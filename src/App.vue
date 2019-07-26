@@ -34,14 +34,6 @@ const CookieInfo = () => import('@/components/CookieInfo')
 export default {
     name: 'App',
 
-    metaInfo () {
-        return {
-            title: (this.$route.name ? this.$t('view.' + this.$route.name + '.title') : ''),
-            titleTemplate: (this.$route.name ? '%s | Osis.fit' : 'Osis.fit'),
-            htmlAttrs: { lang: this.$store.state.app.language }
-        }
-    },
-
     components: {
         Toolbar, Drawer, Alerts, CookieInfo
     },

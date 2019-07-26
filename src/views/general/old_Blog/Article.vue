@@ -22,18 +22,6 @@
 export default {
     name: 'Article',
 
-    metaInfo () {
-        var tags = null
-        if (this.p.keywords) tags = this.p.keywords.join(', ')
-        return {
-            title: this.p.title,
-            meta: [
-                { name: 'description', content: this.p.preview },
-                { name: 'keywords', content: tags }
-            ]
-        }
-    },
-
     data () {
         return {
             p: {

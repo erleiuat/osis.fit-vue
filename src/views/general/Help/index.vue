@@ -12,13 +12,7 @@
 
 <script>
 export default {
-
     name: 'Help',
-    metaInfo: {
-        meta: [
-            { name: 'description', content: 'KLJHADSKJLHASDKHJLDAS.' }
-        ]
-    },
 
     i18n: {
         messages: {

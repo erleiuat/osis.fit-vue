@@ -14,11 +14,6 @@
 
 export default {
     name: 'Terms',
-    metaInfo: {
-        meta: [
-            { name: 'description', content: 'HALLO.' }
-        ]
-    },
 
     i18n: {
         messages: {
