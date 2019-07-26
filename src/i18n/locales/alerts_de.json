@@ -1,0 +1,19 @@
+{
+    "v": {
+        "require": "Wert wird benötigt",
+        "notSame": "Wert ist nicht gleich",
+        "invalid": "Dieser Wert ist ungültig",
+        "tooShort": "Der Wert muss mehr als {amount} Ziffern haben",
+        "tooLong": "Der Wert darf nicht mehr als {amount} Ziffern haben",
+        "tooBig": "Der Wert muss kleiner als {amount} sein",
+        "tooSmall": "Der Wert muss über {amount} liegen"
+    },
+    "success": {
+        "save": "Änderungen gespeichert"
+    },
+    "error": {
+        "default": "Etwas ging schief. Bitte kontaktiere den Support.",
+        "save": "Speichern fehlgeschlagen",
+        "load": "Fehler beim Laden von Daten"
+    }
+}

@@ -1,0 +1,116 @@
+{
+    "osis.fit": {
+        "title": "Osis.fit",
+        "description": ""
+    },
+    "templates": {
+        "title": "Vorlagen",
+        "description": "",
+        "own": {
+            "title": "Deine Vorlagen",
+            "description": ""
+        },
+        "favorite": {
+            "title": "Deine Favoriten",
+            "description": ""
+        },
+        "browse": {
+            "title": "Vorlagen durchsuchen",
+            "description": ""
+        }
+    },
+    "dashboard": {
+        "title": "Dashboard",
+        "description": ""
+    },
+    "calories": {
+        "title": "Kalorien",
+        "description": ""
+    },
+    "weights": {
+        "title": "Gewichte",
+        "description": ""
+    },
+    "activity": {
+        "title": "Aktivität",
+        "description": ""
+    },
+    "settings": {
+        "title": "Einstellungen",
+        "description": ""
+    },
+    "auth": {
+        "title": "Authentifizierung",
+        "description": "",
+        "login": {
+            "title": "Anmeldung",
+            "description": ""
+        },
+        "logout": {
+            "title": "Abmelden",
+            "description": ""
+        },
+        "register": {
+            "title": "Registrierung",
+            "description": ""
+        },
+        "verify": {
+            "title": "Verifizierung",
+            "description": ""
+        }
+    },
+    "welcome": {
+        "title": "Willkommen",
+        "description": ""
+    },
+    "terms": {
+        "title": "Nutzungsbedingungen",
+        "description": "",
+        "cookie": {
+            "title": "Cookie-Richtlinie",
+            "description": ""
+        }
+    },
+    "help": {
+        "title": "Hilfe",
+        "description": "",
+        "contact": {
+            "title": "Kontakt",
+            "description": ""
+        }
+    },
+    "blog": {
+        "title": "Blog",
+        "description": "",
+        "article": {
+            "title": "Artikel",
+            "description": ""
+        },
+        "editor": {
+            "title": "Alle Artikel",
+            "description": "",
+            "edit": {
+                "title": "Artikel bearbeiten",
+                "description": ""
+            },
+            "add": {
+                "title": "Artikel erstellen",
+                "description": ""
+            }
+        }
+    },
+    "error": {
+        "permission": {
+            "title": "Zugang verweigert",
+            "description": ""
+        },
+        "found": {
+            "title": "Nicht gefunden",
+            "description": ""
+        }
+    },
+    "theme": {
+        "title": "Theme",
+        "description": ""
+    }
+}

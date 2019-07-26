@@ -1,0 +1,116 @@
+{
+    "osis.fit": {
+        "title": "Osis.fit",
+        "description": ""
+    },
+    "templates": {
+        "title": "Templates",
+        "description": "",
+        "own": {
+            "title": "Your Templates",
+            "description": ""
+        },
+        "favorite": {
+            "title": "Your Favorites",
+            "description": ""
+        },
+        "browse": {
+            "title": "Browse Templates",
+            "description": ""
+        }
+    },
+    "dashboard": {
+        "title": "Dashboard",
+        "description": ""
+    },
+    "calories": {
+        "title": "Calories",
+        "description": ""
+    },
+    "weights": {
+        "title": "Weights",
+        "description": ""
+    },
+    "activity": {
+        "title": "Activity",
+        "description": ""
+    },
+    "settings": {
+        "title": "Settings",
+        "description": ""
+    },
+    "auth": {
+        "title": "Auth",
+        "description": "",
+        "login": {
+            "title": "Login",
+            "description": ""
+        },
+        "logout": {
+            "title": "Logout",
+            "description": ""
+        },
+        "register": {
+            "title": "Register",
+            "description": ""
+        },
+        "verify": {
+            "title": "Verify",
+            "description": ""
+        }
+    },
+    "welcome": {
+        "title": "Welcome",
+        "description": ""
+    },
+    "terms": {
+        "title": "Terms of use",
+        "description": "",
+        "cookie": {
+            "title": "Cookie-Policy",
+            "description": ""
+        }
+    },
+    "help": {
+        "title": "Help",
+        "description": "",
+        "contact": {
+            "title": "Contact",
+            "description": ""
+        }
+    },
+    "blog": {
+        "title": "Blog",
+        "description": "",
+        "article": {
+            "title": "Article",
+            "description": ""
+        },
+        "editor": {
+            "title": "All articles",
+            "description": "",
+            "edit": {
+                "title": "Edit article",
+                "description": ""
+            },
+            "add": {
+                "title": "Write article",
+                "description": ""
+            }
+        }
+    },
+    "error": {
+        "permission": {
+            "title": "Permissions denied",
+            "description": ""
+        },
+        "found": {
+            "title": "Not Found",
+            "description": ""
+        }
+    },
+    "theme": {
+        "title": "Theme",
+        "description": ""
+    }
+}

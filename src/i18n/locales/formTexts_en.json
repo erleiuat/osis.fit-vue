@@ -1,0 +1,15 @@
+{
+    "name": "Name",
+    "firstname": "Firstname",
+    "lastname": "Lastname",
+    "mail": "E-Mail",
+    "language": "Language",
+    "password": "Password",
+    "repeat": "Repeat",
+    "title": "Title",
+    "date": "Date",
+    "time": "Time",
+    "amount": "Amount",
+    "desc": "Description",
+    "code": "Code"
+}

@@ -1,0 +1,31 @@
+
+
+.zoom-enter-active {
+    animation: zoomIn 0.7s;
+}
+.zoom-leave-active {
+    animation: zoomOut 0.7s;
+}
+
+
+.fade-enter-active {
+    animation: fadeIn 0.1s;
+}
+.fade-leave-active {
+    animation: fadeOut 0.1s;
+}
+
+
+.slideUp-enter-active {
+    animation: slideInUp 0.5s;
+}
+.slideUp-leave-active {
+    animation: slideOutUp 0.2s;
+}
+
+.slideDown-enter-active {
+    animation: slideInDowm 1s;
+}
+.slideDown-leave-active {
+    animation: slideOutUp 0.2s;
+}

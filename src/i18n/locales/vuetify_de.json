@@ -1,0 +1,13 @@
+{
+    "noDataText": "Nichts gefunden",
+    "dataTable": {
+        "rowsPerPageText": "Einträge pro Seite:"
+    },
+    "dataIterator": {
+        "pageText": "{0}-{1} von {2}",
+        "noResultsText": "Keine Resultate",
+        "rowsPerPageAll": "Alle",
+        "prevPage": "Zurück",
+        "nextPage": "Weiter"
+    }
+}

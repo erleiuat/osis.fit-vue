@@ -1,0 +1,78 @@
+
+/* Import Icon-Font and animation lib */
+@import url('https://fonts.googleapis.com/css?family=Material+Icons|Roboto:100,300,400,500,700&display=swap');
+@import url('https://cdn.jsdelivr.net/npm/animate.css@3.5.1');
+
+
+.v-btn {
+    text-transform: none;
+}
+
+.nav-flat.theme--light {
+    border-bottom: solid 1px #dfdede;
+}
+
+.nav-flat.theme--dark {
+    border-bottom: solid 1px #dfdede;
+}
+
+.borders {
+    border-top: solid 1px #dfdede;
+}
+
+.display-4, .display-3, .display-2, .display-1 {
+    font-weight: 300;
+} 
+
+/* Change default Scrollbar */
+::-webkit-scrollbar {
+    height: 8px;
+    width: 10px;
+}
+::-webkit-scrollbar-track {
+    background: #f7f7f7;
+}
+::-webkit-scrollbar-thumb {
+    background: #dddddd;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: #dddddd;
+}
+
+/* Define spinning-loader for buttons etc */
+.spinning-loader {
+    animation: loader 1s infinite;
+    display: flex;
+}
+@-moz-keyframes loader {
+    from {
+        transform: rotate(0);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+@-webkit-keyframes loader {
+    from {
+        transform: rotate(0);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+@-o-keyframes loader {
+    from {
+        transform: rotate(0);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+@keyframes loader {
+    from {
+        transform: rotate(0);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
