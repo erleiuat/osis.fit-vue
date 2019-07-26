@@ -24,7 +24,6 @@ export default {
     computed: {
 
         showLoad () {
-            console.log('yaqy')
             if (this.$store.state.app.routing)
                 return true
 

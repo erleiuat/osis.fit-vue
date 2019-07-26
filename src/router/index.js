@@ -1,16 +1,29 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Meta from 'vue-meta'
 
+const main = require('./routes/main')
+const auth = require('./routes/auth')
+const app = require('./routes/app')
+
+/*
 import routes from './routes/'
+module.exports = [
+    ...main,
+    ...auth,
+    ...app
+]
+*/
 
 Vue.use(Router)
-Vue.use(Meta)
 
 export default new Router({
 
     mode: 'history',
     base: process.env.BASE_URL,
-    routes
+    routes: [
+        ...main,
+        ...auth,
+        ...app
+    ]
 
 })

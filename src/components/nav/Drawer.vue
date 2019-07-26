@@ -17,14 +17,6 @@
             <v-spacer></v-spacer>
 
             <v-list>
-                <v-list-tile :to="{ name: 'blog' }">
-                    <v-list-tile-action>
-                        <v-icon>event</v-icon>
-                    </v-list-tile-action>
-                    <v-list-tile-content>
-                        <v-list-tile-title>{{ $t('view.blog.title') }}</v-list-tile-title>
-                    </v-list-tile-content>
-                </v-list-tile>
                 <v-list-tile :to="{ name: 'help' }">
                     <v-list-tile-action>
                         <v-icon>help</v-icon>
