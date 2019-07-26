@@ -30,7 +30,7 @@ Vue.use(Vuetify, {
 
 Vue.config.productionTip = false
 Vue.prototype.$http = axios.create({
-    baseURL: process.env.VUE_APP_API_URL,
+    baseURL: process.env.VUE_APP_API_URL + 'main/',
     withCredentials: true
 })
 

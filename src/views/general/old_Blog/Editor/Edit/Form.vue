@@ -1,18 +1,17 @@
 <template>
     <v-layout row wrap justify-space-around>
 
-
         <v-flex xs12 md8>
             <v-text-field :label="$t('ft.date')" v-model="value.publicationDate" type="date" />
         </v-flex>
-        
+
         <v-flex xs12 md4>
             <v-radio-group row v-model="value.language" @change="makeUrl()" :rules="rule.require" class="justify-center">
                 <v-radio :label="$t('german')" value="de" color="primary"></v-radio>
                 <v-radio :label="$t('english')" value="en" color="primary"></v-radio>
             </v-radio-group>
         </v-flex>
-        
+
         <v-flex xs12>
             <v-divider />
         </v-flex>

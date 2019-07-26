@@ -78,7 +78,7 @@ export default {
             })
         },
 
-        isStarred (food_id) {
+        isStarred (foodId) {
             return true
         },
 

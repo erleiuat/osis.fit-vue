@@ -29,7 +29,7 @@ export default {
             title: this.p.title,
             meta: [
                 { name: 'description', content: this.p.preview },
-                { name: 'keywords', content: this.tags }
+                { name: 'keywords', content: tags }
             ]
         }
     },
