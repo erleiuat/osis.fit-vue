@@ -10,23 +10,10 @@ import router from './router/'
 import store from './store/'
 import axios from 'axios'
 import i18n from './i18n/'
+import vuetify from './plugins/vuetify';
 
 Vue.use(Notifications)
 Vue.use(VueCookies)
-Vue.use(Vuetify, {
-    lang: {
-        t: (key, ...params) => i18n.t(key, params)
-    },
-    theme: {
-        primary: '2DC7FF',
-        secondary: '444545',
-        accent: '191716',
-        error: 'EB0000',
-        success: '22BB33',
-        warning: 'FB8C00',
-        info: '2196F3'
-    }
-})
 
 Vue.config.productionTip = false
 Vue.prototype.$http = axios.create({
@@ -38,5 +25,6 @@ new Vue({
     router,
     store,
     i18n,
+    vuetify,
     render: function (h) { return h(App) }
 }).$mount('#app')
