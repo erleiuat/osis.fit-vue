@@ -67,38 +67,28 @@ export default {
     methods: {
 
         login () {
-            var vm = this
-            vm.sending = true
-            vm.$refs.form.validate()
-            if (!vm.rule.valid) return false
+            
+            if (!this.$refs.form.validate()) return false
 
-            var target = vm.$route.query.target || false
-
-            vm.$http.post('auth/', vm.fd).then(function (r) {
-                var exp = new Date(r.data.auth.expire * 1000)
-                vm.$cookies.set('app_token', r.data.auth.token, exp)
-                vm.$router.push({ name: 'auth', query: { target: target } })
-            }).catch(function (e) {
-                if (e.response.data._info) switch (e.response.data._info) {
-                case 'password_incorrect':
-                    vm.fd.password = ''
-                    vm.$notify({ type: 'error', text: vm.$t('wrong.pass') })
-                    break
-                case 'mail_not_found':
-                    vm.$notify({ type: 'error', text: vm.$t('wrong.mail') })
-                    break
-                case 'mail_not_verified':
-                    vm.$router.push({ name: 'auth.verify', query: { mail: vm.fd.mail } })
-                    vm.$notify({ type: 'error', text: vm.$t('wrong.verify') })
-                    break
-                default:
-                    vm.$notify({ type: 'error', text: vm.$t('wrong.default') })
-                    break
+            this.sending = true
+            this.$store.dispatch('auth/login', vm.fd).then(r => {
+                this.$router.push({ name: 'auth', query: { target: vm.$route.query.target } })
+            }).catch(r => {
+                switch (r) {
+                    case 'password_wrong':
+                        this.$notify({ type: 'error', text: vm.$t('wrong.pass') })
+                        break
+                    case 'account_not_found':
+                        this.$notify({ type: 'error', text: vm.$t('wrong.mail') })
+                        break
+                    case 'mail_not_verified':
+                        this.$notify({ type: 'error', text: vm.$t('wrong.verify') })
+                        break
                 }
-                else vm.$notify({ type: 'error', text: vm.$t('wrong.default') })
-            }).finally(function () {
-                vm.sending = false
+            }).finally(() => {
+                this.sending = false
             })
+
         }
 
     },

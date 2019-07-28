@@ -54,7 +54,7 @@ export default {
     computed: {
 
         items () {
-            if (this.$store.state.auth.login)
+            if (this.$store.getters['auth/status'])
                 return [
                     { to: 'dashboard', icon: 'dashboard' },
                     { to: 'calories', icon: 'restaurant' },

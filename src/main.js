@@ -1,13 +1,13 @@
 import '@babel/polyfill'
 import '@/registerServiceWorker'
-import 'vuetify/src/stylus/app.styl'
+//import 'vuetify/src/stylus/app.styl'
 import Vue from 'vue'
 import App from './App.vue'
 import Vuetify from 'vuetify/lib'
 import Notifications from 'vue-notification'
 import VueCookies from 'vue-cookies'
 import router from './router/'
-import store from './store'
+import store from './store/'
 import axios from 'axios'
 import i18n from './i18n/'
 
@@ -30,7 +30,7 @@ Vue.use(Vuetify, {
 
 Vue.config.productionTip = false
 Vue.prototype.$http = axios.create({
-    baseURL: process.env.VUE_APP_API_URL+'/'+process.env.VUE_APP_API_VERSION+'/',
+    baseURL: process.env.VUE_APP_API_URL + '/' + process.env.VUE_APP_API_VERSION + '/',
     withCredentials: true
 })
 

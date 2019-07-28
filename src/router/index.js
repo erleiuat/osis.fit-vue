@@ -5,15 +5,6 @@ const main = require('./routes/main')
 const auth = require('./routes/auth')
 const app = require('./routes/app')
 
-/*
-import routes from './routes/'
-module.exports = [
-    ...main,
-    ...auth,
-    ...app
-]
-*/
-
 Vue.use(Router)
 
 export default new Router({

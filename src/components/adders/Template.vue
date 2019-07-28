@@ -174,7 +174,7 @@ export default {
             var formData = new FormData()
             formData.append('img', fileList[0], fileList[0].name)
             formData.append('public', false)
-            var staticPath = process.env.VUE_STATIC_API_URL+'/'+process.env.VUE_STATIC_API_VERSION+'/'
+            var staticPath = process.env.VUE_STATIC_API_URL + '/' + process.env.VUE_STATIC_API_VERSION + '/'
 
             vm.uploading = true
             vm.$http.post(staticPath + 'image/upload/', formData, { withCredentials: false }).then(function (r) {
