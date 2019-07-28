@@ -2,7 +2,7 @@
     <v-container :class="$vuetify.breakpoint.xs ? 'pa-0': 'grid-list-xl'">
 
         <v-layout row wrap justify-center>
-            <v-flex xs12 class="text-xs-center" v-if="!$vuetify.breakpoint.xs">
+            <v-flex xs12 class="text-center" v-if="!$vuetify.breakpoint.xs">
                 <WeightAdder>
                     <template v-slot:default="trigger">
                         <v-btn depressed large block color="primary" v-on="trigger.on">

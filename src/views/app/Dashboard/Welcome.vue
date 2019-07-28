@@ -1,10 +1,10 @@
 <template>
     <v-layout row wrap justify-space-around align-center pt-5 pb-5>
-        <v-flex xs12 md8 class="text-xs-center text-md-left">
+        <v-flex xs12 md8 class="text-center text-md-left">
             <div class="display-1" v-html="$t('title')"></div>
             <div class="title font-weight-light" v-html="$t('text')"></div>
         </v-flex>
-        <v-flex xs12 md4 class="text-xs-center">
+        <v-flex xs12 md4 class="text-center">
             <v-btn depressed large color="primary" :to="{name: 'settings'}">
                 {{ $t('settings') }}
                 <v-icon right>open_in_new</v-icon>

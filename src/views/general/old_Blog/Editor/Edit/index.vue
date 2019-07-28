@@ -48,7 +48,7 @@
                             <v-text-field v-model="fd.color" :label="$t('color')" type="text" />
                         </v-list-tile>
                         <v-list-tile>
-                            <v-list-tile-action text-xs-center>
+                            <v-list-tile-action text-center>
                                 <v-switch v-model="fd.dark" />
                             </v-list-tile-action>
                             <v-list-tile-content>

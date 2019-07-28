@@ -31,7 +31,7 @@
                         <v-flex grow>
                             <v-text-field :label="$t('ft.title')" v-model="fd.title" :rules="rule.title" type="text" />
                         </v-flex>
-                        <v-flex shrink class="text-xs-center pl-2">
+                        <v-flex shrink class="text-center pl-2">
                             <TemplateSelect v-model="fd" />
                         </v-flex>
                     </v-layout>

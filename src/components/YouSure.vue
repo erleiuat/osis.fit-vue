@@ -5,7 +5,7 @@
                 {{ $t('m.title') }}
             </v-card-title>
             <v-container grid-list-xl>
-                <v-card-text class="text-xs-center" v-if="affected">
+                <v-card-text class="text-center" v-if="affected">
                     <div class="title">{{ affected }}</div>
                 </v-card-text>
                 <v-card-text>

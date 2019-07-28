@@ -17,7 +17,7 @@
             <v-flex xs12>
                 <h3 class="display-2">{{ $t('account') }}</h3>
             </v-flex>
-            <v-flex shrink class="text-xs-center">
+            <v-flex shrink class="text-center">
                 <v-switch :label="$t('darkmode')" @change="changeMode()" v-model="mode"></v-switch>
             </v-flex>
             <v-flex shrink>

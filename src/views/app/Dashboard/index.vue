@@ -5,7 +5,7 @@
         <Facts v-else />
 
         <transition appear name="fade" mode="in-out">
-            <v-layout row wrap v-if="!$vuetify.breakpoint.xs" class="text-xs-center">
+            <v-layout row wrap v-if="!$vuetify.breakpoint.xs" class="text-center">
                 <v-flex xs12 class="pt-4">
                     <v-divider />
                 </v-flex>
@@ -36,7 +36,7 @@
         </transition>
 
         <v-layout row wrap>
-            <v-flex xs12 class="text-xs-center" @click="$store.commit('loading', !$store.state.app.loading)">
+            <v-flex xs12 class="text-center" @click="$store.commit('loading', !$store.state.app.loading)">
                 <div class="headline">{{ $t('trainings') }}</div>
                 <v-btn large disabled><i>{{ $t('soon') }}</i></v-btn>
             </v-flex>

@@ -1,7 +1,7 @@
 <template>
-    <v-layout row wrap justify-space-around align-content-start>
+    <v-layout row wrap justify-space-around align-content-center>
 
-        <v-flex xs12 sm10>
+        <v-flex xs12 text-center>
             <div class="display-2 pb-4">{{ $t('title') }}</div>
         </v-flex>
 
@@ -14,15 +14,11 @@
                 <v-text-field :label="$t('ft.repeat')" v-model="pwRepeat" :rules="rule.repeat" type="password" solo />
                 <v-btn @click="register()" type="submit" :disabled="sending" :loading="sending" class="accent" depressed block>
                     {{ $t('btn.register') }}
-                    <span slot="loader" class="spinning-loader">
-                        <v-icon light>cached</v-icon>
-                    </span>
                 </v-btn>
             </v-form>
         </v-flex>
 
         <v-flex xs12 sm8>
-            <v-divider class="pb-4" />
             <v-btn depressed block :to="{name: 'auth.login'}">
                 {{ $t('orLogin') }}
             </v-btn>

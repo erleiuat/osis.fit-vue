@@ -20,7 +20,6 @@ module.exports = {
         return {
             plugins: [
                 // new BundleAnalyzerPlugin(),
-                new VuetifyLoaderPlugin(),
                 new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/)
             ]
         }

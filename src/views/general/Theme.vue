@@ -1,12 +1,6 @@
 <template>
     <v-container grid-list-xl>
-
-        <v-layout row warp>
-            <v-flex xs12>
-                {{ flatObject }}
-            </v-flex>
-        </v-layout>
-
+        
         <v-layout row wrap>
             <v-flex xs12>
                 <div class="display-4">{{ text }}</div>
@@ -30,9 +24,9 @@
 
         <v-layout row wrap>
             <v-flex xs12 v-for="opt in themeOpts" :key="opt">
-                <v-card :class="opt">
+                <v-card :color="opt">
                     <v-card-text>
-                        <div class="body-2">{{ opt }}</div>
+                        {{ opt }}
                     </v-card-text>
                 </v-card>
             </v-flex>
@@ -40,14 +34,10 @@
 
         <v-layout row wrap>
             <v-flex xs3 v-for="opt in themeOpts" :key="opt">
-                <v-btn block :class="opt">
+                <v-btn block :color="opt">
                     <div class="body-2">{{ opt }}</div>
                 </v-btn>
             </v-flex>
-        </v-layout>
-
-        <v-layout>
-            {{ sitemap }}
         </v-layout>
 
     </v-container>
@@ -60,8 +50,6 @@ export default {
     data () {
         return {
             text: 'Osis.fit',
-            sitemap: '',
-            flatObject: '',
             themeOpts: [
                 'primary',
                 'secondary',
@@ -72,29 +60,6 @@ export default {
                 'info'
             ]
         }
-    },
-
-    methods: {
-
-        flatten (array, prn) {
-            var vm = this
-            var allRoutes = []
-
-            array.forEach(function (parentRoute) {
-                var inPoint = prn + parentRoute.path + '/'
-                allRoutes.push(prn + parentRoute.path)
-
-                for (var key in parentRoute)
-                    if (typeof parentRoute[key] === 'object')
-                        if (parentRoute[key].length) {
-                            var childs = vm.flatten(parentRoute[key], inPoint)
-                            allRoutes = allRoutes.concat(childs)
-                        }
-            })
-
-            return allRoutes
-        }
-
     }
 
 }

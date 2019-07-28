@@ -1,49 +1,48 @@
 <template>
-    <v-navigation-drawer app v-model="drawer" class="secondary" dark clipped floating>
-        <v-layout column fill-height>
+    <v-navigation-drawer v-model="drawer" app clipped floating>
 
-            <v-list>
-                <v-list-tile v-for="item in items" :to="{name: item.to}" :key="item.to">
-                    <v-list-tile-action>
-                        <v-icon>{{ item.icon }}</v-icon>
-                    </v-list-tile-action>
-                    <v-list-tile-content>
-                        <v-list-tile-title>{{ $t('view.'+item.to+'.title') }}</v-list-tile-title>
-                    </v-list-tile-content>
-                </v-list-tile>
+        <v-list dense nav>
 
-            </v-list>
+            <v-list-item v-for="item in items" :to="{name: item.to}" :key="item.to" link>
+                <v-list-item-icon>
+                    <v-icon>{{ item.icon }}</v-icon>
+                </v-list-item-icon>
+                <v-list-item-content>
+                    <v-list-item-title>{{ $t('view.'+item.to+'.title') }}</v-list-item-title>
+                </v-list-item-content>
+            </v-list-item>
 
-            <v-spacer></v-spacer>
+        </v-list>
 
-            <v-list>
-                <v-list-tile :to="{ name: 'help' }">
-                    <v-list-tile-action>
+        <template v-slot:append>
+            <v-list dense nav>
+                <v-list-item :to="{ name: 'help' }" link>
+                    <v-list-item-icon>
                         <v-icon>help</v-icon>
-                    </v-list-tile-action>
-                    <v-list-tile-content>
-                        <v-list-tile-title>{{ $t('view.help.title') }}</v-list-tile-title>
-                    </v-list-tile-content>
-                </v-list-tile>
-                <v-list-tile :to="{ name: 'auth.logout' }" v-if="$store.state.auth.login">
-                    <v-list-tile-action>
+                    </v-list-item-icon>
+                    <v-list-item-content>
+                        <v-list-item-title>{{ $t('view.help.title') }}</v-list-item-title>
+                    </v-list-item-content>
+                </v-list-item>
+                <v-list-item :to="{ name: 'auth.logout' }" v-if="$store.state.auth.login" link>
+                    <v-list-item-icon>
                         <v-icon>lock</v-icon>
-                    </v-list-tile-action>
-                    <v-list-tile-content>
-                        <v-list-tile-title>{{ $t('view.auth.logout.title') }}</v-list-tile-title>
-                    </v-list-tile-content>
-                </v-list-tile>
-                <v-list-tile :to="{ name: 'terms' }">
-                    <v-list-tile-action>
+                    </v-list-item-icon>
+                    <v-list-item-content>
+                        <v-list-item-title>{{ $t('view.auth.ogout.title') }}</v-list-item-title>
+                    </v-list-item-content>
+                </v-list-item>
+                <v-list-item :to="{ name: 'terms' }" link>
+                    <v-list-item-icon>
                         <v-icon>notes</v-icon>
-                    </v-list-tile-action>
-                    <v-list-tile-content>
-                        <v-list-tile-title>{{ $t('view.terms.title') }}</v-list-tile-title>
-                    </v-list-tile-content>
-                </v-list-tile>
+                    </v-list-item-icon>
+                    <v-list-item-content>
+                        <v-list-item-title>{{ $t('view.terms.title') }}</v-list-item-title>
+                    </v-list-item-content>
+                </v-list-item>
             </v-list>
+        </template>
 
-        </v-layout>
     </v-navigation-drawer>
 </template>
 

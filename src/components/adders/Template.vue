@@ -49,7 +49,7 @@
                         </v-flex>
 
                         <v-flex xs12 v-if="fd.imgUrl">
-                            <div class="text-xs-center">
+                            <div class="text-center">
                                 <v-img :src="fd.imgUrl" max-height="500" contain></v-img>
                                 <v-btn large block @click="resetImg()" class="warning">
                                     {{$t('remove')}}

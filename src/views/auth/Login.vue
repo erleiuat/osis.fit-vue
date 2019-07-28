@@ -1,37 +1,32 @@
 <template>
-    <v-layout row wrap justify-space-around align-content-center>
+    <v-layout row justify-center>
 
-        <v-flex xs12 text-xs-center>
-            <div class="display-1" v-if="!$route.query.verified">{{ $t('title') }}</div>
-            <div class="display-4">Osis.fit</div>
+        <v-flex xs12 text-center>
+            <div class="display-3 pb-5">Login</div>
         </v-flex>
 
-        <transition appear name="fade">
-            <v-flex xs12 sm8 md7 v-if="$route.query.verified" text-xs-center>
-                <v-alert outline :value="true" type="success">
-                    <div class="title">{{ $t('verified') }}</div>
-                </v-alert>
-            </v-flex>
-        </transition>
+        <v-flex xs8 text-center v-if="$route.query.verified">
+            <v-alert outlined dense type="success">
+                {{ $t('verified') }}
+            </v-alert>
+        </v-flex>
 
-        <v-flex xs12 sm8 md7>
+        <v-flex xs8>
             <v-form v-model="rule.valid" ref="form" v-on:submit.prevent>
                 <v-text-field :label="$t('ft.mail')" v-model="fd.mail" :rules="rule.mail" type="email" solo />
                 <v-text-field :label="$t('ft.password')" v-model="fd.password" :rules="rule.password" type="password" solo />
-                <v-btn @click="login()" type="submit" :disabled="sending" :loading="sending" class="accent" depressed block>
-                    {{ $t('btn.login') }}
-                    <span slot="loader" class="spinning-loader">
-                        <v-icon light>cached</v-icon>
-                    </span>
-                </v-btn>
-            </v-form>
-        </v-flex>
 
-        <v-flex xs12 sm8 md6>
-            <v-divider class="pb-4" />
-            <v-btn depressed block :to="{name: 'auth.register'}">
-                {{ $t('noAccount') }}
-            </v-btn>
+                <v-btn @click="login()" :loading="sending" color="primary" depressed large block type="submit">
+                    {{ $t('btn.login') }}
+                </v-btn>
+
+                <v-divider class="pb-4" />
+
+                <v-btn depressed block :to="{name: 'auth.register'}">
+                    {{ $t('noAccount') }}
+                </v-btn>
+
+            </v-form>
         </v-flex>
 
     </v-layout>
@@ -67,12 +62,12 @@ export default {
     methods: {
 
         login () {
-            
+
             if (!this.$refs.form.validate()) return false
 
             this.sending = true
-            this.$store.dispatch('auth/login', vm.fd).then(r => {
-                this.$router.push({ name: 'auth', query: { target: vm.$route.query.target } })
+            this.$store.dispatch('auth/login', this.fd).then(r => {
+                this.$router.push({ name: 'auth', query: { target: this.$route.query.target } })
             }).catch(r => {
                 switch (r) {
                     case 'password_wrong':
@@ -100,8 +95,8 @@ export default {
     i18n: {
         messages: {
             en: {
-                verified: 'Your account is ready!',
                 title: 'Welcome!',
+                verified: 'Your account is ready!',
                 noAccount: "You don't have an account?",
                 wrong: {
                     mail: 'Mail not found',
@@ -111,8 +106,8 @@ export default {
                 }
             },
             de: {
-                verified: 'Dein Konto ist nun bereit!',
                 title: 'Willkommen!',
+                verified: 'Dein Konto ist nun bereit!',
                 noAccount: 'Hast du noch kein Konto?',
                 wrong: {
                     mail: 'Mail nicht gefunden',

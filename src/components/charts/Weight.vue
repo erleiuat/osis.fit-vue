@@ -1,5 +1,5 @@
 <template>
-    <v-card v-if="values" class="elevation-0 text-xs-center" dark>
+    <v-card v-if="values" class="elevation-0 text-center" dark>
         <v-card-text class="display-1">
             {{ $t('title') }}
         </v-card-text>

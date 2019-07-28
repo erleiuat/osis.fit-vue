@@ -1,9 +1,13 @@
 <template>
-    <v-container fill-height grid-list-xl>
-        <transition appear name="fade" mode="out-in">
-            <router-view>
-            </router-view>
-        </transition>
+    <v-container fluid fill-height>
+        <v-layout row fill-height align-content-center>
+            <v-flex xs12>
+                <transition appear name="fade" mode="out-in">
+                    <router-view>
+                    </router-view>
+                </transition>
+            </v-flex>
+        </v-layout>
     </v-container>
 </template>
 

@@ -1,7 +1,7 @@
 <template>
     <v-container :class="$vuetify.breakpoint.xs ? 'pa-0': 'grid-list-xl'">
         <v-layout row wrap justify-center>
-            <v-flex xs12 sm4 class="text-xs-center" v-if="!$vuetify.breakpoint.xs">
+            <v-flex xs12 sm4 class="text-center" v-if="!$vuetify.breakpoint.xs">
                 <ActivityAdder>
                     <template v-slot:default="trigger">
                         <v-btn depressed large block color="primary" v-on="trigger.on">
@@ -23,7 +23,7 @@
                     </v-date-picker>
                 </v-dialog>
             </v-flex>
-            <v-flex xs12 sm4 class="text-xs-center" v-if="!$vuetify.breakpoint.xs">
+            <v-flex xs12 sm4 class="text-center" v-if="!$vuetify.breakpoint.xs">
                 <Trainings>
                     <template v-slot:default="trigger">
                         <v-btn depressed large block color="primary" v-on="trigger.on">
