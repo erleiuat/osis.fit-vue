@@ -8,9 +8,11 @@
 
             <Alerts />
 
-            <transition appear name="fade" mode="out-in">
-                <router-view />
-            </transition>
+            <v-container fluid fill-height>
+                <transition appear name="fade" mode="out-in">
+                    <router-view />
+                </transition>
+            </v-container>
 
             <CookieInfo v-if="!$store.state.app.cookiesAccepted" />
 

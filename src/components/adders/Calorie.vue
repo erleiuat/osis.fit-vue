@@ -3,7 +3,7 @@
 
         <template v-slot:activator="{ on }">
             <slot v-bind:on="on">
-                <v-btn outlined fab large v-on="on" color="secondary">
+                <v-btn fab depressed large v-on="on" color="primary">
                     <v-icon>add</v-icon>
                 </v-btn>
             </slot>

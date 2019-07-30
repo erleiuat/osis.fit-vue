@@ -6,6 +6,7 @@ Vue.use(Vuetify)
 export default new Vuetify({
     theme: {
         themes: {
+            /*
             light: {
                 primary: '#ee44aa',
                 secondary: '#424242',
@@ -15,6 +16,7 @@ export default new Vuetify({
                 success: '#4CAF50',
                 warning: '#FFC107'
             }
+            */
         }
     },
     icons: {

@@ -1,5 +1,5 @@
 <template>
-    <v-container grid-list-xl fill-height>
+    <v-container grid-list-xl>
         <v-layout wrap>
 
             <Welcome v-if="!$store.getters.latestWeight" />
@@ -11,15 +11,15 @@
                     <v-divider />
                 </v-flex>
                 <v-flex sm4>
-                    <div class="headline">{{ $t('calories') }}</div>
+                    <div class="headline pb-3">{{ $t('calories') }}</div>
                     <CalorieAdder />
                 </v-flex>
                 <v-flex sm4>
-                    <div class="headline">{{ $t('activity') }}</div>
+                    <div class="headline pb-3">{{ $t('activity') }}</div>
                     <ActivityAdder />
                 </v-flex>
                 <v-flex sm4>
-                    <div class="headline">{{ $t('weight') }}</div>
+                    <div class="headline pb-3">{{ $t('weight') }}</div>
                     <WeightAdder />
                 </v-flex>
                 <v-flex xs12>
@@ -32,7 +32,7 @@
             </v-flex>
 
             <v-flex xs12 class="text-center">
-                <div class="headline">{{ $t('trainings') }}</div>
+                <div class="headline pb-3">{{ $t('trainings') }}</div>
                 <v-btn large disabled><i>{{ $t('soon') }}</i></v-btn>
             </v-flex>
 

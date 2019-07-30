@@ -1,7 +1,6 @@
 <template>
     <v-container fill-height grid-list-md>
         <v-layout row wrap justify-space-around align-content-center>
-
             <v-flex xs12 text-center>
                 <div class="display-4">Osis.fit</div>
             </v-flex>
