@@ -1,5 +1,5 @@
 <template>
-    <v-container grid-list-md fill-height>
+    <v-container grid-list-xl fill-height>
         <v-layout wrap justify-center align-center>
             <v-flex xs12 sm8>
                 <transition appear name="fade" mode="out-in">

@@ -57,6 +57,10 @@
         "verify": {
             "title": "Verify",
             "description": ""
+        },
+        "forgotten": {
+            "title": "Change password",
+            "description": ""
         }
     },
     "welcome": {
@@ -77,26 +81,6 @@
         "contact": {
             "title": "Contact",
             "description": ""
-        }
-    },
-    "blog": {
-        "title": "Blog",
-        "description": "",
-        "article": {
-            "title": "Article",
-            "description": ""
-        },
-        "editor": {
-            "title": "All articles",
-            "description": "",
-            "edit": {
-                "title": "Edit article",
-                "description": ""
-            },
-            "add": {
-                "title": "Write article",
-                "description": ""
-            }
         }
     },
     "error": {

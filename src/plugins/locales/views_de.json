@@ -43,7 +43,7 @@
         "title": "Authentifizierung",
         "description": "",
         "login": {
-            "title": "Anmeldung",
+            "title": "Anmelden",
             "description": ""
         },
         "logout": {
@@ -51,11 +51,15 @@
             "description": ""
         },
         "register": {
-            "title": "Registrierung",
+            "title": "Registrieren",
             "description": ""
         },
         "verify": {
-            "title": "Verifizierung",
+            "title": "Verifizieren",
+            "description": ""
+        },
+        "forgotten": {
+            "title": "Passwort ändern",
             "description": ""
         }
     },
@@ -77,26 +81,6 @@
         "contact": {
             "title": "Kontakt",
             "description": ""
-        }
-    },
-    "blog": {
-        "title": "Blog",
-        "description": "",
-        "article": {
-            "title": "Artikel",
-            "description": ""
-        },
-        "editor": {
-            "title": "Alle Artikel",
-            "description": "",
-            "edit": {
-                "title": "Artikel bearbeiten",
-                "description": ""
-            },
-            "add": {
-                "title": "Artikel erstellen",
-                "description": ""
-            }
         }
     },
     "error": {

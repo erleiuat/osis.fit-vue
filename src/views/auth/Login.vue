@@ -1,8 +1,8 @@
 <template>
-    <v-layout row fill-height>
+    <v-layout row justify-center>
 
         <v-flex xs12 text-center>
-            <div class="display-3 pb-5">Login</div>
+            <div class="display-3 pb-5">{{ $t('login') }}</div>
         </v-flex>
 
         <v-flex xs12 text-center v-if="$route.query.verified">
@@ -11,7 +11,7 @@
             </v-alert>
         </v-flex>
 
-        <v-flex xs12>
+        <v-flex xs12 sm10 md8 lg6>
             <v-form v-model="rule.valid" ref="form" v-on:submit.prevent>
 
                 <v-text-field v-model="fd.mail" :label="$t('ft.mail')" :rules="rule.require" type="email" solo />
@@ -28,14 +28,14 @@
             <v-divider />
         </v-flex>
 
-        <v-flex xs12 sm6>
-            <v-btn depressed color="accent" block :to="{name: 'auth.forgotten'}">
+        <v-flex xs12 sm6 md5>
+            <v-btn depressed small block :to="{name: 'auth.forgotten'}">
                 {{ $t('noPassword') }}
             </v-btn>
         </v-flex>
 
-        <v-flex xs12 sm6>
-            <v-btn depressed color="accent" block :to="{name: 'auth.register'}">
+        <v-flex xs12 sm6 md5>
+            <v-btn depressed small color="" block :to="{name: 'auth.register'}">
                 {{ $t('noAccount') }}
             </v-btn>
         </v-flex>
@@ -73,18 +73,18 @@ export default {
                 this.$router.push({ name: 'auth', query: { target: this.$route.query.target } })
             }).catch(r => {
                 switch (r) {
-                case 'password_wrong':
-                    this.$notify({ type: 'error', text: this.$t('fail.pass') })
-                    break
-                case 'account_not_found':
-                    this.$notify({ type: 'error', text: this.$t('fail.unknown') })
-                    break
-                case 'account_not_verified':
-                    this.$notify({ type: 'error', text: this.$t('fail.verify') })
-                    break
-                default:
-                    this.$notify({ type: 'error', text: this.$t('alert.error.default') })
-                    break
+                    case 'password_wrong':
+                        this.$notify({ type: 'error', text: this.$t('fail.pass') })
+                        break
+                    case 'account_not_found':
+                        this.$notify({ type: 'error', text: this.$t('fail.unknown') })
+                        break
+                    case 'account_not_verified':
+                        this.$notify({ type: 'error', text: this.$t('fail.verify') })
+                        break
+                    default:
+                        this.$notify({ type: 'error', text: this.$t('alert.error.default') })
+                        break
                 }
             }).finally(() => {
                 this.sending = false
@@ -100,12 +100,12 @@ export default {
     i18n: {
         messages: {
             en: {
+                login: 'Login',
                 title: 'Welcome!',
                 password: 'Password',
                 verified: 'Your account is ready!',
-                login: 'Login',
-                noAccount: "You don't have an account?",
-                noPassword: 'Password forgotten?',
+                noAccount: "Don't you have an account yet?",
+                noPassword: 'Lost your password?',
                 fail: {
                     pass: 'Password incorrect',
                     unknown: 'Account not found',
@@ -113,12 +113,12 @@ export default {
                 }
             },
             de: {
+                login: 'Anmelden',
                 title: 'Willkommen!',
                 password: 'Passwort',
                 verified: 'Dein Konto ist nun bereit!',
-                login: 'Anmelden',
                 noAccount: 'Hast du noch kein Konto?',
-                noPassword: 'Password vergessen?',
+                noPassword: 'Passwort vergessen?',
                 fail: {
                     pass: 'Falsches Passwort',
                     unknown: 'Konto nicht gefunden',

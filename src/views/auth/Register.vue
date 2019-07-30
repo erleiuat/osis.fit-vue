@@ -6,21 +6,19 @@
                 <div class="display-2 pb-4">{{ $t('title') }}</div>
             </v-flex>
 
-            <v-flex xs6>
-                <v-text-field v-model="fd.firstname" :label="$t('ft.firstname')" :rules="rule.name" type="text" solo />
-            </v-flex>
-            <v-flex xs6>
-                <v-text-field v-model="fd.lastname" :label="$t('ft.lastname')" :rules="rule.name" type="text" solo />
-            </v-flex>
             <v-flex xs12>
+                <v-text-field v-model="fd.firstname" :label="$t('ft.firstname')" :rules="rule.name" type="text" solo />
+                <v-text-field v-model="fd.lastname" :label="$t('ft.lastname')" :rules="rule.name" type="text" solo />
                 <v-text-field v-model="fd.mail" :label="$t('ft.mail')" :rules="rule.mail" type="email" solo />
             </v-flex>
+
             <v-flex xs6>
                 <v-text-field v-model="fd.password" :label="$t('password')" :rules="rule.password" type="password" solo />
             </v-flex>
             <v-flex xs6>
                 <v-text-field v-model="pwRepeat" :label="$t('repeat')" :rules="rule.repeat" type="password" solo />
             </v-flex>
+
             <v-flex xs12>
                 <v-btn @click="register()" :loading="sending" color="primary" depressed large block type="submit">
                     {{ $t('register') }}
@@ -54,7 +52,7 @@ export default {
                 lastname: '',
                 mail: '',
                 password: '',
-                language: this.$store.state.app.language
+                language: navigator.language || navigator.userLanguage
             },
             rule: {
                 valid: false,

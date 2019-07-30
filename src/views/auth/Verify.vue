@@ -1,13 +1,13 @@
 <template>
-    <v-layout row fill-height justify-center>
+    <v-layout row justify-center>
 
-        <v-flex xs12 sm10>
-            <div class="display-2">{{ $t('thanks') }}</div>
+        <v-flex xs12>
+            <div class="display-1">{{ $t('thanks') }}</div>
             <div v-html="$t('text')">
             </div>
         </v-flex>
 
-        <v-flex xs12 sm10>
+        <v-flex xs12 md10 lg8>
             <v-form v-model="rule.valid" ref="form" v-on:submit.prevent>
                 <v-text-field v-model="fd.mail" :label="$t('ft.mail')" :rules="rule.mail" type="email" />
                 <v-text-field v-model="fd.code" :label="$t('code')" :rules="rule.code" type="text" />

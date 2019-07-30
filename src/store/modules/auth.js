@@ -101,19 +101,29 @@ const actions = {
         })
     },
 
-    register (context, data) {
+    register (context, form) {
         return new Promise((resolve, reject) => {
-            Apios.post('auth/register/', data).then(() => {
+            Apios.post('auth/register/', form).then(() => {
                 resolve()
-            }, error => {
-                reject(error.response.data.condition)
+            }, err => {
+                reject(err.data.condition)
             })
         })
     },
 
-    verify (context, data) {
+    verify (context, form) {
         return new Promise((resolve, reject) => {
-            Apios.post('auth/verify/', data).then(() => {
+            Apios.post('auth/verify/', form).then(() => {
+                resolve()
+            }, err => {
+                reject(err.data.condition)
+            })
+        })
+    },
+
+    forgot (context, form) {
+        return new Promise((resolve, reject) => {
+            Apios.post('auth/password/forgotten/', form).then(() => {
                 resolve()
             }, err => {
                 reject(err.data.condition)
