@@ -104,19 +104,12 @@ export default {
     },
 
     mounted(){
-
         if(this.$route.query.mail && this.$route.query.code){
-
             this.state = 'reset'
             this.fd.mail = this.$route.query.mail
             this.fd.code = this.$route.query.code
             this.$router.push({name: 'auth.forgotten', query: {reset: true}})
-
-            // http://localhost:8080/auth/forgotten?mail=reutlinger.elia@gmail.com&code=aAOwFdEgTkHeCrUVlfl7
-
-            console.log('yaa')
         }
-
     },
 
     i18n: {

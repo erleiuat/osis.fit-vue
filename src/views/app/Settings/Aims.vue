@@ -29,20 +29,12 @@
                         <v-text-field v-model="fd.weight" :label="$t('weight')" :rules="rule.require" type="number" />
                     </v-flex>
                     <v-flex xs12 sm6>
-                        <v-dialog ref="dialog" v-model="modal" :return-value.sync="fd.date" full-width width="290px">
+                        <v-menu ref="menu" v-model="menu" :close-on-content-click="false" transition="scale-transition" offset-y full-width min-width="290px">
                             <template v-slot:activator="{ on }">
-                                <v-text-field v-model="fd.date" :label="$t('date')" append-icon="event" :rules="rule.require" readonly v-on="on" type="date" />
+                                <v-text-field v-model="fd.date" :label="$t('date')" prepend-icon="event" readonly v-on="on"></v-text-field>
                             </template>
-                            <v-date-picker v-model="fd.date" scrollable :locale="$store.state.app.language">
-                                <v-btn icon @click="modal = false">
-                                    <v-icon>close</v-icon>
-                                </v-btn>
-                                <v-spacer></v-spacer>
-                                <v-btn icon @click="$refs.dialog.save(fd.date)">
-                                    <v-icon>check</v-icon>
-                                </v-btn>
-                            </v-date-picker>
-                        </v-dialog>
+                            <v-date-picker v-model="fd.date" ref="picker" :locale="$store.state.app.language" @change="$refs.menu.save(fd.date)"></v-date-picker>
+                        </v-menu>
                     </v-flex>
                 </v-layout>
 
@@ -68,7 +60,7 @@ export default {
     data () {
         return {
             edit: false,
-            modal: false,
+            menu: false,
             sending: false,
             rule: {
                 valid: false,

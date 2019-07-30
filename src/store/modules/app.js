@@ -3,7 +3,8 @@ const state = {
     title: 'Osis.fit',
     version: '1.0',
     drawer: false,
-    cookiesAccepted: true
+    cookiesAccepted: true,
+    language: null
 }
 
 const getters = {

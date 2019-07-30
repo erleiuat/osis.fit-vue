@@ -39,6 +39,7 @@ export default {
     },
 
     beforeMount () {
+        this.$store.state.app.language = VueCookies.get('appLang') || navigator.language || navigator.userLanguage
         this.$i18n.locale = VueCookies.get('appLang') || navigator.language || navigator.userLanguage
         this.$vuetify.theme.dark = VueCookies.get('themeDark')
         this.$store.state.app.drawer = this.$vuetify.breakpoint.lgAndUp
