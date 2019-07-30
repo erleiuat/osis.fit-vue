@@ -59,8 +59,8 @@ export default {
 
         vm.$router.beforeResolve((to, from, next) => {
             if (!to.meta.authRequired) next()
-            else if (vm.$store.state.auth.login) next()
-            else vm.$router.push({ name: 'auth', query: { target: to } })
+            else if (vm.$store.getters['auth/status']) next()
+            else vm.$router.push({ name: 'auth', query: { target: to.name } })
         })
 
         vm.$router.afterEach((to, from) => {

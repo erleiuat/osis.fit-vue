@@ -4,12 +4,9 @@
     "lastname": "Nachname",
     "mail": "E-Mail",
     "language": "Sprache",
-    "password": "Passwort",
-    "repeat": "Wiederholen",
     "title": "Titel",
     "date": "Datum",
     "time": "Zeit",
     "amount": "Menge",
-    "desc": "Beschreibung",
-    "code": "Code"
+    "description": "Beschreibung"
 }

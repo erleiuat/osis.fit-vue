@@ -1,5 +1,5 @@
 <template>
-    <v-layout row wrap justify-space-around align-content-start>
+    <v-layout row fill-height justify-center>
 
         <v-flex xs12 sm10>
             <div class="display-2">{{ $t('thanks') }}</div>
@@ -7,15 +7,12 @@
             </div>
         </v-flex>
 
-        <v-flex xs12 sm8 md6 lg5>
+        <v-flex xs12 sm10>
             <v-form v-model="rule.valid" ref="form" v-on:submit.prevent>
-                <v-text-field :label="$t('ft.mail')" v-model="fd.mail" :rules="rule.mail" type="email" />
-                <v-text-field :label="$t('ft.code')" v-model="fd.code" :rules="rule.code" type="number" />
-                <v-btn @click="verify()" color="primary" block type="submit" :disabled="sending" :loading="sending">
+                <v-text-field v-model="fd.mail" :label="$t('ft.mail')" :rules="rule.mail" type="email" />
+                <v-text-field v-model="fd.code" :label="$t('code')" :rules="rule.code" type="text" />
+                <v-btn @click="verify()" :loading="sending" color="primary" depressed large block type="submit">
                     {{ $t('btn.send') }}
-                    <span slot="loader" class="spinning-loader">
-                        <v-icon light>cached</v-icon>
-                    </span>
                 </v-btn>
             </v-form>
         </v-flex>
@@ -42,9 +39,7 @@ export default {
                     v => v.length < 90 || this.$t('alert.v.tooLong', { amount: 90 })
                 ],
                 code: [
-                    v => !!v || this.$t('alert.v.require'),
-                    v => v.length > 9 || this.$t('alert.v.tooShort', { amount: 10 }),
-                    v => v.length < 11 || this.$t('alert.v.tooLong', { amount: 10 })
+                    v => !!v || this.$t('alert.v.require')
                 ]
             }
         }
@@ -53,18 +48,28 @@ export default {
     methods: {
 
         verify () {
-            var vm = this
-            vm.$refs.form.validate()
-            if (!vm.rule.valid) return false
 
-            vm.sending = true
-            vm.$http.post('auth/verify/', vm.fd).then(function (response) {
-                vm.$router.push({ name: 'auth.login', query: { mail: vm.fd.mail, verified: true } })
-            }).catch(function () {
-                vm.$notify({ type: 'error', text: vm.$t('alert.error.default') })
-            }).finally(function () {
-                vm.sending = false
+            if (!this.$refs.form.validate()) return false
+            this.sending = true
+
+            this.$store.dispatch('auth/verify', this.fd).then(r => {
+                this.$router.push({ name: 'auth.login', query: { mail: this.fd.mail, verified: true } })
+            }).catch(r => {
+                switch (r) {
+                    case 'code_wrong':
+                        this.$notify({ type: 'error', text: this.$t('fail.code') })
+                        break
+                    case 'account_already_verified':
+                        this.$notify({ type: 'error', text: this.$t('fail.already') })
+                        break
+                    default:
+                        this.$notify({ type: 'error', text: this.$t('alert.error.default') })
+                        break
+                }
+            }).finally(() => {
+                this.sending = false
             })
+
         }
 
     },
@@ -81,6 +86,11 @@ export default {
         messages: {
             en: {
                 thanks: 'Thank you',
+                code: 'Code',
+                fail: {
+                    code: 'Code is invalid',
+                    already: 'Account is verified'
+                },
                 text: `
                     Your registration was processed successfully. 
                     To activate your account you only have to confirm your <b>E-Mail address</b>, 
@@ -90,6 +100,11 @@ export default {
             },
             de: {
                 thanks: 'Vielen Dank',
+                code: 'Code',
+                fail: {
+                    code: 'Ungültiger Code',
+                    already: 'Konto bereits verifiziert'
+                },
                 text: `
                     Deine Registrierung wurde erfolgreich verarbeitet.
                     Um dein Konto zu aktivieren musst du nur noch deine <b>E-Mail Adresse bestätigen</b>,

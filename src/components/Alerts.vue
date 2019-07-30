@@ -1,7 +1,7 @@
 <template>
-    <notifications position="bottom center" :width="correctWidth" :speed="500">
+    <notifications position="top center" width="100%" :speed="500">
         <template slot="body" slot-scope="props">
-            <v-alert :value="true" :type="props.item.type" @click="props.close" class="elevation-5 mb-0">
+            <v-alert :type="props.item.type" @click="props.close" class="mt-1 mb-1">
                 {{ props.item.text }}
             </v-alert>
         </template>

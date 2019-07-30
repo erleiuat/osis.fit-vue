@@ -28,7 +28,13 @@ module.exports = [
                 name: 'auth.verify',
                 component: () => import('@/views/auth/Verify'),
                 meta: { authRequired: false }
-            }
+            },
+            {
+                path: 'forgotten',
+                name: 'auth.forgotten',
+                component: () => import('@/views/auth/Forgotten'),
+                meta: { authRequired: false }
+            },
         ]
     }
 ]

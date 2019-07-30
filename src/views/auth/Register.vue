@@ -1,30 +1,44 @@
 <template>
-    <v-layout row wrap justify-space-around align-content-center>
+    <v-form v-model="rule.valid" ref="form" v-on:submit.prevent>
+        <v-layout row align-content-center fill-height>
 
-        <v-flex xs12 text-center>
-            <div class="display-2 pb-4">{{ $t('title') }}</div>
-        </v-flex>
+            <v-flex xs12 text-center>
+                <div class="display-2 pb-4">{{ $t('title') }}</div>
+            </v-flex>
 
-        <v-flex xs12 sm8>
-            <v-form v-model="rule.valid" ref="form" v-on:submit.prevent>
-                <v-text-field :label="$t('ft.firstname')" v-model="fd.firstname" :rules="rule.name" type="text" solo />
-                <v-text-field :label="$t('ft.lastname')" v-model="fd.lastname" :rules="rule.name" type="text" solo />
-                <v-text-field :label="$t('ft.mail')" v-model="fd.mail" :rules="rule.mail" type="email" solo />
-                <v-text-field :label="$t('ft.password')" v-model="fd.password" :rules="rule.password" type="password" solo />
-                <v-text-field :label="$t('ft.repeat')" v-model="pwRepeat" :rules="rule.repeat" type="password" solo />
-                <v-btn @click="register()" type="submit" :disabled="sending" :loading="sending" class="accent" depressed block>
-                    {{ $t('btn.register') }}
+            <v-flex xs6>
+                <v-text-field v-model="fd.firstname" :label="$t('ft.firstname')" :rules="rule.name" type="text" solo />
+            </v-flex>
+            <v-flex xs6>
+                <v-text-field v-model="fd.lastname" :label="$t('ft.lastname')" :rules="rule.name" type="text" solo />
+            </v-flex>
+            <v-flex xs12>
+                <v-text-field v-model="fd.mail" :label="$t('ft.mail')" :rules="rule.mail" type="email" solo />
+            </v-flex>
+            <v-flex xs6>
+                <v-text-field v-model="fd.password" :label="$t('password')" :rules="rule.password" type="password" solo />
+            </v-flex>
+            <v-flex xs6>
+                <v-text-field v-model="pwRepeat" :label="$t('repeat')" :rules="rule.repeat" type="password" solo />
+            </v-flex>
+            <v-flex xs12>
+                <v-btn @click="register()" :loading="sending" color="primary" depressed large block type="submit">
+                    {{ $t('register') }}
                 </v-btn>
-            </v-form>
-        </v-flex>
+            </v-flex>
 
-        <v-flex xs12 sm8>
-            <v-btn depressed block :to="{name: 'auth.login'}">
-                {{ $t('orLogin') }}
-            </v-btn>
-        </v-flex>
+            <v-flex xs12>
+                <v-divider />
+            </v-flex>
 
-    </v-layout>
+            <v-flex xs12>
+                <v-btn depressed block :to="{name: 'auth.login'}">
+                    {{ $t('orLogin') }}
+                </v-btn>
+            </v-flex>
+
+        </v-layout>
+    </v-form>
 </template>
 
 <script>
@@ -69,27 +83,19 @@ export default {
     methods: {
 
         register () {
-            var vm = this
-            vm.$refs.form.validate()
-            if (!vm.rule.valid) return false
 
-            vm.sending = true
-            vm.$http.post('auth/register/', vm.fd).then(function (response) {
-                vm.$router.push({ name: 'auth.verify', query: { mail: vm.fd.mail } })
-            }).catch(function (e) {
-                if (e.response.data._info) switch (e.response.data._info) {
-                case 'mail_in_use':
-                    vm.fd.mail = ''
-                    vm.$notify({ type: 'error', text: vm.$t('mailInUse') })
-                    break
-                default:
-                    vm.$notify({ type: 'error', text: vm.$t('somethingWrong') })
-                    break
-                }
-                else vm.$notify({ type: 'error', text: vm.$t('somethingWrong') })
-            }).finally(function () {
-                vm.sending = false
+            if (!this.$refs.form.validate()) return false
+            this.sending = true
+
+            this.$store.dispatch('auth/register', this.fd).then(r => {
+                this.$router.push({ name: 'auth.verify', query: { mail: this.fd.mail } })
+            }).catch(r => {
+                if (r === 'mail_in_use') this.$notify({ type: 'error', text: this.$t('mailInUse') })
+                else this.$notify({ type: 'error', text: this.$t('alert.error.default') })
+            }).finally(() => {
+                this.sending = false
             })
+
         }
 
     },
@@ -97,17 +103,21 @@ export default {
     i18n: {
         messages: {
             en: {
-                orLogin: 'Already registered?',
                 title: 'Create your Account',
-                mailInUse: 'This Mail is already in use',
-                somethingWrong: 'Something went wrong. Please contact Support.',
+                password: 'Password',
+                repeat: 'Repeat Password',
+                register: 'Register',
+                orLogin: 'Already registered?',
+                mailInUse: 'E-Mail Address already in use',
                 strong: 'This password is not strong enough'
             },
             de: {
+                title: 'Konto erstellen',
+                password: 'Passwort',
+                repeat: 'Passwort wiederholen',
+                register: 'Registrieren',
                 orLogin: 'Bereits registriert?',
-                title: 'Erstelle ein neues Konto',
-                mailInUse: 'Diese Mail ist bereits registriert',
-                somethingWrong: 'Etwas lief falsch. Bitte kontaktiere den Support.',
+                mailInUse: 'E-Mail Adresse bereits registriert',
                 strong: 'Dieses Password ist nicht stark genug'
             }
         }

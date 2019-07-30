@@ -1,7 +1,7 @@
 <template>
-    <v-container fluid fill-height>
-        <v-layout row fill-height align-content-center>
-            <v-flex xs12>
+    <v-container grid-list-md fill-height>
+        <v-layout wrap justify-center align-center>
+            <v-flex xs12 sm8>
                 <transition appear name="fade" mode="out-in">
                     <router-view>
                     </router-view>
@@ -17,38 +17,31 @@ export default {
 
     methods: {
 
-        doLogin (tkn, target) {
-            var token = tkn || this.$store.state.auth.token
-            this.$store.commit('login', token)
-            if (token) this.$http.defaults.headers.common['Authorization'] = 'Bearer ' + token
-            else this.$http.defaults.headers.common['Authorization'] = ''
-            this.$router.push(target)
-        },
+        check () {
 
-        checkStates () {
-            var to = this.$route.name
-            var loggedin = this.$store.state.auth.login || false
-            var cookie = this.$cookies.get('app_token') || false
             var target = this.$route.query.target || { name: 'dashboard' }
 
-            if (loggedin && to === 'auth.logout') return
-            if (!loggedin && !cookie && to === 'auth.verify') return
-            if (!loggedin && !cookie && to === 'auth.register') return
-            if (!loggedin && !cookie && to === 'auth.login') return
+            this.$store.dispatch('auth/check').then(r => {
+                if (this.$route.name === 'auth.logout') return
+                this.$router.push(target)
+            }).catch(r => {
+                if (this.$route.name === 'auth.verify') return
+                if (this.$route.name === 'auth.register') return
+                if (this.$route.name === 'auth.login') return
+                if (this.$route.name === 'auth.forgotten') return
+                this.$router.push({ name: 'auth.login' })
+            })
 
-            if (loggedin && cookie) this.$router.push(target)
-            else if (!loggedin && cookie) this.doLogin(cookie, target)
-            else this.$router.push({ name: 'auth.login' })
         }
 
     },
 
     updated () {
-        this.checkStates()
+        this.check()
     },
 
     beforeMount () {
-        this.checkStates()
+        this.check()
     }
 
 }

@@ -1,16 +1,11 @@
 import Apios from '@/store/Apios'
+import VueCookies from 'vue-cookies'
 
 const state = {
 
     status: false,
-    access: {
-        token: null,
-        expire: null
-    },
-    refresh: {
-        token: null,
-        expire: null
-    },
+    accessToken: null,
+    refreshToken: null,
     user: {
         id: null,
         mail: null,
@@ -27,42 +22,112 @@ const getters = {
 
 const mutations = {
 
-    setAccess: (state, payload) => {
-        state.access = payload
+    placeAuth: (state, tokens) => {
+
+        var dec1 = JSON.parse(window.atob((tokens.access.split('.')[1]).replace('-', '+').replace('_', '/')))
+        var dec2 = JSON.parse(window.atob((tokens.refresh.split('.')[1]).replace('-', '+').replace('_', '/')))
+
+        VueCookies.set('accessToken', tokens.access, new Date(dec1.exp * 1000));
+        VueCookies.set('refreshToken', tokens.refresh, new Date(dec2.exp * 1000));
+        Apios.defaults.headers.common['Authorization'] = 'Bearer ' + tokens.access
+
+        state.accessToken = tokens.access
+        state.refreshToken = tokens.refresh
+        state.user = dec1.data.user
+        state.status = true
+
     },
-    setRefresh: (state, payload) => {
-        state.refresh = payload
-    },
-    setUser: (state, payload) => {
-        state.user = payload
+
+    removeAuth: (state) => {
+        VueCookies.remove('accessToken')
+        VueCookies.remove('refreshToken')
+        Apios.defaults.headers.common['Authorization'] = null
+        state.accessToken = null
+        state.refreshToken = null
+        state.user = null
+        state.status = false
     }
 
 }
 
 const actions = {
 
-    login (context, data) {
+    check (context) {
         return new Promise((resolve, reject) => {
 
-            Apios.post('auth/', data).then(r => {
+            var tRefresh = VueCookies.get('refreshToken')
+            
+            if (!tRefresh) reject()
+            else {
 
-                context.commit('setAccess', data.access)
-                context.commit('setRefresh', data.refresh)
-                context.commit('setUser', data.user)
+                var tAccess = VueCookies.get('accessToken')
+                if (tAccess) {
+                    context.commit('placeAuth', {access: tAccess, refresh: tRefresh })
+                    resolve()
+                } else {
+                    context.dispatch('refresh', tRefresh).then(r => {
+                        resolve()
+                    }).catch(r => {
+                        context.dispatch('logout')
+                        reject()
+                    })
+                }
 
-                resolve()
-
-            }, error => {
-                reject(error.response.data.condition)
-            })
+            }
 
         })
     },
 
-    logout: async (context, payload) => {
-        let { data } = await Axios.post('http://yourwebsite.com/api/todo')
-        context.commit('ADD_TODO', payload)
-    }
+    refresh (context, token) { 
+        return new Promise((resolve, reject) => {
+            Apios.post('auth/refresh/', { token: token }).then(r => {
+                context.commit('placeAuth',  r.data.data.tokens)
+                resolve()
+            }, error => {
+                reject(error.response.data.condition)
+            })
+        })
+    },
+
+    login (context, form) {
+        return new Promise((resolve, reject) => {
+            Apios.post('auth/', form).then(r => {
+                context.commit('placeAuth', r.data.data.tokens)
+                resolve()
+            }, error => {
+                reject(error.response.data.condition)
+            })
+        })
+    },
+
+    logout (context) {
+        return new Promise((resolve, reject) => {
+            Apios.post('auth/logout/', { token: context.state.refreshToken }).finally(() => {
+                context.commit('removeAuth')
+                resolve()
+            })
+        })
+    },
+
+    register (context, data) {
+        return new Promise((resolve, reject) => {
+            Apios.post('auth/register/', data).then(r => {
+                resolve()
+            }, error => {
+                reject(error.response.data.condition)
+            })
+        })
+    },
+
+    verify (context, data) {
+        return new Promise((resolve, reject) => {
+            Apios.post('auth/verify/', data).then(r => {
+                resolve()
+            }, error => {
+                reject(error.response.data.condition)
+            })
+        })
+    },
 
 }
 

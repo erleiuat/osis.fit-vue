@@ -74,6 +74,7 @@ export default {
     },
 
     mounted () {
+        /*
         var vm = this
         vm.$store.commit('loading', true)
         vm.$http.get('dashboard/read/').then(function (r) {
@@ -86,6 +87,7 @@ export default {
         }).finally(function () {
             vm.$store.commit('loading', false)
         })
+        */
     },
 
     i18n: {

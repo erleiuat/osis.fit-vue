@@ -36,23 +36,21 @@ export default {
             vm.prgcol = 'warning'
             vm.loading = true
             vm.logout()
-        }, 2000)
+        }, 1000)
     },
 
     methods: {
 
         logout () {
-            var vm = this
-            vm.$http.get('auth/logout/').then(function (response) {
-                vm.prgcol = 'success'
-            }).catch(function () {
-                vm.prgcol = 'error'
-                vm.$notify({ type: 'error', text: vm.$t('alert.error.default') })
-            }).finally(function () {
-                vm.loading = false
-                vm.$store.commit('logout')
-                vm.$cookies.remove('app_token')
-                vm.$router.push({ name: 'auth' })
+            this.$store.dispatch('auth/logout').then(r => {
+                this.prgcol = 'success'
+                this.$router.push({ name: 'auth', query: { target: this.$route.query.target } })
+            }).catch(r => {
+                this.prgcol = 'error'
+                this.$notify({ type: 'error', text: this.$t('alert.error.default') })
+            }).finally(() => {
+                this.loading = false
+                this.$router.push({ name: 'auth' })
             })
         }
 
