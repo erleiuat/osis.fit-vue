@@ -72,22 +72,22 @@ const actions = {
 
     refresh (context, token) {
         return new Promise((resolve, reject) => {
-            Apios.post('auth/refresh/', { token: token }).then(r => {
-                context.commit('placeAuth', r.data.data.tokens)
+            Apios.post('auth/refresh/', { token: token }).then(res => {
+                context.commit('placeAuth', res.data.tokens)
                 resolve()
-            }, error => {
-                reject(error.response.data.condition)
+            }, err => {
+                reject(err.data.condition)
             })
         })
     },
 
     login (context, form) {
         return new Promise((resolve, reject) => {
-            Apios.post('auth/', form).then(r => {
-                context.commit('placeAuth', r.data.data.tokens)
+            Apios.post('auth/', form).then(res => {
+                context.commit('placeAuth', res.data.tokens)
                 resolve()
-            }, error => {
-                reject(error.response.data.condition)
+            }, err => {
+                reject(err.data.condition)
             })
         })
     },
@@ -103,7 +103,7 @@ const actions = {
 
     register (context, data) {
         return new Promise((resolve, reject) => {
-            Apios.post('auth/register/', data).then(r => {
+            Apios.post('auth/register/', data).then(() => {
                 resolve()
             }, error => {
                 reject(error.response.data.condition)
@@ -113,10 +113,10 @@ const actions = {
 
     verify (context, data) {
         return new Promise((resolve, reject) => {
-            Apios.post('auth/verify/', data).then(r => {
+            Apios.post('auth/verify/', data).then(() => {
                 resolve()
-            }, error => {
-                reject(error.response.data.condition)
+            }, err => {
+                reject(err.data.condition)
             })
         })
     }

@@ -28,7 +28,6 @@ import Alerts from '@/components/Alerts'
 import VueCookies from 'vue-cookies'
 
 import(/* webpackPrefetch: true */ '@/assets/css/app.css')
-import(/* webpackPrefetch: true */ '@/assets/css/nprogress.css')
 import(/* webpackPrefetch: true */ '@/assets/css/transitions.css')
 
 const CookieInfo = () => import('@/components/CookieInfo')
@@ -51,11 +50,10 @@ export default {
             this.$router.push({ name: 'welcome' })
         })
 
-        var vm = this
-        vm.$router.beforeResolve((to, from, next) => {
+        this.$router.beforeResolve((to, from, next) => {
             if (!to.meta.authRequired) next()
-            else if (vm.$store.getters['auth/status']) next()
-            else vm.$router.push({ name: 'auth', query: { target: to.name } })
+            else if (this.$store.getters['auth/status']) next()
+            else this.$router.push({ name: 'auth', query: { target: to.name } })
         })
     },
 

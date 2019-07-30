@@ -11,23 +11,27 @@ const apios = Axios.create({
     cancelToken: source.token
 })
 
-apios.interceptors.request.use(function (config) {
+apios.interceptors.request.use(config => {
     if (pendingCalls[config.baseURL + config.url] === true) return {
         ...config, cancelToken: new CancelToken((cancel) => cancel())
     }
+
     NProgress.start()
     pendingCalls[config.baseURL + config.url] = true
     return config
-}, function (error) {
-    return Promise.reject(error)
+}, err => {
+    return Promise.reject(err)
 })
 
-apios.interceptors.response.use(function (response) {
+apios.interceptors.response.use(res => {
     NProgress.done()
-    pendingCalls[response.config.url] = null
-    return response
-}, function (error) {
-    return Promise.reject(error)
+    pendingCalls[res.config.url] = null
+    return res.data
+}, err => {
+    if (err.constructor.name === 'Cancel') return Promise.reject(err)
+    NProgress.done()
+    pendingCalls[err.response.config.url] = null
+    return Promise.reject(err.response)
 })
 
 export default apios
