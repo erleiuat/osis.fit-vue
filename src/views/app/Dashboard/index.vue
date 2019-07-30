@@ -1,50 +1,44 @@
 <template>
-    <v-container grid-list-xl>
+    <v-container grid-list-xl fill-height>
+        <v-layout wrap>
 
-        <Welcome v-if="!$store.getters.latestWeight" />
-        <Facts v-else />
+            <Welcome v-if="!$store.getters.latestWeight" />
 
-        <transition appear name="fade" mode="in-out">
-            <v-layout row wrap v-if="!$vuetify.breakpoint.xs" class="text-center">
-                <v-flex xs12 class="pt-4">
+            <Facts v-else />
+
+            <v-layout wrap text-center v-if="!$vuetify.breakpoint.xs">
+                <v-flex xs12>
                     <v-divider />
                 </v-flex>
-                <v-flex xs12 sm4>
+                <v-flex sm4>
                     <div class="headline">{{ $t('calories') }}</div>
                     <CalorieAdder />
                 </v-flex>
-                <v-flex xs12 sm4>
+                <v-flex sm4>
                     <div class="headline">{{ $t('activity') }}</div>
                     <ActivityAdder />
                 </v-flex>
-                <v-flex xs12 sm4>
+                <v-flex sm4>
                     <div class="headline">{{ $t('weight') }}</div>
                     <WeightAdder />
                 </v-flex>
-            </v-layout>
-        </transition>
-
-        <transition appear name="zoom" mode="in-out">
-            <v-layout row wrap>
-                <v-flex xs12 class="pt-4">
+                <v-flex xs12>
                     <v-divider />
                 </v-flex>
-                <v-flex xs12>
-                    <WeightChart />
-                </v-flex>
             </v-layout>
-        </transition>
 
-        <v-layout row wrap>
-            <v-flex xs12 class="text-center" @click="$store.commit('loading', !$store.state.app.loading)">
+            <v-flex xs12>
+                <WeightChart />
+            </v-flex>
+
+            <v-flex xs12 class="text-center">
                 <div class="headline">{{ $t('trainings') }}</div>
                 <v-btn large disabled><i>{{ $t('soon') }}</i></v-btn>
             </v-flex>
+
         </v-layout>
 
-        <transition appear name="slideUp">
-            <BottomNav v-if="$vuetify.breakpoint.xs" />
-        </transition>
+        <BottomNav v-if="$vuetify.breakpoint.xs" />
 
     </v-container>
 </template>

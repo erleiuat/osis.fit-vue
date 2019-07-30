@@ -1,5 +1,5 @@
 <template>
-    <v-layout row wrap fill-height justify-space-around>
+    <v-layout wrap>
         <CalorieFacts />
         <BMIFacts />
         <WeightFacts />

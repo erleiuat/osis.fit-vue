@@ -9,8 +9,7 @@
             <Alerts />
 
             <transition appear name="fade" mode="out-in">
-                <router-view>
-                </router-view>
+                <router-view />
             </transition>
 
             <CookieInfo v-if="!$store.state.app.cookiesAccepted" />

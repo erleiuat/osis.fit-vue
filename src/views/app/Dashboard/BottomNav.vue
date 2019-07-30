@@ -1,30 +1,34 @@
 <template>
-    <v-bottom-nav app fixed value="true" class="elevation-0 borders">
+    <v-bottom-navigation app fixed grow class="elevation-0">
+
         <CalorieAdder>
             <template v-slot:default="trigger">
-                <v-btn flat v-on="trigger.on">
+                <v-btn text v-on="trigger.on">
                     <span>{{ $t('calories') }}</span>
                     <v-icon>add</v-icon>
                 </v-btn>
             </template>
         </CalorieAdder>
+
         <ActivityAdder>
             <template v-slot:default="trigger">
-                <v-btn flat v-on="trigger.on">
+                <v-btn text v-on="trigger.on">
                     <span>{{ $t('activity') }}</span>
                     <v-icon>add</v-icon>
                 </v-btn>
             </template>
         </ActivityAdder>
+
         <WeightAdder>
             <template v-slot:default="trigger">
-                <v-btn flat v-on="trigger.on">
+                <v-btn text v-on="trigger.on">
                     <span>{{ $t('weight') }}</span>
                     <v-icon>add</v-icon>
                 </v-btn>
             </template>
         </WeightAdder>
-    </v-bottom-nav>
+
+    </v-bottom-navigation>
 </template>
 
 <script>
