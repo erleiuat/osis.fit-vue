@@ -34,7 +34,7 @@ module.exports = [
                 name: 'auth.forgotten',
                 component: () => import('@/views/auth/Forgotten'),
                 meta: { authRequired: false }
-            },
+            }
         ]
     }
 ]

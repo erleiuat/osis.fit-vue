@@ -18,12 +18,9 @@ export default {
     methods: {
 
         check () {
-
-            var target = this.$route.query.target || { name: 'dashboard' }
-
             this.$store.dispatch('auth/check').then(r => {
                 if (this.$route.name === 'auth.logout') return
-                this.$router.push(target)
+                this.$router.push(this.$route.query.target || { name: 'dashboard' })
             }).catch(r => {
                 if (this.$route.name === 'auth.verify') return
                 if (this.$route.name === 'auth.register') return
@@ -31,7 +28,6 @@ export default {
                 if (this.$route.name === 'auth.forgotten') return
                 this.$router.push({ name: 'auth.login' })
             })
-
         }
 
     },

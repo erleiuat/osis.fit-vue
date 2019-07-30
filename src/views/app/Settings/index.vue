@@ -18,10 +18,10 @@
                 <h3 class="display-2">{{ $t('account') }}</h3>
             </v-flex>
             <v-flex shrink class="text-center">
-                <v-switch :label="$t('darkmode')" @change="changeMode()" v-model="mode"></v-switch>
+                <v-switch v-model="mode" :label="$t('darkmode')"></v-switch>
             </v-flex>
             <v-flex shrink>
-                <v-select :label="$t('language')" @input="changeLang()" v-model="language" :items="langs" />
+                <v-select v-model="lang" :items="langs" :label="$t('language')" />
             </v-flex>
         </v-layout>
         <v-layout row wrap justify-space-around>
@@ -42,6 +42,8 @@
 <script>
 import EditAims from '@/views/app/Settings/Aims'
 import EditProfile from '@/views/app/Settings/Profile'
+import i18n from '@/plugins/i18n'
+import VueCookies from 'vue-cookies'
 
 export default {
     name: 'Settings',
@@ -53,32 +55,35 @@ export default {
     data () {
         return {
             langs: [
-                { text: this.$t('l.en'), value: 'en' },
-                { text: this.$t('l.de'), value: 'de' }
-            ],
-            language: this.$store.state.app.language,
-            mode: this.$store.state.app.dark
+                { text: this.$t('lang.en'), value: 'en' },
+                { text: this.$t('lang.de'), value: 'de' }
+            ]
         }
     },
 
-    methods: {
-        changeLang () {
-            this.$store.state.app.language = this.language
-            this.$cookies.set('client_language', this.language)
+    computed: {
+
+        mode: {
+            get () {
+                return VueCookies.get('themeDark')
+            },
+            set (val) {
+                this.$vuetify.theme.dark = val
+                if (val) VueCookies.set('themeDark', val)
+                else VueCookies.remove('themeDark')
+            }
         },
-        changeMode () {
-            this.$store.state.app.dark = this.mode
-            this.$cookies.set('client_darkmode', this.mode)
-        }
-    },
 
-    mounted () {
-        var vm = this
-        vm.$http.get('user/read/').then(function (r) {
-            vm.$store.state.user = r.data.user
-        }).catch(function () {
-            vm.$notify({ type: 'error', text: vm.$t('alert.error.load') })
-        })
+        lang: {
+            get () {
+                return VueCookies.get('appLang') || navigator.language || navigator.userLanguage
+            },
+            set (val) {
+                i18n.locale = val
+                VueCookies.set('appLang', val)
+            }
+        }
+
     },
 
     i18n: {
@@ -90,7 +95,7 @@ export default {
                 changePass: 'Change Password',
                 getData: 'Get all my Data',
                 deleteAcc: 'Delete my Account',
-                l: {
+                lang: {
                     de: 'German',
                     en: 'English'
                 }
@@ -102,7 +107,7 @@ export default {
                 changePass: 'Password ändern',
                 getData: 'Meine Daten herunterladen',
                 deleteAcc: 'Konto löschen',
-                l: {
+                lang: {
                     de: 'Deutsch',
                     en: 'Englisch'
                 }

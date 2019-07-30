@@ -83,7 +83,6 @@ export default {
     methods: {
 
         register () {
-
             if (!this.$refs.form.validate()) return false
             this.sending = true
 
@@ -95,7 +94,6 @@ export default {
             }).finally(() => {
                 this.sending = false
             })
-
         }
 
     },

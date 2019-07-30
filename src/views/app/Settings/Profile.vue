@@ -5,7 +5,39 @@
             <h3 class="display-2">{{ $t('title') }}</h3>
         </v-card-title>
 
-        <v-form v-model="rule.valid" ref="form" v-on:submit.prevent v-if="editMode">
+        <v-card-text v-if="!edit">
+            <v-layout row wrap overflow-hidden>
+                <v-flex xs6 sm4>
+                    <span class="subheading">{{ $t('firstname') }}</span><br />
+                    <span class="headline">{{ $store.state.user.firstname || '-' }}</span>
+                </v-flex>
+                <v-flex xs6 sm4>
+                    <span class="subheading">{{ $t('lastname') }}</span><br />
+                    <span class="headline">{{ $store.state.user.lastname || '-' }}</span>
+                </v-flex>
+                <v-flex xs6 sm4>
+                    <span class="subheading">{{ $t('height') }}</span><br />
+                    <span class="headline">{{ $store.state.user.height || '-' }}</span>
+                </v-flex>
+                <v-flex xs6 sm4>
+                    <span class="subheading">{{ $t('gender') }}</span><br />
+                    <span class="headline">{{ $t('g.'+$store.state.user.gender) }}</span>
+                </v-flex>
+                <v-flex xs6 sm4>
+                    <span class="subheading">{{ $t('birthdate') }}</span><br />
+                    <span class="headline">{{ $store.state.user.birthdate || '-' }}</span>
+                </v-flex>
+                <v-flex xs6 sm4>
+                    <span class="subheading font-italic">{{ $t('mail') }}</span><br />
+                    <span class="caption font-italic">{{ $store.state.auth.user.mail }}</span>
+                </v-flex>
+            </v-layout>
+        </v-card-text>
+        <v-card-actions v-if="!edit">
+            <v-btn @click="edit = !edit" depressed>{{ $t('btn.edit') }}</v-btn>
+        </v-card-actions>
+
+        <v-form v-model="rule.valid" ref="form" v-on:submit.prevent v-if="edit">
             <v-card-text>
                 <v-layout row wrap>
                     <v-flex xs6>
@@ -21,7 +53,7 @@
                         <v-select :label="$t('gender')" v-model="fd.gender" :items="genders" :rules="rule.require" />
                     </v-flex>
                     <v-flex xs12>
-                        <v-dialog ref="dialog" v-model="modal" :return-value.sync="fd.birthdate" lazy full-width width="290px">
+                        <v-dialog ref="dialog" v-model="modal" :return-value.sync="fd.birthdate" full-width width="290px">
                             <template v-slot:activator="{ on }">
                                 <v-text-field v-model="fd.birthdate" :label="$t('birthdate')" append-icon="event" readonly v-on="on" type="date" />
                             </template>
@@ -40,7 +72,7 @@
             </v-card-text>
 
             <v-card-actions>
-                <v-btn @click="toggle()" depressed>{{ $t('btn.cancel') }}</v-btn>
+                <v-btn @click="edit = !edit" depressed>{{ $t('btn.cancel') }}</v-btn>
                 <v-spacer v-if="$vuetify.breakpoint.xs" />
                 <v-btn @click="save()" color="secondary" :disabled="sending" :loading="sending" type="submit">
                     {{ $t('btn.save') }}
@@ -51,39 +83,6 @@
             </v-card-actions>
         </v-form>
 
-        <v-card-text v-if="!editMode">
-            <v-layout row wrap overflow-hidden>
-                <v-flex xs6 sm4>
-                    <span class="subheading">{{ $t('firstname') }}</span><br />
-                    <span class="headline">{{ fd.firstname || '-' }}</span>
-                </v-flex>
-                <v-flex xs6 sm4>
-                    <span class="subheading">{{ $t('lastname') }}</span><br />
-                    <span class="headline">{{ fd.lastname || '-' }}</span>
-                </v-flex>
-                <v-flex xs6 sm4>
-                    <span class="subheading">{{ $t('height') }}</span><br />
-                    <span class="headline">{{ fd.height || '-' }}</span>
-                </v-flex>
-                <v-flex xs6 sm4>
-                    <span class="subheading">{{ $t('gender') }}</span><br />
-                    <span class="headline">{{ $t('g.'+fd.gender) }}</span>
-                </v-flex>
-                <v-flex xs6 sm4>
-                    <span class="subheading">{{ $t('birthdate') }}</span><br />
-                    <span class="headline">{{ fd.birthdate || '-' }}</span>
-                </v-flex>
-                <v-flex xs6 sm4>
-                    <span class="subheading font-italic">{{ $t('mail') }}</span><br />
-                    <span class="caption font-italic">{{ $store.state.auth.user.mail }}</span>
-                </v-flex>
-            </v-layout>
-        </v-card-text>
-
-        <v-card-actions v-if="!editMode">
-            <v-btn @click="toggle()" depressed>{{ $t('btn.edit') }}</v-btn>
-        </v-card-actions>
-
     </v-card>
 </template>
 
@@ -93,10 +92,9 @@ export default {
 
     data () {
         return {
+            edit: false,
             modal: false,
-            editMode: false,
             sending: false,
-            fdOrg: {},
             rule: {
                 valid: false,
                 require: [
@@ -112,9 +110,9 @@ export default {
             return {
                 firstname: this.$store.state.user.firstname,
                 lastname: this.$store.state.user.lastname,
-                birthdate: this.$store.state.user.birthdate,
                 height: this.$store.state.user.height,
-                gender: this.$store.state.user.gender
+                gender: this.$store.state.user.gender,
+                birthdate: this.$store.state.user.birthdate
             }
         },
 
@@ -127,27 +125,23 @@ export default {
 
     },
 
+    mounted () {
+        this.$store.dispatch('user/load')
+    },
+
     methods: {
 
-        toggle () {
-            if (!this.editMode) this.fdOrg = Object.assign({}, this.fd)
-            else for (var key in this.fdOrg) this.fd[key] = this.fdOrg[key]
-            this.editMode = !this.editMode
-        },
-
         save () {
-            var vm = this
-            vm.$refs.form.validate()
-            if (!vm.rule.valid) return false
+            if (!this.$refs.form.validate()) return false
 
-            vm.sending = true
-            vm.$http.post('user/edit/profile/', vm.fd).then(function (r) {
-                vm.editMode = false
-                vm.$notify({ type: 'success', text: vm.$t('alert.success.save') })
-            }).catch(function () {
-                vm.$notify({ type: 'error', text: vm.$t('alert.error.save') })
-            }).finally(function () {
-                vm.sending = false
+            this.sending = true
+            this.$store.dispatch('user/edit', this.fd).then(r => {
+                this.edit = false
+                this.$notify({ type: 'success', text: this.$t('alert.success.save') })
+            }).catch(r => {
+                this.$notify({ type: 'error', text: this.$t('alert.error.save') })
+            }).finally(() => {
+                this.sending = false
             })
         }
 

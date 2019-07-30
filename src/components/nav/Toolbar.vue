@@ -9,8 +9,6 @@
             Osis.fit
         </v-toolbar-title>
 
-        <v-progress-linear :indeterminate="false" absolute bottom />
-
         <v-spacer />
 
         <v-app-bar-nav-icon @click.stop="drawer()" />
@@ -24,7 +22,7 @@ export default {
 
     methods: {
         drawer () {
-            this.$store.commit('drawer', !this.$store.state.app.drawer)
+            this.$store.dispatch('app/drawer')
         }
     }
 

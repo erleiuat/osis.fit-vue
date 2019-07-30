@@ -53,21 +53,19 @@ export default {
     computed: {
 
         items () {
-            if (this.$store.getters['auth/status'])
-                return [
-                    { to: 'dashboard', icon: 'dashboard' },
-                    { to: 'calories', icon: 'restaurant' },
-                    { to: 'weights', icon: 'linear_scale' },
-                    { to: 'activity', icon: 'accessibility_new' },
-                    { to: 'templates', icon: 'dashboard' },
-                    { to: 'settings', icon: 'settings' }
-                ]
-            else
-                return [
-                    { to: 'welcome', icon: 'home' },
-                    { to: 'auth.login', icon: 'lock_open' },
-                    { to: 'auth.register', icon: 'how_to_reg' }
-                ]
+            if (this.$store.getters['auth/status']) return [
+                { to: 'dashboard', icon: 'dashboard' },
+                { to: 'calories', icon: 'restaurant' },
+                { to: 'weights', icon: 'linear_scale' },
+                { to: 'activity', icon: 'accessibility_new' },
+                { to: 'templates', icon: 'dashboard' },
+                { to: 'settings', icon: 'settings' }
+            ]
+            else return [
+                { to: 'welcome', icon: 'home' },
+                { to: 'auth.login', icon: 'lock_open' },
+                { to: 'auth.register', icon: 'how_to_reg' }
+            ]
         },
 
         drawer: {
@@ -75,7 +73,7 @@ export default {
                 return this.$store.state.app.drawer
             },
             set (val) {
-                this.$store.commit('drawer', val)
+                this.$store.commit('app/setDrawer', val)
             }
         }
 

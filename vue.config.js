@@ -1,8 +1,7 @@
 /* eslint-disable no-console */
 
-const VuetifyLoaderPlugin = require('vuetify-loader/lib/plugin')
-const webpack = require('webpack')
 // const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
+const webpack = require('webpack')
 
 module.exports = {
     baseUrl: process.env.BASE_URL,

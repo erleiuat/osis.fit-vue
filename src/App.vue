@@ -1,5 +1,5 @@
 <template>
-    <v-app :dark="$store.state.app.dark">
+    <v-app>
 
         <Drawer />
         <Toolbar />
@@ -25,8 +25,10 @@
 import Drawer from '@/components/nav/Drawer'
 import Toolbar from '@/components/nav/Toolbar'
 import Alerts from '@/components/Alerts'
+import VueCookies from 'vue-cookies'
 
 import(/* webpackPrefetch: true */ '@/assets/css/app.css')
+import(/* webpackPrefetch: true */ '@/assets/css/nprogress.css')
 import(/* webpackPrefetch: true */ '@/assets/css/transitions.css')
 
 const CookieInfo = () => import('@/components/CookieInfo')
@@ -39,39 +41,21 @@ export default {
     },
 
     beforeMount () {
-        var vm = this
+        this.$i18n.locale = VueCookies.get('appLang') || navigator.language || navigator.userLanguage
+        this.$vuetify.theme.dark = VueCookies.get('themeDark')
+        this.$store.state.app.drawer = this.$vuetify.breakpoint.lgAndUp
 
-        vm.$store.state.app.drawer = vm.$vuetify.breakpoint.lgAndUp
-        if (vm.$cookies.get('client_darkmode') === 'true') vm.$store.state.app.dark = true
-        if (vm.$cookies.get('client_language')) vm.$store.state.app.language = vm.$cookies.get('client_language')
-
-        if (vm.$route.name === 'start')
-            if (vm.$store.state.auth.login || vm.$cookies.get('app_token')) {
-                vm.$router.push({ name: 'dashboard' })
-            } else {
-                vm.$router.push({ name: 'welcome' })
-            }
-
-        vm.$router.beforeEach((to, from, next) => {
-            vm.$store.state.app.routing = true
-            next()
+        if (this.$route.name === 'start') this.$store.dispatch('auth/check').then(r => {
+            this.$router.push({ name: 'dashboard' })
+        }).catch(r => {
+            this.$router.push({ name: 'welcome' })
         })
 
+        var vm = this
         vm.$router.beforeResolve((to, from, next) => {
             if (!to.meta.authRequired) next()
             else if (vm.$store.getters['auth/status']) next()
             else vm.$router.push({ name: 'auth', query: { target: to.name } })
-        })
-
-        vm.$router.afterEach((to, from) => {
-            vm.$store.state.app.routing = false
-        })
-
-        vm.$i18n.locale = vm.$store.state.app.language
-        vm.$store.watch(state => {
-            return vm.$store.state.app.language
-        }, (newValue, oldValue) => {
-            vm.$i18n.locale = vm.$store.state.app.language
         })
     },
 

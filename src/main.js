@@ -7,7 +7,7 @@ import VueCookies from 'vue-cookies'
 import router from './router/'
 import store from './store/'
 import i18n from './plugins/i18n'
-import vuetify from './plugins/vuetify';
+import vuetify from './plugins/vuetify'
 
 Vue.use(Notifications)
 Vue.use(VueCookies)

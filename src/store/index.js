@@ -1,43 +1,20 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 
+import app from './modules/app'
 import auth from './modules/auth'
-import todos from './modules/todos'
-
+import user from './modules/user'
 Vue.use(Vuex)
-
 
 export default new Vuex.Store({
 
     modules: {
-        todos,
-        auth
+        app,
+        auth,
+        user
     },
 
     state: {
-
-        app: {
-            title: 'Osis.fit',
-            version: '1.0',
-            drawer: false,
-            language: navigator.language || navigator.userLanguage,
-            dark: false,
-            cookiesAccepted: true,
-            timer: null
-        },
-
-        user: {
-            firstname: null,
-            lastname: null,
-            birthdate: null,
-            height: null,
-            gender: null,
-            aims: {
-                weight: null,
-                date: null
-            }
-        },
-
         data: {
             calorie_log: [],
             weight_log: [],
@@ -45,7 +22,6 @@ export default new Vuex.Store({
             food: [],
             foodFavorite: []
         }
-
     },
 
     getters: {
@@ -92,10 +68,6 @@ export default new Vuex.Store({
 
     mutations: {
 
-        drawer (state, val) {
-            state.app.drawer = val
-        },
-
         loading (state, toggle) {
             if (toggle)
                 state.app.timer = setTimeout(function () {
@@ -105,32 +77,7 @@ export default new Vuex.Store({
                 clearTimeout(state.app.timer)
                 state.app.loading = false
             }
-        },
-
-        login (state, token) {
-            var now = Math.floor(Date.now() / 1000)
-            var dec = JSON.parse(window.atob((token.split('.')[1]).replace('-', '+').replace('_', '/')))
-
-            if (now > dec.exp) {
-                state.auth.login = false
-                state.auth.token = null
-                state.auth.user = {}
-            } else {
-                state.auth.token = token
-                state.auth.login = true
-                state.auth.user = dec.data.user
-            }
-        },
-
-        logout (state) {
-            state.auth.login = false
-            state.auth.token = null
-            state.auth.user = {}
         }
-
-    },
-
-    actions: {
 
     }
 

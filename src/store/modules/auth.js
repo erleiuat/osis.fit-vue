@@ -23,19 +23,17 @@ const getters = {
 const mutations = {
 
     placeAuth: (state, tokens) => {
-
         var dec1 = JSON.parse(window.atob((tokens.access.split('.')[1]).replace('-', '+').replace('_', '/')))
         var dec2 = JSON.parse(window.atob((tokens.refresh.split('.')[1]).replace('-', '+').replace('_', '/')))
 
-        VueCookies.set('accessToken', tokens.access, new Date(dec1.exp * 1000));
-        VueCookies.set('refreshToken', tokens.refresh, new Date(dec2.exp * 1000));
+        VueCookies.set('accessToken', tokens.access, new Date(dec1.exp * 1000))
+        VueCookies.set('refreshToken', tokens.refresh, new Date(dec2.exp * 1000))
         Apios.defaults.headers.common['Authorization'] = 'Bearer ' + tokens.access
 
         state.accessToken = tokens.access
         state.refreshToken = tokens.refresh
         state.user = dec1.data.user
         state.status = true
-
     },
 
     removeAuth: (state) => {
@@ -52,36 +50,30 @@ const mutations = {
 
 const actions = {
 
+    /* eslint prefer-promise-reject-errors: ["error", {"allowEmptyReject": true}] */
     check (context) {
         return new Promise((resolve, reject) => {
-
             var tRefresh = VueCookies.get('refreshToken')
-            
             if (!tRefresh) reject()
             else {
-
                 var tAccess = VueCookies.get('accessToken')
                 if (tAccess) {
-                    context.commit('placeAuth', {access: tAccess, refresh: tRefresh })
+                    context.commit('placeAuth', { access: tAccess, refresh: tRefresh })
                     resolve()
-                } else {
-                    context.dispatch('refresh', tRefresh).then(r => {
-                        resolve()
-                    }).catch(r => {
-                        context.dispatch('logout')
-                        reject()
-                    })
-                }
-
+                } else context.dispatch('refresh', tRefresh).then(r => {
+                    resolve()
+                }).catch(r => {
+                    context.dispatch('logout')
+                    reject()
+                })
             }
-
         })
     },
 
-    refresh (context, token) { 
+    refresh (context, token) {
         return new Promise((resolve, reject) => {
             Apios.post('auth/refresh/', { token: token }).then(r => {
-                context.commit('placeAuth',  r.data.data.tokens)
+                context.commit('placeAuth', r.data.data.tokens)
                 resolve()
             }, error => {
                 reject(error.response.data.condition)
@@ -127,11 +119,14 @@ const actions = {
                 reject(error.response.data.condition)
             })
         })
-    },
+    }
 
 }
 
 export default {
     namespaced: true,
-    state, getters, mutations, actions
+    state,
+    getters,
+    mutations,
+    actions
 }

@@ -66,7 +66,6 @@ export default {
     methods: {
 
         login () {
-
             if (!this.$refs.form.validate()) return false
             this.sending = true
 
@@ -74,23 +73,22 @@ export default {
                 this.$router.push({ name: 'auth', query: { target: this.$route.query.target } })
             }).catch(r => {
                 switch (r) {
-                    case 'password_wrong':
-                        this.$notify({ type: 'error', text: this.$t('fail.pass') })
-                        break
-                    case 'account_not_found':
-                        this.$notify({ type: 'error', text: this.$t('fail.unknown') })
-                        break
-                    case 'account_not_verified':
-                        this.$notify({ type: 'error', text: this.$t('fail.verify') })
-                        break
-                    default:
-                        this.$notify({ type: 'error', text: this.$t('alert.error.default') })
-                        break
+                case 'password_wrong':
+                    this.$notify({ type: 'error', text: this.$t('fail.pass') })
+                    break
+                case 'account_not_found':
+                    this.$notify({ type: 'error', text: this.$t('fail.unknown') })
+                    break
+                case 'account_not_verified':
+                    this.$notify({ type: 'error', text: this.$t('fail.verify') })
+                    break
+                default:
+                    this.$notify({ type: 'error', text: this.$t('alert.error.default') })
+                    break
                 }
             }).finally(() => {
                 this.sending = false
             })
-
         }
 
     },
@@ -107,7 +105,7 @@ export default {
                 verified: 'Your account is ready!',
                 login: 'Login',
                 noAccount: "You don't have an account?",
-                noPassword: "Password forgotten?",
+                noPassword: 'Password forgotten?',
                 fail: {
                     pass: 'Password incorrect',
                     unknown: 'Account not found',
@@ -120,7 +118,7 @@ export default {
                 verified: 'Dein Konto ist nun bereit!',
                 login: 'Anmelden',
                 noAccount: 'Hast du noch kein Konto?',
-                noPassword: "Password vergessen?",
+                noPassword: 'Password vergessen?',
                 fail: {
                     pass: 'Falsches Passwort',
                     unknown: 'Konto nicht gefunden',
