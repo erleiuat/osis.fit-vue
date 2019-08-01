@@ -7,6 +7,7 @@ import auth from './modules/auth'
 import user from './modules/user'
 import calories from './modules/calories'
 import weight from './modules/weight'
+import activity from './modules/activity'
 
 export default new Vuex.Store({
 
@@ -15,7 +16,8 @@ export default new Vuex.Store({
         auth,
         user,
         calories,
-        weight
+        weight,
+        activity
     },
 
     state: {

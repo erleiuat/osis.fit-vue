@@ -1,5 +1,6 @@
 <template>
-    <v-bottom-nav app fixed value="true" class="elevation-0 borders">
+    <v-bottom-navigation app fixed grow class="elevation-0">
+
         <ActivityAdder>
             <template v-slot:default="trigger">
                 <v-btn flat v-on="trigger.on">
@@ -16,7 +17,8 @@
                 </v-btn>
             </template>
         </Trainings>
-    </v-bottom-nav>
+        
+    </v-bottom-navigation>
 </template>
 
 <script>

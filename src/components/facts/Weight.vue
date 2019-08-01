@@ -1,22 +1,26 @@
 <template>
-    <v-flex xs12 md4 v-if="weight">
-        <v-card class="fill-height" :color="state.color" :dark="state.dark">
-            <v-card-title class="display-1">
-                {{ $t('title') }}
-            </v-card-title>
-            <v-card-text class="pt-1" v-if="weight">
-                <v-layout row wrap align-end justify-space-around fill-height>
-                    <v-flex xs7 class="display-2">
-                        {{ weight }}
-                    </v-flex>
-                    <v-flex xs5 class="text-xs-right caption" v-if="target">
-                        {{ $t('target') }}: {{ target }}<br/>
-                        {{ $t('difference') }}: {{ diff }}
-                    </v-flex>
-                </v-layout>
-            </v-card-text>
-        </v-card>
-    </v-flex>
+    <v-card v-if="weight" :color="state.color" :dark="state.dark">
+
+        <v-card-title class="display-1">
+            {{ $t('title') }}
+        </v-card-title>
+
+        <v-card-text>
+            <v-layout wrap align-end>
+
+                <v-flex xs7>
+                    <div class="display-2">{{ weight }}</div>
+                    <div class="caption">{{ $t('target') }}: {{ target }}</div>
+                </v-flex>
+
+                <v-flex xs5 text-right class="caption">
+                    {{ diff }} {{ $t('difference') }}
+                </v-flex>
+
+            </v-layout>
+        </v-card-text>
+
+    </v-card>
 </template>
 
 <script>
@@ -41,19 +45,15 @@ export default {
         },
 
         weight () {
-            var weight = this.$store.getters.latestWeight || false
-            return Math.round(weight.weight * 100) / 100
+            return this.$store.getters['weight/getLatest'].weight
         },
 
         target () {
-            return this.$store.state.user.aims.weight || false
+            return this.$store.state.user.aims.weight
         },
 
         diff () {
-            var weight = this.$store.getters.latestWeight || { weight: 90 }
-            return Math.round(
-                (this.target - weight.weight) * 100
-            ) / 100
+            return Math.round((this.target - this.weight) * 100) / 100
         }
 
     },

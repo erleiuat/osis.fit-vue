@@ -80,10 +80,6 @@ export default {
         }
     },
 
-    mounted () {
-        this.$store.dispatch('user/load')
-    },
-
     methods: {
 
         save () {

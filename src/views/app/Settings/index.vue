@@ -61,6 +61,10 @@ export default {
         }
     },
 
+    mounted () {
+        this.$store.dispatch('user/load')
+    },
+
     computed: {
 
         mode: {

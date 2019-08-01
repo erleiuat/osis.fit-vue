@@ -2,9 +2,13 @@
     <v-container grid-list-xl>
         <v-layout wrap>
 
-            <Welcome v-if="!$store.getters.latestWeight" />
+            <v-flex xs12 v-if="!$store.getters['weight/getLatest']">
+                <Welcome />
+            </v-flex>
 
-            <Facts v-else />
+            <v-flex xs12 v-else>
+                <Facts />
+            </v-flex>
 
             <v-layout wrap text-center v-if="!$vuetify.breakpoint.xs">
                 <v-flex xs12>
@@ -44,8 +48,8 @@
 </template>
 
 <script>
-const Facts = () => import('@/views/app/Dashboard/Facts')
 const Welcome = () => import('@/views/app/Dashboard/Welcome')
+const Facts = () => import('@/views/app/Dashboard/Facts')
 
 const CalorieAdder = () => import('@/components/adder/Calories')
 const ActivityAdder = () => import('@/components/adder/Activity')
@@ -68,20 +72,9 @@ export default {
     },
 
     mounted () {
-        /*
-        var vm = this
-        vm.$store.commit('loading', true)
-        vm.$http.get('dashboard/read/').then(function (r) {
-            vm.$store.state.user = r.data.user
-            vm.$store.state.data.weight_log = r.data.weights
-            vm.$store.state.data.calorie_log = r.data.calories
-            vm.$store.state.data.activity_log = r.data.activity
-        }).catch(function () {
-            vm.$notify({ type: 'error', text: vm.$t('alert.error.load') })
-        }).finally(function () {
-            vm.$store.commit('loading', false)
-        })
-        */
+        // TODO: One call only
+        this.$store.dispatch('weight/load')
+        this.$store.dispatch('user/load')
     },
 
     i18n: {

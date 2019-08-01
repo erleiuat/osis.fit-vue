@@ -12,14 +12,18 @@
                 </ActivityAdder>
             </v-flex>
             <v-flex xs12 sm4>
-                <v-dialog ref="dialog" v-model="modal" :return-value.sync="date" lazy full-width width="290px">
+                <v-dialog ref="dialog" v-model="modal" :return-value.sync="date" persistent full-width width="290px">
                     <template v-slot:activator="{ on }">
-                        <v-text-field solo flat v-model="date" append-icon="event" readonly v-on="on" type="date" hide-details/>
+                        <v-text-field solo flat v-model="date" append-icon="event" readonly v-on="on" type="date" hide-details />
                     </template>
-                    <v-date-picker v-model="date" scrollable :locale="$store.state.app.language">
-                        <v-btn icon @click="modal = false"><v-icon>close</v-icon></v-btn>
+                    <v-date-picker v-model="date" scrollable>
+                        <v-btn icon @click="modal = false">
+                            <v-icon>close</v-icon> 
+                        </v-btn>
                         <v-spacer></v-spacer>
-                        <v-btn icon @click="$refs.dialog.save(date)"><v-icon>check</v-icon></v-btn>
+                        <v-btn icon @click="$refs.dialog.save(date)">
+                            <v-icon>check</v-icon>
+                        </v-btn>
                     </v-date-picker>
                 </v-dialog>
             </v-flex>
@@ -37,7 +41,7 @@
 
         <v-layout row wrap>
             <v-flex xs12>
-                <ActivityTable :showDate="date" />
+                <ActivityTable :date="date" />
             </v-flex>
         </v-layout>
 
@@ -47,11 +51,10 @@
 </template>
 
 <script>
-import ActivityTable from '@/views/app/Activity/Table'
-
 const Trainings = () => import('@/components/trainings/')
 const ActivityAdder = () => import('@/components/adder/Activity')
 const BottomNav = () => import('@/views/app/Activity/BottomNav')
+const ActivityTable = () => import('@/views/app/Activity/Table')
 
 export default {
     name: 'Activity',
@@ -62,15 +65,29 @@ export default {
 
     data () {
         return {
-            date: '',
-            modal: false
+            modal: false,
+            dateSelected: null
         }
     },
 
-    mounted () {
-        var now = new Date()
-        var str = new Date(now.getTime() - (now.getTimezoneOffset() * 60000)).toISOString()
-        this.date = str.substr(0, 10)
+    computed: {
+
+        date: {
+            set (val) {
+                this.dateSelected = val
+                this.$store.dispatch('activity/load', val)
+            },
+            get () {
+                if (!this.dateSelected) {
+                    var now = new Date()
+                    var str = (new Date(now.getTime() - (now.getTimezoneOffset() * 60000)).toISOString()).substr(0, 10)
+                    this.$store.dispatch('activity/load', str)
+                    this.dateSelected = str
+                }
+                return this.dateSelected
+            }
+        }
+
     },
 
     i18n: {

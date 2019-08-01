@@ -17,9 +17,9 @@
                     <v-icon>close</v-icon>
                 </v-btn>
             </v-toolbar>
-            <v-form v-model="rule.valid" ref="form" v-on:submit.prevent>
-
-                <v-container grid-list-sm>
+            
+            <v-container grid-list-sm>
+                <v-form v-model="rule.valid" ref="form" v-on:submit.prevent>
                     <v-layout wrap>
 
                         <v-flex xs6>
@@ -43,16 +43,14 @@
                             <v-text-field v-model="fd.weight" :label="$t('weight')" :rules="rule.require" type="number" outlined />
                         </v-flex>
 
+                        <v-flex xs12>
+                            <v-btn @click="add()" :loading="sending" block type="submit" color="primary">{{ $t('btn.save') }}</v-btn>
+                        </v-flex>
+
                     </v-layout>
-                </v-container>
+                </v-form>
+            </v-container>
 
-                <v-card-actions>
-                    <v-btn @click="show = false" text>{{ $t('btn.cancel') }}</v-btn>
-                    <v-spacer></v-spacer>
-                    <v-btn @click="add()" :loading="sending" type="submit" color="primary" text>{{ $t('btn.save') }}</v-btn>
-                </v-card-actions>
-
-            </v-form>
         </v-card>
     </v-dialog>
 </template>
@@ -106,9 +104,7 @@ export default {
         add () {
             if (!this.$refs.form.validate()) return false
             this.sending = true
-
-            //TODO CLONEDEEP
-
+            
             this.$store.dispatch('weight/add', clonedeep(this.fd)).then(r => {
                 this.$notify({ type: 'success', text: this.$t('alert.success.save') })
                 this.show = false

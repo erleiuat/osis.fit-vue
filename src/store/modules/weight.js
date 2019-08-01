@@ -10,6 +10,26 @@ const getters = {
 
     getAll: (state) => {
         return Object.values(state.items)
+    },
+
+    getLatest: (state) => {
+
+        var a = Object.values(state.items)
+
+        var mostRecentDate = new Date(Math.max.apply(null, a.map(e => {
+            return new Date(e.date + 'T' + e.time)
+        })))
+
+        var found = a.filter(e => {
+            var d = new Date(e.date + 'T' + e.time)
+            return d.getTime() === mostRecentDate.getTime()
+        })[0]
+
+        if (found) {
+            found.weight = Math.round(found.weight * 100) / 100
+            return found
+        } else return null
+
     }
 
 }
@@ -33,14 +53,14 @@ const actions = {
 
     load (context) {
         Apios.post('weight/read/', { from: '', to: '' }).then(res => {
-            if(res.status === 200) context.commit('addItems', res.data.weight)
+            if (res.status === 200) context.commit('addItems', res.data.weight)
         })
     },
 
     add (context, item) {
         return new Promise((resolve, reject) => {
             Apios.post('weight/add/', item).then(res => {
-                context.commit('addItems', [ res.data.object ])
+                context.commit('addItems', [res.data.object])
                 resolve()
             }, err => {
                 reject(err.data.condition)
@@ -50,7 +70,7 @@ const actions = {
 
     delete (context, item) {
         return new Promise((resolve, reject) => {
-            Apios.post('weight/delete/', {id: item.id}).then(() => {
+            Apios.post('weight/delete/', { id: item.id }).then(() => {
                 context.commit('deleteItem', item)
                 resolve()
             }, err => {

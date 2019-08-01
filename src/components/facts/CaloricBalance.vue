@@ -1,28 +1,29 @@
 <template>
-    <v-flex xs12 md4 v-if="basalMetabolicRate && remaining">
-        <v-card class="fill-height" :color="state.color" :dark="state.dark">
-            <v-card-title class="display-1">
-                {{ $t('title') }}
-            </v-card-title>
-            <v-card-text class="pt-1" v-if="remaining">
-                <v-layout row wrap align-end justify-center fill-height>
-                    <v-flex xs6 class="display-2">
-                        {{ remaining }}
-                    </v-flex>
-                    <v-flex xs6 class="text-xs-right caption">
-                        {{ $t('burned') }}: {{ burned }}<br/>
-                        {{ $t('consumed') }}: {{ consumed }}<br/>
-                        {{ $t('basalMetabolicRate') }}: {{ basalMetabolicRate }}
-                    </v-flex>
-                </v-layout>
-            </v-card-text>
-        </v-card>
-    </v-flex>
+    <v-card v-if="remaining" :color="state.color" :dark="state.dark">
+        <v-card-title class="display-1">
+            {{ $t('title') }}
+        </v-card-title>
+        <v-card-text>
+            <v-layout wrap align-end>
+
+                <v-flex xs6>
+                    <div class="display-2">{{ remaining }}</div>
+                    <div class="caption">{{ basalMetabolicRate }} {{ $t('basalMetabolicRate') }}</div>
+                </v-flex>
+
+                <v-flex xs6 text-right class="caption">
+                    {{ burned }} {{ $t('burned') }}<br />
+                    {{ consumed }} {{ $t('consumed') }}
+                </v-flex>
+
+            </v-layout>
+        </v-card-text>
+    </v-card>
 </template>
 
 <script>
 export default {
-    name: 'CalorieFacts',
+    name: 'CaloricBalance',
 
     computed: {
 
@@ -37,18 +38,22 @@ export default {
                 return { dark: true, color: 'error' }
         },
 
-        remaining () {
-            var weight = this.$store.getters.latestWeight || false
-            var aimWeight = this.$store.state.user.aims.weight || false
-            var aimDate = this.$store.state.user.aims.date || false
+        weight () {
+            return this.$store.getters['weight/getLatest'].weight
+        },
 
-            if (!weight || !aimWeight || !aimDate) return false
+        remaining () {
+
+            var aimWeight = this.$store.state.user.aims.weight
+            var aimDate = this.$store.state.user.aims.date
+
+            if (!this.weight || !aimWeight || !aimDate) return false
 
             var diff = new Date(aimDate).getTime() - new Date().getTime()
             var days = Math.round(diff / (1000 * 60 * 60 * 24))
 
             var dailyCalDiff = Math.round(
-                (aimWeight - weight.weight) /
+                (aimWeight - this.weight) /
                 days * 7000
             )
 
@@ -62,12 +67,12 @@ export default {
         },
 
         basalMetabolicRate () {
-            var gender = this.$store.state.user.gender || false
-            var birthdate = this.$store.state.user.birthdate || false
-            var height = this.$store.state.user.height || false
-            var weight = this.$store.getters.latestWeight || false
 
-            if (!gender || !birthdate || !height || !weight) return false
+            var gender = this.$store.state.user.gender
+            var birthdate = this.$store.state.user.birthdate
+            var height = this.$store.state.user.height
+
+            if (!gender || !birthdate || !height || !this.weight) return false
 
             var tmpDate = new Date(Date.now() - Date.parse(birthdate))
             var age = Math.abs(tmpDate.getUTCFullYear() - 1970)
@@ -75,13 +80,13 @@ export default {
             var dayNeed = 0
             if (gender === 'female') dayNeed = (
                 655 +
-                (9.5 * weight.weight) +
+                (9.5 * this.weight) +
                 (1.9 * height) +
                 (4.7 * age)
             )
             else dayNeed = (
                 66 +
-                (13.8 * weight.weight) +
+                (13.8 * this.weight) +
                 (5.0 * height) +
                 (6.8 * age)
             )
@@ -103,13 +108,13 @@ export default {
         messages: {
             en: {
                 title: 'Caloric Balance',
-                basalMetabolicRate: 'Basal Metabolic Rate',
+                basalMetabolicRate: 'BMR',
                 consumed: 'Consumed',
                 burned: 'Burned'
             },
             de: {
                 title: 'Kalorienbilanz',
-                basalMetabolicRate: 'Grundumsatz',
+                basalMetabolicRate: 'GUS',
                 consumed: 'Konsumiert',
                 burned: 'Verbrannt'
             }

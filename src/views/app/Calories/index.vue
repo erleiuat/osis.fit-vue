@@ -42,19 +42,7 @@
 
         <v-layout wrap>
             <v-flex xs12>
-
                 <CaloriesTable :date="date" />
-                <!--
-                <v-data-table :headers="tbl.headers" :items="items" :options.sync="tbl.options" :class="tbl.class" :sort-by.sync="tbl.sortBy" :sort-desc.sync="tbl.desc">
-
-                    <template v-slot:item.action="{ item }">
-                        <v-btn fab small text @click="deleteItem(item)">
-                            <v-icon>delete</v-icon>
-                        </v-btn>
-                    </template>
-
-                </v-data-table>
-                -->
             </v-flex>
         </v-layout>
 
@@ -66,7 +54,6 @@
 <script>
 const CalorieAdder = () => import('@/components/adder/Calories')
 const BottomNav = () => import('@/views/app/Calories/BottomNav')
-
 const CaloriesTable = () => import('@/views/app/Calories/Table')
 
 export default {

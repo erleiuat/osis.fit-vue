@@ -4,12 +4,11 @@
         <CalorieAdder>
             <template v-slot:default="trigger">
                 <v-btn text v-on="trigger.on">
-                    <span>{{ $t('calories') }}</span>
+                    <span>{{ $t('addCalories') }}</span>
                     <v-icon>add</v-icon>
                 </v-btn>
             </template>
         </CalorieAdder>
-
         <v-btn text :to="{name: 'templates'}">
             <span>{{ $t('templates') }}</span>
             <v-icon>open_in_new</v-icon>

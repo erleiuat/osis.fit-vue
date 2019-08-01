@@ -1,22 +1,19 @@
 <template>
-    <v-flex xs12 md4 v-if="bmi">
-        <v-card class="fill-height" :color="state.color" :dark="state.dark">
-            <v-card-title>
-                <div class="display-1">BMI</div>
-            </v-card-title>
-            <v-card-text class="pt-1" v-if="bmi">
-                <v-layout row wrap align-end fill-height>
-                    <v-flex xs6 class="display-2">
-                        {{ bmi }}
-                    </v-flex>
-                    <v-flex xs6 class="text-xs-right">
-                        <div class="title">{{ state.text }}</div>
-                        <div class="caption">{{ $t('normal') }}: 18.5 - 25</div>
-                    </v-flex>
-                </v-layout>
-            </v-card-text>
-        </v-card>
-    </v-flex>
+    <v-card v-if="bmi" :color="state.color" :dark="state.dark">
+        <v-card-title class="display-1">
+            BMI
+        </v-card-title>
+        <v-card-text>
+            <v-layout wrap align-end>
+
+                <v-flex xs12>
+                    <div class="display-2">{{ bmi }}</div>
+                    <div class="caption">{{ state.text }}</div>
+                </v-flex>
+
+            </v-layout>
+        </v-card-text>
+    </v-card>
 </template>
 
 <script>
@@ -41,13 +38,13 @@ export default {
         },
 
         bmi () {
-            var weight = this.$store.getters.latestWeight || false
-            var height = this.$store.state.user.height || false
+            var weight = this.$store.getters['weight/getLatest'].weight
+            var height = this.$store.state.user.height
 
             if (!weight || !height) return false
 
             var value = (
-                Math.round(weight.weight /
+                Math.round(weight /
                     ((height / 1000) *
                         (height / 1000)) /
                     10) / 10
