@@ -8,9 +8,22 @@ const state = {
 
 const getters = {
 
-    getByDate: (state) => (date) => {
-        if(!date || !(date in state.items)) return
+    byDate: (state) => (date) => {
+        if (!date || !(date in state.items)) return
         return Object.values(state.items[date])
+    },
+
+    total: (state) => (date) => {
+
+        if (!date || !(date in state.items)) return
+        else {
+            var total = 0;
+            Object.values(state.items[date]).forEach(function (element) {
+                total += element.calories
+            });
+            return total;
+        }
+
     }
 
 }
@@ -35,14 +48,14 @@ const actions = {
 
     load (context, date) {
         Apios.post('calories/read/', { from: date, to: date }).then(res => {
-            if(res.status === 200) context.commit('addItems', res.data.calories)
+            if (res.status === 200) context.commit('addItems', res.data.calories)
         })
     },
 
     add (context, item) {
         return new Promise((resolve, reject) => {
             Apios.post('calories/add/', item).then(res => {
-                context.commit('addItems', [ res.data.object ])
+                context.commit('addItems', [res.data.object])
                 resolve()
             }, err => {
                 reject(err.data.condition)
@@ -52,7 +65,7 @@ const actions = {
 
     delete (context, item) {
         return new Promise((resolve, reject) => {
-            Apios.post('calories/delete/', {id: item.id}).then(() => {
+            Apios.post('calories/delete/', { id: item.id }).then(() => {
                 context.commit('deleteItem', item)
                 resolve()
             }, err => {

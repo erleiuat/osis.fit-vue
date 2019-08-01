@@ -42,7 +42,7 @@ export default {
     computed: {
 
         items () {
-            return this.$store.getters['activity/getByDate'](this.date)
+            return this.$store.getters['activity/byDate'](this.date)
         }
 
     },

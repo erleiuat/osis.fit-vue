@@ -1,5 +1,5 @@
 <template>
-    <v-card v-if="weight" :color="state.color" :dark="state.dark">
+    <v-card :color="state.color" :dark="state.dark">
 
         <v-card-title class="display-1">
             {{ $t('title') }}
@@ -8,13 +8,13 @@
         <v-card-text>
             <v-layout wrap align-end>
 
-                <v-flex xs7>
-                    <div class="display-2">{{ weight }}</div>
-                    <div class="caption">{{ $t('target') }}: {{ target }}</div>
+                <v-flex xs6>
+                    <div class="display-2">{{ cVals.weight }}</div>
+                    <div class="caption" v-if="cVals.aimWeight">{{ $t('target') }}: {{ cVals.aimWeight }}</div>
                 </v-flex>
 
-                <v-flex xs5 text-right class="caption">
-                    {{ diff }} {{ $t('difference') }}
+                <v-flex xs6 text-right class="caption" v-if="cVals.aimWeight">
+                    {{ diff }} Kg {{ $t('difference') }}
                 </v-flex>
 
             </v-layout>
@@ -27,10 +27,17 @@
 export default {
     name: 'WeightFacts',
 
+    props: {
+        cVals: {
+            weight: Number,
+            aimWeight: Number
+        }
+    },
+
     computed: {
 
         state () {
-            if (!this.weight || !this.target)
+            if (!this.cVals.weight || !this.cVals.aimWeight)
                 return { dark: false, color: '' }
             if (this.diff > 10)
                 return { dark: true, color: 'error' }
@@ -44,16 +51,8 @@ export default {
             return { dark: true, color: 'error' }
         },
 
-        weight () {
-            return this.$store.getters['weight/getLatest'].weight
-        },
-
-        target () {
-            return this.$store.state.user.aims.weight
-        },
-
         diff () {
-            return Math.round((this.target - this.weight) * 100) / 100
+            return Math.round((this.cVals.weight - this.cVals.aimWeight) * 100) / 100
         }
 
     },

@@ -1,5 +1,5 @@
 <template>
-    <v-card v-if="remaining" :color="state.color" :dark="state.dark">
+    <v-card :color="state.color" :dark="state.dark">
         <v-card-title class="display-1">
             {{ $t('title') }}
         </v-card-title>
@@ -12,8 +12,8 @@
                 </v-flex>
 
                 <v-flex xs6 text-right class="caption">
-                    {{ burned }} {{ $t('burned') }}<br />
-                    {{ consumed }} {{ $t('consumed') }}
+                    {{ cVals.lost }} {{ $t('burned') }}<br />
+                    {{ cVals.consumed }} {{ $t('consumed') }}
                 </v-flex>
 
             </v-layout>
@@ -24,6 +24,19 @@
 <script>
 export default {
     name: 'CaloricBalance',
+
+    props: {
+        cVals: {
+            weight: Number,
+            aimWeight: Number,
+            aimDate: Number,
+            gender: String,
+            age: Number,
+            height: Number,
+            consumed: Number,
+            lost: Number
+        }
+    },
 
     computed: {
 
@@ -38,68 +51,43 @@ export default {
                 return { dark: true, color: 'error' }
         },
 
-        weight () {
-            return this.$store.getters['weight/getLatest'].weight
-        },
-
         remaining () {
 
-            var aimWeight = this.$store.state.user.aims.weight
-            var aimDate = this.$store.state.user.aims.date
-
-            if (!this.weight || !aimWeight || !aimDate) return false
-
-            var diff = new Date(aimDate).getTime() - new Date().getTime()
+            var diff = new Date(this.cVals.aimDate).getTime() - new Date().getTime()
             var days = Math.round(diff / (1000 * 60 * 60 * 24))
 
             var dailyCalDiff = Math.round(
-                (aimWeight - this.weight) /
+                (this.cVals.aimWeight - this.cVals.weight) /
                 days * 7000
             )
 
             var doneToday = (
-                this.basalMetabolicRate + this.burned - this.consumed
+                this.basalMetabolicRate + this.cVals.lost - this.cVals.consumed
             )
 
             var value = dailyCalDiff + doneToday
+            console.log(value)
 
             return Math.round(value)
         },
 
         basalMetabolicRate () {
 
-            var gender = this.$store.state.user.gender
-            var birthdate = this.$store.state.user.birthdate
-            var height = this.$store.state.user.height
-
-            if (!gender || !birthdate || !height || !this.weight) return false
-
-            var tmpDate = new Date(Date.now() - Date.parse(birthdate))
-            var age = Math.abs(tmpDate.getUTCFullYear() - 1970)
-
             var dayNeed = 0
-            if (gender === 'female') dayNeed = (
+            if (this.cVals.gender === 'female') dayNeed = (
                 655 +
-                (9.5 * this.weight) +
-                (1.9 * height) +
-                (4.7 * age)
+                (9.5 * this.cVals.weight) +
+                (1.9 * this.cVals.height) +
+                (4.7 * this.cVals.age)
             )
             else dayNeed = (
                 66 +
-                (13.8 * this.weight) +
-                (5.0 * height) +
-                (6.8 * age)
+                (13.8 * this.cVals.weight) +
+                (5.0 * this.cVals.height) +
+                (6.8 * this.cVals.age)
             )
 
             return Math.round(dayNeed)
-        },
-
-        consumed () {
-            return this.$store.getters.totalCalories
-        },
-
-        burned () {
-            return this.$store.getters.totalActivity
         }
 
     },
@@ -108,13 +96,13 @@ export default {
         messages: {
             en: {
                 title: 'Caloric Balance',
-                basalMetabolicRate: 'BMR',
+                basalMetabolicRate: 'Basal Metabolic Rate',
                 consumed: 'Consumed',
                 burned: 'Burned'
             },
             de: {
                 title: 'Kalorienbilanz',
-                basalMetabolicRate: 'GUS',
+                basalMetabolicRate: 'Grundumsatz',
                 consumed: 'Konsumiert',
                 burned: 'Verbrannt'
             }

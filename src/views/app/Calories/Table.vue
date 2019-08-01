@@ -41,7 +41,7 @@ export default {
     computed: {
 
         items () {
-            return this.$store.getters['calories/getByDate'](this.date)
+            return this.$store.getters['calories/byDate'](this.date)
         }
 
     },

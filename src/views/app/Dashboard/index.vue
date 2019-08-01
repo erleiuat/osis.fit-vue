@@ -2,11 +2,11 @@
     <v-container grid-list-xl>
         <v-layout wrap>
 
-            <v-flex xs12 v-if="!$store.getters['weight/getLatest']">
+            <v-flex xs12>
                 <Welcome />
             </v-flex>
 
-            <v-flex xs12 v-else>
+            <v-flex xs12>
                 <Facts />
             </v-flex>
 
@@ -72,9 +72,7 @@ export default {
     },
 
     mounted () {
-        // TODO: One call only
-        this.$store.dispatch('weight/load')
-        this.$store.dispatch('user/load')
+        
     },
 
     i18n: {

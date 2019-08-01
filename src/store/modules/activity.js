@@ -8,9 +8,22 @@ const state = {
 
 const getters = {
 
-    getByDate: (state) => (date) => {
+    byDate: (state) => (date) => {
         if(!date || !(date in state.items)) return
         return Object.values(state.items[date])
+    },
+
+    total: (state) => (date) => {
+
+        if (!date || !(date in state.items)) return
+        else {
+            var total = 0;
+            Object.values(state.items[date]).forEach(function (element) {
+                total += element.calories
+            });
+            return total;
+        }
+
     }
 
 }

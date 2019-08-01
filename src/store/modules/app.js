@@ -4,13 +4,24 @@ const state = {
     version: '1.0',
     drawer: false,
     cookiesAccepted: true,
-    language: null
+    language: null,
+    today: null
 }
 
 const getters = {
+
     dark: state => {
         return state.dark
+    },
+
+    today: state => {
+        if (!state.today) {
+            var now = new Date()
+            state.today = (new Date(now.getTime() - (now.getTimezoneOffset() * 60000)).toISOString()).substr(0, 10)
+        }
+        return state.today
     }
+
 }
 
 const mutations = {

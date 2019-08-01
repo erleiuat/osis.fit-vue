@@ -1,5 +1,5 @@
 <template>
-    <v-card v-if="bmi" :color="state.color" :dark="state.dark">
+    <v-card :color="state.color" :dark="state.dark">
         <v-card-title class="display-1">
             BMI
         </v-card-title>
@@ -20,6 +20,13 @@
 export default {
     name: 'BMIFacts',
 
+    props: {
+        cVals: {
+            weight: Number,
+            height: Number
+        }
+    },
+
     computed: {
 
         state () {
@@ -38,17 +45,12 @@ export default {
         },
 
         bmi () {
-            var weight = this.$store.getters['weight/getLatest'].weight
-            var height = this.$store.state.user.height
 
-            if (!weight || !height) return false
-
-            var value = (
-                Math.round(weight /
-                    ((height / 1000) *
-                        (height / 1000)) /
-                    10) / 10
-            )
+            var value = (Math.round(
+                this.cVals.weight /
+                ((this.cVals.height / 1000) * (this.cVals.height / 1000)) / 
+                10
+            ) / 10)
 
             return value
         }
