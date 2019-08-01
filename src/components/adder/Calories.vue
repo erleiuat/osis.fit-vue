@@ -1,5 +1,5 @@
 <template>
-    <v-dialog v-model="show" :fullscreen="$vuetify.breakpoint.xs" hide-overlay width="600" scrollable transition="dialog-bottom-transition">
+    <v-dialog v-model="show" :fullscreen="$vuetify.breakpoint.xs" hide-overlay transition="dialog-bottom-transition">
 
         <template v-slot:activator="{ on }">
             <slot v-bind:on="on">
@@ -10,63 +10,60 @@
         </template>
 
         <v-card>
-
-            <v-toolbar flat color="primary" dark>
+            <v-toolbar color="primary" flat dark>
                 <v-toolbar-title>{{ $t('title') }}</v-toolbar-title>
                 <v-spacer></v-spacer>
                 <v-btn icon @click="show = false">
                     <v-icon>close</v-icon>
                 </v-btn>
             </v-toolbar>
-
             <v-form v-model="rule.valid" ref="form" v-on:submit.prevent>
-                <v-card-text>
-                    <v-container grid-list-sm pa-0>
-                        <v-layout wrap>
 
-                            <v-flex xs12>
-                                <v-text-field v-model="fd.title" :label="$t('ft.title')" :rules="rule.title" type="text" outlined append-icon="open_in_new" />
-                            </v-flex>
+                <v-container grid-list-sm>
+                    <v-layout wrap>
 
-                            <v-flex xs6>
-                                <v-menu ref="menu" v-model="dMenu" :close-on-content-click="false" :nudge-right="40" transition="scale-transition" offset-y full-width min-width="290px">
-                                    <template v-slot:activator="{ on }">
-                                        <v-text-field v-model="fd.date" :label="$t('ft.date')" :rules="rule.require" type="date" outlined readonly v-on="on" />
-                                    </template>
-                                    <v-date-picker v-model="fd.date" @input="dMenu = false" no-title />
-                                </v-menu>
-                            </v-flex>
-                            <v-flex xs6>
-                                <v-menu ref="menu" v-model="tMenu" :return-value.sync="fd.time" :close-on-content-click="false" :nudge-right="40" transition="scale-transition" offset-y full-width max-width="290px" min-width="290px">
-                                    <template v-slot:activator="{ on }">
-                                        <v-text-field v-model="fd.time" :label="$t('ft.time')" :rules="rule.require" type="time" outlined readonly v-on="on" />
-                                    </template>
-                                    <v-time-picker v-if="tMenu" v-model="fd.time" full-width @click:minute="$refs.menu.save(fd.time)" format="24hr" no-title />
-                                </v-menu>
-                            </v-flex>
+                        <v-flex xs12>
+                            <v-text-field v-model="fd.title" :label="$t('ft.title')" :rules="rule.title" type="text" outlined append-icon="open_in_new" />
+                        </v-flex>
 
-                            <v-flex xs6>
-                                <v-text-field v-model="caloriesPer100" :label="$t('caloriesPer100')" @input="calTotal()" outlined />
-                            </v-flex>
-                            <v-flex xs6>
-                                <v-text-field v-model="amount" :label="$t('ft.amount')" @input="calTotal()" outlined />
-                            </v-flex>
+                        <v-flex xs6>
+                            <v-menu ref="menu" v-model="dMenu" :close-on-content-click="false" :nudge-right="40" transition="scale-transition" offset-y full-width min-width="290px">
+                                <template v-slot:activator="{ on }">
+                                    <v-text-field v-model="fd.date" :label="$t('ft.date')" :rules="rule.require" type="date" outlined readonly v-on="on" />
+                                </template>
+                                <v-date-picker v-model="fd.date" @input="dMenu = false" no-title />
+                            </v-menu>
+                        </v-flex>
+                        <v-flex xs6>
+                            <v-menu ref="menu" v-model="tMenu" :return-value.sync="fd.time" :close-on-content-click="false" :nudge-right="40" transition="scale-transition" offset-y full-width max-width="290px" min-width="290px">
+                                <template v-slot:activator="{ on }">
+                                    <v-text-field v-model="fd.time" :label="$t('ft.time')" :rules="rule.require" type="time" outlined readonly v-on="on" />
+                                </template>
+                                <v-time-picker v-if="tMenu" v-model="fd.time" full-width @click:minute="$refs.menu.save(fd.time)" format="24hr" no-title />
+                            </v-menu>
+                        </v-flex>
 
-                            <v-flex xs12>
-                                <v-text-field v-model="fd.calories" :label="$t('calories')" :rules="rule.require" type="number" outlined />
-                            </v-flex>
+                        <v-flex xs6>
+                            <v-text-field v-model="caloriesPer100" :label="$t('caloriesPer100')" @input="calTotal()" outlined />
+                        </v-flex>
+                        <v-flex xs6>
+                            <v-text-field v-model="amount" :label="$t('ft.amount')" @input="calTotal()" outlined />
+                        </v-flex>
 
-                        </v-layout>
-                    </v-container>
-                </v-card-text>
+                        <v-flex xs12>
+                            <v-text-field v-model="fd.calories" :label="$t('calories')" :rules="rule.require" type="number" outlined />
+                        </v-flex>
+
+                    </v-layout>
+                </v-container>
 
                 <v-card-actions>
-                    <v-btn @click="show = false" text>Close</v-btn>
+                    <v-btn @click="show = false" text>{{ $t('btn.cancel') }}</v-btn>
                     <v-spacer></v-spacer>
-                    <v-btn @click="add()" :loading="sending" type="submit" color="primary" text>Save</v-btn>
+                    <v-btn @click="add()" :loading="sending" type="submit" color="primary" text>{{ $t('btn.save') }}</v-btn>
                 </v-card-actions>
-            </v-form>
 
+            </v-form>
         </v-card>
     </v-dialog>
 </template>
@@ -110,7 +107,7 @@ export default {
 
     watch: {
         show: function () {
-            if(!this.show) return
+            if (!this.show) return
             var now = new Date()
             var str = new Date(now.getTime() - (now.getTimezoneOffset() * 60000)).toISOString()
             this.fd.date = str.substr(0, 10)
