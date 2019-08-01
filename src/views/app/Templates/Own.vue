@@ -64,7 +64,7 @@
 
 <script>
 import YouSure from '@/components/YouSure'
-import TemplateAdder from '@/components/adders/Template'
+import TemplateAdder from '@/components/adder/Template'
 
 export default {
     name: 'Own',

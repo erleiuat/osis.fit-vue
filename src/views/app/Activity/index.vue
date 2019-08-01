@@ -50,7 +50,7 @@
 import ActivityTable from '@/views/app/Activity/Table'
 
 const Trainings = () => import('@/components/trainings/')
-const ActivityAdder = () => import('@/components/adders/Activity')
+const ActivityAdder = () => import('@/components/adder/Activity')
 const BottomNav = () => import('@/views/app/Activity/BottomNav')
 
 export default {

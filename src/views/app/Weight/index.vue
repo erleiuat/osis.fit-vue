@@ -22,7 +22,7 @@
 
         <v-layout row wrap>
             <v-flex xs12>
-                <WeightsTable />
+                <WeightTable />
             </v-flex>
         </v-layout>
 
@@ -32,17 +32,20 @@
 </template>
 
 <script>
-import WeightsTable from '@/views/app/Weights/Table'
-
-const WeightAdder = () => import('@/components/adders/Weight')
+const WeightTable = () => import('@/views/app/Weight/Table')
+const WeightAdder = () => import('@/components/adder/Weight')
 const WeightChart = () => import('@/components/charts/Weight')
-const BottomNav = () => import('@/views/app/Weights/BottomNav')
+const BottomNav = () => import('@/views/app/Weight/BottomNav')
 
 export default {
-    name: 'Weights',
+    name: 'Weight',
 
     components: {
-        BottomNav, WeightsTable, WeightAdder, WeightChart
+        BottomNav, WeightTable, WeightAdder, WeightChart
+    },
+
+    mounted(){
+        this.$store.dispatch('weight/load')
     },
 
     i18n: {

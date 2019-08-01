@@ -27,8 +27,8 @@
         "title": "Calories",
         "description": ""
     },
-    "weights": {
-        "title": "Weights",
+    "weight": {
+        "title": "Weight",
         "description": ""
     },
     "activity": {

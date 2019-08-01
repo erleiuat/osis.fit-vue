@@ -32,9 +32,9 @@
 </template>
 
 <script>
-const CalorieAdder = () => import('@/components/adders/Calorie')
-const ActivityAdder = () => import('@/components/adders/Activity')
-const WeightAdder = () => import('@/components/adders/Weight')
+const CalorieAdder = () => import('@/components/adder/Calories')
+const ActivityAdder = () => import('@/components/adder/Activity')
+const WeightAdder = () => import('@/components/adder/Weight')
 
 export default {
     name: 'BottomNav',

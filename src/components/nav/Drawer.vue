@@ -56,7 +56,7 @@ export default {
             if (this.$store.getters['auth/status']) return [
                 { to: 'dashboard', icon: 'dashboard' },
                 { to: 'calories', icon: 'restaurant' },
-                { to: 'weights', icon: 'linear_scale' },
+                { to: 'weight', icon: 'linear_scale' },
                 { to: 'activity', icon: 'accessibility_new' },
                 { to: 'templates', icon: 'dashboard' },
                 { to: 'settings', icon: 'settings' }

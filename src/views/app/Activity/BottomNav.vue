@@ -20,7 +20,7 @@
 </template>
 
 <script>
-import ActivityAdder from '@/components/adders/Activity'
+import ActivityAdder from '@/components/adder/Activity'
 import Trainings from '@/components/trainings/'
 
 export default {

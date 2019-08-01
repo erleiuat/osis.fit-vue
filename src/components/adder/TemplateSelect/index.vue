@@ -56,8 +56,8 @@
 </template>
 
 <script>
-const OwnAndFavs = () => import('@/components/adders/TemplateSelect/OwnAndFavs')
-const Browse = () => import('@/components/adders/TemplateSelect/Browse')
+const OwnAndFavs = () => import('@/components/adder/TemplateSelect/OwnAndFavs')
+const Browse = () => import('@/components/adder/TemplateSelect/Browse')
 
 export default {
     name: 'TemplateSelect',

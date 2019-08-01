@@ -27,8 +27,8 @@
         "title": "Kalorien",
         "description": ""
     },
-    "weights": {
-        "title": "Gewichte",
+    "weight": {
+        "title": "Gewicht",
         "description": ""
     },
     "activity": {

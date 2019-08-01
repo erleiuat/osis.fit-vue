@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import WeightAdder from '@/components/adders/Weight'
+import WeightAdder from '@/components/adder/Weight'
 
 export default {
     name: 'BottomNav',

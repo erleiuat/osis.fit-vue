@@ -12,27 +12,23 @@
 
 <script>
 export default {
-    name: 'CaloriesTable',
-
-    props: {
-        date: String
-    },
+    name: 'WeightTable',
 
     data () {
         return {
             tbl: {
                 class: '',
-                sortBy: 'time',
+                sortBy: 'date',
                 desc: true,
                 options: {
                     descending: true,
                     itemsPerPage: -1
                 },
                 headers: [
-                    { value: 'title', text: this.$t('title') },
+                    { value: 'date', text: this.$t('date') },
                     { value: 'time', text: this.$t('time') },
-                    { value: 'calories', text: this.$t('calories') },
-                    { value: 'action', sortable: false, align: 'end', width: 10 },
+                    { value: 'weight', text: this.$t('weight') },
+                    { value: 'action', sortable: false, align: 'end', width: 10 }
                 ]
             }
         }
@@ -41,7 +37,7 @@ export default {
     computed: {
 
         items () {
-            return this.$store.getters['calories/getByDate'](this.date)
+            return this.$store.getters['weight/getAll']
         }
 
     },
@@ -49,7 +45,7 @@ export default {
     methods: {
 
         deleteItem (item) {
-            this.$store.dispatch('calories/delete', item)
+            this.$store.dispatch('weight/delete', item)
         }
 
     },
@@ -57,14 +53,14 @@ export default {
     i18n: {
         messages: {
             en: {
-                title: 'Title',
+                date: 'Date',
                 time: 'Time',
-                calories: 'Calories'
+                weight: 'Weight'
             },
             de: {
+                date: 'Datum',
                 time: 'Zeit',
-                title: 'Titel',
-                calories: 'Kalorien'
+                weight: 'Gewicht'
             }
         }
     }

@@ -47,9 +47,9 @@
 const Facts = () => import('@/views/app/Dashboard/Facts')
 const Welcome = () => import('@/views/app/Dashboard/Welcome')
 
-const CalorieAdder = () => import('@/components/adders/Calorie')
-const ActivityAdder = () => import('@/components/adders/Activity')
-const WeightAdder = () => import('@/components/adders/Weight')
+const CalorieAdder = () => import('@/components/adder/Calories')
+const ActivityAdder = () => import('@/components/adder/Activity')
+const WeightAdder = () => import('@/components/adder/Weight')
 
 const WeightChart = () => import('@/components/charts/Weight')
 const BottomNav = () => import('@/views/app/Dashboard/BottomNav')

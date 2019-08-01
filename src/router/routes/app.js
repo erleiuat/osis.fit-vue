@@ -12,9 +12,9 @@ module.exports = [
         meta: { authRequired: true }
     },
     {
-        name: 'weights',
-        path: '/weights',
-        component: () => import('@/views/app/Weights/'),
+        name: 'weight',
+        path: '/weight',
+        component: () => import('@/views/app/Weight/'),
         meta: { authRequired: true }
     },
     {

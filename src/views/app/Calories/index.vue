@@ -21,7 +21,7 @@
                     </template>
                     <v-date-picker v-model="date" scrollable>
                         <v-btn icon @click="modal = false">
-                            <v-icon>close</v-icon>
+                            <v-icon>close</v-icon> 
                         </v-btn>
                         <v-spacer></v-spacer>
                         <v-btn icon @click="$refs.dialog.save(date)">
@@ -37,11 +37,14 @@
                     {{ $t('templates') }}
                 </v-btn>
             </v-flex>
-            
+
         </v-layout>
 
         <v-layout wrap>
             <v-flex xs12>
+
+                <CaloriesTable :date="date" />
+                <!--
                 <v-data-table :headers="tbl.headers" :items="items" :options.sync="tbl.options" :class="tbl.class" :sort-by.sync="tbl.sortBy" :sort-desc.sync="tbl.desc">
 
                     <template v-slot:item.action="{ item }">
@@ -51,6 +54,7 @@
                     </template>
 
                 </v-data-table>
+                -->
             </v-flex>
         </v-layout>
 
@@ -60,43 +64,26 @@
 </template>
 
 <script>
-const CalorieAdder = () => import('@/components/adders/Calorie')
+const CalorieAdder = () => import('@/components/adder/Calories')
 const BottomNav = () => import('@/views/app/Calories/BottomNav')
+
+const CaloriesTable = () => import('@/views/app/Calories/Table')
 
 export default {
     name: 'Calories',
 
     components: {
-        BottomNav, CalorieAdder
+        BottomNav, CalorieAdder, CaloriesTable
     },
 
     data () {
         return {
             modal: false,
-            dateSelected: null,
-            tbl: {
-                class: '',
-                sortBy: 'time',
-                desc: true,
-                options: {
-                    descending: true,
-                    rowsPerPage: -1
-                },
-                headers: [
-                    { value: 'title', text: this.$t('title') },
-                    { value: 'time', text: this.$t('time') },
-                    { value: 'calories', text: this.$t('calories') },
-                    { value: 'action', sortable: false, align: 'end', width: 10 },
-                ]
-            }
+            dateSelected: null
         }
     },
 
     computed: {
-
-        items () {
-            return this.$store.getters['calories/getByDate'](this.date)
-        },
 
         date: {
             set (val) {
@@ -112,14 +99,6 @@ export default {
                 }
                 return this.dateSelected
             }
-        }
-
-    },
-
-    methods: {
-
-        deleteItem (item) {
-            this.$store.dispatch('calories/delete', item)
         }
 
     },
