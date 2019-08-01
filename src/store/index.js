@@ -1,17 +1,19 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+Vue.use(Vuex)
 
 import app from './modules/app'
 import auth from './modules/auth'
 import user from './modules/user'
-Vue.use(Vuex)
+import calories from './modules/calories'
 
 export default new Vuex.Store({
 
     modules: {
         app,
         auth,
-        user
+        user,
+        calories
     },
 
     state: {

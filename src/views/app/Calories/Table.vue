@@ -1,22 +1,5 @@
 <template>
-    <v-data-table :headers="tbl.headers" :items="getItems" :loading="tbl.loading" :pagination.sync="tbl.settings" :class="tbl.class">
-
-        <v-progress-linear v-slot:progress indeterminate />
-        <template v-slot:items="p">
-            <td class="pa-0">
-                <v-btn @click="delItem(p.item)" flat icon :disabled="sending" :loading="sending">
-                    <v-icon>delete</v-icon>
-                    <span slot="loader" class="spinning-loader">
-                        <v-icon light>cached</v-icon>
-                    </span>
-                </v-btn>
-            </td>
-            <td>{{ p.item.time }}</td>
-            <td>{{ p.item.title }}</td>
-            <td>{{ p.item.calories }}</td>
-        </template>
-
-    </v-data-table>
+    
 </template>
 
 <script>
@@ -36,7 +19,6 @@ export default {
             },
             tbl: {
                 data: [],
-                loading: true,
                 class: '',
                 settings: {
                     descending: true,
@@ -54,12 +36,9 @@ export default {
 
     computed: {
 
-        getItems () {
-            if (this.showDate === this.dates.today)
-                this.tbl.data = this.$store.state.data.calorie_log
-
-            if (this.showDate !== this.dates.current) this.getData(this.showDate)
-            return this.tbl.data
+        items () {
+            var items = this.$store.getters['calories/get'];
+            return items
         }
 
     },
