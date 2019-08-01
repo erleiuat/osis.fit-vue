@@ -45,7 +45,6 @@
 
         </v-layout>
 
-
         <BottomNav v-if="$vuetify.breakpoint.xs" />
 
     </v-container>

@@ -41,7 +41,7 @@
             <v-flex xs12>
                 <CaloriesTable :date="date" />
             </v-flex>
-            
+
         </v-layout>
 
         <BottomNav v-if="$vuetify.breakpoint.xs" />
