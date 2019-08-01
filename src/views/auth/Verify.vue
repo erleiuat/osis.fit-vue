@@ -73,11 +73,11 @@ export default {
     },
 
     mounted () {
-        if (this.$route.query.mail && this.$route.query.code) {
-            this.fd.mail = this.$route.query.mail
+        if (this.$route.query.mail) this.fd.mail = this.$route.query.mail
+        if (this.$route.query.code) {
             this.fd.code = this.$route.query.code
             this.verify()
-        } else if (this.$route.query.mail) this.fd.mail = this.$route.query.mail
+        }
     },
 
     i18n: {

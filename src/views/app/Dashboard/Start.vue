@@ -1,33 +1,39 @@
 <template>
-    <v-layout wrap justify-space-around>
+    <v-layout wrap justify-space-around align-center>
 
-        <v-flex xs12 md4 v-if="cals.show">
+        <v-flex xs12 md4 v-if="cals.show" pa-1>
             <CaloricBalance :cVals="cals.cVals" />
         </v-flex>
 
-        <v-flex xs12 md4 v-if="bmi.show">
-            <BMIFacts :cVals="bmi.cVals" />
+        <v-flex xs12 v-else pa-1>
+            <Welcome />
         </v-flex>
 
-        <v-flex xs12 md4 v-if="weight.show">
+        <v-flex xs12 md4 v-if="weight.show" pa-1>
             <WeightFacts :cVals="weight.cVals" />
+        </v-flex>
+
+        <v-flex xs12 md4 v-if="bmi.show" pa-1>
+            <BMIFacts :cVals="bmi.cVals" />
         </v-flex>
 
     </v-layout>
 </template>
 
 <script>
+const Welcome = () => import('@/views/app/Dashboard/Welcome')
 const CaloricBalance = () => import('@/components/facts/CaloricBalance')
 const BMIFacts = () => import('@/components/facts/BMI')
 const WeightFacts = () => import('@/components/facts/Weight')
 
 export default {
-    name: 'Facts',
+    name: 'Start',
 
     components: {
         CaloricBalance,
         BMIFacts,
-        WeightFacts
+        WeightFacts,
+        Welcome
     },
 
     mounted () {

@@ -3,11 +3,7 @@
         <v-layout wrap>
 
             <v-flex xs12>
-                <Welcome />
-            </v-flex>
-
-            <v-flex xs12>
-                <Facts />
+                <Start />
             </v-flex>
 
             <v-layout wrap text-center v-if="!$vuetify.breakpoint.xs">
@@ -48,8 +44,7 @@
 </template>
 
 <script>
-const Welcome = () => import('@/views/app/Dashboard/Welcome')
-const Facts = () => import('@/views/app/Dashboard/Facts')
+const Start = () => import('@/views/app/Dashboard/Start')
 
 const CalorieAdder = () => import('@/components/adder/Calories')
 const ActivityAdder = () => import('@/components/adder/Activity')
@@ -62,17 +57,12 @@ export default {
     name: 'Dashboard',
 
     components: {
-        Facts,
-        Welcome,
+        Start,
         CalorieAdder,
         ActivityAdder,
         WeightAdder,
         WeightChart,
         BottomNav
-    },
-
-    mounted () {
-
     },
 
     i18n: {
