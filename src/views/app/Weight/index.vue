@@ -44,7 +44,7 @@ export default {
         BottomNav, WeightTable, WeightAdder, WeightChart
     },
 
-    mounted(){
+    mounted () {
         this.$store.dispatch('weight/load')
     },
 

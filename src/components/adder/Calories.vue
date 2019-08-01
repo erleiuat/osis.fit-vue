@@ -66,14 +66,14 @@
 </template>
 
 <script>
-const TemplateSelect = () => import('@/components/adder/TemplateSelect/')
 import clonedeep from 'lodash'
+// const TemplateSelect = () => import('@/components/adder/TemplateSelect/')
 
 export default {
     name: 'CalorieAdder',
 
     components: {
-        TemplateSelect
+        // TemplateSelect TODO
     },
 
     data () {
@@ -93,7 +93,7 @@ export default {
             rule: {
                 valid: false,
                 title: [
-                    v => v && v.length < 150 || this.$t('alert.v.tooLong', { amount: 150 })
+                    v => (v && v.length < 150) || this.$t('alert.v.tooLong', { amount: 150 })
                 ],
                 require: [
                     v => !!v || this.$t('alert.v.require')
@@ -115,9 +115,9 @@ export default {
     methods: {
 
         calTotal () {
-            if (this.amount > 0 && this.caloriesPer100 > 0) {
+            if (this.amount > 0 && this.caloriesPer100 > 0)
                 this.fd.calories = Math.round(((this.amount / 100) * this.caloriesPer100) * 100) / 100
-            } else this.fd.calories = 0
+            else this.fd.calories = 0
         },
 
         add () {

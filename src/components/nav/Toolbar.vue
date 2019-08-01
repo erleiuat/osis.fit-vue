@@ -1,7 +1,6 @@
 <template>
     <v-app-bar clipped-left app flat color="primary" dark>
 
-
         <v-toolbar-title>
             Osis.fit
         </v-toolbar-title>

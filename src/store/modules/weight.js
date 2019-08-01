@@ -13,7 +13,6 @@ const getters = {
     },
 
     getLatest: (state) => {
-
         var a = Object.values(state.items)
 
         var mostRecentDate = new Date(Math.max.apply(null, a.map(e => {
@@ -29,7 +28,6 @@ const getters = {
             found.weight = Math.round(found.weight * 100) / 100
             return found
         } else return null
-
     }
 
 }
@@ -40,7 +38,7 @@ const mutations = {
         data.forEach(function (item) {
             if (!(item.id in state.items)) Vue.set(state.items, item.id.toString(), item)
             else state.items[item.id] = item
-        });
+        })
     },
 
     deleteItem: (state, item) => {

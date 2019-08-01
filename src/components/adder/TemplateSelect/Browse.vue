@@ -76,6 +76,7 @@ export default {
                         caloriesPer100: obj.amount
                     }
                 })
+            else return false // TODO
         }
 
     },

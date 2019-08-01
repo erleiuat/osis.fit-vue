@@ -45,10 +45,9 @@ export default {
         },
 
         bmi () {
-
             var value = (Math.round(
                 this.cVals.weight /
-                ((this.cVals.height / 1000) * (this.cVals.height / 1000)) / 
+                ((this.cVals.height / 1000) * (this.cVals.height / 1000)) /
                 10
             ) / 10)
 

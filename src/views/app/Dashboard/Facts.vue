@@ -43,7 +43,7 @@ export default {
         lastWeight () {
             var lWeight = this.$store.getters['weight/getLatest'] || { weight: 0 }
             return {
-                ok: (lWeight.weight > 0 ? true : false),
+                ok: (lWeight.weight > 0),
                 weight: lWeight.weight
             }
         },
@@ -81,7 +81,6 @@ export default {
         },
 
         cals () {
-
             if (!this.user.ok || !this.aims.ok || !this.lastWeight.ok) return { show: false }
 
             var tmpDate = new Date(Date.now() - Date.parse(this.user.birth))
@@ -104,7 +103,6 @@ export default {
                     lost: aTotal
                 }
             }
-
         },
 
         bmi () {

@@ -52,7 +52,6 @@ export default {
         },
 
         remaining () {
-
             var diff = new Date(this.cVals.aimDate).getTime() - new Date().getTime()
             var days = Math.round(diff / (1000 * 60 * 60 * 24))
 
@@ -65,14 +64,10 @@ export default {
                 this.basalMetabolicRate + this.cVals.lost - this.cVals.consumed
             )
 
-            var value = dailyCalDiff + doneToday
-            console.log(value)
-
-            return Math.round(value)
+            return Math.round(dailyCalDiff + doneToday)
         },
 
         basalMetabolicRate () {
-
             var dayNeed = 0
             if (this.cVals.gender === 'female') dayNeed = (
                 655 +

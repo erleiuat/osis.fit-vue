@@ -17,7 +17,7 @@
                     <v-icon>close</v-icon>
                 </v-btn>
             </v-toolbar>
-            
+
             <v-container grid-list-sm>
                 <v-form v-model="rule.valid" ref="form" v-on:submit.prevent>
                     <v-layout wrap>
@@ -56,15 +56,10 @@
 </template>
 
 <script>
-const TemplateSelect = () => import('@/components/adder/TemplateSelect/')
 import clonedeep from 'lodash'
 
 export default {
     name: 'WeightAdder',
-
-    components: {
-        TemplateSelect
-    },
 
     data () {
         return {
@@ -80,7 +75,7 @@ export default {
             rule: {
                 valid: false,
                 title: [
-                    v => v && v.length < 150 || this.$t('alert.v.tooLong', { amount: 150 })
+                    v => (v && v.length < 150) || this.$t('alert.v.tooLong', { amount: 150 })
                 ],
                 require: [
                     v => !!v || this.$t('alert.v.require')
@@ -91,7 +86,7 @@ export default {
 
     watch: {
         show: function () {
-            if(!this.show) return
+            if (!this.show) return
             var now = new Date()
             var str = new Date(now.getTime() - (now.getTimezoneOffset() * 60000)).toISOString()
             this.fd.date = str.substr(0, 10)
@@ -104,7 +99,7 @@ export default {
         add () {
             if (!this.$refs.form.validate()) return false
             this.sending = true
-            
+
             this.$store.dispatch('weight/add', clonedeep(this.fd)).then(r => {
                 this.$notify({ type: 'success', text: this.$t('alert.success.save') })
                 this.show = false

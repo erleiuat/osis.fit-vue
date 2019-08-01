@@ -94,7 +94,7 @@ export default {
             if (!this.$refs.form.validate()) return false
             this.sending = true
             this.$store.dispatch('auth/forgot', this.fd).then(r => {
-                this.$router.push({name: 'auth.login'})
+                this.$router.push({ name: 'auth.login' })
                 this.$notify({ type: 'error', text: this.$t('hasChanged') })
             }).catch(r => { }).finally(() => {
                 this.sending = false
@@ -103,12 +103,12 @@ export default {
 
     },
 
-    mounted(){
-        if(this.$route.query.mail && this.$route.query.code){
+    mounted () {
+        if (this.$route.query.mail && this.$route.query.code) {
             this.state = 'reset'
             this.fd.mail = this.$route.query.mail
             this.fd.code = this.$route.query.code
-            this.$router.push({name: 'auth.forgotten', query: {reset: true}})
+            this.$router.push({ name: 'auth.forgotten', query: { reset: true } })
         }
     },
 

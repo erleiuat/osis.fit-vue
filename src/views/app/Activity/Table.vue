@@ -33,7 +33,7 @@ export default {
                     { value: 'time', text: this.$t('time') },
                     { value: 'duration', text: this.$t('duration') },
                     { value: 'calories', text: this.$t('calories') },
-                    { value: 'action', sortable: false, align: 'end', width: 10 },
+                    { value: 'action', sortable: false, align: 'end', width: 10 }
                 ]
             }
         }

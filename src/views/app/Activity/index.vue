@@ -18,7 +18,7 @@
                     </template>
                     <v-date-picker v-model="date" scrollable>
                         <v-btn icon @click="modal = false">
-                            <v-icon>close</v-icon> 
+                            <v-icon>close</v-icon>
                         </v-btn>
                         <v-spacer></v-spacer>
                         <v-btn icon @click="$refs.dialog.save(date)">
@@ -78,13 +78,10 @@ export default {
                 this.$store.dispatch('activity/load', val)
             },
             get () {
-                if (!this.dateSelected) {
-                    var now = new Date()
-                    var str = (new Date(now.getTime() - (now.getTimezoneOffset() * 60000)).toISOString()).substr(0, 10)
-                    this.$store.dispatch('activity/load', str)
-                    this.dateSelected = str
-                }
-                return this.dateSelected
+                if (this.dateSelected) return this.dateSelected
+                var today = this.$store.getters['app/today']
+                this.$store.dispatch('calories/load', today)
+                return today
             }
         }
 

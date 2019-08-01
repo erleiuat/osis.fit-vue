@@ -72,7 +72,7 @@ export default {
     },
 
     mounted () {
-        
+
     },
 
     i18n: {

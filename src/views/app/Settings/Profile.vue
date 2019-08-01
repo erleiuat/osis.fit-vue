@@ -120,7 +120,7 @@ export default {
     watch: {
         menu (val) {
             val && setTimeout(() => (this.$refs.picker.activePicker = 'YEAR'))
-        },
+        }
     },
 
     methods: {

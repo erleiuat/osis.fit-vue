@@ -32,7 +32,7 @@ export default {
                     { value: 'title', text: this.$t('title') },
                     { value: 'time', text: this.$t('time') },
                     { value: 'calories', text: this.$t('calories') },
-                    { value: 'action', sortable: false, align: 'end', width: 10 },
+                    { value: 'action', sortable: false, align: 'end', width: 10 }
                 ]
             }
         }

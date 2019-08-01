@@ -14,16 +14,13 @@ const getters = {
     },
 
     total: (state) => (date) => {
-
-        if (!date || !(date in state.items)) return
-        else {
-            var total = 0;
+        if (date && (date in state.items)) {
+            var total = 0
             Object.values(state.items[date]).forEach(function (element) {
                 total += element.calories
-            });
-            return total;
+            })
+            return total
         }
-
     }
 
 }
@@ -35,7 +32,7 @@ const mutations = {
             if (!(item.date in state.items)) Vue.set(state.items, item.date, {})
             if (!(item.id in state.items[item.date])) Vue.set(state.items[item.date], item.id.toString(), item)
             else state.items[item.date][item.id] = item
-        });
+        })
     },
 
     deleteItem: (state, item) => {

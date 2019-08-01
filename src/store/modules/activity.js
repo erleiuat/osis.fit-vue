@@ -9,21 +9,18 @@ const state = {
 const getters = {
 
     byDate: (state) => (date) => {
-        if(!date || !(date in state.items)) return
+        if (!date || !(date in state.items)) return
         return Object.values(state.items[date])
     },
 
     total: (state) => (date) => {
-
-        if (!date || !(date in state.items)) return
-        else {
-            var total = 0;
+        if (date && (date in state.items)) {
+            var total = 0
             Object.values(state.items[date]).forEach(function (element) {
                 total += element.calories
-            });
-            return total;
+            })
+            return total
         }
-
     }
 
 }
@@ -35,7 +32,7 @@ const mutations = {
             if (!(item.date in state.items)) Vue.set(state.items, item.date, {})
             if (!(item.id in state.items[item.date])) Vue.set(state.items[item.date], item.id.toString(), item)
             else state.items[item.date][item.id] = item
-        });
+        })
     },
 
     deleteItem: (state, item) => {
@@ -48,7 +45,7 @@ const actions = {
 
     load (context, date) {
         Apios.post('activity/read/', { from: date, to: date }).then(res => {
-            if(res.status === 200) context.commit('addItems', res.data.activity)
+            if (res.status === 200) context.commit('addItems', res.data.activity)
         })
     },
 
@@ -65,7 +62,7 @@ const actions = {
 
     delete (context, item) {
         return new Promise((resolve, reject) => {
-            Apios.post('activity/delete/', {id: item.id}).then(() => {
+            Apios.post('activity/delete/', { id: item.id }).then(() => {
                 context.commit('deleteItem', item)
                 resolve()
             }, err => {

@@ -17,7 +17,7 @@
                 </v-btn>
             </template>
         </Trainings>
-        
+
     </v-bottom-navigation>
 </template>
 
