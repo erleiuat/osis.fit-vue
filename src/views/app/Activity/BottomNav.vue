@@ -3,7 +3,7 @@
 
         <ActivityAdder>
             <template v-slot:default="trigger">
-                <v-btn flat v-on="trigger.on">
+                <v-btn text v-on="trigger.on">
                     <span>{{ $t('addActivity') }}</span>
                     <v-icon>add</v-icon>
                 </v-btn>
@@ -11,7 +11,7 @@
         </ActivityAdder>
         <Trainings>
             <template v-slot:default="trigger">
-                <v-btn flat v-on="trigger.on">
+                <v-btn text v-on="trigger.on">
                     <span>{{ $t('trainings') }}</span>
                     <v-icon>open_in_new</v-icon>
                 </v-btn>

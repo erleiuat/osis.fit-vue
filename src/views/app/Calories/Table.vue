@@ -21,11 +21,10 @@ export default {
     data () {
         return {
             tbl: {
-                class: '',
+                class: 'elevation-1',
                 sortBy: 'time',
                 desc: true,
                 options: {
-                    descending: true,
                     itemsPerPage: -1
                 },
                 headers: [

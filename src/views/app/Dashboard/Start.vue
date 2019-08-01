@@ -5,7 +5,7 @@
             <CaloricBalance :cVals="cals.cVals" />
         </v-flex>
 
-        <v-flex xs12 v-else pa-1>
+        <v-flex xs12 v-else pl-0 pr-0 pt-0>
             <Welcome />
         </v-flex>
 

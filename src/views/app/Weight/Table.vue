@@ -17,7 +17,7 @@ export default {
     data () {
         return {
             tbl: {
-                class: '',
+                class: 'elevation-1',
                 sortBy: 'date',
                 desc: true,
                 options: {

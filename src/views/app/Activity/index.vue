@@ -1,6 +1,7 @@
 <template>
-    <v-container :class="$vuetify.breakpoint.xs ? 'pa-0': 'grid-list-xl'">
-        <v-layout row wrap justify-center>
+    <v-container grid-list-xl pa-0>
+
+        <v-layout wrap>
             <v-flex xs12 sm4 class="text-center" v-if="!$vuetify.breakpoint.xs">
                 <ActivityAdder>
                     <template v-slot:default="trigger">
@@ -14,9 +15,9 @@
             <v-flex xs12 sm4>
                 <v-dialog ref="dialog" v-model="modal" :return-value.sync="date" persistent full-width width="290px">
                     <template v-slot:activator="{ on }">
-                        <v-text-field solo flat v-model="date" append-icon="event" readonly v-on="on" type="date" hide-details />
+                        <v-text-field solo v-model="date" append-icon="event" readonly v-on="on" type="date" hide-details />
                     </template>
-                    <v-date-picker v-model="date" scrollable>
+                    <v-date-picker v-model="date" scrollable :locale="$store.state.app.language">
                         <v-btn icon @click="modal = false">
                             <v-icon>close</v-icon>
                         </v-btn>
@@ -37,13 +38,13 @@
                     </template>
                 </Trainings>
             </v-flex>
-        </v-layout>
 
-        <v-layout row wrap>
             <v-flex xs12>
                 <ActivityTable :date="date" />
             </v-flex>
+
         </v-layout>
+
 
         <BottomNav v-if="$vuetify.breakpoint.xs" />
 

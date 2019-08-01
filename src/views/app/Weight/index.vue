@@ -1,8 +1,8 @@
 <template>
-    <v-container :class="$vuetify.breakpoint.xs ? 'pa-0': 'grid-list-xl'">
+    <v-container grid-list-xl pa-0>
 
         <v-layout row wrap justify-center>
-            <v-flex xs12 class="text-center" v-if="!$vuetify.breakpoint.xs">
+            <v-flex sm6 class="text-center" v-if="!$vuetify.breakpoint.xs">
                 <WeightAdder>
                     <template v-slot:default="trigger">
                         <v-btn depressed large block color="primary" v-on="trigger.on">
@@ -12,15 +12,9 @@
                     </template>
                 </WeightAdder>
             </v-flex>
-        </v-layout>
-
-        <v-layout row wrap>
             <v-flex xs12>
                 <WeightChart />
             </v-flex>
-        </v-layout>
-
-        <v-layout row wrap>
             <v-flex xs12>
                 <WeightTable />
             </v-flex>

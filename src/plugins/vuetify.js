@@ -1,9 +1,13 @@
 import Vue from 'vue'
+import i18n from '@/plugins/i18n'
 import Vuetify from 'vuetify/lib'
 
 Vue.use(Vuetify)
 
 export default new Vuetify({
+    lang: {
+        t: (key, ...params) => i18n.t(key, params),
+    },
     theme: {
         themes: {
             /*

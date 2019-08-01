@@ -1,7 +1,7 @@
 <template>
-    <v-container grid-list-xl>
+    <v-container grid-list-xl pa-0>
 
-        <v-layout row wrap justify-center>
+        <v-layout wrap>
 
             <v-flex xs12 sm4 class="text-center" v-if="!$vuetify.breakpoint.xs">
                 <CalorieAdder>
@@ -17,9 +17,9 @@
             <v-flex xs12 sm4>
                 <v-dialog ref="dialog" v-model="modal" :return-value.sync="date" persistent full-width width="290px">
                     <template v-slot:activator="{ on }">
-                        <v-text-field solo flat v-model="date" append-icon="event" readonly v-on="on" type="date" hide-details />
+                        <v-text-field solo v-model="date" append-icon="event" readonly v-on="on" type="date" hide-details />
                     </template>
-                    <v-date-picker v-model="date" scrollable>
+                    <v-date-picker v-model="date" scrollable :locale="$store.state.app.language">
                         <v-btn icon @click="modal = false">
                             <v-icon>close</v-icon>
                         </v-btn>
@@ -38,12 +38,10 @@
                 </v-btn>
             </v-flex>
 
-        </v-layout>
-
-        <v-layout wrap>
             <v-flex xs12>
                 <CaloriesTable :date="date" />
             </v-flex>
+            
         </v-layout>
 
         <BottomNav v-if="$vuetify.breakpoint.xs" />
