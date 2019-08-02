@@ -24,14 +24,14 @@ module.exports = [
         meta: { authRequired: true }
     },
     {
-        name: '',
+        name: 'templates',
         path: '/templates',
-        component: () => import('@/views/app/Templates/'),
+        component: () => import('@/views/app/Templates/'), // TODO REDIRECT TO CHILD
         meta: { authRequired: true },
         children: [
             {
-                path: '',
-                name: 'templates',
+                path: 'own',
+                name: 'templates.own',
                 component: () => import('@/views/app/Templates/Own'),
                 meta: { authRequired: true }
             },

@@ -1,18 +1,9 @@
 <template>
     <v-navigation-drawer v-model="drawer" app clipped floating>
 
-        <v-list dense nav>
+        <AuthDrawer v-if="$store.getters['auth/status']" />
 
-            <v-list-item v-for="item in items" :to="{name: item.to}" :key="item.to" link>
-                <v-list-item-icon>
-                    <v-icon>{{ item.icon }}</v-icon>
-                </v-list-item-icon>
-                <v-list-item-content>
-                    <v-list-item-title>{{ $t('view.'+item.to+'.title') }}</v-list-item-title>
-                </v-list-item-content>
-            </v-list-item>
-
-        </v-list>
+        <NoAuthDrawer v-else />
 
         <template v-slot:append>
             <v-list dense nav>
@@ -47,26 +38,17 @@
 </template>
 
 <script>
+const AuthDrawer = () => import('@/components/nav/drawer/Auth')
+const NoAuthDrawer = () => import('@/components/nav/drawer/NoAuth')
+
 export default {
     name: 'Drawer',
 
-    computed: {
+    components: {
+        AuthDrawer, NoAuthDrawer
+    },
 
-        items () {
-            if (this.$store.getters['auth/status']) return [
-                { to: 'dashboard', icon: 'dashboard' },
-                { to: 'calories', icon: 'restaurant' },
-                { to: 'weight', icon: 'linear_scale' },
-                { to: 'activity', icon: 'accessibility_new' },
-                { to: 'templates', icon: 'dashboard' },
-                { to: 'settings', icon: 'settings' }
-            ]
-            else return [
-                { to: 'welcome', icon: 'home' },
-                { to: 'auth.login', icon: 'lock_open' },
-                { to: 'auth.register', icon: 'how_to_reg' }
-            ]
-        },
+    computed: {
 
         drawer: {
             get () {

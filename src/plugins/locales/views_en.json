@@ -7,15 +7,15 @@
         "title": "Templates",
         "description": "",
         "own": {
-            "title": "Your Templates",
+            "title": "Own",
             "description": ""
         },
         "favorite": {
-            "title": "Your Favorites",
+            "title": "Favorites",
             "description": ""
         },
         "browse": {
-            "title": "Browse Templates",
+            "title": "Browse",
             "description": ""
         }
     },

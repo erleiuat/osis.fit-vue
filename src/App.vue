@@ -24,7 +24,7 @@
 
 <script>
 import VueCookies from 'vue-cookies'
-import Drawer from '@/components/nav/Drawer'
+import Drawer from '@/components/nav/drawer/'
 import Toolbar from '@/components/nav/Toolbar'
 
 import(/* webpackPrefetch: true */ '@/assets/css/app.css')

@@ -7,15 +7,15 @@
         "title": "Vorlagen",
         "description": "",
         "own": {
-            "title": "Deine Vorlagen",
+            "title": "Eigene",
             "description": ""
         },
         "favorite": {
-            "title": "Deine Favoriten",
+            "title": "Favoriten",
             "description": ""
         },
         "browse": {
-            "title": "Vorlagen durchsuchen",
+            "title": "Durchsuchen",
             "description": ""
         }
     },
