@@ -16,7 +16,7 @@
             </template>
 
             <v-list-item v-for="item in items.i2.items" :to="{name: item.to}" :key="item.to" link>
-                <v-list-item-title>{{ $t('view.'+item.to+'.title') }}</v-list-item-title>
+                <v-list-item-title>{{ $t('view.'+(item.title || item.to)+'.title') }}</v-list-item-title>
                 <v-list-item-icon>
                     <v-icon>{{ item.icon }}</v-icon>
                 </v-list-item-icon>
@@ -51,10 +51,10 @@ export default {
             }
 
             var item2 = {
-                to: 'templates', icon: 'dashboard', items: {
-                    own: { to: 'templates', icon: 'folder' },
-                    favorites: { to: 'templates.favorite', icon: 'favorite' },
-                    browse: { to: 'templates.browse', icon: 'search' }
+                to: 'food', icon: 'dashboard', items: {
+                    own: { title: 'food.own', to: 'food', icon: 'folder' },
+                    favorites: { to: 'food.favorites', icon: 'favorite' },
+                    browse: { to: 'food.browse', icon: 'search' }
                 }
             }
 

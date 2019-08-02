@@ -8,6 +8,7 @@ import calories from './modules/calories'
 import weight from './modules/weight'
 import activity from './modules/activity'
 import food from './modules/food'
+import image from './modules/image'
 Vue.use(Vuex)
 
 export default new Vuex.Store({
@@ -19,7 +20,8 @@ export default new Vuex.Store({
         calories,
         weight,
         activity,
-        food
+        food,
+        image
     }
 
 })

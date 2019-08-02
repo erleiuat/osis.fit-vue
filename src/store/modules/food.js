@@ -9,7 +9,7 @@ const state = {
 const getters = {
 
     all: (state) => {
-        return Object.values(state.items)
+        return Object.values(state.items).reverse()
     }
 
 }
@@ -40,6 +40,17 @@ const actions = {
     add (context, item) {
         return new Promise((resolve, reject) => {
             Apios.post('food/add/', item).then(res => {
+                context.commit('addItems', [res.data.object])
+                resolve()
+            }, err => {
+                reject(err.data.condition)
+            }).catch(() => { })
+        })
+    },
+
+    edit (context, form) {
+        return new Promise((resolve, reject) => {
+            Apios.post('food/edit/', form).then(res => {
                 context.commit('addItems', [res.data.object])
                 resolve()
             }, err => {

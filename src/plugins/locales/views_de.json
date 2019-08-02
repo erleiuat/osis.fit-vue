@@ -3,19 +3,19 @@
         "title": "Osis.fit",
         "description": ""
     },
-    "templates": {
-        "title": "Vorlagen",
+    "food": {
+        "title": "Esswaren",
         "description": "",
         "own": {
             "title": "Eigene",
             "description": ""
         },
-        "favorite": {
+        "favorites": {
             "title": "Favoriten",
             "description": ""
         },
         "browse": {
-            "title": "Durchsuchen",
+            "title": "Suche",
             "description": ""
         }
     },

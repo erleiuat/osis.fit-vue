@@ -24,26 +24,26 @@ module.exports = [
         meta: { authRequired: true }
     },
     {
-        path: '/templates',
-        component: () => import('@/views/app/Templates/'), // TODO REDIRECT TO CHILD
+        path: '/food',
+        component: () => import('@/views/app/Food/'), // TODO REDIRECT TO CHILD
         meta: { authRequired: true },
         children: [
             {
                 path: '',
-                name: 'templates',
-                component: () => import('@/views/app/Templates/Own'),
+                name: 'food',
+                component: () => import('@/views/app/Food/Own'),
                 meta: { authRequired: true }
             },
             {
                 path: 'favorite',
-                name: 'templates.favorite',
-                component: () => import('@/views/app/Templates/Favorite'),
+                name: 'food.favorites',
+                component: () => import('@/views/app/Food/Favorite'),
                 meta: { authRequired: true }
             },
             {
                 path: 'browse',
-                name: 'templates.browse',
-                component: () => import('@/views/app/Templates/Browse'),
+                name: 'food.browse',
+                component: () => import('@/views/app/Food/Browse'),
                 meta: { authRequired: true }
             }
         ]

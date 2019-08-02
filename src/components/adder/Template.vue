@@ -100,22 +100,18 @@ export default {
     data () {
         return {
             show: false,
-            edit: false,
-            uploading: false,
             sending: false,
             fd: {
+                id: '',
+                imageID: '',
                 title: '',
                 amount: '',
-                caloriesPer100: '',
-                imgUrl: '',
-                imgLazy: '',
-                imgPhrase: ''
+                caloriesPer100: ''
             },
             rule: {
                 valid: false,
                 title: [
-                    v => !!v || this.$t('alert.v.require'),
-                    v => v.length < 30 || this.$t('alert.v.tooLong', { amount: 30 })
+                    v => (v && v.length < 150) || this.$t('alert.v.tooLong', { amount: 150 })
                 ],
                 require: [
                     v => !!v || this.$t('alert.v.require')

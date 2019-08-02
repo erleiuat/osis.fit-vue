@@ -3,14 +3,14 @@
         "title": "Osis.fit",
         "description": ""
     },
-    "templates": {
-        "title": "Templates",
+    "food": {
+        "title": "Edibles",
         "description": "",
         "own": {
             "title": "Own",
             "description": ""
         },
-        "favorite": {
+        "favorites": {
             "title": "Favorites",
             "description": ""
         },

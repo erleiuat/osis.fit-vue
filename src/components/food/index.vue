@@ -38,9 +38,8 @@
 </template>
 
 <script>
-
 export default {
-    name: 'Templates',
+    name: 'Food',
 
     data () {
         return {
