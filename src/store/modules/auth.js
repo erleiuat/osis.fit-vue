@@ -76,7 +76,7 @@ const actions = {
                 context.commit('placeAuth', res.data.tokens)
                 resolve()
             }, err => {
-                reject(err.data.condition)
+                reject((err.data ? err.data.condition : null))
             })
         })
     },
@@ -87,7 +87,7 @@ const actions = {
                 context.commit('placeAuth', res.data.tokens)
                 resolve()
             }, err => {
-                reject(err.data.condition)
+                reject((err.data ? err.data.condition : null))
             })
         })
     },
@@ -106,7 +106,7 @@ const actions = {
             Apios.post('auth/register/', form).then(() => {
                 resolve()
             }, err => {
-                reject(err.data.condition)
+                reject((err.data ? err.data.condition : null))
             })
         })
     },
@@ -116,7 +116,7 @@ const actions = {
             Apios.post('auth/verify/', form).then(() => {
                 resolve()
             }, err => {
-                reject(err.data.condition)
+                reject((err.data ? err.data.condition : null))
             })
         })
     },
@@ -126,7 +126,7 @@ const actions = {
             Apios.post('auth/password/forgotten/', form).then(() => {
                 resolve()
             }, err => {
-                reject(err.data.condition)
+                reject((err.data ? err.data.condition : null))
             })
         })
     }

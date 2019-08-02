@@ -1,11 +1,10 @@
 
-/* Make clicks pass-through */
 #nprogress {
     pointer-events: none;
 }
 
 #nprogress .bar {
-    background: rgb(255, 0, 0);
+    background: var(--nprogress-bar);
     position: fixed;
     z-index: 1031;
     top: 0;
@@ -21,7 +20,7 @@
     right: 0px;
     width: 100px;
     height: 100%;
-    box-shadow: 0 0 10px rgb(255, 0, 0), 0 0 5px rgb(255, 0, 0);
+    box-shadow: 0 0 10px var(--nprogress-shadow), 0 0 5px var(--nprogress-shadow);
     opacity: 1.0;
     -webkit-transform: rotate(3deg) translate(0px, -4px);
     -ms-transform: rotate(3deg) translate(0px, -4px);

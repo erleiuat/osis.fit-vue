@@ -61,7 +61,7 @@ export default {
                 mail: '',
                 subject: '',
                 message: '',
-                language: this.$store.state.app.language
+                language: this.$store.state.app.lang
             },
             rule: {
                 valid: false,

@@ -1,19 +1,19 @@
 <template>
     <v-container :class="$vuetify.breakpoint.xs ? 'pa-0 grid-list-md': 'grid-list-lg'">
 
-        <v-layout row wrap>
+        <v-layout wrap>
             <v-flex xs12>
                 <EditAims />
             </v-flex>
         </v-layout>
 
-        <v-layout row wrap>
+        <v-layout wrap>
             <v-flex xs12>
                 <EditProfile />
             </v-flex>
         </v-layout>
 
-        <v-layout row wrap justify-space-around pa-2>
+        <v-layout wrap justify-space-around pa-2>
             <v-flex xs12>
                 <h3 class="display-2">{{ $t('account') }}</h3>
             </v-flex>

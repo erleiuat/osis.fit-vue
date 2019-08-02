@@ -1,30 +1,26 @@
 <template>
-    <v-dialog v-model="show" width="500" transition="dialog-bottom-transition">
-        <v-card>
-            <v-card-title class="title primary white--text">
-                {{ $t('m.title') }}
-            </v-card-title>
+    <v-bottom-sheet v-model="show">
+        <v-sheet>
             <v-container grid-list-xl>
-                <v-card-text>
-                    <div class="caption" v-html="$t('m.text')"></div>
-                </v-card-text>
-                <v-card-actions>
-                    <v-layout row wrap>
-                        <v-flex xs12>
-                            <v-btn depressed block color="primary" @click="show = false">
-                                {{ $t('accept') }}
-                            </v-btn>
-                        </v-flex>
-                        <v-flex xs12>
-                            <v-btn depressed block :to="{ name: 'terms', params: {url: 'cookies'} }" @click="show = false">
-                                {{ $t('info') }}
-                            </v-btn>
-                        </v-flex>
-                    </v-layout>
-                </v-card-actions>
+                <v-layout wrap>
+                    <v-flex xs12>
+                        <div class="headline" v-html="$t('m.title')" />
+                        <div class="caption" v-html="$t('m.text')" />
+                    </v-flex>
+                    <v-flex xs12 sm6>
+                        <v-btn depressed block color="primary" @click="show = false">
+                            {{ $t('accept') }}
+                        </v-btn>
+                    </v-flex>
+                    <v-flex xs12 sm6>
+                        <v-btn depressed block :to="{ name: 'terms', params: {url: 'cookies'} }" @click="show = false">
+                            {{ $t('info') }}
+                        </v-btn>
+                    </v-flex>
+                </v-layout>
             </v-container>
-        </v-card>
-    </v-dialog>
+        </v-sheet>
+    </v-bottom-sheet>
 </template>
 
 <script>
@@ -40,7 +36,7 @@ export default {
     watch: {
         show (val) {
             if (val) return
-            this.$cookies.set('cookie_acceptance', true)
+            this.$cookies.set('cookieAcceptance', true)
             this.show = false
         }
     },

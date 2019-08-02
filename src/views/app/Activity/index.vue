@@ -17,7 +17,7 @@
                     <template v-slot:activator="{ on }">
                         <v-text-field solo v-model="date" append-icon="event" readonly v-on="on" type="date" hide-details />
                     </template>
-                    <v-date-picker v-model="date" scrollable :locale="$store.state.app.language">
+                    <v-date-picker v-model="date" scrollable :locale="$store.state.app.lang">
                         <v-btn icon @click="modal = false">
                             <v-icon>close</v-icon>
                         </v-btn>

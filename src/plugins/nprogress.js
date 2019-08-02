@@ -8,7 +8,7 @@ NProgress.doDone = NProgress.done
 NProgress.clearDelay = function () {
     if (this.startDelay) {
         clearTimeout(this.startDelay)
-        this.startDelay = undefined
+        this.startDelay = null
     }
 }
 
@@ -27,7 +27,7 @@ NProgress.done = function () {
 NProgress.configure({
     trickleSpeed: 50,
     showSpinner: false,
-    delay: 400
+    delay: 250
 })
 
 export default NProgress

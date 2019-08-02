@@ -33,7 +33,7 @@
                             <template v-slot:activator="{ on }">
                                 <v-text-field v-model="fd.date" :label="$t('date')" prepend-icon="event" readonly v-on="on"></v-text-field>
                             </template>
-                            <v-date-picker v-model="fd.date" ref="picker" :locale="$store.state.app.language" @change="$refs.menu.save(fd.date)"></v-date-picker>
+                            <v-date-picker v-model="fd.date" ref="picker" :locale="$store.state.app.lang" @change="$refs.menu.save(fd.date)"></v-date-picker>
                         </v-menu>
                     </v-flex>
                 </v-layout>

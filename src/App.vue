@@ -23,14 +23,15 @@
 </template>
 
 <script>
+import VueCookies from 'vue-cookies'
 import Drawer from '@/components/nav/Drawer'
 import Toolbar from '@/components/nav/Toolbar'
-import Alerts from '@/components/Alerts'
-import VueCookies from 'vue-cookies'
 
+import(/* webpackPrefetch: true */ '@/assets/css/variables.css')
 import(/* webpackPrefetch: true */ '@/assets/css/app.css')
 import(/* webpackPrefetch: true */ '@/assets/css/transitions.css')
 
+const Alerts = () => import('@/components/Alerts')
 const CookieInfo = () => import('@/components/CookieInfo')
 
 export default {
@@ -41,8 +42,9 @@ export default {
     },
 
     beforeMount () {
-        this.$store.state.app.language = VueCookies.get('appLang') || navigator.language || navigator.userLanguage
-        this.$i18n.locale = VueCookies.get('appLang') || navigator.language || navigator.userLanguage
+
+        this.$store.state.app.lang = VueCookies.get('appLang') || navigator.language || navigator.userLanguage
+        this.$i18n.locale = this.$store.state.app.lang
         this.$vuetify.theme.dark = VueCookies.get('themeDark')
         this.$store.state.app.drawer = this.$vuetify.breakpoint.lgAndUp
 
@@ -60,7 +62,7 @@ export default {
     },
 
     mounted () {
-        if (!this.$cookies.get('cookie_acceptance')) this.$store.state.app.cookiesAccepted = false
+        if (!this.$cookies.get('cookieAcceptance')) this.$store.state.app.cookiesAccepted = false
     }
 
 }

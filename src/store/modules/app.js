@@ -4,7 +4,7 @@ const state = {
     version: '1.0',
     drawer: false,
     cookiesAccepted: true,
-    language: null,
+    lang: null,
     today: null
 }
 
@@ -17,9 +17,12 @@ const getters = {
     today: state => {
         if (!state.today) {
             var now = new Date()
-            state.today = (new Date(now.getTime() - (now.getTimezoneOffset() * 60000)).toISOString()).substr(0, 10)
+            state.today = (new Date(now.getTime() - (now.getTimezoneOffset() * 60000)).toISOString())
         }
-        return state.today
+        return {
+            date: state.today.substr(0, 10),
+            time: state.today.substr(11, 5)
+        }
     }
 
 }

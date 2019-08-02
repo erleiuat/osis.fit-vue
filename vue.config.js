@@ -8,7 +8,7 @@ module.exports = {
 
     pwa: {
         name: 'Osis.fit',
-        themeColor: '#2DC7FF',
+        themeColor: '#45B0FF',
         msTileColor: '#2b5797',
         appleMobileWebAppCapable: 'yes',
         appleMobileWebAppStatusBarStyle: 'black',
