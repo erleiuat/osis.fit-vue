@@ -7,6 +7,7 @@ import user from './modules/user'
 import calories from './modules/calories'
 import weight from './modules/weight'
 import activity from './modules/activity'
+import food from './modules/food'
 Vue.use(Vuex)
 
 export default new Vuex.Store({
@@ -17,7 +18,8 @@ export default new Vuex.Store({
         user,
         calories,
         weight,
-        activity
+        activity,
+        food
     }
 
 })

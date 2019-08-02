@@ -52,7 +52,7 @@ export default {
 
             var item2 = {
                 to: 'templates', icon: 'dashboard', items: {
-                    own: { to: 'templates.own', icon: 'folder' },
+                    own: { to: 'templates', icon: 'folder' },
                     favorites: { to: 'templates.favorite', icon: 'favorite' },
                     browse: { to: 'templates.browse', icon: 'search' }
                 }
