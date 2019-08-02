@@ -4,13 +4,13 @@
 }
 
 #nprogress .bar {
-    background: var(--nprogress-bar);
+    background: var(--v-secondary-base);
     position: fixed;
     z-index: 1031;
     top: 0;
     left: 0;
     width: 100%;
-    height: 3px;
+    height: 5px;
 }
 
 /* Fancy blur effect */
@@ -20,7 +20,7 @@
     right: 0px;
     width: 100px;
     height: 100%;
-    box-shadow: 0 0 10px var(--nprogress-shadow), 0 0 5px var(--nprogress-shadow);
+    box-shadow: 0 0 10px var(--v-secondary-base), 0 0 5px var(--v-secondary-base);
     opacity: 1.0;
     -webkit-transform: rotate(3deg) translate(0px, -4px);
     -ms-transform: rotate(3deg) translate(0px, -4px);

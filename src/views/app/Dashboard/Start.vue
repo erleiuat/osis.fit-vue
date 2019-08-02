@@ -37,7 +37,7 @@ export default {
     },
 
     mounted () {
-        var td = this.$store.getters['app/today']
+        var td = this.$store.getters['app/today'].date
         this.$store.dispatch('weight/load')
         this.$store.dispatch('user/load')
         this.$store.dispatch('calories/load', td)
@@ -47,7 +47,7 @@ export default {
     computed: {
 
         lastWeight () {
-            var lWeight = this.$store.getters['weight/getLatest'] || { weight: 0 }
+            var lWeight = this.$store.getters['weight/latest'] || { weight: 0 }
             return {
                 ok: (lWeight.weight > 0),
                 weight: lWeight.weight
@@ -92,7 +92,7 @@ export default {
             var tmpDate = new Date(Date.now() - Date.parse(this.user.birth))
             var age = Math.abs(tmpDate.getUTCFullYear() - 1970)
 
-            var td = this.$store.getters['app/today']
+            var td = this.$store.getters['app/today'].date
             var cTotal = this.$store.getters['calories/total'](td) || 0
             var aTotal = this.$store.getters['activity/total'](td) || 0
 

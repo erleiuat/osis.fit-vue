@@ -37,7 +37,7 @@ export default {
     computed: {
 
         items () {
-            return this.$store.getters['weight/getAll']
+            return this.$store.getters['weight/all']
         }
 
     },

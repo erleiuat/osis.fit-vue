@@ -27,7 +27,7 @@
                 </v-flex>
             </v-layout>
 
-            <v-flex xs12>
+            <v-flex xs12 pa-1>
                 <WeightChart />
             </v-flex>
 

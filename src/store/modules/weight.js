@@ -8,11 +8,11 @@ const state = {
 
 const getters = {
 
-    getAll: (state) => {
+    all: (state) => {
         return Object.values(state.items)
     },
 
-    getLatest: (state) => {
+    latest: (state) => {
         var a = Object.values(state.items)
 
         var mostRecentDate = new Date(Math.max.apply(null, a.map(e => {
