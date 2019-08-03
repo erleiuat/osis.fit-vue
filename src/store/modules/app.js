@@ -1,7 +1,7 @@
 
 const state = {
     title: 'Osis.fit',
-    version: '1.0',
+    version: '1.0.1',
     drawer: false,
     cookiesAccepted: true,
     lang: null,
