@@ -1,27 +1,27 @@
 <template>
-    <v-container grid-list-sm pa-0>
+    <v-container grid-list-sm pl-0 pr-0>
         <v-layout row wrap>
 
-            <v-flex xs12 sm8 v-if="!img.uploaded">
-                <v-btn block @click="$refs.uLf.click()" :color="img.choosen ? 'accent' : 'primary'" :disabled="img.uploading">
+            <v-flex xs12 sm8 v-if="!value">
+                <v-btn block @click="$refs.uLf.click()" :color="choosen ? 'accent' : 'primary'" :disabled="uploading">
                     {{ tmpName || $t('select') }} <v-icon right>camera_alt</v-icon>
                 </v-btn>
             </v-flex>
 
-            <v-flex xs12 sm4 v-if="!img.uploaded">
-                <v-btn block @click="upload()" :loading="img.uploading" :disabled="!img.choosen" :color="img.choosen ? 'success' : ''">
+            <v-flex xs12 sm4 v-if="!value">
+                <v-btn block @click="upload()" :loading="uploading" :disabled="!choosen" :color="choosen ? 'success' : ''">
                     {{ $t('upload') }} <v-icon right>cloud_upload</v-icon>
                 </v-btn>
             </v-flex>
 
-            <v-flex xs12 v-if="img.uploading">
+            <v-flex xs12 v-if="uploading">
                 <v-progress-linear indeterminate rounded />
             </v-flex>
 
-            <v-flex xs12 v-if="img.uploaded">
+            <v-flex xs12 v-if="value">
                 <v-card light outlined tile>
                     <v-card-text>
-                        <v-img :src="img.fullPath" :lazy-src="img.lazyPath" />
+                        <v-img :src="value.fullPath" :lazy-src="value.lazyPath" />
                     </v-card-text>
                 </v-card>
                 <v-btn @click="remove()" tile depressed block color="info">
@@ -44,36 +44,10 @@ export default {
     data () {
         return {
             tmpName: null,
-            fData: null
+            fData: null,
+            choosen: false,
+            uploading: false
         }
-    },
-
-    computed: {
-
-        img: {
-
-            set (val) {
-                console.log('yahaa')
-            },
-            get () {
-                if (this.value) return {
-                    choosen: true,
-                    uploading: false,
-                    uploaded: true,
-                    fullPath: this.value.fullPath,
-                    lazyPath: this.value.lazyPath
-                }
-                else return {
-                    choosen: false,
-                    uploading: false,
-                    uploaded: false,
-                    fullPath: null,
-                    lazyPath: null
-                }
-            }
-
-        }
-
     },
 
     methods: {
@@ -82,44 +56,28 @@ export default {
             this.fData = new FormData()
             this.fData.append('image', files[0], files[0].name)
             this.tmpName = files[0].name
-            this.img.choosen = true
+            this.choosen = true
             this.$refs.uLf.value = null
         },
 
         upload () {
-            try {
-                this.img.uploading = true
-                this.$store.dispatch('image/add', this.fData).then(r => {
-                    this.$emit('input', r)
-                    this.img.fullPath = r.fullPath
-                    this.img.lazyPath = r.lazyPath
-                    this.img.uploaded = true
-                }).catch(r => {
-                    console.log(r)
-
-                    this.$notify({ type: 'error', text: this.$t('alert.error.save') })
-                }).finally(() => {
-                    this.img.uploading = false
-                })
-            } catch (e) {
-                console.log(e)
-            }
+            this.uploading = true
+            this.$store.dispatch('image/add', this.fData).then(res => {
+                this.$emit('input', res)
+            }).catch(r => {
+                this.$notify({ type: 'error', text: this.$t('alert.error.save') })
+            }).finally(() => {
+                this.uploading = false
+            })
         },
 
         remove () {
-            this.$emit('input', null)
-            this.img.uploaded = false
-            this.img.choosen = false
+            this.$emit('input', false)
+            this.choosen = false
             this.tmpName = null
             this.fData = null
         }
 
-    },
-
-    watch: {
-        value (val) {
-            console.log(val)
-        }
     },
 
     i18n: {

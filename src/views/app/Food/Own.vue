@@ -1,6 +1,8 @@
 <template>
     <v-container grid-list-xl pt-0 fill-height>
 
+        <FoodEditor v-model="showEditor" :item="editObj" />
+
         <v-layout wrap>
 
             <v-flex xs12>
@@ -9,7 +11,9 @@
                         <div class="headline">{{ $t('title') }}</div>
                     </v-flex>
                     <v-flex shrink>
-                        <FoodEditor v-model="editObj" />
+                        <v-btn @click="openEditor()" fab depressed small color="primary">
+                            <v-icon>add</v-icon>
+                        </v-btn>
                     </v-flex>
                 </v-layout>
                 <v-layout wrap align-center>
@@ -22,7 +26,7 @@
             <v-flex xs12 v-if="items.a && !items.b" pt-5 pl-0 pr-0>
                 <v-layout wrap justify-center>
                     <v-flex xs12 sm6 pa-1 v-for="item in items.a" :key="item.id">
-                        <FoodCard :item="item" @select="editItem(item)"/>
+                        <FoodCard :item="item" @select="openEditor(item)" />
                     </v-flex>
                 </v-layout>
             </v-flex>
@@ -32,14 +36,14 @@
                     <v-flex sm6>
                         <v-layout column fill-height>
                             <v-flex xs12 pa-2 v-for="item in items.a" :key="item.id">
-                                <FoodCard :item="item" @select="editItem(item)" />
+                                <FoodCard :item="item" @select="openEditor(item)" />
                             </v-flex>
                         </v-layout>
                     </v-flex>
                     <v-flex sm6>
                         <v-layout column fill-height>
                             <v-flex xs12 pa-2 v-for="item in items.b" :key="item.id">
-                                <FoodCard :item="item" @select="editItem(item)" />
+                                <FoodCard :item="item" @select="openEditor(item)" />
                             </v-flex>
                         </v-layout>
                     </v-flex>
@@ -53,13 +57,9 @@
         </v-layout>
 
         <v-fab-transition v-if="!$vuetify.breakpoint.mdAndUp">
-            <FoodEditor v-model="editObj">
-                <template v-slot:default="trigger">
-                    <v-btn fab fixed bottom right color="primary" v-on="trigger.on">
-                        <v-icon>add</v-icon>
-                    </v-btn>
-                </template>
-            </FoodEditor>
+            <v-btn @click="openEditor()" fab fixed bottom right color="primary">
+                <v-icon>add</v-icon>
+            </v-btn>
         </v-fab-transition>
 
     </v-container>
@@ -80,6 +80,7 @@ export default {
     data () {
         return {
             query: '',
+            showEditor: false,
             editObj: null
         }
     },
@@ -111,9 +112,13 @@ export default {
     },
 
     methods: {
-        editItem (item) {
-            var copy = _.cloneDeep(item)
+        openEditor (item = false) {
+            var copy = (item ? _.cloneDeep(item) : false)
             this.editObj = copy
+            this.showEditor = true
+        },
+        closeEditor(){
+            
         }
     },
 

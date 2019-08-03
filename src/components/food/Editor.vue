@@ -1,53 +1,47 @@
 <template>
-    <v-dialog v-model="show" :fullscreen="$vuetify.breakpoint.xs" width="600px" persistent transition="dialog-bottom-transition">
+    <v-dialog v-model="value" :fullscreen="$vuetify.breakpoint.xs" width="600px" persistent scrollable transition="dialog-bottom-transition">
+        <v-card>
 
-        <template v-slot:activator="{ on }">
-            <slot v-bind:on="on">
-                <v-btn fab depressed small v-on="on" color="primary">
-                    <v-icon>add</v-icon>
-                </v-btn>
-            </slot>
-        </template>
-
-        <v-card v-if="show">
-            <v-toolbar color="primary" flat dark>
+            <v-toolbar color="primary" fixed flat dark>
                 <v-toolbar-title>{{ $t('title') }}</v-toolbar-title>
                 <v-spacer></v-spacer>
-                <v-btn icon @click="show = false">
+                <v-btn icon @click="$emit('input', false)">
                     <v-icon>close</v-icon>
                 </v-btn>
             </v-toolbar>
 
-            <v-container grid-list-xl>
-                <v-form v-model="rule.valid" ref="form" v-on:submit.prevent>
-                    <v-layout wrap>
+            <v-card-text>
+                <v-container grid-list-sm pa-0>
+                    <v-form v-model="rule.valid" ref="form" v-on:submit.prevent>
+                        <v-layout wrap>
 
-                        <v-flex xs12>
-                            <v-text-field v-model="value.title" :label="$t('ft.title')" type="text" outlined append-icon="open_in_new" />
-                        </v-flex>
+                            <v-flex xs12>
+                                <v-text-field v-model="fd.title" :label="$t('ft.title')" type="text" outlined append-icon="open_in_new" />
+                            </v-flex>
 
-                        <v-flex xs12 sm6>
-                            <v-text-field v-model="fd.caloriesPer100" :label="$t('caloriesPer100')" type="number" outlined />
-                        </v-flex>
-                        <v-flex xs12 sm6>
-                            <v-text-field v-model="fd.amount" :label="$t('ft.amount')" type="number" outlined />
-                        </v-flex>
+                            <v-flex xs12 sm6>
+                                <v-text-field v-model="fd.caloriesPer100" :label="$t('caloriesPer100')" type="number" outlined />
+                            </v-flex>
+                            <v-flex xs12 sm6>
+                                <v-text-field v-model="fd.amount" :label="$t('ft.amount')" type="number" outlined />
+                            </v-flex>
 
-                        <v-flex xs12>
-                            <v-text-field :value="Math.round(((fd.amount / 100) * fd.caloriesPer100) * 100) / 100" :label="$t('calories')" type="number" outlined hide-details />
-                        </v-flex>
+                            <v-flex xs12>
+                                <v-text-field :value="Math.round(((fd.amount / 100) * fd.caloriesPer100) * 100) / 100" :label="$t('calories')" type="number" outlined hide-details />
+                            </v-flex>
 
-                        <v-flex xs12>
-                            <ImageInput v-model="image" />
-                        </v-flex>
+                            <v-flex xs12>
+                                <ImageInput v-model="fd.image" />
+                            </v-flex>
 
-                        <v-flex xs12>
-                            <v-btn @click="save()" :loading="sending" block type="submit" color="primary">{{ $t('btn.save') }}</v-btn>
-                        </v-flex>
+                            <v-flex xs12>
+                                <v-btn @click="save()" :loading="sending" block type="submit" color="primary">{{ $t('btn.save') }}</v-btn>
+                            </v-flex>
 
-                    </v-layout>
-                </v-form>
-            </v-container>
+                        </v-layout>
+                    </v-form>
+                </v-container>
+            </v-card-text>
 
         </v-card>
     </v-dialog>
@@ -64,13 +58,17 @@ export default {
         ImageInput
     },
 
-    props: ['value'],
+    props: ['value', 'item'],
 
     data () {
         return {
-            image: false,
-            doShow: false,
             sending: false,
+            fd: {
+                title: null,
+                amount: null,
+                caloriesPer100: null,
+                image: null
+            },
             rule: {
                 valid: false,
                 title: [
@@ -83,56 +81,35 @@ export default {
         }
     },
 
-    computed: {
-
-        show: {
-            get () {
-                return this.doShow
-            },
-            set (val) {
-                this.doShow = val
-            }
-        },
-
-        fd () {
-            if (this.value) return {
-                id: this.value.id,
-                imageID: (this.image ? this.image.id : null),
-                title: this.value.title,
-                amount: this.value.amount,
-                caloriesPer100: this.value.caloriesPer100
-            }
-            else return {
-                imageID: (this.image ? this.image.id : null),
-                title: null,
-                amount: null,
-                caloriesPer100: null
-            }
-        }
-
-    },
-
     methods: {
 
         save () {
             if (!this.$refs.form.validate()) return false
             this.sending = true
 
-            if (this.fd.id)
-                this.$store.dispatch('food/edit', this.fd).then(r => {
+            var form = {
+                imageID: (this.fd.image ? this.fd.image.id : null),
+                title: this.fd.title,
+                amount: this.fd.amount,
+                caloriesPer100: this.fd.caloriesPer100,
+            }
+
+            if (this.fd.id) {
+
+                form.id = this.fd.id
+                this.$store.dispatch('food/edit', form).then(r => {
                     this.$notify({ type: 'success', text: this.$t('alert.success.save') })
-                    this.show = false
-                    this.$refs.form.reset()
+                    this.$emit('input', false)
                 }).catch(r => {
                     this.$notify({ type: 'error', text: this.$t('alert.error.save'), detail: r.message })
                 }).finally(() => {
                     this.sending = false
                 })
-            else
+
+            } else
                 this.$store.dispatch('food/add', clonedeep(this.fd)).then(r => {
                     this.$notify({ type: 'success', text: this.$t('alert.success.save') })
-                    this.show = false
-                    this.$refs.form.reset()
+                    this.$emit('input', false)
                 }).catch(r => {
                     this.$notify({ type: 'error', text: this.$t('alert.error.save') })
                 }).finally(() => {
@@ -143,11 +120,11 @@ export default {
     },
 
     watch: {
-        value (val) {
-            if (val) {
-                if (this.value.image) this.image = this.value.image
-                this.show = true
-            } else this.show = false
+        item (val) {
+            if (val) this.fd = val
+            else {
+                this.$refs.form.reset()
+            }
         }
     },
 
