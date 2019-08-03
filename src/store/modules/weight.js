@@ -54,7 +54,7 @@ const actions = {
 
     load (context) {
         Apios.post('weight/read/', { from: '', to: '' }).then(res => {
-            if (res.status === 200) context.commit('addItems', res.data.items)
+            if (res.status === 200) context.commit('set', res.data.items)
         })
     },
 

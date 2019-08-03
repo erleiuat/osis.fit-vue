@@ -68,7 +68,7 @@ const actions = {
     delete (context, item) {
         return new Promise((resolve, reject) => {
             Apios.post('activity/delete/', { id: item.id }).then(() => {
-                context.commit('deleteItem', item)
+                context.commit('delete', item)
                 resolve()
             }).catch(err => {
                 reject(err)

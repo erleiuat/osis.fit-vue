@@ -57,7 +57,7 @@ const actions = {
     add (context, item) {
         return new Promise((resolve, reject) => {
             Apios.post('calories/add/', item).then(res => {
-                context.commit('set', res.data.items)
+                context.commit('set', res.data.item)
                 resolve()
             }).catch(err => {
                 reject(err)

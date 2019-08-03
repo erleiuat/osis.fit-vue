@@ -28,17 +28,15 @@ const actions = {
 
     load (context) {
         Apios.get('user/read/').then(res => {
-            context.commit('set', res.data.user)
-        }).catch(err => {
-            reject(err)
+            context.commit('set', res.data.item)
         })
     },
 
     edit (context, form) {
         return new Promise((resolve, reject) => {
             var obj = Object.assign({}, context.state, form)
-            Apios.post('user/edit/', obj).then(() => {
-                context.commit('set', obj)
+            Apios.post('user/edit/', obj).then(res => {
+                context.commit('set', res.data.item)
                 resolve()
             }).catch(err => {
                 reject(err)
