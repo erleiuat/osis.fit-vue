@@ -17,12 +17,11 @@ export default {
 
     computed: {
 
-        set(){
-
+        set () {
             var color1 = this.$vuetify.theme.themes.light.secondary
             var color2 = this.$vuetify.theme.themes.light.primary
             var font = (this.$vuetify.theme.isDark ? '#FFFFFF' : 'rgba(0, 0, 0, 0.87)')
-            var gradient = ['#'+color1, '#'+color2]
+            var gradient = ['#' + color1, '#' + color2]
 
             return {
                 fill: false,
@@ -37,7 +36,6 @@ export default {
         },
 
         values () {
-
             var arr = this.$store.getters['weight/all']
             if (arr.length <= 1) return false
 

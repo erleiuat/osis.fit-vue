@@ -42,7 +42,6 @@ export default {
     computed: {
 
         items () {
-
             var items1 = {
                 dashboard: { to: 'dashboard', icon: 'dashboard' },
                 calories: { to: 'calories', icon: 'restaurant' },
@@ -51,7 +50,9 @@ export default {
             }
 
             var item2 = {
-                to: 'food', icon: 'dashboard', items: {
+                to: 'food',
+                icon: 'dashboard',
+                items: {
                     own: { title: 'food.own', to: 'food', icon: 'folder' },
                     favorites: { to: 'food.favorites', icon: 'favorite' },
                     browse: { to: 'food.browse', icon: 'search' }

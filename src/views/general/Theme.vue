@@ -72,7 +72,7 @@ export default {
                 'success',
                 'error',
                 'warning',
-                'info',
+                'info'
             ],
             textStyles: [
                 'display-4',

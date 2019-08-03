@@ -1,5 +1,5 @@
 <template>
-    <v-dialog v-model="show" :fullscreen="$vuetify.breakpoint.xs" width="600px" hide-overlay transition="dialog-bottom-transition">
+    <v-dialog v-model="show" :fullscreen="$vuetify.breakpoint.xs" width="600px" persistent transition="dialog-bottom-transition">
 
         <template v-slot:activator="{ on }">
             <slot v-bind:on="on">
@@ -23,22 +23,22 @@
                     <v-layout wrap>
 
                         <v-flex xs12>
-                            <v-text-field v-model="fd.title" :label="$t('ft.title')" type="text" outlined append-icon="open_in_new" />
+                            <v-text-field v-model="value.title" :label="$t('ft.title')" type="text" outlined append-icon="open_in_new" />
                         </v-flex>
 
                         <v-flex xs12 sm6>
-                            <v-text-field v-model="fd.caloriesPer100" :label="$t('caloriesPer100')" @input="calTotal()" type="number" outlined />
+                            <v-text-field v-model="fd.caloriesPer100" :label="$t('caloriesPer100')" type="number" outlined />
                         </v-flex>
                         <v-flex xs12 sm6>
-                            <v-text-field v-model="fd.amount" :label="$t('ft.amount')" @input="calTotal()" type="number" outlined />
+                            <v-text-field v-model="fd.amount" :label="$t('ft.amount')" type="number" outlined />
                         </v-flex>
 
                         <v-flex xs12>
-                            <v-text-field v-model="calories" :label="$t('calories')" type="number" outlined hide-details/>
+                            <v-text-field :value="Math.round(((fd.amount / 100) * fd.caloriesPer100) * 100) / 100" :label="$t('calories')" type="number" outlined hide-details />
                         </v-flex>
 
                         <v-flex xs12>
-                            <ImageInput v-model="fd.imageID" />
+                            <ImageInput v-model="image" />
                         </v-flex>
 
                         <v-flex xs12>
@@ -54,7 +54,7 @@
 </template>
 
 <script>
-const ImageInput = () => import('@/components/ImageInput')
+import ImageInput from '@/components/ImageInput'
 import clonedeep from 'lodash'
 
 export default {
@@ -64,22 +64,13 @@ export default {
         ImageInput
     },
 
-    props: {
-        editObj: Object
-    },
+    props: ['value'],
 
     data () {
         return {
-            show: true,
-            calories: '',
+            image: false,
+            doShow: false,
             sending: false,
-            editID: null,
-            fd: {
-                imageID: null,
-                title: null,
-                amount: null,
-                caloriesPer100: null
-            },
             rule: {
                 valid: false,
                 title: [
@@ -92,29 +83,52 @@ export default {
         }
     },
 
-    methods: {
+    computed: {
 
-        calTotal () {
-            if (this.fd.amount > 0 && this.fd.caloriesPer100 > 0)
-                this.calories = Math.round(((this.fd.amount / 100) * this.fd.caloriesPer100) * 100) / 100
-            else this.calories = 0
+        show: {
+            get () {
+                return this.doShow
+            },
+            set (val) {
+                this.doShow = val
+            }
         },
+
+        fd () {
+            if (this.value) return {
+                id: this.value.id,
+                imageID: (this.image ? this.image.id : null),
+                title: this.value.title,
+                amount: this.value.amount,
+                caloriesPer100: this.value.caloriesPer100
+            }
+            else return {
+                imageID: (this.image ? this.image.id : null),
+                title: null,
+                amount: null,
+                caloriesPer100: null
+            }
+        }
+
+    },
+
+    methods: {
 
         save () {
             if (!this.$refs.form.validate()) return false
             this.sending = true
 
-            if (this.editID) {
-                this.$store.dispatch('food/edit', clonedeep(this.fd)).then(r => {
+            if (this.fd.id)
+                this.$store.dispatch('food/edit', this.fd).then(r => {
                     this.$notify({ type: 'success', text: this.$t('alert.success.save') })
                     this.show = false
                     this.$refs.form.reset()
                 }).catch(r => {
-                    this.$notify({ type: 'error', text: this.$t('alert.error.save') })
+                    this.$notify({ type: 'error', text: this.$t('alert.error.save'), detail: r.message })
                 }).finally(() => {
                     this.sending = false
                 })
-            } else {
+            else
                 this.$store.dispatch('food/add', clonedeep(this.fd)).then(r => {
                     this.$notify({ type: 'success', text: this.$t('alert.success.save') })
                     this.show = false
@@ -124,21 +138,16 @@ export default {
                 }).finally(() => {
                     this.sending = false
                 })
-            }
         }
 
     },
 
     watch: {
-        editObj: function () {
-            if (this.editObj.id) {
-                this.editID = this.editObj.id
-                this.fd = this.editObj
+        value (val) {
+            if (val) {
+                if (this.value.image) this.image = this.value.image
                 this.show = true
-            } else {
-                this.editID = null
-                this.show = false
-            }
+            } else this.show = false
         }
     },
 

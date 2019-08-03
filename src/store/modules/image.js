@@ -8,7 +8,6 @@ const state = {
 
 const getters = {
 
-
 }
 
 const mutations = {
@@ -27,13 +26,13 @@ const actions = {
         return new Promise((resolve, reject) => {
             Apios.post('upload/', fData).then(res => {
                 resolve({
-                    id: res.data.object.id,
-                    fullPath: res.data.object.fullPath,
-                    lazyPath: res.data.object.lazyPath,
+                    id: res.data.item.id,
+                    fullPath: res.data.item.fullPath,
+                    lazyPath: res.data.item.lazyPath
                 })
-            }, err => {
-                reject(err.data.condition)
-            }).catch(() => { })
+            }).catch(err => {
+                reject(err)
+            })
         })
     },
 
