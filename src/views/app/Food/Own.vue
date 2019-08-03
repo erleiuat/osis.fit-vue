@@ -116,9 +116,6 @@ export default {
             var copy = (item ? _.cloneDeep(item) : false)
             this.editObj = copy
             this.showEditor = true
-        },
-        closeEditor(){
-            
         }
     },
 

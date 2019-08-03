@@ -1,15 +1,13 @@
 <template>
     <v-container grid-list-sm pl-0 pr-0>
-        <v-layout row wrap>
+        <v-layout row wrap align-center>
 
             <v-flex xs12 sm8 v-if="!value">
-                <v-btn block @click="$refs.uLf.click()" :color="choosen ? 'accent' : 'primary'" :disabled="uploading">
-                    {{ tmpName || $t('select') }} <v-icon right>camera_alt</v-icon>
-                </v-btn>
+                <v-file-input v-model="file" :label="$t('select')" prepend-icon="camera_alt" accept="image/*" />
             </v-flex>
 
-            <v-flex xs12 sm4 v-if="!value">
-                <v-btn block @click="upload()" :loading="uploading" :disabled="!choosen" :color="choosen ? 'success' : ''">
+            <v-flex xs12 sm4 v-if="!value" text-center>
+                <v-btn @click="upload()" :loading="uploading" :disabled="!choosen" :color="choosen ? 'success' : ''">
                     {{ $t('upload') }} <v-icon right>cloud_upload</v-icon>
                 </v-btn>
             </v-flex>
@@ -29,8 +27,6 @@
                 </v-btn>
             </v-flex>
 
-            <input ref="uLf" @input="selected($event.target.files)" accept="image/*" type="file" class="ImGu" />
-
         </v-layout>
     </v-container>
 </template>
@@ -43,39 +39,38 @@ export default {
 
     data () {
         return {
-            tmpName: null,
-            fData: null,
-            choosen: false,
+            file: null,
             uploading: false
+        }
+    },
+
+    computed: {
+        choosen(){
+            return (this.file ? true : false)
         }
     },
 
     methods: {
 
-        selected (files) {
-            this.fData = new FormData()
-            this.fData.append('image', files[0], files[0].name)
-            this.tmpName = files[0].name
-            this.choosen = true
-            this.$refs.uLf.value = null
-        },
-
         upload () {
+
             this.uploading = true
-            this.$store.dispatch('image/add', this.fData).then(res => {
+            var fData = new FormData()
+            fData.append('image', this.file, this.file.name)
+
+            this.$store.dispatch('image/add', fData).then(res => {
+                this.file = null
                 this.$emit('input', res)
             }).catch(r => {
                 this.$notify({ type: 'error', text: this.$t('alert.error.save') })
             }).finally(() => {
                 this.uploading = false
             })
+
         },
 
         remove () {
             this.$emit('input', false)
-            this.choosen = false
-            this.tmpName = null
-            this.fData = null
         }
 
     },

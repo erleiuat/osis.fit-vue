@@ -3,7 +3,8 @@
         <v-card>
 
             <v-toolbar color="primary" fixed flat dark>
-                <v-toolbar-title>{{ $t('title') }}</v-toolbar-title>
+                <v-toolbar-title v-if="fd.id">{{ $t('titleEdit') }}</v-toolbar-title>
+                <v-toolbar-title v-else>{{ $t('titleAdd') }}</v-toolbar-title>
                 <v-spacer></v-spacer>
                 <v-btn icon @click="$emit('input', false)">
                     <v-icon>close</v-icon>
@@ -11,23 +12,26 @@
             </v-toolbar>
 
             <v-card-text>
-                <v-container grid-list-sm pa-0>
+                <v-container grid-list-xs pa-0>
                     <v-form v-model="rule.valid" ref="form" v-on:submit.prevent>
                         <v-layout wrap>
 
+                            <v-input v-model="fd.id" type="hidden" v-show="false" />
+                            <v-input v-model="fd.image" type="hidden" v-show="false" />
+
                             <v-flex xs12>
-                                <v-text-field v-model="fd.title" :label="$t('ft.title')" type="text" outlined append-icon="open_in_new" />
+                                <v-text-field v-model="fd.title" :label="$t('ft.title')" :rules="rule.title" type="text" outlined />
                             </v-flex>
 
                             <v-flex xs12 sm6>
-                                <v-text-field v-model="fd.caloriesPer100" :label="$t('caloriesPer100')" type="number" outlined />
+                                <v-text-field v-model="fd.caloriesPer100" :label="$t('caloriesPer100')" :rules="rule.require" type="number" outlined />
                             </v-flex>
                             <v-flex xs12 sm6>
-                                <v-text-field v-model="fd.amount" :label="$t('ft.amount')" type="number" outlined />
+                                <v-text-field v-model="fd.amount" :label="$t('ft.amount')" :rules="rule.require" type="number" outlined />
                             </v-flex>
 
-                            <v-flex xs12>
-                                <v-text-field :value="Math.round(((fd.amount / 100) * fd.caloriesPer100) * 100) / 100" :label="$t('calories')" type="number" outlined hide-details />
+                            <v-flex xs12 text-center>
+                                {{ $t('calories') }}: {{ total }}
                             </v-flex>
 
                             <v-flex xs12>
@@ -64,6 +68,7 @@ export default {
         return {
             sending: false,
             fd: {
+                id: null,
                 title: null,
                 amount: null,
                 caloriesPer100: null,
@@ -72,6 +77,7 @@ export default {
             rule: {
                 valid: false,
                 title: [
+                    v => (!!v || v > 0) || this.$t('alert.v.require'),
                     v => (v && v.length < 150) || this.$t('alert.v.tooLong', { amount: 150 })
                 ],
                 require: [
@@ -81,12 +87,21 @@ export default {
         }
     },
 
+    computed: {
+        total () {
+            if (!this.fd.amount || !this.fd.caloriesPer100) return null
+            return Math.round(((this.fd.amount / 100) * this.fd.caloriesPer100) * 100) / 100
+        }
+    },
+
     methods: {
 
         save () {
+
             if (!this.$refs.form.validate()) return false
             this.sending = true
 
+            var action = 'food/add'
             var form = {
                 imageID: (this.fd.image ? this.fd.image.id : null),
                 title: this.fd.title,
@@ -95,26 +110,18 @@ export default {
             }
 
             if (this.fd.id) {
-
                 form.id = this.fd.id
-                this.$store.dispatch('food/edit', form).then(r => {
-                    this.$notify({ type: 'success', text: this.$t('alert.success.save') })
-                    this.$emit('input', false)
-                }).catch(r => {
-                    this.$notify({ type: 'error', text: this.$t('alert.error.save'), detail: r.message })
-                }).finally(() => {
-                    this.sending = false
-                })
+                action = 'food/edit'
+            }
 
-            } else
-                this.$store.dispatch('food/add', clonedeep(this.fd)).then(r => {
-                    this.$notify({ type: 'success', text: this.$t('alert.success.save') })
-                    this.$emit('input', false)
-                }).catch(r => {
-                    this.$notify({ type: 'error', text: this.$t('alert.error.save') })
-                }).finally(() => {
-                    this.sending = false
-                })
+            this.$store.dispatch(action, clonedeep(form)).then(r => {
+                this.$notify({ type: 'success', text: this.$t('alert.success.save') })
+                this.$emit('input', false)
+            }).catch(r => {
+                this.$notify({ type: 'error', text: this.$t('alert.error.save') })
+            }).finally(() => {
+                this.sending = false
+            })
         }
 
     },
@@ -122,21 +129,23 @@ export default {
     watch: {
         item (val) {
             if (val) this.fd = val
-            else {
-                this.$refs.form.reset()
-            }
+        },
+        value (val) {
+            if (!val) this.$refs.form.reset()
         }
     },
 
     i18n: {
         messages: {
             en: {
-                title: 'Add Food',
+                titleAdd: 'Add Food',
+                titleEdit: 'Edit Food',
                 caloriesPer100: 'Calories per 100 (g/ml)',
                 calories: 'Calories Total'
             },
             de: {
-                title: 'Essware hinzufügen',
+                titleAdd: 'Essware hinzufügen',
+                titleEdit: 'Essware bearbeiten',
                 caloriesPer100: 'Kalorien pro 100 (g/ml)',
                 calories: 'Kalorien Total'
             }
