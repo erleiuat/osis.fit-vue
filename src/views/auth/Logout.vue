@@ -33,7 +33,6 @@ export default {
         logout () {
             this.$store.dispatch('auth/logout').then(r => {
                 this.prgcol = 'success'
-                this.$router.push({ name: 'auth', query: { target: this.$route.query.target } })
             }).catch(r => {
                 this.prgcol = 'error'
                 this.$notify({ type: 'error', text: this.$t('alert.error.default') })

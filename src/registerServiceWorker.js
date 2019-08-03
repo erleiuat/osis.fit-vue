@@ -1,5 +1,7 @@
 import { register } from 'register-service-worker'
 
+import NProgress from '@/plugins/nprogress'
+
 /* eslint-disable no-console */
 if (process.env.NODE_ENV === 'production')
     register(`${process.env.BASE_URL}service-worker.js`, {
@@ -16,10 +18,12 @@ if (process.env.NODE_ENV === 'production')
             console.log('Content has been cached for offline use.')
         },
         updatefound () {
+            NProgress.start()
             console.log('New content is downloading.')
         },
         updated () {
             console.log('New content is available; please refresh.')
+            NProgress.done()
             window.location.reload(true)
         },
         offline () {

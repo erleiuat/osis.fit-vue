@@ -6,16 +6,17 @@
                     <v-alert :type="props.item.type" class="mb-1">
                         <v-layout wrap align-center>
                             <v-flex grow>
+                                <!-- TODO -->
                                 {{ props.item.text }}
                             </v-flex>
                             <v-flex shrink>
-                                <v-tooltip top v-if="props.item.detail">
+                                <v-tooltip top v-if="props.item.text">
                                     <template v-slot:activator="{ on }">
                                         <v-chip outlined v-on="on">
                                             <v-icon>info</v-icon>
                                         </v-chip>
                                     </template>
-                                    <span>{{ props.item.detail }}</span>
+                                    <span>{{ props.item.text }}</span>
                                 </v-tooltip>
                             </v-flex>
                         </v-layout>

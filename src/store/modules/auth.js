@@ -95,10 +95,11 @@ const actions = {
     logout (context) {
         return new Promise((resolve, reject) => {
             Apios.post('auth/logout/', { token: context.state.refreshToken }).then(() => {
-                context.commit('removeAuth')
                 resolve()
             }).catch(err => {
                 reject(err)
+            }).finally(() => {
+                context.commit('removeAuth')
             })
         })
     },
