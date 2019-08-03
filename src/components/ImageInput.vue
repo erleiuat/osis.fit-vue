@@ -16,6 +16,8 @@
                 <v-progress-linear indeterminate rounded />
             </v-flex>
 
+            <transition name="fade">
+
             <v-flex xs12 v-if="value">
                 <v-card light outlined tile>
                     <v-card-text>
@@ -26,6 +28,7 @@
                     {{ $t('remove') }} <v-icon right>delete</v-icon>
                 </v-btn>
             </v-flex>
+            </transition>
 
         </v-layout>
     </v-container>
@@ -45,15 +48,14 @@ export default {
     },
 
     computed: {
-        choosen(){
-            return (this.file ? true : false)
+        choosen () {
+            return (!!this.file)
         }
     },
 
     methods: {
 
         upload () {
-
             this.uploading = true
             var fData = new FormData()
             fData.append('image', this.file, this.file.name)
@@ -66,7 +68,6 @@ export default {
             }).finally(() => {
                 this.uploading = false
             })
-
         },
 
         remove () {

@@ -12,8 +12,8 @@
             </v-toolbar>
 
             <v-card-text>
-                <v-container grid-list-xs pa-0>
-                    <v-form v-model="rule.valid" ref="form" v-on:submit.prevent>
+                <v-form v-model="rule.valid" ref="form" v-on:submit.prevent>
+                    <v-container grid-list-xs pa-0>
                         <v-layout wrap>
 
                             <v-input v-model="fd.id" type="hidden" v-show="false" />
@@ -43,8 +43,8 @@
                             </v-flex>
 
                         </v-layout>
-                    </v-form>
-                </v-container>
+                    </v-container>
+                </v-form>
             </v-card-text>
 
         </v-card>
@@ -53,7 +53,6 @@
 
 <script>
 import ImageInput from '@/components/ImageInput'
-import clonedeep from 'lodash'
 
 export default {
     name: 'FoodEditor',
@@ -97,7 +96,6 @@ export default {
     methods: {
 
         save () {
-
             if (!this.$refs.form.validate()) return false
             this.sending = true
 
@@ -106,7 +104,7 @@ export default {
                 imageID: (this.fd.image ? this.fd.image.id : null),
                 title: this.fd.title,
                 amount: this.fd.amount,
-                caloriesPer100: this.fd.caloriesPer100,
+                caloriesPer100: this.fd.caloriesPer100
             }
 
             if (this.fd.id) {
@@ -114,7 +112,7 @@ export default {
                 action = 'food/edit'
             }
 
-            this.$store.dispatch(action, clonedeep(form)).then(r => {
+            this.$store.dispatch(action, form).then(r => {
                 this.$notify({ type: 'success', text: this.$t('alert.success.save') })
                 this.$emit('input', false)
             }).catch(r => {

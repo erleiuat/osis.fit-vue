@@ -66,7 +66,7 @@
 </template>
 
 <script>
-import cloneDeep from 'lodash'
+import clonedeep from 'lodash.clonedeep'
 const FoodCard = () => import('@/components/food/Card')
 const FoodEditor = () => import('@/components/food/Editor')
 
@@ -98,7 +98,7 @@ export default {
 
             var i = 0; var col1 = []; var col2 = []
             filtered.forEach(item => {
-                if (i % 2 == 0) col1.push(item)
+                if (i % 2 === 0) col1.push(item)
                 else col2.push(item)
                 i++
             })
@@ -113,7 +113,7 @@ export default {
 
     methods: {
         openEditor (item = false) {
-            var copy = (item ? _.cloneDeep(item) : false)
+            var copy = (item ? clonedeep(item) : false)
             this.editObj = copy
             this.showEditor = true
         }

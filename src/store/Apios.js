@@ -15,7 +15,6 @@ apios.interceptors.request.use(config => {
     if (pendingCalls[config.baseURL + config.url] === true) return {
         ...config, cancelToken: new CancelToken((cancel) => cancel())
     }
-
     NProgress.start()
     pendingCalls[config.baseURL + config.url] = true
     return config
@@ -28,10 +27,13 @@ apios.interceptors.response.use(res => {
     pendingCalls[res.config.url] = null
     return res.data
 }, err => {
-    if (err.constructor.name === 'Cancel') return Promise.reject(err)
     NProgress.done()
+    if (err.constructor.name === 'Cancel') return Promise.reject(Error('cancelled'))
+    if (!err.response) return Promise.reject(Error('noResponse'))
     pendingCalls[err.response.config.url] = null
-    return Promise.reject(err.response)
+    if (!err.response.data) return Promise.reject(Error('noData'))
+    if (!err.response.data.condition) return Promise.reject(Error('noCondition'))
+    return Promise.reject(err.response.data.condition)
 })
 
 export default apios

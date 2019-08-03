@@ -45,9 +45,9 @@ const actions = {
             Apios.post('food/add/', item).then(res => {
                 context.commit('set', res.data.item)
                 resolve()
-            }, err => {
-                reject(err.data.condition)
-            }).catch(() => { })
+            }).catch(err => {
+                reject(err)
+            })
         })
     },
 
@@ -56,8 +56,6 @@ const actions = {
             Apios.post('food/edit/', form).then(res => {
                 context.commit('set', res.data.item)
                 resolve()
-            }, err => {
-                reject(err)
             }).catch(err => {
                 reject(err)
             })
@@ -69,9 +67,9 @@ const actions = {
             Apios.post('food/delete/', { id: item.id }).then(() => {
                 context.commit('delete', item)
                 resolve()
-            }, err => {
-                reject(err.data.condition)
-            }).catch(() => { })
+            }).catch(err => {
+                reject(err)
+            })
         })
     }
 

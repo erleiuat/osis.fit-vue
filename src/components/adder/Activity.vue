@@ -68,8 +68,6 @@
 </template>
 
 <script>
-import clonedeep from 'lodash'
-
 export default {
     name: 'ActivityAdder',
 
@@ -121,7 +119,7 @@ export default {
             if (!this.$refs.form.validate()) return false
             this.sending = true
 
-            this.$store.dispatch('activity/add', clonedeep(this.fd)).then(r => {
+            this.$store.dispatch('activity/add', this.fd).then(r => {
                 this.$notify({ type: 'success', text: this.$t('alert.success.save') })
                 this.show = false
                 this.$refs.form.reset()
