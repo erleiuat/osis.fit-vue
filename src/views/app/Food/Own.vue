@@ -23,6 +23,20 @@
                 </v-layout>
             </v-flex>
 
+            <v-flex xs12>
+                <v-layout wrap align-start pl-0 pr-0>
+                    <v-flex xs12 sm6 md4 v-for="(arr, key) in items" :key="key">
+                        <v-layout column fill-height>
+                            <v-flex xs12 v-for="(item, key) in arr" :key="key" :class="$vuetify.breakpoint.smAndUp ? 'pa-2':'pa-1'">
+                                <FoodCard :item="item" @select="openEditor(item)" />
+                            </v-flex>
+                        </v-layout>
+                    </v-flex>
+                </v-layout>
+            </v-flex>
+
+            <!--
+
             <v-flex xs12 v-if="items.a && !items.b" pt-5 pl-0 pr-0>
                 <v-layout wrap justify-center>
                     <v-flex xs12 sm6 pa-1 v-for="item in items.a" :key="item.id">
@@ -33,14 +47,14 @@
 
             <v-flex xs12 v-else-if="items.b" pt-5>
                 <v-layout wrap align-start pl-2 pr-2>
-                    <v-flex sm6>
+                    <v-flex xs6>
                         <v-layout column fill-height>
                             <v-flex xs12 pa-2 v-for="item in items.a" :key="item.id">
                                 <FoodCard :item="item" @select="openEditor(item)" />
                             </v-flex>
                         </v-layout>
                     </v-flex>
-                    <v-flex sm6>
+                    <v-flex xs6>
                         <v-layout column fill-height>
                             <v-flex xs12 pa-2 v-for="item in items.b" :key="item.id">
                                 <FoodCard :item="item" @select="openEditor(item)" />
@@ -50,7 +64,9 @@
                 </v-layout>
             </v-flex>
 
-            <v-flex xs12 v-else>
+            -->
+
+            <v-flex xs12>
                 {{ $t('noneyet') }}
             </v-flex>
 
@@ -91,21 +107,45 @@ export default {
             var items = this.$store.getters['food/all']
             var filtered = items.filter(el => el.title.includes(this.query))
 
-            if (this.$vuetify.breakpoint.xsOnly || filtered.length < 2) return {
-                a: filtered,
-                b: false
-            }
+            if (this.$vuetify.breakpoint.xsOnly || filtered.length < 2)
+                return {
+                    a: filtered
+                }
 
-            var i = 0; var col1 = []; var col2 = []
-            filtered.forEach(item => {
-                if (i % 2 === 0) col1.push(item)
-                else col2.push(item)
-                i++
-            })
+            var i = 1; var col1 = []; var col2 = []; var col3 = []
 
-            return {
-                a: col1,
-                b: col2
+            if (this.$vuetify.breakpoint.smOnly) {
+                filtered.forEach(item => {
+                    if (i === 1) {
+                        col1.push(item)
+                        i++
+                    } else if (i === 2) {
+                        col2.push(item)
+                        i = 1
+                    }
+                })
+                return {
+                    a: col1,
+                    b: col2
+                }
+            } else {
+                filtered.forEach(item => {
+                    if (i === 1) {
+                        col1.push(item)
+                        i++
+                    } else if (i === 2) {
+                        col2.push(item)
+                        i++
+                    } else if (i === 3) {
+                        col3.push(item)
+                        i = 1
+                    }
+                })
+                return {
+                    a: col1,
+                    b: col2,
+                    c: col3
+                }
             }
         }
 
