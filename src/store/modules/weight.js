@@ -34,14 +34,17 @@ const getters = {
 
 const mutations = {
 
-    addItems: (state, data) => {
-        data.forEach(function (item) {
+    set: (state, vals) => {
+        if (!Array.isArray(vals))
+            if (!(vals.id in state.items)) Vue.set(state.items, vals.id.toString(), vals)
+            else state.items[vals.id] = vals
+        else vals.forEach(function (item) {
             if (!(item.id in state.items)) Vue.set(state.items, item.id.toString(), item)
             else state.items[item.id] = item
         })
     },
 
-    deleteItem: (state, item) => {
+    delete: (state, item) => {
         Vue.delete(state.items, item.id.toString())
     }
 
@@ -51,29 +54,29 @@ const actions = {
 
     load (context) {
         Apios.post('weight/read/', { from: '', to: '' }).then(res => {
-            if (res.status === 200) context.commit('addItems', res.data.weight)
+            if (res.status === 200) context.commit('addItems', res.data.items)
         })
     },
 
     add (context, item) {
         return new Promise((resolve, reject) => {
             Apios.post('weight/add/', item).then(res => {
-                context.commit('addItems', [res.data.object])
+                context.commit('set', res.data.item)
                 resolve()
-            }, err => {
-                reject(err.data.condition)
-            }).catch(() => { })
+            }).catch(err => {
+                reject(err)
+            })
         })
     },
 
     delete (context, item) {
         return new Promise((resolve, reject) => {
             Apios.post('weight/delete/', { id: item.id }).then(() => {
-                context.commit('deleteItem', item)
+                context.commit('delete', item)
                 resolve()
-            }, err => {
-                reject(err.data.condition)
-            }).catch(() => { })
+            }).catch(err => {
+                reject(err)
+            })
         })
     }
 

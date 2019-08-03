@@ -14,13 +14,9 @@ const state = {
 
 }
 
-const getters = {
-
-}
-
 const mutations = {
 
-    setUser: (state, data) => {
+    set: (state, data) => {
         Object.keys(state).forEach(function (key) {
             if (key in data) state[key] = data[key]
         })
@@ -32,9 +28,9 @@ const actions = {
 
     load (context) {
         Apios.get('user/read/').then(res => {
-            context.commit('setUser', res.data.user)
-        }).catch(() => {
-
+            context.commit('set', res.data.user)
+        }).catch(err => {
+            reject(err)
         })
     },
 
@@ -42,11 +38,11 @@ const actions = {
         return new Promise((resolve, reject) => {
             var obj = Object.assign({}, context.state, form)
             Apios.post('user/edit/', obj).then(() => {
-                context.commit('setUser', obj)
+                context.commit('set', obj)
                 resolve()
-            }, err => {
-                reject(err.data.condition)
-            }).catch(() => { })
+            }).catch(err => {
+                reject(err)
+            })
         })
     }
 
@@ -55,7 +51,6 @@ const actions = {
 export default {
     namespaced: true,
     state,
-    getters,
     mutations,
     actions
 }

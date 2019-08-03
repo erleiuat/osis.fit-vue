@@ -27,15 +27,20 @@ const getters = {
 
 const mutations = {
 
-    addItems: (state, data) => {
-        data.forEach(function (item) {
+    set: (state, vals) => {
+        if (!Array.isArray(vals)) {
+            if (!(vals.date in state.items)) Vue.set(state.items, vals.date, {})
+            if (!(vals.id in state.items[vals.date])) Vue.set(state.items[vals.date], vals.id.toString(), vals)
+            else state.items[vals.date][vals.id] = vals
+        }
+        else vals.forEach(function (item) {
             if (!(item.date in state.items)) Vue.set(state.items, item.date, {})
             if (!(item.id in state.items[item.date])) Vue.set(state.items[item.date], item.id.toString(), item)
             else state.items[item.date][item.id] = item
         })
     },
 
-    deleteItem: (state, item) => {
+    delete: (state, item) => {
         Vue.delete(state.items[item.date], item.id.toString())
     }
 
@@ -45,29 +50,29 @@ const actions = {
 
     load (context, date) {
         Apios.post('calories/read/', { from: date, to: date }).then(res => {
-            if (res.status === 200) context.commit('addItems', res.data.calories)
+            if (res.status === 200) context.commit('set', res.data.items)
         })
     },
 
     add (context, item) {
         return new Promise((resolve, reject) => {
             Apios.post('calories/add/', item).then(res => {
-                context.commit('addItems', [res.data.object])
+                context.commit('set', res.data.items)
                 resolve()
-            }, err => {
-                reject(err.data.condition)
-            }).catch(() => { })
+            }).catch(err => {
+                reject(err)
+            })
         })
     },
 
     delete (context, item) {
         return new Promise((resolve, reject) => {
             Apios.post('calories/delete/', { id: item.id }).then(() => {
-                context.commit('deleteItem', item)
+                context.commit('delete', item)
                 resolve()
-            }, err => {
-                reject(err.data.condition)
-            }).catch(() => { })
+            }).catch(err => {
+                reject(err)
+            })
         })
     }
 

@@ -62,9 +62,9 @@ const actions = {
                     resolve()
                 } else context.dispatch('refresh', tRefresh).then(r => {
                     resolve()
-                }).catch(r => {
+                }).catch(err => {
                     context.dispatch('logout')
-                    reject()
+                    reject(err)
                 })
             }
         })
@@ -75,8 +75,8 @@ const actions = {
             Apios.post('auth/refresh/', { token: token }).then(res => {
                 context.commit('placeAuth', res.data.tokens)
                 resolve()
-            }, err => {
-                reject((err.data ? err.data.condition : null))
+            }).catch(err => {
+                reject(err)
             })
         })
     },
@@ -86,17 +86,19 @@ const actions = {
             Apios.post('auth/', form).then(res => {
                 context.commit('placeAuth', res.data.tokens)
                 resolve()
-            }, err => {
-                reject((err.data ? err.data.condition : null))
+            }).catch(err => {
+                reject(err)
             })
         })
     },
 
     logout (context) {
         return new Promise((resolve, reject) => {
-            Apios.post('auth/logout/', { token: context.state.refreshToken }).finally(() => {
+            Apios.post('auth/logout/', { token: context.state.refreshToken }).then(() => {
                 context.commit('removeAuth')
                 resolve()
+            }).catch(err => {
+                reject(err)
             })
         })
     },
@@ -105,8 +107,8 @@ const actions = {
         return new Promise((resolve, reject) => {
             Apios.post('auth/register/', form).then(() => {
                 resolve()
-            }, err => {
-                reject((err.data ? err.data.condition : null))
+            }).catch(err => {
+                reject(err)
             })
         })
     },
@@ -115,8 +117,8 @@ const actions = {
         return new Promise((resolve, reject) => {
             Apios.post('auth/verify/', form).then(() => {
                 resolve()
-            }, err => {
-                reject((err.data ? err.data.condition : null))
+            }).catch(err => {
+                reject(err)
             })
         })
     },
@@ -125,8 +127,8 @@ const actions = {
         return new Promise((resolve, reject) => {
             Apios.post('auth/password/forgotten/', form).then(() => {
                 resolve()
-            }, err => {
-                reject((err.data ? err.data.condition : null))
+            }).catch(err => {
+                reject(err)
             })
         })
     }
