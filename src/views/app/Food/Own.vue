@@ -35,37 +35,6 @@
                 </v-layout>
             </v-flex>
 
-            <!--
-
-            <v-flex xs12 v-if="items.a && !items.b" pt-5 pl-0 pr-0>
-                <v-layout wrap justify-center>
-                    <v-flex xs12 sm6 pa-1 v-for="item in items.a" :key="item.id">
-                        <FoodCard :item="item" @select="openEditor(item)" />
-                    </v-flex>
-                </v-layout>
-            </v-flex>
-
-            <v-flex xs12 v-else-if="items.b" pt-5>
-                <v-layout wrap align-start pl-2 pr-2>
-                    <v-flex xs6>
-                        <v-layout column fill-height>
-                            <v-flex xs12 pa-2 v-for="item in items.a" :key="item.id">
-                                <FoodCard :item="item" @select="openEditor(item)" />
-                            </v-flex>
-                        </v-layout>
-                    </v-flex>
-                    <v-flex xs6>
-                        <v-layout column fill-height>
-                            <v-flex xs12 pa-2 v-for="item in items.b" :key="item.id">
-                                <FoodCard :item="item" @select="openEditor(item)" />
-                            </v-flex>
-                        </v-layout>
-                    </v-flex>
-                </v-layout>
-            </v-flex>
-
-            -->
-
             <v-flex xs12>
                 {{ $t('noneyet') }}
             </v-flex>

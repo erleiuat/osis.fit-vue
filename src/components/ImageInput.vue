@@ -21,7 +21,7 @@
                 <v-flex xs12 v-if="value">
                     <v-card light outlined tile>
                         <v-card-text>
-                            <v-img :src="getUrl(value.path.xl)" :lazy-src="require('@/assets/img/loading.png')">
+                            <v-img :src="value.path.xl" :lazy-src="require('@/assets/img/loading.png')">
                                 <template v-slot:placeholder>
                                     <v-layout fill-height align-center justify-center ma-0>
                                         <v-progress-circular indeterminate></v-progress-circular>
@@ -56,25 +56,10 @@ export default {
     computed: {
         choosen () {
             return (!!this.file)
-        },
-        path () {
-            var img = this.value.path.xl
-            var lazy = this.value.path.lazy
-            if(img === lazy) lazy = require('@/assets/img/loading.png')
-            return {
-                img: img,
-                lazy: lazy
-            }
         }
     },
 
     methods: {
-
-        getUrl(imgPath){
-            
-            return imgPath
-
-        },
 
         upload () {
             this.uploading = true
