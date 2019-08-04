@@ -24,7 +24,7 @@
             </v-flex>
 
             <v-flex xs12>
-                <v-layout wrap align-start pl-0 pr-0>
+                <v-layout wrap justify-center pl-0 pr-0>
                     <v-flex xs12 sm6 md4 v-for="(arr, key) in items" :key="key">
                         <v-layout column fill-height>
                             <v-flex xs12 v-for="(item, key) in arr" :key="key" :class="$vuetify.breakpoint.smAndUp ? 'pa-2':'pa-1'">

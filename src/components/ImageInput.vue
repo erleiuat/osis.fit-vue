@@ -18,16 +18,22 @@
 
             <transition name="fade">
 
-            <v-flex xs12 v-if="value">
-                <v-card light outlined tile>
-                    <v-card-text>
-                        <v-img :src="value.fullPath" :lazy-src="value.lazyPath" />
-                    </v-card-text>
-                </v-card>
-                <v-btn @click="remove()" tile depressed block color="info">
-                    {{ $t('remove') }} <v-icon right>delete</v-icon>
-                </v-btn>
-            </v-flex>
+                <v-flex xs12 v-if="value">
+                    <v-card light outlined tile>
+                        <v-card-text>
+                            <v-img :src="getUrl(value.path.xl)" :lazy-src="require('@/assets/img/loading.png')">
+                                <template v-slot:placeholder>
+                                    <v-layout fill-height align-center justify-center ma-0>
+                                        <v-progress-circular indeterminate></v-progress-circular>
+                                    </v-layout>
+                                </template>
+                            </v-img>
+                        </v-card-text>
+                    </v-card>
+                    <v-btn @click="remove()" tile depressed block color="info">
+                        {{ $t('remove') }} <v-icon right>delete</v-icon>
+                    </v-btn>
+                </v-flex>
             </transition>
 
         </v-layout>
@@ -50,10 +56,25 @@ export default {
     computed: {
         choosen () {
             return (!!this.file)
+        },
+        path () {
+            var img = this.value.path.xl
+            var lazy = this.value.path.lazy
+            if(img === lazy) lazy = require('@/assets/img/loading.png')
+            return {
+                img: img,
+                lazy: lazy
+            }
         }
     },
 
     methods: {
+
+        getUrl(imgPath){
+            
+            return imgPath
+
+        },
 
         upload () {
             this.uploading = true

@@ -1,6 +1,6 @@
 <template>
     <v-card hover link @click="$emit('select')">
-        <v-img v-if="item.image" class="white--text" :lazy-src="item.image.lazyPath" :src="item.image.fullPath">
+        <v-img v-if="path" class="white--text" :lazy-src="path.lazy" :src="path.image">
             <v-card-title class="lightbox align-end fill-height">
                 {{item.title}}
             </v-card-title>
@@ -21,6 +21,22 @@ export default {
     name: 'FoodCard',
     props: {
         item: Object
+    },
+    computed: {
+        path () {
+            if(!this.item.image) return false
+
+            var bp = this.$vuetify.breakpoint.name
+            var img = this.item.image.path[bp]
+
+            var lazy = this.item.image.path.lazy
+            if(img === lazy) lazy = require('@/assets/img/loading.png')
+
+            return {
+                image: img,
+                lazy: lazy
+            }
+        }
     }
 }
 </script>

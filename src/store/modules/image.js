@@ -8,8 +8,7 @@ const actions = {
             Apios.post('upload/', fData).then(res => {
                 resolve({
                     id: res.data.item.id,
-                    fullPath: res.data.item.fullPath,
-                    lazyPath: res.data.item.lazyPath
+                    path: res.data.item.path
                 })
             }).catch(err => {
                 reject(err)
