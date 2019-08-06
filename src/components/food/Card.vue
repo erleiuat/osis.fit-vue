@@ -26,11 +26,8 @@ export default {
         path () {
             if(!this.item.image) return false
 
-            var bp = this.$vuetify.breakpoint.name
-            var img = this.item.image.path[bp]
-
+            var img = this.item.image.path.small
             var lazy = this.item.image.path.lazy
-            if(img === lazy) lazy = require('@/assets/img/loading.png')
 
             return {
                 image: img,

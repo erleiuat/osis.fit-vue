@@ -20,19 +20,17 @@
 
                 <v-flex xs12 v-if="value">
                     <v-card light outlined tile>
-                        <v-card-text>
-                            <v-img :src="value.path.xl" :lazy-src="require('@/assets/img/loading.png')">
-                                <template v-slot:placeholder>
-                                    <v-layout fill-height align-center justify-center ma-0>
-                                        <v-progress-circular indeterminate></v-progress-circular>
-                                    </v-layout>
-                                </template>
-                            </v-img>
-                        </v-card-text>
+                        <v-img :src="value.path.large" :lazy-src="require('@/assets/img/loading.png')">
+                            <template v-slot:placeholder>
+                                <v-layout fill-height align-center justify-center ma-0>
+                                    <v-progress-circular indeterminate></v-progress-circular>
+                                </v-layout>
+                            </template>
+                        </v-img>
+                        <v-btn @click="remove()" tile depressed block color="info">
+                            {{ $t('remove') }} <v-icon right>delete</v-icon>
+                        </v-btn>
                     </v-card>
-                    <v-btn @click="remove()" tile depressed block color="info">
-                        {{ $t('remove') }} <v-icon right>delete</v-icon>
-                    </v-btn>
                 </v-flex>
             </transition>
 
