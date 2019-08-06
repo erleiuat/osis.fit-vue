@@ -29,13 +29,13 @@ module.exports = [
         meta: { authRequired: true },
         children: [
             {
-                path: '',
-                name: 'food',
+                path: 'own',
+                name: 'food.own',
                 component: () => import('@/views/app/Food/Own'),
                 meta: { authRequired: true }
             },
             {
-                path: 'favorite',
+                path: 'favorites',
                 name: 'food.favorites',
                 component: () => import('@/views/app/Food/Favorite'),
                 meta: { authRequired: true }

@@ -9,7 +9,8 @@ const state = {
     user: {
         id: null,
         mail: null,
-        level: null
+        level: null,
+        premium: null
     }
 
 }
@@ -17,6 +18,12 @@ const state = {
 const getters = {
     status: state => {
         return state.status
+    },
+    premium: state => {
+        if (!state.user) return false
+        if (typeof state.user.premium !== 'boolean') return false
+        if (state.user.premium === true) return true
+        return false
     }
 }
 
@@ -124,7 +131,7 @@ const actions = {
         })
     },
 
-    forgot (context, form) {
+    forgot (context) {
         return new Promise((resolve, reject) => {
             Apios.post('auth/password/forgotten/', form).then(() => {
                 resolve()

@@ -10,12 +10,12 @@
             </v-list-item-content>
         </v-list-item>
 
-        <v-list-group :prepend-icon="items.i2.icon" value="true">
+        <v-list-group :prepend-icon="items.i2.icon">
             <template v-slot:activator>
                 <v-list-item-title>{{ $t('view.'+items.i2.to+'.title') }}</v-list-item-title>
             </template>
 
-            <v-list-item v-for="item in items.i2.items" :to="{name: item.to}" :key="item.to" link>
+            <v-list-item v-for="(item,key) in items.i2.items" :to="{name: item.to}" :key="key" link>
                 <v-list-item-title>{{ $t('view.'+(item.title || item.to)+'.title') }}</v-list-item-title>
                 <v-list-item-icon>
                     <v-icon>{{ item.icon }}</v-icon>
@@ -42,6 +42,9 @@ export default {
     computed: {
 
         items () {
+
+            var premium = this.$store.getters['auth/premium']
+
             var items1 = {
                 dashboard: { to: 'dashboard', icon: 'dashboard' },
                 calories: { to: 'calories', icon: 'restaurant' },
@@ -49,13 +52,22 @@ export default {
                 activity: { to: 'activity', icon: 'accessibility_new' }
             }
 
-            var item2 = {
+            if (premium) var item2 = {
                 to: 'food',
                 icon: 'dashboard',
                 items: {
-                    own: { title: 'food.own', to: 'food', icon: 'folder' },
+                    own: { title: 'food.own', to: 'food.own', icon: 'folder' },
                     favorites: { to: 'food.favorites', icon: 'favorite' },
                     browse: { to: 'food.browse', icon: 'search' }
+                }
+            }
+            else var item2 = {
+                to: 'food',
+                icon: 'dashboard',
+                items: {
+                    own: { title: 'food.own', to: 'food.own', icon: 'folder' },
+                    favorites: { title: 'food.favorites', to: 'premium', icon: 'favorite' },
+                    browse: { title: 'food.browse', to: 'premium', icon: 'search' }
                 }
             }
 

@@ -67,6 +67,10 @@
         "title": "Welcome",
         "description": ""
     },
+    "premium": {
+        "title": "Get Premium",
+        "description": ""
+    },
     "terms": {
         "title": "Terms of use",
         "description": "",

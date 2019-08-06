@@ -6,6 +6,7 @@ Vue.use(Router)
 const main = require('./routes/main')
 const auth = require('./routes/auth')
 const app = require('./routes/app')
+const premium = require('./routes/premium')
 
 const router = new Router({
     mode: 'history',
@@ -13,7 +14,8 @@ const router = new Router({
     routes: [
         ...main,
         ...auth,
-        ...app
+        ...app,
+        ...premium
     ]
 })
 
