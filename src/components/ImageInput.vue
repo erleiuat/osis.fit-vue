@@ -5,7 +5,7 @@
             <v-layout row wrap align-center v-if="!value" style="height: 80px;" key="1">
 
                 <v-flex xs12 sm8 v-if="!value && !uploading">
-                    <v-file-input v-model="file" :label="$t('select')" :disabled="uploading" prepend-icon="camera_alt" accept="image/jpg, image/png, image/jpeg" />
+                    <v-file-input v-model="file" :label="$t('select')" :rules="rule" :disabled="uploading" prepend-icon="camera_alt" accept="image/jpg, image/png, image/jpeg" />
                 </v-flex>
 
                 <v-flex xs12 sm4 v-if="!value && !uploading" text-center>
@@ -58,12 +58,15 @@ export default {
     data () {
         return {
             file: null,
-            whatisgoing: false
+            rule: [
+                value => !value || value.size < (15 * 1000000) || this.$t('maxSize')
+            ]
         }
     },
 
     computed: {
         choosen () {
+            if (this.file && this.file.size >= (15 * 1000000)) return false
             return (!!this.file)
         },
         progress () {
@@ -76,14 +79,6 @@ export default {
         processing () {
             if (this.progress && this.progress === 100) return true
             return false
-        },
-        set: {
-            get () {
-                return this.whatisgoing
-            },
-            set (val) {
-                this.whatisgoing = val
-            }
         }
     },
 
@@ -115,12 +110,14 @@ export default {
     i18n: {
         messages: {
             en: {
+                maxSize: 'Size must be below 15 MB',
                 processing: 'Processing image',
                 select: 'Select File',
                 upload: 'Upload',
                 remove: 'Remove Image'
             },
             de: {
+                maxSize: 'Die Datei muss kleiner als 15MB sein',
                 processing: 'Bild wird verarbeitet',
                 select: 'Datei auswählen',
                 upload: 'Hochladen',
@@ -138,4 +135,3 @@ export default {
     background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.4) 0%, transparent 72px);
 }
 </style>
-
