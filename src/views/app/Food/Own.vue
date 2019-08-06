@@ -18,13 +18,13 @@
                 </v-layout>
                 <v-layout wrap align-center>
                     <v-toolbar dense fixed :tile="false">
-                        <v-text-field v-model="query" hide-details prepend-icon="search" single-line />
+                        <v-text-field v-model="query" hide-details prepend-icon="search" single-line clearable />
                     </v-toolbar>
                 </v-layout>
             </v-flex>
 
             <v-flex xs12>
-                <v-layout wrap justify-center pl-0 pr-0>
+                <v-layout wrap justify-center align-start pl-0 pr-0>
                     <v-flex xs12 sm6 md4 v-for="(arr, key) in items" :key="key">
                         <v-layout column fill-height>
                             <v-flex xs12 v-for="(item, key) in arr" :key="key" :class="$vuetify.breakpoint.smAndUp ? 'pa-2':'pa-1'">

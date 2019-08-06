@@ -10,7 +10,7 @@
         <v-flex xs12 md10 lg8>
             <v-form v-model="rule.valid" ref="form" v-on:submit.prevent>
                 <v-text-field v-model="fd.mail" :label="$t('ft.mail')" :rules="rule.mail" type="email" />
-                <v-text-field v-model="fd.code" :label="$t('code')" type="text" />
+                <v-text-field v-model="fd.code" :label="$t('code')" :rules="rule.code" type="text" />
                 <v-btn @click="verify()" :loading="sending" color="primary" depressed large block type="submit">
                     {{ $t('btn.send') }}
                 </v-btn>

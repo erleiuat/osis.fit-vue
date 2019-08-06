@@ -3,7 +3,7 @@
         <v-layout row wrap align-center>
 
             <v-flex xs12 sm8 v-if="!value">
-                <v-file-input v-model="file" :label="$t('select')" prepend-icon="camera_alt" accept="image/*" />
+                <v-file-input v-model="file" :label="$t('select')" prepend-icon="camera_alt" accept="image/jpg, image/png, image/jpeg" />
             </v-flex>
 
             <v-flex xs12 sm4 v-if="!value" text-center>
@@ -17,10 +17,9 @@
             </v-flex>
 
             <transition name="fade">
-
                 <v-flex xs12 v-if="value">
                     <v-card light outlined tile>
-                        <v-img :src="value.path.large" :lazy-src="require('@/assets/img/loading.png')">
+                        <v-img :src="value.path.large" :lazy-src="lazySrc">
                             <template v-slot:placeholder>
                                 <v-layout fill-height align-center justify-center ma-0>
                                     <v-progress-circular indeterminate></v-progress-circular>
@@ -47,7 +46,8 @@ export default {
     data () {
         return {
             file: null,
-            uploading: false
+            uploading: false,
+            lazySrc: require('@/assets/img/loading.png')
         }
     },
 
@@ -60,10 +60,11 @@ export default {
     methods: {
 
         upload () {
-            this.uploading = true
+
             var fData = new FormData()
             fData.append('image', this.file, this.file.name)
 
+            this.uploading = true
             this.$store.dispatch('image/add', fData).then(res => {
                 this.file = null
                 this.$emit('input', res)
