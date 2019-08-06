@@ -2,7 +2,7 @@
     <v-container grid-list-sm pl-0 pr-0>
         <transition name="zoom" mode="out-in">
 
-            <v-layout row wrap align-center v-if="!value" style="height: 80px;" key="1">
+            <v-layout row wrap align-center v-if="!value" style="height: 120px;" key="1">
 
                 <v-flex xs12 sm8 v-if="!value && !uploading">
                     <v-file-input v-model="file" :label="$t('select')" :rules="rule" :disabled="uploading" prepend-icon="camera_alt" accept="image/jpg, image/png, image/jpeg" />

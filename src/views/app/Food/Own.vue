@@ -16,7 +16,7 @@
                         </v-btn>
                     </v-flex>
                 </v-layout>
-                <v-layout wrap align-center>
+                <v-layout wrap align-center pb-2>
                     <v-toolbar dense fixed :tile="false">
                         <v-text-field v-model="query" hide-details prepend-icon="search" single-line clearable />
                     </v-toolbar>
@@ -68,7 +68,7 @@ export default {
 
     data () {
         return {
-            query: '',
+            query: null,
             showEditor: false,
             editObj: null
         }
@@ -78,7 +78,7 @@ export default {
 
         items () {
             var items = this.$store.getters['food/all']
-            var filtered = items.filter(el => el.title.includes(this.query))
+            var filtered = items.filter(el => el.title.includes(this.query || ''))
 
             if (filtered.length <= 0) return false
 

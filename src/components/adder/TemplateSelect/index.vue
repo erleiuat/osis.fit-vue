@@ -1,47 +1,31 @@
 <template>
-    <v-dialog scrollable v-model="show" :fullscreen="$vuetify.breakpoint.xs" width="500" transition="dialog-bottom-transition">
-
+    <v-dialog v-model="doShow" :fullscreen="$vuetify.breakpoint.xs" width="500" hide-overlay transition="dialog-bottom-transition" scrollable>
         <v-card>
-            
-            <v-toolbar color="primary" class="white--text" v-show="$vuetify.breakpoint.xs">
-                <v-toolbar-title>{{ $t('title') }}</v-toolbar-title>
-                <v-spacer></v-spacer>
-                <v-toolbar-items>
-                    <v-btn icon @click="show = false">
-                        <v-icon right color="white">close</v-icon>
-                    </v-btn>
-                </v-toolbar-items>
-            </v-toolbar>
 
-            <v-card-title class="headline primary white--text" v-show="!$vuetify.breakpoint.xs">
-                {{ $t('title') }}
+            <v-card-title class="pl-0 pt-0 pr-0">
+                <v-toolbar color="primary" flat dark>
+                    <v-toolbar-title>{{ $t('title') }}</v-toolbar-title>
+                    <v-spacer></v-spacer>
+                    <v-btn icon @click="$emit('select', false)">
+                        <v-icon>close</v-icon>
+                    </v-btn>
+                </v-toolbar>
             </v-card-title>
 
-            <v-tabs v-model="active" color="secondary" slider-color="primary" grow dark>
-                <v-tab href="#ownAndFavs">
-                    <v-icon>folder</v-icon>
-                </v-tab>
-                <v-tab href="#browse">
-                    <v-icon>search</v-icon>
-                </v-tab>
-            </v-tabs>
+            <v-card-text class="pa-0">
 
-            <v-card-text class="pa-0" style="height: 600px;">
-                <v-tabs-items v-model="active">
-                    <v-tab-item value="ownAndFavs">
-                        <OwnAndFavs @select="select" />
-                    </v-tab-item>
+                <OwnAndFavs v-if="!searchDB" @select="select" />
 
-                    <v-tab-item value="browse">
-                        <Browse @select="select" />
-                    </v-tab-item>
-                </v-tabs-items>
+                <Browse v-else @select="select" />
+
             </v-card-text>
 
-            <v-divider v-show="!$vuetify.breakpoint.xs" />
+                <v-divider />
 
-            <v-card-actions v-show="!$vuetify.breakpoint.xs">
-                <v-btn text @click="show = false">{{ $t('btn.close') }}</v-btn>
+            <v-card-actions>
+                <v-btn text block @click="searchDB = !searchDB">
+                    Datenbank durchsuchen
+                </v-btn>
             </v-card-actions>
 
         </v-card>
@@ -65,16 +49,26 @@ export default {
 
     data () {
         return {
-            active: 'ownAndFavs'
+            searchDB: false
+        }
+    },
+
+    computed: {
+        doShow: {
+            get () {
+                return this.show
+            },
+            set (val) {
+                if (!val) this.$emit('select', val)
+            }
         }
     },
 
     methods: {
-
         select (e) {
+            if (!e) this.$emit('select', false)
             this.$emit('select', e)
         }
-
     },
 
     i18n: {

@@ -8,7 +8,7 @@
         <v-card-title v-else>
             {{item.title}}
         </v-card-title>
-        <v-card-text>
+        <v-card-text v-if="!nodetails && path">
             Standartmenge: {{ item.amount }}<br />
             Kalorien / 100: {{ item.caloriesPer100 }}<br />
             Total: {{ total }}
@@ -20,7 +20,8 @@
 export default {
     name: 'FoodCard',
     props: {
-        item: Object
+        item: Object,
+        nodetails: Boolean
     },
     computed: {
         path () {

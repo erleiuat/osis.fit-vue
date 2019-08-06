@@ -1,14 +1,29 @@
 <template>
     <v-container>
 
+        <v-layout wrap align-center pb-2>
+            <v-toolbar dense fixed :tile="false">
+                <v-text-field v-model="query" hide-details prepend-icon="search" single-line clearable />
+            </v-toolbar>
+        </v-layout>
+
         <v-layout wrap justify-center align-start pl-0 pr-0>
             <v-flex xs6 v-for="(arr, key) in items" :key="key">
                 <v-layout column fill-height>
                     <v-flex xs12 v-for="(item, key) in arr" :key="key" class="pa-1">
-                        <FoodCard :item="item" @select="$emit('select', item)" />
+                        <FoodCard :item="item" @select="$emit('select', item)" nodetails />
                     </v-flex>
                 </v-layout>
             </v-flex>
+
+            <v-flex xs12 v-if="!items && !query">
+                {{ $t('noneyet') }}
+            </v-flex>
+
+            <v-flex xs12 v-if="!items && query">
+                {{ $t('nonefound') }}
+            </v-flex>
+
         </v-layout>
 
     </v-container>
@@ -26,7 +41,7 @@ export default {
 
     data () {
         return {
-            query: ''
+            query: null
         }
     },
 
@@ -34,9 +49,7 @@ export default {
 
         items () {
             var items = this.$store.getters['food/all']
-            var filtered = items.filter(el => el.title.includes(this.query))
-
-            console.log(filtered)
+            var filtered = items.filter(el => el.title.includes(this.query || ''))
             if (filtered.length <= 0) return false
 
             var i = 1; var col1 = []; var col2 = [];
@@ -67,14 +80,14 @@ export default {
         messages: {
             en: {
                 noneyet: 'You have not yet created your own templates',
-                noneyet2: "You don't have any favorites yet",
+                nonefound: 'No results',
                 amount: 'Amount',
                 calories: 'Calories/100',
                 total: 'Total'
             },
             de: {
                 noneyet: 'Du hast noch keine eigenen Vorlagen erstellt',
-                noneyet2: 'Du hast noch keine Favoriten',
+                nonefound: 'Keine Resultate',
                 amount: 'Menge',
                 calories: 'Kalorien/100',
                 total: 'Total'

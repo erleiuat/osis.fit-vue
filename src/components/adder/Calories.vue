@@ -62,7 +62,7 @@
                 </v-form>
             </v-container>
         </v-card>
-        <TemplateSelect :show="selector" @select="use(item)" />
+        <TemplateSelect :show="selector" @select="use" />
     </v-dialog>
 </template>
 
@@ -136,13 +136,16 @@ export default {
             })
         },
 
-        openSelect(){
-            console.log('yaa')
+        openSelect () {
             this.selector = true
         },
 
-        use(item){
-            console.log(item)
+        use (item) {
+            this.selector = false
+            if (!item) return
+            this.amount = item.amount
+            this.caloriesPer100 = item.caloriesPer100
+            this.calTotal()
         }
 
     },
