@@ -18,10 +18,10 @@
             </v-card>
         </v-dialog>
 
-        <notifications position="bottom center" width="100%" :speed="500">
+        <notifications position="bottom center" width="100%" :speed="5000">
             <template slot="body" slot-scope="props">
                 <v-layout row wrap :class="$vuetify.breakpoint.mdAndUp ? 'justify-end pr-5 pb-2':'justify-center'">
-                    <v-flex xs11 sm8 md6 lg4>
+                    <v-flex xs11 md6 lg5>
                         <v-alert :type="props.item.type" class="mb-1">
 
                             <v-layout wrap align-center>
