@@ -5,11 +5,13 @@ const CancelToken = Axios.CancelToken
 const source = CancelToken.source()
 const pendingCalls = {}
 
-const apios = Axios.create({
+const apiosConfig = {
     baseURL: process.env.VUE_APP_API_URL + '/' + process.env.VUE_APP_API_VERSION + '/',
     withCredentials: true,
     cancelToken: source.token
-})
+}
+
+const apios = Axios.create(apiosConfig)
 
 apios.interceptors.request.use(config => {
     if (pendingCalls[config.baseURL + config.url] === true) return {

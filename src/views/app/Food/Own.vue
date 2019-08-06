@@ -39,7 +39,7 @@
                 {{ $t('noneyet') }}
             </v-flex>
 
-            <v-flex xs12 v-if="!items">
+            <v-flex xs12 v-if="!items && query">
                 {{ $t('nonefound') }}
             </v-flex>
 

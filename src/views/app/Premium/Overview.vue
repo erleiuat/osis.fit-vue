@@ -45,8 +45,6 @@
 </template>
 
 <script>
-import Axios from 'axios'
-
 export default {
     name: 'Overview',
 
@@ -57,39 +55,36 @@ export default {
                 [this.$t('features.f2'), true, false],
                 [this.$t('features.f3'), true, false],
                 [this.$t('features.f4'), true, false],
-                [this.$t('features.f5'), true, false],
+                [this.$t('features.f5'), true, false]
             ]
         }
     },
 
     mounted () {
-
-        let script = document.createElement("script")
+        /*
+        let script = document.createElement('script')
 
         script.onload = () => {
             this.cBee = Chargebee.init({
-                site: "osis-fit-test"
-            });
+                site: 'osis-fit-test'
+            })
         }
 
         script.async = true
-        script.id = "chargebee";
-        script.src = "https://js.chargebee.com/v2/chargebee.js";
+        script.id = 'chargebee'
+        script.src = 'https://js.chargebee.com/v2/chargebee.js'
 
         document.getElementsByTagName('head')[0].appendChild(script)
-
-
-
+        */
     },
 
     methods: {
 
         openCheckout () {
-
             window.open('https://osis-fit-test.chargebee.com/hosted_pages/plans/premium', '_blank')
-            return
 
-            var chargebeeInstance = Chargebee.getInstance();
+            /*
+            var chargebeeInstance = Chargebee.getInstance()
 
             chargebeeInstance.openCheckout({
                 // This function returns a promise that resolves a hosted page object.
@@ -97,17 +92,17 @@ export default {
 
                 hostedPage: function () {
                     // We will discuss on how to implement this end point in the next step.
-                    return Axios.post("/generate_hp_url", {
+                    return Axios.post('/generate_hp_url', {
                         customer_id: this.customer_id,
                         plan_id: this.plan_id
-                    }).then((response) => response.data);
+                    }).then((response) => response.data)
                 },
 
                 success: function (hostedPageId) {
                     // success callback
                 }
-            });
-
+            })
+            */
         }
 
     },
@@ -117,7 +112,7 @@ export default {
             en: {
                 getPremium: 'Get Premium',
                 features: {
-                    f1: 'Esswaren mit Bildern erstellen',
+                    f1: 'Esswaren mit Bildern erstellen'
                 }
             },
             de: {

@@ -133,7 +133,7 @@ const actions = {
 
     forgot (context) {
         return new Promise((resolve, reject) => {
-            Apios.post('auth/password/forgotten/', form).then(() => {
+            Apios.post('auth/password/forgotten/').then(() => {
                 resolve()
             }).catch(err => {
                 reject(err)

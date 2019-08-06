@@ -104,7 +104,6 @@ export default {
     methods: {
 
         remove () {
-
             this.sure = false
             if (!this.fd.id) return
 
@@ -114,7 +113,6 @@ export default {
             }).catch(r => {
                 this.$notify({ type: 'error', title: this.$t('alert.error.save') })
             })
-
         },
 
         save () {

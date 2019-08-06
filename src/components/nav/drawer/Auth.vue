@@ -42,7 +42,6 @@ export default {
     computed: {
 
         items () {
-
             var premium = this.$store.getters['auth/premium']
 
             var items1 = {
@@ -52,7 +51,7 @@ export default {
                 activity: { to: 'activity', icon: 'accessibility_new' }
             }
 
-            if (premium) var item2 = {
+            var item2 = {
                 to: 'food',
                 icon: 'dashboard',
                 items: {
@@ -61,7 +60,7 @@ export default {
                     browse: { to: 'food.browse', icon: 'search' }
                 }
             }
-            else var item2 = {
+            if (!premium) item2 = {
                 to: 'food',
                 icon: 'dashboard',
                 items: {

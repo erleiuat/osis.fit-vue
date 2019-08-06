@@ -24,7 +24,7 @@ export default {
     },
     computed: {
         path () {
-            if(!this.item.image) return false
+            if (!this.item.image) return false
 
             var img = this.item.image.path.small
             var lazy = this.item.image.path.lazy

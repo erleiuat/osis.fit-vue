@@ -94,7 +94,7 @@ export default {
     },
 
     mounted () {
-        if(this.$route.query.mail) this.fd.mail = this.$route.query.mail
+        if (this.$route.query.mail) this.fd.mail = this.$route.query.mail
     },
 
     i18n: {

@@ -3,7 +3,7 @@
         <v-layout row wrap align-center>
 
             <v-flex xs12 sm8 v-if="!value">
-                <v-file-input v-model="file" :label="$t('select')" prepend-icon="camera_alt" accept="image/jpg, image/png, image/jpeg" />
+                <v-file-input v-model="file" :label="$t('select')" :disabled="uploading" prepend-icon="camera_alt" accept="image/jpg, image/png, image/jpeg" />
             </v-flex>
 
             <v-flex xs12 sm4 v-if="!value" text-center>
@@ -12,8 +12,10 @@
                 </v-btn>
             </v-flex>
 
-            <v-flex xs12 v-if="uploading">
-                <v-progress-linear indeterminate rounded />
+            <v-flex xs12>
+                <v-progress-linear :active="uploading" :value="progress" rounded height="25">
+                    <strong>{{ progress }}%</strong>
+                </v-progress-linear>
             </v-flex>
 
             <transition name="fade">
@@ -45,32 +47,34 @@ export default {
 
     data () {
         return {
-            file: null,
-            uploading: false
+            file: null
         }
     },
 
     computed: {
         choosen () {
             return (!!this.file)
+        },
+        progress () {
+            return this.$store.getters['image/progress']
+        },
+        uploading () {
+            if (this.progress > 0 && this.progress < 100) return true
+            return false
         }
     },
 
     methods: {
 
         upload () {
-
             var fData = new FormData()
             fData.append('image', this.file, this.file.name)
 
-            this.uploading = true
             this.$store.dispatch('image/add', fData).then(res => {
                 this.file = null
                 this.$emit('input', res)
             }).catch(r => {
                 this.$notify({ type: 'error', title: this.$t('alert.error.save') })
-            }).finally(() => {
-                this.uploading = false
             })
         },
 

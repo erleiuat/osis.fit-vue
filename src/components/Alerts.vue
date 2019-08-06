@@ -59,7 +59,7 @@ export default {
         showDetail (content) {
             this.title = content.title
             this.text = content.text
-            this.show = true    	
+            this.show = true
         }
 
     }

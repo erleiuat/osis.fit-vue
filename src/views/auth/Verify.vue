@@ -45,7 +45,6 @@ export default {
     methods: {
 
         verify (force = false) {
-
             if (!this.$refs.form.validate() && !force) return false
 
             this.sending = true
@@ -53,15 +52,15 @@ export default {
                 this.$router.push({ name: 'auth.login', query: { mail: this.fd.mail, verified: true } })
             }).catch(r => {
                 switch (r) {
-                    case 'code_wrong':
-                        this.$notify({ type: 'error', title: this.$t('fail.code') })
-                        break
-                    case 'account_already_verified':
-                        this.$notify({ type: 'error', title: this.$t('fail.already') })
-                        break
-                    default:
-                        this.$notify({ type: 'error', title: this.$t('alert.error.default') })
-                        break
+                case 'code_wrong':
+                    this.$notify({ type: 'error', title: this.$t('fail.code') })
+                    break
+                case 'account_already_verified':
+                    this.$notify({ type: 'error', title: this.$t('fail.already') })
+                    break
+                default:
+                    this.$notify({ type: 'error', title: this.$t('alert.error.default') })
+                    break
                 }
             }).finally(() => {
                 this.sending = false
@@ -78,7 +77,6 @@ export default {
                 this.verify(true)
             }
         }
-
     },
 
     i18n: {

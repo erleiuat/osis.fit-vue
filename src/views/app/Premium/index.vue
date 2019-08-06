@@ -5,7 +5,6 @@
     </transition>
 </template>
 
-
 <script>
 export default {
     name: 'Premium'
