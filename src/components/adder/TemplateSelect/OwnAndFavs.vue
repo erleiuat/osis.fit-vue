@@ -1,80 +1,13 @@
 <template>
-    <v-container :class="$vuetify.breakpoint.xs ? 'pl-0 pr-0 grid-list-md': 'grid-list-md'">
+    <v-container>
 
-        <v-layout row wrap v-if="getTemplateItems.length > 0">
-            <v-flex xs12 v-for="(item, index) in getTemplateItems" :key="index">
-                <v-card class="fill-height" @click="$emit('select-item', item)">
-                    <v-img v-if="item.imgUrl" :lazy-src="item.imgLazy" :src="item.imgUrl" height="150px" />
-                    <v-card-text>
-                        <v-layout row wrap class="text-truncate justify-space-between fill-height">
-                            <v-flex xs12>
-                                <div class="title">{{item.title}}</div>
-                            </v-flex>
-                            <v-flex shrink>
-                                <div class="caption">{{ $t('amount') }}</div>
-                                {{item.amount}}
-                            </v-flex>
-                            <v-flex shrink>
-                                <div class="caption">{{ $t('calories') }}</div>
-                                {{item.caloriesPer100}}
-                            </v-flex>
-                            <v-flex shrink>
-                                <div class="caption">{{ $t('total') }}</div>
-                                {{ Math.round(item.amount/100*item.caloriesPer100) }}
-                            </v-flex>
-                        </v-layout>
-                    </v-card-text>
-                </v-card>
-            </v-flex>
-        </v-layout>
-
-        <v-layout row wrap v-else-if="!loaded1">
-            <v-flex xs12 sm12>
-                <v-progress-linear indeterminate height="10" />
-            </v-flex>
-        </v-layout>
-
-        <v-layout row wrap v-else>
-            <v-flex xs12>
-                - {{ $t('noneyet') }}
-            </v-flex>
-        </v-layout>
-
-        <v-layout row wrap v-if="getFavItems.length > 0">
-            <v-flex xs12 v-for="(item, index) in getFavItems" :key="index">
-                <v-card class="fill-height" @click="$emit('select-item', item)">
-                    <v-card-text>
-                        <v-layout row wrap class="text-truncate justify-space-between fill-height">
-                            <v-flex xs12>
-                                <div class="title">{{item.title}}</div>
-                            </v-flex>
-                            <v-flex shrink>
-                                <div class="caption">{{ $t('amount') }}</div>
-                                {{item.amount}}
-                            </v-flex>
-                            <v-flex shrink>
-                                <div class="caption">{{ $t('calories') }}</div>
-                                {{item.caloriesPer100}}
-                            </v-flex>
-                            <v-flex shrink>
-                                <div class="caption">{{ $t('total') }}</div>
-                                {{ Math.round(item.amount/100*item.caloriesPer100) }}
-                            </v-flex>
-                        </v-layout>
-                    </v-card-text>
-                </v-card>
-            </v-flex>
-        </v-layout>
-
-        <v-layout row wrap v-else-if="!loaded2">
-            <v-flex xs12 sm12>
-                <v-progress-linear indeterminate height="10" />
-            </v-flex>
-        </v-layout>
-
-        <v-layout row wrap v-else>
-            <v-flex xs12>
-                - {{ $t('noneyet2') }}
+        <v-layout wrap justify-center align-start pl-0 pr-0>
+            <v-flex xs6 v-for="(arr, key) in items" :key="key">
+                <v-layout column fill-height>
+                    <v-flex xs12 v-for="(item, key) in arr" :key="key" class="pa-1">
+                        <FoodCard :item="item" @select="$emit('select', item)" />
+                    </v-flex>
+                </v-layout>
             </v-flex>
         </v-layout>
 
@@ -82,65 +15,52 @@
 </template>
 
 <script>
+const FoodCard = () => import('@/components/food/Card')
+
 export default {
     name: 'OwnAndFavs',
 
+    components: {
+        FoodCard
+    },
+
     data () {
         return {
-            loaded1: false,
-            loaded2: false,
-            favItems: [],
-            templateItems: []
+            query: ''
         }
     },
 
     computed: {
 
-        getTemplateItems () {
-            return this.templateItems
-        },
+        items () {
+            var items = this.$store.getters['food/all']
+            var filtered = items.filter(el => el.title.includes(this.query))
 
-        getFavItems () {
-            return this.favItems
+            console.log(filtered)
+            if (filtered.length <= 0) return false
+
+            var i = 1; var col1 = []; var col2 = [];
+
+            filtered.forEach(item => {
+                if (i === 1) {
+                    col1.push(item)
+                    i++
+                } else if (i === 2) {
+                    col2.push(item)
+                    i = 1
+                }
+            })
+            return {
+                a: col1,
+                b: col2
+            }
+
         }
 
     },
 
     mounted () {
-        this.getTemplates()
-        this.getFavs()
-    },
-
-    methods: {
-
-        getTemplates () {
-            var vm = this
-            vm.loaded1 = false
-
-            vm.$http.post('user/food/read/').then(function (r) {
-                vm.$store.state.data.food = r.data.food || []
-                vm.templateItems = vm.$store.state.data.food
-            }).catch(function (e) {
-                vm.$notify({ type: 'error', title: vm.$t('alert.error.load') })
-            }).finally(function () {
-                vm.loaded1 = true
-            })
-        },
-
-        getFavs () {
-            var vm = this
-            vm.loaded2 = false
-
-            vm.$http.post('user/food/favorite/read/').then(function (r) {
-                vm.$store.state.data.foodFavorite = r.data.foodFavorite || []
-                vm.favItems = vm.$store.state.data.foodFavorite
-            }).catch(function (e) {
-                vm.$notify({ type: 'error', title: vm.$t('alert.error.load') })
-            }).finally(function () {
-                vm.loaded2 = true
-            })
-        }
-
+        this.$store.dispatch('food/load')
     },
 
     i18n: {

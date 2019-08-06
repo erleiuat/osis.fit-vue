@@ -23,7 +23,7 @@
                     <v-layout wrap>
 
                         <v-flex xs12>
-                            <v-text-field v-model="fd.title" :label="$t('ft.title')" type="text" outlined append-icon="open_in_new" />
+                            <v-text-field v-model="fd.title" :label="$t('ft.title')" @click:append="openSelect()" type="text" outlined append-icon="open_in_new" />
                         </v-flex>
 
                         <v-flex xs6>
@@ -62,21 +62,23 @@
                 </v-form>
             </v-container>
         </v-card>
+        <TemplateSelect :show="selector" @select="use(item)" />
     </v-dialog>
 </template>
 
 <script>
-// const TemplateSelect = () => import('@/components/adder/TemplateSelect/')
+const TemplateSelect = () => import('@/components/adder/TemplateSelect/')
 
 export default {
     name: 'CalorieAdder',
 
     components: {
-        // TemplateSelect TODO
+        TemplateSelect
     },
 
     data () {
         return {
+            selector: false,
             show: false,
             dMenu: false,
             tMenu: false,
@@ -132,6 +134,15 @@ export default {
             }).finally(() => {
                 this.sending = false
             })
+        },
+
+        openSelect(){
+            console.log('yaa')
+            this.selector = true
+        },
+
+        use(item){
+            console.log(item)
         }
 
     },

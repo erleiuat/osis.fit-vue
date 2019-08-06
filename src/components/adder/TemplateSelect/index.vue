@@ -1,15 +1,8 @@
 <template>
-    <v-dialog scrollable v-model="show" v-show="show" :fullscreen="$vuetify.breakpoint.xs" width="500" transition="dialog-bottom-transition">
+    <v-dialog scrollable v-model="show" :fullscreen="$vuetify.breakpoint.xs" width="500" transition="dialog-bottom-transition">
 
-        <template v-slot:activator="{ on }">
-            <slot v-bind:on="on">
-                <v-btn v-on="on" fab icon small color="primary" depressed>
-                    <v-icon>open_in_new</v-icon>
-                </v-btn>
-            </slot>
-        </template>
-
-        <v-card v-if="show">
+        <v-card>
+            
             <v-toolbar color="primary" class="white--text" v-show="$vuetify.breakpoint.xs">
                 <v-toolbar-title>{{ $t('title') }}</v-toolbar-title>
                 <v-spacer></v-spacer>
@@ -35,12 +28,12 @@
 
             <v-card-text class="pa-0" style="height: 600px;">
                 <v-tabs-items v-model="active">
-                    <v-tab-item lazy value="ownAndFavs">
-                        <OwnAndFavs @select-item="select" />
+                    <v-tab-item value="ownAndFavs">
+                        <OwnAndFavs @select="select" />
                     </v-tab-item>
 
-                    <v-tab-item lazy value="browse">
-                        <Browse @select-item="select" />
+                    <v-tab-item value="browse">
+                        <Browse @select="select" />
                     </v-tab-item>
                 </v-tabs-items>
             </v-card-text>
@@ -48,7 +41,7 @@
             <v-divider v-show="!$vuetify.breakpoint.xs" />
 
             <v-card-actions v-show="!$vuetify.breakpoint.xs">
-                <v-btn @click="show = false" flat>{{ $t('btn.close') }}</v-btn>
+                <v-btn text @click="show = false">{{ $t('btn.close') }}</v-btn>
             </v-card-actions>
 
         </v-card>
@@ -66,25 +59,20 @@ export default {
         OwnAndFavs, Browse
     },
 
-    data () {
-        return {
-            show: false,
-            active: 'ownAndFavs'
-        }
+    props: {
+        show: Boolean
     },
 
-    props: {
-        value: Object
+    data () {
+        return {
+            active: 'ownAndFavs'
+        }
     },
 
     methods: {
 
         select (e) {
-            this.value.title = e.title
-            this.value.amount = e.amount
-            this.value.caloriesPer100 = e.caloriesPer100
-            this.value.calories = e.caloriesPer100 * (e.amount / 100)
-            this.show = false
+            this.$emit('select', e)
         }
 
     },
