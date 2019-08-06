@@ -82,8 +82,8 @@ export default {
             this.$store.dispatch('auth/register', this.fd).then(r => {
                 this.$router.push({ name: 'auth.verify', query: { mail: this.fd.mail } })
             }).catch(r => {
-                if (r === 'mail_in_use') this.$notify({ type: 'error', text: this.$t('mailInUse') })
-                else this.$notify({ type: 'error', text: this.$t('alert.error.default') })
+                if (r === 'mail_in_use') this.$notify({ type: 'error', title: this.$t('mailInUse') })
+                else this.$notify({ type: 'error', title: this.$t('alert.error.default') })
             }).finally(() => {
                 this.sending = false
             })

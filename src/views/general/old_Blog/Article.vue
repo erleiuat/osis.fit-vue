@@ -40,7 +40,7 @@ export default {
             vm.$http.post('general/blog/read/content/', { url: vm.$route.params.url }).then(function (r) {
                 vm.p = r.data.article
             }).catch(function () {
-                vm.$notify({ type: 'error', text: vm.$t('alert.error.load') })
+                vm.$notify({ type: 'error', title: vm.$t('alert.error.load') })
                 vm.$router.push({ name: 'error.found' })
             }).finally(function () {
                 vm.loading = false

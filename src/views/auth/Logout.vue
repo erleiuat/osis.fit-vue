@@ -1,9 +1,29 @@
 <template>
-    <v-layout row wrap justify-space-around align-content-center>
-        <v-flex xs12>
+    <v-layout row wrap justify-space-around>
+
+        <v-flex xs12 v-if="!doing" text-center>
+            <div class="headline pb-5">{{ $t('text') }}</div>
+        </v-flex>
+
+        <v-flex xs12 sm6 v-if="!doing" text-center>
+            <v-btn @click="logout()" block color="primary" depressed>
+                {{ $t('sure') }}
+            </v-btn>
+        </v-flex>
+
+        <v-flex xs12 sm6 v-if="!doing" text-center>
+            <v-btn @click="$router.go(-1)" block depressed>
+                {{ $t('btn.cancel') }}
+            </v-btn>
+        </v-flex>
+
+        <v-flex xs12 v-else text-center>
             <div class="headline pb-3">{{ $t('nextTime') }}</div>
             <div class="body-1 pb-5">{{ $t('pleaseWait') }}</div>
-            <v-progress-linear indeterminate :color="prgcol" height="20" />
+        </v-flex>
+
+        <v-flex xs12>
+            <v-progress-linear :indeterminate="doing" :color="prgcol" height="20" />
         </v-flex>
     </v-layout>
 </template>
@@ -16,29 +36,26 @@ export default {
 
     data () {
         return {
+            doing: false,
             prgcol: 'primary'
         }
-    },
-
-    mounted () {
-        var vm = this
-        setTimeout(function () {
-            vm.prgcol = 'info'
-            vm.logout()
-        }, 1000)
     },
 
     methods: {
 
         logout () {
-            this.$store.dispatch('auth/logout').then(r => {
-                this.prgcol = 'success'
-            }).catch(r => {
-                this.prgcol = 'error'
-                this.$notify({ type: 'error', text: this.$t('alert.error.default') })
-            }).finally(() => {
-                this.$router.push({ name: 'auth' })
-            })
+            var vm = this
+            vm.doing = true
+            setTimeout(function () {
+                vm.$store.dispatch('auth/logout').then(r => {
+                    vm.prgcol = 'success'
+                }).catch(r => {
+                    vm.prgcol = 'error'
+                    vm.$notify({ type: 'error', title: vm.$t('alert.error.default') })
+                }).finally(() => {
+                    vm.$router.push({ name: 'auth' })
+                })
+            }, 1000)
         }
 
     },
@@ -46,10 +63,14 @@ export default {
     i18n: {
         messages: {
             en: {
+                text: 'Are you sure?',
+                sure: 'Logout now',
                 pleaseWait: "You're about to be logged off...",
                 nextTime: 'Till next time!'
             },
             de: {
+                text: 'Bist du dir sicher?',
+                sure: 'Jetzt abmelden',
                 pleaseWait: 'Du wirst gleich abgemeldet...',
                 nextTime: 'Bis zum nächsten mal!'
             }

@@ -95,7 +95,7 @@ export default {
             this.sending = true
             this.$store.dispatch('auth/forgot', this.fd).then(r => {
                 this.$router.push({ name: 'auth.login' })
-                this.$notify({ type: 'error', text: this.$t('hasChanged') })
+                this.$notify({ type: 'error', title: this.$t('hasChanged') })
             }).catch(r => { }).finally(() => {
                 this.sending = false
             })

@@ -121,7 +121,7 @@ export default {
                 vm.$store.state.data.food = r.data.food || []
                 vm.templateItems = vm.$store.state.data.food
             }).catch(function (e) {
-                vm.$notify({ type: 'error', text: vm.$t('alert.error.load') })
+                vm.$notify({ type: 'error', title: vm.$t('alert.error.load') })
             }).finally(function () {
                 vm.loaded1 = true
             })
@@ -135,7 +135,7 @@ export default {
                 vm.$store.state.data.foodFavorite = r.data.foodFavorite || []
                 vm.favItems = vm.$store.state.data.foodFavorite
             }).catch(function (e) {
-                vm.$notify({ type: 'error', text: vm.$t('alert.error.load') })
+                vm.$notify({ type: 'error', title: vm.$t('alert.error.load') })
             }).finally(function () {
                 vm.loaded2 = true
             })

@@ -20,7 +20,7 @@ export default {
         check () {
             this.$store.dispatch('auth/check').then(r => {
                 if (this.$route.name === 'auth.logout') return
-                this.$router.push(this.$route.query.target || { name: 'dashboard' })
+                this.$router.push({ name: this.$route.query.target || 'dashboard' })
             }).catch(r => {
                 if (this.$route.name === 'auth.verify') return
                 if (this.$route.name === 'auth.register') return

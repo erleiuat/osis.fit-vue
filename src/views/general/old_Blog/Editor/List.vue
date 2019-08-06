@@ -50,7 +50,7 @@ export default {
             vm.$http.post('general/blog/delete/', { url: url }).then(function (r) {
                 vm.posts.splice(index, 1)
             }).catch(function () {
-                vm.$notify({ type: 'error', text: vm.$t('alert.error.load') })
+                vm.$notify({ type: 'error', title: vm.$t('alert.error.load') })
             }).finally(function () {
                 vm.loading = false
             })
@@ -62,7 +62,7 @@ export default {
         vm.$http.get('general/blog/read/edit/').then(function (r) {
             vm.posts = r.data.article
         }).catch(function () {
-            vm.$notify({ type: 'error', text: vm.$t('alert.error.load') })
+            vm.$notify({ type: 'error', title: vm.$t('alert.error.load') })
         }).finally(function () {
             vm.loading = false
         })

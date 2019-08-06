@@ -72,7 +72,7 @@ export default {
                 vm.$store.state.data.foodFavorite = r.data.foodFavorite || []
                 vm.items = vm.$store.state.data.foodFavorite
             }).catch(function (e) {
-                vm.$notify({ type: 'error', text: vm.$t('alert.error.load') })
+                vm.$notify({ type: 'error', title: vm.$t('alert.error.load') })
             }).finally(function () {
                 vm.$store.commit('loading', false)
             })
@@ -88,7 +88,7 @@ export default {
             vm.$http.post('user/food/favorite/toggle/', item).then(function (r) {
                 if (index > -1) if (index > -1) vm.$store.state.data.foodFavorite.splice(index, 1)
             }).catch(function () {
-                vm.$notify({ type: 'error', text: vm.$t('alert.error.load') })
+                vm.$notify({ type: 'error', title: vm.$t('alert.error.load') })
             })
         }
 

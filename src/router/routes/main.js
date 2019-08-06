@@ -75,6 +75,6 @@ module.exports = [
     },
     {
         path: '*',
-        redirect: { name: 'error.found' }
+        component: () => import('@/views/error/NotFound')
     }
 ]

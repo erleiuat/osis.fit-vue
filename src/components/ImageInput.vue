@@ -19,7 +19,7 @@
             <transition name="fade">
                 <v-flex xs12 v-if="value">
                     <v-card light outlined tile>
-                        <v-img :src="value.path.large" :lazy-src="lazySrc">
+                        <v-img :src="value.path.large" :lazy-src="require('@/assets/img/loading.png')">
                             <template v-slot:placeholder>
                                 <v-layout fill-height align-center justify-center ma-0>
                                     <v-progress-circular indeterminate></v-progress-circular>
@@ -46,8 +46,7 @@ export default {
     data () {
         return {
             file: null,
-            uploading: false,
-            lazySrc: require('@/assets/img/loading.png')
+            uploading: false
         }
     },
 
@@ -69,7 +68,7 @@ export default {
                 this.file = null
                 this.$emit('input', res)
             }).catch(r => {
-                this.$notify({ type: 'error', text: this.$t('alert.error.save') })
+                this.$notify({ type: 'error', title: this.$t('alert.error.save') })
             }).finally(() => {
                 this.uploading = false
             })

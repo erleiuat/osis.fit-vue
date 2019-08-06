@@ -148,10 +148,10 @@ export default {
             vm.$http.post(url, vm.fd).then(function (r) {
                 if (!vm.edit) vm.$store.state.data.food.push(r.data.object)
                 else vm.fdOrg = Object.assign({}, vm.fd)
-                vm.$notify({ type: 'success', text: vm.$t('alert.success.save') })
+                vm.$notify({ type: 'success', title: vm.$t('alert.success.save') })
                 vm.show = false
             }).catch(function () {
-                vm.$notify({ type: 'error', text: vm.$t('alert.error.save') })
+                vm.$notify({ type: 'error', title: vm.$t('alert.error.save') })
             }).finally(function () {
                 vm.sending = false
             })
@@ -178,7 +178,7 @@ export default {
                 vm.fd.imgLazy = r.data.content.lazy.url
                 vm.fd.imgPhrase = r.data.content.phrase
             }).catch(function () {
-                vm.$notify({ type: 'error', text: vm.$t('uploadError') })
+                vm.$notify({ type: 'error', title: vm.$t('uploadError') })
             }).finally(function () {
                 vm.uploading = false
             })

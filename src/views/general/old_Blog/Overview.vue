@@ -46,7 +46,7 @@ export default {
         vm.$http.get('general/blog/read/preview/').then(function (r) {
             vm.posts = r.data.preview
         }).catch(function () {
-            vm.$notify({ type: 'error', text: vm.$t('alert.error.load') })
+            vm.$notify({ type: 'error', title: vm.$t('alert.error.load') })
         }).finally(function () {
             vm.loading = false
         })

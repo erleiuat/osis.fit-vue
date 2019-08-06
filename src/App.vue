@@ -46,15 +46,15 @@ export default {
         this.$vuetify.theme.dark = VueCookies.get('themeDark')
         this.$store.state.app.drawer = this.$vuetify.breakpoint.lgAndUp
 
-        if (this.$route.name === 'start') this.$store.dispatch('auth/check').then(r => {
-            this.$router.push({ name: 'dashboard' })
-        }).catch(r => {
-            this.$router.push({ name: 'welcome' })
+        this.$store.dispatch('auth/check').then(() => {
+            if (this.$route.name === 'start') this.$router.push({ name: 'dashboard' })
+        }).catch(() => {
+            if (this.$route.name === 'start') this.$router.push({ name: 'welcome' })
         })
 
         this.$router.beforeResolve((to, from, next) => {
-            if (!to.meta.authRequired) next()
-            else if (this.$store.getters['auth/status']) next()
+            if (this.$store.getters['auth/status']) next()
+            else if (!to.meta.authRequired) next()
             else this.$router.push({ name: 'auth', query: { target: to.name } })
         })
     },

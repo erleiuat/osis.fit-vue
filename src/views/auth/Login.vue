@@ -74,16 +74,16 @@ export default {
             }).catch(r => {
                 switch (r) {
                 case 'password_wrong':
-                    this.$notify({ type: 'error', text: this.$t('fail.pass') })
+                    this.$notify({ type: 'error', title: this.$t('fail.pass'), text: r })
                     break
                 case 'account_not_found':
-                    this.$notify({ type: 'error', text: this.$t('fail.unknown') })
+                    this.$notify({ type: 'error', title: this.$t('fail.unknown'), text: r })
                     break
                 case 'account_not_verified':
-                    this.$notify({ type: 'error', text: this.$t('fail.verify') })
+                    this.$notify({ type: 'error', title: this.$t('fail.verify'), text: r })
                     break
                 default:
-                    this.$notify({ type: 'error', text: this.$t('alert.error.default') })
+                    this.$notify({ type: 'error', title: this.$t('alert.error.default'), text: r })
                     break
                 }
             }).finally(() => {
@@ -94,7 +94,7 @@ export default {
     },
 
     mounted () {
-        this.fd.mail = this.$route.query.mail || ''
+        if(this.$route.query.mail) this.fd.mail = this.$route.query.mail
     },
 
     i18n: {

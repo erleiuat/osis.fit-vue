@@ -88,7 +88,7 @@ export default {
                 vm.success = true
                 vm.$refs.form.reset()
             }).catch(function (e) {
-                vm.$notify({ type: 'error', text: vm.$t('alert.error.default') })
+                vm.$notify({ type: 'error', title: vm.$t('alert.error.default') })
             }).finally(function () {
                 vm.sending = false
             })

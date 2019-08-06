@@ -108,7 +108,7 @@ export default {
             vm.$http.post('user/food/favorite/read/').then(function (r) {
                 vm.$store.state.data.foodFavorite = r.data.foodFavorite || []
             }).catch(function (e) {
-                vm.$notify({ type: 'error', text: vm.$t('alert.error.load') })
+                vm.$notify({ type: 'error', title: vm.$t('alert.error.load') })
             }).finally(function () {
 
             })
@@ -130,7 +130,7 @@ export default {
                     if (index > -1) vm.$store.state.data.foodFavorite.splice(index, 1)
                 }
             }).catch(function () {
-                vm.$notify({ type: 'error', text: vm.$t('alert.error.load') })
+                vm.$notify({ type: 'error', title: vm.$t('alert.error.load') })
             })
         },
 
@@ -156,7 +156,7 @@ export default {
                     if (r.data.length > 0) vm.results = r.data
                     else vm.results = []
                 }).catch(function () {
-                    vm.$notify({ type: 'error', text: vm.$t('alert.error.load') })
+                    vm.$notify({ type: 'error', title: vm.$t('alert.error.load') })
                 }).finally(function () {
                     vm.searched = true
                     vm.loading = false

@@ -104,7 +104,7 @@ export default {
                     if (r.data.length > 0) vm.results = r.data
                     else vm.results = []
                 }).catch(function () {
-                    vm.$notify({ type: 'error', text: vm.$t('alert.error.load') })
+                    vm.$notify({ type: 'error', title: vm.$t('alert.error.load') })
                 }).finally(function () {
                     vm.searched = true
                     vm.loading = false

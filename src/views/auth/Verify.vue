@@ -54,13 +54,13 @@ export default {
             }).catch(r => {
                 switch (r) {
                     case 'code_wrong':
-                        this.$notify({ type: 'error', text: this.$t('fail.code') })
+                        this.$notify({ type: 'error', title: this.$t('fail.code') })
                         break
                     case 'account_already_verified':
-                        this.$notify({ type: 'error', text: this.$t('fail.already') })
+                        this.$notify({ type: 'error', title: this.$t('fail.already') })
                         break
                     default:
-                        this.$notify({ type: 'error', text: this.$t('alert.error.default') })
+                        this.$notify({ type: 'error', title: this.$t('alert.error.default') })
                         break
                 }
             }).finally(() => {

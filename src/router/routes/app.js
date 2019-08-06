@@ -25,6 +25,7 @@ module.exports = [
     },
     {
         path: '/food',
+        name: 'food.index',
         component: () => import('@/views/app/Food/'), // TODO REDIRECT TO CHILD
         meta: { authRequired: true },
         children: [

@@ -113,10 +113,10 @@ export default {
             }
 
             this.$store.dispatch(action, form).then(r => {
-                this.$notify({ type: 'success', text: this.$t('alert.success.save') })
+                this.$notify({ type: 'success', title: this.$t('alert.success.save') })
                 this.$emit('input', false)
             }).catch(r => {
-                this.$notify({ type: 'error', text: this.$t('alert.error.save') })
+                this.$notify({ type: 'error', title: this.$t('alert.error.save') })
             }).finally(() => {
                 this.sending = false
             })

@@ -120,10 +120,10 @@ export default {
 
             vm.sending = true
             vm.$http.post(path, vm.fd).then(function (r) {
-                vm.$notify({ type: 'success', text: vm.$t('alert.success.save') })
+                vm.$notify({ type: 'success', title: vm.$t('alert.success.save') })
                 vm.$router.push({ name: 'blog.editor.edit', params: { url: vm.fd.url } })
             }).catch(function () {
-                vm.$notify({ type: 'error', text: vm.$t('alert.error.save') })
+                vm.$notify({ type: 'error', title: vm.$t('alert.error.save') })
             }).finally(function () {
                 vm.sending = false
             })
@@ -155,7 +155,7 @@ export default {
             vm.$http.post('general/blog/read/edit/', { url: vm.$route.params.url }).then(function (r) {
                 vm.fd = r.data.article
             }).catch(function () {
-                vm.$notify({ type: 'error', text: vm.$t('alert.error.load') })
+                vm.$notify({ type: 'error', title: vm.$t('alert.error.load') })
             }).finally(function () {
                 vm.loading = false
             })
