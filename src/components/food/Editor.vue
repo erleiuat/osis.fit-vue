@@ -1,38 +1,40 @@
 <template>
     <v-dialog v-model="value" :fullscreen="$vuetify.breakpoint.xs" width="600px" persistent scrollable transition="dialog-bottom-transition">
         <v-card>
-
             <YouSure @accept="remove()" @decline="sure = false" :show="sure" />
 
-            <v-toolbar color="primary" fixed flat dark>
-                <v-toolbar-title v-if="fd.id">{{ $t('titleEdit') }}</v-toolbar-title>
-                <v-toolbar-title v-else>{{ $t('titleAdd') }}</v-toolbar-title>
-                <v-spacer></v-spacer>
-                <v-btn icon @click="$emit('input', false)">
-                    <v-icon>close</v-icon>
-                </v-btn>
-            </v-toolbar>
+            <v-card-title class="pl-0 pt-0 pr-0">
+                <v-toolbar color="primary" flat dark>
+                    <v-toolbar-title v-if="fd.id">{{ $t('titleEdit') }}</v-toolbar-title>
+                    <v-toolbar-title v-else>{{ $t('titleAdd') }}</v-toolbar-title>
+                    <v-spacer></v-spacer>
+                    <v-btn icon @click="$emit('input', false)">
+                        <v-icon>close</v-icon>
+                    </v-btn>
+                </v-toolbar>
+            </v-card-title>
 
             <v-card-text>
-                <v-container grid-list-xs fill-height>
+                <v-container grid-list-xs pl-0 pr-0>
+
                     <v-form v-model="rule.valid" ref="form" v-on:submit.prevent>
                         <v-layout wrap>
 
                             <v-input v-model="fd.id" type="hidden" v-show="false" />
                             <v-input v-model="fd.image" type="hidden" v-show="false" />
 
-                            <v-flex xs12>
+                            <v-flex xs12 pb-0>
                                 <v-text-field v-model="fd.title" :label="$t('ft.title')" :rules="rule.title" type="text" outlined />
                             </v-flex>
 
-                            <v-flex xs12 sm6>
+                            <v-flex xs12 sm6 pt-0 pb-0>
                                 <v-text-field v-model="fd.caloriesPer100" :label="$t('caloriesPer100')" :rules="rule.require" type="number" outlined />
                             </v-flex>
-                            <v-flex xs12 sm6>
+                            <v-flex xs12 sm6 pt-0 pb-0>
                                 <v-text-field v-model="fd.amount" :label="$t('ft.amount')" :rules="rule.require" type="number" outlined />
                             </v-flex>
 
-                            <v-flex xs12 text-center>
+                            <v-flex xs12 pa-0 text-center>
                                 {{ $t('calories') }}: {{ total }}
                             </v-flex>
 
@@ -51,6 +53,7 @@
                         </v-layout>
                     </v-form>
                 </v-container>
+
             </v-card-text>
 
         </v-card>

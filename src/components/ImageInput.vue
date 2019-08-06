@@ -1,42 +1,51 @@
 <template>
     <v-container grid-list-sm pl-0 pr-0>
-        <v-layout row wrap align-center>
+        <transition name="zoom" mode="out-in">
 
-            <v-flex xs12 sm8 v-if="!value && !uploading">
-                <v-file-input v-model="file" :label="$t('select')" :disabled="uploading" prepend-icon="camera_alt" accept="image/jpg, image/png, image/jpeg" />
-            </v-flex>
+            <v-layout row wrap align-center v-if="!value" style="height: 80px;" key="1">
 
-            <v-flex xs12 sm8 v-show="uploading">
-                <v-progress-linear :active="uploading" :value="progress" rounded :indeterminate="progress >= 100" :dark="progress < 50" height="30">
-                    <strong v-if="progress < 100">{{ progress }}%</strong>
-                    <strong v-else>{{ $t('processing') }}</strong>
-                </v-progress-linear>
-            </v-flex>
+                <v-flex xs12 sm8 v-if="!value && !uploading">
+                    <v-file-input v-model="file" :label="$t('select')" :disabled="uploading" prepend-icon="camera_alt" accept="image/jpg, image/png, image/jpeg" />
+                </v-flex>
 
-            <v-flex xs12 sm4 v-if="!value" text-center>
-                <v-btn @click="upload()" :loading="uploading" :disabled="!choosen" :color="choosen ? 'success' : ''" depressed>
-                    {{ $t('upload') }} <v-icon right>cloud_upload</v-icon>
-                </v-btn>
-            </v-flex>
+                <v-flex xs12 sm4 v-if="!value && !uploading" text-center>
+                    <v-btn block @click="upload()" :loading="uploading" :disabled="!choosen" :color="choosen ? 'success' : ''" depressed>
+                        {{ $t('upload') }} <v-icon right>cloud_upload</v-icon>
+                    </v-btn>
+                </v-flex>
 
-            <transition name="fade">
-                <v-flex xs12 v-if="value && !processing">
-                    <v-card light outlined tile>
-                        <v-img :src="value.path.large" :lazy-src="require('@/assets/img/loading.png')">
+                <v-flex xs12 v-if="uploading">
+                    <v-progress-linear :active="uploading" :value="progress" rounded :indeterminate="progress >= 100" :dark="progress < 50" height="30">
+                        <strong v-if="progress < 100">{{ progress }}%</strong>
+                        <strong v-else>{{ $t('processing') }}</strong>
+                    </v-progress-linear>
+                </v-flex>
+            </v-layout>
+
+            <v-layout row wrap align-center v-if="value && !processing" style="min-height: 200px;" key="2">
+                <v-flex xs12 pt-0 pb-0>
+                    <v-card>
+                        <v-img :src="value.path.large" :lazy-src="value.path.lazy" min-height="200">
                             <template v-slot:placeholder>
                                 <v-layout fill-height align-center justify-center ma-0>
-                                    <v-progress-circular indeterminate></v-progress-circular>
+                                    <v-progress-circular indeterminate />
                                 </v-layout>
                             </template>
+                            <v-card-title class="lightbox align-start  fill-height pa-2">
+                                <v-btn icon small @click="remove()" color="white">
+                                    <v-icon>delete</v-icon>
+                                </v-btn>
+                                <v-spacer />
+                                <v-btn icon small @click="download()" color="white">
+                                    <v-icon>cloud_download</v-icon>
+                                </v-btn>
+                            </v-card-title>
                         </v-img>
-                        <v-btn @click="remove()" tile depressed block color="info">
-                            {{ $t('remove') }} <v-icon right>delete</v-icon>
-                        </v-btn>
                     </v-card>
                 </v-flex>
-            </transition>
+            </v-layout>
 
-        </v-layout>
+        </transition>
     </v-container>
 </template>
 
@@ -48,7 +57,8 @@ export default {
 
     data () {
         return {
-            file: null
+            file: null,
+            whatisgoing: false
         }
     },
 
@@ -66,6 +76,14 @@ export default {
         processing () {
             if (this.progress && this.progress === 100) return true
             return false
+        },
+        set: {
+            get () {
+                return this.whatisgoing
+            },
+            set (val) {
+                this.whatisgoing = val
+            }
         }
     },
 
@@ -77,10 +95,15 @@ export default {
 
             this.$store.dispatch('image/add', fData).then(res => {
                 this.file = null
+                this.set = true
                 this.$emit('input', res)
             }).catch(r => {
                 this.$notify({ type: 'error', title: this.$t('alert.error.save') })
             })
+        },
+
+        download () {
+            window.open(this.value.path.original, '_blank')
         },
 
         remove () {
@@ -110,10 +133,9 @@ export default {
 </script>
 
 <style scoped>
-.ImGu {
-    opacity: 0;
-    width: 1px;
-    height: 0px;
-    display: none;
+.lightbox {
+    box-shadow: 0 0 20px inset rgba(0, 0, 0, 0.2);
+    background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.4) 0%, transparent 72px);
 }
 </style>
+
