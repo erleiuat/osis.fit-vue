@@ -10,7 +10,7 @@
         <v-flex xs12 md10 lg8>
             <v-form v-model="rule.valid" ref="form" v-on:submit.prevent>
                 <v-text-field v-model="fd.mail" :label="$t('ft.mail')" :rules="rule.mail" type="email" />
-                <v-text-field v-model="fd.code" :label="$t('code')" :rules="rule.code" type="text" />
+                <v-text-field v-model="fd.code" :label="$t('code')" type="text" />
                 <v-btn @click="verify()" :loading="sending" color="primary" depressed large block type="submit">
                     {{ $t('btn.send') }}
                 </v-btn>
@@ -37,9 +37,6 @@ export default {
                     v => !!v || this.$t('alert.v.require'),
                     v => /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(v) || this.$t('alert.v.invalid'),
                     v => v.length < 90 || this.$t('alert.v.tooLong', { amount: 90 })
-                ],
-                code: [
-                    v => !!v || this.$t('alert.v.require')
                 ]
             }
         }
@@ -47,23 +44,24 @@ export default {
 
     methods: {
 
-        verify () {
-            if (!this.$refs.form.validate()) return false
-            this.sending = true
+        verify (force = false) {
 
+            if (!this.$refs.form.validate() && !force) return false
+
+            this.sending = true
             this.$store.dispatch('auth/verify', this.fd).then(r => {
                 this.$router.push({ name: 'auth.login', query: { mail: this.fd.mail, verified: true } })
             }).catch(r => {
                 switch (r) {
-                case 'code_wrong':
-                    this.$notify({ type: 'error', text: this.$t('fail.code') })
-                    break
-                case 'account_already_verified':
-                    this.$notify({ type: 'error', text: this.$t('fail.already') })
-                    break
-                default:
-                    this.$notify({ type: 'error', text: this.$t('alert.error.default') })
-                    break
+                    case 'code_wrong':
+                        this.$notify({ type: 'error', text: this.$t('fail.code') })
+                        break
+                    case 'account_already_verified':
+                        this.$notify({ type: 'error', text: this.$t('fail.already') })
+                        break
+                    default:
+                        this.$notify({ type: 'error', text: this.$t('alert.error.default') })
+                        break
                 }
             }).finally(() => {
                 this.sending = false
@@ -73,11 +71,14 @@ export default {
     },
 
     mounted () {
-        if (this.$route.query.mail) this.fd.mail = this.$route.query.mail
-        if (this.$route.query.code) {
-            this.fd.code = this.$route.query.code
-            this.verify()
+        if (this.$route.query.mail && this.$route.query.code) {
+            this.fd.mail = this.$route.query.mail
+            if (this.$route.query.code) {
+                this.fd.code = this.$route.query.code
+                this.verify(true)
+            }
         }
+
     },
 
     i18n: {
