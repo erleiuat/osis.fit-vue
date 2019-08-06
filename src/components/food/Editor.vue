@@ -2,6 +2,8 @@
     <v-dialog v-model="value" :fullscreen="$vuetify.breakpoint.xs" width="600px" persistent scrollable transition="dialog-bottom-transition">
         <v-card>
 
+            <YouSure @accept="remove()" @decline="sure = false" :show="sure"/>
+
             <v-toolbar color="primary" fixed flat dark>
                 <v-toolbar-title v-if="fd.id">{{ $t('titleEdit') }}</v-toolbar-title>
                 <v-toolbar-title v-else>{{ $t('titleAdd') }}</v-toolbar-title>
@@ -42,6 +44,10 @@
                                 <v-btn @click="save()" :loading="sending" block type="submit" color="primary">{{ $t('btn.save') }}</v-btn>
                             </v-flex>
 
+                            <v-flex xs12 v-if="fd.id" pt-2>
+                                <v-btn @click="sure = true" block small depressed>{{ $t('delete') }}</v-btn>
+                            </v-flex>
+
                         </v-layout>
                     </v-container>
                 </v-form>
@@ -53,18 +59,20 @@
 
 <script>
 import ImageInput from '@/components/ImageInput'
+const YouSure = () => import('@/components/YouSure')
 
 export default {
     name: 'FoodEditor',
 
     components: {
-        ImageInput
+        ImageInput, YouSure
     },
 
     props: ['value', 'item'],
 
     data () {
         return {
+            sure: false,
             sending: false,
             fd: {
                 id: null,
@@ -94,6 +102,20 @@ export default {
     },
 
     methods: {
+
+        remove () {
+
+            this.sure = false
+            if (!this.fd.id) return
+
+            this.$store.dispatch('food/delete', this.fd.id).then(r => {
+                this.$notify({ type: 'success', title: this.$t('alert.success.save') })
+                this.$emit('input', false)
+            }).catch(r => {
+                this.$notify({ type: 'error', title: this.$t('alert.error.save') })
+            })
+
+        },
 
         save () {
             if (!this.$refs.form.validate()) return false
@@ -136,12 +158,14 @@ export default {
     i18n: {
         messages: {
             en: {
+                delete: 'Delete',
                 titleAdd: 'Add Food',
                 titleEdit: 'Edit Food',
                 caloriesPer100: 'Calories per 100 (g/ml)',
                 calories: 'Calories Total'
             },
             de: {
+                delete: 'Löschen',
                 titleAdd: 'Essware hinzufügen',
                 titleEdit: 'Essware bearbeiten',
                 caloriesPer100: 'Kalorien pro 100 (g/ml)',

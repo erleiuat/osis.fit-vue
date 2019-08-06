@@ -26,8 +26,8 @@ const mutations = {
         })
     },
 
-    delete: (state, item) => {
-        Vue.delete(state.items, item.id.toString())
+    delete: (state, itemID) => {
+        Vue.delete(state.items, itemID.toString())
     }
 
 }
@@ -62,10 +62,10 @@ const actions = {
         })
     },
 
-    delete (context, item) {
+    delete (context, itemID) {
         return new Promise((resolve, reject) => {
-            Apios.post('food/delete/', { id: item.id }).then(() => {
-                context.commit('delete', item)
+            Apios.post('food/delete/', { id: itemID }).then(() => {
+                context.commit('delete', itemID)
                 resolve()
             }).catch(err => {
                 reject(err)

@@ -11,7 +11,7 @@
         <v-card-text>
             Standartmenge: {{ item.amount }}<br />
             Kalorien / 100: {{ item.caloriesPer100 }}<br />
-            Total: {{ item.amount * item.caloriesPer100 }}
+            Total: {{ total }}
         </v-card-text>
     </v-card>
 </template>
@@ -33,6 +33,10 @@ export default {
                 image: img,
                 lazy: lazy
             }
+        },
+        total () {
+            if (!this.item.amount || !this.item.caloriesPer100) return null
+            return Math.round(((this.item.amount / 100) * this.item.caloriesPer100) * 100) / 100
         }
     }
 }

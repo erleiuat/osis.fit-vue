@@ -18,7 +18,7 @@
             </v-card>
         </v-dialog>
 
-        <notifications position="bottom center" width="100%" :speed="5000">
+        <notifications position="bottom center" width="100%" :speed="500">
             <template slot="body" slot-scope="props">
                 <v-layout row wrap :class="$vuetify.breakpoint.mdAndUp ? 'justify-end pr-5 pb-2':'justify-center'">
                     <v-flex xs11 md6 lg5>

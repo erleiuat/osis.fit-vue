@@ -35,8 +35,12 @@
                 </v-layout>
             </v-flex>
 
-            <v-flex xs12>
+            <v-flex xs12 v-if="!items && !query">
                 {{ $t('noneyet') }}
+            </v-flex>
+
+            <v-flex xs12 v-if="!items">
+                {{ $t('nonefound') }}
             </v-flex>
 
         </v-layout>
@@ -75,6 +79,8 @@ export default {
         items () {
             var items = this.$store.getters['food/all']
             var filtered = items.filter(el => el.title.includes(this.query))
+
+            if (filtered.length <= 0) return false
 
             if (this.$vuetify.breakpoint.xsOnly || filtered.length < 2)
                 return {
@@ -140,6 +146,7 @@ export default {
                 calories: 'Calories/100',
                 total: 'Total',
                 noneyet: 'You have not yet created your own templates',
+                nonefound: 'No results',
                 removeImgError: 'Image remove failed'
             },
             de: {
@@ -148,6 +155,7 @@ export default {
                 calories: 'Kalorien/100',
                 total: 'Total',
                 noneyet: 'Du hast noch keine eigenen Vorlagen erstellt',
+                nonefound: 'Keine Resultate',
                 removeImgError: 'Bild entfernen fehlgeschlagen'
             }
         }
