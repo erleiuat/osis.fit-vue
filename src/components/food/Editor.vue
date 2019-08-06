@@ -2,7 +2,7 @@
     <v-dialog v-model="value" :fullscreen="$vuetify.breakpoint.xs" width="600px" persistent scrollable transition="dialog-bottom-transition">
         <v-card>
 
-            <YouSure @accept="remove()" @decline="sure = false" :show="sure"/>
+            <YouSure @accept="remove()" @decline="sure = false" :show="sure" />
 
             <v-toolbar color="primary" fixed flat dark>
                 <v-toolbar-title v-if="fd.id">{{ $t('titleEdit') }}</v-toolbar-title>
@@ -14,8 +14,8 @@
             </v-toolbar>
 
             <v-card-text>
-                <v-form v-model="rule.valid" ref="form" v-on:submit.prevent>
-                    <v-container grid-list-xs pa-0>
+                <v-container grid-list-xs fill-height>
+                    <v-form v-model="rule.valid" ref="form" v-on:submit.prevent>
                         <v-layout wrap>
 
                             <v-input v-model="fd.id" type="hidden" v-show="false" />
@@ -45,12 +45,12 @@
                             </v-flex>
 
                             <v-flex xs12 v-if="fd.id" pt-2>
-                                <v-btn @click="sure = true" block small depressed>{{ $t('delete') }}</v-btn>
+                                <v-btn @click="sure = true" :loading="deleting" block small depressed>{{ $t('delete') }}</v-btn>
                             </v-flex>
 
                         </v-layout>
-                    </v-container>
-                </v-form>
+                    </v-form>
+                </v-container>
             </v-card-text>
 
         </v-card>
@@ -73,6 +73,7 @@ export default {
     data () {
         return {
             sure: false,
+            deleting: false,
             sending: false,
             fd: {
                 id: null,
@@ -105,13 +106,17 @@ export default {
 
         remove () {
             this.sure = false
+
             if (!this.fd.id) return
 
+            this.deleting = true
             this.$store.dispatch('food/delete', this.fd.id).then(r => {
                 this.$notify({ type: 'success', title: this.$t('alert.success.save') })
                 this.$emit('input', false)
             }).catch(r => {
                 this.$notify({ type: 'error', title: this.$t('alert.error.save') })
+            }).finally(() => {
+                this.deleting = false
             })
         },
 

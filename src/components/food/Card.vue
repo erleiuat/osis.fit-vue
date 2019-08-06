@@ -1,6 +1,6 @@
 <template>
     <v-card hover link @click="$emit('select')">
-        <v-img v-if="path" class="white--text" :lazy-src="path.lazy" :src="path.image">
+        <v-img v-if="path" class="white--text" :lazy-src="path.lazy" :src="path.image" max-height="300">
             <v-card-title class="lightbox align-end fill-height">
                 {{item.title}}
             </v-card-title>

@@ -56,8 +56,8 @@
 
 <script>
 import clonedeep from 'lodash.clonedeep'
+import FoodEditor from '@/components/food/Editor'
 const FoodCard = () => import('@/components/food/Card')
-const FoodEditor = () => import('@/components/food/Editor')
 
 export default {
     name: 'Own',

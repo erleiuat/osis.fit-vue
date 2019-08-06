@@ -2,24 +2,25 @@
     <v-container grid-list-sm pl-0 pr-0>
         <v-layout row wrap align-center>
 
-            <v-flex xs12 sm8 v-if="!value">
+            <v-flex xs12 sm8 v-if="!value && !uploading">
                 <v-file-input v-model="file" :label="$t('select')" :disabled="uploading" prepend-icon="camera_alt" accept="image/jpg, image/png, image/jpeg" />
             </v-flex>
 
+            <v-flex xs12 sm8 v-show="uploading">
+                <v-progress-linear :active="uploading" :value="progress" rounded :indeterminate="progress >= 100" :dark="progress < 50" height="30">
+                    <strong v-if="progress < 100">{{ progress }}%</strong>
+                    <strong v-else>{{ $t('processing') }}</strong>
+                </v-progress-linear>
+            </v-flex>
+
             <v-flex xs12 sm4 v-if="!value" text-center>
-                <v-btn @click="upload()" :loading="uploading" :disabled="!choosen" :color="choosen ? 'success' : ''">
+                <v-btn @click="upload()" :loading="uploading" :disabled="!choosen" :color="choosen ? 'success' : ''" depressed>
                     {{ $t('upload') }} <v-icon right>cloud_upload</v-icon>
                 </v-btn>
             </v-flex>
 
-            <v-flex xs12>
-                <v-progress-linear :active="uploading" :value="progress" rounded height="25">
-                    <strong>{{ progress }}%</strong>
-                </v-progress-linear>
-            </v-flex>
-
             <transition name="fade">
-                <v-flex xs12 v-if="value">
+                <v-flex xs12 v-if="value && !processing">
                     <v-card light outlined tile>
                         <v-img :src="value.path.large" :lazy-src="require('@/assets/img/loading.png')">
                             <template v-slot:placeholder>
@@ -59,7 +60,11 @@ export default {
             return this.$store.getters['image/progress']
         },
         uploading () {
-            if (this.progress > 0 && this.progress < 100) return true
+            if (this.progress) return true
+            return false
+        },
+        processing () {
+            if (this.progress && this.progress === 100) return true
             return false
         }
     },
@@ -87,11 +92,13 @@ export default {
     i18n: {
         messages: {
             en: {
+                processing: 'Processing image',
                 select: 'Select File',
                 upload: 'Upload',
                 remove: 'Remove Image'
             },
             de: {
+                processing: 'Bild wird verarbeitet',
                 select: 'Datei auswählen',
                 upload: 'Hochladen',
                 remove: 'Bild entfernen'
