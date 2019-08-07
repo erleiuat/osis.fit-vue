@@ -53,7 +53,7 @@ export default {
     data () {
         return {
             cbi: null,
-            loadingScript: true,
+            loadingScript: true
         }
     },
 
@@ -70,9 +70,7 @@ export default {
     },
 
     mounted () {
-
         if (!document.getElementById('chargebee_js_script')) {
-
             var script = document.createElement('script')
             script.id = 'chargebee_js_script'
             script.src = 'https://js.chargebee.com/v2/chargebee.js'
@@ -80,24 +78,22 @@ export default {
 
             var vm = this
             script.onload = function () {
-                Chargebee.init({ site: "osis-fit-test" })
+                Chargebee.init({ site: 'osis-fit-test' })
                 vm.cbi = Chargebee.getInstance()
                 vm.loadingScript = false
             }
 
             document.getElementsByTagName('head')[0].appendChild(script)
-
         } else {
             this.cbi = Chargebee.getInstance()
             this.loadingScript = false
         }
-
     },
 
     methods: {
 
         openCheckout () {
-            //window.open('https://osis-fit-test.chargebee.com/hosted_pages/plans/premium', '_blank')
+            // window.open('https://osis-fit-test.chargebee.com/hosted_pages/plans/premium', '_blank')
 
             this.cbi.openCheckout({
                 hostedPage: () => {
@@ -105,35 +101,34 @@ export default {
                     // This sample end point will call the below api
                     // https://apidocs.chargebee.com/docs/api/hosted_pages#checkout_new_subscription
                     // If you want to use paypal, go cardless and plaid, pass embed parameter as false
-                    return Apios.get('billing/premium/new/').then((res) => res.data.items);
+                    return Apios.get('billing/premium/new/').then((res) => res.data.items)
                 },
                 loaded: function () {
-                    console.log("checkout opened");
+                    // console.log('checkout opened')
                 },
                 close: () => {
-                    console.log("checkout closed");
+                    // console.log('checkout closed')
                 },
                 success: function (hostedPageId) {
-                    console.log(hostedPageId);
+                    // console.log(hostedPageId)
                     Apios.post('billing/premium/verify/', {
                         token: hostedPageId
                     }).then(res => {
-                        console.log(res)
-                    });
+                        // console.log(res)
+                    })
                     // Hosted page id will be unique token for the checkout that happened
-                    // You can pass this hosted page id to your backend 
+                    // You can pass this hosted page id to your backend
                     // and then call our retrieve hosted page api to get subscription details
                     // https://apidocs.chargebee.com/docs/api/hosted_pages#retrieve_a_hosted_page
                 },
                 step: function (value) {
                     // value -> which step in checkout
-                    console.log(value);
+                    // console.log(value)
                 },
                 error: function (error) {
-                    console.log(error);
+                    // console.log(error)
                 }
-            });
-
+            })
         }
 
     },

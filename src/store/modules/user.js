@@ -10,8 +10,7 @@ const state = {
     birthdate: lStore.get('user.birthdate'),
     height: lStore.get('user.height'),
     gender: lStore.get('user.gender'),
-    aims: lStore.get('user.aims'),
-
+    aims: lStore.get('user.aims')
 
 }
 
