@@ -67,7 +67,6 @@
 </template>
 
 <script>
-import clonedeep from 'lodash.clonedeep'
 const TemplateSelect = () => import('@/components/adder/TemplateSelect/')
 
 export default {
@@ -124,7 +123,7 @@ export default {
 
         add () {
             if (!this.$refs.form.validate()) return
-            console.log(this.fd.title)
+
             this.sending = true
             this.$store.dispatch('calories/add', this.fd).then(r => {
                 this.$notify({ type: 'success', title: this.$t('alert.success.save') })

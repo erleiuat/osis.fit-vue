@@ -52,7 +52,7 @@ export default {
             var filtered = items.filter(el => el.title.includes(this.query || ''))
             if (filtered.length <= 0) return false
 
-            var i = 1; var col1 = []; var col2 = [];
+            var i = 1; var col1 = []; var col2 = []
 
             filtered.forEach(item => {
                 if (i === 1) {
@@ -67,7 +67,6 @@ export default {
                 a: col1,
                 b: col2
             }
-
         }
 
     },

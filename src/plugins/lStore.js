@@ -6,7 +6,7 @@ const lStore = {
 
     hasStore: (name) => {
         if (!lStore.stores) {
-            lStore.stores = JSON.parse(localStorage.getItem(lStore.name+'.stores'))
+            lStore.stores = JSON.parse(localStorage.getItem(lStore.name + '.stores'))
             if (!lStore.stores) {
                 localStorage.setItem(lStore.name + '.stores', JSON.stringify([]))
                 lStore.stores = []
@@ -28,7 +28,7 @@ const lStore = {
 
     set: (sName, data) => {
         if (!lStore.hasStore(sName)) lStore.createStore(sName)
-        localStorage.setItem(lStore.name + '.store.' + sName, JSON.stringify(data));
+        localStorage.setItem(lStore.name + '.store.' + sName, JSON.stringify(data))
     },
 
     clear: () => {
