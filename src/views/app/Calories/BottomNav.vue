@@ -9,7 +9,7 @@
                 </v-btn>
             </template>
         </CalorieAdder>
-        <v-btn text :to="{name: 'templates'}">
+        <v-btn text :to="{name: 'food.own'}">
             <span>{{ $t('templates') }}</span>
             <v-icon>open_in_new</v-icon>
         </v-btn>

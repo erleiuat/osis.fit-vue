@@ -32,7 +32,7 @@
             </v-flex>
 
             <v-flex xs12 sm4 class="text-center" v-if="!$vuetify.breakpoint.xs">
-                <v-btn :to="{name: 'templates'}" depressed large block color="primary">
+                <v-btn :to="{name: 'food.own'}" depressed large block color="primary">
                     <v-icon left>open_in_new</v-icon>
                     {{ $t('templates') }}
                 </v-btn>

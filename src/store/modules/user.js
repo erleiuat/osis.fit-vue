@@ -1,16 +1,16 @@
 import Apios from '@/plugins/Apios'
+import lStore from '@/plugins/lStore'
 
 const state = {
 
-    firstname: null,
-    lastname: null,
-    birthdate: null,
-    height: null,
-    gender: null,
-    aims: {
-        weight: null,
-        date: null
-    }
+    lName: 'user',
+    firstname: lStore.get('user.firstname'),
+    lastname: lStore.get('user.lastname'),
+    birthdate: lStore.get('user.birthdate'),
+    height: lStore.get('user.height'),
+    gender: lStore.get('user.gender'),
+    aims: lStore.get('user.aims'),
+    
 
 }
 
@@ -18,7 +18,10 @@ const mutations = {
 
     set: (state, data) => {
         Object.keys(state).forEach(function (key) {
-            if (key in data) state[key] = data[key]
+            if (key in data) {
+                state[key] = data[key]
+                lStore.set(state.lName +'.'+ key, state[key])
+            }
         })
     }
 
