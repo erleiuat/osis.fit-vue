@@ -81,6 +81,7 @@ const actions = {
 
     refresh (con, token) {
         return new Promise((resolve, reject) => {
+            if(!token) token = VueCookies.get('refreshToken')
             Apios.post(con.state.url + 'refresh/', { token: token }).then(res => {
                 con.commit('placeAuth', res.data.tokens)
                 resolve()

@@ -93,40 +93,20 @@ export default {
     methods: {
 
         openCheckout () {
-            // window.open('https://osis-fit-test.chargebee.com/hosted_pages/plans/premium', '_blank')
-
-            this.cbi.openCheckout({
+            var vm = this
+            vm.cbi.openCheckout({
                 hostedPage: () => {
-                    // Hit your end point that returns hosted page object as response
-                    // This sample end point will call the below api
-                    // https://apidocs.chargebee.com/docs/api/hosted_pages#checkout_new_subscription
-                    // If you want to use paypal, go cardless and plaid, pass embed parameter as false
-                    return Apios.get('billing/premium/new/').then((res) => res.data.items)
-                },
-                loaded: function () {
-                    // console.log('checkout opened')
-                },
-                close: () => {
-                    // console.log('checkout closed')
+                    return Apios.get('billing/premium/checkout/').then((res) => res.data.items)
                 },
                 success: function (hostedPageId) {
-                    // console.log(hostedPageId)
-                    Apios.post('billing/premium/verify/', {
+                    Apios.post('billing/premium/apply/', {
                         token: hostedPageId
                     }).then(res => {
-                        // console.log(res)
+                        vm.$store.dispatch('auth/refresh')
                     })
-                    // Hosted page id will be unique token for the checkout that happened
-                    // You can pass this hosted page id to your backend
-                    // and then call our retrieve hosted page api to get subscription details
-                    // https://apidocs.chargebee.com/docs/api/hosted_pages#retrieve_a_hosted_page
-                },
-                step: function (value) {
-                    // value -> which step in checkout
-                    // console.log(value)
                 },
                 error: function (error) {
-                    // console.log(error)
+                    vm.$notify({ type: 'error', title: vm.$t('alert.error.save'), text: error })
                 }
             })
         }
