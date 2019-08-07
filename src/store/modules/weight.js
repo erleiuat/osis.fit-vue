@@ -1,9 +1,11 @@
 
 import Vue from 'vue'
 import Apios from '@/plugins/Apios'
+import lStore from '@/plugins/lStore'
 
 const state = {
-    items: {}
+    lName: 'weight',
+    items: lStore.get('weight')
 }
 
 const getters = {
@@ -42,10 +44,12 @@ const mutations = {
             if (!(item.id in state.items)) Vue.set(state.items, item.id.toString(), item)
             else state.items[item.id] = item
         })
+        lStore.set(state.lName, state.items)
     },
 
     delete: (state, item) => {
         Vue.delete(state.items, item.id.toString())
+        lStore.set(state.lName, state.items)
     }
 
 }

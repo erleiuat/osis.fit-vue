@@ -1,5 +1,6 @@
 import Apios from '@/plugins/Apios'
 import VueCookies from 'vue-cookies'
+import lStore from '@/plugins/lStore'
 
 const state = {
 
@@ -41,9 +42,11 @@ const mutations = {
         state.refreshToken = tokens.refresh
         state.user = dec1.data.user
         state.status = true
+        lStore.init()
     },
 
     removeAuth: (state) => {
+        lStore.clear()
         VueCookies.remove('accessToken')
         VueCookies.remove('refreshToken')
         Apios.defaults.headers.common['Authorization'] = null
