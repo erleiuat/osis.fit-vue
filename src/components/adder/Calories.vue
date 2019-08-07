@@ -23,7 +23,7 @@
                     <v-layout wrap>
 
                         <v-flex xs12>
-                            <v-text-field v-model="fd.title" :label="$t('ft.title')" @click:append="openSelect()" type="text" outlined append-icon="open_in_new" />
+                            <v-text-field v-model="fd.title" :label="$t('ft.title')" @click:append="openSelect()" type="text" outlined append-icon="open_in_new" required/>
                         </v-flex>
 
                         <v-flex xs6>
@@ -67,6 +67,7 @@
 </template>
 
 <script>
+import clonedeep from 'lodash.clonedeep'
 const TemplateSelect = () => import('@/components/adder/TemplateSelect/')
 
 export default {
@@ -122,13 +123,14 @@ export default {
         },
 
         add () {
-            if (!this.$refs.form.validate()) return false
+            if (!this.$refs.form.validate()) return
+            console.log(this.fd.title)
             this.sending = true
-
             this.$store.dispatch('calories/add', this.fd).then(r => {
                 this.$notify({ type: 'success', title: this.$t('alert.success.save') })
                 this.show = false
                 this.$refs.form.reset()
+                this.fd.title = null // TODO: CREATE OWN FORM VALIDATION
             }).catch(r => {
                 this.$notify({ type: 'error', title: this.$t('alert.error.save') })
             }).finally(() => {
@@ -143,6 +145,7 @@ export default {
         use (item) {
             this.selector = false
             if (!item) return
+            this.fd.title = item.title
             this.amount = item.amount
             this.caloriesPer100 = item.caloriesPer100
             this.calTotal()

@@ -1,6 +1,6 @@
 
 import Vue from 'vue'
-import Apios from '@/store/Apios'
+import Apios from '@/plugins/Apios'
 
 const state = {
     items: {}

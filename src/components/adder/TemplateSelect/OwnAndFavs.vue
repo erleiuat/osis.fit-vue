@@ -11,7 +11,7 @@
             <v-flex xs6 v-for="(arr, key) in items" :key="key">
                 <v-layout column fill-height>
                     <v-flex xs12 v-for="(item, key) in arr" :key="key" class="pa-1">
-                        <FoodCard :item="item" @select="$emit('select', item)" nodetails />
+                        <FoodCard :item="item" @select="$emit('select', item)" nodetails :maxHeight="200" />
                     </v-flex>
                 </v-layout>
             </v-flex>

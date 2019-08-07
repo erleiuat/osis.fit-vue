@@ -1,5 +1,5 @@
 
-import Apios from '@/store/Apios'
+import Apios from '@/plugins/Apios'
 import NProgress from '@/plugins/nprogress'
 
 const state = {

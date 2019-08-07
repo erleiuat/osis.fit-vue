@@ -1,6 +1,6 @@
 <template>
     <v-card hover link @click="$emit('select')">
-        <v-img v-if="path" class="white--text" :lazy-src="path.lazy" :src="path.image" max-height="300">
+        <v-img v-if="path" class="white--text" :lazy-src="path.lazy" :src="path.image" :max-height="maxHeight || 300">
             <v-card-title class="lightbox align-end fill-height">
                 {{item.title}}
             </v-card-title>
@@ -8,7 +8,7 @@
         <v-card-title v-else>
             {{item.title}}
         </v-card-title>
-        <v-card-text v-if="!nodetails && path">
+        <v-card-text v-if="!nodetails || !path">
             Standartmenge: {{ item.amount }}<br />
             Kalorien / 100: {{ item.caloriesPer100 }}<br />
             Total: {{ total }}
@@ -21,7 +21,11 @@ export default {
     name: 'FoodCard',
     props: {
         item: Object,
-        nodetails: Boolean
+        nodetails: {
+            type: Boolean,
+            default: false
+        },
+        maxHeight: Number
     },
     computed: {
         path () {

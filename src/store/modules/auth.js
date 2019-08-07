@@ -1,4 +1,4 @@
-import Apios from '@/store/Apios'
+import Apios from '@/plugins/Apios'
 import VueCookies from 'vue-cookies'
 
 const state = {
