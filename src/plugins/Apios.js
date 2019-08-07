@@ -15,7 +15,7 @@ const apios = Axios.create(apiosConfig)
 
 apios.interceptors.request.use(config => {
     if (pendingCalls[config.baseURL + config.url] === true) return {
-        ...config, cancelToken: new CancelToken((cancel) => cancel())
+        ...config, cancelToken: new CancelToken((cancel) => cancel(config.url))
     }
     NProgress.start()
     pendingCalls[config.baseURL + config.url] = true
@@ -30,7 +30,7 @@ apios.interceptors.response.use(res => {
     return res.data
 }, err => {
     NProgress.done()
-    if (err.constructor.name === 'Cancel') return Promise.reject(Error('cancelled'))
+    if (err.constructor.name === 'Cancel') return Promise.reject(err)
     if (!err.response) return Promise.reject(Error('noResponse'))
     pendingCalls[err.response.config.url] = null
     if (!err.response.data) return Promise.reject(Error('noData'))

@@ -36,7 +36,7 @@
         </v-layout>
 
         <v-layout wrap>
-            <v-btn color="primary" block @click="openCheckout()">
+            <v-btn :loading="loadingScript" color="primary" block @click="openCheckout()">
                 {{ $t('getPremium') }}
             </v-btn>
         </v-layout>
@@ -45,8 +45,17 @@
 </template>
 
 <script>
+import Apios from '@/plugins/Apios'
+
 export default {
     name: 'Overview',
+
+    data () {
+        return {
+            cbi: null,
+            loadingScript: true,
+        }
+    },
 
     computed: {
         features () {
@@ -61,48 +70,65 @@ export default {
     },
 
     mounted () {
-        /*
-        let script = document.createElement('script')
 
-        script.onload = () => {
-            this.cBee = Chargebee.init({
-                site: 'osis-fit-test'
-            })
+        if (!document.getElementById('chargebee_js_script')) {
+
+            var script = document.createElement('script')
+            script.id = 'chargebee_js_script'
+            script.src = 'https://js.chargebee.com/v2/chargebee.js'
+            script.async = true
+
+            var vm = this
+            script.onload = function () {
+                Chargebee.init({ site: "osis-fit-test" })
+                vm.cbi = Chargebee.getInstance()
+                vm.loadingScript = false
+            }
+
+            document.getElementsByTagName('head')[0].appendChild(script)
+
+        } else {
+            this.cbi = Chargebee.getInstance()
+            this.loadingScript = false
         }
 
-        script.async = true
-        script.id = 'chargebee'
-        script.src = 'https://js.chargebee.com/v2/chargebee.js'
-
-        document.getElementsByTagName('head')[0].appendChild(script)
-        */
     },
 
     methods: {
 
         openCheckout () {
-            window.open('https://osis-fit-test.chargebee.com/hosted_pages/plans/premium', '_blank')
+            //window.open('https://osis-fit-test.chargebee.com/hosted_pages/plans/premium', '_blank')
 
-            /*
-            var chargebeeInstance = Chargebee.getInstance()
-
-            chargebeeInstance.openCheckout({
-                // This function returns a promise that resolves a hosted page object.
-                // If the library that you use for making ajax calls, can return a promise, you can directly return that
-
-                hostedPage: function () {
-                    // We will discuss on how to implement this end point in the next step.
-                    return Axios.post('/generate_hp_url', {
-                        customer_id: this.customer_id,
-                        plan_id: this.plan_id
-                    }).then((response) => response.data)
+            this.cbi.openCheckout({
+                hostedPage: () => {
+                    // Hit your end point that returns hosted page object as response
+                    // This sample end point will call the below api
+                    // https://apidocs.chargebee.com/docs/api/hosted_pages#checkout_new_subscription
+                    // If you want to use paypal, go cardless and plaid, pass embed parameter as false
+                    return Apios.get('user/premium/').then((res) => res.data.items);
                 },
-
+                loaded: function () {
+                    console.log("checkout opened");
+                },
+                close: () => {
+                    console.log("checkout closed");
+                },
                 success: function (hostedPageId) {
-                    // success callback
+                    console.log(hostedPageId);
+                    // Hosted page id will be unique token for the checkout that happened
+                    // You can pass this hosted page id to your backend 
+                    // and then call our retrieve hosted page api to get subscription details
+                    // https://apidocs.chargebee.com/docs/api/hosted_pages#retrieve_a_hosted_page
+                },
+                step: function (value) {
+                    // value -> which step in checkout
+                    console.log(value);
+                },
+                error: function (error) {
+                    console.log(error);
                 }
-            })
-            */
+            });
+
         }
 
     },
