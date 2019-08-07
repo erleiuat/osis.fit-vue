@@ -37,11 +37,11 @@ export default {
     },
 
     mounted () {
-        var td = this.$store.getters['app/today'].date
         this.$store.dispatch('user/load')
-        //this.$store.dispatch('weight/load')
-        //this.$store.dispatch('calories/load', td)
-        //this.$store.dispatch('activity/load', td)
+        this.$store.dispatch('weight/load')
+        var td = this.$store.getters['app/today'].date
+        this.$store.dispatch('calories/load', td)
+        this.$store.dispatch('activity/load', td)
     },
 
     computed: {
