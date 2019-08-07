@@ -1,24 +1,28 @@
 
 const lStore = {
 
+    stores: false,
+
+    hasStore: (name) => {
+        if (!lStore.stores) return false
+        return lStore.stores.includes(name)
+    },
+
+    createStore: (name) => {
+        if (!lStore.stores) lStore.stores = []
+        lStore.stores.push(name)
+        localStorage.setItem('lStore.stores', JSON.stringify(lStore.stores))
+        localStorage.setItem('lStore.store.' + name, JSON.stringify([]))
+    },
+
     get: (sName) => {
-        var items = JSON.parse(localStorage.getItem('lStore.store'))
-        if (items[sName]) return items[sName].data
-        return {}
+        if (!lStore.hasStore(sName)) lStore.createStore(sName)
+        return JSON.parse(localStorage.getItem('lStore.store.' + sName))
     },
 
     set: (sName, data) => {
-        var tmp = JSON.parse(localStorage.getItem('lStore.store'))
-        var d = new Date()
-        tmp[sName] = {
-            stamp: d.getTime(),
-            data: data
-        }
-        localStorage.setItem('lStore.store', JSON.stringify(tmp));
-    },
-
-    init: () => {
-        localStorage.setItem('lStore.store', JSON.stringify({}));
+        if (!lStore.hasStore(sName)) lStore.createStore(sName)
+        localStorage.setItem('lStore.store.' + sName, JSON.stringify(data));
     },
 
     clear: () => {

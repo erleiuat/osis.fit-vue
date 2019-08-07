@@ -42,7 +42,6 @@ const mutations = {
         state.refreshToken = tokens.refresh
         state.user = dec1.data.user
         state.status = true
-        lStore.init()
     },
 
     removeAuth: (state) => {
