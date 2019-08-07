@@ -105,7 +105,7 @@ export default {
                     // This sample end point will call the below api
                     // https://apidocs.chargebee.com/docs/api/hosted_pages#checkout_new_subscription
                     // If you want to use paypal, go cardless and plaid, pass embed parameter as false
-                    return Apios.get('user/premium/').then((res) => res.data.items);
+                    return Apios.get('billing/premium/new/').then((res) => res.data.items);
                 },
                 loaded: function () {
                     console.log("checkout opened");
@@ -115,6 +115,11 @@ export default {
                 },
                 success: function (hostedPageId) {
                     console.log(hostedPageId);
+                    Apios.post('billing/premium/verify/', {
+                        token: hostedPageId
+                    }).then(res => {
+                        console.log(res)
+                    });
                     // Hosted page id will be unique token for the checkout that happened
                     // You can pass this hosted page id to your backend 
                     // and then call our retrieve hosted page api to get subscription details

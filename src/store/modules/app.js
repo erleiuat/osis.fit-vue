@@ -34,8 +34,8 @@ const mutations = {
 }
 
 const actions = {
-    drawer (context) {
-        context.commit('setDrawer', !context.state.drawer)
+    drawer (con) {
+        con.commit('setDrawer', !con.state.drawer)
     }
 }
 

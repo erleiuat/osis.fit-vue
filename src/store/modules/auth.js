@@ -3,7 +3,7 @@ import VueCookies from 'vue-cookies'
 import lStore from '@/plugins/lStore'
 
 const state = {
-
+    url: 'auth/',
     status: false,
     accessToken: null,
     refreshToken: null,
@@ -60,29 +60,29 @@ const mutations = {
 const actions = {
 
     /* eslint prefer-promise-reject-errors: ["error", {"allowEmptyReject": true}] */
-    check (context) {
+    check (con) {
         return new Promise((resolve, reject) => {
             var tRefresh = VueCookies.get('refreshToken')
             if (!tRefresh) reject()
             else {
                 var tAccess = VueCookies.get('accessToken')
                 if (tAccess) {
-                    context.commit('placeAuth', { access: tAccess, refresh: tRefresh })
+                    con.commit('placeAuth', { access: tAccess, refresh: tRefresh })
                     resolve()
-                } else context.dispatch('refresh', tRefresh).then(r => {
+                } else con.dispatch('refresh', tRefresh).then(r => {
                     resolve()
                 }).catch(err => {
-                    context.dispatch('logout')
+                    con.dispatch('logout')
                     reject(err)
                 })
             }
         })
     },
 
-    refresh (context, token) {
+    refresh (con, token) {
         return new Promise((resolve, reject) => {
-            Apios.post('auth/refresh/', { token: token }).then(res => {
-                context.commit('placeAuth', res.data.tokens)
+            Apios.post(con.state.url + 'refresh/', { token: token }).then(res => {
+                con.commit('placeAuth', res.data.tokens)
                 resolve()
             }).catch(err => {
                 reject(err)
@@ -90,10 +90,10 @@ const actions = {
         })
     },
 
-    login (context, form) {
+    login (con, form) {
         return new Promise((resolve, reject) => {
-            Apios.post('auth/', form).then(res => {
-                context.commit('placeAuth', res.data.tokens)
+            Apios.post(con.state.url, form).then(res => {
+                con.commit('placeAuth', res.data.tokens)
                 resolve()
             }).catch(err => {
                 reject(err)
@@ -101,21 +101,21 @@ const actions = {
         })
     },
 
-    logout (context) {
+    logout (con) {
         return new Promise((resolve, reject) => {
-            Apios.post('auth/logout/', { token: context.state.refreshToken }).then(() => {
+            Apios.post(con.state.url + 'logout/', { token: con.state.refreshToken }).then(() => {
                 resolve()
             }).catch(err => {
                 reject(err)
             }).finally(() => {
-                context.commit('removeAuth')
+                con.commit('removeAuth')
             })
         })
     },
 
-    register (context, form) {
+    register (con, form) {
         return new Promise((resolve, reject) => {
-            Apios.post('auth/register/', form).then(() => {
+            Apios.post(con.state.url + 'register/', form).then(() => {
                 resolve()
             }).catch(err => {
                 reject(err)
@@ -123,7 +123,7 @@ const actions = {
         })
     },
 
-    verify (context, form) {
+    verify (con, form) {
         return new Promise((resolve, reject) => {
             Apios.post('auth/verify/', form).then(() => {
                 resolve()
@@ -133,7 +133,7 @@ const actions = {
         })
     },
 
-    forgot (context) {
+    forgot (con) {
         return new Promise((resolve, reject) => {
             Apios.post('auth/password/forgotten/').then(() => {
                 resolve()

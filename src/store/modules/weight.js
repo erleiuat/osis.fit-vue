@@ -4,6 +4,7 @@ import Apios from '@/plugins/Apios'
 import lStore from '@/plugins/lStore'
 
 const state = {
+    url: 'app/weight/',
     lName: 'weight',
     items: lStore.get('weight')
 }
@@ -56,16 +57,16 @@ const mutations = {
 
 const actions = {
 
-    load (context) {
-        Apios.post('weight/read/', { from: '', to: '' }).then(res => {
-            if (res.status === 200) context.commit('set', res.data.items)
+    load (con) {
+        Apios.post(con.state.url + 'read/', { from: '', to: '' }).then(res => {
+            if (res.status === 200) con.commit('set', res.data.items)
         })
     },
 
-    add (context, item) {
+    add (con, item) {
         return new Promise((resolve, reject) => {
-            Apios.post('weight/add/', item).then(res => {
-                context.commit('set', res.data.item)
+            Apios.post(con.state.url + 'add/', item).then(res => {
+                con.commit('set', res.data.item)
                 resolve()
             }).catch(err => {
                 reject(err)
@@ -73,10 +74,10 @@ const actions = {
         })
     },
 
-    delete (context, item) {
+    delete (con, item) {
         return new Promise((resolve, reject) => {
-            Apios.post('weight/delete/', { id: item.id }).then(() => {
-                context.commit('delete', item)
+            Apios.post(con.state.url + 'delete/', { id: item.id }).then(() => {
+                con.commit('delete', item)
                 resolve()
             }).catch(err => {
                 reject(err)

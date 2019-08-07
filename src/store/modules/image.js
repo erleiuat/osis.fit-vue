@@ -3,7 +3,7 @@ import Apios from '@/plugins/Apios'
 import NProgress from '@/plugins/nprogress'
 
 const state = {
-
+    url: 'upload/',
     progress: false
 
 }
@@ -27,21 +27,21 @@ const mutations = {
 
 const actions = {
 
-    add (context, fData) {
+    add (con, fData) {
         NProgress.configure({ trickle: false })
 
         return new Promise((resolve, reject) => {
-            context.commit('progress', 0.1)
+            con.commit('progress', 0.1)
 
             var config = {
                 onUploadProgress: function (progressEvent) {
                     var val = Math.round((progressEvent.loaded * 100) / progressEvent.total)
-                    context.commit('progress', val || 0.1)
+                    con.commit('progress', val || 0.1)
                     NProgress.set(val / 100)
                 }
             }
 
-            Apios.post('upload/', fData, config).then(res => {
+            Apios.post(con.state.url, fData, config).then(res => {
                 resolve({
                     id: res.data.item.id,
                     path: res.data.item.path
@@ -50,16 +50,16 @@ const actions = {
                 reject(err)
             }).finally(() => {
                 NProgress.configure({ trickle: true })
-                context.commit('progress', false)
+                con.commit('progress', false)
             })
         })
     }
 
     /* TODO ???
-    delete (context, item) {
+    delete (con, item) {
         return new Promise((resolve, reject) => {
             Apios.post('food/delete/', { id: item.id }).then(() => {
-                context.commit('deleteItem', item)
+                con.commit('deleteItem', item)
                 resolve()
             }, err => {
                 reject(err.data.condition)

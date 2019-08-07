@@ -6,7 +6,7 @@ const source = CancelToken.source()
 const pendingCalls = {}
 
 const apiosConfig = {
-    baseURL: process.env.VUE_APP_API_URL + '/' + process.env.VUE_APP_API_VERSION + '/',
+    baseURL: process.env.VUE_APP_API_URL + '/' + process.env.VUE_APP_API_VERSION + '/c/',
     withCredentials: true,
     cancelToken: source.token
 }

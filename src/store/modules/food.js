@@ -4,6 +4,7 @@ import Apios from '@/plugins/Apios'
 import lStore from '@/plugins/lStore'
 
 const state = {
+    url: 'app/food/',
     lName: 'food',
     items: lStore.get('food')
 }
@@ -38,16 +39,16 @@ const mutations = {
 
 const actions = {
 
-    load (context) {
-        Apios.post('food/read/', { id: null }).then(res => {
-            if (res.status === 200) context.commit('set', res.data.items)
+    load (con) {
+        Apios.post(con.state.url + 'read/', { id: null }).then(res => {
+            if (res.status === 200) con.commit('set', res.data.items)
         })
     },
 
-    add (context, item) {
+    add (con, item) {
         return new Promise((resolve, reject) => {
-            Apios.post('food/add/', item).then(res => {
-                context.commit('set', res.data.item)
+            Apios.post(con.state.url + 'add/', item).then(res => {
+                con.commit('set', res.data.item)
                 resolve()
             }).catch(err => {
                 reject(err)
@@ -55,10 +56,10 @@ const actions = {
         })
     },
 
-    edit (context, form) {
+    edit (con, form) {
         return new Promise((resolve, reject) => {
-            Apios.post('food/edit/', form).then(res => {
-                context.commit('set', res.data.item)
+            Apios.post(con.state.url + 'edit/', form).then(res => {
+                con.commit('set', res.data.item)
                 resolve()
             }).catch(err => {
                 reject(err)
@@ -66,10 +67,10 @@ const actions = {
         })
     },
 
-    delete (context, itemID) {
+    delete (con, itemID) {
         return new Promise((resolve, reject) => {
-            Apios.post('food/delete/', { id: itemID }).then(() => {
-                context.commit('delete', itemID)
+            Apios.post(con.state.url + 'delete/', { id: itemID }).then(() => {
+                con.commit('delete', itemID)
                 resolve()
             }).catch(err => {
                 reject(err)

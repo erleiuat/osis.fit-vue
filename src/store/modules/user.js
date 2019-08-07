@@ -3,6 +3,7 @@ import lStore from '@/plugins/lStore'
 
 const state = {
 
+    url: 'app/user/',
     lName: 'user',
     firstname: lStore.get('user.firstname'),
     lastname: lStore.get('user.lastname'),
@@ -10,7 +11,7 @@ const state = {
     height: lStore.get('user.height'),
     gender: lStore.get('user.gender'),
     aims: lStore.get('user.aims'),
-    
+
 
 }
 
@@ -20,7 +21,7 @@ const mutations = {
         Object.keys(state).forEach(function (key) {
             if (key in data) {
                 state[key] = data[key]
-                lStore.set(state.lName +'.'+ key, state[key])
+                lStore.set(state.lName + '.' + key, state[key])
             }
         })
     }
@@ -29,17 +30,17 @@ const mutations = {
 
 const actions = {
 
-    load (context) {
-        Apios.get('user/read/').then(res => {
-            context.commit('set', res.data.item)
+    load (con) {
+        Apios.get(con.state.url + 'read/').then(res => {
+            con.commit('set', res.data.item)
         })
     },
 
-    edit (context, form) {
+    edit (con, form) {
         return new Promise((resolve, reject) => {
-            var obj = Object.assign({}, context.state, form)
-            Apios.post('user/edit/', obj).then(res => {
-                context.commit('set', res.data.item)
+            var obj = Object.assign({}, con.state, form)
+            Apios.post(con.state.url + 'edit/', obj).then(res => {
+                con.commit('set', res.data.item)
                 resolve()
             }).catch(err => {
                 reject(err)
