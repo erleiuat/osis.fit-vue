@@ -45,18 +45,6 @@ export default {
         this.$i18n.locale = this.$store.state.app.lang
         this.$vuetify.theme.dark = VueCookies.get('themeDark')
         this.$store.state.app.drawer = this.$vuetify.breakpoint.lgAndUp
-
-        this.$store.dispatch('auth/check').then(() => {
-            if (this.$route.name === 'start') this.$router.push({ name: 'dashboard' })
-        }).catch(() => {
-            if (this.$route.name === 'start') this.$router.push({ name: 'welcome' })
-        })
-
-        this.$router.beforeResolve((to, from, next) => {
-            if (this.$store.getters['auth/status']) next()
-            else if (!to.meta.authRequired) next()
-            else this.$router.push({ name: 'auth', query: { target: to.name } })
-        })
     },
 
     mounted () {

@@ -1,7 +1,7 @@
 <template>
     <v-navigation-drawer v-model="drawer" app clipped floating>
 
-        <AuthDrawer v-if="$store.getters['auth/status']" />
+        <AuthDrawer v-if="$store.getters['auth/is']" />
 
         <NoAuthDrawer v-else />
 
@@ -15,7 +15,7 @@
                         <v-list-item-title>{{ $t('view.help.title') }}</v-list-item-title>
                     </v-list-item-content>
                 </v-list-item>
-                <v-list-item :to="{ name: 'auth.logout' }" v-if="$store.getters['auth/status']" link>
+                <v-list-item :to="{ name: 'auth.logout' }" v-if="$store.getters['auth/is']" link>
                     <v-list-item-icon>
                         <v-icon>lock</v-icon>
                     </v-list-item-icon>

@@ -70,7 +70,7 @@ export default {
             this.sending = true
 
             this.$store.dispatch('auth/login', this.fd).then(r => {
-                this.$router.push({ name: 'auth', query: { target: this.$route.query.target } })
+                this.$router.push(this.$route.query.target)
             }).catch(r => {
                 switch (r) {
                 case 'password_wrong':

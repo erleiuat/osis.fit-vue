@@ -15,5 +15,6 @@
         "default": "Something went wrong. Please contact Support.",
         "save": "Saving failed",
         "load": "Error loading data"
-    }
+    },
+    "premiumOnly": "You need Premium for this"
 }

@@ -18,16 +18,14 @@ export default {
     methods: {
 
         check () {
-            this.$store.dispatch('auth/check').then(r => {
-                if (this.$route.name === 'auth.logout') return
-                this.$router.push({ name: this.$route.query.target || 'dashboard' })
-            }).catch(r => {
-                if (this.$route.name === 'auth.verify') return
-                if (this.$route.name === 'auth.register') return
-                if (this.$route.name === 'auth.login') return
-                if (this.$route.name === 'auth.forgotten') return
-                this.$router.push({ name: 'auth.login' })
-            })
+            if (this.$route.name === 'auth.logout') return
+            else if (this.$route.name === 'auth.verify') return
+            else if (this.$route.name === 'auth.register') return
+            else if (this.$route.name === 'auth.forgotten') return
+            else {
+                var target = (this.$route.query.target || { name: 'dashboard' })
+                this.$router.push({ name: 'auth.login', query: {target: target} })
+            }
         }
 
     },

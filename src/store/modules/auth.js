@@ -1,58 +1,90 @@
 import Apios from '@/plugins/Apios'
 import VueCookies from 'vue-cookies'
 import lStore from '@/plugins/lStore'
+import router from '@/router/'
 
 const state = {
     url: 'auth/',
-    status: false,
+
+    authorized: false,
     accessToken: null,
     refreshToken: null,
+    premium: null,
     user: {
         id: null,
         mail: null,
-        level: null,
-        premium: null
+        level: null
     }
 
 }
 
 const getters = {
-    status: state => {
-        return state.status
+
+    is: state => {
+        return state.authorized
     },
+
+    check: state => {
+        if (state.authorized) return 'authorized'
+        state.refreshToken = VueCookies.get('refreshToken')
+        if (!state.refreshToken) return 'unauthorized'
+        state.accessToken = VueCookies.get('accessToken')
+        if (!state.accessToken) return 'expired'
+        return 'available'
+    },
+
     premium: state => {
-        if (!state.user) return false
-        if (typeof state.user.premium !== 'boolean') return false
-        if (state.user.premium === true) return true
-        return false
+        if (!state.premium) return true
+        else if (state.premium.active) return true
+        else return false
+    },
+
+    billing: state => {
+        if (!state.premium) return {
+            active: false,
+            subscription: false,
+            plan: false
+        }
+        else return state.premium
     }
+
 }
 
 const mutations = {
 
-    placeAuth: (state, tokens) => {
-        var dec1 = JSON.parse(window.atob((tokens.access.split('.')[1]).replace('-', '+').replace('_', '/')))
-        var dec2 = JSON.parse(window.atob((tokens.refresh.split('.')[1]).replace('-', '+').replace('_', '/')))
+    place: (state) => {
 
-        VueCookies.set('accessToken', tokens.access, new Date(dec1.exp * 1000))
-        VueCookies.set('refreshToken', tokens.refresh, new Date(dec2.exp * 1000))
-        Apios.defaults.headers.common['Authorization'] = 'Bearer ' + tokens.access
+        var tAccess = state.accessToken
+        var tRefresh = state.refreshToken
 
-        state.accessToken = tokens.access
-        state.refreshToken = tokens.refresh
-        state.user = dec1.data.user
-        state.status = true
+        var dRefresh = JSON.parse(window.atob((tRefresh.split('.')[1]).replace('-', '+').replace('_', '/')))
+        var dAccess = JSON.parse(window.atob((tAccess.split('.')[1]).replace('-', '+').replace('_', '/')))
+
+        VueCookies.set('accessToken', tAccess, new Date(dAccess.exp * 1000))
+        VueCookies.set('refreshToken', tRefresh, new Date(dRefresh.exp * 1000))
+
+        Apios.defaults.headers.common['Authorization'] = 'Bearer ' + tAccess
+
+        state.user = dAccess.data.user
+        state.authorized = true
+
+        if (!dAccess.data.premium || !dAccess.data.premium.active) {
+            router.getRoutes('noPremium').then(() => {
+                state.premium = dAccess.data.premium
+            })
+        } else state.premium = dAccess.data.premium
+
     },
 
-    removeAuth: (state) => {
+    remove: (state) => {
         lStore.clear()
-        VueCookies.remove('accessToken')
         VueCookies.remove('refreshToken')
-        Apios.defaults.headers.common['Authorization'] = null
-        state.accessToken = null
+        VueCookies.remove('accessToken')
         state.refreshToken = null
+        state.accessToken = null
+        Apios.defaults.headers.common['Authorization'] = null
+        state.authorized = false
         state.user = null
-        state.status = false
     }
 
 }
@@ -60,32 +92,26 @@ const mutations = {
 const actions = {
 
     /* eslint prefer-promise-reject-errors: ["error", {"allowEmptyReject": true}] */
+
     check (con) {
-        return new Promise((resolve, reject) => {
-            var tRefresh = VueCookies.get('refreshToken')
-            if (!tRefresh) reject()
-            else {
-                var tAccess = VueCookies.get('accessToken')
-                if (tAccess) {
-                    con.commit('placeAuth', { access: tAccess, refresh: tRefresh })
-                    resolve()
-                } else con.dispatch('refresh', tRefresh).then(r => {
-                    resolve()
-                }).catch(err => {
-                    con.dispatch('logout')
-                    reject(err)
-                })
-            }
-        })
+        con.state.refreshToken = VueCookies.get('refreshToken')
+        if (!con.state.refreshToken) con.commit('remove')
+        else {
+            con.state.accessToken = VueCookies.get('accessToken')
+            if (!con.state.accessToken) con.dispatch('refresh')
+        }
     },
 
-    refresh (con, token) {
+    refresh (con) {
         return new Promise((resolve, reject) => {
-            if(!token) token = VueCookies.get('refreshToken')
-            Apios.post(con.state.url + 'refresh/', { token: token }).then(res => {
-                con.commit('placeAuth', res.data.tokens)
+            var data = { token: con.state.refreshToken }
+            Apios.post(con.state.url + 'refresh/', data).then(res => {
+                con.state.accessToken = res.data.tokens.access
+                con.state.refreshToken = res.data.tokens.refresh
+                con.commit('place')
                 resolve()
             }).catch(err => {
+                con.commit('remove')
                 reject(err)
             })
         })
@@ -94,7 +120,9 @@ const actions = {
     login (con, form) {
         return new Promise((resolve, reject) => {
             Apios.post(con.state.url, form).then(res => {
-                con.commit('placeAuth', res.data.tokens)
+                con.state.accessToken = res.data.tokens.access
+                con.state.refreshToken = res.data.tokens.refresh
+                con.commit('place')
                 resolve()
             }).catch(err => {
                 reject(err)
@@ -109,7 +137,7 @@ const actions = {
             }).catch(err => {
                 reject(err)
             }).finally(() => {
-                con.commit('removeAuth')
+                con.commit('remove')
             })
         })
     },

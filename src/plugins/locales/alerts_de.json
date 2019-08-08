@@ -15,5 +15,6 @@
         "default": "Etwas ging schief. Bitte kontaktiere den Support.",
         "save": "Speichern fehlgeschlagen",
         "load": "Fehler beim Laden von Daten"
-    }
+    },
+    "premiumOnly": "Dafür benötigst du Premium"
 }

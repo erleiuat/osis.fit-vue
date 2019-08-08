@@ -62,8 +62,8 @@ export default {
         setSession () {
             this.cbi.setPortalSession(function () {
                 return Apios.get('billing/premium/portal/').then((res) => res.data.items)
-            });
-            this.portal = this.cbi.createChargebeePortal();
+            })
+            this.portal = this.cbi.createChargebeePortal()
         },
 
         openPortal () {
@@ -72,7 +72,7 @@ export default {
                 close () {
                     vm.$store.dispatch('auth/refresh')
                 }
-            });
+            })
         }
 
     },

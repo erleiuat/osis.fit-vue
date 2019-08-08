@@ -1,13 +1,8 @@
+
 module.exports = [
     {
         path: '/',
         name: 'start',
-        meta: { authRequired: false }
-    },
-    {
-        name: 'welcome',
-        path: '/welcome',
-        component: () => import('@/views/general/Welcome'),
         meta: { authRequired: false }
     },
     {

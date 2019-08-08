@@ -14,7 +14,6 @@
             <template v-slot:activator>
                 <v-list-item-title>{{ $t('view.'+items.i2.to+'.title') }}</v-list-item-title>
             </template>
-
             <v-list-item v-for="(item,key) in items.i2.items" :to="{name: item.to}" :key="key" link>
                 <v-list-item-title>{{ $t('view.'+(item.title || item.to)+'.title') }}</v-list-item-title>
                 <v-list-item-icon>
@@ -25,10 +24,14 @@
 
         <v-list-item v-for="item in items.i3" :to="{name: item.to}" :key="item.to" link>
             <v-list-item-icon>
-                <v-icon>{{ item.icon }}</v-icon>
+                <v-icon :color="item.color ? item.color : null">
+                    {{ item.icon }}
+                </v-icon>
             </v-list-item-icon>
             <v-list-item-content>
-                <v-list-item-title>{{ $t('view.'+item.to+'.title') }}</v-list-item-title>
+                <v-list-item-title>
+                    {{ $t('view.'+item.to+'.title') }}
+                </v-list-item-title>
             </v-list-item-content>
         </v-list-item>
 
@@ -42,8 +45,6 @@ export default {
     computed: {
 
         items () {
-            var premium = this.$store.getters['auth/premium']
-
             var items1 = {
                 dashboard: { to: 'dashboard', icon: 'dashboard' },
                 calories: { to: 'calories', icon: 'restaurant' },
@@ -60,18 +61,15 @@ export default {
                     browse: { to: 'food.browse', icon: 'search' }
                 }
             }
-            if (!premium) item2 = {
-                to: 'food',
-                icon: 'dashboard',
-                items: {
-                    own: { title: 'food.own', to: 'food.own', icon: 'folder' },
-                    favorites: { title: 'food.favorites', to: 'premium', icon: 'favorite' },
-                    browse: { title: 'food.browse', to: 'premium', icon: 'search' }
-                }
-            }
 
             var items3 = {
                 settings: { to: 'settings', icon: 'settings' }
+            }
+
+            if (!this.$store.getters['auth/premium']) {
+                items3['premium'] = {
+                    to: 'premium', icon: 'star', color: 'yellow'
+                }
             }
 
             return {
