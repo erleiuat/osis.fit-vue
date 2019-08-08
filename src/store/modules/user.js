@@ -37,7 +37,17 @@ const actions = {
 
     edit (con, form) {
         return new Promise((resolve, reject) => {
-            var obj = Object.assign({}, con.state, form)
+
+            var data = {
+                firstname: con.store.firstname,
+                lastname: con.store.lastname,
+                birthdate: con.store.birthdate,
+                height: con.store.height,
+                gender: con.store.gender,
+                aims: con.store.aims
+            }
+
+            var obj = Object.assign({}, data, form)
             Apios.post(con.state.url + 'edit/', obj).then(res => {
                 con.commit('set', res.data.item)
                 resolve()
