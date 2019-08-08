@@ -25,7 +25,7 @@
             <v-layout row wrap align-center v-if="value && !processing" style="min-height: 200px;" key="2">
                 <v-flex xs12 pt-0 pb-0>
                     <v-card>
-                        <v-img :src="value.path.large" :lazy-src="value.path.lazy" min-height="200">
+                        <v-img :src="value.path.medium" :lazy-src="value.path.lazy" min-height="200">
                             <template v-slot:placeholder>
                                 <v-layout fill-height align-center justify-center ma-0>
                                     <v-progress-circular indeterminate />
