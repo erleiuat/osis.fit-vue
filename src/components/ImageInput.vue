@@ -98,7 +98,17 @@ export default {
         },
 
         download () {
-            window.open(this.value.path.original, '_blank')
+
+            var element = document.createElement('a');
+            element.setAttribute('href', this.value.path.original);
+            element.setAttribute('target', '_blank');
+            element.setAttribute('download', this.value.name+"."+this.value.mime);
+            element.style.display = 'none';
+
+            document.body.appendChild(element);
+            element.click();
+            document.body.removeChild(element);
+
         },
 
         remove () {
