@@ -53,7 +53,6 @@ const getters = {
 const mutations = {
 
     place: (state) => {
-
         var tAccess = state.accessToken
         var tRefresh = state.refreshToken
 
@@ -68,11 +67,7 @@ const mutations = {
         state.user = dAccess.data.user
         state.authorized = true
 
-        if (!dAccess.data.premium || !dAccess.data.premium.active) {
-            router.getRoutes('noPremium').then(() => {
-                state.premium = dAccess.data.premium
-            })
-        } else state.premium = dAccess.data.premium
+        state.premium = dAccess.data.premium
 
     },
 

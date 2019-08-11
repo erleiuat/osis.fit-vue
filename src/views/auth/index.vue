@@ -24,7 +24,7 @@ export default {
             else if (this.$route.name === 'auth.forgotten') return
             else {
                 var target = (this.$route.query.target || { name: 'dashboard' })
-                this.$router.push({ name: 'auth.login', query: {target: target} })
+                this.$router.push({ name: 'auth.login', query: { target: target } })
             }
         }
 

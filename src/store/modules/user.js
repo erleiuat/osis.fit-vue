@@ -37,14 +37,13 @@ const actions = {
 
     edit (con, form) {
         return new Promise((resolve, reject) => {
-
             var data = {
-                firstname: con.store.firstname,
-                lastname: con.store.lastname,
-                birthdate: con.store.birthdate,
-                height: con.store.height,
-                gender: con.store.gender,
-                aims: con.store.aims
+                firstname: con.state.firstname,
+                lastname: con.state.lastname,
+                birthdate: con.state.birthdate,
+                height: con.state.height,
+                gender: con.state.gender,
+                aims: con.state.aims
             }
 
             var obj = Object.assign({}, data, form)

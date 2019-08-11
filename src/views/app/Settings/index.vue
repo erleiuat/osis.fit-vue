@@ -13,6 +13,12 @@
             </v-flex>
         </v-layout>
 
+        <v-layout wrap>
+            <v-flex xs12>
+                <Premium />
+            </v-flex>
+        </v-layout>
+
         <v-layout wrap justify-space-around pa-2>
             <v-flex xs12>
                 <h3 class="display-2">{{ $t('account') }}</h3>
@@ -42,6 +48,7 @@
 <script>
 import EditAims from '@/views/app/Settings/Aims'
 import EditProfile from '@/views/app/Settings/Profile'
+import Premium from '@/views/app/Settings/Premium'
 import i18n from '@/plugins/i18n'
 import VueCookies from 'vue-cookies'
 
@@ -49,7 +56,7 @@ export default {
     name: 'Settings',
 
     components: {
-        EditAims, EditProfile
+        EditAims, EditProfile, Premium
     },
 
     data () {
