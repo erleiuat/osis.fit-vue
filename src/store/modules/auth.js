@@ -42,18 +42,15 @@ const getters = {
     },
 
     premium: state => {
-        if (!state.premium) return true
-        else if (state.premium.active) return true
-        else return false
+        if (!state.subscription) return false
+        if (!state.subscription.id) return false
+        if (state.subscription.deleted) return false
+        if (state.subscription.status === 'active') return true
+        return false
     },
 
-    billing: state => {
-        if (!state.premium) return {
-            active: false,
-            subscription: false,
-            plan: false
-        }
-        else return state.premium
+    subscription: state => {
+        return state.subscription
     }
 
 }
