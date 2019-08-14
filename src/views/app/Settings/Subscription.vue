@@ -23,7 +23,7 @@
         </v-card-text>
 
         <v-card-actions>
-            <v-btn @click="openPortal()" :loading="loadingScript" depressed v-if="premium">
+            <v-btn @click="openPortal()" :loading="loadingScript" v-if="sub.id">
                 {{ $t('btnEdit') }}
             </v-btn>
             <v-btn @click="openCheckout()" :loading="loadingScript" block v-else>
@@ -72,14 +72,14 @@ export default {
                 Chargebee.init({ site: 'osis-fit-test' })
                 vm.cbi = Chargebee.getInstance()
                 vm.loadingScript = false
-                if (vm.premium) vm.setSession()
+                if (vm.sub.id) vm.setSession()
             }
 
             document.getElementsByTagName('head')[0].appendChild(script)
         } else {
             vm.cbi = Chargebee.getInstance()
             vm.loadingScript = false
-            if (vm.premium) vm.setSession()
+            if (vm.sub.id) vm.setSession()
         }
     },
 

@@ -38,8 +38,13 @@
                                 {{ $t('calories') }}: {{ total }}
                             </v-flex>
 
-                            <v-flex xs12>
+                            <v-flex xs12 v-if="$store.getters['auth/premium']">
                                 <ImageInput v-model="fd.image" />
+                            </v-flex>
+                            <v-flex xs12 v-else pa-2>
+                                <v-btn block :to="{name: 'premium'}">
+                                    {{ $t('needsPremium') }}
+                                </v-btn>
                             </v-flex>
 
                             <v-flex xs12>
@@ -164,6 +169,7 @@ export default {
     i18n: {
         messages: {
             en: {
+                needsPremium: 'Add Images with premium!',
                 delete: 'Delete',
                 titleAdd: 'Add Food',
                 titleEdit: 'Edit Food',
@@ -171,6 +177,7 @@ export default {
                 calories: 'Calories Total'
             },
             de: {
+                needsPremium: 'Füge Bilder mit Premium hinzu!',
                 delete: 'Löschen',
                 titleAdd: 'Essware hinzufügen',
                 titleEdit: 'Essware bearbeiten',
