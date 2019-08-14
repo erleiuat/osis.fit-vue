@@ -15,7 +15,7 @@
 
         <v-layout wrap>
             <v-flex xs12>
-                <Premium />
+                <Subscription />
             </v-flex>
         </v-layout>
 
@@ -48,7 +48,7 @@
 <script>
 import EditAims from '@/views/app/Settings/Aims'
 import EditProfile from '@/views/app/Settings/Profile'
-import Premium from '@/views/app/Settings/Premium'
+import Subscription from '@/views/app/Settings/Subscription'
 import i18n from '@/plugins/i18n'
 import VueCookies from 'vue-cookies'
 
@@ -56,7 +56,7 @@ export default {
     name: 'Settings',
 
     components: {
-        EditAims, EditProfile, Premium
+        EditAims, EditProfile, Subscription
     },
 
     data () {

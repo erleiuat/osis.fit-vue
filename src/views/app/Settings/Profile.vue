@@ -7,11 +7,11 @@
 
         <v-card-text v-if="!edit">
             <v-layout row wrap overflow-hidden>
-                <v-flex xs6 sm4>
+                <v-flex xs6>
                     <span class="subheading">{{ $t('firstname') }}</span><br />
                     <span class="headline">{{ $store.state.user.firstname || '-' }}</span>
                 </v-flex>
-                <v-flex xs6 sm4>
+                <v-flex xs6>
                     <span class="subheading">{{ $t('lastname') }}</span><br />
                     <span class="headline">{{ $store.state.user.lastname || '-' }}</span>
                 </v-flex>
@@ -26,10 +26,6 @@
                 <v-flex xs6 sm4>
                     <span class="subheading">{{ $t('birthdate') }}</span><br />
                     <span class="headline">{{ $store.state.user.birthdate || '-' }}</span>
-                </v-flex>
-                <v-flex xs6 sm4>
-                    <span class="subheading font-italic">{{ $t('mail') }}</span><br />
-                    <span class="caption font-italic">{{ $store.state.auth.user.mail }}</span>
                 </v-flex>
             </v-layout>
         </v-card-text>
@@ -46,16 +42,16 @@
                     <v-flex xs6>
                         <v-text-field :label="$t('lastname')" v-model="fd.lastname" :rules="rule.require" type="text" />
                     </v-flex>
-                    <v-flex xs6>
+                    <v-flex xs6 sm4>
                         <v-text-field :label="$t('height')" v-model="fd.height" :rules="rule.require" type="number" />
                     </v-flex>
-                    <v-flex xs6>
+                    <v-flex xs6 sm4>
                         <v-select :label="$t('gender')" v-model="fd.gender" :items="genders" :rules="rule.require" />
                     </v-flex>
-                    <v-flex xs12>
+                    <v-flex xs12 sm4>
                         <v-menu ref="menu" v-model="menu" :close-on-content-click="false" transition="scale-transition" offset-y full-width min-width="290px">
                             <template v-slot:activator="{ on }">
-                                <v-text-field v-model="fd.birthdate" :label="$t('birthdate')" prepend-icon="event" readonly v-on="on"></v-text-field>
+                                <v-text-field v-model="fd.birthdate" :label="$t('birthdate')" append-icon="event" readonly v-on="on"></v-text-field>
                             </template>
                             <v-date-picker v-model="fd.birthdate" ref="picker" :locale="$store.state.app.lang" @change="$refs.menu.save(fd.birthdate)"></v-date-picker>
                         </v-menu>
