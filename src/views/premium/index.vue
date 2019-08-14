@@ -36,7 +36,7 @@
         </v-layout>
 
         <v-layout wrap>
-            <v-btn :loading="loadingScript" color="primary" block @click="openCheckout()">
+            <v-btn color="primary" block :to="{name: 'settings'}">
                 {{ $t('getPremium') }}
             </v-btn>
         </v-layout>
@@ -50,13 +50,6 @@ import Apios from '@/plugins/Apios'
 export default {
     name: 'Overview',
 
-    data () {
-        return {
-            cbi: null,
-            loadingScript: true
-        }
-    },
-
     computed: {
         features () {
             return [
@@ -67,51 +60,6 @@ export default {
                 [this.$t('features.f5'), true, false]
             ]
         }
-    },
-
-    mounted () {
-        if (!document.getElementById('chargebee_js_script')) {
-            var script = document.createElement('script')
-            script.id = 'chargebee_js_script'
-            script.src = 'https://js.chargebee.com/v2/chargebee.js'
-            script.async = true
-
-            var vm = this
-            script.onload = function () {
-                Chargebee.init({ site: 'osis-fit-test' })
-                vm.cbi = Chargebee.getInstance()
-                vm.loadingScript = false
-            }
-
-            document.getElementsByTagName('head')[0].appendChild(script)
-        } else {
-            this.cbi = Chargebee.getInstance()
-            this.loadingScript = false
-        }
-    },
-
-    methods: {
-
-        openCheckout () {
-            var vm = this
-            vm.cbi.openCheckout({
-                hostedPage: () => {
-                    return Apios.get('billing/premium/checkout/').then((res) => res.data.items)
-                },
-                success: function (hostedPageId) {
-                    Apios.post('billing/premium/apply/', {
-                        token: hostedPageId
-                    }).then(res => {
-                        vm.$store.dispatch('auth/refresh')
-                        vm.$router.push({name: 'dashboard'})
-                    })
-                },
-                error: function (error) {
-                    vm.$notify({ type: 'error', title: vm.$t('alert.error.save'), text: error })
-                }
-            })
-        }
-
     },
 
     i18n: {

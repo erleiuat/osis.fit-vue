@@ -17,7 +17,7 @@
                 </v-flex>
                 <v-flex xs6 sm4>
                     <span class="subheading">{{ $t('state') }}</span><br />
-                    <span class="headline">{{ sub.status ? sub.status : $t('inactive') }}</span>
+                    <span class="headline">{{ premium ? $t('active') : $t('inactive') }}</span>
                 </v-flex>
             </v-layout>
         </v-card-text>

@@ -46,6 +46,7 @@ const getters = {
         if (!state.subscription.id) return false
         if (state.subscription.deleted) return false
         if (state.subscription.status === 'active') return true
+        if (state.subscription.status === 'non_renewing') return true
         return false
     },
 
