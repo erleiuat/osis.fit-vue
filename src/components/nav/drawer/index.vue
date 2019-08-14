@@ -15,12 +15,12 @@
                         <v-list-item-title>{{ $t('view.help.title') }}</v-list-item-title>
                     </v-list-item-content>
                 </v-list-item>
-                <v-list-item :to="{ name: 'auth.logout' }" v-if="$store.getters['auth/is']" link>
+                <v-list-item :to="{ name: 'logout' }" v-if="$store.getters['auth/is']" link>
                     <v-list-item-icon>
                         <v-icon>lock</v-icon>
                     </v-list-item-icon>
                     <v-list-item-content>
-                        <v-list-item-title>{{ $t('view.auth.logout.title') }}</v-list-item-title>
+                        <v-list-item-title>{{ $t('view.logout.title') }}</v-list-item-title>
                     </v-list-item-content>
                 </v-list-item>
                 <v-list-item :to="{ name: 'terms' }" link>

@@ -19,12 +19,6 @@ module.exports = [{
             meta: { authRequired: false }
         },
         {
-            path: 'logout',
-            name: 'auth.logout',
-            component: () => import('@/views/auth/Logout'),
-            meta: { authRequired: true }
-        },
-        {
             path: 'register',
             name: 'auth.register',
             component: () => import('@/views/auth/Register'),

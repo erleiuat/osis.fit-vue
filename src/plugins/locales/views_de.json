@@ -39,17 +39,17 @@
         "title": "Einstellungen",
         "description": ""
     },
+    "logout": {
+        "title": "Abmelden",
+        "description": ""
+    },
     "auth": {
         "title": "Authentifizierung",
         "description": "",
         "login": {
             "title": "Anmelden",
             "description": ""
-        },
-        "logout": {
-            "title": "Abmelden",
-            "description": ""
-        },
+        },        
         "register": {
             "title": "Registrieren",
             "description": ""

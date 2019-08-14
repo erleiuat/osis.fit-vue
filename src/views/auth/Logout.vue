@@ -1,31 +1,34 @@
 <template>
-    <v-layout row wrap justify-space-around>
+    <v-container grid-list-xl>
+        <v-layout row wrap justify-space-around>
 
-        <v-flex xs12 v-if="!doing" text-center>
-            <div class="headline pb-5">{{ $t('text') }}</div>
-        </v-flex>
+            <v-flex xs12 v-if="!doing" text-center>
+                <div class="headline pb-5">{{ $t('text') }}</div>
+            </v-flex>
 
-        <v-flex xs12 sm6 v-if="!doing" text-center>
-            <v-btn @click="logout()" block color="primary" depressed>
-                {{ $t('sure') }}
-            </v-btn>
-        </v-flex>
+            <v-flex xs12 sm6 v-if="!doing" text-center>
+                <v-btn @click="logout()" block color="primary" depressed>
+                    {{ $t('sure') }}
+                </v-btn>
+            </v-flex>
 
-        <v-flex xs12 sm6 v-if="!doing" text-center>
-            <v-btn @click="$router.go(-1)" block depressed>
-                {{ $t('btn.cancel') }}
-            </v-btn>
-        </v-flex>
+            <v-flex xs12 sm6 v-if="!doing" text-center>
+                <v-btn @click="$router.go(-1)" block depressed>
+                    {{ $t('btn.cancel') }}
+                </v-btn>
+            </v-flex>
 
-        <v-flex xs12 v-else text-center>
-            <div class="headline pb-3">{{ $t('nextTime') }}</div>
-            <div class="body-1 pb-5">{{ $t('pleaseWait') }}</div>
-        </v-flex>
+            <v-flex xs12 v-else text-center>
+                <div class="headline pb-3">{{ $t('nextTime') }}</div>
+                <div class="body-1 pb-5">{{ $t('pleaseWait') }}</div>
+            </v-flex>
 
-        <v-flex xs12>
-            <v-progress-linear :indeterminate="doing" :color="prgcol" height="20" />
-        </v-flex>
-    </v-layout>
+            <v-flex xs12>
+                <v-progress-linear :indeterminate="doing" :color="prgcol" height="20" />
+            </v-flex>
+
+        </v-layout>
+    </v-container>
 </template>
 
 <script>

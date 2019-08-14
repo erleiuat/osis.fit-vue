@@ -39,15 +39,15 @@
         "title": "Settings",
         "description": ""
     },
+    "logout": {
+        "title": "Logout",
+        "description": ""
+    },
     "auth": {
         "title": "Auth",
         "description": "",
         "login": {
             "title": "Login",
-            "description": ""
-        },
-        "logout": {
-            "title": "Logout",
             "description": ""
         },
         "register": {

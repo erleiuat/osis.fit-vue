@@ -60,4 +60,11 @@ module.exports = [{
     component: () => import('@/views/app/Settings/'),
     meta: { authRequired: true }
 
+}, {
+
+    name: 'logout',
+    path: '/logout',
+    component: () => import('@/views/auth/Logout'),
+    meta: { authRequired: true }
+
 }]
