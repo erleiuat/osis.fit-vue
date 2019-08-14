@@ -18,13 +18,12 @@ export default {
     methods: {
 
         check () {
-            if (this.$route.name === 'auth.logout') return
-            else if (this.$route.name === 'auth.verify') return
-            else if (this.$route.name === 'auth.register') return
-            else if (this.$route.name === 'auth.forgotten') return
-            else {
-                var target = (this.$route.query.target || { name: 'dashboard' })
-                this.$router.push({ name: 'auth.login', query: { target: target } })
+            if (this.$store.getters['auth/check'] === 'authorized') {
+                if (this.$route.name === 'auth.logout') return 
+                else if (this.$route.query.target) this.$router.push({ name: target })
+                else this.$router.push({ name: 'dashboard' })
+            } else if (this.$route.name === 'auth') {
+                this.$router.push({ name: 'auth.login' })
             }
         }
 

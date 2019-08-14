@@ -7,13 +7,21 @@ const state = {
     url: 'auth/',
 
     authorized: false,
-    accessToken: null,
-    refreshToken: null,
-    premium: null,
-    user: {
+    level: null,
+    token: {
+        access: null,
+        refresh: null
+    },
+    subscription: {
         id: null,
-        mail: null,
-        level: null
+		status: null,
+		deleted: null,
+		expiration: null,
+		plan: null
+    },
+    account: {
+        id: null,
+        mail: null
     }
 
 }
@@ -26,10 +34,10 @@ const getters = {
 
     check: state => {
         if (state.authorized) return 'authorized'
-        state.refreshToken = VueCookies.get('refreshToken')
-        if (!state.refreshToken) return 'unauthorized'
-        state.accessToken = VueCookies.get('accessToken')
-        if (!state.accessToken) return 'expired'
+        state.token.refresh = VueCookies.get('refreshToken')
+        if (!state.token.refresh) return 'unauthorized'
+        state.token.access = VueCookies.get('accessToken')
+        if (!state.token.access) return 'expired'
         return 'available'
     },
 
@@ -53,8 +61,9 @@ const getters = {
 const mutations = {
 
     place: (state) => {
-        var tAccess = state.accessToken
-        var tRefresh = state.refreshToken
+
+        var tAccess = state.token.access
+        var tRefresh = state.token.refresh
 
         var dRefresh = JSON.parse(window.atob((tRefresh.split('.')[1]).replace('-', '+').replace('_', '/')))
         var dAccess = JSON.parse(window.atob((tAccess.split('.')[1]).replace('-', '+').replace('_', '/')))
@@ -64,10 +73,9 @@ const mutations = {
 
         Apios.defaults.headers.common['Authorization'] = 'Bearer ' + tAccess
 
-        state.user = dAccess.data.user
+        state.account = dAccess.data.account
+        state.subscription = dAccess.data.subscription
         state.authorized = true
-
-        state.premium = dAccess.data.premium
 
     },
 
@@ -75,11 +83,12 @@ const mutations = {
         lStore.clear()
         VueCookies.remove('refreshToken')
         VueCookies.remove('accessToken')
-        state.refreshToken = null
-        state.accessToken = null
+        state.token.refresh = null
+        state.token.access = null
         Apios.defaults.headers.common['Authorization'] = null
         state.authorized = false
-        state.user = null
+        state.subscription = null
+        state.account = null
     }
 
 }
@@ -89,20 +98,20 @@ const actions = {
     /* eslint prefer-promise-reject-errors: ["error", {"allowEmptyReject": true}] */
 
     check (con) {
-        con.state.refreshToken = VueCookies.get('refreshToken')
-        if (!con.state.refreshToken) con.commit('remove')
+        con.state.token.refresh = VueCookies.get('refreshToken')
+        if (!con.state.token.refresh) con.commit('remove')
         else {
-            con.state.accessToken = VueCookies.get('accessToken')
-            if (!con.state.accessToken) con.dispatch('refresh')
+            con.state.token.access = VueCookies.get('accessToken')
+            if (!con.state.token.access) con.dispatch('refresh')
         }
     },
 
     refresh (con) {
         return new Promise((resolve, reject) => {
-            var data = { token: con.state.refreshToken }
+            var data = { token: con.state.token.refresh }
             Apios.post(con.state.url + 'refresh/', data).then(res => {
-                con.state.accessToken = res.data.tokens.access
-                con.state.refreshToken = res.data.tokens.refresh
+                con.state.token.access = res.data.tokens.access
+                con.state.token.refresh = res.data.tokens.refresh
                 con.commit('place')
                 resolve()
             }).catch(err => {
@@ -115,8 +124,8 @@ const actions = {
     login (con, form) {
         return new Promise((resolve, reject) => {
             Apios.post(con.state.url, form).then(res => {
-                con.state.accessToken = res.data.tokens.access
-                con.state.refreshToken = res.data.tokens.refresh
+                con.state.token.access = res.data.tokens.access
+                con.state.token.refresh = res.data.tokens.refresh
                 con.commit('place')
                 resolve()
             }).catch(err => {
@@ -127,7 +136,7 @@ const actions = {
 
     logout (con) {
         return new Promise((resolve, reject) => {
-            Apios.post(con.state.url + 'logout/', { token: con.state.refreshToken }).then(() => {
+            Apios.post(con.state.url + 'logout/', { token: con.state.token.refresh }).then(() => {
                 resolve()
             }).catch(err => {
                 reject(err)

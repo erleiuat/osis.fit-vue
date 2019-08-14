@@ -53,7 +53,7 @@ router.beforeEach((to, from, next) => {
         if (!start) next()
         else router.push({ name: 'welcome' })
     else
-        router.push({ name: 'auth', query: { target: to } })
+        router.push({ name: 'auth.login', query: { target: to.name } })
 
     store.dispatch('auth/check')
 })
