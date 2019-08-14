@@ -31,7 +31,7 @@ apios.interceptors.response.use(res => {
 }, err => {
     NProgress.done()
     if (err.constructor.name === 'Cancel') return Promise.reject(err)
-    if (!err.response) return Promise.reject(Error('noResponse'))
+    if (!err.response) return Promise.reject(err)
     pendingCalls[err.response.config.url] = null
     if (!err.response.data) return Promise.reject(Error('noData'))
     if (!err.response.data.condition) return Promise.reject(Error('noCondition'))

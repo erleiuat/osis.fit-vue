@@ -7,13 +7,13 @@
                     <div class="headline">{{ $t('browse') }}</div>
                 </v-flex>
                 <v-flex shrink>
-                    <v-select v-model="searchdb" :items="databases" solo hide-details flat />
+                    <v-select v-if="dblist" v-model="searchDB" :items="dblist" solo hide-details flat />
                 </v-flex>
                 <v-flex xs12>
                     <v-text-field v-model="searchQuery" :readonly="loading" hide-details append-icon="search" @input="changeIn()" />
                 </v-flex>
                 <v-flex xs12 v-show="false">
-                   <v-btn type="submit"></v-btn>
+                    <v-btn type="submit"></v-btn>
                 </v-flex>
             </v-layout>
         </form>
@@ -37,7 +37,7 @@
                             </v-flex>
                             <v-flex xs2>
                                 <v-btn icon>
-                                    <v-icon large color="yellow" v-if="isStarred(item.id)">
+                                    <v-icon large color="yellow" v-if="false">
                                         star
                                     </v-icon>
                                     <v-icon large color="yellow" v-else>
@@ -69,71 +69,33 @@ export default {
             loading: false,
             searchQuery: this.$route.query.s,
             searched: false,
-            results: [],
             typerTimer: null,
-            searchdb: 'sndb',
-            databases: [
-                { text: 'Schweizer Nährwertdatenbank', value: 'sndb' }
-            ]
+            results: []
         }
     },
 
     computed: {
-        getResults () {
-            if (this.searchdb === 'sndb')
-                var formatted = this.results.map(obj => {
-                    var rObj = {
-                        id: obj.foodid,
-                        title: obj.foodName,
-                        amount: '100',
-                        caloriesPer100: obj.amount,
-                        source: this.searchdb
-                    }
-                    return rObj
-                })
 
-            return formatted
+        dblist () {
+            return this.$store.getters['foodFavorite/dblist']
+        },
+
+        searchDB: {
+            get () {
+                return this.$store.getters['foodFavorite/searchdb']
+            },
+            set (item) {
+                this.$store.commit('foodFavorite/setDatabase', item)
+            }
         }
+
     },
 
     mounted () {
-        this.getFavs()
-        this.doSearch()
+        this.$store.dispatch('foodFavorite/loadDatabases')
     },
 
     methods: {
-
-        getFavs () {
-            var vm = this
-            vm.$http.post('user/food/favorite/read/').then(function (r) {
-                vm.$store.state.data.foodFavorite = r.data.foodFavorite || []
-            }).catch(function (e) {
-                vm.$notify({ type: 'error', title: vm.$t('alert.error.load') })
-            }).finally(function () {
-
-            })
-        },
-
-        isStarred (foodId) {
-            var vm = this
-            var str = vm.$store.state.data.foodFavorite
-            return str.find(o => o.id === foodId) || false
-        },
-
-        toggleFav (item) {
-            var vm = this
-            vm.$http.post('user/food/favorite/toggle/', item).then(function (r) {
-                if (r.data.added) vm.$store.state.data.foodFavorite.push(item)
-                else {
-                    var storeObj = vm.isStarred(item.id)
-                    var index = vm.$store.state.data.foodFavorite.indexOf(storeObj)
-                    if (index > -1) vm.$store.state.data.foodFavorite.splice(index, 1)
-                }
-            }).catch(function () {
-                vm.$notify({ type: 'error', title: vm.$t('alert.error.load') })
-            })
-        },
-
         changeIn () {
             this.searched = false
             clearTimeout(this.typerTimer)
@@ -142,28 +104,13 @@ export default {
             }, 800)
         },
 
-        doSearch () {
-            var vm = this
-            if (!vm.searchQuery || vm.searchQuery.length <= 2) return
-
-            vm.loading = true
-            vm.$router.push({ name: vm.$route.name, query: { s: vm.searchQuery } })
-            if (vm.searchdb === 'sndb') {
-                var path = 'https://api.webapp.prod.blv.foodcase-services.com/BLV_WebApp_WS/webresources/BLV/foods?search=' +
-                    vm.searchQuery + '&component=25640&operator=%3E&amount=0&lang=de'
-
-                vm.$http.get(path).then(function (r) {
-                    if (r.data.length > 0) vm.results = r.data
-                    else vm.results = []
-                }).catch(function () {
-                    vm.$notify({ type: 'error', title: vm.$t('alert.error.load') })
-                }).finally(function () {
-                    vm.searched = true
-                    vm.loading = false
-                })
-            }
+        doSearch() {
+            this.$store.dispatch('foodFavorite/search', this.searchQuery).then(res => {
+                this.results = res
+            }).catch(err => {
+                console.log(err)
+            })
         }
-
     },
 
     i18n: {
