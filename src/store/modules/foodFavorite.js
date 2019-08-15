@@ -47,7 +47,7 @@ const actions = {
 
     search (con, query) {
         return new Promise((resolve, reject) => {
-            Apios.post(con.state.url + 'search/', {query: query}).then(res => {
+            Apios.post(con.state.url + 'search/', { query: query }).then(res => {
                 resolve(res.data)
             }).catch(err => {
                 reject(err)

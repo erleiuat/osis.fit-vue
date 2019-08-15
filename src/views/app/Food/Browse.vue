@@ -22,8 +22,10 @@
         </v-layout>
 
         <v-layout row wrap v-if="results.length > 0">
-            <v-flex xs12 sm6 v-for="(item, index) in results" :key="index" @click="toggleFav(item)">
+
+            <v-flex xs6 sm4 md3 v-for="(item, index) in results" :key="index" @click="toggleFav(item)">
                 <v-card class="fill-height" ripple>
+                    <v-img v-if="item.image" class="white--text" :src="item.image" :max-height="100" />
                     <v-card-text>
                         <v-layout row wrap class="text-truncate justify-space-between fill-height">
                             <v-flex xs10 class="title">
@@ -46,6 +48,7 @@
                     </v-card-text>
                 </v-card>
             </v-flex>
+
         </v-layout>
 
         <v-layout row wrap v-if="results.length < 1 && searched">
@@ -86,6 +89,8 @@ export default {
                 this.results = res.items
             }).catch(err => {
                 this.$notify({ type: 'error', title: this.$t('alert.error.default'), text: err })
+            }).finally(() => {
+                this.searched = true
             })
         }
     },
