@@ -1,7 +1,6 @@
 import Apios from '@/plugins/Apios'
 import VueCookies from 'vue-cookies'
 import lStore from '@/plugins/lStore'
-import router from '@/router/'
 
 const state = {
     url: 'auth/',
@@ -14,10 +13,10 @@ const state = {
     },
     subscription: {
         id: null,
-		status: null,
-		deleted: null,
-		expiration: null,
-		plan: null
+        status: null,
+        deleted: null,
+        expiration: null,
+        plan: null
     },
     account: {
         id: null,
@@ -47,10 +46,11 @@ const getters = {
         if (state.subscription.deleted) return false
         if (state.subscription.status === 'active') return true
         if (state.subscription.status === 'non_renewing') return true
+        if (state.subscription.status === 'in_trial') return true
         return false
     },
 
-    subscription: state => {
+    sub: state => {
         return state.subscription
     }
 
@@ -78,7 +78,6 @@ const mutations = {
     },
 
     remove: (state) => {
-        lStore.clear()
         VueCookies.remove('refreshToken')
         VueCookies.remove('accessToken')
         state.token.refresh = null
@@ -139,6 +138,7 @@ const actions = {
             }).catch(err => {
                 reject(err)
             }).finally(() => {
+                lStore.clear()
                 con.commit('remove')
             })
         })

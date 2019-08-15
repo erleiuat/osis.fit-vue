@@ -1,6 +1,12 @@
 <template>
     <v-container :class="$vuetify.breakpoint.xs ? 'pa-0 grid-list-md': 'grid-list-lg'">
 
+        <v-layout wrap v-if="!$store.getters['auth/premium']">
+            <v-flex xs12>
+                <Subscription />
+            </v-flex>
+        </v-layout>
+
         <v-layout wrap>
             <v-flex xs12>
                 <EditAims />
@@ -13,7 +19,7 @@
             </v-flex>
         </v-layout>
 
-        <v-layout wrap>
+        <v-layout wrap v-if="$store.getters['auth/premium']">
             <v-flex xs12>
                 <Subscription />
             </v-flex>

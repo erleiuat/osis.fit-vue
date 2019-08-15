@@ -22,9 +22,9 @@
             <template slot="body" slot-scope="props">
                 <v-layout row wrap :class="$vuetify.breakpoint.mdAndUp ? 'justify-end pr-5 pb-2':'justify-center'">
                     <v-flex xs11 md6 lg5>
-                        <v-alert :type="props.item.type" class="mb-1">
+                        <v-alert :type="props.item.type" mb-1>
 
-                            <v-layout wrap align-center>
+                            <v-layout row wrap align-center pb-0 pt-0>
                                 <v-flex grow @click="props.close">
                                     {{ props.item.title }}
                                 </v-flex>

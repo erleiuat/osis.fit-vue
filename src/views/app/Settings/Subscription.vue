@@ -1,23 +1,32 @@
 <template>
-    <v-card flat :color="premium ? '' : 'yellow lighten-3'">
+    <v-card flat :color="premium ? 'success' : 'warning'" dark>
 
         <v-card-title>
             <h3 class="display-2">{{ $t('title') }}</h3>
         </v-card-title>
 
         <v-card-text>
-            <v-layout row wrap overflow-hidden>
-                <v-flex xs6 sm4>
+            <v-layout row wrap overflow-hidden v-if="sub.id">
+                <v-flex xs12 sm6>
                     <span class="subheading">{{ $t('subsNr') }}</span><br />
-                    <span class="headline">{{ sub.id || '-' }}</span>
+                    <span class="headline">{{ sub.id }}</span>
                 </v-flex>
-                <v-flex xs6 sm4>
+                <v-flex xs6>
                     <span class="subheading">{{ $t('plan') }}</span><br />
-                    <span class="headline">{{ sub.plan || '-' }}</span>
+                    <span class="headline">{{ sub.plan }}</span>
                 </v-flex>
-                <v-flex xs6 sm4>
+                <v-flex xs6>
                     <span class="subheading">{{ $t('state') }}</span><br />
-                    <span class="headline">{{ premium ? $t('active') : $t('inactive') }}</span>
+                    <span class="headline">{{ subStatus.text }}</span>
+                </v-flex>
+                <v-flex xs6>
+                    <span class="subheading">{{ subExpiry.title }}</span><br />
+                    <span class="headline">{{ subExpiry.value }}</span>
+                </v-flex>
+            </v-layout>
+            <v-layout row wrap v-else>
+                <v-flex xs12>
+                    {{ $t('youDontHave') }}
                 </v-flex>
             </v-layout>
         </v-card-text>
@@ -49,8 +58,37 @@ export default {
 
     computed: {
 
+        subExpiry () {
+            var title = this.$t('renewsOn')
+            var date = new Date(this.sub.expiration * 1000)
+            var day = date.getDate();
+            var month = date.getMonth() + 1;
+            var year = date.getFullYear();
+
+            if(this.subStatus.value !== 'active') title = this.$t('expiresOn')
+            return {
+                title: title,
+                value: day + '.' + month + '.' + year
+            }
+        },
+
+        subStatus () {
+            var doUse = 'nonExisting'
+            var sus = this.sub.status
+            if (sus === 'cancelled') doUse = 'cancelled'
+            else if (sus === 'paused') doUse = 'paused'
+            else if (sus === 'non_renewing') doUse = 'nonRenewing'
+            else if (sus === 'active') doUse = 'active'
+            else if (sus === 'in_trial') doUse = 'inTrial'
+            else if (sus === 'future') doUse = 'future'
+            return {
+                value: doUse,
+                text: this.$t('states.' + doUse)
+            }
+        },
+
         sub () {
-            return this.$store.getters['auth/subscription']
+            return this.$store.getters['auth/sub']
         },
 
         premium () {
@@ -61,7 +99,6 @@ export default {
 
     mounted () {
         var vm = this
-
         if (!document.getElementById('chargebee_js_script')) {
             var script = document.createElement('script')
             script.id = 'chargebee_js_script'
@@ -97,6 +134,9 @@ export default {
             vm.portal.open({
                 close () {
                     vm.$store.dispatch('auth/refresh')
+                },
+                error: function (error) {
+                    vm.$notify({ type: 'error', title: vm.$t('alert.error.default'), text: error })
                 }
             })
         },
@@ -112,11 +152,10 @@ export default {
                         token: hostedPageId
                     }).then(res => {
                         vm.$store.dispatch('auth/refresh')
-                        vm.$router.push({ name: 'dashboard' })
                     })
                 },
                 error: function (error) {
-                    vm.$notify({ type: 'error', title: vm.$t('alert.error.save'), text: error })
+                    vm.$notify({ type: 'error', title: vm.$t('alert.error.default'), text: error })
                 }
             })
         }
@@ -126,24 +165,44 @@ export default {
     i18n: {
         messages: {
             en: {
+                youDontHave: "You don't have a subscription yet",
                 btnEdit: 'Manage Subscription',
                 btnGet: 'Get Premium',
                 title: 'Premium',
                 subsNr: 'Subscription ID',
                 plan: 'Plan ID',
                 state: 'Status',
-                active: 'Active',
-                inactive: 'Not active'
+                expiresOn: 'Expires on',
+                renewsOn: 'Will be renewed on',
+                states: {
+                    future: 'Scheduled Start',
+                    inTrial: 'Trial',
+                    active: 'Active',
+                    nonRenewing: 'Non renewing',
+                    paused: 'Paused',
+                    cancelled: 'Cancelled',
+                    nonExisting: 'Not subscribed'
+                }
             },
             de: {
+                youDontHave: 'Du hast noch kein Abonnement',
                 btnEdit: 'Abonnement verwalten',
                 btnGet: 'Premium abbonieren',
                 title: 'Premium',
                 subsNr: 'Abonnement ID',
                 plan: 'Plan ID',
                 state: 'Status',
-                active: 'Aktiv',
-                inactive: 'Nicht aktiv'
+                expiresOn: 'Läuft ab am',
+                renewsOn: 'Erneuert sich am',
+                states: {
+                    future: 'Geplanter Start',
+                    inTrial: 'Testversion',
+                    active: 'Aktiv',
+                    nonRenewing: 'Nicht verlängernd',
+                    paused: 'Pausiert',
+                    cancelled: 'Storniert',
+                    nonExisting: 'Nicht abonniert'
+                }
             }
         }
     }
