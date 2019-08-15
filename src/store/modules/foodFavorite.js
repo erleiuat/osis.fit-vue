@@ -13,6 +13,11 @@ const getters = {
 
     all: (state) => {
         return Object.values(state.items).reverse()
+    },
+
+    id: (state) => (itemID) => {
+        if (!(itemID.toString() in state.items)) return false
+        else return state.items[itemID.toString()]
     }
 
 }
