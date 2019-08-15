@@ -44,6 +44,11 @@
 </template>
 
 <script>
+import user from '@/store/modules/user'
+import weight from '@/store/modules/weight'
+import calories from '@/store/modules/calories'
+import activity from '@/store/modules/activity'
+
 const Start = () => import('@/views/app/Dashboard/Start')
 
 const CalorieAdder = () => import('@/components/adder/Calories')
@@ -52,11 +57,6 @@ const WeightAdder = () => import('@/components/adder/Weight')
 
 const WeightChart = () => import('@/components/charts/Weight')
 const BottomNav = () => import('@/views/app/Dashboard/BottomNav')
-
-import user from "@/store/modules/user"
-import weight from "@/store/modules/weight"
-import calories from "@/store/modules/calories"
-import activity from "@/store/modules/activity"
 
 export default {
     name: 'Dashboard',

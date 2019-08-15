@@ -7,7 +7,7 @@ const state = {
     cookiesAccepted: true,
     lang: null,
     today: null
-    
+
 }
 
 const getters = {

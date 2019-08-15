@@ -16,7 +16,7 @@ const registeredModules = []
 
 store.useModule = (mod) => {
     if (!registeredModules.includes(mod.name)) {
-        store.registerModule(mod.name, mod.module);
+        store.registerModule(mod.name, mod.module)
         registeredModules.push(mod.name)
     }
 }
@@ -24,7 +24,7 @@ store.useModule = (mod) => {
 store.removeModules = () => {
     registeredModules.forEach(name => {
         store.unregisterModule(name)
-    });
+    })
     registeredModules.length = 0
 }
 

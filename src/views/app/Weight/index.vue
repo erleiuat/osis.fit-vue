@@ -26,12 +26,12 @@
 </template>
 
 <script>
+import storeModule from '@/store/modules/weight'
+
 const WeightTable = () => import('@/views/app/Weight/Table')
 const WeightAdder = () => import('@/components/adder/Weight')
 const WeightChart = () => import('@/components/charts/Weight')
 const BottomNav = () => import('@/views/app/Weight/BottomNav')
-
-import storeModule from "@/store/modules/weight"
 
 export default {
     name: 'Weight',
@@ -40,7 +40,7 @@ export default {
         BottomNav, WeightTable, WeightAdder, WeightChart
     },
 
-    created(){
+    created () {
         this.$store.useModule(storeModule)
     },
 

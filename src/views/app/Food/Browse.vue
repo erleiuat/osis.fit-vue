@@ -51,7 +51,7 @@
 </template>
 
 <script>
-import storeModule from "@/store/modules/foodFavorite"
+import storeModule from '@/store/modules/foodFavorite'
 
 export default {
     name: 'Browse',

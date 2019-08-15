@@ -47,11 +47,11 @@
 </template>
 
 <script>
+import storeModule from '@/store/modules/activity'
+
 const ActivityAdder = () => import('@/components/adder/Activity')
 const BottomNav = () => import('@/views/app/Activity/BottomNav')
 const ActivityTable = () => import('@/views/app/Activity/Table')
-
-import storeModule from "@/store/modules/activity"
 
 export default {
     name: 'Activity',

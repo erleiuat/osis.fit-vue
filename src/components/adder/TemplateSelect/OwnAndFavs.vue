@@ -30,10 +30,10 @@
 </template>
 
 <script>
-const FoodCard = () => import('@/components/food/Card')
+import food from '@/store/modules/food'
+import foodFavs from '@/store/modules/foodFavorite'
 
-import food from "@/store/modules/food"
-import foodFavs from "@/store/modules/foodFavorite"
+const FoodCard = () => import('@/components/food/Card')
 
 export default {
     name: 'OwnAndFavs',

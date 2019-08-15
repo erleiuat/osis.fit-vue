@@ -50,7 +50,7 @@
 </template>
 
 <script>
-import storeModule from "@/store/modules/image"
+import storeModule from '@/store/modules/image'
 
 export default {
     name: 'ImageInput',

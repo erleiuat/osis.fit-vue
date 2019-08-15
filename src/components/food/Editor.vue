@@ -66,7 +66,7 @@
 </template>
 
 <script>
-import storeModule from "@/store/modules/food"
+import storeModule from '@/store/modules/food'
 
 import ImageInput from '@/components/ImageInput'
 const YouSure = () => import('@/components/YouSure')
