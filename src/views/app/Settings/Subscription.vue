@@ -1,5 +1,5 @@
 <template>
-    <v-card flat :color="premium ? 'success' : 'warning'" dark>
+    <v-card flat :color="premium ? '' : 'info'" :dark="!premium">
 
         <v-card-title>
             <h3 class="display-2">{{ $t('title') }}</h3>
@@ -32,7 +32,7 @@
         </v-card-text>
 
         <v-card-actions>
-            <v-btn @click="openPortal()" :loading="loadingScript" v-if="sub.id">
+            <v-btn @click="openPortal()" :loading="loadingScript" depressed v-if="sub.id">
                 {{ $t('btnEdit') }}
             </v-btn>
             <v-btn @click="openCheckout()" :loading="loadingScript" block v-else>
@@ -61,11 +61,11 @@ export default {
         subExpiry () {
             var title = this.$t('renewsOn')
             var date = new Date(this.sub.expiration * 1000)
-            var day = date.getDate();
-            var month = date.getMonth() + 1;
-            var year = date.getFullYear();
+            var day = date.getDate()
+            var month = date.getMonth() + 1
+            var year = date.getFullYear()
 
-            if(this.subStatus.value !== 'active') title = this.$t('expiresOn')
+            if (this.subStatus.value !== 'active') title = this.$t('expiresOn')
             return {
                 title: title,
                 value: day + '.' + month + '.' + year
@@ -98,6 +98,7 @@ export default {
     },
 
     mounted () {
+        /* eslint-disable no-undef */
         var vm = this
         if (!document.getElementById('chargebee_js_script')) {
             var script = document.createElement('script')
@@ -118,6 +119,7 @@ export default {
             vm.loadingScript = false
             if (vm.sub.id) vm.setSession()
         }
+        /* eslint-enable no-undef */
     },
 
     methods: {

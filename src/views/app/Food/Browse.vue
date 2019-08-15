@@ -3,11 +3,8 @@
 
         <form v-on:submit.prevent="doSearch()">
             <v-layout row wrap align-center pa-2>
-                <v-flex grow>
+                <v-flex xs12>
                     <div class="headline">{{ $t('browse') }}</div>
-                </v-flex>
-                <v-flex shrink>
-                    <v-select v-if="dblist" v-model="searchDB" :items="dblist" solo hide-details flat />
                 </v-flex>
                 <v-flex xs12>
                     <v-text-field v-model="searchQuery" :readonly="loading" hide-details append-icon="search" @input="changeIn()" />
@@ -25,7 +22,7 @@
         </v-layout>
 
         <v-layout row wrap v-if="results.length > 0">
-            <v-flex xs12 sm6 v-for="(item, index) in getResults" :key="index" @click="toggleFav(item)">
+            <v-flex xs12 sm6 v-for="(item, index) in results" :key="index" @click="toggleFav(item)">
                 <v-card class="fill-height" ripple>
                     <v-card-text>
                         <v-layout row wrap class="text-truncate justify-space-between fill-height">
@@ -74,27 +71,6 @@ export default {
         }
     },
 
-    computed: {
-
-        dblist () {
-            return this.$store.getters['foodFavorite/dblist']
-        },
-
-        searchDB: {
-            get () {
-                return this.$store.getters['foodFavorite/searchdb']
-            },
-            set (item) {
-                this.$store.commit('foodFavorite/setDatabase', item)
-            }
-        }
-
-    },
-
-    mounted () {
-        this.$store.dispatch('foodFavorite/loadDatabases')
-    },
-
     methods: {
         changeIn () {
             this.searched = false
@@ -104,11 +80,12 @@ export default {
             }, 800)
         },
 
-        doSearch() {
+        doSearch () {
+            if (this.searchQuery.length < 3) return
             this.$store.dispatch('foodFavorite/search', this.searchQuery).then(res => {
-                this.results = res
+                this.results = res.items
             }).catch(err => {
-                console.log(err)
+                this.$notify({ type: 'error', title: this.$t('alert.error.default'), text: err })
             })
         }
     },

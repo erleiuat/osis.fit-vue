@@ -70,7 +70,7 @@ export default {
             this.sending = true
 
             this.$store.dispatch('auth/login', this.fd).then(r => {
-                if (this.$route.query.target) this.$router.push({ name: target })
+                if (this.$route.query.target) this.$router.push({ name: this.$route.query.target.name })
                 else this.$router.push({ name: 'dashboard' })
             }).catch(r => {
                 switch (r) {

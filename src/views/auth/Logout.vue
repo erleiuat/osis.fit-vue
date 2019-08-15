@@ -2,28 +2,28 @@
     <v-container grid-list-xl>
         <v-layout row wrap justify-space-around>
 
-            <v-flex xs12 v-if="!doing" text-center>
+            <v-flex xs12 sm8 v-if="!doing" text-center style="height: 150px">
                 <div class="headline pb-5">{{ $t('text') }}</div>
+                <v-layout row wrap justify-space-around>
+                    <v-flex xs12 sm6>
+                        <v-btn @click="logout()" block color="primary" depressed>
+                            {{ $t('sure') }}
+                        </v-btn>
+                    </v-flex>
+                    <v-flex xs12 sm6>
+                        <v-btn @click="$router.go(-1)" block depressed>
+                            {{ $t('btn.cancel') }}
+                        </v-btn>
+                    </v-flex>
+                </v-layout>
             </v-flex>
 
-            <v-flex xs12 sm6 v-if="!doing" text-center>
-                <v-btn @click="logout()" block color="primary" depressed>
-                    {{ $t('sure') }}
-                </v-btn>
-            </v-flex>
-
-            <v-flex xs12 sm6 v-if="!doing" text-center>
-                <v-btn @click="$router.go(-1)" block depressed>
-                    {{ $t('btn.cancel') }}
-                </v-btn>
-            </v-flex>
-
-            <v-flex xs12 v-else text-center>
+            <v-flex xs12 v-else text-center style="height: 150px">
                 <div class="headline pb-3">{{ $t('nextTime') }}</div>
                 <div class="body-1 pb-5">{{ $t('pleaseWait') }}</div>
             </v-flex>
 
-            <v-flex xs12>
+            <v-flex xs12 sm8>
                 <v-progress-linear :indeterminate="doing" :color="prgcol" height="20" />
             </v-flex>
 
@@ -54,7 +54,7 @@ export default {
                     vm.prgcol = 'success'
                 }).catch(r => {
                     vm.prgcol = 'error'
-                    vm.$notify({ type: 'error', title: vm.$t('alert.error.default') })
+                    vm.$notify({ type: 'error', title: vm.$t('alert.error.default'), text: r })
                 }).finally(() => {
                     vm.$router.push({ name: 'auth' })
                 })

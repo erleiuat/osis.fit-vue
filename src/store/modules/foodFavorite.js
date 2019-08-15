@@ -6,22 +6,10 @@ import lStore from '@/plugins/lStore'
 const state = {
     url: 'app/food/favorite/',
     lName: 'foodFavorite',
-    databaseList: lStore.get('foodFavorite.database.list'),
-    database: lStore.get('foodFavorite.database'),
     items: lStore.get('foodFavorite')
 }
 
 const getters = {
-
-    dblist: (state) => {
-        if (state.databaseList.length) return state.databaseList
-        return false
-    },
-
-    searchdb: (state) => {
-        if (state.database) return state.database
-        return false
-    },
 
     all: (state) => {
         return Object.values(state.items).reverse()
@@ -30,16 +18,6 @@ const getters = {
 }
 
 const mutations = {
-
-    setDatabaseList: (state, vals) => {
-        state.databaseList = vals
-        lStore.set(state.lName + ".database.list", state.databaseList)
-    },
-
-    setDatabase: (state, vals) => {
-        state.database = vals
-        lStore.set(state.lName + ".database", state.database)
-    },
 
     set: (state, vals) => {
         if (!Array.isArray(vals))
@@ -61,12 +39,6 @@ const mutations = {
 
 const actions = {
 
-    loadDatabases (con) {
-        Apios.post(con.state.url + 'dblist/', { id: null }).then(res => {
-            if (res.status === 200) con.commit('setDatabaseList', res.data.items)
-        })
-    },
-
     load (con) {
         Apios.post(con.state.url + 'read/', { id: null }).then(res => {
             if (res.status === 200) con.commit('set', res.data.items)
@@ -74,9 +46,8 @@ const actions = {
     },
 
     search (con, query) {
-        var url = con.state.database.url + con.state.database.searchParam + query
         return new Promise((resolve, reject) => {
-            Apios.get(url).then(res => {
+            Apios.post(con.state.url + 'search/', {query: query}).then(res => {
                 resolve(res.data)
             }).catch(err => {
                 reject(err)

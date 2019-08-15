@@ -45,8 +45,6 @@
 </template>
 
 <script>
-import Apios from '@/plugins/Apios'
-
 export default {
     name: 'Overview',
 
@@ -63,10 +61,8 @@ export default {
     },
 
     mounted () {
-
         if (this.$route.query.notify)
             this.$notify({ type: 'info', title: this.$t('alert.premiumOnly') })
-
     },
 
     i18n: {

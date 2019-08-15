@@ -59,7 +59,6 @@ const getters = {
 const mutations = {
 
     place: (state) => {
-
         var tAccess = state.token.access
         var tRefresh = state.token.refresh
 
@@ -74,7 +73,6 @@ const mutations = {
         state.account = dAccess.data.account
         state.subscription = dAccess.data.subscription
         state.authorized = true
-
     },
 
     remove: (state) => {
