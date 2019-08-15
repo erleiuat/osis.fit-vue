@@ -57,7 +57,7 @@ export default {
     data () {
         return {
             loading: false,
-            searchQuery: this.$route.query.s,
+            searchQuery: this.$route.query.s || '',
             searched: false,
             typerTimer: null,
             results: []
@@ -65,6 +65,7 @@ export default {
     },
 
     computed: {
+
         items () {
             var items = this.results
             if (items.length <= 0) return false
@@ -110,6 +111,7 @@ export default {
                 }
             }
         }
+
     },
 
     methods: {
@@ -119,8 +121,9 @@ export default {
             else return false
         },
 
-        toggleFav (itemID) {
-
+        toggleFav (item) {
+            if(this.isFav(item.id)) this.$store.dispatch('foodFavorite/delete', item.id)
+            else this.$store.dispatch('foodFavorite/add', item)
         },
 
         changeIn () {
@@ -145,6 +148,7 @@ export default {
     },
 
     mounted () {
+        this.$store.dispatch('foodFavorite/load')
         this.doSearch()
     },
 

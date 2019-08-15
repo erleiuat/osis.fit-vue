@@ -7,34 +7,27 @@
             </v-flex>
         </v-layout>
 
-        <v-layout row wrap v-if="getItems.length > 0">
-            <v-flex xs12 sm6 v-for="(item, index) in getItems" :key="index" @click="toggleFav(item)">
-                <v-card class="fill-height" ripple>
-                    <v-card-text>
-                        <v-layout row wrap class="text-truncate justify-space-between fill-height">
-                            <v-flex xs10 class="title">
-                                {{ item.title }}
-                            </v-flex>
-                            <v-flex xs10 class="caption">
-                                {{ item.caloriesPer100 }} Kalorien
-                            </v-flex>
-                            <v-flex xs2>
-                                <v-btn icon>
-                                    <v-icon large color="yellow" v-if="isStarred(item.id)">
-                                        star
-                                    </v-icon>
-                                    <v-icon large color="yellow" v-else>
-                                        star_border
-                                    </v-icon>
-                                </v-btn>
-                            </v-flex>
-                        </v-layout>
-                    </v-card-text>
-                </v-card>
+        <v-layout wrap justify-center align-start pl-0 pr-0>
+            <v-flex xs12 sm6 md4 v-for="(arr, key) in items" :key="key">
+                <v-layout column fill-height>
+                    <v-flex xs12 v-for="item in arr" :key="item.id" @click="toggleFav(item)">
+                        <v-card :class="true ? 'yellow' : ''" :light="true" class="fill-height" link ripple>
+                            <v-img v-if="item.image" :src="item.image" :height="100" />
+                            <v-card-title class="title">
+                                {{item.title}}
+                            </v-card-title>
+                            <v-card-text class="caption">
+                                Standartmenge: {{ item.amount }}<br />
+                                Kalorien / 100: {{ item.caloriesPer100 }}<br />
+                                Total: {{ item.total }}
+                            </v-card-text>
+                        </v-card>
+                    </v-flex>
+                </v-layout>
             </v-flex>
         </v-layout>
 
-        <v-layout row wrap v-else-if="!$store.state.app.loading">
+        <v-layout row wrap v-if="!items">
             <v-flex xs12>
                 {{ $t('notFound') }}
             </v-flex>
@@ -47,51 +40,60 @@
 export default {
     name: 'Favorite',
 
-    data () {
-        return {
-            items: []
-        }
-    },
-
     computed: {
-        getItems () {
-            return this.items
-        }
-    },
 
-    mounted () {
-        this.getFavs()
+        items () {
+            var items = this.$store.getters['foodFavorite/all']
+            if (items.length <= 0) return false
+
+            if (this.$vuetify.breakpoint.xsOnly || items.length < 2)
+                return {
+                    a: items
+                }
+
+            var i = 1; var col1 = []; var col2 = []; var col3 = []
+
+            if (this.$vuetify.breakpoint.smOnly) {
+                items.forEach(item => {
+                    if (i === 1) {
+                        col1.push(item)
+                        i++
+                    } else if (i === 2) {
+                        col2.push(item)
+                        i = 1
+                    }
+                })
+                return {
+                    a: col1,
+                    b: col2
+                }
+            } else {
+                items.forEach(item => {
+                    if (i === 1) {
+                        col1.push(item)
+                        i++
+                    } else if (i === 2) {
+                        col2.push(item)
+                        i++
+                    } else if (i === 3) {
+                        col3.push(item)
+                        i = 1
+                    }
+                })
+                return {
+                    a: col1,
+                    b: col2,
+                    c: col3
+                }
+            }
+        }
+
     },
 
     methods: {
-
-        getFavs () {
-            var vm = this
-            vm.$store.commit('loading', true)
-            vm.$http.post('user/food/favorite/read/').then(function (r) {
-                vm.$store.state.data.foodFavorite = r.data.foodFavorite || []
-                vm.items = vm.$store.state.data.foodFavorite
-            }).catch(function (e) {
-                vm.$notify({ type: 'error', title: vm.$t('alert.error.load') })
-            }).finally(function () {
-                vm.$store.commit('loading', false)
-            })
-        },
-
-        isStarred (foodId) {
-            return true
-        },
-
         toggleFav (item) {
-            var vm = this
-            var index = vm.$store.state.data.foodFavorite.indexOf(item)
-            vm.$http.post('user/food/favorite/toggle/', item).then(function (r) {
-                if (index > -1) if (index > -1) vm.$store.state.data.foodFavorite.splice(index, 1)
-            }).catch(function () {
-                vm.$notify({ type: 'error', title: vm.$t('alert.error.load') })
-            })
+            this.$store.dispatch('foodFavorite/delete', item.id)
         }
-
     },
 
     i18n: {
