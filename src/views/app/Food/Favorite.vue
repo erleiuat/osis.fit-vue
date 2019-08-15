@@ -96,6 +96,10 @@ export default {
         }
     },
 
+    mounted () {
+        this.$store.dispatch('foodFavorite/load')
+    },
+
     i18n: {
         messages: {
             en: {

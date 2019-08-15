@@ -52,7 +52,7 @@
 export default {
     name: 'Browse',
 
-   data () {
+    data () {
         return {
             loading: false,
             searchQuery: this.$route.query.s || '',
@@ -95,7 +95,7 @@ export default {
         },
 
         toggleFav (item) {
-            if(this.isFav(item.id)) this.$store.dispatch('foodFavorite/delete', item.id)
+            if (this.isFav(item.id)) this.$store.dispatch('foodFavorite/delete', item.id)
             else this.$store.dispatch('foodFavorite/add', item)
         },
 

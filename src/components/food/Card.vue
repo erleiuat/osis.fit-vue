@@ -31,7 +31,7 @@ export default {
         path () {
             if (!this.item.image) return false
 
-            if(!this.item.image.path) return {
+            if (!this.item.image.path) return {
                 image: this.item.image,
                 lazy: this.item.image
             }

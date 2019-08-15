@@ -122,7 +122,7 @@ export default {
         },
 
         toggleFav (item) {
-            if(this.isFav(item.id)) this.$store.dispatch('foodFavorite/delete', item.id)
+            if (this.isFav(item.id)) this.$store.dispatch('foodFavorite/delete', item.id)
             else this.$store.dispatch('foodFavorite/add', item)
         },
 
