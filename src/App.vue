@@ -41,6 +41,7 @@ export default {
     },
 
     beforeMount () {
+        document.title = process.env.VUE_APP_TITLE
         this.$store.state.app.lang = VueCookies.get('appLang') || navigator.language || navigator.userLanguage
         this.$i18n.locale = this.$store.state.app.lang
         this.$vuetify.theme.dark = VueCookies.get('themeDark')

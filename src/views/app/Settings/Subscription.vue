@@ -107,7 +107,7 @@ export default {
             script.async = true
 
             script.onload = function () {
-                Chargebee.init({ site: 'osis-fit-test' })
+                Chargebee.init({ site: process.env.VUE_APP_CB_SITE })
                 vm.cbi = Chargebee.getInstance()
                 vm.loadingScript = false
                 if (vm.sub.id) vm.setSession()

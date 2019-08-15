@@ -7,7 +7,7 @@ module.exports = {
     baseUrl: process.env.BASE_URL,
 
     pwa: {
-        name: 'Osis.fit',
+        name: process.env.VUE_APP_PWA_NAME,
         themeColor: '#45B0FF',
         msTileColor: '#2b5797',
         appleMobileWebAppCapable: 'yes',

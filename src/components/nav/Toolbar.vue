@@ -2,7 +2,7 @@
     <v-app-bar clipped-left app flat color="primary" dark>
 
         <v-toolbar-title>
-            Osis.fit
+            {{ title }}
         </v-toolbar-title>
         <v-spacer />
         <v-app-bar-nav-icon @click.stop="drawer()" />
@@ -13,6 +13,12 @@
 <script>
 export default {
     name: 'Toolbar',
+
+    data () {
+        return {
+            title: process.env.VUE_APP_TITLE
+        }
+    },
 
     methods: {
         drawer () {
