@@ -53,6 +53,11 @@ const WeightAdder = () => import('@/components/adder/Weight')
 const WeightChart = () => import('@/components/charts/Weight')
 const BottomNav = () => import('@/views/app/Dashboard/BottomNav')
 
+import user from "@/store/modules/user"
+import weight from "@/store/modules/weight"
+import calories from "@/store/modules/calories"
+import activity from "@/store/modules/activity"
+
 export default {
     name: 'Dashboard',
 
@@ -63,6 +68,13 @@ export default {
         WeightAdder,
         WeightChart,
         BottomNav
+    },
+
+    created () {
+        this.$store.useModule(user)
+        this.$store.useModule(weight)
+        this.$store.useModule(calories)
+        this.$store.useModule(activity)
     },
 
     i18n: {

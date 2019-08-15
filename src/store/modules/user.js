@@ -1,5 +1,9 @@
+
 import Apios from '@/plugins/Apios'
 import lStore from '@/plugins/lStore'
+
+const name = 'user'
+const namespaced = true
 
 const state = {
 
@@ -59,8 +63,11 @@ const actions = {
 }
 
 export default {
-    namespaced: true,
-    state,
-    mutations,
-    actions
+    name: name,
+    module: {
+        namespaced: namespaced,
+        state,
+        mutations,
+        actions
+    }
 }

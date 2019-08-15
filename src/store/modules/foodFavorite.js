@@ -3,6 +3,9 @@ import Vue from 'vue'
 import Apios from '@/plugins/Apios'
 import lStore from '@/plugins/lStore'
 
+const name = 'foodFavorite'
+const namespaced = true
+
 const state = {
     url: 'app/food/favorite/',
     lName: 'foodFavorite',
@@ -85,9 +88,12 @@ const actions = {
 }
 
 export default {
-    namespaced: true,
-    state,
-    getters,
-    mutations,
-    actions
+    name: name,
+    module: {
+        namespaced: namespaced,
+        state,
+        getters,
+        mutations,
+        actions
+    }
 }

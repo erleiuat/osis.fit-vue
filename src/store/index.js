@@ -3,27 +3,29 @@ import Vuex from 'vuex'
 
 import app from './modules/app'
 import auth from './modules/auth'
-import user from './modules/user'
-import calories from './modules/calories'
-import weight from './modules/weight'
-import activity from './modules/activity'
-import food from './modules/food'
-import foodFavorite from './modules/foodFavorite'
-import image from './modules/image'
 Vue.use(Vuex)
 
-export default new Vuex.Store({
-
+const store = new Vuex.Store({
     modules: {
         app,
-        auth,
-        user,
-        calories,
-        weight,
-        activity,
-        food,
-        foodFavorite,
-        image
+        auth
     }
-
 })
+
+const registeredModules = []
+
+store.useModule = (mod) => {
+    if (!registeredModules.includes(mod.name)) {
+        store.registerModule(mod.name, mod.module);
+        registeredModules.push(mod.name)
+    }
+}
+
+store.removeModules = () => {
+    registeredModules.forEach(name => {
+        store.unregisterModule(name)
+    });
+    registeredModules.length = 0
+}
+
+export default store

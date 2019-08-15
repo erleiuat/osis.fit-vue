@@ -3,6 +3,9 @@ import Vue from 'vue'
 import Apios from '@/plugins/Apios'
 import lStore from '@/plugins/lStore'
 
+const name = 'calories'
+const namespaced = true
+
 const state = {
     url: 'app/calories/',
     lName: 'calories',
@@ -83,9 +86,12 @@ const actions = {
 }
 
 export default {
-    namespaced: true,
-    state,
-    getters,
-    mutations,
-    actions
+    name: name,
+    module: {
+        namespaced: namespaced,
+        state,
+        getters,
+        mutations,
+        actions
+    }
 }

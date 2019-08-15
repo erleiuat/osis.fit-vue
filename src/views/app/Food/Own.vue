@@ -59,6 +59,8 @@ import clonedeep from 'lodash.clonedeep'
 import FoodEditor from '@/components/food/Editor'
 const FoodCard = () => import('@/components/food/Card')
 
+import storeModule from "@/store/modules/food"
+
 export default {
     name: 'Own',
 
@@ -138,6 +140,10 @@ export default {
         this.$store.dispatch('food/load')
     },
 
+    created () {
+        this.$store.useModule(storeModule)
+    },
+    
     i18n: {
         messages: {
             en: {

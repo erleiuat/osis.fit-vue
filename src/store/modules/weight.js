@@ -3,6 +3,9 @@ import Vue from 'vue'
 import Apios from '@/plugins/Apios'
 import lStore from '@/plugins/lStore'
 
+const name = 'weight'
+const namespaced = true
+
 const state = {
     url: 'app/weight/',
     lName: 'weight',
@@ -88,9 +91,12 @@ const actions = {
 }
 
 export default {
-    namespaced: true,
-    state,
-    getters,
-    mutations,
-    actions
+    name: name,
+    module: {
+        namespaced: namespaced,
+        state,
+        getters,
+        mutations,
+        actions
+    }
 }

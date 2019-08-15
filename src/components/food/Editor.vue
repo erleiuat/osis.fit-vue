@@ -66,6 +66,8 @@
 </template>
 
 <script>
+import storeModule from "@/store/modules/food"
+
 import ImageInput from '@/components/ImageInput'
 const YouSure = () => import('@/components/YouSure')
 
@@ -77,6 +79,10 @@ export default {
     },
 
     props: ['value', 'item'],
+
+    created () {
+        this.$store.useModule(storeModule)
+    },
 
     data () {
         return {

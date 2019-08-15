@@ -9,27 +9,22 @@
                 </v-btn>
             </template>
         </ActivityAdder>
-        <Trainings>
-            <template v-slot:default="trigger">
-                <v-btn text v-on="trigger.on">
-                    <span>{{ $t('trainings') }}</span>
-                    <v-icon>open_in_new</v-icon>
-                </v-btn>
-            </template>
-        </Trainings>
+        <v-btn text disabled>
+            <span>{{ $t('trainings') }}</span>
+            <v-icon>open_in_new</v-icon>
+        </v-btn>
 
     </v-bottom-navigation>
 </template>
 
 <script>
 import ActivityAdder from '@/components/adder/Activity'
-import Trainings from '@/components/trainings/'
 
 export default {
     name: 'BottomNav',
 
     components: {
-        ActivityAdder, Trainings
+        ActivityAdder
     },
 
     i18n: {

@@ -31,11 +31,17 @@ const WeightAdder = () => import('@/components/adder/Weight')
 const WeightChart = () => import('@/components/charts/Weight')
 const BottomNav = () => import('@/views/app/Weight/BottomNav')
 
+import storeModule from "@/store/modules/weight"
+
 export default {
     name: 'Weight',
 
     components: {
         BottomNav, WeightTable, WeightAdder, WeightChart
+    },
+
+    created(){
+        this.$store.useModule(storeModule)
     },
 
     mounted () {

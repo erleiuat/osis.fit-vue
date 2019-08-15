@@ -32,6 +32,9 @@
 <script>
 const FoodCard = () => import('@/components/food/Card')
 
+import food from "@/store/modules/food"
+import foodFavs from "@/store/modules/foodFavorite"
+
 export default {
     name: 'OwnAndFavs',
 
@@ -45,11 +48,19 @@ export default {
         }
     },
 
+    created () {
+        this.$store.useModule(food)
+        if (this.$store.getters['auth/premium']) this.$store.useModule(foodFavs)
+    },
+
     computed: {
 
         items () {
             var items = [
-                ...this.$store.getters['food/all'],
+                ...this.$store.getters['food/all']
+            ]
+            if (this.$store.getters['auth/premium']) items = [
+                ...items,
                 ...this.$store.getters['foodFavorite/all']
             ]
             var filtered = items.filter(el => el.title.includes(this.query || ''))

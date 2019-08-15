@@ -29,14 +29,10 @@
                 </v-dialog>
             </v-flex>
             <v-flex xs12 sm4 class="text-center" v-if="!$vuetify.breakpoint.xs">
-                <Trainings>
-                    <template v-slot:default="trigger">
-                        <v-btn depressed large block color="primary" v-on="trigger.on">
-                            <v-icon left>open_in_new</v-icon>
-                            {{ $t('trainings') }}
-                        </v-btn>
-                    </template>
-                </Trainings>
+                <v-btn disabled large block color="primary">
+                    <v-icon left>open_in_new</v-icon>
+                    {{ $t('trainings') }}
+                </v-btn>
             </v-flex>
 
             <v-flex xs12>
@@ -51,16 +47,17 @@
 </template>
 
 <script>
-const Trainings = () => import('@/components/trainings/')
 const ActivityAdder = () => import('@/components/adder/Activity')
 const BottomNav = () => import('@/views/app/Activity/BottomNav')
 const ActivityTable = () => import('@/views/app/Activity/Table')
+
+import storeModule from "@/store/modules/activity"
 
 export default {
     name: 'Activity',
 
     components: {
-        ActivityAdder, Trainings, ActivityTable, BottomNav
+        ActivityAdder, ActivityTable, BottomNav
     },
 
     data () {
@@ -85,6 +82,10 @@ export default {
             }
         }
 
+    },
+
+    created () {
+        this.$store.useModule(storeModule)
     },
 
     i18n: {

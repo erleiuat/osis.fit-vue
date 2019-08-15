@@ -58,6 +58,8 @@ import Subscription from '@/views/app/Settings/Subscription'
 import i18n from '@/plugins/i18n'
 import VueCookies from 'vue-cookies'
 
+import storeModule from "@/store/modules/user"
+
 export default {
     name: 'Settings',
 
@@ -76,6 +78,10 @@ export default {
 
     mounted () {
         this.$store.dispatch('user/load')
+    },
+
+    created(){
+        this.$store.useModule(storeModule)
     },
 
     computed: {

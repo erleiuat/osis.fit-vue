@@ -37,6 +37,8 @@
 </template>
 
 <script>
+import storeModule from "@/store/modules/foodFavorite"
+
 export default {
     name: 'Favorite',
 
@@ -98,6 +100,10 @@ export default {
 
     mounted () {
         this.$store.dispatch('foodFavorite/load')
+    },
+
+    created () {
+        this.$store.useModule(storeModule)
     },
 
     i18n: {

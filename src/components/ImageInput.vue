@@ -50,6 +50,8 @@
 </template>
 
 <script>
+import storeModule from "@/store/modules/image"
+
 export default {
     name: 'ImageInput',
 
@@ -80,6 +82,10 @@ export default {
             if (this.progress && this.progress === 100) return true
             return false
         }
+    },
+
+    created () {
+        this.$store.useModule(storeModule)
     },
 
     methods: {

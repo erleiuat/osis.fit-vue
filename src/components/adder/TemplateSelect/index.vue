@@ -16,16 +16,31 @@
 
                 <OwnAndFavs v-if="!searchDB" @select="select" />
 
-                <Browse v-else @select="select" />
+                <Browse v-else-if="$store.getters['auth/premium']" @select="select" />
 
             </v-card-text>
 
-                <v-divider />
+            <v-divider />
 
             <v-card-actions>
-                <v-btn text block @click="searchDB = !searchDB">
-                    Datenbank durchsuchen
-                </v-btn>
+                <v-layout wrap>
+                    <v-flex xs6>
+                        <v-btn text @click="searchDB = true" v-if="$store.getters['auth/premium'] && !searchDB">
+                            Datenbank durchsuchen
+                        </v-btn>
+                        <v-btn text :to="{name: 'premium', query: {notify: true}}" v-else-if="!$store.getters['auth/premium']">
+                            Datenbank durchsuchen
+                        </v-btn>
+                        <v-btn text @click="searchDB = false" v-else>
+                            Gespeicherte durchsuchen
+                        </v-btn>
+                    </v-flex>
+                    <v-flex xs6 text-end>
+                        <v-btn text disabled>
+                           Code Scannen
+                        </v-btn>
+                    </v-flex>
+                </v-layout>
             </v-card-actions>
 
         </v-card>

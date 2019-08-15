@@ -2,6 +2,9 @@
 import Apios from '@/plugins/Apios'
 import NProgress from '@/plugins/nprogress'
 
+const name = 'image'
+const namespaced = true
+
 const state = {
     url: 'upload/',
     progress: false
@@ -71,9 +74,12 @@ const actions = {
 }
 
 export default {
-    namespaced: true,
-    state,
-    getters,
-    mutations,
-    actions
+    name: name,
+    module: {
+        namespaced: namespaced,
+        state,
+        getters,
+        mutations,
+        actions
+    }
 }

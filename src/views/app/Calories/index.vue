@@ -54,6 +54,8 @@ const CalorieAdder = () => import('@/components/adder/Calories')
 const BottomNav = () => import('@/views/app/Calories/BottomNav')
 const CaloriesTable = () => import('@/views/app/Calories/Table')
 
+import storeModule from "@/store/modules/calories"
+
 export default {
     name: 'Calories',
 
@@ -83,6 +85,10 @@ export default {
             }
         }
 
+    },
+
+    created(){
+        this.$store.useModule(storeModule)
     },
 
     i18n: {

@@ -51,6 +51,8 @@
 </template>
 
 <script>
+import storeModule from "@/store/modules/foodFavorite"
+
 export default {
     name: 'Browse',
 
@@ -150,6 +152,10 @@ export default {
     mounted () {
         this.$store.dispatch('foodFavorite/load')
         this.doSearch()
+    },
+
+    created () {
+        this.$store.useModule(storeModule)
     },
 
     i18n: {

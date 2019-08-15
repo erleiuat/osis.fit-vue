@@ -12,10 +12,16 @@
 </template>
 
 <script>
+import storeModule from "@/store/modules/weight"
+
 export default {
     name: 'WeightChart',
 
     computed: {
+
+        created () {
+            this.$store.useModule(storeModule)
+        },
 
         set () {
             var color1 = this.$vuetify.theme.themes.light.secondary
