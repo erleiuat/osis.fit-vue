@@ -16,14 +16,14 @@ if (process.env.NODE_ENV === 'production')
         },
         cached () {
             console.log('Content has been cached for offline use.')
+            NProgress.done()
         },
         updatefound () {
-            NProgress.start()
             console.log('New content is downloading.')
+            NProgress.start()
         },
         updated () {
             console.log('New content is available; please refresh.')
-            NProgress.done()
             window.location.reload(true)
         },
         offline () {

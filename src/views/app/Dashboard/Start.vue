@@ -93,8 +93,8 @@ export default {
             var age = Math.abs(tmpDate.getUTCFullYear() - 1970)
 
             var td = this.$store.getters['app/today'].date
-            var cTotal = this.$store.getters['calories/total'](td) || 0
-            var aTotal = this.$store.getters['activity/total'](td) || 0
+            var cTotal = Math.round(this.$store.getters['calories/total'](td)) || 0
+            var aTotal = Math.round(this.$store.getters['activity/total'](td)) || 0
 
             return {
                 show: true,
