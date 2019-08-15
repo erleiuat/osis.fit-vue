@@ -1,12 +1,10 @@
 <template>
     <v-container :class="$vuetify.breakpoint.xs ? 'pa-0 grid-list-md': 'grid-list-md'">
+
         <form v-on:submit.prevent="doSearch()">
-            <v-layout row wrap align-center pa-1>
+            <v-layout row wrap align-center pa-2>
                 <v-flex xs12>
-                    <v-select v-model="searchdb" :items="databases" label="" hide-details />
-                </v-flex>
-                <v-flex xs12>
-                    <v-text-field v-model="searchQuery" :readonly="loading" solo :placeholder="$t('seachPlace')" append-icon="search" @input="changeIn()" />
+                    <v-text-field v-model="searchQuery" :readonly="loading" hide-details append-icon="search" @input="changeIn()" />
                 </v-flex>
                 <v-flex xs12 v-show="false">
                     <v-btn type="submit"></v-btn>
@@ -20,20 +18,23 @@
             </v-flex>
         </v-layout>
 
-        <v-layout row wrap v-if="results.length > 0">
-            <v-flex xs12 v-for="(item, index) in getResults" :key="index">
-                <v-card class="fill-height" ripple @click="$emit('select-item', item)">
-                    <v-card-text>
-                        <v-layout row wrap class="text-truncate justify-space-between fill-height">
-                            <v-flex xs10 class="title">
-                                {{ item.title }}
-                            </v-flex>
-                            <v-flex xs10 class="caption">
-                                {{ item.caloriesPer100 }} Kalorien
-                            </v-flex>
-                        </v-layout>
-                    </v-card-text>
-                </v-card>
+        <v-layout wrap justify-center align-start pl-0 pr-0>
+            <v-flex xs6 v-for="(arr, key) in items" :key="key">
+                <v-layout column fill-height>
+                    <v-flex xs12 v-for="item in arr" :key="item.id" @click="$emit('select', item)">
+                        <v-card :class="isFav(item.id) ? 'yellow' : ''" :light="isFav(item.id)" class="fill-height" link ripple>
+                            <v-img v-if="item.image" :src="item.image" :height="100" />
+                            <v-card-title class="title">
+                                {{item.title}}
+                            </v-card-title>
+                            <v-card-text class="caption">
+                                Standartmenge: {{ item.amount }}<br />
+                                Kalorien / 100: {{ item.caloriesPer100 }}<br />
+                                Total: {{ item.total }}
+                            </v-card-text>
+                        </v-card>
+                    </v-flex>
+                </v-layout>
             </v-flex>
         </v-layout>
 
@@ -51,37 +52,52 @@
 export default {
     name: 'Browse',
 
-    data () {
+   data () {
         return {
             loading: false,
-            searchQuery: '',
+            searchQuery: this.$route.query.s || '',
             searched: false,
-            results: [],
             typerTimer: null,
-            searchdb: 'sndb',
-            databases: [
-                { text: 'Schweizer Nährwertdatenbank', value: 'sndb' }
-            ]
+            results: []
         }
     },
 
     computed: {
 
-        getResults () {
-            if (this.searchdb === 'sndb')
-                return this.results.map(obj => {
-                    return {
-                        title: obj.foodName,
-                        amount: '100',
-                        caloriesPer100: obj.amount
-                    }
-                })
-            else return false // TODO
+        items () {
+            var items = this.results
+            if (items.length <= 0) return false
+
+            var i = 1; var col1 = []; var col2 = []
+
+            items.forEach(item => {
+                if (i === 1) {
+                    col1.push(item)
+                    i++
+                } else if (i === 2) {
+                    col2.push(item)
+                    i = 1
+                }
+            })
+            return {
+                a: col1,
+                b: col2
+            }
         }
 
     },
 
     methods: {
+
+        isFav (itemID) {
+            if (this.$store.getters['foodFavorite/id'](itemID)) return true
+            else return false
+        },
+
+        toggleFav (item) {
+            if(this.isFav(item.id)) this.$store.dispatch('foodFavorite/delete', item.id)
+            else this.$store.dispatch('foodFavorite/add', item)
+        },
 
         changeIn () {
             this.searched = false
@@ -92,37 +108,26 @@ export default {
         },
 
         doSearch () {
-            var vm = this
-            if (!vm.searchQuery || vm.searchQuery.length <= 2) return
-
-            vm.loading = true
-            if (vm.searchdb === 'sndb') {
-                var path = 'https://api.webapp.prod.blv.foodcase-services.com/BLV_WebApp_WS/webresources/BLV/foods?search=' +
-                    vm.searchQuery + '&component=25640&operator=%3E&amount=0&lang=de'
-
-                vm.$http.get(path).then(function (r) {
-                    if (r.data.length > 0) vm.results = r.data
-                    else vm.results = []
-                }).catch(function () {
-                    vm.$notify({ type: 'error', title: vm.$t('alert.error.load') })
-                }).finally(function () {
-                    vm.searched = true
-                    vm.loading = false
-                })
-            }
+            if (this.searchQuery.length < 3) return
+            this.$store.dispatch('foodFavorite/search', this.searchQuery).then(res => {
+                this.results = res.items
+            }).catch(err => {
+                this.$notify({ type: 'error', title: this.$t('alert.error.default'), text: err })
+            }).finally(() => {
+                this.searched = true
+            })
         }
-
     },
 
     i18n: {
         messages: {
             en: {
-                notFound: 'No results',
-                seachPlace: 'Search...'
+                browse: 'Search Items',
+                notFound: 'No results'
             },
             de: {
-                notFound: 'Keine Suchergebnisse',
-                seachPlace: 'Suchbegriff'
+                browse: 'Lebensmittel suchen',
+                notFound: 'Keine Suchergebnisse'
             }
         }
     }

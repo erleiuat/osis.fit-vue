@@ -48,7 +48,10 @@ export default {
     computed: {
 
         items () {
-            var items = this.$store.getters['food/all']
+            var items = [
+                ...this.$store.getters['food/all'],
+                ...this.$store.getters['foodFavorite/all']
+            ]
             var filtered = items.filter(el => el.title.includes(this.query || ''))
             if (filtered.length <= 0) return false
 
@@ -73,6 +76,7 @@ export default {
 
     mounted () {
         this.$store.dispatch('food/load')
+        this.$store.dispatch('foodFavorite/load')
     },
 
     i18n: {
