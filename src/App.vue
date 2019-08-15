@@ -27,9 +27,6 @@ import VueCookies from 'vue-cookies'
 import Drawer from '@/components/nav/drawer/'
 import Toolbar from '@/components/nav/Toolbar'
 
-import(/* webpackPrefetch: true */ '@/assets/css/app.css')
-import(/* webpackPrefetch: true */ '@/assets/css/transitions.css')
-
 const Alerts = () => import('@/components/Alerts')
 const CookieInfo = () => import('@/components/CookieInfo')
 
