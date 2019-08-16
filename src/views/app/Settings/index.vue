@@ -1,49 +1,35 @@
 <template>
     <v-container :class="$vuetify.breakpoint.xs ? 'pa-0 grid-list-md': 'grid-list-lg'">
 
-        <v-layout wrap v-if="!$store.getters['premium']">
-            <v-flex xs12>
+        <v-layout wrap >
+            <v-flex xs12 lg4 v-if="!$store.getters['premium']">
                 <Subscription />
             </v-flex>
-        </v-layout>
-
-        <v-layout wrap>
-            <v-flex xs12>
+            <v-flex xs12 lg3>
                 <EditAims />
             </v-flex>
-        </v-layout>
-
-        <v-layout wrap>
-            <v-flex xs12>
+            <v-flex xs12 lg5>
                 <EditProfile />
             </v-flex>
-        </v-layout>
-
-        <v-layout wrap v-if="$store.getters['premium']">
-            <v-flex xs12>
+            <v-flex xs12 lg4 v-if="$store.getters['premium']">
                 <Subscription />
             </v-flex>
         </v-layout>
 
-        <v-layout wrap justify-space-around pa-2>
-            <v-flex xs12>
-                <h3 class="display-2">{{ $t('account') }}</h3>
-            </v-flex>
-            <v-flex shrink class="text-center">
+        <v-layout wrap pa-2 align-center>
+            <v-flex xs12 sm4 md2 class="text-center">
                 <v-switch v-model="mode" :label="$t('darkmode')"></v-switch>
             </v-flex>
-            <v-flex shrink>
+            <v-flex xs12 sm8 md3>
                 <v-select v-model="lang" :items="langs" :label="$t('language')" />
             </v-flex>
-        </v-layout>
-        <v-layout row wrap justify-space-around>
-            <v-flex xs12 sm6 md4>
+            <v-flex xs12 sm6 md2>
                 <v-btn disabled block>{{ $t('changePass') }}</v-btn>
             </v-flex>
-            <v-flex xs12 sm6 md4>
+            <v-flex xs12 sm6 md3>
                 <v-btn disabled block>{{ $t('getData') }}</v-btn>
             </v-flex>
-            <v-flex xs12 md4>
+            <v-flex xs12 md2>
                 <v-btn disabled block>{{ $t('deleteAcc') }}</v-btn>
             </v-flex>
         </v-layout>

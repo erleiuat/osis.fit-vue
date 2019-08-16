@@ -1,27 +1,27 @@
 <template>
-    <v-card flat :color="premium ? '' : 'info'" :dark="!premium">
+    <v-card outlined :color="premium ? '' : 'info'" :dark="!premium">
 
         <v-card-title>
-            <h3 class="display-2">{{ $t('title') }}</h3>
+            <h3 class="display-1">{{ $t('title') }}</h3>
         </v-card-title>
 
         <v-card-text>
             <v-layout row wrap overflow-hidden v-if="sub.id">
-                <v-flex xs12 sm6>
-                    <span class="subheading">{{ $t('subsNr') }}</span><br />
-                    <span class="headline">{{ sub.id }}</span>
+                <v-flex xs12 sm6 md3 lg8>
+                    <span class="title">{{ $t('subsNr') }}</span><br />
+                    <span class="subheading">{{ sub.id }}</span>
                 </v-flex>
-                <v-flex xs6>
-                    <span class="subheading">{{ $t('plan') }}</span><br />
-                    <span class="headline">{{ sub.plan }}</span>
+                <v-flex xs6 sm6 md3 lg4>
+                    <span class="title">{{ $t('plan') }}</span><br />
+                    <span class="subheading">{{ sub.plan }}</span>
                 </v-flex>
-                <v-flex xs6>
-                    <span class="subheading">{{ $t('state') }}</span><br />
-                    <span class="headline">{{ subStatus.text }}</span>
+                <v-flex xs6 sm6 md3 lg4>
+                    <span class="title">{{ $t('state') }}</span><br />
+                    <span class="subheading">{{ subStatus.text }}</span>
                 </v-flex>
-                <v-flex xs6>
-                    <span class="subheading">{{ subExpiry.title }}</span><br />
-                    <span class="headline">{{ subExpiry.value }}</span>
+                <v-flex xs12 sm6 md3 lg8>
+                    <span class="title">{{ subExpiry.title }}</span><br />
+                    <span class="subheading">{{ subExpiry.value }}</span>
                 </v-flex>
             </v-layout>
             <v-layout row wrap v-else>

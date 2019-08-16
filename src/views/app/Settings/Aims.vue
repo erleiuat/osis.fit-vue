@@ -1,19 +1,19 @@
 <template>
-    <v-card flat>
+    <v-card outlined>
 
         <v-card-title>
-            <div class="display-2">{{ $t('title') }}</div>
+            <div class="display-1">{{ $t('title') }}</div>
         </v-card-title>
 
         <v-card-text v-if="!edit">
             <v-layout row wrap>
-                <v-flex xs6 overflow-hidden>
-                    <span class="subheading">{{ $t('weight') }}</span><br />
-                    <span class="headline">{{ $store.state.user.aims.weight || '-' }}</span>
+                <v-flex xs6 lg12 overflow-hidden>
+                    <span class="title">{{ $t('weight') }}</span><br />
+                    <span class="subheading">{{ $store.state.user.aims.weight || '-' }}</span>
                 </v-flex>
-                <v-flex xs6>
-                    <span class="subheading">{{ $t('date') }}</span><br />
-                    <span class="headline">{{ $dateFormat($store.state.user.aims.date) || '-' }}</span>
+                <v-flex xs6 lg12>
+                    <span class="title">{{ $t('date') }}</span><br />
+                    <span class="subheading">{{ $dateFormat($store.state.user.aims.date) || '-' }}</span>
                 </v-flex>
             </v-layout>
         </v-card-text>
@@ -26,10 +26,10 @@
             <v-card-text>
 
                 <v-layout row wrap>
-                    <v-flex xs12 sm6>
+                    <v-flex xs12 sm6 lg12>
                         <v-text-field v-model="fd.weight" :label="$t('weight')" :rules="rule.require" type="number" />
                     </v-flex>
-                    <v-flex xs12 sm6>
+                    <v-flex xs12 sm6 lg12>
                         <v-menu ref="menu" v-model="menu" :close-on-content-click="false" :nudge-right="40" transition="scale-transition" offset-y full-width min-width="290px">
                             <template v-slot:activator="{ on }">
                                 <v-text-field v-model="fd.date" :label="$t('ft.date')" :rules="rule.require" type="date" v-on="on" @focus="menu = true" readonly append-icon="event"/>

@@ -1,31 +1,31 @@
 <template>
-    <v-card flat>
+    <v-card outlined>
 
         <v-card-title>
-            <h3 class="display-2">{{ $t('title') }}</h3>
+            <h3 class="display-1">{{ $t('title') }}</h3>
         </v-card-title>
 
         <v-card-text v-if="!edit">
             <v-layout row wrap overflow-hidden>
-                <v-flex xs6>
-                    <span class="subheading">{{ $t('firstname') }}</span><br />
-                    <span class="headline">{{ $store.state.user.firstname || '-' }}</span>
+                <v-flex xs6 sm4 lg6>
+                    <span class="title">{{ $t('firstname') }}</span><br />
+                    <span class="subheading">{{ $store.state.user.firstname || '-' }}</span>
                 </v-flex>
-                <v-flex xs6>
-                    <span class="subheading">{{ $t('lastname') }}</span><br />
-                    <span class="headline">{{ $store.state.user.lastname || '-' }}</span>
+                <v-flex xs6 sm8 lg6>
+                    <span class="title">{{ $t('lastname') }}</span><br />
+                    <span class="subheading">{{ $store.state.user.lastname || '-' }}</span>
                 </v-flex>
-                <v-flex xs6 sm4>
-                    <span class="subheading">{{ $t('height') }}</span><br />
-                    <span class="headline">{{ $store.state.user.height || '-' }}</span>
+                <v-flex xs6 sm4 lg4> c
+                    <span class="title">{{ $t('height') }}</span><br />
+                    <span class="subheading">{{ $store.state.user.height || '-' }}</span>
                 </v-flex>
-                <v-flex xs6 sm4>
-                    <span class="subheading">{{ $t('gender') }}</span><br />
-                    <span class="headline">{{ $t('g.'+$store.state.user.gender) }}</span>
+                <v-flex xs6 sm4 lg4>
+                    <span class="title">{{ $t('gender') }}</span><br />
+                    <span class="subheading">{{ $t('g.'+$store.state.user.gender) }}</span>
                 </v-flex>
-                <v-flex xs6 sm4>
-                    <span class="subheading">{{ $t('birthdate') }}</span><br />
-                    <span class="headline">{{ $dateFormat($store.state.user.birthdate) || '-' }}</span>
+                <v-flex xs6 sm4 lg4>
+                    <span class="title">{{ $t('birthdate') }}</span><br />
+                    <span class="subheading">{{ $dateFormat($store.state.user.birthdate) || '-' }}</span>
                 </v-flex>
             </v-layout>
         </v-card-text>
@@ -42,13 +42,13 @@
                     <v-flex xs6>
                         <v-text-field :label="$t('lastname')" v-model="fd.lastname" :rules="rule.require" type="text" />
                     </v-flex>
-                    <v-flex xs6 sm4>
+                    <v-flex xs6 sm4 lg6>
                         <v-text-field :label="$t('height')" v-model="fd.height" :rules="rule.require" type="number" />
                     </v-flex>
-                    <v-flex xs6 sm4>
+                    <v-flex xs6 sm4 lg6>
                         <v-select :label="$t('gender')" v-model="fd.gender" :items="genders" :rules="rule.require" />
                     </v-flex>
-                    <v-flex xs12 sm4>
+                    <v-flex xs12 sm4 lg12>
                         <v-menu ref="menu" v-model="menu" :close-on-content-click="false" transition="scale-transition" offset-y full-width min-width="290px">
                             <template v-slot:activator="{ on }">
                                 <v-text-field v-model="fd.birthdate" :label="$t('birthdate')" v-on="on" @focus="menu = true" readonly type="date" append-icon="event"/>

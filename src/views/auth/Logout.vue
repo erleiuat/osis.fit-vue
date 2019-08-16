@@ -2,7 +2,7 @@
     <v-container grid-list-xl>
         <v-layout row wrap justify-space-around>
 
-            <v-flex xs12 sm8 v-if="!doing" text-center style="height: 150px">
+            <v-flex xs12 sm8 v-if="!doing" text-center style="height: 200px">
                 <div class="headline pb-5">{{ $t('text') }}</div>
                 <v-layout row wrap justify-space-around>
                     <v-flex xs12 sm6>
@@ -18,7 +18,7 @@
                 </v-layout>
             </v-flex>
 
-            <v-flex xs12 v-else text-center style="height: 150px">
+            <v-flex xs12 v-else text-center style="height: 200px">
                 <div class="headline pb-3">{{ $t('nextTime') }}</div>
                 <div class="body-1 pb-5">{{ $t('pleaseWait') }}</div>
             </v-flex>
