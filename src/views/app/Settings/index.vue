@@ -69,20 +69,18 @@ export default {
         user
     },
 
-    data () {
-        return {
-            langs: [
-                { text: this.$t('lang.en'), value: 'en' },
-                { text: this.$t('lang.de'), value: 'de' }
-            ]
-        }
-    },
-
     mounted () {
         this.$store.dispatch('user/load')
     },
 
     computed: {
+
+        langs () {
+            return [
+                { text: this.$t('lang.en'), value: 'en' },
+                { text: this.$t('lang.de'), value: 'de' }
+            ]
+        },
 
         mode: {
             get () {

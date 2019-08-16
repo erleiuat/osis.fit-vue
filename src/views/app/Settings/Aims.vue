@@ -13,10 +13,11 @@
                 </v-flex>
                 <v-flex xs6>
                     <span class="subheading">{{ $t('date') }}</span><br />
-                    <span class="headline">{{ $store.state.user.aims.date || '-' }}</span>
+                    <span class="headline">{{ $dateFormat($store.state.user.aims.date) || '-' }}</span>
                 </v-flex>
             </v-layout>
         </v-card-text>
+
         <v-card-actions v-if="!edit">
             <v-btn @click="edit = !edit" depressed>{{ $t('btn.edit') }}</v-btn>
         </v-card-actions>
@@ -29,11 +30,11 @@
                         <v-text-field v-model="fd.weight" :label="$t('weight')" :rules="rule.require" type="number" />
                     </v-flex>
                     <v-flex xs12 sm6>
-                        <v-menu ref="menu" v-model="menu" :close-on-content-click="false" transition="scale-transition" offset-y full-width min-width="290px">
+                        <v-menu ref="menu" v-model="menu" :close-on-content-click="false" :nudge-right="40" transition="scale-transition" offset-y full-width min-width="290px">
                             <template v-slot:activator="{ on }">
-                                <v-text-field v-model="fd.date" :label="$t('date')" prepend-icon="event" readonly v-on="on"></v-text-field>
+                                <v-text-field v-model="fd.date" :label="$t('ft.date')" :rules="rule.require" type="date" v-on="on" @focus="menu = true" readonly append-icon="event"/>
                             </template>
-                            <v-date-picker v-model="fd.date" ref="picker" :locale="$store.state.app.lang" @change="$refs.menu.save(fd.date)"></v-date-picker>
+                            <v-date-picker v-model="fd.date" @input="menu = false" :locale="$store.getters['locale']" no-title />
                         </v-menu>
                     </v-flex>
                 </v-layout>

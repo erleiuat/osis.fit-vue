@@ -29,7 +29,7 @@
                         <v-flex xs6>
                             <v-menu ref="menu" v-model="dMenu" :close-on-content-click="false" :nudge-right="40" transition="scale-transition" offset-y full-width min-width="290px">
                                 <template v-slot:activator="{ on }">
-                                    <v-text-field v-model="fd.date" :label="$t('ft.date')" :rules="rule.require" type="date" outlined readonly v-on="on" />
+                                    <v-text-field v-model="fd.date" :label="$t('ft.date')" :rules="rule.require" type="date" outlined readonly v-on="on" @focus="dMenu = true" />
                                 </template>
                                 <v-date-picker v-model="fd.date" @input="dMenu = false" no-title />
                             </v-menu>
@@ -37,7 +37,7 @@
                         <v-flex xs6>
                             <v-menu ref="menu" v-model="tMenu" :return-value.sync="fd.time" :close-on-content-click="false" :nudge-right="40" transition="scale-transition" offset-y full-width max-width="290px" min-width="290px">
                                 <template v-slot:activator="{ on }">
-                                    <v-text-field v-model="fd.time" :label="$t('ft.time')" :rules="rule.require" type="time" outlined readonly v-on="on" />
+                                    <v-text-field v-model="fd.time" :label="$t('ft.time')" :rules="rule.require" type="time" outlined readonly v-on="on" @focus="tMenu = true" />
                                 </template>
                                 <v-time-picker v-if="tMenu" v-model="fd.time" full-width @click:minute="$refs.menu.save(fd.time)" format="24hr" no-title />
                             </v-menu>
@@ -46,7 +46,7 @@
                         <v-flex xs12>
                             <v-menu ref="menu" v-model="tMenu2" :return-value.sync="fd.duration" :close-on-content-click="false" :nudge-right="40" transition="scale-transition" offset-y full-width max-width="290px" min-width="290px">
                                 <template v-slot:activator="{ on }">
-                                    <v-text-field v-model="fd.duration" :label="$t('duration')" type="time" outlined readonly v-on="on" />
+                                    <v-text-field v-model="fd.duration" :label="$t('duration')" type="time" outlined readonly v-on="on" @focus="tMenu2 = true" />
                                 </template>
                                 <v-time-picker v-if="tMenu2" v-model="fd.duration" full-width @click:minute="$refs.menu.save(fd.duration)" format="24hr" no-title />
                             </v-menu>

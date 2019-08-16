@@ -11,14 +11,18 @@ import Notifications from 'vue-notification'
 
 import(/* webpackPrefetch: true */ '@/assets/css/app.css')
 import(/* webpackPrefetch: true */ '@/assets/css/transitions.css')
-Vue.use(Notifications)
 
+Vue.use(Notifications)
 Vue.use(smartStore, {
     store: store
 })
 
-
 Vue.config.productionTip = false
+Vue.prototype.$dateFormat = (date) => {
+    if (!date) return null
+    const [year, month, day] = date.split('-')
+    return `${day}.${month}.${year}`
+}
 
 new Vue({
     router,

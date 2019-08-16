@@ -29,10 +29,10 @@ export default {
 
     computed: {
         show: {
-            get(){
+            get () {
                 return this.$store.getters['cookieNotice']
             },
-            set(val) {
+            set (val) {
                 this.$store.commit('acceptCookies')
             }
         }

@@ -25,7 +25,7 @@
                 </v-flex>
                 <v-flex xs6 sm4>
                     <span class="subheading">{{ $t('birthdate') }}</span><br />
-                    <span class="headline">{{ $store.state.user.birthdate || '-' }}</span>
+                    <span class="headline">{{ $dateFormat($store.state.user.birthdate) || '-' }}</span>
                 </v-flex>
             </v-layout>
         </v-card-text>
@@ -51,9 +51,9 @@
                     <v-flex xs12 sm4>
                         <v-menu ref="menu" v-model="menu" :close-on-content-click="false" transition="scale-transition" offset-y full-width min-width="290px">
                             <template v-slot:activator="{ on }">
-                                <v-text-field v-model="fd.birthdate" :label="$t('birthdate')" append-icon="event" readonly v-on="on"></v-text-field>
+                                <v-text-field v-model="fd.birthdate" :label="$t('birthdate')" v-on="on" @focus="menu = true" readonly type="date" append-icon="event"/>
                             </template>
-                            <v-date-picker v-model="fd.birthdate" ref="picker" :locale="$store.state.app.lang" @change="$refs.menu.save(fd.birthdate)"></v-date-picker>
+                            <v-date-picker v-model="fd.birthdate" ref="picker" @change="$refs.menu.save(fd.birthdate)" :locale="$store.getters['locale']" />
                         </v-menu>
                     </v-flex>
                 </v-layout>

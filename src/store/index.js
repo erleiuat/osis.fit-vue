@@ -9,17 +9,18 @@ Vue.use(Vuex)
 export default new Vuex.Store({
 
     state: {
+
         today: null,
         cookiesAccepted: VueCookies.get('cAccept') || false,
         app: {
             title: process.env.VUE_APP_TITLE,
             drawer: false,
             dark: VueCookies.get('appDark') || false,
-            language: VueCookies.get('appLang') || navigator.language || navigator.userLanguage,
+            language: VueCookies.get('appLang') || navigator.language || navigator.userLanguage
         },
         auth: {
             authorized: false,
-            level: null,
+            level: null
         },
         token: {
             access: null,
@@ -36,6 +37,7 @@ export default new Vuex.Store({
             id: null,
             mail: null
         }
+
     },
 
     getters: {
@@ -76,7 +78,7 @@ export default new Vuex.Store({
         },
 
         dark: state => {
-            if(state.app.dark) return true
+            if (state.app.dark) return true
             return false
         },
 
