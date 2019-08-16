@@ -42,15 +42,18 @@ export default {
         FoodCard
     },
 
+    modules () {
+        if (this.$store.getters['auth/premium'])
+            return {
+                food,
+                foodFavs
+            }
+    },
+
     data () {
         return {
             query: null
         }
-    },
-
-    created () {
-        this.$store.useModule(food)
-        if (this.$store.getters['auth/premium']) this.$store.useModule(foodFavs)
     },
 
     computed: {

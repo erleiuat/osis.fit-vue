@@ -50,7 +50,7 @@
 </template>
 
 <script>
-import storeModule from '@/store/modules/calories'
+import calories from '@/store/modules/calories'
 
 const CalorieAdder = () => import('@/components/adder/Calories')
 const BottomNav = () => import('@/views/app/Calories/BottomNav')
@@ -61,6 +61,10 @@ export default {
 
     components: {
         BottomNav, CalorieAdder, CaloriesTable
+    },
+
+    modules: {
+        calories
     },
 
     data () {
@@ -85,10 +89,6 @@ export default {
             }
         }
 
-    },
-
-    created () {
-        this.$store.useModule(storeModule)
     },
 
     i18n: {

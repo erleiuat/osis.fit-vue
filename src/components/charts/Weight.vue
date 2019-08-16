@@ -12,13 +12,13 @@
 </template>
 
 <script>
-import storeModule from '@/store/modules/weight'
+import weight from '@/store/modules/weight'
 
 export default {
     name: 'WeightChart',
 
-    created () {
-        this.$store.useModule(storeModule)
+    modules: {
+        weight
     },
 
     computed: {

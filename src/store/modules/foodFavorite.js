@@ -1,7 +1,7 @@
 
 import Vue from 'vue'
 import Apios from '@/plugins/Apios'
-import lStore from '@/plugins/lStore'
+import smartStore from '@/plugins/smartStore'
 
 const name = 'foodFavorite'
 const namespaced = true
@@ -9,7 +9,7 @@ const namespaced = true
 const state = {
     url: 'app/food/favorite/',
     lName: 'foodFavorite',
-    items: lStore.get('foodFavorite')
+    items: smartStore.get('foodFavorite')
 }
 
 const getters = {
@@ -35,12 +35,12 @@ const mutations = {
             if (!(item.id in state.items)) Vue.set(state.items, item.id.toString(), item)
             else state.items[item.id] = item
         })
-        lStore.set(state.lName, state.items)
+        smartStore.set(state.lName, state.items)
     },
 
     delete: (state, itemID) => {
         Vue.delete(state.items, itemID.toString())
-        lStore.set(state.lName, state.items)
+        smartStore.set(state.lName, state.items)
     }
 
 }

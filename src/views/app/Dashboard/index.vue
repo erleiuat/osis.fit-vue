@@ -70,11 +70,8 @@ export default {
         BottomNav
     },
 
-    created () {
-        this.$store.useModule(user)
-        this.$store.useModule(weight)
-        this.$store.useModule(calories)
-        this.$store.useModule(activity)
+    modules: {
+        user, weight, calories, activity
     },
 
     i18n: {

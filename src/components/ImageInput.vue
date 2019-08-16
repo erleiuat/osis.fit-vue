@@ -50,10 +50,14 @@
 </template>
 
 <script>
-import storeModule from '@/store/modules/image'
+import image from '@/store/modules/image'
 
 export default {
     name: 'ImageInput',
+
+    modules: {
+        image
+    },
 
     props: ['value'],
 
@@ -82,10 +86,6 @@ export default {
             if (this.progress && this.progress === 100) return true
             return false
         }
-    },
-
-    created () {
-        this.$store.useModule(storeModule)
     },
 
     methods: {

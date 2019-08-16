@@ -47,7 +47,7 @@
 </template>
 
 <script>
-import storeModule from '@/store/modules/activity'
+import activity from '@/store/modules/activity'
 
 const ActivityAdder = () => import('@/components/adder/Activity')
 const BottomNav = () => import('@/views/app/Activity/BottomNav')
@@ -58,6 +58,10 @@ export default {
 
     components: {
         ActivityAdder, ActivityTable, BottomNav
+    },
+
+    modules: {
+        activity
     },
 
     data () {
@@ -82,10 +86,6 @@ export default {
             }
         }
 
-    },
-
-    created () {
-        this.$store.useModule(storeModule)
     },
 
     i18n: {

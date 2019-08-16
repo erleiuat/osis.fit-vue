@@ -1,6 +1,6 @@
 import Apios from '@/plugins/Apios'
 import VueCookies from 'vue-cookies'
-import lStore from '@/plugins/lStore'
+import smartStore from '@/plugins/smartStore'
 
 const state = {
     url: 'auth/',
@@ -84,6 +84,8 @@ const mutations = {
         state.authorized = false
         state.subscription = null
         state.account = null
+        smartStore.clearModules()
+        smartStore.clearStorage()
     }
 
 }
@@ -136,7 +138,6 @@ const actions = {
             }).catch(err => {
                 reject(err)
             }).finally(() => {
-                lStore.clear()
                 con.commit('remove')
             })
         })

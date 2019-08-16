@@ -56,7 +56,6 @@ export default {
                     vm.prgcol = 'error'
                     vm.$notify({ type: 'error', title: vm.$t('alert.error.default'), text: r })
                 }).finally(() => {
-                    vm.$store.removeModules()
                     vm.$router.push({ name: 'auth' })
                 })
             }, 1000)

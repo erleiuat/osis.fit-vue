@@ -51,10 +51,14 @@
 </template>
 
 <script>
-import storeModule from '@/store/modules/foodFavorite'
+import foodFavorite from '@/store/modules/foodFavorite'
 
 export default {
     name: 'Browse',
+
+    modules: {
+        foodFavorite
+    },
 
     data () {
         return {
@@ -152,10 +156,6 @@ export default {
     mounted () {
         this.$store.dispatch('foodFavorite/load')
         this.doSearch()
-    },
-
-    created () {
-        this.$store.useModule(storeModule)
     },
 
     i18n: {

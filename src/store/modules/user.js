@@ -1,6 +1,6 @@
 
 import Apios from '@/plugins/Apios'
-import lStore from '@/plugins/lStore'
+import smartStore from '@/plugins/smartStore'
 
 const name = 'user'
 const namespaced = true
@@ -9,12 +9,12 @@ const state = {
 
     url: 'app/user/',
     lName: 'user',
-    firstname: lStore.get('user.firstname'),
-    lastname: lStore.get('user.lastname'),
-    birthdate: lStore.get('user.birthdate'),
-    height: lStore.get('user.height'),
-    gender: lStore.get('user.gender'),
-    aims: lStore.get('user.aims')
+    firstname: smartStore.get('user.firstname'),
+    lastname: smartStore.get('user.lastname'),
+    birthdate: smartStore.get('user.birthdate'),
+    height: smartStore.get('user.height'),
+    gender: smartStore.get('user.gender'),
+    aims: smartStore.get('user.aims')
 
 }
 
@@ -24,7 +24,7 @@ const mutations = {
         Object.keys(state).forEach(function (key) {
             if (key in data) {
                 state[key] = data[key]
-                lStore.set(state.lName + '.' + key, state[key])
+                smartStore.set(state.lName + '.' + key, state[key])
             }
         })
     }
