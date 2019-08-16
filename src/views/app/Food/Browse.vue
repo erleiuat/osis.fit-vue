@@ -25,7 +25,7 @@
             <v-flex xs12 sm6 md4 v-for="(arr, key) in items" :key="key">
                 <v-layout column fill-height>
                     <v-flex xs12 v-for="item in arr" :key="item.id" @click="toggleFav(item)">
-                        <v-card :class="isFav(item.id) ? 'yellow' : ''" :light="isFav(item.id)" class="fill-height" link ripple>
+                        <v-card :class="isFav(item.id) ? 'amber lighten-3' : ''" :light="isFav(item.id)" class="fill-height" link ripple>
                             <v-img v-if="item.image" :src="item.image" :height="100" />
                             <v-card-title class="title">
                                 {{item.title}}
