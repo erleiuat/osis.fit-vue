@@ -42,12 +42,9 @@ export default {
         FoodCard
     },
 
-    modules () {
-        if (this.$store.getters['auth/premium'])
-            return {
-                food,
-                foodFavs
-            }
+    modules: {
+        food,
+        foodFavs
     },
 
     data () {
@@ -90,7 +87,7 @@ export default {
 
     mounted () {
         this.$store.dispatch('food/load')
-        this.$store.dispatch('foodFavorite/load')
+        if (this.$store.getters['auth/premium']) this.$store.dispatch('foodFavorite/load')
     },
 
     i18n: {

@@ -1,5 +1,5 @@
 <template>
-    <v-bottom-navigation app fixed grow class="elevation-0">
+    <v-bottom-navigation app fixed grow>
 
         <CalorieAdder>
             <template v-slot:default="trigger">

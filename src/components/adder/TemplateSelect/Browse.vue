@@ -1,14 +1,14 @@
 <template>
-    <v-container :class="$vuetify.breakpoint.xs ? 'pa-0 grid-list-md': 'grid-list-md'">
+    <v-container>
 
         <form v-on:submit.prevent="doSearch()">
-            <v-layout row wrap align-center pa-2>
-                <v-flex xs12>
-                    <v-text-field v-model="searchQuery" :readonly="loading" hide-details append-icon="search" @input="changeIn()" />
-                </v-flex>
-                <v-flex xs12 v-show="false">
-                    <v-btn type="submit"></v-btn>
-                </v-flex>
+            <v-layout wrap align-center pb-2>
+                <v-toolbar dense fixed :tile="false">
+                    <v-text-field v-model="searchQuery" hide-details prepend-icon="search" single-line clearable @input="changeIn()" />
+                    <v-flex xs12 v-show="false">
+                        <v-btn type="submit"></v-btn>
+                    </v-flex>
+                </v-toolbar>
             </v-layout>
         </form>
 
@@ -18,10 +18,10 @@
             </v-flex>
         </v-layout>
 
-        <v-layout wrap justify-center align-start pl-0 pr-0>
+        <v-layout wrap justify-center align-start pl-0 pr-0> 
             <v-flex xs6 v-for="(arr, key) in items" :key="key">
                 <v-layout column fill-height>
-                    <v-flex xs12 v-for="item in arr" :key="item.id" @click="$emit('select', item)">
+                    <v-flex xs12 v-for="item in arr" :key="item.id" @click="$emit('select', item)" class="pa-1">
                         <v-card :class="isFav(item.id) ? 'yellow' : ''" :light="isFav(item.id)" class="fill-height" link ripple>
                             <v-img v-if="item.image" :src="item.image" :height="100" />
                             <v-card-title class="title">
@@ -38,7 +38,7 @@
             </v-flex>
         </v-layout>
 
-        <v-layout row wrap v-if="results.length < 1 && searched">
+        <v-layout row wrap pa-2 text-center v-if="results.length < 1 && searched">
             <v-flex xs12>
                 {{ $t('notFound') }}
             </v-flex>
@@ -55,7 +55,7 @@ export default {
     data () {
         return {
             loading: false,
-            searchQuery: this.$route.query.s || '',
+            searchQuery: '',
             searched: false,
             typerTimer: null,
             results: []
