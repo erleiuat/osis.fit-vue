@@ -2,27 +2,28 @@ import Apios from '@/plugins/Apios'
 import VueCookies from 'vue-cookies'
 import smartStore from '@/plugins/smartStore'
 
-const state = {
-    url: 'auth/',
+const state = () => {
+    return {
+        url: 'auth/',
 
-    authorized: false,
-    level: null,
-    token: {
-        access: null,
-        refresh: null
-    },
-    subscription: {
-        id: null,
-        status: null,
-        deleted: null,
-        expiration: null,
-        plan: null
-    },
-    account: {
-        id: null,
-        mail: null
+        authorized: false,
+        level: null,
+        token: {
+            access: null,
+            refresh: null
+        },
+        subscription: {
+            id: null,
+            status: null,
+            deleted: null,
+            expiration: null,
+            plan: null
+        },
+        account: {
+            id: null,
+            mail: null
+        }
     }
-
 }
 
 const getters = {

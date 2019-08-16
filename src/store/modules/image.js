@@ -5,10 +5,11 @@ import NProgress from '@/plugins/nprogress'
 const name = 'image'
 const namespaced = true
 
-const state = {
-    url: 'upload/',
-    progress: false
-
+const state = () => {
+    return {
+        url: 'upload/',
+        progress: false
+    }
 }
 
 const getters = {

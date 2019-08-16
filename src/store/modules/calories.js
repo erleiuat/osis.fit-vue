@@ -6,10 +6,12 @@ import smartStore from '@/plugins/smartStore'
 const name = 'calories'
 const namespaced = true
 
-const state = {
-    url: 'app/calories/',
-    lName: 'calories',
-    items: smartStore.get('calories')
+const state = () => {
+    return {
+        url: 'app/calories/',
+        lName: 'calories',
+        items: smartStore.get('calories')
+    }
 }
 
 const getters = {

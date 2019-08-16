@@ -6,10 +6,12 @@ import smartStore from '@/plugins/smartStore'
 const name = 'foodFavorite'
 const namespaced = true
 
-const state = {
-    url: 'app/food/favorite/',
-    lName: 'foodFavorite',
-    items: smartStore.get('foodFavorite')
+const state = () => {
+    return {
+        url: 'app/food/favorite/',
+        lName: 'foodFavorite',
+        items: smartStore.get('foodFavorite')
+    }
 }
 
 const getters = {

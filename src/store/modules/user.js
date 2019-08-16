@@ -5,17 +5,17 @@ import smartStore from '@/plugins/smartStore'
 const name = 'user'
 const namespaced = true
 
-const state = {
-
-    url: 'app/user/',
-    lName: 'user',
-    firstname: smartStore.get('user.firstname'),
-    lastname: smartStore.get('user.lastname'),
-    birthdate: smartStore.get('user.birthdate'),
-    height: smartStore.get('user.height'),
-    gender: smartStore.get('user.gender'),
-    aims: smartStore.get('user.aims')
-
+const state = () => {
+    return {
+        url: 'app/user/',
+        lName: 'user',
+        firstname: smartStore.get('user.firstname'),
+        lastname: smartStore.get('user.lastname'),
+        birthdate: smartStore.get('user.birthdate'),
+        height: smartStore.get('user.height'),
+        gender: smartStore.get('user.gender'),
+        aims: smartStore.get('user.aims')
+    }
 }
 
 const mutations = {
