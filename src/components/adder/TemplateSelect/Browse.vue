@@ -18,7 +18,7 @@
             </v-flex>
         </v-layout>
 
-        <v-layout wrap justify-center align-start pl-0 pr-0> 
+        <v-layout wrap justify-center align-start pl-0 pr-0>
             <v-flex xs6 v-for="(arr, key) in items" :key="key">
                 <v-layout column fill-height>
                     <v-flex xs12 v-for="item in arr" :key="item.id" @click="$emit('select', item)" class="pa-1">

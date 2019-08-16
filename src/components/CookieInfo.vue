@@ -36,7 +36,7 @@ export default {
     watch: {
         show (val) {
             if (val) return
-            this.$cookies.set('cookieAcceptance', true, 0)
+            this.$cookies.set('cookieAcceptance', true, -1)
             this.show = false
         }
     },

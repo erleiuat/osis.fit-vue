@@ -41,8 +41,8 @@ const smartStore = {
     },
 
     clearStorage: () => {
-        smartStore.stores = false
         localStorage.clear()
+        smartStore.stores = false
     },
 
     install (Vue, opts) {
