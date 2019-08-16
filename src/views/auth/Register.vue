@@ -79,7 +79,7 @@ export default {
             if (!this.$refs.form.validate()) return false
             this.sending = true
 
-            this.$store.dispatch('auth/register', this.fd).then(r => {
+            this.$store.dispatch('register', this.fd).then(r => {
                 this.$router.push({ name: 'auth.verify', query: { mail: this.fd.mail } })
             }).catch(r => {
                 if (r === 'mail_in_use') this.$notify({ type: 'error', title: this.$t('mailInUse') })

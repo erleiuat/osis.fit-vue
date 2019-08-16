@@ -14,7 +14,7 @@
                 </transition>
             </v-container>
 
-            <CookieInfo v-if="!$store.state.app.cookiesAccepted" />
+            <CookieInfo v-if="this.$store.getters['cookieNotice']"/>
 
         </v-content>
 
@@ -23,7 +23,6 @@
 </template>
 
 <script>
-import VueCookies from 'vue-cookies'
 import Drawer from '@/components/nav/drawer/'
 import Toolbar from '@/components/nav/Toolbar'
 
@@ -37,16 +36,16 @@ export default {
         Toolbar, Drawer, Alerts, CookieInfo
     },
 
-    beforeMount () {
-        document.title = process.env.VUE_APP_TITLE
-        this.$store.state.app.lang = VueCookies.get('appLang') || navigator.language || navigator.userLanguage
-        this.$i18n.locale = this.$store.state.app.lang
-        this.$vuetify.theme.dark = VueCookies.get('themeDark')
-        this.$store.state.app.drawer = this.$vuetify.breakpoint.lgAndUp
+    created () {
+        this.$i18n.locale = this.$store.getters['locale']
+        this.$vuetify.theme.dark = this.$store.getters['dark']
     },
 
     mounted () {
-        if (!this.$cookies.get('cookieAcceptance')) this.$store.state.app.cookiesAccepted = false
+        this.$store.subscribe((mutation, state) => {
+            this.$i18n.locale = this.$store.getters['locale']
+            this.$vuetify.theme.dark = this.$store.getters['dark']
+        })
     }
 
 }

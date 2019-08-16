@@ -26,11 +26,11 @@ router.beforeEach((to, from, next) => {
     var needAuth = (to.name ? to.meta.authRequired : true)
     var needPremium = (to.name ? to.meta.premium : true)
 
-    var auth = store.getters['auth/check']
+    var auth = store.getters['authDetail']
 
     if (auth !== 'unauthorized')
 
-        if (auth === 'expired') store.dispatch('auth/refresh').then(() => {
+        if (auth === 'expired') store.dispatch('refreshAuth').then(() => {
             router.push({ name: 'dashboard' })
         }).catch(res => {
             router.push({ name: 'start' })
@@ -38,13 +38,13 @@ router.beforeEach((to, from, next) => {
 
         else {
             if (auth === 'available') {
-                store.commit('auth/place')
-                auth = store.getters['auth/check']
+                store.commit('placeAuth')
+                auth = store.getters['authDetail']
             }
             if (auth === 'authorized')
                 if (!start) {
                     if (!needPremium) next()
-                    else if (store.getters['auth/premium']) next()
+                    else if (store.getters['premium']) next()
                     else router.push({ name: 'premium', query: { notify: true } })
                 } else router.push({ name: 'dashboard' })
         }
@@ -55,7 +55,7 @@ router.beforeEach((to, from, next) => {
     else
         router.push({ name: 'auth.login', query: { target: to.name } })
 
-    store.dispatch('auth/check')
+    store.dispatch('checkAuth')
 })
 
 router.beforeResolve((to, from, next) => {

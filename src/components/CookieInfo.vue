@@ -27,17 +27,14 @@
 export default {
     name: 'CookieInfo',
 
-    data () {
-        return {
-            show: true
-        }
-    },
-
-    watch: {
-        show (val) {
-            if (val) return
-            this.$cookies.set('cookieAcceptance', true, -1)
-            this.show = false
+    computed: {
+        show: {
+            get(){
+                return this.$store.getters['cookieNotice']
+            },
+            set(val) {
+                this.$store.commit('acceptCookies')
+            }
         }
     },
 

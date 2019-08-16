@@ -39,7 +39,7 @@ export default {
     mounted () {
         this.$store.dispatch('user/load')
         this.$store.dispatch('weight/load')
-        var td = this.$store.getters['app/today'].date
+        var td = this.$store.getters['today'].date
         this.$store.dispatch('calories/load', td)
         this.$store.dispatch('activity/load', td)
     },
@@ -92,7 +92,7 @@ export default {
             var tmpDate = new Date(Date.now() - Date.parse(this.user.birth))
             var age = Math.abs(tmpDate.getUTCFullYear() - 1970)
 
-            var td = this.$store.getters['app/today'].date
+            var td = this.$store.getters['today'].date
             var cTotal = Math.round(this.$store.getters['calories/total'](td)) || 0
             var aTotal = Math.round(this.$store.getters['activity/total'](td)) || 0
 

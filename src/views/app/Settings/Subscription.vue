@@ -88,11 +88,11 @@ export default {
         },
 
         sub () {
-            return this.$store.getters['auth/sub']
+            return this.$store.getters['sub']
         },
 
         premium () {
-            return this.$store.getters['auth/premium']
+            return this.$store.getters['premium']
         }
 
     },
@@ -135,7 +135,7 @@ export default {
             var vm = this
             vm.portal.open({
                 close () {
-                    vm.$store.dispatch('auth/refresh')
+                    vm.$store.dispatch('refreshAuth')
                 },
                 error: function (error) {
                     vm.$notify({ type: 'error', title: vm.$t('alert.error.default'), text: error })
@@ -153,7 +153,7 @@ export default {
                     Apios.post('subscription/apply/', {
                         token: hostedPageId
                     }).then(res => {
-                        vm.$store.dispatch('auth/refresh')
+                        vm.$store.dispatch('refreshAuth')
                     })
                 },
                 error: function (error) {

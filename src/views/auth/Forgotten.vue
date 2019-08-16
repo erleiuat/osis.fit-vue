@@ -44,8 +44,6 @@
 </template>
 
 <script>
-import VueCookies from 'vue-cookies'
-
 export default {
     name: 'Forgotten',
 
@@ -56,7 +54,7 @@ export default {
             pwRepeat: '',
             fd: {
                 mail: '',
-                language: VueCookies.get('appLang') || navigator.language || navigator.userLanguage,
+                language: this.$store.state.app.lang,
                 code: '',
                 password: ''
             },
@@ -83,7 +81,7 @@ export default {
         send () {
             if (!this.$refs.form.validate()) return false
             this.sending = true
-            this.$store.dispatch('auth/forgot', this.fd).then(r => {
+            this.$store.dispatch('forgot', this.fd).then(r => {
                 this.state = 'sent'
             }).catch(r => { }).finally(() => {
                 this.sending = false
@@ -93,7 +91,7 @@ export default {
         reset () {
             if (!this.$refs.form.validate()) return false
             this.sending = true
-            this.$store.dispatch('auth/forgot', this.fd).then(r => {
+            this.$store.dispatch('forgot', this.fd).then(r => {
                 this.$router.push({ name: 'auth.login' })
                 this.$notify({ type: 'error', title: this.$t('hasChanged') })
             }).catch(r => { }).finally(() => {

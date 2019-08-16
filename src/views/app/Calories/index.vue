@@ -83,7 +83,7 @@ export default {
             },
             get () {
                 if (this.dateSelected) return this.dateSelected
-                var today = this.$store.getters['app/today'].date
+                var today = this.$store.getters['today'].date
                 this.$store.dispatch('calories/load', today)
                 return today
             }

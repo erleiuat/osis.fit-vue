@@ -1,7 +1,7 @@
 <template>
     <v-navigation-drawer v-model="drawer" app clipped floating>
 
-        <AuthDrawer v-if="$store.getters['auth/is']" />
+        <AuthDrawer v-if="$store.getters['auth']" />
 
         <NoAuthDrawer v-else />
 
@@ -15,7 +15,7 @@
                         <v-list-item-title>{{ $t('view.help.title') }}</v-list-item-title>
                     </v-list-item-content>
                 </v-list-item>
-                <v-list-item :to="{ name: 'logout' }" v-if="$store.getters['auth/is']" link>
+                <v-list-item :to="{ name: 'logout' }" v-if="$store.getters['auth']" link>
                     <v-list-item-icon>
                         <v-icon>lock</v-icon>
                     </v-list-item-icon>
@@ -55,7 +55,7 @@ export default {
                 return this.$store.state.app.drawer
             },
             set (val) {
-                this.$store.commit('app/setDrawer', val)
+                this.$store.commit('setDrawer', val)
             }
         }
 

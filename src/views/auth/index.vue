@@ -18,7 +18,7 @@ export default {
     methods: {
 
         check () {
-            if (this.$store.getters['auth/check'] === 'authorized')
+            if (this.$store.getters['authDetail'] === 'authorized')
                 if (this.$route.query.target) this.$router.push({ name: this.$route.query.target.name })
                 else this.$router.push({ name: 'dashboard' })
             else if (this.$route.name === 'auth')

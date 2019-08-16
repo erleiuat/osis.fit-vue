@@ -22,7 +22,7 @@ export default {
 
     methods: {
         drawer () {
-            this.$store.dispatch('app/drawer')
+            this.$store.dispatch('drawer')
         }
     }
 

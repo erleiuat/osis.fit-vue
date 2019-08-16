@@ -66,7 +66,7 @@ export default {
                 settings: { to: 'settings', icon: 'settings' }
             }
 
-            if (!this.$store.getters['auth/premium'])
+            if (!this.$store.getters['premium'])
                 items3['premium'] = {
                     to: 'premium', icon: 'star', color: 'yellow'
                 }

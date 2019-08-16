@@ -1,7 +1,7 @@
 <template>
     <v-container :class="$vuetify.breakpoint.xs ? 'pa-0 grid-list-md': 'grid-list-lg'">
 
-        <v-layout wrap v-if="!$store.getters['auth/premium']">
+        <v-layout wrap v-if="!$store.getters['premium']">
             <v-flex xs12>
                 <Subscription />
             </v-flex>
@@ -19,7 +19,7 @@
             </v-flex>
         </v-layout>
 
-        <v-layout wrap v-if="$store.getters['auth/premium']">
+        <v-layout wrap v-if="$store.getters['premium']">
             <v-flex xs12>
                 <Subscription />
             </v-flex>
@@ -55,8 +55,6 @@
 import EditAims from '@/views/app/Settings/Aims'
 import EditProfile from '@/views/app/Settings/Profile'
 import Subscription from '@/views/app/Settings/Subscription'
-import i18n from '@/plugins/i18n'
-import VueCookies from 'vue-cookies'
 
 import user from '@/store/modules/user'
 
@@ -88,22 +86,19 @@ export default {
 
         mode: {
             get () {
-                return VueCookies.get('themeDark')
+                return this.$store.getters['dark']
             },
             set (val) {
-                this.$vuetify.theme.dark = val
-                if (val) VueCookies.set('themeDark', val)
-                else VueCookies.remove('themeDark')
+                this.$store.commit('setDark', val)
             }
         },
 
         lang: {
             get () {
-                return VueCookies.get('appLang') || navigator.language || navigator.userLanguage
+                return this.$store.getters['locale']
             },
             set (val) {
-                i18n.locale = val
-                VueCookies.set('appLang', val)
+                this.$store.commit('setLocale', val)
             }
         }
 

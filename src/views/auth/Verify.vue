@@ -48,7 +48,7 @@ export default {
             if (!this.$refs.form.validate() && !force) return false
 
             this.sending = true
-            this.$store.dispatch('auth/verify', this.fd).then(r => {
+            this.$store.dispatch('verify', this.fd).then(r => {
                 this.$router.push({ name: 'auth.login', query: { mail: this.fd.mail, verified: true } })
             }).catch(r => {
                 switch (r) {

@@ -9,16 +9,14 @@ import i18n from './plugins/i18n/'
 import vuetify from './plugins/vuetify'
 import Notifications from 'vue-notification'
 
-import VueCookies from 'vue-cookies'
-
 import(/* webpackPrefetch: true */ '@/assets/css/app.css')
 import(/* webpackPrefetch: true */ '@/assets/css/transitions.css')
 Vue.use(Notifications)
-Vue.use(VueCookies)
 
 Vue.use(smartStore, {
     store: store
 })
+
 
 Vue.config.productionTip = false
 
