@@ -6,10 +6,12 @@ import smartStore from '@/plugins/smartStore'
 const name = 'activity'
 const namespaced = true
 
-const state = {
-    url: 'app/activity/',
-    lName: 'activity',
-    items: smartStore.get('activity')
+const state = () => {
+    return {
+        url: 'app/activity/',
+        lName: 'activity',
+        items: smartStore.get('activity')
+    }
 }
 
 const getters = {
@@ -57,7 +59,7 @@ const actions = {
 
     load (con, date) {
         Apios.post(con.state.url + 'read/', { from: date, to: date }).then(res => {
-            if (res.status === 200) con.commit('set', res.data.items)
+            // if (res.status === 200) con.commit('set', res.data.items)
         })
     },
 
