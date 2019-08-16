@@ -15,7 +15,7 @@
                     <span class="title">{{ $t('lastname') }}</span><br />
                     <span class="subheading">{{ $store.state.user.lastname || '-' }}</span>
                 </v-flex>
-                <v-flex xs6 sm4 lg4> c
+                <v-flex xs6 sm4 lg4>
                     <span class="title">{{ $t('height') }}</span><br />
                     <span class="subheading">{{ $store.state.user.height || '-' }}</span>
                 </v-flex>
