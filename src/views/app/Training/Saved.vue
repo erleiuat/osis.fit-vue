@@ -1,18 +1,26 @@
 <template>
-    <v-container grid-list-xl pt-0 fill-height>
-        <v-layout wrap v-if="items">
+    <v-container grid-list-sm fill-height>
+        <v-layout wrap>
 
-            <v-flex xs12 md6 v-for="item in items" :key="item.id">
-                <v-card>
+            <v-flex xs12 class="title">
+                {{ $t('title') }}
+            </v-flex>
 
-                    <v-card-title>
-                        {{ item.title }}
-                    </v-card-title>
-                    <v-card-text>
-                        {{ item.description }}
-                    </v-card-text>
+            <v-flex xs12>
+                <v-layout row wrap v-if="items">
+                    <v-flex xs12 md6 v-for="item in items" :key="item.id">
+                        <v-card>
 
-                </v-card>
+                            <v-card-title>
+                                {{ item.title }}
+                            </v-card-title>
+                            <v-card-text>
+                                {{ item.description }}
+                            </v-card-text>
+
+                        </v-card>
+                    </v-flex>
+                </v-layout>
             </v-flex>
 
         </v-layout>
@@ -46,17 +54,8 @@ export default {
 
             if (filtered.length <= 0) return false
             else return filtered
-
         }
 
-    },
-
-    methods: {
-        openEditor (item = false) {
-            var copy = (item ? clonedeep(item) : false)
-            this.editObj = copy
-            this.showEditor = true
-        }
     },
 
     mounted () {
@@ -66,22 +65,10 @@ export default {
     i18n: {
         messages: {
             en: {
-                title: 'Your Templates',
-                amount: 'Amount',
-                calories: 'Calories/100',
-                total: 'Total',
-                noneyet: 'You have not yet created your own templates',
-                nonefound: 'No results',
-                removeImgError: 'Image remove failed'
+                title: 'Saved training plans'
             },
             de: {
-                title: 'Deine Vorlagen',
-                amount: 'Menge',
-                calories: 'Kalorien/100',
-                total: 'Total',
-                noneyet: 'Du hast noch keine eigenen Vorlagen erstellt',
-                nonefound: 'Keine Resultate',
-                removeImgError: 'Bild entfernen fehlgeschlagen'
+                title: 'Deine Trainingspläne'
             }
         }
     }
