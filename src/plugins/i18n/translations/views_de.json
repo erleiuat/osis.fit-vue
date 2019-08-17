@@ -19,6 +19,22 @@
             "description": ""
         }
     },
+    "training": {
+        "title": "Training",
+        "description": "",
+        "saved": {
+            "title": "Pläne",
+            "description": ""
+        },
+        "exercise": {
+            "title": "Übung",
+            "description": "",
+            "saved": {
+                "title": "Übungen",
+                "description": ""
+            }
+        }
+    },
     "dashboard": {
         "title": "Dashboard",
         "description": ""

@@ -55,6 +55,47 @@ module.exports = [{
 
 }, {
 
+    path: '/training',
+    name: 'training.index',
+    component: () => import('@/views/app/Training/'), // TODO REDIRECT TO CHILD
+    meta: { authRequired: true, premium: true },
+    children: [
+        {
+            path: '#/:id',
+            name: 'training',
+            component: () => import(/* webpackChunkName: "premium" */'@/views/app/Training/Training'),
+            meta: { authRequired: true, premium: true }
+        },
+        {
+            path: 'saved',
+            name: 'training.saved',
+            component: () => import(/* webpackChunkName: "premium" */'@/views/app/Training/Saved'),
+            meta: { authRequired: true, premium: true }
+        },
+        {
+            path: 'exercise',
+            name: 'training.exercise.index',
+            component: () => import(/* webpackChunkName: "premium" */'@/views/app/Training/Exercise/'),
+            meta: { authRequired: true, premium: true },
+            children: [
+                {
+                    path: '#/:id',
+                    name: 'training.exercise',
+                    component: () => import(/* webpackChunkName: "premium" */'@/views/app/Training/Exercise/Exercise'),
+                    meta: { authRequired: true, premium: true }
+                },
+                {
+                    path: 'saved',
+                    name: 'training.exercise.saved',
+                    component: () => import(/* webpackChunkName: "premium" */'@/views/app/Training/Exercise/Saved'),
+                    meta: { authRequired: true, premium: true }
+                }
+            ]
+        }
+    ]
+
+}, {
+
     name: 'settings',
     path: '/settings',
     component: () => import('@/views/app/Settings/'),

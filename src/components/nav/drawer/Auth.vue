@@ -22,7 +22,19 @@
             </v-list-item>
         </v-list-group>
 
-        <v-list-item v-for="item in items.i3" :to="{name: item.to}" :key="item.to" link>
+        <v-list-group :prepend-icon="items.i3.icon">
+            <template v-slot:activator>
+                <v-list-item-title>{{ $t('view.'+items.i3.to+'.title') }}</v-list-item-title>
+            </template>
+            <v-list-item v-for="(item,key) in items.i3.items" :to="{name: item.to}" :key="key" link>
+                <v-list-item-title>{{ $t('view.'+(item.title || item.to)+'.title') }}</v-list-item-title>
+                <v-list-item-icon>
+                    <v-icon>{{ item.icon }}</v-icon>
+                </v-list-item-icon>
+            </v-list-item>
+        </v-list-group>
+
+        <v-list-item v-for="item in items.i4" :to="{name: item.to}" :key="item.to" link>
             <v-list-item-icon>
                 <v-icon :color="item.color ? item.color : null">
                     {{ item.icon }}
@@ -54,7 +66,7 @@ export default {
 
             var item2 = {
                 to: 'food',
-                icon: 'dashboard',
+                icon: 'fastfood',
                 items: {
                     own: { title: 'food.own', to: 'food.own', icon: 'folder' },
                     favorites: { to: 'food.favorites', icon: 'favorite' },
@@ -62,19 +74,29 @@ export default {
                 }
             }
 
-            var items3 = {
+            var item3 = {
+                to: 'training',
+                icon: 'fitness_center',
+                items: {
+                    saved: { title: 'training.saved', to: 'training.saved', icon: 'list_alt' },
+                    exercise: { to: 'training.exercise.saved', icon: 'calendar_view_day' }
+                }
+            }
+
+            var items4 = {
                 settings: { to: 'settings', icon: 'settings' }
             }
 
             if (!this.$store.getters['premium'])
-                items3['premium'] = {
+                items4['premium'] = {
                     to: 'premium', icon: 'star', color: 'yellow'
                 }
 
             return {
                 i1: items1,
                 i2: item2,
-                i3: items3
+                i3: item3,
+                i4: items4
             }
         }
 
