@@ -11,7 +11,6 @@
                 <v-layout row wrap v-if="items">
                     <v-flex xs12 md6 v-for="item in items" :key="item.id">
                         <v-hover v-slot:default="{ hover }">
-
                             <v-card link flat :elevation="hover ? 12 : 2">
 
                                 <v-card-title>
@@ -43,7 +42,6 @@ export default {
 
     data () {
         return {
-            query: null,
             showEditor: false,
             editObj: null
         }
@@ -54,7 +52,11 @@ export default {
         items () {
             var items = this.$store.getters['training/all']
 
-            var filtered = items.filter(el => el.title.includes(this.query || ''))
+            var query = this.$route.query.s || ''
+
+            var filtered = items.filter(el =>
+                el.title.toUpperCase().includes(query.toUpperCase())
+            )
 
             if (filtered.length <= 0) return false
             else return filtered

@@ -2,39 +2,57 @@ module.exports = [{
 
     name: 'welcome',
     path: '/welcome',
-    component: () => import('@/views/general/Welcome'),
-    meta: { authRequired: false }
+    meta: { authRequired: false },
+    components: {
+        toolbar: () => import('@/components/nav/toolbar/'),
+        default: () => import('@/views/general/Welcome')
+    }
 
 }, {
 
     name: 'auth',
     path: '/auth',
-    component: () => import('@/views/auth/'),
     meta: { authRequired: false },
+    components: {
+        toolbar: () => import('@/components/nav/toolbar/'),
+        default: () => import('@/views/auth/')
+    },
     children: [
         {
             path: 'login',
             name: 'auth.login',
-            component: () => import('@/views/auth/Login'),
-            meta: { authRequired: false }
+            meta: { authRequired: false },
+            components: {
+                toolbar: () => import('@/components/nav/toolbar/'),
+                default: () => import('@/views/auth/Login')
+            }
         },
         {
             path: 'register',
             name: 'auth.register',
-            component: () => import('@/views/auth/Register'),
-            meta: { authRequired: false }
+            meta: { authRequired: false },
+            components: {
+                toolbar: () => import('@/components/nav/toolbar/'),
+                default: () => import('@/views/auth/Register')
+            }
         },
         {
             path: 'verify',
             name: 'auth.verify',
-            component: () => import('@/views/auth/Verify'),
-            meta: { authRequired: false }
+            meta: { authRequired: false },
+            components: {
+                toolbar: () => import('@/components/nav/toolbar/'),
+                default: () => import('@/views/auth/Verify')
+            }
         },
         {
             path: 'forgotten',
             name: 'auth.forgotten',
-            component: () => import('@/views/auth/Forgotten'),
-            meta: { authRequired: false }
+            meta: { authRequired: false },
+            components: {
+                toolbar: () => import('@/components/nav/toolbar/'),
+                default: () => import('@/views/auth/Forgotten')
+            }
         }
     ]
 

@@ -8,40 +8,58 @@ module.exports = [{
 }, {
 
     path: '/terms',
-    component: () => import('@/views/general/Terms/'),
     meta: { authRequired: false },
+    components: {
+        toolbar: () => import('@/components/nav/toolbar/'),
+        default: () => import('@/views/general/Terms/')
+    },
     children: [
         {
             path: '',
             name: 'terms',
-            component: () => import('@/views/general/Terms/List'),
-            meta: { authRequired: false }
+            meta: { authRequired: false },
+            components: {
+                toolbar: () => import('@/components/nav/toolbar/'),
+                default: () => import('@/views/general/Terms/List')
+            }
         },
         {
             path: 'cookies',
             name: 'terms.cookie',
-            component: () => import('@/views/general/Terms/Cookie'),
-            meta: { authRequired: false }
+            meta: { authRequired: false },
+            components: {
+                toolbar: () => import('@/components/nav/toolbar/'),
+                default: () => import('@/views/general/Terms/Cookie')
+            }
         }
     ]
 
 }, {
 
     path: '/help',
-    component: () => import('@/views/general/Help/'),
     meta: { authRequired: false },
+    components: {
+        toolbar: () => import('@/components/nav/toolbar/'),
+        default: () => import('@/views/general/Help/')
+    },
     children: [
         {
             name: 'help',
             path: 'faq',
-            component: () => import('@/views/general/Help/FAQ'),
-            meta: { authRequired: false }
+            meta: { authRequired: false },
+            components: {
+                toolbar: () => import('@/components/nav/toolbar/'),
+                default: () => import('@/views/general/Help/FAQ')
+            }
         },
         {
             name: 'help.contact',
             path: 'contact',
-            component: () => import('@/views/general/Help/Contact'),
-            meta: { authRequired: false }
+            meta: { authRequired: false },
+            components: {
+                toolbar: () => import('@/components/nav/toolbar/'),
+                default: () => import('@/views/general/Help/Contact')
+            }
         }
     ]
 
@@ -49,32 +67,47 @@ module.exports = [{
 
     name: 'theme',
     path: '/theme',
-    component: () => import('@/views/general/Theme'),
-    meta: { authRequired: false }
+    meta: { authRequired: false },
+    components: {
+        toolbar: () => import('@/components/nav/toolbar/'),
+        default: () => import('@/views/general/Theme')
+    }
 
 }, {
 
     path: '/error',
-    component: () => import('@/views/error/'),
     meta: { authRequired: false },
+    components: {
+        toolbar: () => import('@/components/nav/toolbar/'),
+        default: () => import('@/views/error/')
+    },
     children: [
         {
             path: '401',
             name: 'error.permission',
-            component: () => import('@/views/error/NoPermission'),
-            meta: { authRequired: false }
+            meta: { authRequired: false },
+            components: {
+                toolbar: () => import('@/components/nav/toolbar/'),
+                default: () => import('@/views/error/NoPermission')
+            }
         },
         {
             path: '404',
             name: 'error.found',
-            component: () => import('@/views/error/NotFound'),
-            meta: { authRequired: false }
+            meta: { authRequired: false },
+            components: {
+                toolbar: () => import('@/components/nav/toolbar/'),
+                default: () => import('@/views/error/NotFound')
+            }
         }
     ]
 
 }, {
 
     path: '*',
-    component: () => import('@/views/error/NotFound')
+    components: {
+        toolbar: () => import('@/components/nav/toolbar/'),
+        default: () => import('@/views/error/NotFound')
+    }
 
 }]

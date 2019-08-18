@@ -1,6 +1,9 @@
 module.exports = [{
     name: 'premium',
     path: '/premium',
-    component: () => import('@/views/premium/'),
-    meta: { authRequired: true }
+    meta: { authRequired: true },
+    components: {
+        toolbar: () => import('@/components/nav/toolbar/'),
+        default: () => import('@/views/premium/')
+    }
 }]

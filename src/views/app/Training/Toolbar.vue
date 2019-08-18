@@ -1,10 +1,7 @@
 <template>
     <Default>
         <v-app-bar-nav-icon @click.stop="drawer()" />
-        <v-spacer />
-        <v-toolbar-title>
-            {{ title }}
-        </v-toolbar-title>
+        <v-text-field v-model="query" hide-details append-icon="search" single-line clearable />
     </Default>
 </template>
 
@@ -18,9 +15,14 @@ export default {
         Default
     },
 
-    data () {
-        return {
-            title: process.env.VUE_APP_TITLE
+    computed: {
+        query: {
+            get () {
+                return this.$route.query.s
+            },
+            set (val) {
+                this.$router.replace({ name: 'training.saved', query: { s: val } })
+            }
         }
     },
 

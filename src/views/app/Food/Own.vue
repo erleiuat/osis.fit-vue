@@ -16,11 +16,6 @@
                         </v-btn>
                     </v-flex>
                 </v-layout>
-                <v-layout wrap align-center pb-2>
-                    <v-toolbar dense fixed :tile="false">
-                        <v-text-field v-model="query" hide-details prepend-icon="search" single-line clearable />
-                    </v-toolbar>
-                </v-layout>
             </v-flex>
 
             <v-flex xs12>
@@ -74,7 +69,6 @@ export default {
 
     data () {
         return {
-            query: null,
             showEditor: false,
             editObj: null
         }
@@ -84,7 +78,12 @@ export default {
 
         items () {
             var items = this.$store.getters['food/all']
-            var filtered = items.filter(el => el.title.includes(this.query || ''))
+
+            var query = this.$route.query.s || ''
+
+            var filtered = items.filter(el =>
+                el.title.toUpperCase().includes(query.toUpperCase() || '')
+            )
 
             if (filtered.length <= 0) return false
 
@@ -142,7 +141,6 @@ export default {
 
     mounted () {
         this.$store.dispatch('food/load')
-        this.$store.commit('toolbar/show', 'search')
     },
 
     i18n: {

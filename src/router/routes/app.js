@@ -2,54 +2,79 @@ module.exports = [{
 
     name: 'dashboard',
     path: '/dashboard',
-    component: () => import('@/views/app/Dashboard/'),
-    meta: { authRequired: true }
+    meta: { authRequired: true },
+    components: {
+        toolbar: () => import('@/components/nav/toolbar/'),
+        default: () => import('@/views/app/Dashboard/')
+    }
 
 }, {
 
     name: 'calories',
     path: '/calories',
-    component: () => import('@/views/app/Calories/'),
-    meta: { authRequired: true }
+    meta: { authRequired: true },
+    components: {
+        toolbar: () => import('@/components/nav/toolbar/'),
+        default: () => import('@/views/app/Calories/')
+    }
 
 }, {
 
     name: 'weight',
     path: '/weight',
-    component: () => import('@/views/app/Weight/'),
-    meta: { authRequired: true }
+    meta: { authRequired: true },
+    components: {
+        toolbar: () => import('@/components/nav/toolbar/'),
+        default: () => import('@/views/app/Weight/')
+    }
 
 }, {
 
     name: 'activity',
     path: '/activity',
-    component: () => import('@/views/app/Activity/'),
-    meta: { authRequired: true }
+    meta: { authRequired: true },
+    components: {
+        toolbar: () => import('@/components/nav/toolbar/'),
+        default: () => import('@/views/app/Activity/')
+    }
 
 }, {
 
     path: '/food',
     name: 'food.index',
-    component: () => import('@/views/app/Food/'), // TODO REDIRECT TO CHILD
     meta: { authRequired: true },
+    components: {
+        toolbar: () => import('@/views/app/Food/Toolbar'),
+        default: () => import('@/views/app/Food/') // TODO REDIRECT TO CHILD
+    },
     children: [
         {
             path: 'own',
             name: 'food.own',
-            component: () => import('@/views/app/Food/Own'),
-            meta: { authRequired: true }
+            meta: { authRequired: true },
+            components: {
+                toolbar: () => import('@/components/nav/toolbar/'),
+                default: () => import('@/views/app/Food/Own')
+            }
         },
         {
             path: 'favorites',
             name: 'food.favorites',
-            component: () => import(/* webpackChunkName: "premium" */'@/views/app/Food/Favorite'),
-            meta: { authRequired: true, premium: true }
+            meta: { authRequired: true, premium: true },
+
+            components: {
+                toolbar: () => import('@/components/nav/toolbar/'),
+                default: () => import('@/views/app/Food/Favorite')
+            }
         },
         {
             path: 'browse',
             name: 'food.browse',
-            component: () => import(/* webpackChunkName: "premium" */ '@/views/app/Food/Browse'),
-            meta: { authRequired: true, premium: true }
+            meta: { authRequired: true, premium: true },
+            components: {
+                toolbar: () => import('@/components/nav/toolbar/'),
+                default: () => import('@/views/app/Food/Browse')
+            }
         }
     ]
 
@@ -57,38 +82,56 @@ module.exports = [{
 
     path: '/training',
     name: 'training.index',
-    component: () => import('@/views/app/Training/'), // TODO REDIRECT TO CHILD
     meta: { authRequired: true, premium: true },
+    components: {
+        toolbar: () => import('@/views/app/Training/Toolbar'),
+        default: () => import('@/views/app/Training/') // TODO REDIRECT TO CHILD
+    },
     children: [
         {
             path: '#/:id',
             name: 'training',
-            component: () => import(/* webpackChunkName: "premium" */'@/views/app/Training/Training'),
-            meta: { authRequired: true, premium: true }
+            meta: { authRequired: true, premium: true },
+            components: {
+                toolbar: () => import('@/components/nav/toolbar/'),
+                default: () => import('@/views/app/Training/Training')
+            }
         },
         {
             path: 'saved',
             name: 'training.saved',
-            component: () => import(/* webpackChunkName: "premium" */'@/views/app/Training/Saved'),
-            meta: { authRequired: true, premium: true }
+            meta: { authRequired: true, premium: true },
+            components: {
+                toolbar: () => import('@/views/app/Training/Toolbar'),
+                default: () => import('@/views/app/Training/Saved')
+            }
         },
         {
             path: 'exercise',
             name: 'training.exercise.index',
-            component: () => import(/* webpackChunkName: "premium" */'@/views/app/Training/Exercise/'),
             meta: { authRequired: true, premium: true },
+            components: {
+                toolbar: () => import('@/components/nav/toolbar/'),
+                default: () => import('@/views/app/Training/Exercise/')
+            },
             children: [
                 {
                     path: '#/:id',
                     name: 'training.exercise',
-                    component: () => import(/* webpackChunkName: "premium" */'@/views/app/Training/Exercise/Exercise'),
-                    meta: { authRequired: true, premium: true }
+                    meta: { authRequired: true, premium: true },
+                    components: {
+                        toolbar: () => import('@/components/nav/toolbar/'),
+                        default: () => import('@/views/app/Training/Exercise/Exercise')
+                    }
                 },
                 {
                     path: 'saved',
                     name: 'training.exercise.saved',
-                    component: () => import(/* webpackChunkName: "premium" */'@/views/app/Training/Exercise/Saved'),
-                    meta: { authRequired: true, premium: true }
+                    meta: { authRequired: true, premium: true },
+                    components: {
+                        toolbar: () => import('@/components/nav/toolbar/'),
+                        default: () => import('@/views/app/Training/Exercise/Saved')
+                    }
                 }
             ]
         }
@@ -98,14 +141,20 @@ module.exports = [{
 
     name: 'settings',
     path: '/settings',
-    component: () => import('@/views/app/Settings/'),
-    meta: { authRequired: true }
+    meta: { authRequired: true },
+    components: {
+        toolbar: () => import('@/components/nav/toolbar/'),
+        default: () => import('@/views/app/Settings/')
+    }
 
 }, {
 
     name: 'logout',
     path: '/logout',
-    component: () => import('@/views/auth/Logout'),
-    meta: { authRequired: true }
+    meta: { authRequired: true },
+    components: {
+        toolbar: () => import('@/components/nav/toolbar/'),
+        default: () => import('@/views/auth/Logout')
+    }
 
 }]

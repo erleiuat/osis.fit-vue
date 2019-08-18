@@ -2,7 +2,8 @@
     <v-app>
 
         <Drawer />
-        <Toolbar />
+
+        <router-view name="toolbar" />
 
         <v-content>
 
@@ -24,7 +25,6 @@
 
 <script>
 import Drawer from '@/components/nav/drawer/'
-import Toolbar from '@/components/nav/toolbar/'
 
 const Alerts = () => import('@/components/Alerts')
 const CookieInfo = () => import('@/components/CookieInfo')
@@ -33,7 +33,7 @@ export default {
     name: 'App',
 
     components: {
-        Toolbar, Drawer, Alerts, CookieInfo
+        Drawer, Alerts, CookieInfo
     },
 
     created () {
