@@ -1,5 +1,5 @@
 <template>
-    <v-container grid-list-xl pa-0>
+    <v-container grid-list-xl>
 
         <v-layout wrap>
 

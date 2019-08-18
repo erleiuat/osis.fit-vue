@@ -1,5 +1,5 @@
 <template>
-    <v-container grid-list-xs pt-0 pl-0 pr-0 fill-height>
+    <v-container grid-list-xs fill-height>
         <v-layout wrap>
             <v-flex xs12>
 

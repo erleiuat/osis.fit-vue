@@ -1,6 +1,6 @@
 <template>
-    <v-container grid-list-xl>
-        <v-layout row wrap justify-space-around>
+    <v-container grid-list-xl fill-height>
+        <v-layout wrap justify-space-around>
 
             <v-flex xs12 sm8 v-if="!doing" text-center style="height: 200px">
                 <div class="headline pb-5">{{ $t('text') }}</div>

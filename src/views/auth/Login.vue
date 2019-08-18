@@ -1,46 +1,51 @@
 <template>
-    <v-layout row justify-center>
+    <v-container>
 
-        <v-flex xs12 text-center>
+        <v-row justify="center">
             <div class="display-3 pb-5">{{ $t('login') }}</div>
-        </v-flex>
+        </v-row>
 
-        <v-flex xs12 text-center v-if="$route.query.verified">
+        <v-row justify="center" v-if="$route.query.verified">
             <v-alert outlined dense type="success">
                 {{ $t('verified') }}
             </v-alert>
-        </v-flex>
+        </v-row>
 
-        <v-flex xs12 sm10 md8 lg6>
-            <v-form v-model="rule.valid" ref="form" v-on:submit.prevent>
+        <v-form v-model="rule.valid" ref="form" v-on:submit.prevent>
+            <v-container>
+                <v-row justify="center">
+                    <v-text-field v-model="fd.mail" :label="$t('ft.mail')" :rules="rule.require" type="email" filled rounded single-line/>
+                </v-row>
+                <v-row justify="center">
 
-                <v-text-field v-model="fd.mail" :label="$t('ft.mail')" :rules="rule.require" type="email" solo />
-                <v-text-field v-model="fd.password" :label="$t('password')" :rules="rule.require" type="password" solo />
+                    <v-text-field v-model="fd.password" :label="$t('password')" :rules="rule.require" type="password" filled rounded single-line />
 
-                <v-btn @click="login()" :loading="sending" color="primary" depressed large block type="submit">
-                    {{ $t('login') }}
-                </v-btn>
+                    <v-btn @click="login()" :loading="sending" color="primary" depressed large block type="submit">
+                        {{ $t('login') }}
+                    </v-btn>
 
-            </v-form>
-        </v-flex>
+                </v-row>
+            </v-container>
+        </v-form>
 
-        <v-flex xs12>
+        <v-row>
             <v-divider />
-        </v-flex>
+        </v-row>
 
-        <v-flex xs12 sm6 md5>
-            <v-btn depressed small block :to="{name: 'auth.forgotten'}">
-                {{ $t('noPassword') }}
-            </v-btn>
-        </v-flex>
+        <v-row>
+            <v-col>
+                <v-btn depressed small block :to="{name: 'auth.forgotten'}">
+                    {{ $t('noPassword') }}
+                </v-btn>
+            </v-col>
+            <v-col>
+                <v-btn depressed small color="" block :to="{name: 'auth.register'}">
+                    {{ $t('noAccount') }}
+                </v-btn>
+            </v-col>
+        </v-row>
 
-        <v-flex xs12 sm6 md5>
-            <v-btn depressed small color="" block :to="{name: 'auth.register'}">
-                {{ $t('noAccount') }}
-            </v-btn>
-        </v-flex>
-
-    </v-layout>
+    </v-container>
 </template>
 
 <script>
@@ -74,18 +79,18 @@ export default {
                 else this.$router.push({ name: 'dashboard' })
             }).catch(r => {
                 switch (r) {
-                case 'password_wrong':
-                    this.$notify({ type: 'error', title: this.$t('fail.pass'), text: r })
-                    break
-                case 'account_not_found':
-                    this.$notify({ type: 'error', title: this.$t('fail.unknown'), text: r })
-                    break
-                case 'account_not_verified':
-                    this.$notify({ type: 'error', title: this.$t('fail.verify'), text: r })
-                    break
-                default:
-                    this.$notify({ type: 'error', title: this.$t('alert.error.default'), text: r })
-                    break
+                    case 'password_wrong':
+                        this.$notify({ type: 'error', title: this.$t('fail.pass'), text: r })
+                        break
+                    case 'account_not_found':
+                        this.$notify({ type: 'error', title: this.$t('fail.unknown'), text: r })
+                        break
+                    case 'account_not_verified':
+                        this.$notify({ type: 'error', title: this.$t('fail.verify'), text: r })
+                        break
+                    default:
+                        this.$notify({ type: 'error', title: this.$t('alert.error.default'), text: r })
+                        break
                 }
             }).finally(() => {
                 this.sending = false

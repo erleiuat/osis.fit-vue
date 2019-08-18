@@ -1,7 +1,7 @@
 <template>
-    <v-container :class="$vuetify.breakpoint.xs ? 'pa-0 grid-list-md': 'grid-list-lg'">
+    <v-container grid-list-md>
 
-        <v-layout wrap >
+        <v-layout wrap>
             <v-flex xs12 lg4 v-if="!$store.getters['premium']">
                 <Subscription />
             </v-flex>
@@ -16,7 +16,7 @@
             </v-flex>
         </v-layout>
 
-        <v-layout wrap pa-2 align-center>
+        <v-layout wrap align-center>
             <v-flex xs12 sm4 md2 class="text-center">
                 <v-switch v-model="mode" :label="$t('darkmode')"></v-switch>
             </v-flex>

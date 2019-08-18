@@ -9,13 +9,11 @@
 
             <Alerts />
 
-            <v-container fluid fill-height>
-                <transition appear name="fade" mode="out-in">
-                    <router-view />
-                </transition>
-            </v-container>
+            <transition appear name="fade" mode="out-in">
+                <router-view />
+            </transition>
 
-            <CookieInfo v-if="this.$store.getters['cookieNotice']"/>
+            <CookieInfo v-if="this.$store.getters['cookieNotice']" />
 
         </v-content>
 
