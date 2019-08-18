@@ -1,18 +1,18 @@
 <template>
-    <v-app-bar clipped-left app flat color="primary" dark>
+    <v-app-bar app color="primary" elevate-on-scroll hide-on-scroll dark>
 
+        <v-app-bar-nav-icon @click.stop="drawer()" />
+        <v-spacer />
         <v-toolbar-title>
             {{ title }}
         </v-toolbar-title>
-        <v-spacer />
-        <v-app-bar-nav-icon @click.stop="drawer()" />
 
     </v-app-bar>
 </template>
 
 <script>
 export default {
-    name: 'Toolbar',
+    name: 'ToolbarDesktop',
 
     data () {
         return {

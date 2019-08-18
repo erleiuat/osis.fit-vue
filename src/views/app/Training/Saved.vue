@@ -1,5 +1,6 @@
 <template>
     <v-container grid-list-sm fill-height>
+
         <v-layout wrap>
 
             <v-flex xs12 class="title">
@@ -9,16 +10,19 @@
             <v-flex xs12>
                 <v-layout row wrap v-if="items">
                     <v-flex xs12 md6 v-for="item in items" :key="item.id">
-                        <v-card>
+                        <v-hover v-slot:default="{ hover }">
 
-                            <v-card-title>
-                                {{ item.title }}
-                            </v-card-title>
-                            <v-card-text>
-                                {{ item.description }}
-                            </v-card-text>
+                            <v-card link flat :elevation="hover ? 12 : 2">
 
-                        </v-card>
+                                <v-card-title>
+                                    {{ item.title }}
+                                </v-card-title>
+                                <v-card-text>
+                                    {{ item.description }}
+                                </v-card-text>
+
+                            </v-card>
+                        </v-hover>
                     </v-flex>
                 </v-layout>
             </v-flex>
@@ -75,3 +79,13 @@ export default {
 
 }
 </script>
+
+<style scoped>
+.sticky-bar {
+    width: 100%;
+}
+.sticky-bar > .v-toolbar {
+    position: fixed;
+    width: inherit;
+}
+</style>

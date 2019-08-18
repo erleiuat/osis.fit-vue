@@ -1,5 +1,5 @@
 <template>
-    <v-navigation-drawer v-model="drawer" app clipped floating>
+    <v-navigation-drawer v-model="drawer" app floating>
 
         <AuthDrawer v-if="$store.getters['auth']" />
 

@@ -142,6 +142,7 @@ export default {
 
     mounted () {
         this.$store.dispatch('food/load')
+        this.$store.commit('toolbar/show', 'search')
     },
 
     i18n: {

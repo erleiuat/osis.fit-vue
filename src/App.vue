@@ -24,7 +24,7 @@
 
 <script>
 import Drawer from '@/components/nav/drawer/'
-import Toolbar from '@/components/nav/Toolbar'
+import Toolbar from '@/components/nav/toolbar/'
 
 const Alerts = () => import('@/components/Alerts')
 const CookieInfo = () => import('@/components/CookieInfo')
