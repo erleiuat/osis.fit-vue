@@ -1,5 +1,5 @@
 <template>
-    <v-container grid-list-md pt-0 fill-height>
+    <v-container grid-list-xs pt-0 pl-0 pr-0 fill-height>
         <v-layout wrap>
             <v-flex xs12>
 
@@ -14,7 +14,7 @@
                     </v-flex>
                 </v-layout>
 
-                <v-layout wrap justify-center align-start pl-0 pr-0>
+                <v-layout wrap justify-center align-start>
                     <v-flex xs12 sm6 md4 v-for="(arr, key) in items" :key="key">
                         <v-layout column fill-height>
                             <v-flex xs12 v-for="(item, key) in arr" :key="key" :class="$vuetify.breakpoint.smAndUp ? 'pa-2':'pa-1'">

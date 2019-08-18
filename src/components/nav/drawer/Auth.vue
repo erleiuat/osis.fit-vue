@@ -69,8 +69,7 @@ export default {
                 icon: 'fastfood',
                 items: {
                     own: { title: 'food.own', to: 'food.own', icon: 'folder' },
-                    favorites: { to: 'food.favorites', icon: 'favorite' },
-                    browse: { to: 'food.browse', icon: 'search' }
+                    favorites: { to: 'food.favorites', icon: 'favorite' }
                 }
             }
 

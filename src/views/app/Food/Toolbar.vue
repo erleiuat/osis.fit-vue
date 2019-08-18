@@ -1,7 +1,9 @@
 <template>
     <Default>
         <v-app-bar-nav-icon @click.stop="drawer()" />
-        <v-text-field v-model="query" hide-details append-icon="search" single-line clearable />
+        <v-spacer />
+        <v-text-field v-model="query" clearable hide-details single-line append-icon="search" />
+        <v-spacer />
     </Default>
 </template>
 

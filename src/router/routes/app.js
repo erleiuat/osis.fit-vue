@@ -66,15 +66,6 @@ module.exports = [{
                 toolbar: () => import('@/components/nav/toolbar/'),
                 default: () => import('@/views/app/Food/Favorite')
             }
-        },
-        {
-            path: 'browse',
-            name: 'food.browse',
-            meta: { authRequired: true, premium: true },
-            components: {
-                toolbar: () => import('@/components/nav/toolbar/'),
-                default: () => import('@/views/app/Food/Browse')
-            }
         }
     ]
 
