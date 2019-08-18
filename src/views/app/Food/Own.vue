@@ -1,11 +1,8 @@
 <template>
-    <v-container grid-list-xl pt-0 fill-height>
-
-        <FoodEditor v-model="showEditor" :item="editObj" />
-
+    <v-container grid-list-md pt-0 fill-height>
         <v-layout wrap>
-
             <v-flex xs12>
+
                 <v-layout wrap align-center v-if="$vuetify.breakpoint.mdAndUp">
                     <v-flex grow>
                         <div class="headline">{{ $t('title') }}</div>
@@ -16,9 +13,7 @@
                         </v-btn>
                     </v-flex>
                 </v-layout>
-            </v-flex>
 
-            <v-flex xs12>
                 <v-layout wrap justify-center align-start pl-0 pr-0>
                     <v-flex xs12 sm6 md4 v-for="(arr, key) in items" :key="key">
                         <v-layout column fill-height>
@@ -27,18 +22,20 @@
                             </v-flex>
                         </v-layout>
                     </v-flex>
+
+                    <v-flex xs12 v-if="!items && !this.$route.query.s">
+                        {{ $t('noneyet') }}
+                    </v-flex>
+                    <v-flex xs12 v-if="!items && this.$route.query.s">
+                        {{ $t('nonefound') }}
+                    </v-flex>
+
                 </v-layout>
-            </v-flex>
 
-            <v-flex xs12 v-if="!items && !query">
-                {{ $t('noneyet') }}
             </v-flex>
-
-            <v-flex xs12 v-if="!items && query">
-                {{ $t('nonefound') }}
-            </v-flex>
-
         </v-layout>
+
+        <FoodEditor v-model="showEditor" :item="editObj" />
 
         <v-fab-transition v-if="!$vuetify.breakpoint.mdAndUp">
             <v-btn @click="openEditor()" fab fixed bottom right color="primary">

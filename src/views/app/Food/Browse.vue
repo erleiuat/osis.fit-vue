@@ -1,31 +1,19 @@
 <template>
-    <v-container :class="$vuetify.breakpoint.xs ? 'pa-0 grid-list-md': 'grid-list-md'">
+    <v-container grid-list-md pt-0 fill-height>
 
-        <form v-on:submit.prevent="doSearch()">
-            <v-layout row wrap align-center pa-2>
-                <v-flex xs12>
-                    <div class="headline">{{ $t('browse') }}</div>
-                </v-flex>
-                <v-flex xs12>
-                    <v-text-field v-model="searchQuery" :readonly="loading" hide-details append-icon="search" @input="changeIn()" />
-                </v-flex>
-                <v-flex xs12 v-show="false">
-                    <v-btn type="submit"></v-btn>
-                </v-flex>
-            </v-layout>
-        </form>
+        <v-layout wrap>
+            <v-flex xs12>
 
-        <v-layout row wrap v-if="loading">
-            <v-flex xs12 sm12>
-                <v-progress-linear indeterminate height="10" />
-            </v-flex>
-        </v-layout>
+                <v-layout wrap align-center>
+                    <v-flex grow>
+                        <div class="headline">{{ $t('title') }}</div>
+                    </v-flex>
+                </v-layout>
 
-        <v-layout wrap justify-center align-start pl-0 pr-0>
-            <v-flex xs12 sm6 md4 v-for="(arr, key) in items" :key="key">
-                <v-layout column fill-height>
-                    <v-flex xs12 v-for="item in arr" :key="item.id" @click="toggleFav(item)">
-                        <v-card :class="isFav(item.id) ? 'amber lighten-3' : ''" :light="isFav(item.id)" class="fill-height" link ripple>
+                <v-layout wrap align-start pl-0 pr-0>
+                    
+                    <v-flex xs6 sm4 lg3 v-for="item in items" :key="item.id">
+                        <v-card link ripple @click="toggleFav(item)" :color="isFav(item.id) ? 'yellow darken-2' : ''">
                             <v-img v-if="item.image" :src="item.image" :height="100" />
                             <v-card-title class="title">
                                 {{item.title}}
@@ -37,13 +25,13 @@
                             </v-card-text>
                         </v-card>
                     </v-flex>
-                </v-layout>
-            </v-flex>
-        </v-layout>
 
-        <v-layout row wrap v-if="results.length < 1 && searched">
-            <v-flex xs12>
-                {{ $t('notFound') }}
+                    <v-flex xs12 v-if="!items && this.$route.query.s">
+                        {{ $t('nonefound') }}
+                    </v-flex>
+
+                </v-layout>
+
             </v-flex>
         </v-layout>
 
@@ -62,8 +50,6 @@ export default {
 
     data () {
         return {
-            loading: false,
-            searchQuery: this.$route.query.s || '',
             searched: false,
             typerTimer: null,
             results: []
@@ -75,47 +61,7 @@ export default {
         items () {
             var items = this.results
             if (items.length <= 0) return false
-
-            if (this.$vuetify.breakpoint.xsOnly || items.length < 2)
-                return {
-                    a: items
-                }
-
-            var i = 1; var col1 = []; var col2 = []; var col3 = []
-
-            if (this.$vuetify.breakpoint.smOnly) {
-                items.forEach(item => {
-                    if (i === 1) {
-                        col1.push(item)
-                        i++
-                    } else if (i === 2) {
-                        col2.push(item)
-                        i = 1
-                    }
-                })
-                return {
-                    a: col1,
-                    b: col2
-                }
-            } else {
-                items.forEach(item => {
-                    if (i === 1) {
-                        col1.push(item)
-                        i++
-                    } else if (i === 2) {
-                        col2.push(item)
-                        i++
-                    } else if (i === 3) {
-                        col3.push(item)
-                        i = 1
-                    }
-                })
-                return {
-                    a: col1,
-                    b: col2,
-                    c: col3
-                }
-            }
+            else return items
         }
 
     },
@@ -141,9 +87,8 @@ export default {
         },
 
         doSearch () {
-            if (this.searchQuery.length < 3) return
-            this.$router.replace({ query: { s: this.searchQuery } })
-            this.$store.dispatch('foodFavorite/search', this.searchQuery).then(res => {
+            if (!this.$route.query.s || this.$route.query.s.length < 3) return
+            this.$store.dispatch('foodFavorite/search', this.$route.query.s).then(res => {
                 this.results = res.items
             }).catch(err => {
                 this.$notify({ type: 'error', title: this.$t('alert.error.default'), text: err })
@@ -153,20 +98,29 @@ export default {
         }
     },
 
+    watch: {
+        '$route' (to, from) {
+            this.changeIn()
+        }
+    },
+
     mounted () {
         this.$store.dispatch('foodFavorite/load')
+        if (!this.$route.query.s) this.$router.replace({query: {s: this.$t('placehold')}})
         this.doSearch()
     },
 
     i18n: {
         messages: {
             en: {
-                browse: 'Search Items',
-                notFound: 'No results'
+                title: 'Search Items',
+                nonefound: 'No Results',
+                placehold: 'Apple'
             },
             de: {
-                browse: 'Lebensmittel suchen',
-                notFound: 'Keine Suchergebnisse'
+                title: 'Lebensmittel suchen',
+                nonefound: 'Keine Resultate',
+                placehold: 'Apfel'
             }
         }
     }

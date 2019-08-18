@@ -21,7 +21,7 @@ export default {
                 return this.$route.query.s
             },
             set (val) {
-                this.$router.replace({ name: 'training.saved', query: { s: val } })
+                this.$router.replace({ query: { s: val } })
             }
         }
     },

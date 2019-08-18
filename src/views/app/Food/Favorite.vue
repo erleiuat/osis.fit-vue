@@ -1,17 +1,23 @@
 <template>
-    <v-container :class="$vuetify.breakpoint.xs ? 'pa-0 grid-list-md': 'grid-list-md'">
+    <v-container grid-list-md pt-0 fill-height>
 
-        <v-layout row wrap align-center pa-2>
+        <v-layout wrap>
             <v-flex xs12>
-                <div class="headline">{{ $t('title') }}</div>
-            </v-flex>
-        </v-layout>
 
-        <v-layout wrap justify-center align-start pl-0 pr-0>
-            <v-flex xs12 sm6 md4 v-for="(arr, key) in items" :key="key">
-                <v-layout column fill-height>
-                    <v-flex xs12 v-for="item in arr" :key="item.id" @click="toggleFav(item)">
-                        <v-card :class="true ? 'amber lighten-3' : ''" :light="true" class="fill-height" link ripple>
+                <v-layout wrap align-center>
+                    <v-flex grow>
+                        <div class="headline">{{ $t('title') }}</div>
+                    </v-flex>
+                    <v-flex shrink>
+                        <v-btn :to="{name: 'food.browse'}" fab depressed small color="primary">
+                            <v-icon>add</v-icon>
+                        </v-btn>
+                    </v-flex>
+                </v-layout>
+
+                <v-layout wrap align-start pl-0 pr-0>
+                    <v-flex xs6 sm4 lg3 v-for="item in items" :key="item.id">
+                        <v-card link ripple @click="toggleFav(item)">
                             <v-img v-if="item.image" :src="item.image" :height="100" />
                             <v-card-title class="title">
                                 {{item.title}}
@@ -23,13 +29,16 @@
                             </v-card-text>
                         </v-card>
                     </v-flex>
-                </v-layout>
-            </v-flex>
-        </v-layout>
 
-        <v-layout row wrap v-if="!items">
-            <v-flex xs12>
-                {{ $t('notFound') }}
+                    <v-flex xs12 v-if="!items && !this.$route.query.s">
+                        {{ $t('noneyet') }}
+                    </v-flex>
+                    <v-flex xs12 v-if="!items && this.$route.query.s">
+                        {{ $t('nonefound') }}
+                    </v-flex>
+
+                </v-layout>
+
             </v-flex>
         </v-layout>
 
@@ -50,48 +59,14 @@ export default {
 
         items () {
             var items = this.$store.getters['foodFavorite/all']
-            if (items.length <= 0) return false
+            var query = this.$route.query.s || ''
 
-            if (this.$vuetify.breakpoint.xsOnly || items.length < 2)
-                return {
-                    a: items
-                }
+            var filtered = items.filter(el =>
+                el.title.toUpperCase().includes(query.toUpperCase() || '')
+            )
 
-            var i = 1; var col1 = []; var col2 = []; var col3 = []
-
-            if (this.$vuetify.breakpoint.smOnly) {
-                items.forEach(item => {
-                    if (i === 1) {
-                        col1.push(item)
-                        i++
-                    } else if (i === 2) {
-                        col2.push(item)
-                        i = 1
-                    }
-                })
-                return {
-                    a: col1,
-                    b: col2
-                }
-            } else {
-                items.forEach(item => {
-                    if (i === 1) {
-                        col1.push(item)
-                        i++
-                    } else if (i === 2) {
-                        col2.push(item)
-                        i++
-                    } else if (i === 3) {
-                        col3.push(item)
-                        i = 1
-                    }
-                })
-                return {
-                    a: col1,
-                    b: col2,
-                    c: col3
-                }
-            }
+            if (filtered.length <= 0) return false
+            else return filtered
         }
 
     },
@@ -110,11 +85,14 @@ export default {
         messages: {
             en: {
                 title: 'Your Favorites',
-                notFound: "You don't have any favorites yet"
+                noneyet: 'You have not yet created your own templates',
+                nonefound: 'No results',
             },
             de: {
                 title: 'Deine Favoriten',
-                notFound: 'Du hast noch keine Favoriten'
+                notFound: 'Du hast noch keine Favoriten',
+                noneyet: 'Du hast noch keine eigenen Vorlagen erstellt',
+                nonefound: 'Keine Resultate',
             }
         }
     }

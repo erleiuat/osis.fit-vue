@@ -65,7 +65,7 @@ export default {
         return {
             file: null,
             rule: [
-                value => !value || value.size < (15 * 1000000) || this.$t('maxSize')
+                v => ( v ? v.size < (15 * 1000000) : true) || this.$t('maxSize')
             ]
         }
     },
