@@ -49,14 +49,13 @@
 import calories from '@/store/modules/calories'
 
 const CalorieAdder = () => import('@/components/adder/Calories')
-const BottomNav = () => import('@/views/app/Calories/BottomNav')
 const CaloriesTable = () => import('@/views/app/Calories/Table')
 
 export default {
     name: 'Calories',
 
     components: {
-        BottomNav, CalorieAdder, CaloriesTable
+        CalorieAdder, CaloriesTable
     },
 
     modules: {

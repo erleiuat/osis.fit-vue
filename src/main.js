@@ -1,4 +1,4 @@
-import '@/plugins/registerServiceWorker'
+import '@/plugins/pwa/'
 import Vue from 'vue'
 import App from '@/App.vue'
 import smartStore from '@/plugins/smartStore'

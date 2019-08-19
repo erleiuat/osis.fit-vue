@@ -43,7 +43,7 @@
                 <v-btn large disabled><i>{{ $t('soon') }}</i></v-btn>
             </v-col>
         </v-row>
-        
+
     </vcontainer>
 </template>
 
@@ -60,7 +60,6 @@ const ActivityAdder = () => import('@/components/adder/Activity')
 const WeightAdder = () => import('@/components/adder/Weight')
 
 const WeightChart = () => import('@/components/charts/Weight')
-const BottomNav = () => import('@/views/app/Dashboard/BottomNav')
 
 export default {
     name: 'Dashboard',
@@ -70,8 +69,7 @@ export default {
         CalorieAdder,
         ActivityAdder,
         WeightAdder,
-        WeightChart,
-        BottomNav
+        WeightChart
     },
 
     modules: {
