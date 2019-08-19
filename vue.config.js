@@ -9,7 +9,7 @@ module.exports = {
 
     pwa: {
         name: process.env.VUE_APP_PWA_NAME,
-        themeColor: '#45B0FF',
+        themeColor: '#FFFFFF',
         msTileColor: '#2b5797',
         appleMobileWebAppCapable: 'yes',
         appleMobileWebAppStatusBarStyle: 'black',
