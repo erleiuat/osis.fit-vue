@@ -6,8 +6,7 @@ import NProgress from '@/plugins/nprogress'
 
 if (process.env.NODE_ENV === 'production')
 
-    register(`${process.env.BASE_URL}pwabuilder-sw.js`, {
-        registrationOptions: { scope: './' },
+    register(`${process.env.BASE_URL}service-worker.js`, {
         ready () {
             console.log('App is being served from cache by a service worker.')
         },
