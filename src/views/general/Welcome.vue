@@ -1,21 +1,28 @@
 <template>
-    <v-container fill-height grid-list-md>
-        <v-layout row wrap justify-space-around align-content-center>
-            <v-flex xs12 text-center>
+    <vcontainer align="center">
+
+        <v-row justify="center">
+            <v-col cols="auto">
                 <div class="display-4">Osis.fit</div>
-            </v-flex>
-            <v-flex xs12 sm7 text-center>
+            </v-col>
+        </v-row>
+
+        <v-row justify="center">
+            <v-col cols="12" sm="6">
                 <v-btn depressed block large color="primary" :to="{name: 'auth.login'}">
                     {{ $t('login') }}
                 </v-btn>
-            </v-flex>
-            <v-flex xs12 sm7 text-center>
+            </v-col>
+
+        </v-row>
+        <v-row justify="center">
+            <v-col cols="12" sm="6">
                 <v-btn depressed large block color="secondary" :to="{name: 'auth.register'}">
                     {{ $t('create') }}
                 </v-btn>
-            </v-flex>
-        </v-layout>
-    </v-container>
+            </v-col>
+        </v-row>
+    </vcontainer>
 </template>
 
 <script>

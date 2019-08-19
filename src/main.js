@@ -5,11 +5,14 @@ import smartStore from '@/plugins/smartStore'
 import router from '@/router/'
 import store from '@/store/'
 import i18n from '@/plugins/i18n/'
-import vuetify from '@/plugins/vuetify'
+import vuetify from '@/plugins/vuetify/'
 import Notifications from 'vue-notification'
+
+import vcontainer from '@/plugins/vuetify/vcontainer'
 
 import(/* webpackPrefetch: true */ '@/assets/css/app.css')
 import(/* webpackPrefetch: true */ '@/assets/css/transitions.css')
+Vue.component('vcontainer', vcontainer)
 
 Vue.use(Notifications)
 Vue.use(smartStore, {

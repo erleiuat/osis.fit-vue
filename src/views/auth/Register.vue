@@ -1,37 +1,49 @@
 <template>
-    <v-form v-model="rule.valid" ref="form" v-on:submit.prevent>
-        <v-layout row align-content-center fill-height>
+    <vcontainer align="center">
+        <v-form v-model="rule.valid" ref="form" v-on:submit.prevent fill-height>
+            <v-row dense justify="center">
 
-            <v-flex xs12 text-center>
-                <div class="display-1">{{ $t('title') }}</div>
-            </v-flex>
+                <v-col cols="12">
+                    <div class="display-1 text-center">
+                        {{ $t('title') }}
+                    </div>
+                </v-col>
 
-            <v-flex xs12>
-                <v-text-field v-model="fd.firstname" :label="$t('ft.firstname')" :rules="rule.name" type="text" solo />
-                <v-text-field v-model="fd.lastname" :label="$t('ft.lastname')" :rules="rule.name" type="text" solo />
-                <v-text-field v-model="fd.mail" :label="$t('ft.mail')" :rules="rule.mail" type="email" solo />
-                <v-text-field v-model="fd.password" :label="$t('password')" :rules="rule.password" type="password" solo />
-                <v-text-field v-model="pwRepeat" :label="$t('repeat')" :rules="rule.repeat" type="password" solo />
-            </v-flex>
+                <v-col cols="12" sm="6" md="4">
+                    <v-text-field v-model="fd.firstname" :label="$t('ft.firstname')" :rules="rule.name" type="text" outlined single-line />
+                </v-col>
+                <v-col cols="12" sm="6" md="4">
+                    <v-text-field v-model="fd.lastname" :label="$t('ft.lastname')" :rules="rule.name" type="text" outlined single-line />
+                </v-col>
 
-            <v-flex xs12>
-                <v-btn @click="register()" :loading="sending" color="primary" depressed large block type="submit">
-                    {{ $t('register') }}
-                </v-btn>
-            </v-flex>
+                <v-col cols="12" md="8">
+                    <v-text-field v-model="fd.mail" :label="$t('ft.mail')" :rules="rule.mail" type="email" outlined single-line />
+                </v-col>
 
-            <v-flex xs12>
-                <v-divider />
-            </v-flex>
+                <v-col cols="12" md="8">
+                    <v-text-field v-model="fd.password" :label="$t('password')" :rules="rule.password" :type="showPW ? 'text' : 'password'" :append-icon="showPW ? 'visibility' : 'visibility_off'" @click:append="showPW = !showPW" outlined single-line />
+                </v-col>
 
-            <v-flex xs12>
-                <v-btn depressed block :to="{name: 'auth.login'}">
-                    {{ $t('orLogin') }}
-                </v-btn>
-            </v-flex>
+            </v-row>
+            <v-row dense justify="center">
+                <v-col cols="12" sm="6">
+                    <v-btn @click="register()" :loading="sending" color="primary" depressed large block type="submit">
+                        {{ $t('register') }}
+                    </v-btn>
+                </v-col>
 
-        </v-layout>
-    </v-form>
+                <v-col cols="8">
+                    <v-divider />
+                </v-col>
+
+                <v-col cols="12" sm="6">
+                    <v-btn :to="{name: 'auth.login'}" small depressed block>
+                        {{ $t('orLogin') }}
+                    </v-btn>
+                </v-col>
+            </v-row>
+        </v-form>
+    </vcontainer>
 </template>
 
 <script>
@@ -40,8 +52,8 @@ export default {
 
     data () {
         return {
+            showPW: false,
             sending: false,
-            pwRepeat: '',
             fd: {
                 firstname: '',
                 lastname: '',
@@ -64,10 +76,6 @@ export default {
                     v => !!v || this.$t('alert.v.require'),
                     v => /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.{8,})/.test(v) || this.$t('strong'),
                     v => v.length < 255 || this.$t('alert.v.tooLong', { amount: 255 })
-                ],
-                repeat: [
-                    v => !!v || this.$t('alert.v.require'),
-                    v => v === this.fd.password || this.$t('alert.v.notSame')
                 ]
             }
         }

@@ -75,6 +75,16 @@ module.exports = [{
 
 }, {
 
+    name: 'grid',
+    path: '/grid',
+    meta: { authRequired: false },
+    components: {
+        toolbar: () => import('@/components/nav/toolbar/'),
+        default: () => import('@/views/general/Grid')
+    }
+
+}, {
+
     path: '/error',
     meta: { authRequired: false },
     components: {

@@ -1,51 +1,53 @@
 <template>
-    <v-container>
+    <vcontainer align="center">
+
+        <v-row justify="space-around">
+            <v-col cols="auto">
+                <div class="display-3">{{ $t('login') }}</div>
+            </v-col>
+        </v-row>
+
+        <v-row v-if="$route.query.verified" justify="center">
+            <v-col cols="auto">
+                <v-alert outlined dense type="success">
+                    {{ $t('verified') }}
+                </v-alert>
+            </v-col>
+        </v-row>
 
         <v-row justify="center">
-            <div class="display-3 pb-5">{{ $t('login') }}</div>
+            <v-col cols="auto">
+                <v-form v-model="rule.valid" ref="form" v-on:submit.prevent>
+                    <v-container>
+                        <v-row justify="center">
+                            <v-text-field v-model="fd.mail" :label="$t('ft.mail')" :rules="rule.require" type="email" filled rounded single-line />
+                        </v-row>
+                        <v-row justify="center">
+                            <v-text-field v-model="fd.password" :label="$t('password')" :rules="rule.require" type="password" filled rounded single-line />
+                            <v-btn @click="login()" :loading="sending" color="primary" depressed large block type="submit">
+                                {{ $t('login') }}
+                            </v-btn>
+                        </v-row>
+                    </v-container>
+                </v-form>
+                <v-divider />
+            </v-col>
         </v-row>
 
-        <v-row justify="center" v-if="$route.query.verified">
-            <v-alert outlined dense type="success">
-                {{ $t('verified') }}
-            </v-alert>
-        </v-row>
-
-        <v-form v-model="rule.valid" ref="form" v-on:submit.prevent>
-            <v-container>
-                <v-row justify="center">
-                    <v-text-field v-model="fd.mail" :label="$t('ft.mail')" :rules="rule.require" type="email" filled rounded single-line/>
-                </v-row>
-                <v-row justify="center">
-
-                    <v-text-field v-model="fd.password" :label="$t('password')" :rules="rule.require" type="password" filled rounded single-line />
-
-                    <v-btn @click="login()" :loading="sending" color="primary" depressed large block type="submit">
-                        {{ $t('login') }}
-                    </v-btn>
-
-                </v-row>
-            </v-container>
-        </v-form>
-
-        <v-row>
-            <v-divider />
-        </v-row>
-
-        <v-row>
-            <v-col>
-                <v-btn depressed small block :to="{name: 'auth.forgotten'}">
+        <v-row justify="center">
+            <v-col cols="12" sm="auto">
+                <v-btn :to="{name: 'auth.forgotten'}" depressed small block>
                     {{ $t('noPassword') }}
                 </v-btn>
             </v-col>
-            <v-col>
-                <v-btn depressed small color="" block :to="{name: 'auth.register'}">
+            <v-col cols="12" sm="auto">
+                <v-btn :to="{name: 'auth.register'}" depressed small block>
                     {{ $t('noAccount') }}
                 </v-btn>
             </v-col>
         </v-row>
 
-    </v-container>
+    </vcontainer>
 </template>
 
 <script>
@@ -79,18 +81,18 @@ export default {
                 else this.$router.push({ name: 'dashboard' })
             }).catch(r => {
                 switch (r) {
-                    case 'password_wrong':
-                        this.$notify({ type: 'error', title: this.$t('fail.pass'), text: r })
-                        break
-                    case 'account_not_found':
-                        this.$notify({ type: 'error', title: this.$t('fail.unknown'), text: r })
-                        break
-                    case 'account_not_verified':
-                        this.$notify({ type: 'error', title: this.$t('fail.verify'), text: r })
-                        break
-                    default:
-                        this.$notify({ type: 'error', title: this.$t('alert.error.default'), text: r })
-                        break
+                case 'password_wrong':
+                    this.$notify({ type: 'error', title: this.$t('fail.pass'), text: r })
+                    break
+                case 'account_not_found':
+                    this.$notify({ type: 'error', title: this.$t('fail.unknown'), text: r })
+                    break
+                case 'account_not_verified':
+                    this.$notify({ type: 'error', title: this.$t('fail.verify'), text: r })
+                    break
+                default:
+                    this.$notify({ type: 'error', title: this.$t('alert.error.default'), text: r })
+                    break
                 }
             }).finally(() => {
                 this.sending = false

@@ -1,14 +1,8 @@
 <template>
-    <v-container grid-list-xl fill-height>
-        <v-layout wrap justify-center align-center>
-            <v-flex xs12 sm8>
-                <transition appear name="fade" mode="out-in">
-                    <router-view>
-                    </router-view>
-                </transition>
-            </v-flex>
-        </v-layout>
-    </v-container>
+    <transition appear name="fade" mode="out-in">
+        <router-view>
+        </router-view>
+    </transition>
 </template>
 
 <script>

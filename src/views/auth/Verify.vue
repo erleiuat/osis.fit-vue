@@ -1,23 +1,25 @@
 <template>
-    <v-layout row justify-center>
+    <vcontainer align="center">
+        <v-row justify="center">
 
-        <v-flex xs12>
-            <div class="display-1">{{ $t('thanks') }}</div>
-            <div v-html="$t('text')">
-            </div>
-        </v-flex>
+            <v-col cols="12" md="8">
+                <div class="display-1">{{ $t('thanks') }}</div>
+                <div v-html="$t('text')">
+                </div>
+            </v-col>
 
-        <v-flex xs12 md10 lg8>
-            <v-form v-model="rule.valid" ref="form" v-on:submit.prevent>
-                <v-text-field v-model="fd.mail" :label="$t('ft.mail')" :rules="rule.mail" type="email" />
-                <v-text-field v-model="fd.code" :label="$t('code')" :rules="rule.code" type="text" />
-                <v-btn @click="verify()" :loading="sending" color="primary" depressed large block type="submit">
-                    {{ $t('btn.send') }}
-                </v-btn>
-            </v-form>
-        </v-flex>
+            <v-col cols="12" md="8">
+                <v-form v-model="rule.valid" ref="form" v-on:submit.prevent>
+                    <v-text-field v-model="fd.mail" :label="$t('ft.mail')" :rules="rule.mail" type="email" />
+                    <v-text-field v-model="fd.code" :label="$t('code')" :rules="rule.code" type="text" />
+                    <v-btn @click="verify()" :loading="sending" color="primary" depressed large block type="submit">
+                        {{ $t('btn.send') }}
+                    </v-btn>
+                </v-form>
+            </v-col>
 
-    </v-layout>
+        </v-row>
+    </vcontainer>
 </template>
 
 <script>

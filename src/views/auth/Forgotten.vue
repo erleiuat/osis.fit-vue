@@ -1,46 +1,54 @@
 <template>
-    <v-layout row justify-center>
+    <vcontainer align="center">
 
-        <v-flex xs12>
-            <div class="display-1">{{ $t('title') }}</div>
-            <div v-html="$t('text')" v-if="state === 'forgot'">
-            </div>
-        </v-flex>
+        <v-row justify="center">
+            <v-col md="8">
+                <div class="display-1">{{ $t('title') }}</div>
+                <div v-html="$t('text')" v-if="state === 'forgot'">
+                </div>
+            </v-col>
+            <v-col md="8" v-if="state === 'sent'">
+                <v-alert outlined type="success">
+                    {{ $t('sent') }}
+                </v-alert>
+            </v-col>
+        </v-row>
 
-        <v-flex xs12 sm10 v-if="state === 'sent'">
-            <v-alert outlined type="success">
-                {{ $t('sent') }}
-            </v-alert>
-        </v-flex>
+        <v-form v-if="state === 'forgot'" v-model="rule.valid" ref="form" v-on:submit.prevent>
+            <v-row justify="center" align="baseline">
 
-        <v-flex xs12 sm10 v-if="state === 'forgot'">
-            <v-form v-model="rule.valid" ref="form" v-on:submit.prevent>
+                <v-col md="8">
+                    <v-text-field v-model="fd.mail" :label="$t('ft.mail')" :rules="rule.require" type="email" filled rounded single-line />
+                </v-col>
 
-                <v-text-field v-model="fd.mail" :label="$t('ft.mail')" :rules="rule.require" type="email" solo />
-                <v-btn @click="send()" :loading="sending" color="primary" depressed large block type="submit">
-                    {{ $t('btn.send') }}
-                </v-btn>
+            </v-row>
+            <v-row justify="center">
+                <v-col md="3">
+                    <v-btn @click="send()" :loading="sending" color="primary" depressed block type="submit">
+                        {{ $t('btn.send') }}
+                    </v-btn>
+                </v-col>
 
-            </v-form>
-        </v-flex>
+                <v-col sm="3">
+                    <v-btn depressed block :to="{name: 'auth.login'}">
+                        {{ $t('btn.cancel') }}
+                    </v-btn>
+                </v-col>
+            </v-row>
+        </v-form>
 
-        <v-flex xs12 sm10 v-if="state === 'reset'">
-            <v-form v-model="rule.valid" ref="form" v-on:submit.prevent>
+        <v-form v-if="state === 'reset'" v-model="rule.valid" ref="form" v-on:submit.prevent>
+            <v-row>
                 <v-text-field v-model="fd.password" :label="$t('password')" :rules="rule.password" type="password" solo />
                 <v-text-field v-model="pwRepeat" :label="$t('repeat')" :rules="rule.repeat" type="password" solo />
                 <v-btn @click="reset()" :loading="sending" color="primary" depressed large block type="submit">
                     {{ $t('btn.send') }}
                 </v-btn>
-            </v-form>
-        </v-flex>
+            </v-row>
+        </v-form>
 
-        <v-flex xs12 sm6 md5 v-if="state === 'forgot'">
-            <v-btn depressed small block :to="{name: 'auth.login'}">
-                {{ $t('btn.cancel') }}
-            </v-btn>
-        </v-flex>
+    </vcontainer>
 
-    </v-layout>
 </template>
 
 <script>

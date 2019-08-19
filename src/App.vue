@@ -4,18 +4,22 @@
         <Drawer />
 
         <router-view name="toolbar" />
+        <Alerts />
 
+        <!--
+            -->
         <v-content>
-
-            <Alerts />
-
             <transition appear name="fade" mode="out-in">
                 <router-view />
             </transition>
-
-            <CookieInfo v-if="this.$store.getters['cookieNotice']" />
-
         </v-content>
+
+        <!--
+                -->
+        <!--
+        -->
+
+        <CookieInfo v-if="this.$store.getters['cookieNotice']" />
 
     </v-app>
 
