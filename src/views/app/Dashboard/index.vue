@@ -43,9 +43,7 @@
                 <v-btn large disabled><i>{{ $t('soon') }}</i></v-btn>
             </v-col>
         </v-row>
-
-        <BottomNav v-if="$vuetify.breakpoint.xs" />
-
+        
     </vcontainer>
 </template>
 

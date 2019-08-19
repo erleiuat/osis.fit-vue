@@ -5,7 +5,8 @@ module.exports = [{
     meta: { authRequired: true },
     components: {
         toolbar: () => import('@/components/nav/toolbar/'),
-        default: () => import('@/views/app/Dashboard/')
+        default: () => import('@/views/app/Dashboard/'),
+        bottom: () => import('@/views/app/Dashboard/BottomNav')
     }
 
 }, {
@@ -15,7 +16,8 @@ module.exports = [{
     meta: { authRequired: true },
     components: {
         toolbar: () => import('@/components/nav/toolbar/'),
-        default: () => import('@/views/app/Calories/')
+        default: () => import('@/views/app/Calories/'),
+        bottom: () => import('@/views/app/Calories/BottomNav')
     }
 
 }, {

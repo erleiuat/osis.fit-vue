@@ -6,23 +6,19 @@
         <router-view name="toolbar" />
         <Alerts />
 
-        <!--
-            -->
         <v-content>
             <transition appear name="fade" mode="out-in">
                 <router-view />
             </transition>
         </v-content>
 
-        <!--
-                -->
-        <!--
-        -->
+        <transition appear name="slideUp" mode="out-in">
+            <router-view name="bottom" />
+        </transition>
 
         <CookieInfo v-if="this.$store.getters['cookieNotice']" />
 
     </v-app>
-
 </template>
 
 <script>

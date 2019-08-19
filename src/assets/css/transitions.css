@@ -10,18 +10,18 @@
 
 
 .fade-enter-active {
-    animation: fadeIn 0.1s;
+    animation: fadeIn 0.3s;
 }
 .fade-leave-active {
-    animation: fadeOut 0.1s;
+    animation: fadeOut 0.3s;
 }
 
 
 .slideUp-enter-active {
-    animation: slideInUp 0.5s;
+    animation: slideInUp 0.4s;
 }
 .slideUp-leave-active {
-    animation: slideOutUp 0.2s;
+    animation: slideOutDown 0.4s;
 }
 
 .slideDown-enter-active {

@@ -1,5 +1,5 @@
 <template>
-    <v-bottom-navigation app fixed grow>
+    <v-bottom-navigation app fixed grow v-if="$vuetify.breakpoint.xs">
 
         <CalorieAdder>
             <template v-slot:default="trigger">

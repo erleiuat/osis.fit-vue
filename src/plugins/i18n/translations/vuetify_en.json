@@ -1,7 +1,8 @@
 {
     "noDataText": "Nothing found",
     "dataTable": {
-        "itemsPerPageText": "Items per page:"
+        "itemsPerPageText": "Items per page:",
+        "sortBy": "Sort by"
     },
     "dataFooter": {
         "itemsPerPageAll": "All"

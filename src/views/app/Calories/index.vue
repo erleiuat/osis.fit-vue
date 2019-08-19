@@ -1,9 +1,8 @@
 <template>
-    <v-container grid-list-xl>
+    <vcontainer>
 
-        <v-layout wrap>
-
-            <v-flex xs12 sm4 class="text-center" v-if="!$vuetify.breakpoint.xs">
+        <v-row>
+            <v-col cols="4" v-if="!$vuetify.breakpoint.xs">
                 <CalorieAdder>
                     <template v-slot:default="trigger">
                         <v-btn block color="primary" depressed large v-on="trigger.on">
@@ -12,9 +11,8 @@
                         </v-btn>
                     </template>
                 </CalorieAdder>
-            </v-flex>
-
-            <v-flex xs12 sm4>
+            </v-col>
+            <v-col cols="12" sm="4">
                 <v-dialog ref="dialog" v-model="modal" :return-value.sync="date" persistent full-width width="290px">
                     <template v-slot:activator="{ on }">
                         <v-text-field solo v-model="date" append-icon="event" readonly v-on="on" type="date" hide-details />
@@ -29,24 +27,22 @@
                         </v-btn>
                     </v-date-picker>
                 </v-dialog>
-            </v-flex>
-
-            <v-flex xs12 sm4 class="text-center" v-if="!$vuetify.breakpoint.xs">
+            </v-col>
+            <v-col cols="4" v-if="!$vuetify.breakpoint.xs">
                 <v-btn :to="{name: 'food.own'}" depressed large block color="primary">
                     <v-icon left>open_in_new</v-icon>
                     {{ $t('templates') }}
                 </v-btn>
-            </v-flex>
+            </v-col>
+        </v-row>
 
-            <v-flex xs12>
+        <v-row>
+            <v-col cols="12">
                 <CaloriesTable :date="date" />
-            </v-flex>
+            </v-col>
+        </v-row>
 
-        </v-layout>
-
-        <BottomNav v-if="$vuetify.breakpoint.xs" />
-
-    </v-container>
+    </vcontainer>
 </template>
 
 <script>
