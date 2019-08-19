@@ -1,6 +1,7 @@
 /* eslint-disable no-console */
 
 // const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
+const WebpackAssetsManifest = require('webpack-assets-manifest')
 const webpack = require('webpack')
 
 module.exports = {
@@ -19,7 +20,31 @@ module.exports = {
         return {
             plugins: [
                 // new BundleAnalyzerPlugin(),
-                new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/)
+                new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
+                new WebpackAssetsManifest({
+                    output: 'manifest.json',
+                    transform (assets) {
+                        assets.name = process.env.VUE_APP_PWA_NAME
+                        assets.short_name = process.env.VUE_APP_PWA_NAME
+                        assets.start_url = './'
+                        assets.display = 'standalone'
+                        assets.background_color = '#FFFFFF'
+                        assets.theme_color = '#FFFFFF'
+
+                        assets.icons = [
+                            {
+                                src: './img/icons/android-chrome-192x192.png',
+                                sizes: '192x192',
+                                type: 'image/png'
+                            },
+                            {
+                                src: './img/icons/android-chrome-512x512.png',
+                                sizes: '512x512',
+                                type: 'image/png'
+                            }
+                        ]
+                    }
+                })
             ]
         }
     },
