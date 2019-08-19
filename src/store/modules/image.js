@@ -1,6 +1,6 @@
 
 import Apios from '@/plugins/Apios'
-import NProgress from '@/plugins/nprogress'
+import NProgress from '@/plugins/nProgress'
 
 const name = 'image'
 const namespaced = true

@@ -2,7 +2,7 @@
 
 import { register } from 'register-service-worker'
 
-import NProgress from '@/plugins/nprogress'
+import NProgress from '@/plugins/nProgress'
 
 if (process.env.NODE_ENV === 'production')
 

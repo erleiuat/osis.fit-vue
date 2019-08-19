@@ -1,23 +1,22 @@
-import '@/plugins/pwa/'
+
 import Vue from 'vue'
 import App from '@/App.vue'
-import smartStore from '@/plugins/smartStore'
-import router from '@/router/'
 import store from '@/store/'
+import router from '@/router/'
+
+import '@/plugins/pwa/'
 import i18n from '@/plugins/i18n/'
 import vuetify from '@/plugins/vuetify/'
-import Notifications from 'vue-notification'
-
+import smartStore from '@/plugins/smartStore'
 import vcontainer from '@/plugins/vuetify/vcontainer'
+import Notifications from 'vue-notification'
 
 import(/* webpackPrefetch: true */ '@/assets/css/app.css')
 import(/* webpackPrefetch: true */ '@/assets/css/transitions.css')
-Vue.component('vcontainer', vcontainer)
 
+Vue.component('vcontainer', vcontainer)
 Vue.use(Notifications)
-Vue.use(smartStore, {
-    store: store
-})
+Vue.use(smartStore, { store: store })
 
 Vue.config.productionTip = false
 Vue.prototype.$dateFormat = (date) => {

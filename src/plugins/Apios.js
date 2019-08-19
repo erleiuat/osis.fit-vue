@@ -1,5 +1,5 @@
 import Axios from 'axios'
-import NProgress from '@/plugins/nprogress'
+import NProgress from '@/plugins/nProgress'
 
 const CancelToken = Axios.CancelToken
 const source = CancelToken.source()

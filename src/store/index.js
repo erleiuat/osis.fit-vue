@@ -13,7 +13,7 @@ export default new Vuex.Store({
         today: null,
         cookiesAccepted: VueCookies.get('cAccept') || false,
         app: {
-            title: process.env.VUE_APP_TITLE,
+            title: process.env.VUE_APP_NAME,
             drawer: null,
             dark: VueCookies.get('appDark') || false,
             language: VueCookies.get('appLang') || navigator.language || navigator.userLanguage

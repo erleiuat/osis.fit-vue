@@ -8,9 +8,9 @@ module.exports = {
     baseUrl: process.env.BASE_URL,
 
     pwa: {
-        name: process.env.VUE_APP_PWA_NAME,
-        themeColor: '#FFFFFF',
-        msTileColor: '#2b5797',
+        name: process.env.VUE_APP_NAME,
+        themeColor: process.env.VUE_APP_THEME_COLOR,
+        msTileColor: process.env.VUE_APP_THEME_MSTILE,
         appleMobileWebAppCapable: 'yes',
         appleMobileWebAppStatusBarStyle: 'black',
         workboxOptions: { skipWaiting: true }
@@ -24,13 +24,12 @@ module.exports = {
                 new WebpackAssetsManifest({
                     output: 'manifest.json',
                     transform (assets) {
-                        assets.name = process.env.VUE_APP_PWA_NAME
-                        assets.short_name = process.env.VUE_APP_PWA_NAME
+                        assets.name = process.env.VUE_APP_NAME
+                        assets.short_name = process.env.VUE_APP_NAME_SHORT
+                        assets.background_color = process.env.VUE_APP_THEME_BACKGROUND
+                        assets.theme_color = process.env.VUE_APP_THEME_COLOR
                         assets.start_url = './'
                         assets.display = 'standalone'
-                        assets.background_color = '#FFFFFF'
-                        assets.theme_color = '#FFFFFF'
-
                         assets.icons = [
                             {
                                 src: './img/icons/android-chrome-192x192.png',
