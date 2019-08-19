@@ -1,46 +1,52 @@
 <template>
-    <v-container grid-list-xl fill-height>
-        <v-layout wrap>
+    <vcontainer>
 
-            <v-flex xs12>
+        <v-row>
+            <v-col cols="12">
                 <Start />
-            </v-flex>
+            </v-col>
+        </v-row>
 
-            <v-layout wrap text-center v-if="!$vuetify.breakpoint.xs">
-                <v-flex xs12>
-                    <v-divider />
-                </v-flex>
-                <v-flex sm4>
-                    <div class="headline pb-3">{{ $t('calories') }}</div>
-                    <CalorieAdder />
-                </v-flex>
-                <v-flex sm4>
-                    <div class="headline pb-3">{{ $t('activity') }}</div>
-                    <ActivityAdder />
-                </v-flex>
-                <v-flex sm4>
-                    <div class="headline pb-3">{{ $t('weight') }}</div>
-                    <WeightAdder />
-                </v-flex>
-                <v-flex xs12>
-                    <v-divider />
-                </v-flex>
-            </v-layout>
+        <v-row v-if="!$vuetify.breakpoint.xs">
+            <v-col cols="12">
+                <v-divider />
+            </v-col>
+            <v-col cols="4" align="center">
+                <div class="headline pb-3">{{ $t('calories') }}</div>
+                <CalorieAdder />
+            </v-col>
+            <v-col cols="4" align="center">
+                <div class="headline pb-3">{{ $t('activity') }}</div>
+                <ActivityAdder />
+            </v-col>
+            <v-col cols="4" align="center">
+                <div class="headline pb-3">{{ $t('weight') }}</div>
+                <WeightAdder />
+            </v-col>
+            <v-col cols="12">
+                <v-divider />
+            </v-col>
+        </v-row>
 
-            <v-flex xs12 pa-1>
+        <v-row>
+            <v-col cols="12">
                 <WeightChart />
-            </v-flex>
+            </v-col>
+        </v-row>
 
-            <v-flex xs12 class="text-center">
+        <v-row>
+            <v-col cols="12">
+                <v-divider />
+            </v-col>
+            <v-col align="center">
                 <div class="headline pb-3">{{ $t('trainings') }}</div>
                 <v-btn large disabled><i>{{ $t('soon') }}</i></v-btn>
-            </v-flex>
-
-        </v-layout>
+            </v-col>
+        </v-row>
 
         <BottomNav v-if="$vuetify.breakpoint.xs" />
 
-    </v-container>
+    </vcontainer>
 </template>
 
 <script>

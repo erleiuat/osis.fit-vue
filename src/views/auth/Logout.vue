@@ -1,34 +1,36 @@
 <template>
-    <v-container grid-list-xl fill-height>
-        <v-layout wrap justify-space-around>
+    <vcontainer align="center">
 
-            <v-flex xs12 sm8 v-if="!doing" text-center style="height: 200px">
+        <v-row justify="center" align="end" style="height: 200px">
+            <v-col cols="auto" v-if="!doing">
                 <div class="headline pb-5">{{ $t('text') }}</div>
-                <v-layout row wrap justify-space-around>
-                    <v-flex xs12 sm6>
-                        <v-btn @click="logout()" block color="primary" depressed>
-                            {{ $t('sure') }}
-                        </v-btn>
-                    </v-flex>
-                    <v-flex xs12 sm6>
-                        <v-btn @click="$router.go(-1)" block depressed>
-                            {{ $t('btn.cancel') }}
-                        </v-btn>
-                    </v-flex>
-                </v-layout>
-            </v-flex>
-
-            <v-flex xs12 v-else text-center style="height: 200px">
-                <div class="headline pb-3">{{ $t('nextTime') }}</div>
+            </v-col>
+            <v-col cols="auto" v-else>
                 <div class="body-1 pb-5">{{ $t('pleaseWait') }}</div>
-            </v-flex>
+                <div class="headline pb-3">{{ $t('nextTime') }}</div>
+            </v-col>
+        </v-row>
 
-            <v-flex xs12 sm8>
+        <v-row justify="center">
+            <v-col cols="12" sm="6" md="3">
+                <v-btn @click="logout()" block color="primary" depressed>
+                    {{ $t('sure') }}
+                </v-btn>
+            </v-col>
+            <v-col cols="12" sm="6" md="3">
+                <v-btn @click="$router.go(-1)" block depressed>
+                    {{ $t('btn.cancel') }}
+                </v-btn>
+            </v-col>
+        </v-row>
+
+        <v-row justify="center">
+            <v-col cols="12" md="6">
                 <v-progress-linear :indeterminate="doing" :color="prgcol" height="20" />
-            </v-flex>
+            </v-col>
+        </v-row>
 
-        </v-layout>
-    </v-container>
+    </vcontainer>
 </template>
 
 <script>
