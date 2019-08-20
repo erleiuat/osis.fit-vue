@@ -3,7 +3,7 @@
 
         <v-row>
             <v-col cols="12" lg="4" v-if="!$store.getters['premium']">
-                <Subscription />
+                <Premium />
             </v-col>
             <v-col cols="12" lg="3">
                 <EditAims />
@@ -12,7 +12,7 @@
                 <EditProfile />
             </v-col>
             <v-col cols="12" lg="4" v-if="$store.getters['premium']">
-                <Subscription />
+                <Premium />
             </v-col>
         </v-row>
 
@@ -49,7 +49,7 @@
 <script>
 import EditAims from '@/views/app/Settings/Aims'
 import EditProfile from '@/views/app/Settings/Profile'
-import Subscription from '@/views/app/Settings/Subscription'
+import Premium from '@/views/app/Settings/Subscription'
 
 import user from '@/store/modules/user'
 
@@ -57,7 +57,7 @@ export default {
     name: 'Settings',
 
     components: {
-        EditAims, EditProfile, Subscription
+        EditAims, EditProfile, Premium
     },
 
     modules: {

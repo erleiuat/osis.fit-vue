@@ -2,7 +2,7 @@
     <vcontainer fluid>
 
         <v-list dense>
-            <v-subheader>GENERAL</v-subheader>
+            <v-subheader>{{ $t('general') }}</v-subheader>
             <v-list-item-group color="primary">
 
                 <v-list-item v-for="(item, key) in items" :key="key" :to="{name: item.to}">
@@ -16,21 +16,39 @@
 
             </v-list-item-group>
 
-            <v-subheader>SECURITY</v-subheader>
+            <v-subheader>{{ $t('account') }}</v-subheader>
             <v-list-item-group color="primary">
 
-                <v-list-item v-for="(item, key) in items" :key="key" :to="{name: item.to}">
+                <v-list-item :to="{name: null}">
                     <v-list-item-icon>
-                        <v-icon>{{ item.icon }}</v-icon>
+                        <v-icon></v-icon>
                     </v-list-item-icon>
                     <v-list-item-content>
-                        <v-list-item-title>{{ item.title }}</v-list-item-title>
+                        <v-list-item-title>{{ $t('password') }}</v-list-item-title>
+                    </v-list-item-content>
+                </v-list-item>
+
+                <v-list-item :to="{name: null}">
+                    <v-list-item-icon>
+                        <v-icon></v-icon>
+                    </v-list-item-icon>
+                    <v-list-item-content>
+                        <v-list-item-title>{{ $t('getdata') }}</v-list-item-title>
+                    </v-list-item-content>
+                </v-list-item>
+
+                <v-list-item :to="{name: null}">
+                    <v-list-item-icon>
+                        <v-icon></v-icon>
+                    </v-list-item-icon>
+                    <v-list-item-content>
+                        <v-list-item-title>{{ $t('delete') }}</v-list-item-title>
                     </v-list-item-content>
                 </v-list-item>
 
             </v-list-item-group>
 
-            <v-subheader>APP</v-subheader>
+            <v-subheader>{{ $t('app') }}</v-subheader>
             <v-list-item-group>
 
                 <v-list-item>
@@ -38,14 +56,24 @@
                         <v-checkbox v-model="mode" color="primary"></v-checkbox>
                     </v-list-item-action>
                     <v-list-item-content>
-                        <v-list-item-title>Dark</v-list-item-title>
-                        <v-list-item-subtitle>App Design</v-list-item-subtitle>
+                        <v-list-item-title>{{ $t('dark') }}</v-list-item-title>
+                        <v-list-item-subtitle>{{ $t('appdesign') }}</v-list-item-subtitle>
                     </v-list-item-content>
                 </v-list-item>
 
                 <v-list-item>
                     <v-list-item-content>
                         <v-select v-model="lang" :items="langs" :label="$t('language')" outlined hide-details />
+                    </v-list-item-content>
+                </v-list-item>
+
+            </v-list-item-group>
+            <v-subheader>{{ $t('notifications') }}</v-subheader>
+            <v-list-item-group>
+
+                <v-list-item>
+                    <v-list-item-content class="caption">
+                        {{ $t('soon') }}
                     </v-list-item-content>
                 </v-list-item>
 
@@ -62,9 +90,9 @@ export default {
     data () {
         return {
             items: [
-                { title: 'Profile', icon: 'account_circle', to: '' },
-                { title: 'Aims', icon: 'done_all', to: '' },
-                { title: 'Premium', icon: 'star', to: '' }
+                { title: this.$t('profile'), icon: 'account_circle', to: 'settings.profile' },
+                { title: this.$t('aims'), icon: 'done_all', to: 'settings.aims' },
+                { title: this.$t('premium'), icon: 'star', to: 'settings.premium' }
             ]
         }
     },
@@ -99,22 +127,42 @@ export default {
             en: {
                 general: 'GENERAL',
                 profile: 'Profile',
-                aims: '',
-                premium: '',
-
+                aims: 'Aims',
+                premium: 'Premium',
+                account: 'ACCOUNT',
+                password: 'Change Password',
+                getdata: 'Download your data',
+                delete: 'Delete Account',
+                app: 'APP',
+                dark: 'Darkmode',
+                appdesign: 'App design',
+                language: 'Language',
+                lang: {
+                    de: 'German',
+                    en: 'English'
+                },
+                notifications: 'NOTIFICATIONS',
+                soon: 'Coming soon'
             },
             de: {
+                general: 'ALLGEMEIN',
+                profile: 'Profil',
+                aims: 'Ziele',
+                premium: 'Premium',
+                account: 'KONTO',
+                password: 'Passwort ändern',
+                getdata: 'Daten herunterladen',
+                delete: 'Konto löschen',
+                app: 'ANWENDUNG',
+                dark: 'Dunkelmodus',
+                appdesign: 'Design der App',
                 language: 'Sprache',
-                darkmode: 'Dunkelmodus',
-                toolbar: 'Navigation 2',
-                account: 'Konto',
-                changePass: 'Password ändern',
-                getData: 'Meine Daten herunterladen',
-                deleteAcc: 'Konto löschen',
                 lang: {
                     de: 'Deutsch',
                     en: 'Englisch'
-                }
+                },
+                notifications: 'BENACHRICHTIGUNGEN',
+                soon: 'Bald verfügbar'
             }
         }
     }

@@ -1,9 +1,5 @@
 <template>
-    <v-card outlined>
-
-        <v-card-title>
-            <h3 class="display-1">{{ $t('title') }}</h3>
-        </v-card-title>
+    <v-card flat>
 
         <v-card-text v-if="!edit">
             <v-row dense>

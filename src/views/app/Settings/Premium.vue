@@ -47,7 +47,7 @@
 import Apios from '@/plugins/Apios'
 
 export default {
-    name: 'Subscription',
+    name: 'Premium',
 
     data () {
         return {

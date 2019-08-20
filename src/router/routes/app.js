@@ -138,7 +138,33 @@ module.exports = [{
     components: {
         toolbar: () => import('@/components/nav/toolbar/'),
         default: () => import('@/views/app/Settings/')
-    }
+    },
+    children: [
+        {
+            path: 'profile',
+            name: 'settings.profile',
+            meta: { authRequired: true },
+            components: {
+                default: () => import('@/views/app/Settings/Profile')
+            }
+        },
+        {
+            path: 'aims',
+            name: 'settings.aims',
+            meta: { authRequired: true },
+            components: {
+                default: () => import('@/views/app/Settings/Aims')
+            }
+        },
+        {
+            path: 'premium',
+            name: 'settings.premium',
+            meta: { authRequired: true },
+            components: {
+                default: () => import('@/views/app/Settings/Premium')
+            }
+        },
+    ]
 
 }, {
 
