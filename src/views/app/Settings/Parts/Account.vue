@@ -45,7 +45,7 @@ export default {
         return {
         }
     },
-    
+
     i18n: {
         messages: {
             en: {

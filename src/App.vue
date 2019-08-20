@@ -37,6 +37,9 @@ export default {
     created () {
         this.$i18n.locale = this.$store.getters['locale']
         this.$vuetify.theme.dark = this.$store.getters['dark']
+        var metaThemeColor = document.querySelector('meta[name=theme-color]')
+        if (this.$vuetify.theme.dark) metaThemeColor.setAttribute('content', '#303030')
+        else metaThemeColor.setAttribute('content', '#FAFAFA')
     },
 
     mounted () {

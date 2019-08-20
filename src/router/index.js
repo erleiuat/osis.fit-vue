@@ -54,7 +54,6 @@ router.beforeEach((to, from, next) => {
         else router.push({ name: 'welcome' })
     else
         router.push({ name: 'auth.login', query: { target: to.name } })
-
 })
 
 router.beforeResolve((to, from, next) => {

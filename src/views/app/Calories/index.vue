@@ -1,7 +1,7 @@
 <template>
     <vcontainer>
 
-        <v-row>
+        <v-row justify="center">
             <v-col cols="4" v-if="!$vuetify.breakpoint.xs">
                 <CalorieAdder>
                     <template v-slot:default="trigger">
@@ -12,7 +12,7 @@
                     </template>
                 </CalorieAdder>
             </v-col>
-            <v-col cols="12" sm="4">
+            <v-col cols="12" sm="6">
                 <v-dialog ref="dialog" v-model="modal" :return-value.sync="date" persistent full-width width="290px">
                     <template v-slot:activator="{ on }">
                         <v-text-field solo v-model="date" append-icon="event" readonly v-on="on" type="date" hide-details />
@@ -27,12 +27,6 @@
                         </v-btn>
                     </v-date-picker>
                 </v-dialog>
-            </v-col>
-            <v-col cols="4" v-if="!$vuetify.breakpoint.xs">
-                <v-btn :to="{name: 'food.own'}" depressed large block color="primary">
-                    <v-icon left>open_in_new</v-icon>
-                    {{ $t('templates') }}
-                </v-btn>
             </v-col>
         </v-row>
 

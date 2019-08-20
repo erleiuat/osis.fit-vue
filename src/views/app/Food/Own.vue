@@ -15,19 +15,12 @@
             </v-col>
         </v-row>
 
-        <v-fab-transition v-if="!$vuetify.breakpoint.mdAndUp">
-            <v-btn @click="this.$router.push({name: 'food.add'})" fab fixed bottom right color="primary">
-                <v-icon>add</v-icon>
-            </v-btn>
-        </v-fab-transition>
-
     </vcontainer>
 </template>
 
 <script>
+import FoodCard from '@/components/food/Card'
 import food from '@/store/modules/food'
-
-const FoodCard = () => import('@/components/food/Card')
 
 export default {
     name: 'Own',
@@ -52,7 +45,6 @@ export default {
 
             if (filtered.length <= 0) return false
             else return filtered
-
         }
 
     },

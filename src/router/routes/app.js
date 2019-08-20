@@ -26,7 +26,7 @@ module.exports = [{
     path: '/weight',
     meta: { authRequired: true },
     components: {
-        toolbar: () => import('@/views/app/Weight/Toolbar'),
+        toolbar: () => import('@/components/nav/toolbar/'),
         default: () => import('@/views/app/Weight/')
     }
 
@@ -46,7 +46,8 @@ module.exports = [{
     meta: { authRequired: true },
     components: {
         default: () => import('@/views/app/Food/'),
-        toolbar: () => import('@/views/app/Food/Toolbar')
+        toolbar: () => import('@/views/app/Food/Toolbar'),
+        bottom: () => import('@/views/app/Food/BottomNav')
     },
     children: [
         {
@@ -55,7 +56,7 @@ module.exports = [{
             meta: { authRequired: true },
             components: {
                 default: () => import('@/views/app/Food/Own'),
-                toolbar: () => import('@/components/nav/toolbar/'),
+                toolbar: () => import('@/components/nav/toolbar/')
             },
             children: [
                 {
@@ -71,7 +72,7 @@ module.exports = [{
                     components: {
                         editor: () => import('@/components/food/Editor')
                     }
-                },
+                }
             ]
         },
         {
@@ -186,7 +187,7 @@ module.exports = [{
             components: {
                 default: () => import('@/views/app/Settings/Parts/Account')
             }
-        },
+        }
     ]
 
 }, {

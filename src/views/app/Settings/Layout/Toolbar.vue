@@ -24,8 +24,8 @@ export default {
     },
 
     computed: {
-        title() {
-            return this.$t('view.'+this.$route.name+'.title')
+        title () {
+            return this.$t('view.' + this.$route.name + '.title')
         }
     },
 

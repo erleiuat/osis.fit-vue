@@ -97,7 +97,7 @@ export default {
             set (val) {
                 this.$store.commit('setDark', val)
             }
-        },
+        }
     },
 
     i18n: {

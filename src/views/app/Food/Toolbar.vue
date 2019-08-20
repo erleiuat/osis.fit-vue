@@ -12,7 +12,7 @@
             <v-btn v-else-if="query" @click="search = true" text large>
                 <v-icon left>search</v-icon> <strong>{{ query }}</strong>
             </v-btn>
-            <v-btn v-else @click="search = true" icon small>
+            <v-btn v-else @click="search = true" icon>
                 <v-icon>search</v-icon>
             </v-btn>
         </transition>

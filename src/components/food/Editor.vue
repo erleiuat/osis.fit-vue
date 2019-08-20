@@ -6,60 +6,55 @@
 
             <v-card-title class="pl-0 pt-0 pr-0">
                 <v-toolbar color="primary" flat dark>
+                    <v-btn icon @click="show=false">
+                        <v-icon>close</v-icon>
+                    </v-btn>
                     <v-toolbar-title v-if="fd.id">{{ $t('titleEdit') }}</v-toolbar-title>
                     <v-toolbar-title v-else>{{ $t('titleAdd') }}</v-toolbar-title>
                     <v-spacer></v-spacer>
-                    <v-btn icon @click="show=false">
-                        <v-icon>close</v-icon>
+                    <v-btn icon @click="sure = true" v-if="fd.id">
+                        <v-icon>delete</v-icon>
                     </v-btn>
                 </v-toolbar>
             </v-card-title>
 
-            <v-card-text>
-                <v-container grid-list-xs pl-0 pr-0>
+            <v-card-text class="pa-0">
+                <v-form v-model="rule.valid" ref="form" v-on:submit.prevent>
+                    <vcontainer>
+                        <v-row dense>
 
-                    <v-form v-model="rule.valid" ref="form" v-on:submit.prevent>
-                        <v-layout wrap>
-
-                            <v-input v-model="fd.id" type="hidden" v-show="false" />
-                            <v-input v-model="fd.image" type="hidden" v-show="false" />
-
-                            <v-flex xs12 pb-0>
+                            <v-col cols="12">
                                 <v-text-field v-model="fd.title" :label="$t('ft.title')" :rules="rule.title" type="text" outlined />
-                            </v-flex>
-
-                            <v-flex xs12 sm6 pt-0 pb-0>
+                            </v-col>
+                            <v-col cols="12" md="6">
                                 <v-text-field v-model="fd.caloriesPer100" :label="$t('caloriesPer100')" :rules="rule.require" type="number" outlined />
-                            </v-flex>
-                            <v-flex xs12 sm6 pt-0 pb-0>
+                            </v-col>
+                            <v-col cols="12" md="6">
                                 <v-text-field v-model="fd.amount" :label="$t('ft.amount')" :rules="rule.require" type="number" outlined />
-                            </v-flex>
+                            </v-col>
 
-                            <v-flex xs12 pa-0 text-center>
+                            <v-col cols="12">
                                 {{ $t('calories') }}: {{ total }}
-                            </v-flex>
+                            </v-col>
 
-                            <v-flex xs12 v-if="$store.getters['premium']">
+                            <v-col cols="12" v-if="$store.getters['premium']">
                                 <ImageInput v-model="fd.image" />
-                            </v-flex>
-                            <v-flex xs12 v-else pa-2>
-                                <v-btn block :to="{name: 'premium'}">
+                            </v-col>
+                            <v-col cols="12" v-else>
+                                <v-btn block depressed large :to="{name: 'premium'}">
                                     {{ $t('needsPremium') }}
                                 </v-btn>
-                            </v-flex>
+                            </v-col>
 
-                            <v-flex xs12>
-                                <v-btn @click="save()" :loading="sending" block type="submit" color="primary">{{ $t('btn.save') }}</v-btn>
-                            </v-flex>
+                            <v-col cols="12">
+                                <v-btn @click="save()" :loading="sending" block type="submit" color="primary">
+                                    {{ $t('btn.save') }}
+                                </v-btn>
+                            </v-col>
 
-                            <v-flex xs12 v-if="fd.id" pt-2>
-                                <v-btn @click="sure = true" :loading="deleting" block small depressed>{{ $t('delete') }}</v-btn>
-                            </v-flex>
-
-                        </v-layout>
-                    </v-form>
-                </v-container>
-
+                        </v-row>
+                    </vcontainer>
+                </v-form>
             </v-card-text>
 
         </v-card>
@@ -67,9 +62,11 @@
 </template>
 
 <script>
+import clonedeep from 'lodash.clonedeep'
+import ImageInput from '@/components/ImageInput'
+
 import food from '@/store/modules/food'
 
-import ImageInput from '@/components/ImageInput'
 const YouSure = () => import('@/components/YouSure')
 
 export default {
@@ -86,7 +83,6 @@ export default {
     data () {
         return {
             sure: false,
-            deleting: false,
             sending: false,
             fd: {
                 id: null,
@@ -118,7 +114,10 @@ export default {
         show: {
             get () {
                 if (this.$route.name === 'food.add') return true
-                if (this.$route.name === 'food.edit' && this.$route.params.id) return true
+                if (this.$route.name === 'food.edit' && this.$route.params.id) {
+                    this.getItem()
+                    return true
+                }
                 return false
             },
             set (val) {
@@ -130,15 +129,18 @@ export default {
 
     methods: {
 
+        getItem () {
+            var item = clonedeep(this.$store.getters['food/id'](this.$route.params.id))
+            if (item) this.fd = item
+        },
+
         remove () {
             this.sure = false
-
             if (!this.fd.id) return
 
-            this.deleting = true
             this.$store.dispatch('food/delete', this.fd.id).then(r => {
-                this.$notify({ type: 'success', title: this.$t('alert.success.save') })
                 this.$router.push({ name: 'food' })
+                this.$notify({ type: 'success', title: this.$t('alert.success.save') })
             }).catch(r => {
                 this.$notify({ type: 'error', title: this.$t('alert.error.save') })
             }).finally(() => {
@@ -148,7 +150,6 @@ export default {
 
         save () {
             if (!this.$refs.form.validate()) return false
-            this.sending = true
 
             var action = 'food/add'
             var form = {
@@ -163,9 +164,10 @@ export default {
                 action = 'food/edit'
             }
 
+            this.sending = true
             this.$store.dispatch(action, form).then(r => {
-                this.$notify({ type: 'success', title: this.$t('alert.success.save') })
                 this.$router.push({ name: 'food' })
+                this.$notify({ type: 'success', title: this.$t('alert.success.save') })
             }).catch(r => {
                 this.$notify({ type: 'error', title: this.$t('alert.error.save') })
             }).finally(() => {

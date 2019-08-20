@@ -16,6 +16,10 @@ const state = () => {
 
 const getters = {
 
+    id: (state) => (id) => {
+        if (state.items[id]) return state.items[id]
+    },
+
     all: (state) => {
         return Object.values(state.items).reverse()
     }
