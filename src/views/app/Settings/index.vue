@@ -1,43 +1,49 @@
 <template>
-    <v-container grid-list-md>
+    <vcontainer>
 
-        <v-layout wrap>
-            <v-flex xs12 lg4 v-if="!$store.getters['premium']">
+        <v-row>
+            <v-col cols="12" lg="4" v-if="!$store.getters['premium']">
                 <Subscription />
-            </v-flex>
-            <v-flex xs12 lg3>
+            </v-col>
+            <v-col cols="12" lg="3">
                 <EditAims />
-            </v-flex>
-            <v-flex xs12 lg5>
+            </v-col>
+            <v-col cols="12" lg="5">
                 <EditProfile />
-            </v-flex>
-            <v-flex xs12 lg4 v-if="$store.getters['premium']">
+            </v-col>
+            <v-col cols="12" lg="4" v-if="$store.getters['premium']">
                 <Subscription />
-            </v-flex>
-        </v-layout>
+            </v-col>
+        </v-row>
 
-        <v-layout wrap align-center>
-            <v-flex xs6 sm4 md2 class="text-center">
-                <v-switch v-model="mode" :label="$t('darkmode')"></v-switch>
-            </v-flex>
-            <v-flex xs6 sm4 md2 class="text-center">
-                <v-switch v-model="tool" :label="$t('toolbar')"></v-switch>
-            </v-flex>
-            <v-flex xs12 sm8 md3>
-                <v-select v-model="lang" :items="langs" :label="$t('language')" />
-            </v-flex>
-            <v-flex xs12 sm6 md2>
+        <v-row justify="center">
+            <v-col cols="12" md="6">
+                <v-select v-model="lang" :items="langs" :label="$t('language')" outlined hide-details />
+            </v-col>
+            <v-col align="center">
+                <v-radio-group v-model="mode" :label="$t('mode')" row hide-details>
+                    <v-radio :label="$t('modeDark')" :value="true" />
+                    <v-radio :label="$t('modeLight')" :value="false" />
+                </v-radio-group>
+            </v-col>
+        </v-row>
+
+        <v-row align="center">
+            <v-col cols="12" md="4">
                 <v-btn disabled block>{{ $t('changePass') }}</v-btn>
-            </v-flex>
-            <v-flex xs12 sm6 md3>
-                <v-btn disabled block>{{ $t('getData') }}</v-btn>
-            </v-flex>
-            <v-flex xs12 md2>
-                <v-btn disabled block>{{ $t('deleteAcc') }}</v-btn>
-            </v-flex>
-        </v-layout>
 
-    </v-container>
+            </v-col>
+            <v-col cols="12" md="4">
+                <v-btn disabled block>{{ $t('getData') }}</v-btn>
+
+            </v-col>
+            <v-col cols="12" md="4">
+                <v-btn disabled block>{{ $t('deleteAcc') }}</v-btn>
+
+            </v-col>
+        </v-row>
+
+    </vcontainer>
 </template>
 
 <script>

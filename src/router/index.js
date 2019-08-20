@@ -55,7 +55,6 @@ router.beforeEach((to, from, next) => {
     else
         router.push({ name: 'auth.login', query: { target: to.name } })
 
-    store.dispatch('checkAuth')
 })
 
 router.beforeResolve((to, from, next) => {

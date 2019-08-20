@@ -57,12 +57,13 @@ export default new Vuex.Store({
         },
 
         authDetail: state => {
-            if (state.auth.authorized) return 'authorized'
-            state.token.refresh = VueCookies.get('refreshToken')
-            if (!state.token.refresh) return 'unauthorized'
             state.token.access = VueCookies.get('accessToken')
-            if (!state.token.access) return 'expired'
-            return 'available'
+            state.token.refresh = VueCookies.get('refreshToken')
+            if (state.token.access && state.token.refresh) {
+                if (state.auth.authorized) return 'authorized'
+                return 'available'
+            } else if (state.token.refresh) return 'expired'
+            else return 'unauthorized'
         },
 
         premium: state => {
@@ -126,13 +127,12 @@ export default new Vuex.Store({
         setDark: (state, info) => {
             state.app.dark = info
             var metaThemeColor = document.querySelector('meta[name=theme-color]')
-            metaThemeColor.setAttribute('content', '#123321')
             if (info) {
-                metaThemeColor.setAttribute('content', '#FAFAFA')
                 VueCookies.set('appDark', 1, -1)
-            } else {
                 metaThemeColor.setAttribute('content', '#303030')
+            } else {
                 VueCookies.remove('appDark')
+                metaThemeColor.setAttribute('content', '#FAFAFA')
             }
         },
 
@@ -149,11 +149,6 @@ export default new Vuex.Store({
         acceptCookies: state => {
             state.cookiesAccepted = true
             VueCookies.set('cAccept', true, -1)
-        },
-
-        setTokens: (state, tokens) => {
-            state.token.access = tokens.access
-            state.token.refresh = tokens.refresh
         },
 
         placeAuth: (state) => {
@@ -207,7 +202,8 @@ export default new Vuex.Store({
             return new Promise((resolve, reject) => {
                 var data = { token: con.state.token.refresh }
                 Apios.post('auth/refresh/', data).then(res => {
-                    con.commit('setTokens', res.data.tokens)
+                    con.state.token.access = res.data.tokens.access
+                    con.state.token.refresh = res.data.tokens.refresh
                     con.commit('placeAuth')
                     resolve()
                 }).catch(err => {
@@ -220,7 +216,8 @@ export default new Vuex.Store({
         auth (con, form) {
             return new Promise((resolve, reject) => {
                 Apios.post('auth/', form).then(res => {
-                    con.commit('setTokens', res.data.tokens)
+                    con.state.token.access = res.data.tokens.access
+                    con.state.token.refresh = res.data.tokens.refresh
                     con.commit('placeAuth')
                     resolve()
                 }).catch(err => {

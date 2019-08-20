@@ -6,16 +6,16 @@
         </v-card-title>
 
         <v-card-text v-if="!edit">
-            <v-layout row wrap>
-                <v-flex xs6 lg12 overflow-hidden>
+            <v-row dense>
+                <v-col cols="6" lg="12">
                     <span class="title">{{ $t('weight') }}</span><br />
                     <span class="subheading">{{ $store.state.user.aims.weight || '-' }}</span>
-                </v-flex>
-                <v-flex xs6 lg12>
+                </v-col>
+                <v-col cols="6" lg="12">
                     <span class="title">{{ $t('date') }}</span><br />
                     <span class="subheading">{{ $dateFormat($store.state.user.aims.date) || '-' }}</span>
-                </v-flex>
-            </v-layout>
+                </v-col>
+            </v-row>
         </v-card-text>
 
         <v-card-actions v-if="!edit">
@@ -24,21 +24,19 @@
 
         <v-form v-model="rule.valid" ref="form" v-on:submit.prevent v-if="edit">
             <v-card-text>
-
-                <v-layout row wrap>
-                    <v-flex xs12 sm6 lg12>
+                <v-row dense>
+                    <v-col cols="6" lg="12">
                         <v-text-field v-model="fd.weight" :label="$t('weight')" :rules="rule.require" type="number" />
-                    </v-flex>
-                    <v-flex xs12 sm6 lg12>
+                    </v-col>
+                    <v-col cols="6" lg="12">
                         <v-menu ref="menu" v-model="menu" :close-on-content-click="false" :nudge-right="40" transition="scale-transition" offset-y full-width min-width="290px">
                             <template v-slot:activator="{ on }">
-                                <v-text-field v-model="fd.date" :label="$t('ft.date')" :rules="rule.require" type="date" v-on="on" @focus="menu = true" readonly append-icon="event"/>
+                                <v-text-field v-model="fd.date" :label="$t('ft.date')" :rules="rule.require" type="date" v-on="on" @focus="menu = true" readonly append-icon="event" />
                             </template>
                             <v-date-picker v-model="fd.date" @input="menu = false" :locale="$store.getters['locale']" no-title />
                         </v-menu>
-                    </v-flex>
-                </v-layout>
-
+                    </v-col>
+                </v-row>
             </v-card-text>
             <v-card-actions>
 
