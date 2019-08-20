@@ -1,55 +1,30 @@
 <template>
-    <v-card outlined>
-
-        <v-card-title>
-            <div class="display-1">{{ $t('title') }}</div>
-        </v-card-title>
-
-        <v-card-text v-if="!edit">
-            <v-row dense>
-                <v-col cols="6" lg="12">
-                    <span class="title">{{ $t('weight') }}</span><br />
-                    <span class="subheading">{{ $store.state.user.aims.weight || '-' }}</span>
-                </v-col>
-                <v-col cols="6" lg="12">
-                    <span class="title">{{ $t('date') }}</span><br />
-                    <span class="subheading">{{ $dateFormat($store.state.user.aims.date) || '-' }}</span>
+    <vcontainer align="center" style="min-height: 400px;">
+        <v-form v-model="rule.valid" ref="form" v-on:submit.prevent>
+            <v-row justify="center" dense>
+                <v-col cols="12" sm="6">
+                    <v-text-field v-model="fd.weight" :label="$t('weight')" :rules="rule.require" type="number" filled />
                 </v-col>
             </v-row>
-        </v-card-text>
-
-        <v-card-actions v-if="!edit">
-            <v-btn @click="edit = !edit" depressed>{{ $t('btn.edit') }}</v-btn>
-        </v-card-actions>
-
-        <v-form v-model="rule.valid" ref="form" v-on:submit.prevent v-if="edit">
-            <v-card-text>
-                <v-row dense>
-                    <v-col cols="6" lg="12">
-                        <v-text-field v-model="fd.weight" :label="$t('weight')" :rules="rule.require" type="number" />
-                    </v-col>
-                    <v-col cols="6" lg="12">
-                        <v-menu ref="menu" v-model="menu" :close-on-content-click="false" :nudge-right="40" transition="scale-transition" offset-y full-width min-width="290px">
-                            <template v-slot:activator="{ on }">
-                                <v-text-field v-model="fd.date" :label="$t('ft.date')" :rules="rule.require" type="date" v-on="on" @focus="menu = true" readonly append-icon="event" />
-                            </template>
-                            <v-date-picker v-model="fd.date" @input="menu = false" :locale="$store.getters['locale']" no-title />
-                        </v-menu>
-                    </v-col>
-                </v-row>
-            </v-card-text>
-            <v-card-actions>
-
-                <v-btn @click="edit = !edit" depressed>{{ $t('btn.cancel') }}</v-btn>
-                <v-spacer v-if="$vuetify.breakpoint.xs" />
-                <v-btn @click="save()" :loading="sending" color="secondary" type="submit">
-                    {{ $t('btn.save') }}
-                </v-btn>
-
-            </v-card-actions>
+            <v-row justify="center" dense>
+                <v-col cols="12" sm="6">
+                    <v-menu ref="menu" v-model="menu" :close-on-content-click="false" :nudge-right="40" transition="scale-transition" offset-y full-width min-width="290px">
+                        <template v-slot:activator="{ on }">
+                            <v-text-field v-model="fd.date" :label="$t('ft.date')" :rules="rule.require" type="date" v-on="on" @focus="menu = true" readonly append-icon="event" filled />
+                        </template>
+                        <v-date-picker v-model="fd.date" @input="menu = false" :locale="$store.getters['locale']" no-title />
+                    </v-menu>
+                </v-col>
+            </v-row>
+            <v-row justify="center" dense>
+                <v-col cols="12" sm="4">
+                    <v-btn @click="save()" :loading="sending" color="primary" type="submit" block depressed>
+                        {{ $t('btn.save') }}
+                    </v-btn>
+                </v-col>
+            </v-row>
         </v-form>
-
-    </v-card>
+    </vcontainer>
 </template>
 
 <script>
@@ -58,7 +33,6 @@ export default {
 
     data () {
         return {
-            edit: false,
             menu: false,
             sending: false,
             rule: {

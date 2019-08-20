@@ -1,10 +1,7 @@
 <template>
-    <vcontainer align="space-evenly">
+    <vcontainer fluid align="start">
 
         <v-row>
-            <v-col cols="12">
-
-            </v-col>
             <v-col cols="12">
                 <v-tabs vertical grow style="min-height: 400px;">
 
@@ -23,7 +20,35 @@
 
         <v-row>
             <v-col cols="12">
-                Aha
+                <v-card flat>
+                    <v-card-title>
+                        {{ $t('app') }}
+                    </v-card-title>
+                    <v-card-text>
+                        <v-select v-model="lang" :items="langs" :label="$t('language')" outlined hide-details />
+                    </v-card-text>
+                    <v-card-text>
+                        <div class="title">{{ $t('appdesign') }}</div>
+                        <v-checkbox v-model="mode" color="primary" :label="$t('dark')" />
+                    </v-card-text>
+                </v-card>
+            </v-col>
+        </v-row>
+
+        <v-row>
+            <v-col cols="12">
+                <v-card flat>
+                    <v-card-title>
+                        {{ $t('notifications') }}
+                    </v-card-title>
+                    <v-card-text>
+                        <v-row align="center">
+                            <v-col cols="12">
+                                {{ $t('soon') }}
+                            </v-col>
+                        </v-row>
+                    </v-card-text>
+                </v-card>
             </v-col>
         </v-row>
 
@@ -57,7 +82,8 @@ export default {
             items: [
                 { title: this.$t('profile'), icon: 'account_circle', to: 'settings.profile' },
                 { title: this.$t('aims'), icon: 'done_all', to: 'settings.aims' },
-                { title: this.$t('premium'), icon: 'star', to: 'settings.premium' }
+                { title: this.$t('premium'), icon: 'star', to: 'settings.premium' },
+                { title: this.$t('account'), icon: 'settings', to: 'settings.premium' }
             ]
         }
     },
