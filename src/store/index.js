@@ -12,16 +12,11 @@ export default new Vuex.Store({
 
         today: null,
         cookiesAccepted: VueCookies.get('cAccept') || false,
-        viewport: {
-            mobile: false,
-            tablet: false,
-            desktop: false
-        },
         app: {
             drawer: null,
-            toolbar2: VueCookies.get('appToolbar2') || false,
             title: process.env.VUE_APP_NAME,
             dark: VueCookies.get('appDark') || false,
+            toolbar2: VueCookies.get('appToolbar2') || false,
             language: VueCookies.get('appLang') || navigator.language || navigator.userLanguage
         },
         auth: {
@@ -47,10 +42,6 @@ export default new Vuex.Store({
     },
 
     getters: {
-
-        device: state => {
-            return state.viewport
-        },
 
         auth: state => {
             return state.auth.authorized
@@ -112,12 +103,6 @@ export default new Vuex.Store({
     },
 
     mutations: {
-
-        setViewport: (state, info) => {
-            state.viewport.mobile = (info === 'mobile')
-            state.viewport.tablet = (info === 'tablet')
-            state.viewport.desktop = (info === 'desktop')
-        },
 
         setLocale: (state, info) => {
             state.app.language = info

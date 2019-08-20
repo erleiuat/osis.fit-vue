@@ -84,6 +84,8 @@
 </template>
 
 <script>
+import user from '@/store/modules/user'
+
 export default {
     name: 'MobileMenu',
 
@@ -95,6 +97,14 @@ export default {
                 { title: this.$t('premium'), icon: 'star', to: 'settings.premium' }
             ]
         }
+    },
+
+    modules: {
+        user
+    },
+
+    mounted () {
+        this.$store.dispatch('user/load')
     },
 
     computed: {

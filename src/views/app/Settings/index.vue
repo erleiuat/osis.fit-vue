@@ -1,11 +1,11 @@
 <template>
     <vcontainer fluid>
 
-        <MobileMenu v-if="$vuetify.breakpoint.xsOnly && $route.name === 'settings'" />
-        <router-view v-if="$vuetify.breakpoint.xsOnly && $route.name !== 'settings'">
+        <MobileMenu v-if="$vuetify.breakpoint.smAndDown && $route.name === 'settings'" />
+        <router-view v-if="$vuetify.breakpoint.smAndDown && $route.name !== 'settings'">
         </router-view>
 
-        <DesktopMenu v-if="!$vuetify.breakpoint.xsOnly" />
+        <DesktopMenu v-if="!$vuetify.breakpoint.smAndDown" />
         
     </vcontainer>
 </template>

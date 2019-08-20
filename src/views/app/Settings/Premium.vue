@@ -1,46 +1,45 @@
 <template>
-    <v-card outlined :color="premium ? '' : 'info'" :dark="!premium">
+    <vcontainer align="center" style="min-height: 400px;">
 
-        <v-card-title>
-            <h3 class="display-1">{{ $t('title') }}</h3>
-        </v-card-title>
+        <v-row justify="center" dense v-if="sub.id">
+            <v-col cols="12" sm="8" md="4">
+                <span class="title">{{ $t('subsNr') }}</span><br />
+                <span class="subheading">{{ sub.id }}</span>
+            </v-col>
+            <v-col cols="12" sm="8" md="4">
+                <span class="title">{{ $t('plan') }}</span><br />
+                <span class="subheading">{{ sub.plan }}</span>
+            </v-col>
+        </v-row>
+        <v-row justify="center" dense v-if="sub.id">
+            <v-col cols="12" sm="4">
+                <span class="title">{{ $t('state') }}</span><br />
+                <span class="subheading">{{ subStatus.text }}</span>
+            </v-col>
+            <v-col cols="12" sm="4">
+                <span class="title">{{ subExpiry.title }}</span><br />
+                <span class="subheading">{{ subExpiry.value }}</span>
+            </v-col>
+        </v-row>
 
-        <v-card-text>
-            <v-layout row wrap overflow-hidden v-if="sub.id">
-                <v-flex xs12 sm6 md3 lg8>
-                    <span class="title">{{ $t('subsNr') }}</span><br />
-                    <span class="subheading">{{ sub.id }}</span>
-                </v-flex>
-                <v-flex xs6 sm6 md3 lg4>
-                    <span class="title">{{ $t('plan') }}</span><br />
-                    <span class="subheading">{{ sub.plan }}</span>
-                </v-flex>
-                <v-flex xs6 sm6 md3 lg4>
-                    <span class="title">{{ $t('state') }}</span><br />
-                    <span class="subheading">{{ subStatus.text }}</span>
-                </v-flex>
-                <v-flex xs12 sm6 md3 lg8>
-                    <span class="title">{{ subExpiry.title }}</span><br />
-                    <span class="subheading">{{ subExpiry.value }}</span>
-                </v-flex>
-            </v-layout>
-            <v-layout row wrap v-else>
-                <v-flex xs12>
-                    {{ $t('youDontHave') }}
-                </v-flex>
-            </v-layout>
-        </v-card-text>
+        <v-row justify="center" dense v-else>
+            <v-col cols="12" sm="4">
+                {{ $t('youDontHave') }}
+            </v-col>
+        </v-row>
 
-        <v-card-actions>
-            <v-btn @click="openPortal()" :loading="loadingScript" depressed v-if="sub.id">
-                {{ $t('btnEdit') }}
-            </v-btn>
-            <v-btn @click="openCheckout()" :loading="loadingScript" block v-else>
-                <strong>{{ $t('btnGet') }}</strong>
-            </v-btn>
-        </v-card-actions>
+        <v-row justify="center">
+            <v-col cols="12" sm="6">
+                <v-btn @click="openPortal()" v-if="sub.id" :loading="loadingScript" color="primary" block depressed>
+                    {{ $t('btnEdit') }}
+                </v-btn>
+                <v-btn @click="openCheckout()" v-else :loading="loadingScript" color="primary" block depressed>
+                    <strong>{{ $t('btnGet') }}</strong>
+                </v-btn>
+            </v-col>
+        </v-row>
 
-    </v-card>
+    </vcontainer>
 </template>
 
 <script>

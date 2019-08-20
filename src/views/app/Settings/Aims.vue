@@ -2,12 +2,12 @@
     <vcontainer align="center" style="min-height: 400px;">
         <v-form v-model="rule.valid" ref="form" v-on:submit.prevent>
             <v-row justify="center" dense>
-                <v-col cols="12" sm="6">
+                <v-col cols="12" sm="8" md="6">
                     <v-text-field v-model="fd.weight" :label="$t('weight')" :rules="rule.require" type="number" filled />
                 </v-col>
             </v-row>
             <v-row justify="center" dense>
-                <v-col cols="12" sm="6">
+                <v-col cols="12" sm="8" md="6">
                     <v-menu ref="menu" v-model="menu" :close-on-content-click="false" :nudge-right="40" transition="scale-transition" offset-y full-width min-width="290px">
                         <template v-slot:activator="{ on }">
                             <v-text-field v-model="fd.date" :label="$t('ft.date')" :rules="rule.require" type="date" v-on="on" @focus="menu = true" readonly append-icon="event" filled />

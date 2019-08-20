@@ -164,6 +164,14 @@ module.exports = [{
                 default: () => import('@/views/app/Settings/Premium')
             }
         },
+        {
+            path: 'account',
+            name: 'settings.account',
+            meta: { authRequired: true },
+            components: {
+                default: () => import('@/views/app/Settings/Account')
+            }
+        },
     ]
 
 }, {

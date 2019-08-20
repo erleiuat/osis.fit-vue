@@ -56,18 +56,10 @@
 </template>
 
 <script>
-import EditAims from '@/views/app/Settings/Aims'
-import EditProfile from '@/views/app/Settings/Profile'
-import Premium from '@/views/app/Settings/Premium'
-
 import user from '@/store/modules/user'
 
 export default {
     name: 'DesktopMenu',
-
-    components: {
-        EditAims, EditProfile, Premium
-    },
 
     modules: {
         user
@@ -83,7 +75,7 @@ export default {
                 { title: this.$t('profile'), icon: 'account_circle', to: 'settings.profile' },
                 { title: this.$t('aims'), icon: 'done_all', to: 'settings.aims' },
                 { title: this.$t('premium'), icon: 'star', to: 'settings.premium' },
-                { title: this.$t('account'), icon: 'settings', to: 'settings.premium' }
+                { title: this.$t('account'), icon: 'settings', to: 'settings.account' }
             ]
         }
     },

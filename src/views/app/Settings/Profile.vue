@@ -3,19 +3,19 @@
         <v-form v-model="rule.valid" ref="form" v-on:submit.prevent>
 
             <v-row justify="center" dense>
-                <v-col cols="12" sm="4">
+                <v-col cols="12" sm="5" md="4">
                     <v-text-field :label="$t('firstname')" v-model="fd.firstname" :rules="rule.require" type="text" filled/>
                 </v-col>
-                <v-col cols="12" sm="4">
+                <v-col cols="12" sm="5" md="4">
                     <v-text-field :label="$t('lastname')" v-model="fd.lastname" :rules="rule.require" type="text" filled />
                 </v-col>
             </v-row>
 
             <v-row justify="center" dense>
-                <v-col cols="12" sm="4">
+                <v-col cols="12" sm="5" md="4">
                     <v-text-field :label="$t('height')" v-model="fd.height" :rules="rule.require" type="number" filled/>
                 </v-col>
-                <v-col cols="12" sm="4">
+                <v-col cols="12" sm="5" md="4">
                     <v-select :label="$t('gender')" v-model="fd.gender" :items="genders" :rules="rule.require" filled />
                 </v-col>
             </v-row>

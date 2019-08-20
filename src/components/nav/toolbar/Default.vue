@@ -29,7 +29,7 @@ export default {
                 t3: false
             }
 
-            if (this.$store.getters['device'].mobile)
+            if (this.$vuetify.breakpoint.xsOnly)
                 if (this.$store.getters['toolbar2']) {
                     tb.t2 = true
                 } else {
