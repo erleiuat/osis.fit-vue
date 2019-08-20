@@ -113,9 +113,9 @@ export default new Vuex.Store({
     mutations: {
 
         setViewport: (state, info) => {
-            state.viewport.mobile = (info === 'mobile' ? true : false)
-            state.viewport.tablet = (info === 'tablet' ? true : false)
-            state.viewport.desktop = (info === 'desktop' ? true : false)
+            state.viewport.mobile = (info === 'mobile')
+            state.viewport.tablet = (info === 'tablet')
+            state.viewport.desktop = (info === 'desktop')
         },
 
         setLocale: (state, info) => {
@@ -125,8 +125,15 @@ export default new Vuex.Store({
 
         setDark: (state, info) => {
             state.app.dark = info
-            if (info) VueCookies.set('appDark', 1, -1)
-            else VueCookies.remove('appDark')
+            var metaThemeColor = document.querySelector('meta[name=theme-color]')
+            metaThemeColor.setAttribute('content', '#123321')
+            if (info) {
+                metaThemeColor.setAttribute('content', '#FAFAFA')
+                VueCookies.set('appDark', 1, -1)
+            } else {
+                metaThemeColor.setAttribute('content', '#303030')
+                VueCookies.remove('appDark')
+            }
         },
 
         setToolbar2: (state, info) => {

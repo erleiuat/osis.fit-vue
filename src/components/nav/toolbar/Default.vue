@@ -23,22 +23,20 @@ export default {
     computed: {
 
         use () {
-
             var tb = {
                 t1: false,
                 t2: false,
                 t3: false
             }
 
-            if (this.$store.getters['device'].mobile) {
+            if (this.$store.getters['device'].mobile)
                 if (this.$store.getters['toolbar2']) {
                     tb.t2 = true
                 } else {
                     tb.t1 = true
                 }
-            } else {
+            else
                 tb.t3 = true
-            }
 
             return tb
         }
