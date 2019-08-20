@@ -197,7 +197,7 @@ module.exports = [{
     meta: { authRequired: true },
     components: {
         toolbar: () => import('@/components/nav/toolbar/'),
-        default: () => import('@/views/auth/Logout')
+        default: () => import('@/views/app/Logout')
     }
 
 }]

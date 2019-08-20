@@ -1,8 +1,25 @@
 <template>
-    <transition appear name="fade" mode="out-in">
-        <router-view>
-        </router-view>
-    </transition>
+    <vcontainer>
+
+        <transition appear name="fade" mode="out-in">
+            <router-view>
+            </router-view>
+        </transition>
+
+        <v-row justify="space-between">
+            <v-col cols="auto">
+                <v-btn text :to="{ name: 'terms' }">
+                    {{ $t('view.terms.title') }}
+                </v-btn>
+            </v-col>
+            <v-col cols="auto">
+                <v-btn text :to="{ name: 'help' }">
+                    {{ $t('view.help.title') }}
+                </v-btn>
+            </v-col>
+        </v-row>
+
+    </vcontainer>
 </template>
 
 <script>

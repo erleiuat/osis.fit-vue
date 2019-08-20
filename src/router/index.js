@@ -2,22 +2,23 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import NProgress from 'nprogress'
 import store from '@/store/'
+import i18n from '@/plugins/i18n/'
 
 Vue.use(Router)
 
 const main = require('@/router/routes/main')
-const noAuth = require('@/router/routes/noAuth')
+const auth = require('@/router/routes/auth')
 const app = require('@/router/routes/app')
-const noPremium = require('@/router/routes/noPremium')
+const premium = require('@/router/routes/premium')
 
 const router = new Router({
     mode: 'history',
     base: process.env.BASE_URL,
     routes: [
         ...main,
-        ...noAuth,
+        ...auth,
         ...app,
-        ...noPremium
+        ...premium
     ]
 })
 
@@ -63,6 +64,7 @@ router.beforeResolve((to, from, next) => {
 
 router.afterEach((to, from) => {
     NProgress.done()
+    if (to.name) document.title = i18n.t('view.' + to.name + '.title') + ' | ' + store.state.app.title
 })
 
 export default router

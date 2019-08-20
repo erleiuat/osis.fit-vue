@@ -1,15 +1,5 @@
 module.exports = [{
 
-    name: 'welcome',
-    path: '/welcome',
-    meta: { authRequired: false },
-    components: {
-        toolbar: () => import('@/components/nav/toolbar/'),
-        default: () => import('@/views/general/Welcome')
-    }
-
-}, {
-
     name: 'auth',
     path: '/auth',
     meta: { authRequired: false },
@@ -19,11 +9,18 @@ module.exports = [{
     },
     children: [
         {
+            path: '/welcome',
+            name: 'welcome',
+            meta: { authRequired: false },
+            components: {
+                default: () => import('@/views/auth/Welcome')
+            }
+        },
+        {
             path: 'login',
             name: 'auth.login',
             meta: { authRequired: false },
             components: {
-                toolbar: () => import('@/components/nav/toolbar/'),
                 default: () => import('@/views/auth/Login')
             }
         },
@@ -32,7 +29,6 @@ module.exports = [{
             name: 'auth.register',
             meta: { authRequired: false },
             components: {
-                toolbar: () => import('@/components/nav/toolbar/'),
                 default: () => import('@/views/auth/Register')
             }
         },
@@ -41,7 +37,6 @@ module.exports = [{
             name: 'auth.verify',
             meta: { authRequired: false },
             components: {
-                toolbar: () => import('@/components/nav/toolbar/'),
                 default: () => import('@/views/auth/Verify')
             }
         },
@@ -50,7 +45,6 @@ module.exports = [{
             name: 'auth.forgotten',
             meta: { authRequired: false },
             components: {
-                toolbar: () => import('@/components/nav/toolbar/'),
                 default: () => import('@/views/auth/Forgotten')
             }
         }

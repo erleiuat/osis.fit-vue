@@ -1,7 +1,7 @@
 <template>
     <v-app>
 
-        <Drawer />
+        <Drawer v-if="$store.getters['auth']"/>
 
         <router-view name="toolbar" />
         <Alerts />
