@@ -1,5 +1,5 @@
 <template>
-    <v-container :fill-height="fillHeight" :fluid="fluid" pt-0>
+    <v-container :fill-height="fillHeight" :fluid="fluid" :class="fluid ? 'pa-0' : 'pt-0'">
         <v-row class="vcontainer-row">
             <v-col cols="12" :class="colStyle">
                 <slot></slot>

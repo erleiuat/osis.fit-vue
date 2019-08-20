@@ -18,9 +18,9 @@ export default {
         Default
     },
 
-    data () {
-        return {
-            title: process.env.VUE_APP_NAME
+    computed: {
+        title() {
+            return this.$t('view.'+this.$route.name+'.title')
         }
     },
 
