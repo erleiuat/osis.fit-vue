@@ -5,22 +5,10 @@
 
         <v-spacer />
 
-        <transition name="fade" mode="out-in">
-            <v-text-field v-if="search" v-model="query" ref="search" @blur="search = false" autofocus clearable hide-details single-line>
-                asdfasdf
-            </v-text-field>
-            <v-btn v-else-if="query" @click="search = true" text large>
-                <v-icon left>search</v-icon> <strong>{{ query }}</strong>
-            </v-btn>
-            <v-btn v-else @click="search = true" icon small>
-                <v-icon>search</v-icon>
-            </v-btn>
-        </transition>
-
-        <v-btn @click="$router.push({name: 'food.add'})" v-if="$vuetify.breakpoint.mdAndUp" large text>
+        <v-btn @click="openEditor()" v-if="$vuetify.breakpoint.mdAndUp" large text>
             <v-icon left>add</v-icon> {{ $t('btn.add') }}
         </v-btn>
-
+        
     </Default>
 </template>
 
@@ -47,6 +35,7 @@ export default {
     },
 
     computed: {
+
         query: {
             get () {
                 return this.$route.query.s
@@ -56,6 +45,5 @@ export default {
             }
         }
     }
-
 }
 </script>

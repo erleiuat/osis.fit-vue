@@ -4,5 +4,7 @@
     "save": "Speichern",
     "send": "Absenden",
     "cancel": "Abbrechen",
-    "close": "Schliessen"
+    "close": "Schliessen",
+    "add": "Hinzufügen",
+    "search": "Suchen"
 }

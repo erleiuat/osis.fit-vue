@@ -68,7 +68,7 @@ export default {
                 to: 'food',
                 icon: 'fastfood',
                 items: {
-                    own: { title: 'food.own', to: 'food.own', icon: 'folder' },
+                    own: { title: 'food.own', to: 'food', icon: 'folder' },
                     favorites: { to: 'food.favorites', icon: 'favorite' }
                 }
             }

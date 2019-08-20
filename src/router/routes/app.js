@@ -26,7 +26,7 @@ module.exports = [{
     path: '/weight',
     meta: { authRequired: true },
     components: {
-        toolbar: () => import('@/components/nav/toolbar/'),
+        toolbar: () => import('@/views/app/Weight/Toolbar'),
         default: () => import('@/views/app/Weight/')
     }
 
@@ -43,21 +43,36 @@ module.exports = [{
 }, {
 
     path: '/food',
-    name: 'food.index',
     meta: { authRequired: true },
     components: {
-        toolbar: () => import('@/views/app/Food/Toolbar'),
-        default: () => import('@/views/app/Food/') // TODO REDIRECT TO CHILD
+        default: () => import('@/views/app/Food/'),
+        toolbar: () => import('@/views/app/Food/Toolbar')
     },
     children: [
         {
-            path: 'own',
-            name: 'food.own',
+            path: '',
+            name: 'food',
             meta: { authRequired: true },
             components: {
+                default: () => import('@/views/app/Food/Own'),
                 toolbar: () => import('@/components/nav/toolbar/'),
-                default: () => import('@/views/app/Food/Own')
-            }
+            },
+            children: [
+                {
+                    path: ':id',
+                    name: 'food.edit',
+                    components: {
+                        editor: () => import('@/components/food/Editor')
+                    }
+                },
+                {
+                    path: 'add',
+                    name: 'food.add',
+                    components: {
+                        editor: () => import('@/components/food/Editor')
+                    }
+                },
+            ]
         },
         {
             path: 'favorites',
@@ -136,7 +151,7 @@ module.exports = [{
     path: '/settings',
     meta: { authRequired: true },
     components: {
-        toolbar: () => import('@/components/nav/toolbar/'),
+        toolbar: () => import('@/views/app/Settings/Layout/Toolbar'),
         default: () => import('@/views/app/Settings/')
     },
     children: [
@@ -145,7 +160,7 @@ module.exports = [{
             name: 'settings.profile',
             meta: { authRequired: true },
             components: {
-                default: () => import('@/views/app/Settings/Profile')
+                default: () => import('@/views/app/Settings/Parts/Profile')
             }
         },
         {
@@ -153,7 +168,7 @@ module.exports = [{
             name: 'settings.aims',
             meta: { authRequired: true },
             components: {
-                default: () => import('@/views/app/Settings/Aims')
+                default: () => import('@/views/app/Settings/Parts/Aims')
             }
         },
         {
@@ -161,7 +176,7 @@ module.exports = [{
             name: 'settings.premium',
             meta: { authRequired: true },
             components: {
-                default: () => import('@/views/app/Settings/Premium')
+                default: () => import('@/views/app/Settings/Parts/Premium')
             }
         },
         {
@@ -169,7 +184,7 @@ module.exports = [{
             name: 'settings.account',
             meta: { authRequired: true },
             components: {
-                default: () => import('@/views/app/Settings/Account')
+                default: () => import('@/views/app/Settings/Parts/Account')
             }
         },
     ]

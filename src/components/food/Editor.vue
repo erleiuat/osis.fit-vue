@@ -1,6 +1,7 @@
 <template>
-    <v-dialog v-model="value" :fullscreen="$vuetify.breakpoint.xs" width="600px" persistent scrollable transition="dialog-bottom-transition">
+    <v-dialog v-model="show" :fullscreen="$vuetify.breakpoint.xs" width="600px" scrollable transition="dialog-bottom-transition">
         <v-card>
+
             <YouSure @accept="remove()" @decline="sure = false" :show="sure" />
 
             <v-card-title class="pl-0 pt-0 pr-0">
@@ -8,7 +9,7 @@
                     <v-toolbar-title v-if="fd.id">{{ $t('titleEdit') }}</v-toolbar-title>
                     <v-toolbar-title v-else>{{ $t('titleAdd') }}</v-toolbar-title>
                     <v-spacer></v-spacer>
-                    <v-btn icon @click="$emit('input', false)">
+                    <v-btn icon @click="show=false">
                         <v-icon>close</v-icon>
                     </v-btn>
                 </v-toolbar>
@@ -82,8 +83,6 @@ export default {
         food
     },
 
-    props: ['value', 'item'],
-
     data () {
         return {
             sure: false,
@@ -110,10 +109,23 @@ export default {
     },
 
     computed: {
+
         total () {
             if (!this.fd.amount || !this.fd.caloriesPer100) return null
             return Math.round(((this.fd.amount / 100) * this.fd.caloriesPer100) * 100) / 100
+        },
+
+        show: {
+            get () {
+                if (this.$route.name === 'food.add') return true
+                if (this.$route.name === 'food.edit' && this.$route.params.id) return true
+                return false
+            },
+            set (val) {
+                if (!val) this.$router.push({ name: 'food' })
+            }
         }
+
     },
 
     methods: {
@@ -126,7 +138,7 @@ export default {
             this.deleting = true
             this.$store.dispatch('food/delete', this.fd.id).then(r => {
                 this.$notify({ type: 'success', title: this.$t('alert.success.save') })
-                this.$emit('input', false)
+                this.$router.push({ name: 'food' })
             }).catch(r => {
                 this.$notify({ type: 'error', title: this.$t('alert.error.save') })
             }).finally(() => {
@@ -153,7 +165,7 @@ export default {
 
             this.$store.dispatch(action, form).then(r => {
                 this.$notify({ type: 'success', title: this.$t('alert.success.save') })
-                this.$emit('input', false)
+                this.$router.push({ name: 'food' })
             }).catch(r => {
                 this.$notify({ type: 'error', title: this.$t('alert.error.save') })
             }).finally(() => {
@@ -161,15 +173,6 @@ export default {
             })
         }
 
-    },
-
-    watch: {
-        item (val) {
-            if (val) this.fd = val
-        },
-        value (val) {
-            if (!val) this.$refs.form.reset()
-        }
     },
 
     i18n: {

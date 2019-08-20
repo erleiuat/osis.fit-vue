@@ -1,5 +1,5 @@
 <template>
-    <vcontainer fluid align="start">
+    <vcontainer align="start">
 
         <v-row>
             <v-col cols="12">
@@ -25,7 +25,8 @@
                         {{ $t('app') }}
                     </v-card-title>
                     <v-card-text>
-                        <v-select v-model="lang" :items="langs" :label="$t('language')" outlined hide-details />
+                        <div class="title">{{ $t('language') }}</div>
+                        <v-select v-model="lang" :items="langs" solo hide-details />
                     </v-card-text>
                     <v-card-text>
                         <div class="title">{{ $t('appdesign') }}</div>
@@ -56,18 +57,8 @@
 </template>
 
 <script>
-import user from '@/store/modules/user'
-
 export default {
     name: 'DesktopMenu',
-
-    modules: {
-        user
-    },
-
-    mounted () {
-        this.$store.dispatch('user/load')
-    },
 
     data () {
         return {
@@ -78,6 +69,10 @@ export default {
                 { title: this.$t('account'), icon: 'settings', to: 'settings.account' }
             ]
         }
+    },
+
+    mounted () {
+        if (this.$route.name === 'settings') this.$router.replace({ name: 'settings.profile' })
     },
 
     computed: {

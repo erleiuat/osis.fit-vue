@@ -53,7 +53,23 @@
     },
     "settings": {
         "title": "Settings",
-        "description": ""
+        "description": "",
+        "profile": {
+            "title": "Edit Profile",
+            "description": ""
+        },
+        "aims": {
+            "title": "Edit Aims",
+            "description": ""
+        },
+        "premium": {
+            "title": "Premium",
+            "description": ""
+        },
+        "account": {
+            "title": "Account",
+            "description": ""
+        }
     },
     "logout": {
         "title": "Logout",

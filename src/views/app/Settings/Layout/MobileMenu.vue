@@ -19,27 +19,27 @@
             <v-subheader>{{ $t('account') }}</v-subheader>
             <v-list-item-group color="primary">
 
-                <v-list-item :to="{name: null}">
+                <v-list-item :to="{ name: 'settings.account', query: {s:'password'} }">
                     <v-list-item-icon>
-                        <v-icon></v-icon>
+                        <v-icon>lock</v-icon>
                     </v-list-item-icon>
                     <v-list-item-content>
                         <v-list-item-title>{{ $t('password') }}</v-list-item-title>
                     </v-list-item-content>
                 </v-list-item>
 
-                <v-list-item :to="{name: null}">
+                <v-list-item :to="{ name: 'settings.account', query: {s:'data'} }">
                     <v-list-item-icon>
-                        <v-icon></v-icon>
+                        <v-icon>arrow_downward</v-icon>
                     </v-list-item-icon>
                     <v-list-item-content>
                         <v-list-item-title>{{ $t('getdata') }}</v-list-item-title>
                     </v-list-item-content>
                 </v-list-item>
 
-                <v-list-item :to="{name: null}">
+                <v-list-item :to="{ name: 'settings.account', query: {s:'delete'} }">
                     <v-list-item-icon>
-                        <v-icon></v-icon>
+                        <v-icon>delete_forever</v-icon>
                     </v-list-item-icon>
                     <v-list-item-content>
                         <v-list-item-title>{{ $t('delete') }}</v-list-item-title>
@@ -63,7 +63,9 @@
 
                 <v-list-item>
                     <v-list-item-content>
-                        <v-select v-model="lang" :items="langs" :label="$t('language')" outlined hide-details />
+                        <v-list-item-title>{{ $t('language') }}</v-list-item-title>
+
+                        <v-select v-model="lang" :items="langs" solo hide-details />
                     </v-list-item-content>
                 </v-list-item>
 
@@ -84,8 +86,6 @@
 </template>
 
 <script>
-import user from '@/store/modules/user'
-
 export default {
     name: 'MobileMenu',
 
@@ -97,14 +97,6 @@ export default {
                 { title: this.$t('premium'), icon: 'star', to: 'settings.premium' }
             ]
         }
-    },
-
-    modules: {
-        user
-    },
-
-    mounted () {
-        this.$store.dispatch('user/load')
     },
 
     computed: {

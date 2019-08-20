@@ -4,5 +4,7 @@
     "save": "Save",
     "send": "Send",
     "cancel": "Cancel",
-    "close": "Close"
+    "close": "Close",
+    "add": "Add",
+    "search": "Search"
 }

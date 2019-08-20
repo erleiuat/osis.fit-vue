@@ -53,7 +53,23 @@
     },
     "settings": {
         "title": "Einstellungen",
-        "description": ""
+        "description": "",
+        "profile": {
+            "title": "Profil bearbeiten",
+            "description": ""
+        },
+        "aims": {
+            "title": "Ziele bearbeiten",
+            "description": ""
+        },
+        "premium": {
+            "title": "Premium",
+            "description": ""
+        },
+        "account": {
+            "title": "Account verwalten",
+            "description": ""
+        }
     },
     "logout": {
         "title": "Abmelden",
