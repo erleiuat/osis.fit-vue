@@ -1,23 +1,20 @@
 <template>
-    <v-layout wrap justify-space-around align-center>
+    <v-row dense>
 
-        <v-flex xs12 md4 v-if="cals.show" pa-1>
+        <v-col cols="12" md="4" v-if="cals.show">
             <CaloricBalance :cVals="cals.cVals" />
-        </v-flex>
-
-        <v-flex xs12 v-else pl-0 pr-0 pt-0>
+        </v-col>
+        <v-col cols="12" v-else>
             <Welcome />
-        </v-flex>
-
-        <v-flex xs12 md4 v-if="weight.show" pa-1>
+        </v-col>
+        <v-col cols="12" md="4" v-if="weight.show">
             <WeightFacts :cVals="weight.cVals" />
-        </v-flex>
-
-        <v-flex xs12 md4 v-if="bmi.show" pa-1>
+        </v-col>
+        <v-col cols="12" md="4" v-if="bmi.show">
             <BMIFacts :cVals="bmi.cVals" />
-        </v-flex>
+        </v-col>
 
-    </v-layout>
+    </v-row>
 </template>
 
 <script>

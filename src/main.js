@@ -26,9 +26,8 @@ Vue.prototype.$dateFormat = (date) => {
 }
 
 new Vue({
-    router,
-    store,
-    i18n,
-    vuetify,
-    render: function (h) { return h(App) }
+    router, store, i18n, vuetify,
+    render: function (h) {
+        return h(App)
+    }
 }).$mount('#app')

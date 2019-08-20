@@ -17,8 +17,11 @@
         </v-layout>
 
         <v-layout wrap align-center>
-            <v-flex xs12 sm4 md2 class="text-center">
+            <v-flex xs6 sm4 md2 class="text-center">
                 <v-switch v-model="mode" :label="$t('darkmode')"></v-switch>
+            </v-flex>
+            <v-flex xs6 sm4 md2 class="text-center">
+                <v-switch v-model="tool" :label="$t('toolbar')"></v-switch>
             </v-flex>
             <v-flex xs12 sm8 md3>
                 <v-select v-model="lang" :items="langs" :label="$t('language')" />
@@ -68,6 +71,15 @@ export default {
             ]
         },
 
+        tool: {
+            get () {
+                return this.$store.getters['toolbar2']
+            },
+            set (val) {
+                this.$store.commit('setToolbar2', val)
+            }
+        },
+
         mode: {
             get () {
                 return this.$store.getters['dark']
@@ -93,6 +105,7 @@ export default {
             en: {
                 language: 'Language',
                 darkmode: 'Darkmode',
+                toolbar: 'Toolbar 2',
                 account: 'Account',
                 changePass: 'Change Password',
                 getData: 'Get all my Data',
@@ -105,6 +118,7 @@ export default {
             de: {
                 language: 'Sprache',
                 darkmode: 'Dunkelmodus',
+                toolbar: 'Navigation 2',
                 account: 'Konto',
                 changePass: 'Password ändern',
                 getData: 'Meine Daten herunterladen',

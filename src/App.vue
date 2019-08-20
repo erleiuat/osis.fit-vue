@@ -37,6 +37,10 @@ export default {
     created () {
         this.$i18n.locale = this.$store.getters['locale']
         this.$vuetify.theme.dark = this.$store.getters['dark']
+        var bp = this.$vuetify.breakpoint.name
+        if (bp === 'xs') this.$store.commit('setViewport', 'mobile')
+        else if (bp === 'sm') this.$store.commit('setViewport', 'tablet')
+        else this.$store.commit('setViewport', 'desktop')
     },
 
     mounted () {

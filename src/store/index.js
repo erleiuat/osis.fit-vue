@@ -12,9 +12,15 @@ export default new Vuex.Store({
 
         today: null,
         cookiesAccepted: VueCookies.get('cAccept') || false,
+        viewport: {
+            mobile: false,
+            tablet: false,
+            desktop: false
+        },
         app: {
-            title: process.env.VUE_APP_NAME,
             drawer: null,
+            toolbar2: VueCookies.get('appToolbar2') || false,
+            title: process.env.VUE_APP_NAME,
             dark: VueCookies.get('appDark') || false,
             language: VueCookies.get('appLang') || navigator.language || navigator.userLanguage
         },
@@ -41,6 +47,10 @@ export default new Vuex.Store({
     },
 
     getters: {
+
+        device: state => {
+            return state.viewport
+        },
 
         auth: state => {
             return state.auth.authorized
@@ -77,6 +87,11 @@ export default new Vuex.Store({
             return state.app.language
         },
 
+        toolbar2: state => {
+            if (state.app.toolbar2) return true
+            return false
+        },
+
         dark: state => {
             if (state.app.dark) return true
             return false
@@ -97,6 +112,12 @@ export default new Vuex.Store({
 
     mutations: {
 
+        setViewport: (state, info) => {
+            state.viewport.mobile = (info === 'mobile' ? true : false)
+            state.viewport.tablet = (info === 'tablet' ? true : false)
+            state.viewport.desktop = (info === 'desktop' ? true : false)
+        },
+
         setLocale: (state, info) => {
             state.app.language = info
             VueCookies.set('appLang', info)
@@ -106,6 +127,12 @@ export default new Vuex.Store({
             state.app.dark = info
             if (info) VueCookies.set('appDark', 1, -1)
             else VueCookies.remove('appDark')
+        },
+
+        setToolbar2: (state, info) => {
+            state.app.toolbar2 = info
+            if (info) VueCookies.set('appToolbar2', 1, -1)
+            else VueCookies.remove('appToolbar2')
         },
 
         setDrawer: (state, condition) => {
