@@ -49,13 +49,12 @@ export default new Vuex.Store({
         },
 
         authDetail: state => {
-            state.token.access = VueCookies.get('accessToken')
-            state.token.refresh = VueCookies.get('refreshToken')
-            if (state.token.access && state.token.refresh) {
-                if (state.auth.authorized) return 'authorized'
-                return 'available'
-            } else if (state.token.refresh) return 'expired'
-            else return 'unauthorized'
+            state.token.access = VueCookies.get('accessToken') || false
+            state.token.refresh = VueCookies.get('refreshToken') || false
+            if (state.token.access && state.auth.authorized) return 'authorized'
+            if (state.token.access) return 'available'
+            if (state.token.refresh) return 'expired'
+            return 'unauthorized'
         },
 
         premium: state => {
