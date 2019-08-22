@@ -8,13 +8,12 @@
                         <v-list dense dark>
                             <v-list-item>
                                 <v-list-item-avatar>
-                                    <v-img src="https://randomuser.me/api/portraits/women/85.jpg" />
+                                    <v-img :src="$store.getters['user/image'] || require('@/assets/img/user.png')" />
                                 </v-list-item-avatar>
                             </v-list-item>
                             <v-list-item two-line>
                                 <v-list-item-content>
-                                    <v-list-item-title class="title">Sandra Adams</v-list-item-title>
-                                    <v-list-item-subtitle>sandra_a88@gmail.com</v-list-item-subtitle>
+                                    <v-list-item-title class="title">{{ $store.getters['user/fullName'] }}</v-list-item-title>
                                 </v-list-item-content>
                             </v-list-item>
                         </v-list>
@@ -67,6 +66,8 @@
 </template>
 
 <script>
+import user from '@/store/modules/user'
+
 const DrawerItems = () => import('@/components/nav/drawer/DrawerItems')
 
 export default {
@@ -74,6 +75,10 @@ export default {
 
     components: {
         DrawerItems
+    },
+
+    modules: {
+        user
     },
 
     computed: {

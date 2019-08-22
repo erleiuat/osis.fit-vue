@@ -9,6 +9,7 @@ const state = () => {
     return {
         url: 'app/user/',
         lName: 'user',
+        image: smartStore.get('user.image'),
         firstname: smartStore.get('user.firstname'),
         lastname: smartStore.get('user.lastname'),
         birthdate: smartStore.get('user.birthdate'),
@@ -16,6 +17,19 @@ const state = () => {
         gender: smartStore.get('user.gender'),
         aims: smartStore.get('user.aims')
     }
+}
+
+const getters = {
+
+    fullName: state => {
+        return state.firstname + ' ' + state.lastname
+    },
+
+    image: state => {
+        if (state.image) return state.image
+        else return false
+    }
+
 }
 
 const mutations = {
@@ -66,6 +80,7 @@ export default {
     name: name,
     module: {
         namespaced: namespaced,
+        getters,
         state,
         mutations,
         actions

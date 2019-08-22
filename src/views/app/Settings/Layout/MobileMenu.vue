@@ -70,7 +70,7 @@
                 </v-list-item-content>
             </v-list-item>
         </v-list-item-group>
-        
+
     </v-list>
 </template>
 
