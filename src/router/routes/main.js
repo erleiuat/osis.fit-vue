@@ -44,8 +44,8 @@ module.exports = [{
     },
     children: [
         {
+            path: '',
             name: 'help',
-            path: 'faq',
             meta: { authRequired: false },
             components: {
                 toolbar: () => import('@/components/nav/toolbar/'),

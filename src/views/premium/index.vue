@@ -32,7 +32,7 @@
                 <v-divider />
             </v-col>
             <v-col cols="12" sm="8">
-                <v-btn color="amber" dark depressed block :to="{name: 'settings'}">
+                <v-btn color="amber" dark depressed block :to="{name: 'settings.premium'}">
                     <strong>{{ $t('getPremium') }}</strong>
                 </v-btn>
             </v-col>
@@ -83,7 +83,7 @@ export default {
                     f4: 'Trainingspläne erstellen & druchsuchen',
                     f5: 'Fitness-Tracker verknüpfen (bald verfügbar)',
                     f6: 'Werbung entfernen',
-                    f7: 'Detailierten Tagesbedarf berechnen',
+                    f7: 'Detailierten Tagesbedarf berechnen'
                 }
             }
         }

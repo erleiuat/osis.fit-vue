@@ -1,5 +1,6 @@
 <template>
-    <v-bottom-navigation app fixed grow>
+    <v-bottom-navigation app fixed grow v-if="$vuetify.breakpoint.smAndDown">
+
         <WeightAdder>
             <template v-slot:default="trigger">
                 <v-btn text v-on="trigger.on">
@@ -8,6 +9,7 @@
                 </v-btn>
             </template>
         </WeightAdder>
+
     </v-bottom-navigation>
 </template>
 

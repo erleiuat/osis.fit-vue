@@ -47,7 +47,6 @@ export default {
     methods: {
 
         verify (force = false) {
-
             if (!this.$refs.form.validate() && !force) return false
 
             this.sending = true

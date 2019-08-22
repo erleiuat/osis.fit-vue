@@ -1,50 +1,53 @@
 <template>
-    <v-card flat>
-        <v-card-text>
-            <div class="display-3">
-                {{ $t('contact') }}
-            </div>
-            <div class="mt-2 mb-4">
-                Hast du Fragen oder ein Problem mit der App? <br />
-                Oder hast du einen Verbesserungsvorschlag/Kritik für uns?
-            </div>
-            <transition appear name="zoom">
-                <v-alert outline :value="true" type="success" v-if="success">
-                    <div class="title" v-html="$t('success.title')" />
-                    <div class="body-2" v-html="$t('success.text')" />
-                </v-alert>
-            </transition>
+    <vcontainer align="center">
+        <v-row justify="center">
+            <v-col cols="12" sm="10">
+                <div class="display-3">
+                    {{ $t('contact') }}
+                </div>
+                <div class="mt-2 mb-4">
+                    Hast du Fragen oder ein Problem mit der App? <br />
+                    Oder hast du einen Verbesserungsvorschlag/Kritik für uns?
+                </div>
+            </v-col>
+        </v-row>
+
+        <v-form v-model="rule.valid" ref="form" v-on:submit.prevent v-if="!success">
             <transition name="zoom">
-            <v-form v-model="rule.valid" ref="form" v-on:submit.prevent v-if="!success">
-                <v-layout row wrap>
-                    <v-flex xs12 sm6 md4>
+                <v-row v-if="success">
+                    <v-col cols="12" sm="10">
+                        <v-alert outline :value="true" type="success" v-if="success">
+                            <div class="title" v-html="$t('success.title')" />
+                            <div class="body-2" v-html="$t('success.text')" />
+                        </v-alert>
+                    </v-col>
+                </v-row>
+                <v-row dense v-else justify="center">
+                    <v-col cols="12" sm="3">
                         <v-text-field :label="$t('ft.firstname')" v-model="fd.firstname" type="text" />
-                    </v-flex>
-                    <v-flex xs12 sm6 md4>
+                    </v-col>
+                    <v-col cols="12" sm="3">
                         <v-text-field :label="$t('ft.lastname')" v-model="fd.lastname" type="text" />
-                    </v-flex>
-                    <v-flex xs12 md4>
+                    </v-col>
+                    <v-col cols="12" sm="3">
                         <v-text-field :label="$t('ft.mail')" v-model="fd.mail" :rules="rule.mail" type="email" />
-                    </v-flex>
-                    <v-flex xs12>
+                    </v-col>
+                    <v-col cols="12" sm="9">
                         <v-text-field :label="$t('subject')" v-model="fd.subject" :rules="rule.require" type="text" />
-                    </v-flex>
-                    <v-flex xs12>
+                    </v-col>
+                    <v-col cols="12" sm="9">
                         <v-textarea :label="$t('message')" v-model="fd.message" :rules="rule.require" />
-                    </v-flex>
-                    <v-flex xs12>
-                        <v-btn @click="send()" type="submit" :disabled="sending" :loading="sending" class="accent" depressed block>
+                    </v-col>
+                    <v-col cols="12" sm="7">
+                        <v-btn @click="send()" type="submit" :disabled="sending" :loading="sending" color="primary" depressed block>
                             {{ $t('btn.send') }}
-                            <span slot="loader" class="spinning-loader">
-                                <v-icon light>cached</v-icon>
-                            </span>
                         </v-btn>
-                    </v-flex>
-                </v-layout>
-            </v-form>
+                    </v-col>
+                </v-row>
             </transition>
-        </v-card-text>
-    </v-card>
+        </v-form>
+
+    </vcontainer>
 </template>
 
 <script>
@@ -93,13 +96,6 @@ export default {
                 vm.sending = false
             })
         }
-    },
-
-    mounted () {
-        var str = this.$store.state
-        if (str.auth.login) this.fd.mail = str.auth.user.mail
-        if (str.user.firstname) this.fd.firstname = str.user.firstname
-        if (str.user.lastname) this.fd.lastname = str.user.lastname
     },
 
     i18n: {

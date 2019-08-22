@@ -1,39 +1,28 @@
 <template>
-    <v-card flat>
-        <v-card-text>
-            <v-container grid-list-xl>
-                <v-layout row wrap>
-
-                    <v-flex xs12>
-                        {{ $t('text') }}
-                    </v-flex>
-
-                    <v-flex xs12 md6>
-                        <v-btn :to="{name: 'terms.cookie'}" block class="primary">
-                            {{ $t('cookie') }}
-                        </v-btn>
-                    </v-flex>
-
-                    <v-flex xs12>
-                        <i>{{ $t('soon') }}:</i>
-                    </v-flex>
-
-                    <v-flex xs12 md6>
-                        <v-btn disabled block class="primary">
-                            {{ $t('general') }}
-                        </v-btn>
-                    </v-flex>
-
-                    <v-flex xs12 md6>
-                        <v-btn disabled block class="primary">
-                            {{ $t('data') }}
-                        </v-btn>
-                    </v-flex>
-
-                </v-layout>
-            </v-container>
-        </v-card-text>
-    </v-card>
+     <vcontainer align="center">
+        <v-row justify="center">
+            <v-col cols="12" sm="10">
+                {{ $t('text') }}
+            </v-col>
+        </v-row>
+        <v-row justify="center">
+            <v-col cols="12" sm="10">
+                <v-btn block disabled outlined :to="{name: 'terms.cookie'}">
+                    {{ $t('general') }} ({{ $t('soon') }})
+                </v-btn>
+            </v-col>
+            <v-col cols="12" sm="10">
+                <v-btn block outlined :to="{name: 'terms.cookie'}">
+                    {{ $t('cookie') }}
+                </v-btn>
+            </v-col>
+            <v-col cols="12" sm="10">
+                <v-btn block disabled outlined :to="{name: 'terms.cookie'}">
+                    {{ $t('data') }} ({{ $t('soon') }})
+                </v-btn>
+            </v-col>
+        </v-row>
+    </vcontainer>
 </template>
 
 <script>

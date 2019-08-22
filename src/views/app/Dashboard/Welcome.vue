@@ -1,19 +1,18 @@
 <template>
-    <v-layout wrap justify-center align-center>
+    <v-row justify="center" align="center">
 
-        <v-flex xs11 md7 text-md-left>
+        <v-col cols="12" md="8">
             <div class="display-1" v-html="$t('title')"></div>
             <div class="title font-weight-light" v-html="$t('text')"></div>
-        </v-flex>
+        </v-col>
 
-        <v-flex xs12 md3 text-center>
+        <v-col cols="auto" md="4" class="text-center">
             <v-btn depressed large color="primary" :to="{name: 'settings'}">
-                {{ $t('settings') }}
-                <v-icon right>open_in_new</v-icon>
+                {{ $t('settings') }} <v-icon right>open_in_new</v-icon>
             </v-btn>
-        </v-flex>
+        </v-col>
 
-    </v-layout>
+    </v-row>
 </template>
 
 <script>

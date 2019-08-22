@@ -36,7 +36,8 @@ export default new Vuex.Store({
         },
         account: {
             id: null,
-            mail: null
+            mail: null,
+            username: null
         }
 
     },

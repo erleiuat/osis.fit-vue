@@ -12,10 +12,10 @@ module.exports = [{
 }, {
 
     name: 'calories',
-    path: '/calories',
+    path: '/calories/:date',
     meta: { authRequired: true },
     components: {
-        toolbar: () => import('@/components/nav/toolbar/'),
+        toolbar: () => import('@/views/app/Calories/Toolbar'),
         default: () => import('@/views/app/Calories/'),
         bottom: () => import('@/views/app/Calories/BottomNav')
     }
@@ -26,18 +26,20 @@ module.exports = [{
     path: '/weight',
     meta: { authRequired: true },
     components: {
-        toolbar: () => import('@/components/nav/toolbar/'),
-        default: () => import('@/views/app/Weight/')
+        toolbar: () => import('@/views/app/Weight/Toolbar'),
+        default: () => import('@/views/app/Weight/'),
+        bottom: () => import('@/views/app/Weight/BottomNav')
     }
 
 }, {
 
     name: 'activity',
-    path: '/activity',
+    path: '/activity/:date',
     meta: { authRequired: true },
     components: {
-        toolbar: () => import('@/components/nav/toolbar/'),
-        default: () => import('@/views/app/Activity/')
+        toolbar: () => import('@/views/app/Activity/Toolbar'),
+        default: () => import('@/views/app/Activity/'),
+        bottom: () => import('@/views/app/Activity/BottomNav')
     }
 
 }, {

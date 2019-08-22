@@ -1,5 +1,5 @@
 <template>
-    <v-bottom-navigation app fixed grow>
+    <v-bottom-navigation app fixed grow v-if="$vuetify.breakpoint.smAndDown">
 
         <ActivityAdder>
             <template v-slot:default="trigger">
@@ -9,7 +9,8 @@
                 </v-btn>
             </template>
         </ActivityAdder>
-        <v-btn text disabled>
+
+        <v-btn text :to="{name: 'training.saved'}">
             <span>{{ $t('trainings') }}</span>
             <v-icon>open_in_new</v-icon>
         </v-btn>

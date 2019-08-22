@@ -100,7 +100,6 @@ export default {
             }).finally(() => {
                 this.sending = false
             })
-
         },
 
         reset () {

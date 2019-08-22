@@ -1,12 +1,12 @@
 <template>
     <v-list dense nav>
 
-        <v-list-item v-for="item in items.i1" :to="{name: item.to}" :key="item.to" link>
+        <v-list-item v-for="(item,key) in items.i1" :to="item.to" :key="key" link>
             <v-list-item-icon>
                 <v-icon>{{ item.icon }}</v-icon>
             </v-list-item-icon>
             <v-list-item-content>
-                <v-list-item-title>{{ $t('view.'+item.to+'.title') }}</v-list-item-title>
+                <v-list-item-title>{{ $t('view.'+item.title+'.title') }}</v-list-item-title>
             </v-list-item-content>
         </v-list-item>
 
@@ -52,16 +52,18 @@
 
 <script>
 export default {
-    name: 'AuthDrawer',
+    name: 'DrawerItems',
 
     computed: {
 
         items () {
+            var date = this.$store.getters['today'].date
+
             var items1 = {
-                dashboard: { to: 'dashboard', icon: 'dashboard' },
-                calories: { to: 'calories', icon: 'restaurant' },
-                weight: { to: 'weight', icon: 'linear_scale' },
-                activity: { to: 'activity', icon: 'accessibility_new' }
+                dashboard: { title: 'dashboard', to: { name: 'dashboard' }, icon: 'dashboard' },
+                calories: { title: 'calories', to: { name: 'calories', params: { date: date } }, icon: 'restaurant' },
+                weight: { title: 'weight', to: { name: 'weight' }, icon: 'linear_scale' },
+                activity: { title: 'activity', to: { name: 'activity', params: { date: date } }, icon: 'accessibility_new' }
             }
 
             var item2 = {
@@ -82,9 +84,7 @@ export default {
                 }
             }
 
-            var items4 = {
-                settings: { to: 'settings', icon: 'settings' }
-            }
+            var items4 = {}
 
             if (!this.$store.getters['premium'])
                 items4['premium'] = {

@@ -1,5 +1,5 @@
 <template>
-    <v-row dense>
+    <v-row dense justify="center">
 
         <v-col cols="12" md="4" v-if="cals.show">
             <CaloricBalance :cVals="cals.cVals" />

@@ -1,5 +1,5 @@
 <template>
-    <v-bottom-navigation app fixed grow v-if="$vuetify.breakpoint.xs">
+    <v-bottom-navigation app fixed grow v-if="$vuetify.breakpoint.smAndDown">
 
         <CalorieAdder>
             <template v-slot:default="trigger">
@@ -10,7 +10,7 @@
             </template>
         </CalorieAdder>
 
-        <v-btn text :to="{name: 'food.own'}">
+        <v-btn text :to="{name: 'food'}">
             <span>{{ $t('templates') }}</span>
             <v-icon>open_in_new</v-icon>
         </v-btn>

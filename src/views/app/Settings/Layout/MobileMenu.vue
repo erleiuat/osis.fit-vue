@@ -1,88 +1,77 @@
 <template>
-    <vcontainer fluid>
+    <v-list dense>
 
-        <v-list dense>
-            <v-subheader>{{ $t('general') }}</v-subheader>
-            <v-list-item-group color="primary">
+        <v-subheader>{{ $t('general') }}</v-subheader>
+        <v-list-item-group color="primary">
+            <v-list-item v-for="(item, key) in items" :key="key" :to="{name: item.to}">
+                <v-list-item-icon>
+                    <v-icon>{{ item.icon }}</v-icon>
+                </v-list-item-icon>
+                <v-list-item-content>
+                    <v-list-item-title>{{ item.title }}</v-list-item-title>
+                </v-list-item-content>
+            </v-list-item>
+        </v-list-item-group>
 
-                <v-list-item v-for="(item, key) in items" :key="key" :to="{name: item.to}">
-                    <v-list-item-icon>
-                        <v-icon>{{ item.icon }}</v-icon>
-                    </v-list-item-icon>
-                    <v-list-item-content>
-                        <v-list-item-title>{{ item.title }}</v-list-item-title>
-                    </v-list-item-content>
-                </v-list-item>
+        <v-subheader>{{ $t('account') }}</v-subheader>
+        <v-list-item-group color="primary">
+            <v-list-item :to="{ name: 'settings.account', query: {s:'password'} }">
+                <v-list-item-icon>
+                    <v-icon>lock</v-icon>
+                </v-list-item-icon>
+                <v-list-item-content>
+                    <v-list-item-title>{{ $t('password') }}</v-list-item-title>
+                </v-list-item-content>
+            </v-list-item>
+            <v-list-item :to="{ name: 'settings.account', query: {s:'data'} }">
+                <v-list-item-icon>
+                    <v-icon>arrow_downward</v-icon>
+                </v-list-item-icon>
+                <v-list-item-content>
+                    <v-list-item-title>{{ $t('getdata') }}</v-list-item-title>
+                </v-list-item-content>
+            </v-list-item>
+            <v-list-item :to="{ name: 'settings.account', query: {s:'delete'} }">
+                <v-list-item-icon>
+                    <v-icon>delete_forever</v-icon>
+                </v-list-item-icon>
+                <v-list-item-content>
+                    <v-list-item-title>{{ $t('delete') }}</v-list-item-title>
+                </v-list-item-content>
+            </v-list-item>
+        </v-list-item-group>
 
-            </v-list-item-group>
+        <v-subheader>{{ $t('app') }}</v-subheader>
+        <v-list-item-group>
+            <v-list-item>
+                <v-list-item-action>
+                    <v-checkbox v-model="mode" color="primary"></v-checkbox>
+                </v-list-item-action>
+                <v-list-item-content>
+                    <v-list-item-title>{{ $t('dark') }}</v-list-item-title>
+                    <v-list-item-subtitle>{{ $t('appdesign') }}</v-list-item-subtitle>
+                </v-list-item-content>
+            </v-list-item>
 
-            <v-subheader>{{ $t('account') }}</v-subheader>
-            <v-list-item-group color="primary">
+            <v-list-item>
+                <v-list-item-content>
+                    <v-list-item-title>{{ $t('language') }}</v-list-item-title>
 
-                <v-list-item :to="{ name: 'settings.account', query: {s:'password'} }">
-                    <v-list-item-icon>
-                        <v-icon>lock</v-icon>
-                    </v-list-item-icon>
-                    <v-list-item-content>
-                        <v-list-item-title>{{ $t('password') }}</v-list-item-title>
-                    </v-list-item-content>
-                </v-list-item>
+                    <v-select v-model="lang" :items="langs" solo flat hide-details />
+                </v-list-item-content>
+            </v-list-item>
+        </v-list-item-group>
 
-                <v-list-item :to="{ name: 'settings.account', query: {s:'data'} }">
-                    <v-list-item-icon>
-                        <v-icon>arrow_downward</v-icon>
-                    </v-list-item-icon>
-                    <v-list-item-content>
-                        <v-list-item-title>{{ $t('getdata') }}</v-list-item-title>
-                    </v-list-item-content>
-                </v-list-item>
-
-                <v-list-item :to="{ name: 'settings.account', query: {s:'delete'} }">
-                    <v-list-item-icon>
-                        <v-icon>delete_forever</v-icon>
-                    </v-list-item-icon>
-                    <v-list-item-content>
-                        <v-list-item-title>{{ $t('delete') }}</v-list-item-title>
-                    </v-list-item-content>
-                </v-list-item>
-
-            </v-list-item-group>
-
-            <v-subheader>{{ $t('app') }}</v-subheader>
-            <v-list-item-group>
-
-                <v-list-item>
-                    <v-list-item-action>
-                        <v-checkbox v-model="mode" color="primary"></v-checkbox>
-                    </v-list-item-action>
-                    <v-list-item-content>
-                        <v-list-item-title>{{ $t('dark') }}</v-list-item-title>
-                        <v-list-item-subtitle>{{ $t('appdesign') }}</v-list-item-subtitle>
-                    </v-list-item-content>
-                </v-list-item>
-
-                <v-list-item>
-                    <v-list-item-content>
-                        <v-list-item-title>{{ $t('language') }}</v-list-item-title>
-
-                        <v-select v-model="lang" :items="langs" solo hide-details />
-                    </v-list-item-content>
-                </v-list-item>
-
-            </v-list-item-group>
-            <v-subheader>{{ $t('notifications') }}</v-subheader>
-            <v-list-item-group>
-
-                <v-list-item>
-                    <v-list-item-content class="caption">
-                        {{ $t('soon') }}
-                    </v-list-item-content>
-                </v-list-item>
-
-            </v-list-item-group>
-        </v-list>
-
-    </vcontainer>
+        <v-subheader>{{ $t('notifications') }}</v-subheader>
+        <v-list-item-group>
+            <v-list-item>
+                <v-list-item-content class="caption">
+                    {{ $t('soon') }}
+                </v-list-item-content>
+            </v-list-item>
+        </v-list-item-group>
+        
+    </v-list>
 </template>
 
 <script>

@@ -1,15 +1,9 @@
 <template>
-    <vcontainer fluid>
-        <transition appear v-if="$vuetify.breakpoint.smAndDown" name="fade" mode="out-in">
-
-            <MobileMenu v-if="$route.name === 'settings'" />
-            <router-view v-else />
-
-        </transition>
-
-        <DesktopMenu v-if="!$vuetify.breakpoint.smAndDown" />
-
-    </vcontainer>
+    <transition v-if="$vuetify.breakpoint.smAndDown" name="fade" mode="out-in">
+        <MobileMenu v-if="$route.name === 'settings'" />
+        <router-view v-else />
+    </transition>
+    <DesktopMenu v-else />
 </template>
 
 <script>
