@@ -35,9 +35,6 @@
         </v-row>
 
         <v-row>
-            <v-col cols="12">
-                <v-divider />
-            </v-col>
             <v-col align="center">
                 <div class="headline pb-3">{{ $t('trainings') }}</div>
                 <v-btn large disabled><i>{{ $t('soon') }}</i></v-btn>

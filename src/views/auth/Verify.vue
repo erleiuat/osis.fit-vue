@@ -8,7 +8,7 @@
                 </div>
             </v-col>
 
-            <v-col cols="12" md="8">
+            <v-col cols="12" md="8" v-if="$route.query.mail">
                 <v-form v-model="rule.valid" ref="form" v-on:submit.prevent>
                     <v-text-field v-model="fd.mail" :label="$t('ft.mail')" :rules="rule.mail" type="email" />
                     <v-text-field v-model="fd.code" :label="$t('code')" :rules="rule.code" type="text" />
@@ -47,6 +47,7 @@ export default {
     methods: {
 
         verify (force = false) {
+
             if (!this.$refs.form.validate() && !force) return false
 
             this.sending = true
@@ -72,13 +73,9 @@ export default {
     },
 
     mounted () {
-        if (this.$route.query.mail && this.$route.query.code) {
-            this.fd.mail = this.$route.query.mail
-            if (this.$route.query.code) {
-                this.fd.code = this.$route.query.code
-                this.verify(true)
-            }
-        }
+        if (this.$route.query.mail) this.fd.mail = this.$route.query.mail
+        if (this.$route.query.code) this.fd.code = this.$route.query.code
+        if (this.$route.query.mail && this.$route.query.code) this.verify(true)
     },
 
     i18n: {

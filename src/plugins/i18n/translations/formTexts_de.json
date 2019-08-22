@@ -2,6 +2,8 @@
     "name": "Name",
     "firstname": "Vorname",
     "lastname": "Nachname",
+    "identifier": "E-Mail/Benutzername",
+    "username": "Benutzername",
     "mail": "E-Mail",
     "language": "Sprache",
     "title": "Titel",

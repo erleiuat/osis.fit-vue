@@ -2,12 +2,12 @@
     <vcontainer align="center">
 
         <v-row justify="center">
-            <v-col md="8">
+            <v-col cols="12" sm="8">
                 <div class="display-1">{{ $t('title') }}</div>
                 <div v-html="$t('text')" v-if="state === 'forgot'">
                 </div>
             </v-col>
-            <v-col md="8" v-if="state === 'sent'">
+            <v-col cols="12" sm="8" v-if="state === 'sent'">
                 <v-alert outlined type="success">
                     {{ $t('sent') }}
                 </v-alert>
@@ -16,20 +16,17 @@
 
         <v-form v-if="state === 'forgot'" v-model="rule.valid" ref="form" v-on:submit.prevent>
             <v-row justify="center" align="baseline">
-
-                <v-col md="8">
-                    <v-text-field v-model="fd.mail" :label="$t('ft.mail')" :rules="rule.require" type="email" filled rounded single-line />
+                <v-col cols="12" sm="8">
+                    <v-text-field v-model="fd.identifier" :label="$t('ft.identifier')" :rules="rule.require" type="text" filled rounded single-line />
                 </v-col>
-
             </v-row>
             <v-row justify="center">
-                <v-col md="3">
+                <v-col cols="12" sm="4">
                     <v-btn @click="send()" :loading="sending" color="primary" depressed block type="submit">
                         {{ $t('btn.send') }}
                     </v-btn>
                 </v-col>
-
-                <v-col sm="3">
+                <v-col cols="12" sm="4">
                     <v-btn depressed block :to="{name: 'auth.login'}">
                         {{ $t('btn.cancel') }}
                     </v-btn>
@@ -38,12 +35,18 @@
         </v-form>
 
         <v-form v-if="state === 'reset'" v-model="rule.valid" ref="form" v-on:submit.prevent>
-            <v-row>
-                <v-text-field v-model="fd.password" :label="$t('password')" :rules="rule.password" type="password" solo />
-                <v-text-field v-model="pwRepeat" :label="$t('repeat')" :rules="rule.repeat" type="password" solo />
-                <v-btn @click="reset()" :loading="sending" color="primary" depressed large block type="submit">
-                    {{ $t('btn.send') }}
-                </v-btn>
+            <v-row dense justify="center">
+                <v-col cols="12" sm="7" md="4">
+                    <v-text-field v-model="fd.password" :label="$t('password')" :rules="rule.password" type="password" filled rounded single-line />
+                </v-col>
+                <v-col cols="12" sm="7" md="4">
+                    <v-text-field v-model="pwRepeat" :label="$t('repeat')" :rules="rule.repeat" type="password" filled rounded single-line />
+                </v-col>
+                <v-col cols="12" sm="7">
+                    <v-btn @click="reset()" :loading="sending" color="primary" depressed large block type="submit">
+                        {{ $t('btn.send') }}
+                    </v-btn>
+                </v-col>
             </v-row>
         </v-form>
 
@@ -52,6 +55,8 @@
 </template>
 
 <script>
+import Apios from '@/plugins/Apios'
+
 export default {
     name: 'Forgotten',
 
@@ -61,8 +66,8 @@ export default {
             sending: false,
             pwRepeat: '',
             fd: {
-                mail: '',
-                language: this.$store.state.app.lang,
+                identifier: '',
+                language: this.$store.state.app.lang || null,
                 code: '',
                 password: ''
             },
@@ -89,11 +94,13 @@ export default {
         send () {
             if (!this.$refs.form.validate()) return false
             this.sending = true
-            this.$store.dispatch('forgot', this.fd).then(r => {
+
+            Apios.post('auth/password/forgotten/', this.fd).then(res => {
                 this.state = 'sent'
-            }).catch(r => { }).finally(() => {
+            }).finally(() => {
                 this.sending = false
             })
+
         },
 
         reset () {

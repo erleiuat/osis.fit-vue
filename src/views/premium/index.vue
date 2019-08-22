@@ -1,47 +1,44 @@
 <template>
-    <v-container grid-list-xl>
-        <v-layout wrap>
-            <v-flex xs12>
+    <vcontainer align="space-evenly">
+
+        <v-row dense justify="center">
+            <v-col cols="12" sm="8">
                 <div class="display-1">
-                    {{ $t('getPremium') }}
+                    {{ $t('title') }}
                 </div>
-            </v-flex>
-            <v-flex xs12>
-                Einige Funktionen...
-            </v-flex>
-        </v-layout>
+            </v-col>
+            <v-col cols="12" sm="8">
+                Hole dir noch heute dein Premium-Abonnement von Osis.fit um zahlreiche Funktionen freizuschalten.
+            </v-col>
+        </v-row>
 
-        <v-layout wrap>
-            <v-flex xs8></v-flex>
-            <v-flex xs2 text-center>
-                Premium
-            </v-flex>
-            <v-flex xs2 text-center>
-                Free
-            </v-flex>
-        </v-layout>
+        <v-row justify="center">
+            <v-col cols="12">
+                <v-divider />
+            </v-col>
+        </v-row>
 
-        <v-layout wrap v-for="(f, key) in features" :key="key" align-center>
-            <v-flex xs8>
-                {{ f[0] }}
-            </v-flex>
-            <v-flex xs2 text-center>
-                <v-icon v-if="f[1]" large color="success">check</v-icon>
-                <v-icon v-else large color="error">remove</v-icon>
-            </v-flex>
-            <v-flex xs2 text-center>
-                <v-icon v-if="f[2]" large color="success">check</v-icon>
-                <v-icon v-else large color="error">remove</v-icon>
-            </v-flex>
-        </v-layout>
+        <v-row dense justify="center" v-for="(f, key) in features" :key="key">
+            <v-col cols="10">
+                {{ f }}
+            </v-col>
+            <v-col cols="2" class="text-center">
+                <v-icon large color="success">check</v-icon>
+            </v-col>
+        </v-row>
 
-        <v-layout wrap>
-            <v-btn color="primary" block :to="{name: 'settings'}">
-                {{ $t('getPremium') }}
-            </v-btn>
-        </v-layout>
+        <v-row justify="center">
+            <v-col cols="12">
+                <v-divider />
+            </v-col>
+            <v-col cols="12" sm="8">
+                <v-btn color="amber" dark depressed block :to="{name: 'settings'}">
+                    <strong>{{ $t('getPremium') }}</strong>
+                </v-btn>
+            </v-col>
+        </v-row>
 
-    </v-container>
+    </vcontainer>
 </template>
 
 <script>
@@ -51,11 +48,13 @@ export default {
     computed: {
         features () {
             return [
-                [this.$t('features.f1'), true, false],
-                [this.$t('features.f2'), true, false],
-                [this.$t('features.f3'), true, false],
-                [this.$t('features.f4'), true, false],
-                [this.$t('features.f5'), true, false]
+                this.$t('features.f1'),
+                this.$t('features.f2'),
+                this.$t('features.f3'),
+                this.$t('features.f4'),
+                this.$t('features.f5'),
+                this.$t('features.f6'),
+                this.$t('features.f7')
             ]
         }
     },
@@ -68,19 +67,23 @@ export default {
     i18n: {
         messages: {
             en: {
+                title: 'Premium',
                 getPremium: 'Get Premium',
                 features: {
                     f1: 'Esswaren mit Bildern erstellen'
                 }
             },
             de: {
+                title: 'Premium',
                 getPremium: 'Premium erhalten',
                 features: {
                     f1: 'Esswaren mit Bildern erstellen',
-                    f2: 'Datenbank mit Esswaren durchsuchen',
-                    f3: 'Aktivitäten speichern',
-                    f4: 'Trainingspläne erstellen',
-                    f5: 'Fitness-Tracker verknüpfen'
+                    f2: 'Datenbank mit Produkten durchsuchen',
+                    f3: 'Aktivitäten/Kalorienverbrauch aufzeichen',
+                    f4: 'Trainingspläne erstellen & druchsuchen',
+                    f5: 'Fitness-Tracker verknüpfen (bald verfügbar)',
+                    f6: 'Werbung entfernen',
+                    f7: 'Detailierten Tagesbedarf berechnen',
                 }
             }
         }
