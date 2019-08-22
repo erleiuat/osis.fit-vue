@@ -6,6 +6,14 @@
     text-transform: none !important;
 }
 
+.v-bottom-navigation--fixed {
+    position: fixed !important;
+}
+
+.v-item-group.v-bottom-navigation .v-btn {
+    height: inherit !important;
+}
+
 /* Change default Scrollbar */
 ::-webkit-scrollbar {
     height: 8px;
