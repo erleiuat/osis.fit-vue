@@ -10,7 +10,7 @@ const state = () => {
     return {
         url: 'app/food/',
         lName: 'food',
-        items: smartStore.get('food')
+        items: smartStore.get('food') || {}
     }
 }
 
@@ -21,6 +21,7 @@ const getters = {
     },
 
     all: (state) => {
+        if (!state.items) return
         return Object.values(state.items).reverse()
     }
 

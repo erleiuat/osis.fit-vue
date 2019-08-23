@@ -175,6 +175,14 @@ module.exports = [{
             }
         },
         {
+            path: 'metabolism',
+            name: 'settings.metabolism',
+            meta: { authRequired: true },
+            components: {
+                default: () => import('@/views/app/Settings/Parts/Metabolism')
+            }
+        },
+        {
             path: 'premium',
             name: 'settings.premium',
             meta: { authRequired: true },

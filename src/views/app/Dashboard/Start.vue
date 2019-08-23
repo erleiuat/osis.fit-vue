@@ -52,9 +52,11 @@ export default {
         },
 
         user () {
-            var gend = this.$store.state.user.gender
-            var heig = this.$store.state.user.height
-            var birth = this.$store.state.user.birthdate
+            var data = this.$store.getters['user/metabolism']
+            if (!data) return { ok: false }
+            var gend = data.gender
+            var heig = data.height
+            var birth = data.birthdate
             return {
                 ok: (gend && heig && birth),
                 gender: gend,
@@ -64,8 +66,10 @@ export default {
         },
 
         aims () {
-            var aWeight = this.$store.state.user.aims.weight
-            var aDate = this.$store.state.user.aims.date
+            var data = this.$store.getters['user/aims']
+            if (!data) return {ok: false}
+            var aWeight = data.weight
+            var aDate = data.date
             return {
                 ok: (aWeight && aDate),
                 weight: aWeight,

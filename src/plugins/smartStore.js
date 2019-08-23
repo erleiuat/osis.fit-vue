@@ -18,14 +18,19 @@ const smartStore = {
     },
 
     createStore: (name) => {
-        localStorage.setItem(smartStore.name + '.store.' + name, JSON.stringify({}))
+        localStorage.setItem(smartStore.name + '.store.' + name, JSON.stringify(null))
         smartStore.stores.push(name)
         localStorage.setItem(smartStore.name + '.stores', JSON.stringify(smartStore.stores))
     },
 
     get: (sName) => {
-        if (!smartStore.hasStore(sName)) smartStore.createStore(sName)
-        return JSON.parse(localStorage.getItem(smartStore.name + '.store.' + sName))
+        var data = null
+        if (!smartStore.hasStore(sName)) {
+            smartStore.createStore(sName)
+        } else {
+            data = JSON.parse(localStorage.getItem(smartStore.name + '.store.' + sName))
+        }
+        return data
     },
 
     set: (sName, data) => {

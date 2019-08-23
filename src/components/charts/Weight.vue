@@ -43,7 +43,7 @@ export default {
 
         values () {
             var arr = this.$store.getters['weight/all']
-            if (arr.length <= 1) return false
+            if (!arr || arr.length <= 1) return false
 
             arr.sort(function (a, b) {
                 return (

@@ -55,6 +55,7 @@ export default {
         return {
             items: [
                 { title: this.$t('profile'), icon: 'account_circle', to: 'settings.profile' },
+                { title: this.$t('metabolism'), icon: 'done_all', to: 'settings.metabolism' },
                 { title: this.$t('aims'), icon: 'done_all', to: 'settings.aims' },
                 { title: this.$t('premium'), icon: 'star', to: 'settings.premium' },
                 { title: this.$t('account'), icon: 'settings', to: 'settings.account' }
@@ -96,6 +97,7 @@ export default {
             en: {
                 general: 'GENERAL',
                 profile: 'Profile',
+                metabolism: 'Metabolism',
                 aims: 'Aims',
                 premium: 'Premium',
                 account: 'ACCOUNT',
@@ -116,6 +118,7 @@ export default {
             de: {
                 general: 'ALLGEMEIN',
                 profile: 'Profil',
+                metabolism: 'Stoffwechsel',
                 aims: 'Ziele',
                 premium: 'Premium',
                 account: 'KONTO',

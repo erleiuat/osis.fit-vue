@@ -56,9 +56,10 @@ export default {
 
     computed: {
         fd () {
+            var data = this.$store.getters['user/aims']
             return {
-                weight: this.$store.state.user.aims.weight,
-                date: this.$store.state.user.aims.date
+                weight: data.weight,
+                date: data.date
             }
         }
     },
@@ -69,7 +70,7 @@ export default {
             if (!this.$refs.form.validate()) return false
 
             this.sending = true
-            this.$store.dispatch('user/edit', { aims: this.fd }).then(r => {
+            this.$store.dispatch('user/editAims', this.fd ).then(r => {
                 this.edit = false
                 this.$notify({ type: 'success', title: this.$t('alert.success.save') })
             }).catch(r => {

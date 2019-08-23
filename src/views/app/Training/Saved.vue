@@ -51,8 +51,8 @@ export default {
 
         items () {
             var items = this.$store.getters['training/all']
-
             var query = this.$route.query.s || ''
+            if (!items) return false
 
             var filtered = items.filter(el =>
                 el.title.toUpperCase().includes(query.toUpperCase())

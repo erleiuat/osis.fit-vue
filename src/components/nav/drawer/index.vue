@@ -8,7 +8,7 @@
                         <v-list dense dark>
                             <v-list-item>
                                 <v-list-item-avatar v-if="$store.getters['user/image']">
-                                    <v-img :src="$store.getters['user/image']" />
+                                    <v-img :src="$store.getters['user/image'].path.small" />
                                 </v-list-item-avatar>
                                 <v-list-item-avatar v-else>
                                     <v-img :src="require('@/assets/img/user.png')" />

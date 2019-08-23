@@ -9,25 +9,49 @@ const state = () => {
     return {
         url: 'app/user/',
         lName: 'user',
-        image: smartStore.get('user.image'),
-        firstname: smartStore.get('user.firstname'),
-        lastname: smartStore.get('user.lastname'),
-        birthdate: smartStore.get('user.birthdate'),
-        height: smartStore.get('user.height'),
-        gender: smartStore.get('user.gender'),
-        aims: smartStore.get('user.aims')
+        item: smartStore.get('user')
     }
 }
 
 const getters = {
 
+    user: state => {
+        if (!state.item) return null
+        return {
+            firstname: state.item.firstname,
+            lastname: state.item.lastname,
+            image: state.item.image
+        }
+    },
+
+    metabolism: state => {
+        if (!state.item) return null
+        return {
+            birthdate: state.item.birthdate,
+            height: state.item.height,
+            gender: state.item.gender,
+            pal: state.item.pal,
+        }
+    },
+
+    aims: state => {
+        if (!state.item) return null
+        return {
+            weight: state.item.aims.weight,
+            date: state.item.aims.date
+        }
+    },
+
     fullName: state => {
-        return state.firstname + ' ' + state.lastname
+        if (!state.item) return null
+        return state.item.firstname + ' ' + state.item.lastname
     },
 
     image: state => {
-        if (state.image) return state.image
-        else return false
+        console.log(state.item.image)
+        if (!state.item) return null
+        if (state.item.image) return state.item.image
+        else return null
     }
 
 }
@@ -35,12 +59,8 @@ const getters = {
 const mutations = {
 
     set: (state, data) => {
-        Object.keys(state).forEach(function (key) {
-            if (key in data) {
-                state[key] = data[key]
-                smartStore.set(state.lName + '.' + key, state[key])
-            }
-        })
+        state.item = data
+        smartStore.set(state.lName, state.item)
     }
 
 }
@@ -53,19 +73,31 @@ const actions = {
         })
     },
 
-    edit (con, form) {
+    editProfile (con, form) {
         return new Promise((resolve, reject) => {
-            var data = {
-                firstname: con.state.firstname,
-                lastname: con.state.lastname,
-                birthdate: con.state.birthdate,
-                height: con.state.height,
-                gender: con.state.gender,
-                aims: con.state.aims
-            }
+            Apios.post(con.state.url + 'edit/profile/', form).then(res => {
+                con.commit('set', res.data.item)
+                resolve()
+            }).catch(err => {
+                reject(err)
+            })
+        })
+    },
 
-            var obj = Object.assign({}, data, form)
-            Apios.post(con.state.url + 'edit/', obj).then(res => {
+    editAims (con, form) {
+        return new Promise((resolve, reject) => {
+            Apios.post(con.state.url + 'edit/aims/', form).then(res => {
+                con.commit('set', res.data.item)
+                resolve()
+            }).catch(err => {
+                reject(err)
+            })
+        })
+    },
+
+    editMetabolism (con, form) {
+        return new Promise((resolve, reject) => {
+            Apios.post(con.state.url + 'edit/metabolism/', form).then(res => {
                 con.commit('set', res.data.item)
                 resolve()
             }).catch(err => {

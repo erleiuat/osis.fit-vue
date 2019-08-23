@@ -17,11 +17,13 @@ const state = () => {
 const getters = {
 
     byDate: (state) => (date) => {
+        if (!state.items) return
         if (!date || !(date in state.items)) return
         return Object.values(state.items[date])
     },
 
     total: (state) => (date) => {
+        if (!state.items) return
         if (date && (date in state.items)) {
             var total = 0
             Object.values(state.items[date]).forEach(function (element) {

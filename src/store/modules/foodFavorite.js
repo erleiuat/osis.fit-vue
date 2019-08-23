@@ -17,10 +17,12 @@ const state = () => {
 const getters = {
 
     all: (state) => {
+        if (!state.items) return
         return Object.values(state.items).reverse()
     },
 
     id: (state) => (itemID) => {
+        if (!state.items) return
         if (!(itemID.toString() in state.items)) return false
         else return state.items[itemID.toString()]
     }

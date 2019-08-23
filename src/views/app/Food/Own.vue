@@ -36,8 +36,9 @@ export default {
     computed: {
 
         items () {
-            var items = this.$store.getters['food/all']
             var query = this.$route.query.s || ''
+            var items = this.$store.getters['food/all']
+            if (!items) return false
 
             var filtered = items.filter(el =>
                 el.title.toUpperCase().includes(query.toUpperCase() || '')
