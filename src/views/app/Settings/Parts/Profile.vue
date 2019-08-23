@@ -2,32 +2,34 @@
     <vcontainer align="center" style="min-height: 400px;">
         <v-form v-model="rule.valid" ref="form" v-on:submit.prevent>
 
-            <v-row justify="center" dense>
-                <v-col cols="12" sm="10" md="8" v-if="$store.getters['premium']">
+            <v-row justify="center" align="center" dense>
+
+                <v-col cols="7" sm="6" md="4" v-if="$store.getters['premium']">
+                    Profilbild
                     <ImageInput v-model="fd.image" />
                 </v-col>
-                <v-col cols="12" sm="10" md="8" v-else>
+                <v-col cols="8" sm="6" md="4" v-else>
+                    Profilbild
                     <v-btn block depressed large :to="{name: 'premium'}">
                         {{ $t('needsPremium') }}
                     </v-btn>
                 </v-col>
-            </v-row>
 
-            <v-row justify="center" dense>
-                <v-col cols="12" sm="5" md="4">
-                    <v-text-field :label="$t('firstname')" v-model="fd.firstname" :rules="rule.require" type="text" filled />
-                </v-col>
-                <v-col cols="12" sm="5" md="4">
-                    <v-text-field :label="$t('lastname')" v-model="fd.lastname" :rules="rule.require" type="text" filled />
-                </v-col>
-            </v-row>
-
-            <v-row justify="center" dense>
-                <v-col cols="12" sm="5" md="4">
-                    <v-text-field :value="$store.state.account.mail" disabled :label="$t('email')" filled />
-                </v-col>
-                <v-col cols="12" sm="5" md="4">
-                    <v-text-field :value="$store.state.account.username" disabled :label="$t('username')" filled />
+                <v-col cols="12" md="5">
+                    <v-row justify="center">
+                        <v-col cols="12" md="11">
+                            <v-text-field :label="$t('firstname')" v-model="fd.firstname" :rules="rule.require" type="text" filled />
+                        </v-col>
+                        <v-col cols="12" md="11">
+                            <v-text-field :label="$t('lastname')" v-model="fd.lastname" :rules="rule.require" type="text" filled />
+                        </v-col>
+                        <v-col cols="12" md="11">
+                            <v-text-field :value="$store.state.account.mail" disabled :label="$t('email')" filled />
+                        </v-col>
+                        <v-col cols="12" md="11">
+                            <v-text-field :value="$store.state.account.username" disabled :label="$t('username')" filled />
+                        </v-col>
+                    </v-row>
                 </v-col>
             </v-row>
 
@@ -38,6 +40,7 @@
                     </v-btn>
                 </v-col>
             </v-row>
+            
         </v-form>
     </vcontainer>
 </template>
