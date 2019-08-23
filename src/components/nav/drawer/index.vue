@@ -7,8 +7,11 @@
                     <v-col cols="12" class="pb-0">
                         <v-list dense dark>
                             <v-list-item>
-                                <v-list-item-avatar>
-                                    <v-img :src="$store.getters['user/image'] || require('@/assets/img/user.png')" />
+                                <v-list-item-avatar v-if="$store.getters['user/image']">
+                                    <v-img :src="$store.getters['user/image']" />
+                                </v-list-item-avatar>
+                                <v-list-item-avatar v-else>
+                                    <v-img :src="require('@/assets/img/user.png')" />
                                 </v-list-item-avatar>
                             </v-list-item>
                             <v-list-item two-line>

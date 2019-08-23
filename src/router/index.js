@@ -31,7 +31,8 @@ router.beforeEach((to, from, next) => {
     if (auth !== 'unauthorized')
 
         if (auth === 'expired') store.dispatch('refreshAuth').then(() => {
-            next()
+            if (!start) next()
+            else router.push({ name: 'dashboard' })
         }).catch(res => {
             router.push({ name: 'start' })
         })

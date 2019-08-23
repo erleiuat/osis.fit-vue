@@ -51,8 +51,9 @@ export default new Vuex.Store({
         authDetail: state => {
             state.token.access = VueCookies.get('accessToken') || false
             state.token.refresh = VueCookies.get('refreshToken') || false
-            if (state.token.access && state.auth.authorized) return 'authorized'
-            if (state.token.access) return 'available'
+
+            if (state.token.access && state.token.refresh && state.auth.authorized) return 'authorized'
+            if (state.token.access && state.token.refresh) return 'available'
             if (state.token.refresh) return 'expired'
             return 'unauthorized'
         },
