@@ -1,7 +1,7 @@
 <template>
     <v-app>
 
-        <Drawer v-if="$store.getters['auth']"/>
+        <Drawer v-if="$store.getters['auth/authorized']" />
 
         <router-view name="toolbar" />
         <Alerts />
@@ -34,20 +34,27 @@ export default {
         Drawer, Alerts, CookieInfo
     },
 
-    created () {
-        this.$i18n.locale = this.$store.getters['locale']
-        this.$vuetify.theme.dark = this.$store.getters['dark']
-        var metaThemeColor = document.querySelector('meta[name=theme-color]')
-        if (this.$vuetify.theme.dark) metaThemeColor.setAttribute('content', '#303030')
-        else metaThemeColor.setAttribute('content', '#FAFAFA')
+    methods: {
+        setMetaTheme (dark) {
+            var metaThemeColor = document.querySelector('meta[name=theme-color]')
+            if (dark) metaThemeColor.setAttribute('content', '#303030')
+            else metaThemeColor.setAttribute('content', '#FAFAFA')
+        }
     },
 
-    mounted () {
+    created () {
+        var appInfo = this.$store.getters['app']
+        this.$i18n.locale = appInfo.locale
+        this.$vuetify.theme.dark = appInfo.dark
+        this.setMetaTheme(appInfo.dark)
+
         this.$store.subscribe((mutation, state) => {
-            this.$i18n.locale = this.$store.getters['locale']
-            this.$vuetify.theme.dark = this.$store.getters['dark']
+            if (mutation.type === 'setLocale') this.$i18n.locale = mutation.payload
+            else if (mutation.type === 'setDark') {
+                this.$vuetify.theme.dark = mutation.payload
+                this.setMetaTheme(mutation.payload)
+            }
         })
     }
-
 }
 </script>

@@ -37,7 +37,7 @@
                                 {{ $t('calories') }}: {{ total }}
                             </v-col>
 
-                            <v-col cols="12" v-if="$store.getters['premium']">
+                            <v-col cols="12" v-if="$store.getters['auth/premium']">
                                 <ImageInput v-model="fd.image" />
                             </v-col>
                             <v-col cols="12" v-else>

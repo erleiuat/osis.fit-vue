@@ -23,8 +23,13 @@
 </template>
 
 <script>
+import account from '@/store/modules/account'
+
 export default {
     name: 'Verify',
+    modules: {
+        account
+    },
 
     data () {
         return {
@@ -50,7 +55,7 @@ export default {
             if (!this.$refs.form.validate() && !force) return false
 
             this.sending = true
-            this.$store.dispatch('verify', this.fd).then(r => {
+            this.$store.dispatch('account/verify', this.fd).then(r => {
                 this.$router.push({ name: 'auth.login', query: { mail: this.fd.mail, verified: true } })
             }).catch(r => {
                 switch (r) {

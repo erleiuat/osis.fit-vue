@@ -25,7 +25,7 @@
             </v-img>
         </template>
 
-        <DrawerItems v-if="$store.getters['auth']" />
+        <DrawerItems v-if="$store.getters['auth/authorized']" />
 
         <template v-slot:append>
             <v-divider></v-divider>
@@ -38,7 +38,7 @@
                         <v-list-item-title>{{ $t('view.settings.title') }}</v-list-item-title>
                     </v-list-item-content>
                 </v-list-item>
-                <v-list-item :to="{ name: 'help' }" v-if="$store.getters['auth']" link>
+                <v-list-item :to="{ name: 'help' }" v-if="$store.getters['auth/authorized']" link>
                     <v-list-item-icon>
                         <v-icon>help</v-icon>
                     </v-list-item-icon>
@@ -46,7 +46,7 @@
                         <v-list-item-title>{{ $t('view.help.title') }}</v-list-item-title>
                     </v-list-item-content>
                 </v-list-item>
-                <v-list-item :to="{ name: 'logout' }" v-if="$store.getters['auth']" link>
+                <v-list-item :to="{ name: 'logout' }" v-if="$store.getters['auth/authorized']" link>
                     <v-list-item-icon>
                         <v-icon>lock</v-icon>
                     </v-list-item-icon>
@@ -69,8 +69,6 @@
 </template>
 
 <script>
-import user from '@/store/modules/user'
-
 const DrawerItems = () => import('@/components/nav/drawer/DrawerItems')
 
 export default {
@@ -78,10 +76,6 @@ export default {
 
     components: {
         DrawerItems
-    },
-
-    modules: {
-        user
     },
 
     computed: {

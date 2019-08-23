@@ -59,7 +59,7 @@ export default {
             var items = [
                 ...this.$store.getters['food/all']
             ]
-            if (this.$store.getters['premium']) items = [
+            if (this.$store.getters['auth/premium']) items = [
                 ...items,
                 ...this.$store.getters['foodFavorite/all']
             ]
@@ -87,7 +87,7 @@ export default {
 
     mounted () {
         this.$store.dispatch('food/load')
-        if (this.$store.getters['premium']) this.$store.dispatch('foodFavorite/load')
+        if (this.$store.getters['auth/premium']) this.$store.dispatch('foodFavorite/load')
     },
 
     i18n: {

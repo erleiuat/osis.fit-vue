@@ -69,8 +69,8 @@ export default {
             if (!this.$refs.form.validate()) return false
             this.sending = true
 
-            this.$store.dispatch('auth', this.fd).then(r => {
-                if (this.$route.query.target) this.$router.push({ name: this.$route.query.target.name })
+            this.$store.dispatch('auth/login', this.fd).then(r => {
+                if (this.$route.query.target) this.$router.push({ name: this.$route.query.target })
                 else this.$router.push({ name: 'dashboard' })
             }).catch(r => {
                 switch (r) {

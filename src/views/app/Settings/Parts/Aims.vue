@@ -28,14 +28,8 @@
 </template>
 
 <script>
-import user from '@/store/modules/user'
-
 export default {
     name: 'EditAims',
-
-    modules: {
-        user
-    },
 
     mounted () {
         this.$store.dispatch('user/load')

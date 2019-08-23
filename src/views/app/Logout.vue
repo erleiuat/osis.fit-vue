@@ -52,7 +52,7 @@ export default {
             var vm = this
             vm.doing = true
             setTimeout(function () {
-                vm.$store.dispatch('logout').then(r => {
+                vm.$store.dispatch('auth/logout').then(r => {
                     vm.prgcol = 'success'
                 }).catch(r => {
                     vm.prgcol = 'error'

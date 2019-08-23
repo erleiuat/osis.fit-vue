@@ -55,10 +55,14 @@
 </template>
 
 <script>
+import account from '@/store/modules/account'
 import Apios from '@/plugins/Apios'
 
 export default {
     name: 'Forgotten',
+    modules: {
+        account
+    },
 
     data () {
         return {
@@ -95,7 +99,7 @@ export default {
             if (!this.$refs.form.validate()) return false
             this.sending = true
 
-            Apios.post('auth/password/forgotten/', this.fd).then(res => {
+            Apios.post('auth/password/forgotten/', this.fd).then(res => { // TODO: Put in module
                 this.state = 'sent'
             }).finally(() => {
                 this.sending = false
@@ -105,7 +109,7 @@ export default {
         reset () {
             if (!this.$refs.form.validate()) return false
             this.sending = true
-            this.$store.dispatch('forgot', this.fd).then(r => {
+            this.$store.dispatch('account/forgot', this.fd).then(r => {
                 this.$router.push({ name: 'auth.login' })
                 this.$notify({ type: 'error', title: this.$t('hasChanged') })
             }).catch(r => { }).finally(() => {

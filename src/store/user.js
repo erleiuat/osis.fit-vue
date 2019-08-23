@@ -2,7 +2,6 @@
 import Apios from '@/plugins/Apios'
 import smartStore from '@/plugins/smartStore'
 
-const name = 'user'
 const namespaced = true
 
 const state = () => {
@@ -60,6 +59,10 @@ const mutations = {
     set: (state, data) => {
         state.item = data
         smartStore.set(state.lName, state.item)
+    },
+
+    remove: state => {
+        state.item = null
     }
 
 }
@@ -108,12 +111,9 @@ const actions = {
 }
 
 export default {
-    name: name,
-    module: {
-        namespaced: namespaced,
-        getters,
-        state,
-        mutations,
-        actions
-    }
+    namespaced: namespaced,
+    getters,
+    state,
+    mutations,
+    actions
 }

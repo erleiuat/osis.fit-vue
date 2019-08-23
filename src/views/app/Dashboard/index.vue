@@ -45,7 +45,6 @@
 </template>
 
 <script>
-import user from '@/store/modules/user'
 import weight from '@/store/modules/weight'
 import calories from '@/store/modules/calories'
 import activity from '@/store/modules/activity'
@@ -70,7 +69,7 @@ export default {
     },
 
     modules: {
-        user, weight, calories, activity
+        weight, calories, activity
     },
 
     i18n: {

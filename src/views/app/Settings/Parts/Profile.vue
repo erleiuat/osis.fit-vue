@@ -4,7 +4,7 @@
 
             <v-row justify="center" align="center" dense>
 
-                <v-col cols="7" sm="6" md="4" v-if="$store.getters['premium']">
+                <v-col cols="7" sm="6" md="4" v-if="$store.getters['auth/premium']">
                     Profilbild
                     <ImageInput v-model="fd.image" />
                 </v-col>
@@ -40,13 +40,12 @@
                     </v-btn>
                 </v-col>
             </v-row>
-            
+
         </v-form>
     </vcontainer>
 </template>
 
 <script>
-import user from '@/store/modules/user'
 import ImageInput from '@/components/ImageInput'
 
 export default {
@@ -54,10 +53,6 @@ export default {
 
     components: {
         ImageInput
-    },
-
-    modules: {
-        user
     },
 
     mounted () {

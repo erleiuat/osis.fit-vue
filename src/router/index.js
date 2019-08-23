@@ -23,14 +23,17 @@ const router = new Router({
 })
 
 router.beforeEach((to, from, next) => {
+    store.commit('auth/check')
+
     var start = (!!(to.name && to.name === 'start'))
     var needAuth = (to.name ? to.meta.authRequired : true)
     var needPremium = (to.name ? to.meta.premium : true)
-    var auth = store.getters['authDetail']
+
+    var auth = store.getters['auth/details']
 
     if (auth !== 'unauthorized')
 
-        if (auth === 'expired') store.dispatch('refreshAuth').then(() => {
+        if (auth === 'expired') store.dispatch('auth/refresh').then(() => {
             if (!start) {
                 NProgress.start()
                 next()
@@ -39,17 +42,20 @@ router.beforeEach((to, from, next) => {
             router.push({ name: 'start' })
         })
 
-        else {
+        else if (auth === 'unhooked') {
+            store.commit('auth/remove')
+            router.push({ name: 'auth.login', query: { target: to.name } })
+        } else {
             if (auth === 'available') {
-                store.commit('placeAuth')
-                auth = store.getters['authDetail']
+                store.commit('auth/place')
+                auth = store.getters['auth/details']
             }
 
             if (auth === 'authorized' && !start)
                 if (!needPremium) {
                     NProgress.start()
                     next()
-                } else if (store.getters['premium']) {
+                } else if (store.getters['auth/premium']) {
                     NProgress.start()
                     next()
                 } else router.push({ name: 'premium', query: { notify: true } })

@@ -76,7 +76,7 @@ export default {
         },
         lang: {
             get () {
-                return this.$store.getters['locale']
+                return this.$store.getters['app'].locale
             },
             set (val) {
                 this.$store.commit('setLocale', val)
@@ -84,7 +84,7 @@ export default {
         },
         mode: {
             get () {
-                return this.$store.getters['dark']
+                return this.$store.getters['app'].dark
             },
             set (val) {
                 this.$store.commit('setDark', val)

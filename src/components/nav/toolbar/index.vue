@@ -1,6 +1,6 @@
 <template>
     <Default>
-        <v-toolbar-items v-if="!$store.getters['auth']">
+        <v-toolbar-items v-if="!$store.getters['auth/authorized']">
             <v-btn text :to="{name: 'auth.login'}">
                 {{ $t('view.auth.login.title') }}
             </v-btn>
@@ -8,9 +8,9 @@
                 {{ $t('view.auth.register.title') }}
             </v-btn>
         </v-toolbar-items>
-        <v-app-bar-nav-icon @click.stop="drawer()" v-if="$store.getters['auth']" />
+        <v-app-bar-nav-icon @click.stop="drawer()" v-if="$store.getters['auth/authorized']" />
         <v-spacer />
-        <v-toolbar-title v-if="$store.getters['auth']">
+        <v-toolbar-title v-if="$store.getters['auth/authorized']">
             {{ title }}
         </v-toolbar-title>
     </Default>

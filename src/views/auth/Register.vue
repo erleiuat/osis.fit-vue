@@ -50,10 +50,14 @@
 </template>
 
 <script>
+import account from '@/store/modules/account'
 import Apios from '@/plugins/Apios'
 
 export default {
     name: 'Register',
+    modules: {
+        account
+    },
 
     data () {
         return {
@@ -126,7 +130,7 @@ export default {
             if (!this.$refs.form.validate()) return false
             this.sending = true
 
-            this.$store.dispatch('register', this.fd).then(r => {
+            this.$store.dispatch('account/register', this.fd).then(r => {
                 this.$router.push({ name: 'auth.verify' })
             }).catch(r => {
                 if (r === 'mail_in_use') this.$notify({ type: 'error', title: this.$t('mailInUse') })
