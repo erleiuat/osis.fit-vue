@@ -31,8 +31,10 @@ router.beforeEach((to, from, next) => {
     if (auth !== 'unauthorized')
 
         if (auth === 'expired') store.dispatch('refreshAuth').then(() => {
-            if (!start) next()
-            else router.push({ name: 'dashboard' })
+            if (!start) {
+                NProgress.start()
+                next()
+            } else router.push({ name: 'dashboard' })
         }).catch(res => {
             router.push({ name: 'start' })
         })
@@ -44,23 +46,24 @@ router.beforeEach((to, from, next) => {
             }
 
             if (auth === 'authorized' && !start)
-                if (!needPremium) next()
-                else if (store.getters['premium']) next()
-                else router.push({ name: 'premium', query: { notify: true } })
+                if (!needPremium) {
+                    NProgress.start()
+                    next()
+                } else if (store.getters['premium']) {
+                    NProgress.start()
+                    next()
+                } else router.push({ name: 'premium', query: { notify: true } })
             else if (start)
                 router.push({ name: 'dashboard' })
         }
 
     else if (!needAuth)
-        if (!start) next()
-        else router.push({ name: 'welcome' })
+        if (!start) {
+            NProgress.start()
+            next()
+        } else router.push({ name: 'welcome' })
     else
         router.push({ name: 'auth.login', query: { target: to.name } })
-})
-
-router.beforeResolve((to, from, next) => {
-    if (to.name) NProgress.start()
-    next()
 })
 
 router.afterEach((to, from) => {

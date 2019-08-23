@@ -67,7 +67,7 @@ export default {
 
         aims () {
             var data = this.$store.getters['user/aims']
-            if (!data) return {ok: false}
+            if (!data) return { ok: false }
             var aWeight = data.weight
             var aDate = data.date
             return {

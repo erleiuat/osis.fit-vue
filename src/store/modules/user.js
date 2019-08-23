@@ -30,7 +30,7 @@ const getters = {
             birthdate: state.item.birthdate,
             height: state.item.height,
             gender: state.item.gender,
-            pal: state.item.pal,
+            pal: state.item.pal
         }
     },
 
@@ -48,7 +48,6 @@ const getters = {
     },
 
     image: state => {
-        console.log(state.item.image)
         if (!state.item) return null
         if (state.item.image) return state.item.image
         else return null

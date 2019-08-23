@@ -17,12 +17,12 @@ const state = () => {
 const getters = {
 
     all: (state) => {
-        if(!state.items) return
+        if (!state.items) return
         return Object.values(state.items)
     },
 
     latest: (state) => {
-        if(!state.items) return
+        if (!state.items) return
         var a = Object.values(state.items)
 
         var mostRecentDate = new Date(Math.max.apply(null, a.map(e => {

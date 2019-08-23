@@ -70,7 +70,7 @@ export default {
             if (!this.$refs.form.validate()) return false
 
             this.sending = true
-            this.$store.dispatch('user/editAims', this.fd ).then(r => {
+            this.$store.dispatch('user/editAims', this.fd).then(r => {
                 this.edit = false
                 this.$notify({ type: 'success', title: this.$t('alert.success.save') })
             }).catch(r => {
