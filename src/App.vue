@@ -1,7 +1,13 @@
 <template>
     <v-app>
 
-        <router-view name="toolbar" />
+        <Toolbar>
+            <router-view name="toolbar" />
+        </Toolbar>
+
+        <Drawer />
+
+        <Notification />
 
         <v-content>
             <router-view />
@@ -13,8 +19,16 @@
 </template>
 
 <script>
+import Toolbar from '@/components/navigation/Toolbar/'
+import Drawer from '@/components/navigation/Drawer/'
+import Notification from '@/components/Notification'
+
 export default {
     name: 'App',
+
+    components: {
+        Toolbar, Drawer, Notification
+    },
 
     data: () => ({
 
@@ -22,3 +36,13 @@ export default {
 
 }
 </script>
+
+<style>
+.row {
+    /* 
+        Fix for v-container issue 
+        https://github.com/vuetifyjs/vuetify/issues/8608
+    */
+    width: 100%; 
+}
+</style>

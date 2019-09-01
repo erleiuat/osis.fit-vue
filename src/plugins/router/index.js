@@ -12,9 +12,35 @@ export default new Router({
             path: '/',
             name: 'main',
             components: {
-                toolbar: () => import('@/components/navigation/toolbar/'),
+                toolbar: () => import('@/views/Auth/Toolbar'),
                 default: () => import('@/views/Main')
             }
+        },
+
+        {
+            path: '/auth',
+            redirect: { name: 'auth.login' },
+            components: {
+                toolbar: () => import('@/views/Auth/Toolbar'),
+                default: () => import('@/views/Auth/')
+            },
+            children: [
+                {
+                    path: 'login',
+                    name: 'auth.login',
+                    components: {
+                        default: () => import('@/views/Auth/Login/')
+                    }
+                },
+                {
+                    path: 'register',
+                    name: 'auth.register',
+                    components: {
+                        default: () => import('@/views/Auth/Register')
+                    }
+                }
+            ]
         }
+
     ]
 })

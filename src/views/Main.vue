@@ -1,21 +1,23 @@
-
 <template>
 
-    <v-container class="fill-height" flex-column>
+    <v-container class="fill-height flex-column fluid">
 
-        <v-row align="center" justify="center">
-            <v-col v-for="n in 3" :key="n">
-                <v-card class="pa-2" outlined tile>
-                    1. One of three columns
-                </v-card>
+        <v-row align="end" justify="start">
+            <v-col cols="12">
+                <div class="display-4">Osis.Fit</div>
             </v-col>
         </v-row>
 
         <v-row align="start" justify="start">
-            <v-col v-for="n in 3" :key="n">
-                <v-card class="pa-2" outlined tile>
-                    2. One of three columns
-                </v-card>
+            <v-col cols="12" sm="6">
+                <v-btn :to="{ name: 'auth.login' }" depressed block large color="primary">
+                    Login
+                </v-btn>
+            </v-col>
+            <v-col cols="12" sm="6">
+                <v-btn depressed large block color="secondary">
+                    Register
+                </v-btn>
             </v-col>
         </v-row>
 
