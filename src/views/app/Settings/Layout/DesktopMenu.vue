@@ -1,50 +1,56 @@
 <template>
-    <v-row>
+    <vcontainer>
 
-        <v-col cols="12">
-            <v-tabs vertical grow style="min-height: 400px;">
-                <v-tab v-for="(item, key) in items" :key="key" :to="{name: item.to}">
-                    <v-icon left>{{item.icon}}</v-icon>
-                    {{item.title}}
-                </v-tab>
-                <v-tabs-items>
-                    <router-view />
-                </v-tabs-items>
-            </v-tabs>
-        </v-col>
+        <v-row>
 
-        <v-col cols="12">
-            <v-card flat>
-                <v-card-title>
-                    {{ $t('app') }}
-                </v-card-title>
-                <v-card-text>
-                    <div class="title">{{ $t('language') }}</div>
-                    <v-select v-model="lang" :items="langs" solo flat hide-details />
-                </v-card-text>
-                <v-card-text>
-                    <div class="title">{{ $t('appdesign') }}</div>
-                    <v-checkbox v-model="mode" color="primary" :label="$t('dark')" />
-                </v-card-text>
-            </v-card>
-        </v-col>
+            <v-col cols="6">
+                <v-card flat>
+                    <v-card-title>
+                        {{ $t('app') }}
+                    </v-card-title>
+                    <v-card-text>
+                        <div class="title">{{ $t('language') }}</div>
+                        <v-select v-model="lang" :items="langs" solo flat hide-details />
+                    </v-card-text>
+                    <v-card-text>
+                        <div class="title">{{ $t('appdesign') }}</div>
+                        <v-checkbox v-model="mode" color="primary" :label="$t('dark')" />
+                    </v-card-text>
+                </v-card>
+            </v-col>
 
-        <v-col cols="12">
-            <v-card flat>
-                <v-card-title>
-                    {{ $t('notifications') }}
-                </v-card-title>
-                <v-card-text>
-                    <v-row align="center">
-                        <v-col cols="12">
-                            {{ $t('soon') }}
-                        </v-col>
-                    </v-row>
-                </v-card-text>
-            </v-card>
-        </v-col>
+            <v-col cols="6">
+                <v-card flat>
+                    <v-card-title>
+                        {{ $t('notifications') }}
+                    </v-card-title>
+                    <v-card-text>
+                        <v-row align="center">
+                            <v-col cols="12">
+                                {{ $t('soon') }}
+                            </v-col>
+                        </v-row>
+                    </v-card-text>
+                </v-card>
+            </v-col>
 
-    </v-row>
+            <v-col cols="12">
+                <v-card flat>
+                    <v-tabs grow fixed style="min-height: 400px;">
+                        <v-tab v-for="(item, key) in items" :key="key" :to="{name: item.to}">
+                            <v-icon left>{{item.icon}}</v-icon>
+                            {{item.title}}
+                        </v-tab>
+                        <v-tabs-items>
+                            <router-view />
+                        </v-tabs-items>
+                    </v-tabs>
+                </v-card>
+            </v-col>
+
+        </v-row>
+    </vcontainer>
+
 </template>
 
 <script>
