@@ -29,7 +29,7 @@ module.exports = [{
             name: 'auth.register',
             meta: { authRequired: false },
             components: {
-                default: () => import('@/views/auth/Register')
+                default: () => import('@/views/auth/Register.vue')
             }
         },
         {
