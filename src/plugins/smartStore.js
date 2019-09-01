@@ -18,7 +18,7 @@ const smartStore = {
     },
 
     createStore: (name) => {
-        localStorage.setItem(smartStore.name + '.store.' + name, null)
+        localStorage.setItem(smartStore.name + '.store.' + name, JSON.stringify({}))
         smartStore.stores.push(name)
         localStorage.setItem(smartStore.name + '.stores', JSON.stringify(smartStore.stores))
     },

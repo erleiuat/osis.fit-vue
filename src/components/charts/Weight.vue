@@ -45,6 +45,8 @@ export default {
             var arr = this.$store.getters['weight/all']
             if (!arr || arr.length <= 1) return false
 
+            console.log(arr)
+
             arr.sort(function (a, b) {
                 return (
                     new Date(a.date + 'T' + a.time) -

@@ -24,10 +24,10 @@
                             <v-text-field :label="$t('lastname')" v-model="fd.lastname" :rules="rule.require" type="text" filled />
                         </v-col>
                         <v-col cols="12" md="11">
-                            <v-text-field :value="$store.state.account.mail" disabled :label="$t('email')" filled />
+                            <v-text-field :value="$store.state.auth.account.mail" disabled :label="$t('email')" filled />
                         </v-col>
                         <v-col cols="12" md="11">
-                            <v-text-field :value="$store.state.account.username" disabled :label="$t('username')" filled />
+                            <v-text-field :value="$store.state.auth.account.username" disabled :label="$t('username')" filled />
                         </v-col>
                     </v-row>
                 </v-col>

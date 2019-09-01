@@ -35,8 +35,8 @@ export default {
 
     mounted () {
         var td = this.$store.getters['today'].date
-        this.$store.dispatch('weight/load')
         this.$store.dispatch('calories/load', td)
+        this.$store.dispatch('weight/load')
         this.$store.dispatch('activity/load', td)
     },
 

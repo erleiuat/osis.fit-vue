@@ -37,6 +37,10 @@ export default {
         }
     },
 
+    mounted() {
+        this.$store.dispatch('calories/load', this.date)
+    },
+
     computed: {
 
         items () {
