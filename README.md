@@ -1,4 +1,4 @@
-# osis.fit-vue
+# osis.fit
 
 ## Project setup
 ```
@@ -23,11 +23,6 @@ npm run test
 ### Lints and fixes files
 ```
 npm run lint
-```
-
-### Run your unit tests
-```
-npm run test:unit
 ```
 
 ### Customize configuration
