@@ -1,0 +1,14 @@
+{
+    "name": "Name",
+    "firstname": "Vorname",
+    "lastname": "Nachname",
+    "identifier": "E-Mail/Benutzername",
+    "username": "Benutzername",
+    "mail": "E-Mail",
+    "language": "Sprache",
+    "title": "Titel",
+    "date": "Datum",
+    "time": "Zeit",
+    "amount": "Menge",
+    "description": "Beschreibung"
+}

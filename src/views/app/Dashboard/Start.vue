@@ -1,0 +1,127 @@
+<template>
+    <v-row dense justify="center">
+
+        <v-col cols="12" md="4" v-if="cals.show">
+            <CaloricBalance :cVals="cals.cVals" />
+        </v-col>
+        <v-col cols="12" v-else>
+            <Welcome />
+        </v-col>
+        <v-col cols="12" md="4" v-if="weight.show">
+            <WeightFacts :cVals="weight.cVals" />
+        </v-col>
+        <v-col cols="12" md="4" v-if="bmi.show">
+            <BMIFacts :cVals="bmi.cVals" />
+        </v-col>
+
+    </v-row>
+</template>
+
+<script>
+const Welcome = () => import('@/views/app/Dashboard/Welcome')
+const CaloricBalance = () => import('@/components/facts/CaloricBalance')
+const BMIFacts = () => import('@/components/facts/BMI')
+const WeightFacts = () => import('@/components/facts/Weight')
+
+export default {
+    name: 'Start',
+
+    components: {
+        CaloricBalance,
+        BMIFacts,
+        WeightFacts,
+        Welcome
+    },
+
+    mounted () {
+        var td = this.$store.getters['today'].date
+        this.$store.dispatch('calories/load', td)
+        this.$store.dispatch('weight/load')
+        this.$store.dispatch('activity/load', td)
+    },
+
+    computed: {
+
+        lastWeight () {
+            var lWeight = this.$store.getters['weight/latest'] || { weight: 0 }
+            return {
+                ok: (lWeight.weight > 0),
+                weight: lWeight.weight
+            }
+        },
+
+        user () {
+            var data = this.$store.getters['user/metabolism']
+            if (!data) return { ok: false }
+            var gend = data.gender
+            var heig = data.height
+            var birth = data.birthdate
+            return {
+                ok: (gend && heig && birth),
+                gender: gend,
+                height: heig,
+                birth: birth
+            }
+        },
+
+        aims () {
+            var data = this.$store.getters['user/aims']
+            if (!data) return { ok: false }
+            var aWeight = data.weight
+            var aDate = data.date
+            return {
+                ok: (aWeight && aDate),
+                weight: aWeight,
+                date: aDate
+            }
+        },
+
+        weight () {
+            return {
+                show: this.lastWeight.ok,
+                cVals: {
+                    weight: this.lastWeight.weight,
+                    aimWeight: this.aims.weight
+                }
+            }
+        },
+
+        cals () {
+            if (!this.user.ok || !this.aims.ok || !this.lastWeight.ok) return { show: false }
+
+            var tmpDate = new Date(Date.now() - Date.parse(this.user.birth))
+            var age = Math.abs(tmpDate.getUTCFullYear() - 1970)
+
+            var td = this.$store.getters['today'].date
+            var cTotal = Math.round(this.$store.getters['calories/total'](td)) || 0
+            var aTotal = Math.round(this.$store.getters['activity/total'](td)) || 0
+
+            return {
+                show: true,
+                cVals: {
+                    weight: this.lastWeight.weight,
+                    aimWeight: this.aims.weight,
+                    aimDate: this.aims.date,
+                    gender: this.user.gender,
+                    height: this.user.height,
+                    age: age,
+                    consumed: cTotal,
+                    lost: aTotal
+                }
+            }
+        },
+
+        bmi () {
+            return {
+                show: (this.lastWeight.ok && this.user.height),
+                cVals: {
+                    weight: this.lastWeight.weight,
+                    height: this.user.height
+                }
+            }
+        }
+
+    }
+
+}
+</script>

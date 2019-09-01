@@ -1,0 +1,30 @@
+
+@import url('https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900');
+@import url('https://fonts.googleapis.com/css?family=Material+Icons');
+
+.v-btn {
+    text-transform: none !important;
+}
+
+.v-bottom-navigation--fixed {
+    position: fixed !important;
+}
+
+.v-item-group.v-bottom-navigation .v-btn {
+    height: inherit !important;
+}
+
+/* Change default Scrollbar */
+::-webkit-scrollbar {
+    height: 8px;
+    width: 10px;
+}
+::-webkit-scrollbar-track {
+    background: #f7f7f7;
+}
+::-webkit-scrollbar-thumb {
+    background:  #dddddd;
+}
+::-webkit-scrollbar-thumb:hover {
+    background:  #dddddd;
+}
