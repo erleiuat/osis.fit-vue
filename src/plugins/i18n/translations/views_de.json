@@ -1,0 +1,136 @@
+{
+    "osis.fit": {
+        "title": "Osis.fit",
+        "description": ""
+    },
+    "food": {
+        "title": "Esswaren",
+        "description": "",
+        "own": {
+            "title": "Eigene",
+            "description": ""
+        },
+        "favorites": {
+            "title": "Favoriten",
+            "description": ""
+        },
+        "browse": {
+            "title": "Suche",
+            "description": ""
+        }
+    },
+    "training": {
+        "title": "Training",
+        "description": "",
+        "saved": {
+            "title": "Pläne",
+            "description": ""
+        },
+        "exercise": {
+            "title": "Übung",
+            "description": "",
+            "saved": {
+                "title": "Übungen",
+                "description": ""
+            }
+        }
+    },
+    "dashboard": {
+        "title": "Dashboard",
+        "description": ""
+    },
+    "calories": {
+        "title": "Kalorien",
+        "description": ""
+    },
+    "weight": {
+        "title": "Gewicht",
+        "description": ""
+    },
+    "activity": {
+        "title": "Aktivität",
+        "description": ""
+    },
+    "settings": {
+        "title": "Einstellungen",
+        "description": "",
+        "profile": {
+            "title": "Profil bearbeiten",
+            "description": ""
+        },
+        "aims": {
+            "title": "Ziele bearbeiten",
+            "description": ""
+        },
+        "premium": {
+            "title": "Premium",
+            "description": ""
+        },
+        "account": {
+            "title": "Account verwalten",
+            "description": ""
+        }
+    },
+    "logout": {
+        "title": "Abmelden",
+        "description": ""
+    },
+    "auth": {
+        "title": "Authentifizierung",
+        "description": "",
+        "login": {
+            "title": "Anmelden",
+            "description": ""
+        },        
+        "register": {
+            "title": "Registrieren",
+            "description": ""
+        },
+        "verify": {
+            "title": "Verifizieren",
+            "description": ""
+        },
+        "forgotten": {
+            "title": "Passwort ändern",
+            "description": ""
+        }
+    },
+    "welcome": {
+        "title": "Willkommen",
+        "description": ""
+    },
+    "premium": {
+        "title": "Premium erhalten",
+        "description": ""
+    },
+    "terms": {
+        "title": "Nutzungsbedingungen",
+        "description": "",
+        "cookie": {
+            "title": "Cookie-Richtlinie",
+            "description": ""
+        }
+    },
+    "help": {
+        "title": "Support",
+        "description": "",
+        "contact": {
+            "title": "Kontakt",
+            "description": ""
+        }
+    },
+    "error": {
+        "permission": {
+            "title": "Zugang verweigert",
+            "description": ""
+        },
+        "found": {
+            "title": "Nicht gefunden",
+            "description": ""
+        }
+    },
+    "theme": {
+        "title": "Theme",
+        "description": ""
+    }
+}

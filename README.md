@@ -1,4 +1,4 @@
-# osis.fit-vue
+# osis.fit
 
 ## Project setup
 ```

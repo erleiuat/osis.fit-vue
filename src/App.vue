@@ -1,48 +1,60 @@
 <template>
     <v-app>
 
-        <Toolbar>
-            <router-view name="toolbar" />
-        </Toolbar>
+        <Drawer v-if="$store.getters['auth/authorized']" />
 
-        <Drawer />
-
-        <Notification />
+        <router-view name="toolbar" />
+        <Alerts />
 
         <v-content>
-            <router-view />
+            <transition appear name="fade" mode="out-in">
+                <router-view />
+            </transition>
         </v-content>
 
-        <router-view name="bottom" />
+        <transition appear name="slideUp" mode="out-in">
+            <router-view name="bottom" />
+        </transition>
+
+        <CookieInfo v-if="this.$store.getters['cookieNotice']" />
 
     </v-app>
 </template>
 
 <script>
-import Toolbar from '@/components/navigation/Toolbar/'
-import Drawer from '@/components/navigation/Drawer/'
-import Notification from '@/components/Notification'
+import Drawer from '@/components/nav/drawer/'
+
+const Alerts = () => import('@/components/Alerts')
+const CookieInfo = () => import('@/components/CookieInfo')
 
 export default {
     name: 'App',
 
     components: {
-        Toolbar, Drawer, Notification
+        Drawer, Alerts, CookieInfo
     },
 
-    data: () => ({
+    methods: {
+        setMetaTheme (dark) {
+            var metaThemeColor = document.querySelector('meta[name=theme-color]')
+            if (dark) metaThemeColor.setAttribute('content', '#303030')
+            else metaThemeColor.setAttribute('content', '#FAFAFA')
+        }
+    },
 
-    })
+    created () {
+        var appInfo = this.$store.getters['app']
+        this.$i18n.locale = appInfo.locale
+        this.$vuetify.theme.dark = appInfo.dark
+        this.setMetaTheme(appInfo.dark)
 
+        this.$store.subscribe((mutation, state) => {
+            if (mutation.type === 'setLocale') this.$i18n.locale = mutation.payload
+            else if (mutation.type === 'setDark') {
+                this.$vuetify.theme.dark = mutation.payload
+                this.setMetaTheme(mutation.payload)
+            }
+        })
+    }
 }
 </script>
-
-<style>
-.row {
-    /* 
-        Fix for v-container issue 
-        https://github.com/vuetifyjs/vuetify/issues/8608
-    */
-    width: 100%; 
-}
-</style>

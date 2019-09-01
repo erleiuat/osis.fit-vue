@@ -1,5 +1,6 @@
 /* eslint-disable no-console */
 
+// const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 const WebpackAssetsManifest = require('webpack-assets-manifest')
 const webpack = require('webpack')
 
@@ -18,9 +19,9 @@ module.exports = {
     configureWebpack: () => {
         return {
             plugins: [
+                // new BundleAnalyzerPlugin(),
                 new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
                 new WebpackAssetsManifest({
-
                     output: 'manifest.json',
                     transform (assets) {
                         assets.name = process.env.VUE_APP_NAME
@@ -42,7 +43,6 @@ module.exports = {
                             }
                         ]
                     }
-
                 })
             ]
         }
@@ -51,7 +51,6 @@ module.exports = {
     chainWebpack: config => {
         config.plugins.delete('prefetch')
     }
-
 }
 
 /* eslint-enable no-console */
