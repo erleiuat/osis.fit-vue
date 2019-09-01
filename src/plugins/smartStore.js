@@ -24,7 +24,7 @@ const smartStore = {
     },
 
     get: (sName) => {
-        var data = null
+        var data = {}
         if (!smartStore.hasStore(sName))
             smartStore.createStore(sName)
         else
