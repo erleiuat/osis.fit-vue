@@ -42,11 +42,13 @@ const mutations = {
             if (!(vals.date in state.items)) Vue.set(state.items, vals.date, {})
             if (!(vals.id in state.items[vals.date])) Vue.set(state.items[vals.date], vals.id.toString(), vals)
             else state.items[vals.date][vals.id] = vals
-        } else vals.forEach(function (item) {
-            if (!(item.date in state.items)) Vue.set(state.items, item.date, {})
-            if (!(item.id in state.items[item.date])) Vue.set(state.items[item.date], item.id.toString(), item)
-            else state.items[item.date][item.id] = item
-        })
+        } else {
+            vals.forEach(function (item) {
+                if (!(item.date in state.items)) Vue.set(state.items, item.date, {})
+                if (!(item.id in state.items[item.date])) Vue.set(state.items[item.date], item.id.toString(), item)
+                else state.items[item.date][item.id] = item
+            })
+        }
         smartStore.set(state.lName, state.items)
     },
 

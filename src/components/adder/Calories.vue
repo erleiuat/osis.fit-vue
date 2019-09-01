@@ -23,7 +23,7 @@
                     <v-layout wrap>
 
                         <v-flex xs12>
-                            <v-text-field v-model="fd.title" :label="$t('ft.title')" @click:append="openSelect()" type="text" outlined append-icon="open_in_new" required/>
+                            <v-text-field v-model="fd.title" :label="$t('ft.title')" @click:append="openSelect()" type="text" outlined append-icon="open_in_new" required />
                         </v-flex>
 
                         <v-flex xs6>
@@ -116,9 +116,9 @@ export default {
     methods: {
 
         calTotal () {
-            if (this.amount > 0 && this.caloriesPer100 > 0)
+            if (this.amount > 0 && this.caloriesPer100 > 0) {
                 this.fd.calories = Math.round(((this.amount / 100) * this.caloriesPer100) * 100) / 100
-            else this.fd.calories = 0
+            } else this.fd.calories = 0
         },
 
         add () {

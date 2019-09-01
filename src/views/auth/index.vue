@@ -29,11 +29,12 @@ export default {
     methods: {
 
         check () {
-            if (this.$store.getters['auth/details'] === 'authorized')
+            if (this.$store.getters['auth/details'] === 'authorized') {
                 if (this.$route.query.target) this.$router.push({ name: this.$route.query.target.name })
                 else this.$router.push({ name: 'dashboard' })
-            else if (this.$route.name === 'auth')
+            } else if (this.$route.name === 'auth') {
                 this.$router.push({ name: 'auth.login' })
+            }
         }
 
     },

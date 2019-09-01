@@ -86,10 +86,11 @@ export default {
 
             var items4 = {}
 
-            if (!this.$store.getters['auth/premium'])
+            if (!this.$store.getters['auth/premium']) {
                 items4['premium'] = {
                     to: 'premium', icon: 'star', color: 'yellow'
                 }
+            }
 
             return {
                 i1: items1,

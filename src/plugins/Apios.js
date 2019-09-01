@@ -14,8 +14,10 @@ const apiosConfig = {
 const apios = Axios.create(apiosConfig)
 
 apios.interceptors.request.use(config => {
-    if (pendingCalls[config.baseURL + config.url] === true) return {
-        ...config, cancelToken: new CancelToken((cancel) => cancel(config.url))
+    if (pendingCalls[config.baseURL + config.url] === true) {
+        return {
+            ...config, cancelToken: new CancelToken((cancel) => cancel(config.url))
+        }
     }
     NProgress.start()
     pendingCalls[config.baseURL + config.url] = true

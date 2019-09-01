@@ -37,17 +37,11 @@ export default {
     computed: {
 
         state () {
-            if (!this.cVals.weight || !this.cVals.aimWeight)
-                return { dark: false, color: '' }
-            if (this.diff > 10)
-                return { dark: true, color: 'error' }
-            if (this.diff > 5)
-                return { dark: true, color: 'warning' }
-            if (this.diff > -5)
-                return { dark: true, color: 'success' }
-            if (this.diff > -10)
-                return { dark: true, color: 'warning' }
-
+            if (!this.cVals.weight || !this.cVals.aimWeight) return { dark: false, color: '' }
+            if (this.diff > 10) return { dark: true, color: 'error' }
+            if (this.diff > 5) return { dark: true, color: 'warning' }
+            if (this.diff > -5) return { dark: true, color: 'success' }
+            if (this.diff > -10) return { dark: true, color: 'warning' }
             return { dark: true, color: 'error' }
         },
 

@@ -19,21 +19,25 @@
 <script>
 export default {
     name: 'FoodCard',
+
     props: {
         item: Object,
+        maxHeight: Number,
         nodetails: {
             type: Boolean,
             default: false
-        },
-        maxHeight: Number
+        }
     },
+
     computed: {
+
         path () {
             if (!this.item.image) return false
-
-            if (!this.item.image.path) return {
-                image: this.item.image,
-                lazy: this.item.image
+            else if (!this.item.image.path) {
+                return {
+                    image: this.item.image,
+                    lazy: this.item.image
+                }
             }
 
             var img = this.item.image.path.small
@@ -44,11 +48,14 @@ export default {
                 lazy: lazy
             }
         },
+
         total () {
             if (!this.item.amount || !this.item.caloriesPer100) return null
             return Math.round(((this.item.amount / 100) * this.item.caloriesPer100) * 100) / 100
         }
+
     }
+
 }
 </script>
 

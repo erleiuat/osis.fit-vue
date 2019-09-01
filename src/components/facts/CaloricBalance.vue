@@ -41,14 +41,10 @@ export default {
     computed: {
 
         state () {
-            if (this.remaining > 300)
-                return { dark: true, color: 'success' }
-            else if (this.remaining > 100)
-                return { dark: true, color: 'warning' }
-            else if (this.remaining > -100)
-                return { dark: false, color: '' }
-            else
-                return { dark: true, color: 'error' }
+            if (this.remaining > 300) return { dark: true, color: 'success' }
+            else if (this.remaining > 100) return { dark: true, color: 'warning' }
+            else if (this.remaining > -100) return { dark: false, color: '' }
+            else return { dark: true, color: 'error' }
         },
 
         remaining () {
@@ -69,18 +65,21 @@ export default {
 
         basalMetabolicRate () {
             var dayNeed = 0
-            if (this.cVals.gender === 'female') dayNeed = (
-                655 +
-                (9.5 * this.cVals.weight) +
-                (1.9 * this.cVals.height) +
-                (4.7 * this.cVals.age)
-            )
-            else dayNeed = (
-                66 +
-                (13.8 * this.cVals.weight) +
-                (5.0 * this.cVals.height) +
-                (6.8 * this.cVals.age)
-            )
+            if (this.cVals.gender === 'female') {
+                dayNeed = (
+                    655 +
+                    (9.5 * this.cVals.weight) +
+                    (1.9 * this.cVals.height) +
+                    (4.7 * this.cVals.age)
+                )
+            } else {
+                dayNeed = (
+                    66 +
+                    (13.8 * this.cVals.weight) +
+                    (5.0 * this.cVals.height) +
+                    (6.8 * this.cVals.age)
+                )
+            }
 
             return Math.round(dayNeed)
         }

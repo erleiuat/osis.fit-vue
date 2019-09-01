@@ -60,8 +60,7 @@ export default {
     },
 
     mounted () {
-        if (this.$route.query.notify)
-            this.$notify({ type: 'info', title: this.$t('alert.premiumOnly') })
+        if (this.$route.query.notify) this.$notify({ type: 'info', title: this.$t('alert.premiumOnly') })
     },
 
     i18n: {

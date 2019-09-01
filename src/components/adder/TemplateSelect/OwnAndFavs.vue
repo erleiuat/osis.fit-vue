@@ -59,10 +59,12 @@ export default {
             var items = [
                 ...this.$store.getters['food/all']
             ]
-            if (this.$store.getters['auth/premium']) items = [
-                ...items,
-                ...this.$store.getters['foodFavorite/all']
-            ]
+            if (this.$store.getters['auth/premium']) {
+                items = [
+                    ...items,
+                    ...this.$store.getters['foodFavorite/all']
+                ]
+            }
             var filtered = items.filter(el => el.title.includes(this.query || ''))
             if (filtered.length <= 0) return false
 

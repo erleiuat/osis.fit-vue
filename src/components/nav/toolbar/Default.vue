@@ -29,14 +29,10 @@ export default {
                 t3: false
             }
 
-            if (this.$vuetify.breakpoint.xsOnly)
-                if (this.$store.getters['toolbar2']) {
-                    tb.t2 = true
-                } else {
-                    tb.t1 = true
-                }
-            else
-                tb.t3 = true
+            if (this.$vuetify.breakpoint.xsOnly) {
+                if (this.$store.getters['toolbar2']) tb.t2 = true
+                else tb.t1 = true
+            } else tb.t3 = true
 
             return tb
         }

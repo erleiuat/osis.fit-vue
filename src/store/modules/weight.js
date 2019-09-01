@@ -45,13 +45,15 @@ const getters = {
 const mutations = {
 
     set: (state, vals) => {
-        if (!Array.isArray(vals))
+        if (!Array.isArray(vals)) {
             if (!(vals.id in state.items)) Vue.set(state.items, vals.id.toString(), vals)
             else state.items[vals.id] = vals
-        else vals.forEach(function (item) {
-            if (!(item.id in state.items)) Vue.set(state.items, item.id.toString(), item)
-            else state.items[item.id] = item
-        })
+        } else {
+            vals.forEach(function (item) {
+                if (!(item.id in state.items)) Vue.set(state.items, item.id.toString(), item)
+                else state.items[item.id] = item
+            })
+        }
         smartStore.set(state.lName, state.items)
     },
 

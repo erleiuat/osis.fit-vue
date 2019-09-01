@@ -25,10 +25,8 @@ const smartStore = {
 
     get: (sName) => {
         var data = {}
-        if (!smartStore.hasStore(sName))
-            smartStore.createStore(sName)
-        else
-            data = JSON.parse(localStorage.getItem(smartStore.name + '.store.' + sName))
+        if (!smartStore.hasStore(sName)) smartStore.createStore(sName)
+        else data = JSON.parse(localStorage.getItem(smartStore.name + '.store.' + sName))
 
         return data
     },

@@ -30,24 +30,19 @@ export default {
     computed: {
 
         state () {
-            if (!this.bmi)
-                return { color: '', dark: false, text: '' }
-            if (this.bmi > 30)
-                return { color: 'error', dark: true, text: this.$t('eq.over') }
-            if (this.bmi > 25)
-                return { color: 'warning', dark: true, text: this.$t('eq.slightOver') }
-            if (this.bmi > 18.5)
-                return { color: 'success', dark: true, text: this.$t('eq.normal') }
-            if (this.bmi > 17)
-                return { color: 'warning', dark: true, text: this.$t('eq.slightUnder') }
-
+            if (!this.bmi) return { color: '', dark: false, text: '' }
+            if (this.bmi > 30) return { color: 'error', dark: true, text: this.$t('eq.over') }
+            if (this.bmi > 25) return { color: 'warning', dark: true, text: this.$t('eq.slightOver') }
+            if (this.bmi > 18.5) return { color: 'success', dark: true, text: this.$t('eq.normal') }
+            if (this.bmi > 17) return { color: 'warning', dark: true, text: this.$t('eq.slightUnder') }
             return { color: 'error', dark: true, text: this.$t('eq.under') }
         },
 
         bmi () {
             var value = (Math.round(
                 this.cVals.weight /
-                ((this.cVals.height / 1000) * (this.cVals.height / 1000)) /
+                ((this.cVals.height / 1000) *
+                (this.cVals.height / 1000)) /
                 10
             ) / 10)
 

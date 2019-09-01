@@ -110,9 +110,9 @@ export default {
     methods: {
 
         calTotal () {
-            if (this.amount > 0 && this.caloriesPer100 > 0)
+            if (this.amount > 0 && this.caloriesPer100 > 0) {
                 this.fd.calories = Math.round(((this.amount / 100) * this.caloriesPer100) * 100) / 100
-            else this.fd.calories = 0
+            } else this.fd.calories = 0
         },
 
         add () {
