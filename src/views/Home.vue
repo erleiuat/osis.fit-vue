@@ -6,8 +6,8 @@
 import HelloWorld from '../components/HelloWorld'
 
 export default {
-  components: {
-    HelloWorld
-  }
+    components: {
+        HelloWorld
+    }
 }
 </script>

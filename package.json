@@ -27,6 +27,7 @@
     "sass": "^1.17.4",
     "sass-loader": "^7.1.0",
     "vue-cli-plugin-vuetify": "^0.6.3",
+    "vue-i18n": "^8.14.0",
     "vue-template-compiler": "^2.6.10",
     "vuetify-loader": "^1.2.2",
     "webpack-assets-manifest": "^3.1.1"
@@ -40,7 +41,9 @@
       "plugin:vue/essential",
       "@vue/standard"
     ],
-    "rules": {},
+    "rules": {
+      "indent": ["error", 4]
+    },
     "parserOptions": {
       "parser": "babel-eslint"
     }
