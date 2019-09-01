@@ -1,6 +1,6 @@
 {
-  "name": "Osis.fit",
-  "short_name": "Osis.fit",
+  "name": "osis.fit-vue",
+  "short_name": "osis.fit-vue",
   "icons": [
     {
       "src": "./img/icons/android-chrome-192x192.png",
@@ -13,8 +13,8 @@
       "type": "image/png"
     }
   ],
-  "start_url": "./",
+  "start_url": "./index.html",
   "display": "standalone",
-  "background_color": "#FFFFFF",
-  "theme_color": "#FFFFFF"
+  "background_color": "#000000",
+  "theme_color": "#4DBA87"
 }

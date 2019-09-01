@@ -1,60 +1,31 @@
 <template>
-    <v-app>
-
-        <Drawer v-if="$store.getters['auth/authorized']" />
-
-        <router-view name="toolbar" />
-        <Alerts />
-
-        <v-content>
-            <transition appear name="fade" mode="out-in">
-                <router-view />
-            </transition>
-        </v-content>
-
-        <transition appear name="slideUp" mode="out-in">
-            <router-view name="bottom" />
-        </transition>
-
-        <CookieInfo v-if="this.$store.getters['cookieNotice']" />
-
-    </v-app>
+  <div id="app">
+    <div id="nav">
+      <router-link to="/">Home</router-link> |
+      <router-link to="/about">About</router-link>
+    </div>
+    <router-view/>
+  </div>
 </template>
 
-<script>
-import Drawer from '@/components/nav/drawer/'
-
-const Alerts = () => import('@/components/Alerts')
-const CookieInfo = () => import('@/components/CookieInfo')
-
-export default {
-    name: 'App',
-
-    components: {
-        Drawer, Alerts, CookieInfo
-    },
-
-    methods: {
-        setMetaTheme (dark) {
-            var metaThemeColor = document.querySelector('meta[name=theme-color]')
-            if (dark) metaThemeColor.setAttribute('content', '#303030')
-            else metaThemeColor.setAttribute('content', '#FAFAFA')
-        }
-    },
-
-    created () {
-        var appInfo = this.$store.getters['app']
-        this.$i18n.locale = appInfo.locale
-        this.$vuetify.theme.dark = appInfo.dark
-        this.setMetaTheme(appInfo.dark)
-
-        this.$store.subscribe((mutation, state) => {
-            if (mutation.type === 'setLocale') this.$i18n.locale = mutation.payload
-            else if (mutation.type === 'setDark') {
-                this.$vuetify.theme.dark = mutation.payload
-                this.setMetaTheme(mutation.payload)
-            }
-        })
-    }
+<style>
+#app {
+  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: #2c3e50;
 }
-</script>
+#nav {
+  padding: 30px;
+}
+
+#nav a {
+  font-weight: bold;
+  color: #2c3e50;
+}
+
+#nav a.router-link-exact-active {
+  color: #42b983;
+}
+</style>
