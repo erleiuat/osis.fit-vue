@@ -1,6 +1,6 @@
 <template>
     <div>
-        <v-app-bar app color="primary" dark elevate-on-scroll hide-on-scroll>
+        <v-app-bar app dark elevate-on-scroll hide-on-scroll>
             <slot></slot>
         </v-app-bar>
     </div>
