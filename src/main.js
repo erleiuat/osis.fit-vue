@@ -1,9 +1,9 @@
 import Vue from 'vue'
 import App from './App.vue'
-import router from './router'
-import store from './store'
-import './registerServiceWorker'
-import vuetify from './plugins/vuetify';
+import router from '@/plugins/router/'
+import store from '@/plugins/vuex/'
+import vuetify from '@/plugins/vuetify/'
+import '@/plugins/pwa/'
 
 Vue.config.productionTip = false
 
