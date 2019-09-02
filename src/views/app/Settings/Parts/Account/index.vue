@@ -1,25 +1,30 @@
 <template>
     <v-expansion-panels v-model="openPanel" popout>
         <v-expansion-panel>
-            <v-expansion-panel-header>
+            <v-expansion-panel-header class="subheader">
                 {{ $t('change') }}
             </v-expansion-panel-header>
+            <v-divider />
             <v-expansion-panel-content>
                 <Change />
             </v-expansion-panel-content>
+            <v-divider />
         </v-expansion-panel>
         <v-expansion-panel>
-            <v-expansion-panel-header>
+            <v-expansion-panel-header class="subheader">
                 {{ $t('download') }}
             </v-expansion-panel-header>
+            <v-divider />
             <v-expansion-panel-content>
                 <Download />
             </v-expansion-panel-content>
+            <v-divider />
         </v-expansion-panel>
         <v-expansion-panel>
-            <v-expansion-panel-header>
+            <v-expansion-panel-header class="subheader">
                 {{ $t('delete') }}
             </v-expansion-panel-header>
+            <v-divider />
             <v-expansion-panel-content>
                 <Delete />
             </v-expansion-panel-content>

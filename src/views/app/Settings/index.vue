@@ -1,7 +1,7 @@
 <template>
     <transition v-if="$vuetify.breakpoint.smAndDown" name="fade" mode="out-in">
         <MobileMenu v-if="$route.name === 'settings'" />
-        <router-view v-else />
+        <router-view v-else class="pt-2"/>
     </transition>
     <DesktopMenu v-else />
 </template>

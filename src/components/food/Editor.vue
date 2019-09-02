@@ -41,7 +41,7 @@
                             </v-col>
 
                             <v-col cols="12" v-if="$store.getters['auth/premium']">
-                                <ImageInput v-model="fd.image" />
+                                <ImageInput v-model="fd.image" height="200" contain/>
                             </v-col>
                             <v-col cols="12" v-else>
                                 <v-btn block depressed large :to="{name: 'premium'}">

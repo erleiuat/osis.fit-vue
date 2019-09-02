@@ -39,7 +39,7 @@
                             <v-icon left>{{item.icon}}</v-icon>
                             {{item.title}}
                         </v-tab>
-                        <v-tabs-items>
+                        <v-tabs-items class="pt-4 pb-4">
                             <router-view />
                         </v-tabs-items>
                     </v-tabs>

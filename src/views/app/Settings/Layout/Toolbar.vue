@@ -10,17 +10,20 @@
         <v-toolbar-title>
             {{ title }}
         </v-toolbar-title>
+        <v-spacer />
+        <Icon />
     </Default>
 </template>
 
 <script>
 import Default from '@/components/nav/toolbar/Default'
+import Icon from '@/components/nav/toolbar/Icon'
 
 export default {
     name: 'Toolbar',
 
     components: {
-        Default
+        Default, Icon
     },
 
     computed: {

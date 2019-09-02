@@ -4,13 +4,14 @@
 
             <v-row justify="center" align="center" dense>
 
-                <v-col cols="7" sm="6" md="4" v-if="$store.getters['auth/premium']">
-                    Profilbild
-                    <ImageInput v-model="fd.image" />
+                <v-col cols="9" sm="6" md="4" v-if="$store.getters['auth/premium']">
+                    {{ $t('profPic')}}
+                    <ImageInput v-model="fd.image" ratio="1" />
                 </v-col>
-                <v-col cols="8" sm="6" md="4" v-else>
-                    Profilbild
-                    <v-btn block depressed large :to="{name: 'premium'}">
+                <v-col cols="12" sm="6" md="4" v-else>
+                    {{ $t('profPic')}}
+                    <v-btn :to="{name: 'premium'}" color="amber" light block depressed large>
+                        <v-icon left>star</v-icon>
                         {{ $t('needsPremium') }}
                     </v-btn>
                 </v-col>
@@ -24,7 +25,7 @@
                             <v-text-field :label="$t('lastname')" v-model="fd.lastname" :rules="rule.require" type="text" filled />
                         </v-col>
                         <v-col cols="12" md="11">
-                            <v-text-field :value="$store.state.auth.account.mail" disabled :label="$t('email')" filled />
+                            <v-text-field :value="$store.state.auth.account.mail" disabled :label="$t('mail')" filled />
                         </v-col>
                         <v-col cols="12" md="11">
                             <v-text-field :value="$store.state.auth.account.username" disabled :label="$t('username')" filled />
@@ -122,13 +123,16 @@ export default {
     i18n: {
         messages: {
             en: {
+                needsPremium: 'Premium-Only',
                 title: 'Profile',
+                profPic: 'Avatar',
                 firstname: 'Firstname',
                 lastname: 'Lastname',
                 birthdate: 'Birthdate',
                 gender: 'Gender',
                 height: 'Height (cm)',
                 mail: 'Mail',
+                username: 'Username',
                 g: {
                     null: '-',
                     male: 'Male',
@@ -136,13 +140,16 @@ export default {
                 }
             },
             de: {
+                needsPremium: 'Nur mit Premium',
                 title: 'Profil',
+                profPic: 'Profilbild',
                 firstname: 'Vorname',
                 lastname: 'Nachname',
                 birthdate: 'Geburtsdatum',
                 gender: 'Geschlecht',
                 height: 'Grösse (cm)',
                 mail: 'Mail',
+                username: 'Benutzername',
                 g: {
                     null: '-',
                     male: 'Männlich',

@@ -34,7 +34,6 @@
         <DrawerItems v-if="$store.getters['auth/authorized']" />
 
         <template v-slot:append>
-            <v-divider></v-divider>
             <v-list dense nav>
                 <v-list-item :to="{ name: 'settings' }" link>
                     <v-list-item-icon>
@@ -44,6 +43,7 @@
                         <v-list-item-title>{{ $t('view.settings.title') }}</v-list-item-title>
                     </v-list-item-content>
                 </v-list-item>
+                <!--
                 <v-list-item :to="{ name: 'help' }" v-if="$store.getters['auth/authorized']" link>
                     <v-list-item-icon>
                         <v-icon>help</v-icon>
@@ -68,7 +68,55 @@
                         <v-list-item-title>{{ $t('view.terms.title') }}</v-list-item-title>
                     </v-list-item-content>
                 </v-list-item>
+                -->
             </v-list>
+            <v-divider></v-divider>
+
+            <v-container class="pt-1 pb-1">
+                <v-row no-gutters align="center">
+                    <v-col cols="10" class="caption">
+                        Osis.Fit Beta
+                    </v-col>
+                    <v-col cols="2" class="text-right">
+                        <v-menu transition="slide-y-transition">
+                            <template v-slot:activator="{ on }">
+                                <v-btn icon small v-on="on">
+                                    <v-icon>more_horiz</v-icon>
+                                </v-btn>
+                            </template>
+                            <v-list dense>
+
+                                <v-list-item :to="{ name: 'help' }" v-if="$store.getters['auth/authorized']" link>
+                                    <v-list-item-icon>
+                                        <v-icon>help</v-icon>
+                                    </v-list-item-icon>
+                                    <v-list-item-content>
+                                        <v-list-item-title>{{ $t('view.help.title') }}</v-list-item-title>
+                                    </v-list-item-content>
+                                </v-list-item>
+                                <v-list-item :to="{ name: 'logout' }" v-if="$store.getters['auth/authorized']" link>
+                                    <v-list-item-icon>
+                                        <v-icon>lock</v-icon>
+                                    </v-list-item-icon>
+                                    <v-list-item-content>
+                                        <v-list-item-title>{{ $t('view.logout.title') }}</v-list-item-title>
+                                    </v-list-item-content>
+                                </v-list-item>
+                                <v-list-item :to="{ name: 'terms' }" link>
+                                    <v-list-item-icon>
+                                        <v-icon>notes</v-icon>
+                                    </v-list-item-icon>
+                                    <v-list-item-content>
+                                        <v-list-item-title>{{ $t('view.terms.title') }}</v-list-item-title>
+                                    </v-list-item-content>
+                                </v-list-item>
+
+                            </v-list>
+                        </v-menu>
+
+                    </v-col>
+                </v-row>
+            </v-container>
         </template>
 
     </v-navigation-drawer>

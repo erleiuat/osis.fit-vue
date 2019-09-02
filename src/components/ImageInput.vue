@@ -1,39 +1,43 @@
 <template>
     <v-container grid-list-sm pl-0 pr-0>
-        <transition name="zoom" mode="out-in">
+        <v-card :outlined="!value">
+            <transition name="fade" mode="out-in">
 
-            <v-layout row wrap align-center v-if="!value" style="height: 120px;" key="1">
+                <v-layout row wrap align-center v-if="!value" :style="height?'height:'+height+'px':'min-height:200px'" key="1">
 
-                <v-flex xs12 v-if="!value && !uploading">
-                    <v-file-input v-model="file" :label="$t('select')" @change="upload()" :rules="rule" :disabled="uploading" prepend-icon="camera_alt" accept="image/jpg, image/png, image/jpeg" />
-                </v-flex>
+                    <v-flex xs12 v-if="!value && !uploading">
+                        <v-card-text>
+                            <v-file-input v-model="file" :label="$t('select')" @change="upload()" :rules="rule" :disabled="uploading" prepend-icon="camera_alt" accept="image/jpg, image/png, image/jpeg" />
+                        </v-card-text>
+                    </v-flex>
 
-                <!--
-                <v-flex xs12 v-if="!value && !uploading" text-center>
-                    <v-btn block @click="upload()" :loading="uploading" :disabled="!choosen" :color="choosen ? 'success' : ''" depressed>
-                        {{ $t('upload') }} <v-icon right>cloud_upload</v-icon>
-                    </v-btn>
-                </v-flex>
-                -->
+                    <!--
+                    <v-flex xs12 v-if="!value && !uploading" text-center>
+                        <v-btn block @click="upload()" :loading="uploading" :disabled="!choosen" :color="choosen ? 'success' : ''" depressed>
+                            {{ $t('upload') }} <v-icon right>cloud_upload</v-icon>
+                        </v-btn>
+                    </v-flex>
+                    -->
 
-                <v-flex xs12 v-if="uploading">
-                    <v-progress-linear :active="uploading" :value="progress" rounded :indeterminate="progress >= 100" :dark="progress < 50" height="30">
-                        <strong v-if="progress < 100">{{ progress }}%</strong>
-                        <strong v-else>{{ $t('processing') }}</strong>
-                    </v-progress-linear>
-                </v-flex>
-            </v-layout>
+                    <v-flex xs12 v-if="uploading">
+                        <v-card-text>
+                            <v-progress-linear :active="uploading" :value="progress" rounded :indeterminate="progress >= 100" :dark="progress < 50" height="30">
+                                <strong v-if="progress < 100">{{ progress }}%</strong>
+                                <strong v-else>{{ $t('processing') }}</strong>
+                            </v-progress-linear>
+                        </v-card-text>
+                    </v-flex>
+                </v-layout>
 
-            <v-layout row wrap align-center v-if="value && !processing" style="min-height: 200px;" key="2">
-                <v-flex xs12 pt-0 pb-0>
-                    <v-card>
-                        <v-img :src="value.path.medium" :lazy-src="value.path.lazy" min-height="200">
+                <v-layout row wrap align-center v-if="value && !processing" :style="height?'height:'+height+'px':'min-height:200px'" key="2">
+                    <v-flex xs12 pt-0 pb-0>
+                        <v-img :src="value.path.medium" :lazy-src="value.path.lazy" :aspect-ratio="ratio" :height="height" :contain="contain">
                             <template v-slot:placeholder>
                                 <v-layout fill-height align-center justify-center ma-0>
                                     <v-progress-circular indeterminate />
                                 </v-layout>
                             </template>
-                            <v-card-title class="lightbox align-start  fill-height pa-2">
+                            <v-card-title class="lightbox align-start fill-height pa-2">
                                 <v-btn icon small @click="remove()" color="white">
                                     <v-icon>delete</v-icon>
                                 </v-btn>
@@ -43,11 +47,11 @@
                                 </v-btn>
                             </v-card-title>
                         </v-img>
-                    </v-card>
-                </v-flex>
-            </v-layout>
+                    </v-flex>
+                </v-layout>
 
-        </transition>
+            </transition>
+        </v-card>
     </v-container>
 </template>
 
@@ -61,7 +65,7 @@ export default {
         image
     },
 
-    props: ['value'],
+    props: ['value', 'ratio', 'height', 'contain'],
 
     data () {
         return {
