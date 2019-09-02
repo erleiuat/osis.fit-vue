@@ -1,24 +1,39 @@
 <template>
-    <vcontainer align="center" style="min-height: 400px;">
+    <vcontainer align="center">
         <v-form v-model="rule.valid" ref="form" v-on:submit.prevent>
 
-            <v-row justify="center" dense>
-                <v-col cols="12" md="3">
+            <v-row justify="center" align="center" dense>
+
+                <v-col cols="12" md="5">
+                    <WeightAdder>
+                        <template v-slot:default="trigger">
+                            <div>
+                                <p class="caption mb-0">{{ $t('curWeight') }}</p>
+                                <v-btn v-on="trigger.on" depressed block>
+                                    {{ $store.getters['weight/latest'] ? $store.getters['weight/latest'].weight+' Kg' : '' }}
+                                    <v-icon small right>edit</v-icon>
+                                </v-btn>
+                            </div>
+                        </template>
+                    </WeightAdder>
+                </v-col>
+
+                <v-col cols="12" md="5">
                     <v-text-field :label="$t('height')" v-model="fd.height" :rules="rule.require" type="number" filled />
                 </v-col>
-                <v-col cols="12" md="3">
+                <v-col cols="12" md="5">
                     <v-select :label="$t('gender')" v-model="fd.gender" :items="genders" :rules="rule.require" filled />
                 </v-col>
-                <v-col cols="12" md="3">
+                <v-col cols="12" md="5">
                     <v-text-field v-model="fd.birthdate" :label="$t('birthdate')" type="date" append-icon="event" filled />
-                    <!--
-                    <v-menu ref="menu" v-model="menu" :close-on-content-click="false" transition="scale-transition" offset-y full-width min-width="290px">
-                        <template v-slot:activator="{ on }">
-                            <v-text-field v-model="fd.birthdate" :label="$t('birthdate')" v-on="on" @focus="menu = true" readonly type="date" append-icon="event" filled />
-                        </template>
-                        <v-date-picker v-model="fd.birthdate" ref="picker" @change="$refs.menu.save(fd.birthdate)" :locale="$store.getters['app'].locale" />
-                    </v-menu>
-                    -->
+                </v-col>
+
+                <v-col cols="12" class="text-center">
+                    {{ bmr }}
+                </v-col>
+
+                <v-col cols="12">
+                    <v-divider />
                 </v-col>
 
                 <v-col cols="12" md="9" class="text-center">
@@ -87,8 +102,19 @@
 </template>
 
 <script>
+import weight from '@/store/modules/weight'
+import WeightAdder from '@/components/adder/Weight'
+
 export default {
     name: 'EditMetabolism',
+
+    components: {
+        WeightAdder
+    },
+
+    modules: {
+        weight
+    },
 
     mounted () {
         this.$store.dispatch('user/load')
@@ -125,6 +151,19 @@ export default {
     },
 
     computed: {
+
+        bmr () {
+            var rtn = this.$t('bmr') + ': '
+            if (!this.$store.getters['weight/latest']) {
+                rtn += this.$t('missing')
+            } else {
+                rtn += this.$store.getters['user/bmr'](
+                    this.$store.getters['weight/latest'].weight,
+                    this.fd.height, this.fd.gender, this.fd.birthdate
+                ) + ' ' + this.$t('calday')
+            }
+            return rtn
+        },
 
         pals () {
             var sl = this.slider
@@ -194,6 +233,10 @@ export default {
                 gender: 'Gender',
                 height: 'Height (cm)',
                 mail: 'Mail',
+                curWeight: 'Current weight',
+                bmr: 'Basal Metabolic Rate',
+                missing: 'Fill in all fields',
+                calday: 'Calories / Day',
                 g: {
                     null: '-',
                     male: 'Male',
@@ -211,6 +254,10 @@ export default {
                 gender: 'Geschlecht',
                 height: 'Grösse (cm)',
                 mail: 'Mail',
+                curWeight: 'Aktuelles Gewicht',
+                bmr: 'Grundumsatz',
+                missing: 'Fülle alle Felder aus',
+                calday: 'Kalorien / Tag',
                 g: {
                     null: '-',
                     male: 'Männlich',

@@ -14,6 +14,30 @@ const state = () => {
 
 const getters = {
 
+    bmr: state => (weight, height, gender, birth) => {
+
+        var dayNeed = 0
+
+        var tmpDate = new Date(Date.now() - Date.parse(birth))
+        var age = Math.abs(tmpDate.getUTCFullYear() - 1970)
+
+        if (gender === 'female') dayNeed = (
+            655.1 +
+            (9.6 * weight) +
+            (1.8 * height) +
+            (4.7 * age)
+        )
+        else dayNeed = (
+            66.47 +
+            (13.7 * weight) +
+            (5.0 * height) +
+            (6.8 * age)
+        )
+
+        return Math.round(dayNeed)
+        
+    },
+
     user: state => {
         if (!state.item) return null
         return {
