@@ -43,20 +43,22 @@
 
         <v-subheader>{{ $t('app') }}</v-subheader>
         <v-list-item-group>
-            <v-list-item>
+            <v-list-item link @click="mode = !mode">
                 <v-list-item-action>
-                    <v-checkbox v-model="mode" color="primary"></v-checkbox>
+                    <v-checkbox v-model="mode" readonly color="primary" />
                 </v-list-item-action>
                 <v-list-item-content>
                     <v-list-item-title>{{ $t('dark') }}</v-list-item-title>
                     <v-list-item-subtitle>{{ $t('appdesign') }}</v-list-item-subtitle>
                 </v-list-item-content>
             </v-list-item>
-
-            <v-list-item>
+            <v-list-item @click="lang = (lang === 'en' ? 'de' : 'en')">
+                <v-list-item-action class="text-center">
+                    <v-icon>language</v-icon>
+                </v-list-item-action>
                 <v-list-item-content>
                     <v-list-item-title>{{ $t('language') }}</v-list-item-title>
-                    <v-select v-model="lang" :items="langs" solo flat hide-details />
+                    <v-list-item-subtitle>{{ $t('lang.'+lang) }}</v-list-item-subtitle>
                 </v-list-item-content>
             </v-list-item>
         </v-list-item-group>
@@ -78,18 +80,12 @@ export default {
     name: 'MobileMenu',
 
     computed: {
-        items() {
+        items () {
             return [
                 { title: this.$t('profile'), icon: 'account_circle', to: 'settings.profile' },
                 { title: this.$t('metabolism'), icon: 'rotate_90_degrees_ccw', to: 'settings.metabolism' },
                 { title: this.$t('aims'), icon: 'done_all', to: 'settings.aims' },
                 { title: this.$t('premium'), icon: 'star', to: 'settings.premium' }
-            ]
-        },
-        langs () {
-            return [
-                { text: this.$t('lang.en'), value: 'en' },
-                { text: this.$t('lang.de'), value: 'de' }
             ]
         },
         lang: {

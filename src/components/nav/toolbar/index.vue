@@ -26,7 +26,7 @@ export default {
     name: 'Toolbar',
 
     components: {
-        Default,Icon
+        Default, Icon
     },
 
     computed: {

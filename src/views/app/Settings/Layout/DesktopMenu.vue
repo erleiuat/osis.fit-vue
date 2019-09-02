@@ -9,10 +9,26 @@
                         {{ $t('app') }}
                     </v-card-title>
                     <v-card-text>
-                        <div class="title">{{ $t('language') }}</div>
-                        <v-select v-model="lang" :items="langs" solo flat hide-details />
-                        <div class="title">{{ $t('appdesign') }}</div>
-                        <v-checkbox v-model="mode" color="primary" :label="$t('dark')" hide-details />
+                        <v-list-item-group>
+                            <v-list-item link @click="mode = !mode">
+                                <v-list-item-action>
+                                    <v-checkbox v-model="mode" readonly color="primary" />
+                                </v-list-item-action>
+                                <v-list-item-content>
+                                    <v-list-item-title>{{ $t('dark') }}</v-list-item-title>
+                                    <v-list-item-subtitle>{{ $t('appdesign') }}</v-list-item-subtitle>
+                                </v-list-item-content>
+                            </v-list-item>
+                            <v-list-item @click="lang = (lang === 'en' ? 'de' : 'en')">
+                                <v-list-item-action class="text-center">
+                                    <v-icon>language</v-icon>
+                                </v-list-item-action>
+                                <v-list-item-content>
+                                    <v-list-item-title>{{ $t('language') }}</v-list-item-title>
+                                    <v-list-item-subtitle>{{ $t('lang.'+lang) }}</v-list-item-subtitle>
+                                </v-list-item-content>
+                            </v-list-item>
+                        </v-list-item-group>
                     </v-card-text>
                 </v-card>
             </v-col>
@@ -67,12 +83,6 @@ export default {
                 { title: this.$t('aims'), icon: 'done_all', to: 'settings.aims' },
                 { title: this.$t('premium'), icon: 'star', to: 'settings.premium' },
                 { title: this.$t('account'), icon: 'settings', to: 'settings.account' }
-            ]
-        },
-        langs () {
-            return [
-                { text: this.$t('lang.en'), value: 'en' },
-                { text: this.$t('lang.de'), value: 'de' }
             ]
         },
         lang: {
