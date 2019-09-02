@@ -11,10 +11,13 @@
 
         <v-card>
             <v-toolbar color="primary" flat dark>
-                <v-toolbar-title>{{ $t('title') }}</v-toolbar-title>
-                <v-spacer></v-spacer>
                 <v-btn icon @click="show = false">
                     <v-icon>close</v-icon>
+                </v-btn>
+                <v-toolbar-title>{{ $t('title') }}</v-toolbar-title>
+                <v-spacer></v-spacer>
+                <v-btn icon @click="add()" :loading="sending">
+                    <v-icon>save</v-icon>
                 </v-btn>
             </v-toolbar>
 
@@ -57,7 +60,9 @@
                         </v-flex>
 
                         <v-flex xs12>
-                            <v-btn @click="add()" :loading="sending" block type="submit" color="primary">{{ $t('btn.save') }}</v-btn>
+                            <v-btn @click="add()" :loading="sending" type="submit" color="primary" block depressed>
+                                {{ $t('btn.save') }}
+                            </v-btn>
                         </v-flex>
 
                     </v-layout>

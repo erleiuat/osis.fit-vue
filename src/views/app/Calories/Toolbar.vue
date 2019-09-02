@@ -20,7 +20,7 @@
 
         <CalorieAdder v-if="$vuetify.breakpoint.mdAndUp">
             <template v-slot:default="trigger">
-                <v-btn large text v-on="trigger.on">
+                <v-btn v-on="trigger.on" color="accent" large depressed>
                     <v-icon left>add</v-icon> {{ $t('btn.add') }}
                 </v-btn>
             </template>

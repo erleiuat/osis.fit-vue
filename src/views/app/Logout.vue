@@ -1,31 +1,25 @@
 <template>
     <vcontainer align="center">
 
-        <v-row justify="center" align="end" style="height: 200px">
-            <v-col cols="auto" v-if="!doing">
+        <v-row justify="center">
+            <v-col cols="12" sm="7" v-if="!doing" style="height: 200px">
                 <div class="headline pb-5">{{ $t('text') }}</div>
             </v-col>
-            <v-col cols="auto" v-else>
+            <v-col cols="12" sm="7" v-else style="height: 200px">
                 <div class="body-1 pb-5">{{ $t('pleaseWait') }}</div>
                 <div class="headline pb-3">{{ $t('nextTime') }}</div>
             </v-col>
-        </v-row>
-
-        <v-row justify="center">
-            <v-col cols="12" sm="6" md="3">
+            <v-col cols="12" sm="7">
                 <v-btn @click="logout()" block color="primary" depressed>
                     {{ $t('sure') }}
                 </v-btn>
             </v-col>
-            <v-col cols="12" sm="6" md="3">
+            <v-col cols="12" sm="7">
                 <v-btn @click="$router.go(-1)" block depressed>
                     {{ $t('btn.cancel') }}
                 </v-btn>
             </v-col>
-        </v-row>
-
-        <v-row justify="center">
-            <v-col cols="12" md="6">
+            <v-col cols="12" md="7">
                 <v-progress-linear :indeterminate="doing" :color="prgcol" height="20" />
             </v-col>
         </v-row>

@@ -23,7 +23,7 @@
                     <v-list-item-title>{{ $t('password') }}</v-list-item-title>
                 </v-list-item-content>
             </v-list-item>
-            <v-list-item :to="{ name: 'settings.account', query: {s:'data'} }">
+            <v-list-item :to="{ name: 'settings.account', query: {s:'download'} }">
                 <v-list-item-icon>
                     <v-icon>arrow_downward</v-icon>
                 </v-list-item-icon>
@@ -56,7 +56,6 @@
             <v-list-item>
                 <v-list-item-content>
                     <v-list-item-title>{{ $t('language') }}</v-list-item-title>
-
                     <v-select v-model="lang" :items="langs" solo flat hide-details />
                 </v-list-item-content>
             </v-list-item>
@@ -82,6 +81,7 @@ export default {
         return {
             items: [
                 { title: this.$t('profile'), icon: 'account_circle', to: 'settings.profile' },
+                { title: this.$t('metabolism'), icon: 'rotate_90_degrees_ccw', to: 'settings.metabolism' },
                 { title: this.$t('aims'), icon: 'done_all', to: 'settings.aims' },
                 { title: this.$t('premium'), icon: 'star', to: 'settings.premium' }
             ]
@@ -97,7 +97,7 @@ export default {
         },
         lang: {
             get () {
-                return this.$store.getters['locale']
+                return this.$store.getters['app'].locale
             },
             set (val) {
                 this.$store.commit('setLocale', val)
@@ -105,7 +105,7 @@ export default {
         },
         mode: {
             get () {
-                return this.$store.getters['dark']
+                return this.$store.getters['app'].dark
             },
             set (val) {
                 this.$store.commit('setDark', val)
@@ -118,6 +118,7 @@ export default {
             en: {
                 general: 'GENERAL',
                 profile: 'Profile',
+                metabolism: 'Metabolism',
                 aims: 'Aims',
                 premium: 'Premium',
                 account: 'ACCOUNT',
@@ -138,6 +139,7 @@ export default {
             de: {
                 general: 'ALLGEMEIN',
                 profile: 'Profil',
+                metabolism: 'Stoffwechsel',
                 aims: 'Ziele',
                 premium: 'Premium',
                 account: 'KONTO',

@@ -36,11 +36,8 @@
 
         <v-form v-if="state === 'reset'" v-model="rule.valid" ref="form" v-on:submit.prevent>
             <v-row dense justify="center">
-                <v-col cols="12" sm="7" md="4">
-                    <v-text-field v-model="fd.password" :label="$t('password')" :rules="rule.password" type="password" filled rounded single-line />
-                </v-col>
-                <v-col cols="12" sm="7" md="4">
-                    <v-text-field v-model="pwRepeat" :label="$t('repeat')" :rules="rule.repeat" type="password" filled rounded single-line />
+                <v-col cols="12" sm="7">
+                    <v-text-field v-model="fd.password" :label="$t('password')" :rules="rule.password" :type="showPW ? 'text' : 'password'" :append-icon="showPW ? 'visibility' : 'visibility_off'" @click:append="showPW = !showPW" filled rounded single-line />
                 </v-col>
                 <v-col cols="12" sm="7">
                     <v-btn @click="reset()" :loading="sending" color="primary" depressed large block type="submit">
@@ -67,8 +64,8 @@ export default {
     data () {
         return {
             state: 'forgot',
+            showPW: false,
             sending: false,
-            pwRepeat: '',
             fd: {
                 identifier: '',
                 language: this.$store.state.app.lang || null,
@@ -84,10 +81,6 @@ export default {
                     v => !!v || this.$t('alert.v.require'),
                     v => /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.{8,})/.test(v) || this.$t('strong'),
                     v => v.length < 255 || this.$t('alert.v.tooLong', { amount: 255 })
-                ],
-                repeat: [
-                    v => !!v || this.$t('alert.v.require'),
-                    v => v === this.fd.password || this.$t('alert.v.notSame')
                 ]
             }
         }
@@ -109,22 +102,23 @@ export default {
         reset () {
             if (!this.$refs.form.validate()) return false
             this.sending = true
-            this.$store.dispatch('account/forgot', this.fd).then(r => {
+            this.$store.dispatch('account/forgot2', this.fd).then(r => {
                 this.$router.push({ name: 'auth.login' })
-                this.$notify({ type: 'error', title: this.$t('hasChanged') })
-            }).catch(r => { }).finally(() => {
+                this.$notify({ type: 'success', title: this.$t('hasChanged') })
+            }).catch(r => {
+                this.$notify({ type: 'error', title: this.$t('alert.error.default'), text: r })
+            }).finally(() => {
                 this.sending = false
             })
         }
 
     },
 
-    mounted () {
+    beforeMount () {
         if (this.$route.query.mail && this.$route.query.code) {
-            this.state = 'reset'
-            this.fd.mail = this.$route.query.mail
+            this.fd.identifier = this.$route.query.mail
             this.fd.code = this.$route.query.code
-            this.$router.push({ name: 'auth.forgotten', query: { reset: true } })
+            this.state = 'reset'
         }
     },
 
@@ -132,9 +126,10 @@ export default {
         messages: {
             en: {
                 title: 'Reset password',
-                password: 'Password',
+                password: 'New Password',
                 repeat: 'Repeat Password',
                 hasChanged: 'Password has been changed',
+                strong: 'New password is not strong enough',
                 text: `
                     If you have forgotten your password, you can request a reset link here. 
                     The link will then be sent to you by email.
@@ -146,9 +141,10 @@ export default {
             },
             de: {
                 title: 'Passwort zurücksetzen',
-                password: 'Passwort',
+                password: 'Neues Passwort',
                 repeat: 'Passwort wiederholen',
                 hasChanged: 'Passwort wurde geändert',
+                strong: 'Das neue Password ist nicht stark genug',
                 text: `
                     Falls du dein Passwort vergessen hast, kannst du hier 
                     einen Link zum Zurücksetzen anfordern. Der Link wird anschliessend

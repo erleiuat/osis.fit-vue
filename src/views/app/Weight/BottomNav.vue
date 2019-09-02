@@ -1,4 +1,15 @@
 <template>
+    <v-fab-transition v-if="$vuetify.breakpoint.smAndDown">
+        <WeightAdder>
+            <template v-slot:default="trigger">
+                <v-btn v-on="trigger.on" fab fixed bottom right color="primary">
+                    <v-icon>add</v-icon>
+                </v-btn>
+            </template>
+        </WeightAdder>
+    </v-fab-transition>
+
+    <!--
     <v-bottom-navigation app fixed grow v-if="$vuetify.breakpoint.smAndDown">
 
         <WeightAdder>
@@ -11,6 +22,8 @@
         </WeightAdder>
 
     </v-bottom-navigation>
+    -->
+
 </template>
 
 <script>

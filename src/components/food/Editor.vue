@@ -15,6 +15,9 @@
                     <v-btn icon @click="sure = true" v-if="fd.id">
                         <v-icon>delete</v-icon>
                     </v-btn>
+                    <v-btn icon @click="save()" :loading="sending" v-else>
+                        <v-icon>save</v-icon>
+                    </v-btn>
                 </v-toolbar>
             </v-card-title>
 

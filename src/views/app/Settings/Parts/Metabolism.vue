@@ -13,12 +13,15 @@
 
             <v-row justify="center" dense>
                 <v-col cols="12" sm="5" md="4">
+                    <v-text-field v-model="fd.birthdate" :label="$t('birthdate')" type="date" append-icon="event" filled />
+                    <!--
                     <v-menu ref="menu" v-model="menu" :close-on-content-click="false" transition="scale-transition" offset-y full-width min-width="290px">
                         <template v-slot:activator="{ on }">
                             <v-text-field v-model="fd.birthdate" :label="$t('birthdate')" v-on="on" @focus="menu = true" readonly type="date" append-icon="event" filled />
                         </template>
                         <v-date-picker v-model="fd.birthdate" ref="picker" @change="$refs.menu.save(fd.birthdate)" :locale="$store.getters['locale']" />
                     </v-menu>
+                    -->
                 </v-col>
 
                 <v-col cols="12" sm="5" md="4">

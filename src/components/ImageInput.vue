@@ -4,15 +4,17 @@
 
             <v-layout row wrap align-center v-if="!value" style="height: 120px;" key="1">
 
-                <v-flex xs12 sm8 v-if="!value && !uploading">
-                    <v-file-input v-model="file" :label="$t('select')" :rules="rule" :disabled="uploading" prepend-icon="camera_alt" accept="image/jpg, image/png, image/jpeg" />
+                <v-flex xs12 v-if="!value && !uploading">
+                    <v-file-input v-model="file" :label="$t('select')" @change="upload()" :rules="rule" :disabled="uploading" prepend-icon="camera_alt" accept="image/jpg, image/png, image/jpeg" />
                 </v-flex>
 
-                <v-flex xs12 sm4 v-if="!value && !uploading" text-center>
+                <!--
+                <v-flex xs12 v-if="!value && !uploading" text-center>
                     <v-btn block @click="upload()" :loading="uploading" :disabled="!choosen" :color="choosen ? 'success' : ''" depressed>
                         {{ $t('upload') }} <v-icon right>cloud_upload</v-icon>
                     </v-btn>
                 </v-flex>
+                -->
 
                 <v-flex xs12 v-if="uploading">
                     <v-progress-linear :active="uploading" :value="progress" rounded :indeterminate="progress >= 100" :dark="progress < 50" height="30">
@@ -91,6 +93,8 @@ export default {
     methods: {
 
         upload () {
+            if(!this.choosen) return
+
             var fData = new FormData()
             fData.append('image', this.file, this.file.name)
 

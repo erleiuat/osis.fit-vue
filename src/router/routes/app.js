@@ -195,7 +195,7 @@ module.exports = [{
             name: 'settings.account',
             meta: { authRequired: true },
             components: {
-                default: () => import('@/views/app/Settings/Parts/Account')
+                default: () => import('@/views/app/Settings/Parts/Account/')
             }
         }
     ]

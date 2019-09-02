@@ -30,6 +30,17 @@ const state = () => {
 
 const getters = {
 
+    account: state => {
+        if (!state.account) {
+            state.authorized = false
+            return null
+        }
+        return {
+            mail: state.account.mail,
+            username: state.account.username
+        }
+    },
+
     authorized: state => {
         return state.authorized
     },

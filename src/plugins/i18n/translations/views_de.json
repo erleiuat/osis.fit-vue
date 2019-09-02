@@ -54,6 +54,10 @@
     "settings": {
         "title": "Einstellungen",
         "description": "",
+        "metabolism": {
+            "title": "Stoffwechsel",
+            "description": ""
+        },
         "profile": {
             "title": "Profil bearbeiten",
             "description": ""

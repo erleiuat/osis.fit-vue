@@ -11,10 +11,8 @@
                     <v-card-text>
                         <div class="title">{{ $t('language') }}</div>
                         <v-select v-model="lang" :items="langs" solo flat hide-details />
-                    </v-card-text>
-                    <v-card-text>
                         <div class="title">{{ $t('appdesign') }}</div>
-                        <v-checkbox v-model="mode" color="primary" :label="$t('dark')" />
+                        <v-checkbox v-model="mode" color="primary" :label="$t('dark')" hide-details />
                     </v-card-text>
                 </v-card>
             </v-col>
@@ -61,7 +59,7 @@ export default {
         return {
             items: [
                 { title: this.$t('profile'), icon: 'account_circle', to: 'settings.profile' },
-                { title: this.$t('metabolism'), icon: 'done_all', to: 'settings.metabolism' },
+                { title: this.$t('metabolism'), icon: 'rotate_90_degrees_ccw', to: 'settings.metabolism' },
                 { title: this.$t('aims'), icon: 'done_all', to: 'settings.aims' },
                 { title: this.$t('premium'), icon: 'star', to: 'settings.premium' },
                 { title: this.$t('account'), icon: 'settings', to: 'settings.account' }

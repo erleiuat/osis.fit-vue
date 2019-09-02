@@ -40,6 +40,26 @@ const actions = {
                 reject(err)
             })
         })
+    },
+
+    forgot2 (con, form) {
+        return new Promise((resolve, reject) => {
+            Apios.post('auth/password/forgotten/', form).then(() => {
+                resolve()
+            }).catch(err => {
+                reject(err)
+            })
+        })
+    },
+
+    change (con, form) {
+        return new Promise((resolve, reject) => {
+            Apios.post('auth/password/change/', form).then(() => {
+                resolve()
+            }).catch(err => {
+                reject(err)
+            })
+        })
     }
 
 }

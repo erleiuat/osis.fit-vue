@@ -134,7 +134,7 @@ export default {
                 this.$router.push({ name: 'auth.verify' })
             }).catch(r => {
                 if (r === 'mail_in_use') this.$notify({ type: 'error', title: this.$t('mailInUse') })
-                else this.$notify({ type: 'error', title: this.$t('alert.error.default') })
+                else this.$notify({ type: 'error', title: this.$t('alert.error.default'), text: r })
             }).finally(() => {
                 this.sending = false
             })

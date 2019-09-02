@@ -54,6 +54,10 @@
     "settings": {
         "title": "Settings",
         "description": "",
+        "metabolism": {
+            "title": "Metabolism",
+            "description": ""
+        },
         "profile": {
             "title": "Edit Profile",
             "description": ""

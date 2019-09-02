@@ -2,28 +2,33 @@
     <v-navigation-drawer v-model="drawer" app floating>
 
         <template v-slot:prepend>
-                <v-img :src="require('@/assets/img/drawer_bg.jpg')" max-height="144">
+            <v-img :lazy-src="require('@/assets/img/drawer_bg_lazy.jpg')" :src="require('@/assets/img/drawer_bg.jpg')" max-height="144">
 
-                    <v-row class="lightbox">
-                        <v-col cols="12" class="pb-0">
-                            <v-list dense dark>
-                                <v-list-item>
-                                    <v-list-item-avatar v-if="$store.getters['user/image']">
-                                        <v-img :src="$store.getters['user/image'].path.small" />
-                                    </v-list-item-avatar>
-                                    <v-list-item-avatar v-else>
-                                        <v-img :src="require('@/assets/img/user.png')" />
-                                    </v-list-item-avatar>
-                                </v-list-item>
-                                <v-list-item two-line>
-                                    <v-list-item-content>
-                                        <v-list-item-title class="title">{{ $store.getters['user/fullName'] }}</v-list-item-title>
-                                    </v-list-item-content>
-                                </v-list-item>
-                            </v-list>
-                        </v-col>
-                    </v-row>
-                </v-img>
+                <v-row class="lightbox">
+                    <v-col cols="12" class="pb-0">
+                        <v-list dense dark>
+                            <v-list-item link @click="$router.push({name: 'settings.profile'})">
+                                <v-list-item-avatar v-if="$store.getters['user/image']">
+                                    <v-img :src="$store.getters['user/image'].path.small" />
+                                </v-list-item-avatar>
+                                <v-list-item-avatar v-else>
+                                    <v-img :src="require('@/assets/img/user.png')" />
+                                </v-list-item-avatar>
+                            </v-list-item>
+                            <v-list-item two-line link @click="$router.push({name: 'settings.profile'})">
+                                <v-list-item-content>
+                                    <v-list-item-title class="subheader">
+                                        {{ $store.getters['user/fullName'] }}
+                                    </v-list-item-title>
+                                    <v-list-item-subtitle>
+                                        {{ $store.getters['auth/account'].username }}
+                                    </v-list-item-subtitle>
+                                </v-list-item-content>
+                            </v-list-item>
+                        </v-list>
+                    </v-col>
+                </v-row>
+            </v-img>
         </template>
 
         <DrawerItems v-if="$store.getters['auth/authorized']" />

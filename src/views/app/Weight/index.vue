@@ -1,7 +1,7 @@
 <template>
     <vcontainer fluid>
 
-        <v-row>
+        <v-row dense>
             <v-col cols="12">
                 <WeightChart />
             </v-col>

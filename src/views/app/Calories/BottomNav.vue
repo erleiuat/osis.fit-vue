@@ -1,21 +1,24 @@
 <template>
-    <v-bottom-navigation app fixed grow v-if="$vuetify.breakpoint.smAndDown">
+    <div>
 
-        <CalorieAdder>
-            <template v-slot:default="trigger">
-                <v-btn text v-on="trigger.on">
-                    <span>{{ $t('addCalories') }}</span>
-                    <v-icon>add</v-icon>
-                </v-btn>
-            </template>
-        </CalorieAdder>
+        <v-fab-transition v-if="$vuetify.breakpoint.smAndDown">
+            <CalorieAdder>
+                <template v-slot:default="trigger">
+                    <v-btn v-on="trigger.on" fab fixed bottom right color="primary" class="mb-12">
+                        <v-icon>add</v-icon>
+                    </v-btn>
+                </template>
+            </CalorieAdder>
+        </v-fab-transition>
 
-        <v-btn text :to="{name: 'food'}">
-            <span>{{ $t('templates') }}</span>
-            <v-icon>open_in_new</v-icon>
-        </v-btn>
+        <v-bottom-navigation app fixed grow v-if="$vuetify.breakpoint.smAndDown">
+            <v-btn text :to="{name: 'food'}">
+                <span>{{ $t('templates') }}</span>
+                <v-icon>open_in_new</v-icon>
+            </v-btn>
+        </v-bottom-navigation>
 
-    </v-bottom-navigation>
+    </div>
 </template>
 
 <script>
