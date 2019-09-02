@@ -4,42 +4,42 @@
             <v-row dense justify="center">
 
                 <v-col cols="12">
-                    <div class="display-1 text-center">
+                    <div class="display-1 text-center pb-5">
                         {{ $t('title') }}
                     </div>
                 </v-col>
 
-                <v-col cols="12" sm="6">
+                <v-col cols="12" sm="5">
                     <v-text-field v-model="fd.firstname" :label="$t('ft.firstname')" :rules="rule.name" type="text" outlined single-line />
                 </v-col>
-                <v-col cols="12" sm="6">
+                <v-col cols="12" sm="5">
                     <v-text-field v-model="fd.lastname" :label="$t('ft.lastname')" :rules="rule.name" type="text" outlined single-line />
                 </v-col>
 
-                <v-col cols="12" sm="6" md="4">
+                <v-col cols="12" sm="6" md="5">
                     <v-text-field v-model="fd.username" :label="$t('ft.username')" :rules="rule.username" ref="username" @input="changeIn()" type="text" outlined single-line />
                 </v-col>
-                <v-col cols="12" sm="6" md="4">
+                <v-col cols="12" sm="6" md="5">
                     <v-text-field v-model="fd.mail" :label="$t('ft.mail')" :rules="rule.mail" ref="mail" @input="changeIn()" type="email" outlined single-line />
                 </v-col>
 
-                <v-col cols="12" md="4">
+                <v-col cols="12" md="8">
                     <v-text-field v-model="fd.password" :label="$t('password')" :rules="rule.password" :type="showPW ? 'text' : 'password'" :append-icon="showPW ? 'visibility' : 'visibility_off'" @click:append="showPW = !showPW" outlined single-line />
                 </v-col>
 
             </v-row>
             <v-row dense justify="center">
-                <v-col cols="12" sm="6">
+                <v-col cols="12" sm="8">
                     <v-btn @click="register()" :loading="sending" color="primary" depressed large block type="submit">
                         {{ $t('register') }}
                     </v-btn>
                 </v-col>
 
-                <v-col cols="8">
+                <v-col cols="12" sm="8">
                     <v-divider />
                 </v-col>
 
-                <v-col cols="12" sm="6">
+                <v-col cols="12" sm="8">
                     <v-btn :to="{name: 'auth.login'}" small depressed block>
                         {{ $t('orLogin') }}
                     </v-btn>

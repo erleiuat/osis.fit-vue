@@ -2,19 +2,19 @@
     <vcontainer align="space-evenly">
 
         <v-row justify="space-around">
-            <v-col cols="auto">
+            <v-col cols="12" class="text-center">
                 <div class="display-3">{{ $t('login') }}</div>
+            </v-col>
+            <v-col cols="12" md="6" v-if="$route.query.verified">
+                <v-alert outlined dense type="success">
+                    {{ $t('verified') }}
+                </v-alert>
             </v-col>
         </v-row>
 
         <v-form v-model="rule.valid" ref="form" v-on:submit.prevent>
             <v-row justify="center" dense>
-                <v-col cols="12" md="9" v-if="$route.query.verified">
-                    <v-alert outlined dense type="success">
-                        {{ $t('verified') }}
-                    </v-alert>
-                </v-col>
-                <v-col cols="12" md="4">
+                <v-col cols="12" md="6">
                     <v-text-field v-model="fd.identifier" :label="$t('ft.identifier')" :rules="rule.require" type="text" filled rounded single-line />
                     <v-text-field v-model="fd.password" :label="$t('password')" :rules="rule.require" type="password" filled rounded single-line />
                     <v-btn @click="login()" :loading="sending" color="primary" depressed large block type="submit">
@@ -74,18 +74,19 @@ export default {
                 else this.$router.push({ name: 'dashboard' })
             }).catch(r => {
                 switch (r) {
-                case 'password_wrong':
-                    this.$notify({ type: 'error', title: this.$t('fail.pass'), text: r })
-                    break
-                case 'account_not_found':
-                    this.$notify({ type: 'error', title: this.$t('fail.unknown'), text: r })
-                    break
-                case 'account_not_verified':
-                    this.$notify({ type: 'error', title: this.$t('fail.verify'), text: r })
-                    break
-                default:
-                    this.$notify({ type: 'error', title: this.$t('alert.error.default'), text: r })
-                    break
+                    case 'password_wrong':
+                        this.$notify({ type: 'error', title: this.$t('fail.pass'), text: r })
+                        break
+                    case 'account_not_found':
+                        this.$notify({ type: 'error', title: this.$t('fail.unknown'), text: r })
+                        break
+                    case 'account_not_verified':
+                        this.$router.push({ name: 'auth.verify', query: { v: true } })
+                        this.$notify({ type: 'error', title: this.$t('fail.verify'), text: r })
+                        break
+                    default:
+                        this.$notify({ type: 'error', title: this.$t('alert.error.default'), text: r })
+                        break
                 }
             }).finally(() => {
                 this.sending = false
@@ -110,7 +111,7 @@ export default {
                 fail: {
                     pass: 'Password incorrect',
                     unknown: 'Account not found',
-                    verify: 'Account unverified'
+                    verify: 'Account not verified'
                 }
             },
             de: {
@@ -123,7 +124,7 @@ export default {
                 fail: {
                     pass: 'Falsches Passwort',
                     unknown: 'Konto nicht gefunden',
-                    verify: 'Konto unverifiziert'
+                    verify: 'Konto noch nicht verifiziert'
                 }
             }
         }

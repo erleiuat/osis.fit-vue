@@ -21,7 +21,7 @@
             </v-card>
         </v-dialog>
 
-        <notifications position="bottom center" width="100%" :speed="500" :duration="50000">
+        <notifications position="bottom center" width="100%" :speed="500">
             <template slot="body" slot-scope="props">
                 <v-container fluid class="pb-0 pt-0">
                     <v-alert :type="props.item.type" dismissible class="elevation-2" :max-width="600">

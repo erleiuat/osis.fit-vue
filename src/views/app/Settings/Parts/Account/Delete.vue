@@ -41,7 +41,7 @@ export default {
                 valid: false,
                 username: [
                     v => !!v || this.$t('alert.v.require'),
-                    v => v === this.$store.getters['auth/account'].username || this.$t('wrongUser'),
+                    v => v === this.$store.getters['auth/account'].username || this.$t('wrongUser')
                 ],
                 password: [
                     v => !!v || this.$t('alert.v.require'),

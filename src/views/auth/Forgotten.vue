@@ -4,12 +4,12 @@
         <v-row justify="center">
             <v-col cols="12" sm="8">
                 <div class="display-1">{{ $t('title') }}</div>
-                <div v-html="$t('text')" v-if="state === 'forgot'">
-                </div>
+                <div v-html="$t('text')" v-if="state === 'forgot'" />
+                <div v-html="$t('resetText')" v-if="state === 'reset'" />
             </v-col>
             <v-col cols="12" sm="8" v-if="state === 'sent'">
-                <v-alert outlined type="success">
-                    {{ $t('sent') }}
+                <v-alert outlined type="success" class="body-2">
+                    <div v-html="$t('sent')"></div>
                 </v-alert>
             </v-col>
         </v-row>
@@ -93,8 +93,8 @@ export default {
             this.sending = true
 
             Apios.post('auth/password/forgotten/', this.fd).then(res => { // TODO: Put in module
-                this.state = 'sent'
             }).finally(() => {
+                this.state = 'sent'
                 this.sending = false
             })
         },
@@ -128,31 +128,35 @@ export default {
                 title: 'Reset password',
                 password: 'New Password',
                 repeat: 'Repeat Password',
-                hasChanged: 'Password has been changed',
+                hasChanged: 'Your password has been changed. You can sing in using your new password now.',
                 strong: 'New password is not strong enough',
+                resetText: 'Enter your new password:',
                 text: `
                     If you have forgotten your password, you can request a reset link here. 
                     The link will then be sent to you by email.
                 `,
                 sent: `
-                    If an account is registered with this email, 
-                    the password reset link has just been sent.
+                    If there is an account with these credentials, the password-reset link has just been sent.
+                    It may take a few minutes before you receive the email. Also check your spam folder. 
+                    If you still haven't received the code after 10 minutes, <a to="/help/contact">please contact support</a>.
                 `
             },
             de: {
                 title: 'Passwort zurücksetzen',
                 password: 'Neues Passwort',
                 repeat: 'Passwort wiederholen',
-                hasChanged: 'Passwort wurde geändert',
+                hasChanged: 'Dein Passwort wurde geändert. Du kannst dich nun mit dem neuen Passwort anmelden.',
                 strong: 'Das neue Password ist nicht stark genug',
+                resetText: 'Gebe hier dein neues Passwort ein:',
                 text: `
                     Falls du dein Passwort vergessen hast, kannst du hier 
                     einen Link zum Zurücksetzen anfordern. Der Link wird anschliessend
                     per E-Mail an dich versendet.
                 `,
                 sent: `
-                    Falls unter dieser E-Mail ein Konto registriert ist, 
-                    wurde der Link zum Zurücksetzen des Passworts soeben verschickt.
+                    Falls ein Konto unter deinen Angaben existert, wurde der Link zum Zurücksetzen des Passworts soeben verschickt.
+                    Es kann einige Minuten dauern, bis du die E-Mail erhälst. Überprüfe auch deinen Spam-Ordner. 
+                    Hast du den Code nach 10 Minuten noch immer nicht erhalten, <a to="/help/contact">kontaktiere bitte den Support</a>.
                 `
             }
         }

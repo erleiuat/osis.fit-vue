@@ -77,18 +77,15 @@
 export default {
     name: 'MobileMenu',
 
-    data () {
-        return {
-            items: [
+    computed: {
+        items() {
+            return [
                 { title: this.$t('profile'), icon: 'account_circle', to: 'settings.profile' },
                 { title: this.$t('metabolism'), icon: 'rotate_90_degrees_ccw', to: 'settings.metabolism' },
                 { title: this.$t('aims'), icon: 'done_all', to: 'settings.aims' },
                 { title: this.$t('premium'), icon: 'star', to: 'settings.premium' }
             ]
-        }
-    },
-
-    computed: {
+        },
         langs () {
             return [
                 { text: this.$t('lang.en'), value: 'en' },

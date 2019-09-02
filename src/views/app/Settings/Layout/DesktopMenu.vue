@@ -55,23 +55,20 @@
 export default {
     name: 'DesktopMenu',
 
-    data () {
-        return {
-            items: [
+    mounted () {
+        if (this.$route.name === 'settings') this.$router.replace({ name: 'settings.profile' })
+    },
+
+    computed: {
+        items () {
+            return [
                 { title: this.$t('profile'), icon: 'account_circle', to: 'settings.profile' },
                 { title: this.$t('metabolism'), icon: 'rotate_90_degrees_ccw', to: 'settings.metabolism' },
                 { title: this.$t('aims'), icon: 'done_all', to: 'settings.aims' },
                 { title: this.$t('premium'), icon: 'star', to: 'settings.premium' },
                 { title: this.$t('account'), icon: 'settings', to: 'settings.account' }
             ]
-        }
-    },
-
-    mounted () {
-        if (this.$route.name === 'settings') this.$router.replace({ name: 'settings.profile' })
-    },
-
-    computed: {
+        },
         langs () {
             return [
                 { text: this.$t('lang.en'), value: 'en' },
