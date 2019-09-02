@@ -73,7 +73,7 @@ module.exports = [{
         default: () => import('@/views/general/About')
     }
 
-},{
+}, {
 
     name: 'theme',
     path: '/theme',

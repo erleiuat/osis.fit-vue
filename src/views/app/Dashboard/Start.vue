@@ -55,12 +55,14 @@ export default {
             if (!data) return { ok: false }
             var gend = data.gender
             var heig = data.height
-            var birth = data.birthdate
+            var birthdate = data.birthdate
+            var pal = data.pal
             return {
-                ok: (gend && heig && birth),
+                ok: (gend && heig && birthdate && pal),
                 gender: gend,
                 height: heig,
-                birth: birth
+                birthdate: birthdate,
+                pal: pal
             }
         },
 
@@ -89,9 +91,6 @@ export default {
         cals () {
             if (!this.user.ok || !this.aims.ok || !this.lastWeight.ok) return { show: false }
 
-            var tmpDate = new Date(Date.now() - Date.parse(this.user.birth))
-            var age = Math.abs(tmpDate.getUTCFullYear() - 1970)
-
             var td = this.$store.getters['today'].date
             var cTotal = Math.round(this.$store.getters['calories/total'](td)) || 0
             var aTotal = Math.round(this.$store.getters['activity/total'](td)) || 0
@@ -103,8 +102,9 @@ export default {
                     aimWeight: this.aims.weight,
                     aimDate: this.aims.date,
                     gender: this.user.gender,
+                    birthdate: this.user.birthdate,
                     height: this.user.height,
-                    age: age,
+                    pal: this.user.pal,
                     consumed: cTotal,
                     lost: aTotal
                 }

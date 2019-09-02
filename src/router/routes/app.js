@@ -178,7 +178,7 @@ module.exports = [{
             name: 'settings.metabolism',
             meta: { authRequired: true },
             components: {
-                default: () => import('@/views/app/Settings/Parts/Metabolism')
+                default: () => import('@/views/app/Settings/Parts/Metabolism/')
             }
         },
         {

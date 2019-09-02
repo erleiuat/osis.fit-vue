@@ -6,12 +6,13 @@
         <v-card-text>
             <v-layout wrap align-end>
 
-                <v-flex xs6>
+                <v-flex grow>
                     <div class="display-2">{{ remaining }}</div>
-                    <div class="caption">{{ basalMetabolicRate }} {{ $t('basalMetabolicRate') }}</div>
+                    <div class="caption">({{ dailyRequire }} {{ $t('calNeed') }})</div>
                 </v-flex>
 
-                <v-flex xs6 text-right class="caption">
+                <v-flex shrink text-right class="caption">
+                    {{ cVals.pal }} PAL<br />
                     {{ cVals.lost }} {{ $t('burned') }}<br />
                     {{ cVals.consumed }} {{ $t('consumed') }}
                 </v-flex>
@@ -31,7 +32,8 @@ export default {
             aimWeight: Number,
             aimDate: Number,
             gender: String,
-            age: Number,
+            birthdate: Number,
+            pal: Number,
             height: Number,
             consumed: Number,
             lost: Number
@@ -57,30 +59,21 @@ export default {
             )
 
             var doneToday = (
-                this.basalMetabolicRate + this.cVals.lost - this.cVals.consumed
+                this.bmr + this.cVals.lost - this.cVals.consumed
             )
 
             return Math.round(dailyCalDiff + doneToday)
         },
 
-        basalMetabolicRate () {
-            var dayNeed = 0
-            if (this.cVals.gender === 'female') {
-                dayNeed = (
-                    655 +
-                    (9.5 * this.cVals.weight) +
-                    (1.9 * this.cVals.height) +
-                    (4.7 * this.cVals.age)
-                )
-            } else {
-                dayNeed = (
-                    66 +
-                    (13.8 * this.cVals.weight) +
-                    (5.0 * this.cVals.height) +
-                    (6.8 * this.cVals.age)
-                )
-            }
+        dailyRequire () {
+            return Math.round(this.bmr * this.cVals.pal)
+        },
 
+        bmr () {
+            var dayNeed = this.$store.getters['user/bmr'](
+                this.cVals.weight,
+                this.cVals.height, this.cVals.gender, this.cVals.birthdate
+            )
             return Math.round(dayNeed)
         }
 
@@ -90,13 +83,15 @@ export default {
         messages: {
             en: {
                 title: 'Caloric Balance',
-                basalMetabolicRate: 'Basal Metabolic Rate',
+                calNeed: 'Daily calories',
+                bmr: 'Basal Metabolic Rate',
                 consumed: 'Consumed',
                 burned: 'Burned'
             },
             de: {
                 title: 'Kalorienbilanz',
-                basalMetabolicRate: 'Grundumsatz',
+                calNeed: 'Täglicher Kalorienbedarf',
+                bmr: 'Grundumsatz',
                 consumed: 'Konsumiert',
                 burned: 'Verbrannt'
             }

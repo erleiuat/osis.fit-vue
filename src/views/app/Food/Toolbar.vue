@@ -8,7 +8,7 @@
 
         <v-spacer />
         <transition name="fade" mode="out-in">
-            <v-text-field v-if="search" v-model="query" ref="search" @blur="search = false" autofocus clearable hide-details single-line />                
+            <v-text-field v-if="search" v-model="query" ref="search" @blur="search = false" autofocus clearable hide-details single-line />
             <v-btn v-else @click="search = true" text>
                 <strong>{{ query || $t('btn.search') }}</strong>
                 <v-icon right>search</v-icon>

@@ -2,7 +2,7 @@
     <Default>
         <v-spacer />
         <transition name="fade" mode="out-in">
-            <v-text-field v-if="search" v-model="query" ref="search" @blur="search = false" autofocus clearable hide-details single-line />                
+            <v-text-field v-if="search" v-model="query" ref="search" @blur="search = false" autofocus clearable hide-details single-line />
             <v-btn v-else-if="query" @click="search = true" text large>
                 <v-icon left>search</v-icon> <strong>{{ query }}</strong>
             </v-btn>
