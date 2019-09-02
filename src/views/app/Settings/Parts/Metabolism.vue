@@ -21,9 +21,9 @@
                     -->
                 </v-col>
 
-                <v-col cols="12">
-                    <v-slider v-model="fd.pal" class="align-center" :max="200" hide-details />
-
+                <v-col cols="12" md="9" class="text-center">
+                    PAL
+                    <v-slider v-model="slider" class="align-center" :min="95" :max="240" hide-details />
                     <!--
                     <v-dialog v-model="dialog" width="500">
                         <template v-slot:activator="{ on }">
@@ -50,12 +50,26 @@
                         </v-card>
                     </v-dialog>
                     -->
-                    {{ fd.pal / 100 }}
+                    {{ slider / 100 }}
                 </v-col>
-                <v-col cols="12">
-                    <v-card>
+
+            </v-row>
+
+            <v-row justify="center" v-if="$vuetify.breakpoint.mdAndUp">
+                <v-col cols="2" v-for="(el, key) in pals" :key="key">
+                    <v-card :elevation="el.active ? '5': '0'">
                         <v-card-text>
-                            Hello
+                            {{ $t('pals.'+key+'.title') }}
+                        </v-card-text>
+                    </v-card>
+                </v-col>
+            </v-row>
+
+            <v-row justify="center" v-else>
+                <v-col cols="12" v-for="(el, key) in pals" :key="key" v-show="el.active">
+                    <v-card outlined>
+                        <v-card-text>
+                            {{ $t('pals.'+key+'.title') }}
                         </v-card-text>
                     </v-card>
                 </v-col>
@@ -85,6 +99,7 @@ export default {
             menu: false,
             dialog: false,
             sending: false,
+            slider: 95,
             fd: {
                 height: null,
                 gender: null,
@@ -106,9 +121,34 @@ export default {
         this.fd.gender = data.gender
         this.fd.birthdate = data.birthdate
         this.fd.pal = data.pal
+        this.slider = data.pal * 100
     },
 
     computed: {
+
+        pals () {
+            var sl = this.slider
+            return {
+                a: {
+                    active: sl >= 0 && sl <= 99
+                },
+                b: {
+                    active: sl >= 100 && sl <= 139
+                },
+                c: {
+                    active: sl >= 140 && sl <= 159
+                },
+                d: {
+                    active: sl >= 160 && sl <= 179
+                },
+                e: {
+                    active: sl >= 180 && sl <= 199
+                },
+                f: {
+                    active: sl >= 200 && sl <= 249
+                }
+            }
+        },
 
         genders () {
             return [
@@ -128,6 +168,7 @@ export default {
     methods: {
 
         save () {
+            this.fd.pal = this.slider / 100
             if (!this.$refs.form.validate()) return false
 
             this.sending = true
@@ -157,6 +198,9 @@ export default {
                     null: '-',
                     male: 'Male',
                     female: 'Female'
+                },
+                pals: {
+
                 }
             },
             de: {
@@ -171,6 +215,9 @@ export default {
                     null: '-',
                     male: 'Männlich',
                     female: 'Weiblich'
+                },
+                pals: {
+
                 }
             }
         }
