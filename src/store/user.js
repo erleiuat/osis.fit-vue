@@ -34,7 +34,7 @@ const getters = {
     },
 
     aims: state => {
-        if (!state.item) return null
+        if (!state.item || !state.item.aims) return null
         return {
             weight: state.item.aims.weight,
             date: state.item.aims.date

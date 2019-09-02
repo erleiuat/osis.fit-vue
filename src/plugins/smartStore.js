@@ -26,7 +26,11 @@ const smartStore = {
     get: (sName) => {
         var data = {}
         if (!smartStore.hasStore(sName)) smartStore.createStore(sName)
-        else data = JSON.parse(localStorage.getItem(smartStore.name + '.store.' + sName))
+        else {
+            data = localStorage.getItem(smartStore.name + '.store.' + sName)
+            if (data && data !== 'undefined') data = JSON.parse(data)
+            else return {}
+        }
 
         return data
     },
