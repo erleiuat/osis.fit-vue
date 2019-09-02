@@ -3,7 +3,7 @@
     <v-data-table :headers="tbl.headers" :items="items" :options.sync="tbl.options" :class="tbl.class" :sort-by.sync="tbl.sortBy" :sort-desc.sync="tbl.desc" dense>
 
         <template v-slot:item.action="{ item }">
-            <v-btn fab small text @click="deleteItem(item)">
+            <v-btn small icon @click="deleteItem(item)">
                 <v-icon>delete</v-icon>
             </v-btn>
         </template>
@@ -35,7 +35,7 @@ export default {
                     { value: 'time', text: this.$t('time') },
                     { value: 'duration', text: this.$t('duration') },
                     { value: 'calories', text: this.$t('calories') },
-                    { value: 'action', sortable: false, align: 'end', width: 10 }
+                    { value: 'action', sortable: false, align: 'end' }
                 ]
             }
         }

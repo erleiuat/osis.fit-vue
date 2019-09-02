@@ -14,7 +14,7 @@
                         <template v-slot:activator="{ on }">
                             <v-text-field v-model="fd.date" :label="$t('ft.date')" :rules="rule.require" type="date" v-on="on" @focus="menu = true" readonly append-icon="event" filled />
                         </template>
-                        <v-date-picker v-model="fd.date" @input="menu = false" :locale="$store.getters['locale']" no-title />
+                        <v-date-picker v-model="fd.date" @input="menu = false" :locale="$store.getters['app'].locale" no-title />
                     </v-menu>
                     -->
                 </v-col>

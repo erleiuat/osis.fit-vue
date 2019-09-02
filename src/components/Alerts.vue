@@ -3,41 +3,40 @@
 
         <v-dialog v-model="show" width="500">
             <v-card>
-                <v-card-title>
+
+                <v-card-title class="title">
                     Error Details
                     <v-spacer />
-                    <v-btn icon small @click="show = false">
-                        <v-icon>close</v-icon>
+                    <v-btn icon @click="show = false">
+                        <v-icon>mdi-close</v-icon>
                     </v-btn>
                 </v-card-title>
-
                 <v-card-text>
                     <div class="headline">{{ title }}</div>
+                </v-card-text>
+                <v-card-text>
                     <div class="body-2">{{ text }}</div>
                 </v-card-text>
+
             </v-card>
         </v-dialog>
 
-        <notifications position="bottom center" width="100%" :speed="500">
+        <notifications position="bottom center" width="100%" :speed="500" :duration="50000">
             <template slot="body" slot-scope="props">
-                <v-layout row wrap :class="$vuetify.breakpoint.mdAndUp ? 'justify-end pr-5 pb-2':'justify-center'">
-                    <v-flex xs11 md6 lg5>
-                        <v-alert :type="props.item.type" mb-1>
-
-                            <v-layout row wrap align-center pb-0 pt-0>
-                                <v-flex grow @click="props.close">
-                                    {{ props.item.title }}
-                                </v-flex>
-                                <v-flex shrink v-if="props.item.text">
-                                    <v-btn icon small @click="showDetail(props.item)">
-                                        <v-icon>info</v-icon>
-                                    </v-btn>
-                                </v-flex>
-                            </v-layout>
-
-                        </v-alert>
-                    </v-flex>
-                </v-layout>
+                <v-container fluid class="pb-0 pt-0">
+                    <v-alert :type="props.item.type" dismissible class="elevation-2" :max-width="600">
+                        <v-row justify="center" align="center" no-gutters>
+                            <v-col cols="11">
+                                {{ props.item.title }}
+                            </v-col>
+                            <v-col cols="1" align="end" v-if="props.item.text">
+                                <v-btn icon small @click="showDetail(props.item)">
+                                    <v-icon>info</v-icon>
+                                </v-btn>
+                            </v-col>
+                        </v-row>
+                    </v-alert>
+                </v-container>
             </template>
         </notifications>
 

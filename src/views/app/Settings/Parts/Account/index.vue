@@ -1,5 +1,5 @@
 <template>
-    <v-expansion-panels popout accordion v-model="openPanel">
+    <v-expansion-panels v-model="openPanel" popout>
         <v-expansion-panel>
             <v-expansion-panel-header>
                 {{ $t('change') }}
@@ -13,7 +13,7 @@
                 {{ $t('download') }}
             </v-expansion-panel-header>
             <v-expansion-panel-content>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                <Download />
             </v-expansion-panel-content>
         </v-expansion-panel>
         <v-expansion-panel>
@@ -21,7 +21,7 @@
                 {{ $t('delete') }}
             </v-expansion-panel-header>
             <v-expansion-panel-content>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                <Delete />
             </v-expansion-panel-content>
         </v-expansion-panel>
     </v-expansion-panels>
@@ -29,12 +29,14 @@
 
 <script>
 import Change from '@/views/app/Settings/Parts/Account/Change'
+import Download from '@/views/app/Settings/Parts/Account/Download'
+import Delete from '@/views/app/Settings/Parts/Account/Delete'
 
 export default {
     name: 'EditAccount',
 
     components: {
-        Change
+        Change, Download, Delete
     },
 
     data () {

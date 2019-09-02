@@ -11,7 +11,7 @@
                     {{ $dateFormat(date) }} <v-icon right>event</v-icon>
                 </v-btn>
             </template>
-            <v-date-picker v-model="date" scrollable :locale="$store.getters['locale']">
+            <v-date-picker v-model="date" scrollable :locale="$store.getters['app'].locale">
                 <v-btn block text @click="dialog = false">
                     <v-icon>check</v-icon>
                 </v-btn>

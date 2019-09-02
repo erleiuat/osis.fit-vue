@@ -6,7 +6,7 @@
                 <v-switch v-model="mode" label="Switch Mode"></v-switch>
             </v-flex>
             <v-flex xs2 v-for="opt in alerts" :key="opt">
-                <v-btn outlined :color="opt" @click="$notify({ type: opt, text: 'Test Notification' })">
+                <v-btn outlined :color="opt" @click="$notify({ type: opt, title: 'Lorizzle ipsum dolor fo shizzle my nizzle mofo, sizzle adipiscing elit. Nullam break yo neck, yall bow wow wow, bling bling volutpizzle, suscipizzle rizzle, crazy vizzle, pot.', text: 'Lorizzle ipsum dolor fo shizzle my nizzle mofo, sizzle adipiscing elit. Nullam break yo neck, yall bow wow wow, bling bling volutpizzle, suscipizzle rizzle, crazy vizzle, pot. Lorizzle ipsum dolor fo shizzle my nizzle mofo, sizzle adipiscing elit. Nullam break yo neck, yall bow wow wow, bling bling volutpizzle, suscipizzle rizzle, crazy vizzle, pot.' })">
                     {{ opt }}
                 </v-btn>
             </v-flex>

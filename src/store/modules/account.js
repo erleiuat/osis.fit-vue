@@ -60,6 +60,16 @@ const actions = {
                 reject(err)
             })
         })
+    },
+
+    delete (con, form) {
+        return new Promise((resolve, reject) => {
+            Apios.post('auth/delete/', form).then(() => {
+                resolve()
+            }).catch(err => {
+                reject(err)
+            })
+        })
     }
 
 }

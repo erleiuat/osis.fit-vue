@@ -19,7 +19,7 @@
                         <template v-slot:activator="{ on }">
                             <v-text-field v-model="fd.birthdate" :label="$t('birthdate')" v-on="on" @focus="menu = true" readonly type="date" append-icon="event" filled />
                         </template>
-                        <v-date-picker v-model="fd.birthdate" ref="picker" @change="$refs.menu.save(fd.birthdate)" :locale="$store.getters['locale']" />
+                        <v-date-picker v-model="fd.birthdate" ref="picker" @change="$refs.menu.save(fd.birthdate)" :locale="$store.getters['app'].locale" />
                     </v-menu>
                     -->
                 </v-col>
