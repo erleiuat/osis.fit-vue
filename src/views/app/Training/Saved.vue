@@ -3,7 +3,7 @@
 
         <v-layout wrap>
 
-            <v-flex xs12 class="title">
+            <v-flex xs12 class="subheading">
                 {{ $t('title') }}
             </v-flex>
 

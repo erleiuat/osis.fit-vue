@@ -1,24 +1,18 @@
 <template>
     <Default>
 
+        <div v-if="!$store.getters['auth/authorized']" />
+
         <template v-slot:toggler v-if="!$store.getters['auth/authorized']">
-            <div></div>
+            <v-toolbar-items>
+                <v-btn text :to="{name: 'auth.login'}">
+                    {{ $t('view.auth.login.title') }}
+                </v-btn>
+                <v-btn text :to="{name: 'auth.register'}">
+                    {{ $t('view.auth.register.title') }}
+                </v-btn>
+            </v-toolbar-items>
         </template>
-
-        <v-toolbar-items v-if="!$store.getters['auth/authorized']">
-            <v-btn text :to="{name: 'auth.login'}">
-                {{ $t('view.auth.login.title') }}
-            </v-btn>
-            <v-btn text :to="{name: 'auth.register'}">
-                {{ $t('view.auth.register.title') }}
-            </v-btn>
-        </v-toolbar-items>
-
-        <v-spacer />
-        
-        <v-toolbar-title v-if="$store.getters['auth/authorized']">
-            {{ title }}
-        </v-toolbar-title>
 
     </Default>
 </template>

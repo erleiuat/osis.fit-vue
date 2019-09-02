@@ -34,10 +34,12 @@
             </v-col>
         </v-row>
 
-        <v-row>
-            <v-col align="center">
-                <div class="headline pb-3">{{ $t('trainings') }}</div>
-                <v-btn large disabled><i>{{ $t('soon') }}</i></v-btn>
+        <v-row justify="center">
+            <v-col md="6" align="center">
+                <v-btn :to="{name: 'training.saved'}" color="primary" block large depressed>
+                    {{ $t('trainings') }}
+                    <v-icon right>open_in_new</v-icon>
+                </v-btn>
             </v-col>
         </v-row>
 
@@ -78,8 +80,7 @@ export default {
                 calories: 'Calories',
                 activity: 'Activity',
                 weight: 'Weight',
-                trainings: 'Trainings',
-                soon: 'Coming soon',
+                trainings: 'Training',
                 m: {
                     title: 'Welcome to Osis.fit!',
                     text: `
@@ -93,8 +94,7 @@ export default {
                 calories: 'Kalorien',
                 activity: 'Aktivität',
                 weight: 'Gewicht',
-                trainings: 'Übungen',
-                soon: 'Demnächst verfügbar',
+                trainings: 'Training',
                 m: {
                     title: 'Willkommen bei Osis.fit!',
                     text: `

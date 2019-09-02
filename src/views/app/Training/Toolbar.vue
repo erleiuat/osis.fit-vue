@@ -1,7 +1,15 @@
 <template>
     <Default>
-        <v-app-bar-nav-icon @click.stop="drawer()" />
-        <v-text-field v-model="query" hide-details append-icon="search" single-line clearable />
+        <v-spacer />
+        <transition name="fade" mode="out-in">
+            <v-text-field v-if="search" v-model="query" ref="search" @blur="search = false" autofocus clearable hide-details single-line />                
+            <v-btn v-else-if="query" @click="search = true" text large>
+                <v-icon left>search</v-icon> <strong>{{ query }}</strong>
+            </v-btn>
+            <v-btn v-else @click="search = true" icon>
+                <v-icon>search</v-icon>
+            </v-btn>
+        </transition>
     </Default>
 </template>
 
@@ -15,6 +23,12 @@ export default {
         Default
     },
 
+    data () {
+        return {
+            search: false
+        }
+    },
+
     computed: {
         query: {
             get () {
@@ -23,12 +37,6 @@ export default {
             set (val) {
                 this.$router.replace({ query: { s: val } })
             }
-        }
-    },
-
-    methods: {
-        drawer () {
-            this.$store.dispatch('drawer')
         }
     }
 

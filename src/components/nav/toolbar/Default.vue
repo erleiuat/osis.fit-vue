@@ -7,7 +7,7 @@
             </slot>
             <slot>
                 <v-spacer />
-                <v-toolbar-title v-if="$store.getters['auth/authorized']">
+                <v-toolbar-title>
                     {{ title }}
                 </v-toolbar-title>
             </slot>
@@ -23,7 +23,7 @@
             </slot>
             <slot>
                 <v-spacer />
-                <v-toolbar-title v-if="$store.getters['auth/authorized']">
+                <v-toolbar-title>
                     {{ title }}
                 </v-toolbar-title>
             </slot>

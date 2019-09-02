@@ -53,7 +53,7 @@ module.exports = [{
     },
     children: [
         {
-            path: '',
+            path: 'own',
             name: 'food',
             meta: { authRequired: true },
             components: {
@@ -62,7 +62,7 @@ module.exports = [{
             },
             children: [
                 {
-                    path: ':id',
+                    path: 'edit/:id',
                     name: 'food.edit',
                     components: {
                         editor: () => import('@/components/food/Editor')
@@ -81,7 +81,6 @@ module.exports = [{
             path: 'favorites',
             name: 'food.favorites',
             meta: { authRequired: true, premium: true },
-
             components: {
                 toolbar: () => import('@/components/nav/toolbar/'),
                 default: () => import('@/views/app/Food/Favorite')
