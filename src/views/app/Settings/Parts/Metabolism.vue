@@ -3,16 +3,13 @@
         <v-form v-model="rule.valid" ref="form" v-on:submit.prevent>
 
             <v-row justify="center" dense>
-                <v-col cols="12" sm="5" md="4">
+                <v-col cols="12" md="3">
                     <v-text-field :label="$t('height')" v-model="fd.height" :rules="rule.require" type="number" filled />
                 </v-col>
-                <v-col cols="12" sm="5" md="4">
+                <v-col cols="12" md="3">
                     <v-select :label="$t('gender')" v-model="fd.gender" :items="genders" :rules="rule.require" filled />
                 </v-col>
-            </v-row>
-
-            <v-row justify="center" dense>
-                <v-col cols="12" sm="5" md="4">
+                <v-col cols="12" md="3">
                     <v-text-field v-model="fd.birthdate" :label="$t('birthdate')" type="date" append-icon="event" filled />
                     <!--
                     <v-menu ref="menu" v-model="menu" :close-on-content-click="false" transition="scale-transition" offset-y full-width min-width="290px">
@@ -24,7 +21,10 @@
                     -->
                 </v-col>
 
-                <v-col cols="12" sm="5" md="4">
+                <v-col cols="12">
+                    <v-slider v-model="fd.pal" class="align-center" :max="200" hide-details />
+
+                    <!--
                     <v-dialog v-model="dialog" width="500">
                         <template v-slot:activator="{ on }">
                             <v-text-field :label="$t('pal')" v-model="fd.pal" :rules="rule.require" v-on="on" type="number" filled />
@@ -49,6 +49,15 @@
                             </v-card-actions>
                         </v-card>
                     </v-dialog>
+                    -->
+                    {{ fd.pal / 100 }}
+                </v-col>
+                <v-col cols="12">
+                    <v-card>
+                        <v-card-text>
+                            Hello
+                        </v-card-text>
+                    </v-card>
                 </v-col>
             </v-row>
 
@@ -76,6 +85,12 @@ export default {
             menu: false,
             dialog: false,
             sending: false,
+            fd: {
+                height: null,
+                gender: null,
+                birthdate: null,
+                pal: null
+            },
             rule: {
                 valid: false,
                 require: [
@@ -85,17 +100,15 @@ export default {
         }
     },
 
-    computed: {
+    mounted () {
+        var data = this.$store.getters['user/metabolism']
+        this.fd.height = data.height
+        this.fd.gender = data.gender
+        this.fd.birthdate = data.birthdate
+        this.fd.pal = data.pal
+    },
 
-        fd () {
-            var data = this.$store.getters['user/metabolism']
-            return {
-                height: data.height,
-                gender: data.gender,
-                birthdate: data.birthdate,
-                pal: data.pal
-            }
-        },
+    computed: {
 
         genders () {
             return [
