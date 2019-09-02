@@ -37,18 +37,18 @@ export default {
         Change
     },
 
-    data() {
+    data () {
         return {
             openPanel: null
         }
     },
 
-    beforeMount(){
+    beforeMount () {
         var qry = this.$route.query.s
-        if(qry){
-            if(qry === 'password') this.openPanel = 0
-            else if(qry === 'download') this.openPanel = 1
-            else if(qry === 'delete') this.openPanel = 2
+        if (qry) {
+            if (qry === 'password') this.openPanel = 0
+            else if (qry === 'download') this.openPanel = 1
+            else if (qry === 'delete') this.openPanel = 2
         }
     },
 

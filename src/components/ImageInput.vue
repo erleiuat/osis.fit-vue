@@ -93,7 +93,7 @@ export default {
     methods: {
 
         upload () {
-            if(!this.choosen) return
+            if (!this.choosen) return
 
             var fData = new FormData()
             fData.append('image', this.file, this.file.name)
