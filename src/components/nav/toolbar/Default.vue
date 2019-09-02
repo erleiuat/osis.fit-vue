@@ -2,11 +2,35 @@
     <div>
 
         <v-app-bar v-if="mobile" :style="style" scroll-threshold="50" app dense elevate-on-scroll hide-on-scroll>
-            <slot />
+            <slot name="toggler">
+                <v-app-bar-nav-icon @click.stop="drawer()" />
+            </slot>
+            <slot>
+                <v-spacer />
+                <v-toolbar-title v-if="$store.getters['auth/authorized']">
+                    {{ title }}
+                </v-toolbar-title>
+            </slot>
+            <slot name="icon">
+                <v-spacer />
+                <Icon />
+            </slot>
         </v-app-bar>
 
         <v-app-bar v-else app elevate-on-scroll hide-on-scroll>
-            <slot />
+            <slot name="toggler">
+                <v-app-bar-nav-icon @click.stop="drawer()" />
+            </slot>
+            <slot>
+                <v-spacer />
+                <v-toolbar-title v-if="$store.getters['auth/authorized']">
+                    {{ title }}
+                </v-toolbar-title>
+            </slot>
+            <slot name="icon">
+                <v-spacer />
+                <Icon />
+            </slot>
         </v-app-bar>
 
         <!--
@@ -19,10 +43,20 @@
 </template>
 
 <script>
+import Icon from '@/components/nav/toolbar/Icon'
+
 export default {
     name: 'Default',
 
+    components: {
+        Icon
+    },
+
     computed: {
+
+        title () {
+            return this.$t('view.' + this.$route.name + '.title')
+        },
 
         style () {
             var border = ''
@@ -49,6 +83,12 @@ export default {
             */
         }
 
+    },
+
+    methods: {
+        drawer () {
+            this.$store.dispatch('drawer')
+        }
     }
 
 }

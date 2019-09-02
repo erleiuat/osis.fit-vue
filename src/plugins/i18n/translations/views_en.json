@@ -123,6 +123,10 @@
             "description": ""
         }
     },
+    "about": {
+        "title": "About",
+        "description": ""
+    },
     "error": {
         "permission": {
             "title": "Permissions denied",

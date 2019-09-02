@@ -1,13 +1,19 @@
 <template>
     <Default>
-
-        <v-app-bar-nav-icon @click.stop="drawer()" />
-
         <v-spacer />
+
+        <ActivityAdder v-if="$vuetify.breakpoint.mdAndUp">
+            <template v-slot:default="trigger">
+                <v-btn v-on="trigger.on" outlined text>
+                    <v-icon left>add</v-icon> {{ $t('btn.add') }}
+                </v-btn>
+            </template>
+        </ActivityAdder>
+        <v-spacer v-if="$vuetify.breakpoint.mdAndUp" />
 
         <v-dialog ref="dialog" v-model="dialog" full-width width="290px">
             <template v-slot:activator="{ on }">
-                <v-btn large text v-on="on">
+                <v-btn v-on="on" text>
                     {{ $dateFormat(date) }} <v-icon right>event</v-icon>
                 </v-btn>
             </template>
@@ -17,14 +23,6 @@
                 </v-btn>
             </v-date-picker>
         </v-dialog>
-
-        <ActivityAdder v-if="$vuetify.breakpoint.mdAndUp">
-            <template v-slot:default="trigger">
-                <v-btn v-on="trigger.on" color="accent" large depressed>
-                    <v-icon left>add</v-icon> {{ $t('btn.add') }}
-                </v-btn>
-            </template>
-        </ActivityAdder>
 
     </Default>
 </template>
@@ -36,19 +34,13 @@ import Default from '@/components/nav/toolbar/Default'
 export default {
     name: 'Toolbar',
 
-    data () {
-        return {
-            dialog: false
-        }
-    },
-
     components: {
         Default, ActivityAdder
     },
 
-    methods: {
-        drawer () {
-            this.$store.dispatch('drawer')
+    data () {
+        return {
+            dialog: false
         }
     },
 

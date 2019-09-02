@@ -1,14 +1,14 @@
 <template>
     <Default>
 
-        <v-app-bar-nav-icon @click.stop="drawer()" />
+        <v-spacer v-if="$vuetify.breakpoint.mdAndUp" />
+        <v-btn @click="$router.push({name: 'food.add'})" v-if="$vuetify.breakpoint.mdAndUp" outlined text>
+            <v-icon left>add</v-icon> {{ $t('btn.add') }}
+        </v-btn>
 
         <v-spacer />
-
         <transition name="fade" mode="out-in">
-            <v-text-field v-if="search" v-model="query" ref="search" @blur="search = false" autofocus clearable hide-details single-line>
-                asdfasdf
-            </v-text-field>
+            <v-text-field v-if="search" v-model="query" ref="search" @blur="search = false" autofocus clearable hide-details single-line />                
             <v-btn v-else-if="query" @click="search = true" text large>
                 <v-icon left>search</v-icon> <strong>{{ query }}</strong>
             </v-btn>
@@ -16,10 +16,6 @@
                 <v-icon>search</v-icon>
             </v-btn>
         </transition>
-
-        <v-btn @click="$router.push({name: 'food.add'})" v-if="$vuetify.breakpoint.mdAndUp" large text>
-            <v-icon left>add</v-icon> {{ $t('btn.add') }}
-        </v-btn>
 
     </Default>
 </template>
@@ -30,19 +26,13 @@ import Default from '@/components/nav/toolbar/Default'
 export default {
     name: 'Toolbar',
 
-    data () {
-        return {
-            search: false
-        }
-    },
-
     components: {
         Default
     },
 
-    methods: {
-        drawer () {
-            this.$store.dispatch('drawer')
+    data () {
+        return {
+            search: false
         }
     },
 

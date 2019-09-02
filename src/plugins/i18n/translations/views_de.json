@@ -123,6 +123,10 @@
             "description": ""
         }
     },
+    "about": {
+        "title": "Über",
+        "description": ""
+    },
     "error": {
         "permission": {
             "title": "Zugang verweigert",

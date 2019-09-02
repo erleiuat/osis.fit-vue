@@ -65,6 +65,16 @@ module.exports = [{
 
 }, {
 
+    name: 'about',
+    path: '/about',
+    meta: { authRequired: false },
+    components: {
+        toolbar: () => import('@/components/nav/toolbar/'),
+        default: () => import('@/views/general/About')
+    }
+
+},{
+
     name: 'theme',
     path: '/theme',
     meta: { authRequired: false },

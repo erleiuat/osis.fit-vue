@@ -1,13 +1,10 @@
 <template>
     <Default>
 
-        <v-app-bar-nav-icon @click.stop="drawer()" />
-
-        <v-spacer />
-
+        <v-spacer v-if="$vuetify.breakpoint.mdAndUp" />
         <WeightAdder v-if="$vuetify.breakpoint.mdAndUp">
             <template v-slot:default="trigger">
-                <v-btn v-on="trigger.on" color="accent" large depressed>
+                <v-btn v-on="trigger.on" outlined text>
                     <v-icon left>add</v-icon> {{ $t('btn.add') }}
                 </v-btn>
             </template>
@@ -23,22 +20,16 @@ import Default from '@/components/nav/toolbar/Default'
 export default {
     name: 'Toolbar',
 
+    components: {
+        Default, WeightAdder
+    },
+
     data () {
         return {
             dialog: false
         }
     },
-
-    components: {
-        Default, WeightAdder
-    },
-
-    methods: {
-        drawer () {
-            this.$store.dispatch('drawer')
-        }
-    },
-
+    
     computed: {
         date: {
             get () {

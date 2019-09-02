@@ -50,7 +50,7 @@
                             </v-col>
 
                             <v-col cols="12">
-                                <v-btn @click="save()" :loading="sending" block type="submit" color="primary">
+                                <v-btn @click="save()" :loading="sending" type="submit" color="primary" block depressed>
                                     {{ $t('btn.save') }}
                                 </v-btn>
                             </v-col>
