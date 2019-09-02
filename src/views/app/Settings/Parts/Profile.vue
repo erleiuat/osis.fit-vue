@@ -56,10 +56,6 @@ export default {
         ImageInput
     },
 
-    mounted () {
-        this.$store.dispatch('user/load')
-    },
-
     data () {
         var data = this.$store.getters['user/user']
         return {
@@ -76,23 +72,6 @@ export default {
                     v => !!v || this.$t('alert.v.require')
                 ]
             }
-        }
-    },
-
-    computed: {
-
-        genders () {
-            return [
-                { text: this.$t('g.male'), value: 'male' },
-                { text: this.$t('g.female'), value: 'female' }
-            ]
-        }
-
-    },
-
-    watch: {
-        menu (val) {
-            val && setTimeout(() => (this.$refs.picker.activePicker = 'YEAR'))
         }
     },
 

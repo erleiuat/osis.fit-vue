@@ -34,10 +34,6 @@
 export default {
     name: 'EditAims',
 
-    mounted () {
-        this.$store.dispatch('user/load')
-    },
-
     data () {
         return {
             menu: false,
