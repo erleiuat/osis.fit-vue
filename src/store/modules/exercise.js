@@ -8,7 +8,7 @@ const namespaced = true
 
 const state = () => {
     return {
-        url: 'app/training/exercise/',
+        url: 'app/exercise/',
         lName: 'exercise',
         items: smartStore.get('exercise')
     }
