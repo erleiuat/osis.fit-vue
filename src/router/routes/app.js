@@ -117,7 +117,7 @@ module.exports = [{
             }
         },
         {
-            path: 'exercise',
+            path: 'exercises',
             meta: { authRequired: true, premium: true },
             components: {
                 toolbar: () => import('@/components/nav/toolbar/'),
@@ -133,7 +133,7 @@ module.exports = [{
                     }
                 },
                 {
-                    path: ':id',
+                    path: 'r/:id',
                     name: 'training.exercise',
                     meta: { authRequired: true, premium: true },
                     components: {
@@ -141,12 +141,23 @@ module.exports = [{
                     }
                 },
                 {
-                    path: ':id/edit',
-                    name: 'training.exercise.edit',
+                    path: 'edit',
                     meta: { authRequired: true, premium: true },
                     components: {
-                        default: () => import('@/views/app/Training/Exercise/Edit')
-                    }
+                        default: () => import('@/views/app/Training/Exercise/Edit/')
+                    },
+                    children: [
+                        {
+                            path: '',
+                            name: 'training.exercise.new',
+                            meta: { authRequired: true, premium: true }
+                        },
+                        {
+                            path: ':id',
+                            name: 'training.exercise.edit',
+                            meta: { authRequired: true, premium: true }
+                        },
+                    ]
                 }
             ]
         }
