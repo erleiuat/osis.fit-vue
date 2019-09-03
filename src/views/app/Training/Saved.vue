@@ -65,7 +65,7 @@ export default {
     },
 
     mounted () {
-        //this.$store.dispatch('training/load')
+        // this.$store.dispatch('training/load')
     },
 
     i18n: {
