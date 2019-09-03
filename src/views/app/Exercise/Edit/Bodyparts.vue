@@ -5,7 +5,11 @@
                 {{ $t('bodyparts') }} {{ bodyparts.length || '' }}
             </v-expansion-panel-header>
             <v-expansion-panel-content eager>
-                <v-checkbox v-model="bodyparts" v-for="(i, key) in list" :label="label(i.translationKey)" :value="i.id" :key="key" />
+                <v-row no-gutters>
+                    <v-col cols="12" sm="6" md="3" v-for="(i, key) in list" :key="key">
+                        <v-checkbox v-model="bodyparts" hide-details :label="label(i.translationKey)" :value="i.id" />
+                    </v-col>
+                </v-row>
             </v-expansion-panel-content>
         </v-expansion-panel>
     </v-expansion-panels>
@@ -29,13 +33,7 @@ export default {
             }
         },
         list () {
-            return [
-                { id: 1, translationKey: 'chest' },
-                { id: 2, translationKey: 'chest' },
-                { id: 3, translationKey: 'chest' },
-                { id: 4, translationKey: 'chest' },
-                { id: 5, translationKey: 'chest' }
-            ]
+            return this.$store.getters['exercise/bodyparts']
         }
     },
 

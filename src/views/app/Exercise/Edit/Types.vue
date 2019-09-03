@@ -5,9 +5,13 @@
                 {{ $t('type') }} {{ type ? ': '+type : '' }}
             </v-expansion-panel-header>
             <v-expansion-panel-content eager>
-                <v-radio-group v-model="type" :mandatory="false" row :rules="rules">
-                    <v-radio v-for="(i, key) in list" :label="i.title" :value="i.value" :key="key" />
-                </v-radio-group>
+                <v-row no-gutters justify="center">
+                    <v-radio-group v-model="type" :mandatory="false" row :rules="rules">
+                        <v-col cols="12" sm="6" md="4" v-for="(i, key) in list" :key="key">
+                            <v-radio :label="i.title" :value="i.value" />
+                        </v-col>
+                    </v-radio-group>
+                </v-row>
             </v-expansion-panel-content>
         </v-expansion-panel>
     </v-expansion-panels>

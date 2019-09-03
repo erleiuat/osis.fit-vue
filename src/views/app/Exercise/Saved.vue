@@ -64,6 +64,7 @@ export default {
 
     mounted () {
         this.$store.dispatch('exercise/load')
+        this.$store.dispatch('exercise/loadBodyparts')
     },
 
     i18n: {

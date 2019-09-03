@@ -10,11 +10,15 @@ const state = () => {
     return {
         url: 'app/exercise/',
         lName: 'exercise',
-        items: smartStore.get('exercise')
+        items: smartStore.get('exercise'),
+        bodyparts: smartStore.get('exercise.bodyparts')
     }
 }
 
 const getters = {
+    bodyparts: (state) => {
+        return state.bodyparts
+    },
     all: (state) => {
         if (!state.items) return
         return Object.values(state.items).reverse()
@@ -22,6 +26,11 @@ const getters = {
 }
 
 const mutations = {
+
+    setBodyparts: (state, vals) => {
+        state.bodyparts = vals
+        smartStore.set('exercise.bodyparts', state.bodyparts)
+    },
 
     set: (state, vals) => {
         if (!Array.isArray(vals)) {
@@ -52,6 +61,13 @@ const actions = {
             }).catch(err => {
                 reject(err)
             })
+        })
+    },
+
+    loadBodyparts (con) {
+        if (con.state.bodyparts.length > 0) return null
+        Apios.get(con.state.url + 'bodyparts/').then(res => {
+            if (res.status === 200) con.commit('setBodyparts', res.data.items)
         })
     },
 
