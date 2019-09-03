@@ -1,5 +1,5 @@
 <template>
-    <vcontainer fluid>
+    <vcontainer>
         <CaloriesTable :date="$route.params.date" />
     </vcontainer>
 </template>

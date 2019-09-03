@@ -126,7 +126,7 @@ module.exports = [{
             },
             children: [
                 {
-                    path: '#/:id',
+                    path: ':id',
                     name: 'training.exercise',
                     meta: { authRequired: true, premium: true },
                     components: {

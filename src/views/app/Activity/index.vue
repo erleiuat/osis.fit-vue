@@ -1,5 +1,5 @@
 <template>
-    <vcontainer fluid>
+    <vcontainer>
         <ActivityTable :date="$route.params.date" />
     </vcontainer>
 </template>

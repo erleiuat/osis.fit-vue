@@ -51,7 +51,7 @@
             <v-col cols="12">
                 <v-card flat>
                     <v-tabs grow fixed style="min-height: 400px;">
-                        <v-tab v-for="(item, key) in items" :key="key" :to="{name: item.to}">
+                        <v-tab v-for="(item, key) in items" :key="key" :to="{name: item.to}" class="ml-0">
                             <v-icon left>{{item.icon}}</v-icon>
                             {{item.title}}
                         </v-tab>

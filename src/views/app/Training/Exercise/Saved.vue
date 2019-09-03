@@ -1,11 +1,16 @@
 <template>
-    <v-container grid-list-sm fill-height>
-        <v-layout wrap>
-            <v-flex xs12 class="subheading">
+    <vcontainer>
+        <v-row>
+            <v-col cols="10" class="subheading">
                 {{ $t('title') }}
-            </v-flex>
-        </v-layout>
-    </v-container>
+            </v-col>
+            <v-col cols="2">
+                <v-btn fab>
+                    <v-icon>add</v-icon>
+                </v-btn>
+            </v-col>
+        </v-row>
+    </vcontainer>
 </template>
 
 <script>

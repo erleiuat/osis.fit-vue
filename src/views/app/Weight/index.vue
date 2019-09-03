@@ -1,5 +1,5 @@
 <template>
-    <vcontainer fluid>
+    <vcontainer>
 
         <v-row dense>
             <v-col cols="12">
