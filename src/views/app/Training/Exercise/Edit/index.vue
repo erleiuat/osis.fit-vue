@@ -50,10 +50,10 @@
 </template>
 
 <script>
-const notFound = () => import('@/views/error/NotFound')
 import exercise from '@/store/modules/exercise'
 import Bodyparts from '@/views/app/Training/Exercise/Edit/Bodyparts'
 import Types from '@/views/app/Training/Exercise/Edit/Types'
+const notFound = () => import('@/views/error/NotFound')
 
 export default {
     name: 'EditExercise',
@@ -113,7 +113,7 @@ export default {
             this.loaded = false
             this.$store.dispatch('exercise/get', this.$route.params.id).then(res => {
                 this.fd = res
-            }).catch(err => {
+            }).catch(() => {
                 this.fd = null
             }).finally(() => {
                 this.loaded = true

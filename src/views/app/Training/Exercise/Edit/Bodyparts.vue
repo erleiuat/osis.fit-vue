@@ -21,10 +21,10 @@ export default {
 
     computed: {
         bodyparts: {
-            get(){
+            get () {
                 return this.value
             },
-            set(val){
+            set (val) {
                 this.$emit('input', val)
             }
         },

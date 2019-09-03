@@ -44,8 +44,8 @@
 </template>
 
 <script>
-const notFound = () => import('@/views/error/NotFound')
 import exercise from '@/store/modules/exercise'
+const notFound = () => import('@/views/error/NotFound')
 
 export default {
     name: 'Exercise',
