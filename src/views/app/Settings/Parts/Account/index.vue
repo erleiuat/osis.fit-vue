@@ -5,7 +5,7 @@
                 {{ $t('change') }}
             </v-expansion-panel-header>
             <v-divider />
-            <v-expansion-panel-content>
+            <v-expansion-panel-content eager>
                 <Change />
             </v-expansion-panel-content>
             <v-divider />
@@ -15,7 +15,7 @@
                 {{ $t('download') }}
             </v-expansion-panel-header>
             <v-divider />
-            <v-expansion-panel-content>
+            <v-expansion-panel-content eager>
                 <Download />
             </v-expansion-panel-content>
             <v-divider />
@@ -25,7 +25,7 @@
                 {{ $t('delete') }}
             </v-expansion-panel-header>
             <v-divider />
-            <v-expansion-panel-content>
+            <v-expansion-panel-content eager>
                 <Delete />
             </v-expansion-panel-content>
         </v-expansion-panel>
