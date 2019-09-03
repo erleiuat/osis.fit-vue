@@ -4,20 +4,25 @@
             {{ $t('title') }}
         </v-card-title>
         <v-card-text>
-            <v-layout wrap align-end>
+            <v-row no-gutters align="end" justify="space-between" style="height: 95px">
 
-                <v-flex grow>
+                <v-col cols="auto">
                     <div class="display-2">{{ remaining }}</div>
-                    <div class="caption">({{ dailyRequire }} {{ $t('calNeed') }})</div>
-                </v-flex>
+                    <div class="caption">{{ dailyRequire }} {{ $t('calNeed') }}</div>
+                    <div class="caption">{{ dailyTarget }} {{ $t('calLoss') }}</div>
+                </v-col>
 
-                <v-flex shrink text-right class="caption">
+                <v-col cols="auto" class="caption text-right">
                     {{ cVals.pal }} PAL<br />
                     {{ cVals.lost }} {{ $t('burned') }}<br />
                     {{ cVals.consumed }} {{ $t('consumed') }}
-                </v-flex>
+                </v-col>
 
-            </v-layout>
+                <v-col cols="12">
+                    <v-progress-linear :value="progress" :color="state.dark?'white':'black'" />
+                </v-col>
+
+            </v-row>
         </v-card-text>
     </v-card>
 </template>
@@ -42,27 +47,30 @@ export default {
 
     computed: {
 
-        state () {
-            if (this.remaining > 300) return { dark: true, color: 'success' }
-            else if (this.remaining > 100) return { dark: true, color: 'warning' }
-            else if (this.remaining > -100) return { dark: false, color: '' }
-            else return { dark: true, color: 'error' }
+        progress () {
+            var val = this.remaining / (this.dailyTarget + this.dailyRequire)
+            return 100 - val * 100
         },
 
-        remaining () {
+        state () {
+            if (this.remaining > 100) return { dark: true, color: 'success' }
+            else if (this.remaining <= 0 && this.remaining > -100) return { dark: true, color: 'warning' }
+            else if (this.remaining <= -100) return { dark: true, color: 'error' }
+            else return { dark: false, color: '' }
+        },
+
+        dailyTarget () {
             var diff = new Date(this.cVals.aimDate).getTime() - new Date().getTime()
             var days = Math.round(diff / (1000 * 60 * 60 * 24))
-
-            var dailyCalDiff = Math.round(
+            return Math.round(
                 (this.cVals.aimWeight - this.cVals.weight) /
                 days * 7000
             )
+        },
 
-            var doneToday = (
-                this.bmr + this.cVals.lost - this.cVals.consumed
-            )
-
-            return Math.round(dailyCalDiff + doneToday)
+        remaining () {
+            var doneToday = this.dailyRequire + this.cVals.lost - this.cVals.consumed
+            return Math.round(this.dailyTarget + doneToday)
         },
 
         dailyRequire () {
@@ -83,14 +91,16 @@ export default {
         messages: {
             en: {
                 title: 'Caloric Balance',
-                calNeed: 'Daily calories',
+                calNeed: 'Daily conversion',
+                calLoss: 'Savings',
                 bmr: 'Basal Metabolic Rate',
                 consumed: 'Consumed',
                 burned: 'Burned'
             },
             de: {
                 title: 'Kalorienbilanz',
-                calNeed: 'Täglicher Kalorienbedarf',
+                calNeed: 'Umsatz',
+                calLoss: 'Sparen',
                 bmr: 'Grundumsatz',
                 consumed: 'Konsumiert',
                 burned: 'Verbrannt'

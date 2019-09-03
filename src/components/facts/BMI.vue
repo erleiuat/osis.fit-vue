@@ -4,14 +4,14 @@
             BMI
         </v-card-title>
         <v-card-text>
-            <v-layout wrap align-end>
+            <v-row no-gutters align="end" justify="space-between" style="height: 95px">
 
-                <v-flex xs12>
+                <v-col cols="12">
                     <div class="display-2">{{ bmi }}</div>
                     <div class="caption">{{ state.text }}</div>
-                </v-flex>
+                </v-col>
 
-            </v-layout>
+            </v-row>
         </v-card-text>
     </v-card>
 </template>

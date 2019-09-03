@@ -6,18 +6,24 @@
         </v-card-title>
 
         <v-card-text>
-            <v-layout wrap align-end>
+            <v-row no-gutters align="end" justify="space-between" style="height: 95px">
 
-                <v-flex xs6>
+                <v-col cols="auto">
                     <div class="display-2">{{ cVals.weight }}</div>
                     <div class="caption" v-if="cVals.aimWeight">{{ $t('target') }}: {{ cVals.aimWeight }}</div>
-                </v-flex>
+                </v-col>
 
-                <v-flex xs6 text-right class="caption" v-if="cVals.aimWeight">
+                <v-col cols="auto" class="caption text-right" v-if="cVals.aimWeight">
                     {{ diff }} Kg {{ $t('difference') }}
-                </v-flex>
+                </v-col>
 
-            </v-layout>
+                <!-- TODO
+                <v-col cols="12">
+                    <v-progress-linear :value="progress" :color="state.dark?'white':'black'" />
+                </v-col>
+                -->
+
+            </v-row>
         </v-card-text>
 
     </v-card>
@@ -35,6 +41,14 @@ export default {
     },
 
     computed: {
+
+        /* TODO
+        progress () {
+            var val = this.cVals.aimWeight / this.cVals.weight
+            console.log(100 - val * 100)
+            return 100 - val * 100
+        },
+        */
 
         state () {
             if (!this.cVals.weight || !this.cVals.aimWeight) return { dark: false, color: '' }
