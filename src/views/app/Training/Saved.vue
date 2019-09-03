@@ -34,7 +34,7 @@
 import training from '@/store/modules/training'
 
 export default {
-    name: 'Own',
+    name: 'Saved',
 
     modules: {
         training
