@@ -80,7 +80,7 @@ export default {
                 icon: 'fitness_center',
                 items: {
                     saved: { title: 'training.saved', to: 'training.saved', icon: 'list_alt' },
-                    exercise: { to: 'training.exercise.saved', icon: 'calendar_view_day' }
+                    exercise: { to: 'exercise.saved', icon: 'calendar_view_day' }
                 }
             }
 

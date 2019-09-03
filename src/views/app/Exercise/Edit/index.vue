@@ -51,8 +51,8 @@
 
 <script>
 import exercise from '@/store/modules/exercise'
-import Bodyparts from '@/views/app/Training/Exercise/Edit/Bodyparts'
-import Types from '@/views/app/Training/Exercise/Edit/Types'
+import Bodyparts from '@/views/app/Exercise/Edit/Bodyparts'
+import Types from '@/views/app/Exercise/Edit/Types'
 const notFound = () => import('@/views/error/NotFound')
 
 export default {
@@ -91,16 +91,14 @@ export default {
         save () {
             if (!this.$refs.form.validate()) return
             var action = 'exercise/edit'
-            if (this.$route.name !== 'training.exercise.edit') action = 'exercise/add'
+            if (this.$route.name !== 'exercise.edit') action = 'exercise/add'
 
             this.sending = true
             this.$store.dispatch(action, this.fd).then(r => {
+                this.$router.push({ name: 'exercise', params: { type: 'own', id: r } })
                 this.$notify({ type: 'success', title: this.$t('alert.success.save') })
-                if (action !== 'exercise/add') return
-                this.$router.replace({ name: 'training.exercise.edit', params: { id: r } })
-                this.fd.id = r
             }).catch(r => {
-                this.$notify({ type: 'error', title: this.$t('alert.error.save') })
+                this.$notify({ type: 'error', title: this.$t('alert.error.save'), text: r })
             }).finally(() => {
                 this.sending = false
             })
@@ -109,7 +107,7 @@ export default {
     },
 
     mounted () {
-        if (this.$route.name === 'training.exercise.edit') {
+        if (this.$route.name === 'exercise.edit') {
             this.loaded = false
             this.$store.dispatch('exercise/get', this.$route.params.id).then(res => {
                 this.fd = res

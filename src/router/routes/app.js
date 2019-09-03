@@ -109,52 +109,57 @@ module.exports = [{
             name: 'training',
             meta: { authRequired: true, premium: true },
             component: () => import('@/views/app/Training/Training')
+        }
+    ]
+
+}, {
+
+    path: '/exercises',
+    meta: { authRequired: true, premium: true },
+    components: {
+        toolbar: () => import('@/views/app/Exercise/Layout/Toolbar'),
+        default: () => import('@/views/app/Exercise/Layout/'), // TODO REDIRECT TO CHILD
+        bottom: () => import('@/views/app/Exercise/Layout/BottomNav')
+    },
+    children: [
+        {
+            path: '',
+            name: 'exercise.saved',
+            meta: { authRequired: true, premium: true },
+            component: () => import('@/views/app/Exercise/Saved')
         },
         {
-            path: 'exercises',
+            path: 'browse',
+            name: 'exercise.browse',
             meta: { authRequired: true, premium: true },
-            component: () => import('@/views/app/Training/Exercise/'),
+            component: () => import('@/views/app/Exercise/Browse')
+        },
+        {
+            path: 'r/:type/:id',
+            name: 'exercise',
+            meta: { authRequired: true, premium: true },
+            component: () => import('@/views/app/Exercise/Exercise')
+        },
+        {
+            path: 'save/:id',
+            name: 'exercise.save',
+            meta: { authRequired: true, premium: true },
+            component: () => import('@/views/app/Exercise/Save')
+        },
+        {
+            path: 'edit',
+            meta: { authRequired: true, premium: true },
+            component: () => import('@/views/app/Exercise/Edit/'),
             children: [
                 {
                     path: '',
-                    name: 'training.exercise.saved',
-                    meta: { authRequired: true, premium: true },
-                    component: () => import('@/views/app/Training/Exercise/Saved')
+                    name: 'exercise.new',
+                    meta: { authRequired: true, premium: true }
                 },
                 {
-                    path: 'browse',
-                    name: 'training.exercise.browse',
-                    meta: { authRequired: true, premium: true },
-                    component: () => import('@/views/app/Training/Exercise/Browse')
-                },
-                {
-                    path: 'r/:type/:id',
-                    name: 'training.exercise',
-                    meta: { authRequired: true, premium: true },
-                    component: () => import('@/views/app/Training/Exercise/Exercise')
-                },
-                {
-                    path: 'save/:id',
-                    name: 'training.exercise.save',
-                    meta: { authRequired: true, premium: true },
-                    component: () => import('@/views/app/Training/Exercise/Save')
-                },
-                {
-                    path: 'edit',
-                    meta: { authRequired: true, premium: true },
-                    component: () => import('@/views/app/Training/Exercise/Edit/'),
-                    children: [
-                        {
-                            path: '',
-                            name: 'training.exercise.new',
-                            meta: { authRequired: true, premium: true }
-                        },
-                        {
-                            path: ':id',
-                            name: 'training.exercise.edit',
-                            meta: { authRequired: true, premium: true }
-                        }
-                    ]
+                    path: ':id',
+                    name: 'exercise.edit',
+                    meta: { authRequired: true, premium: true }
                 }
             ]
         }

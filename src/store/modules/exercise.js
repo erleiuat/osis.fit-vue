@@ -81,7 +81,7 @@ const actions = {
         return new Promise((resolve, reject) => {
             Apios.post(con.state.url + 'edit/', form).then(res => {
                 con.commit('set', res.data.item)
-                resolve()
+                resolve(res.data.id)
             }).catch(err => {
                 reject(err)
             })

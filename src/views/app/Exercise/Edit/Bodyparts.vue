@@ -5,7 +5,7 @@
                 {{ $t('bodyparts') }} {{ bodyparts.length || '' }}
             </v-expansion-panel-header>
             <v-expansion-panel-content eager>
-                <v-checkbox v-model="bodyparts" v-for="(i, key) in list" :label="i.title" :value="i.value" :key="key" />
+                <v-checkbox v-model="bodyparts" v-for="(i, key) in list" :label="label(i.translationKey)" :value="i.id" :key="key" />
             </v-expansion-panel-content>
         </v-expansion-panel>
     </v-expansion-panels>
@@ -30,12 +30,18 @@ export default {
         },
         list () {
             return [
-                { value: '1', title: this.$t('bodypart.1') },
-                { value: '2', title: this.$t('bodypart.2') },
-                { value: '3', title: this.$t('bodypart.3') },
-                { value: '4', title: this.$t('bodypart.4') },
-                { value: '5', title: this.$t('bodypart.5') }
+                { id: 1, translationKey: 'chest' },
+                { id: 2, translationKey: 'chest' },
+                { id: 3, translationKey: 'chest' },
+                { id: 4, translationKey: 'chest' },
+                { id: 5, translationKey: 'chest' }
             ]
+        }
+    },
+
+    methods: {
+        label (key) {
+            return this.$t('bodypart.' + key)
         }
     },
 

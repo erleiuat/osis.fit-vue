@@ -72,24 +72,23 @@ export default {
 
         showBack () {
             if (!this.$vuetify.breakpoint.smAndDown) return false
-            else if (this.$route.name === 'training.exercise.saved') return false
-            else if (this.$route.name === 'training.saved') return false
+            else if (this.$route.name === 'exercise.saved') return false
             else return true
         },
 
         showSearch () {
-            if (this.$route.name === 'training.exercise.saved') return true
-            else if (this.$route.name === 'training.exercise.browse') return true
+            if (this.$route.name === 'exercise.saved') return true
+            else if (this.$route.name === 'exercise.browse') return true
             else return false
         },
 
         savePublic () {
             if (!this.$vuetify.breakpoint.mdAndUp) return false
-            else if (this.$route.name !== 'training.exercise') return false
+            else if (this.$route.name !== 'exercise') return false
             else if (this.$route.params.type !== 'public') return false
             else {
                 return {
-                    to: { name: 'training.exercise.save' },
+                    to: { name: 'exercise.save' },
                     text: this.$t('btn.save'),
                     icon: 'save'
                 }
@@ -98,11 +97,11 @@ export default {
 
         editOwn () {
             if (!this.$vuetify.breakpoint.mdAndUp) return false
-            else if (this.$route.name !== 'training.exercise') return false
+            else if (this.$route.name !== 'exercise') return false
             else if (this.$route.params.type !== 'own') return false
             else {
                 return {
-                    to: { name: 'training.exercise.edit', params: { id: this.$route.params.id } },
+                    to: { name: 'exercise.edit', params: { id: this.$route.params.id } },
                     text: this.$t('btn.edit'),
                     icon: 'edit'
                 }
@@ -111,11 +110,11 @@ export default {
 
         addNew () {
             if (!this.$vuetify.breakpoint.mdAndUp) return false
-            else if (this.$route.name !== 'training.exercise.saved') return false
+            else if (this.$route.name !== 'exercise.saved') return false
             else {
                 return {
-                    to: { name: 'training.exercise.new' },
-                    toBrowse: { name: 'training.exercise.browse' },
+                    to: { name: 'exercise.new' },
+                    toBrowse: { name: 'exercise.browse' },
                     text: this.$t('btn.add'),
                     icon: 'add'
                 }

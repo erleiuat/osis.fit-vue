@@ -25,14 +25,14 @@
         "saved": {
             "title": "Pläne",
             "description": ""
-        },
-        "exercise": {
-            "title": "Übung",
-            "description": "",
-            "saved": {
-                "title": "Übungen",
-                "description": ""
-            }
+        }
+    },
+    "exercise": {
+        "title": "Übung",
+        "description": "",
+        "saved": {
+            "title": "Übungen",
+            "description": ""
         }
     },
     "dashboard": {
@@ -85,7 +85,7 @@
         "login": {
             "title": "Anmelden",
             "description": ""
-        },        
+        },
         "register": {
             "title": "Registrieren",
             "description": ""
