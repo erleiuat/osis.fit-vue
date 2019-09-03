@@ -49,7 +49,7 @@
                         </v-flex>
 
                         <v-flex xs12>
-                            <v-text-field v-model="fd.weight" :label="$t('weight')" :rules="rule.require" type="number" outlined />
+                            <v-text-field v-model="fd.weight" :label="$t('weight')" :rules="rule.require" type="number" outlined autofocus />
                         </v-flex>
 
                         <v-flex xs12>

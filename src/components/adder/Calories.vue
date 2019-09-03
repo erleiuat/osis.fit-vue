@@ -26,7 +26,7 @@
                     <v-layout wrap>
 
                         <v-flex xs12>
-                            <v-text-field v-model="fd.title" :label="$t('ft.title')" @click:append="openSelect()" type="text" outlined append-icon="open_in_new" required />
+                            <v-text-field v-model="fd.title" :label="$t('ft.title')" @click:append="openSelect()" type="text" outlined append-icon="open_in_new" />
                         </v-flex>
 
                         <v-flex xs6>
@@ -54,7 +54,7 @@
                         </v-flex>
 
                         <v-flex xs12>
-                            <v-text-field v-model="fd.calories" :label="$t('calories')" :rules="rule.require" type="number" outlined />
+                            <v-text-field v-model="fd.calories" :label="$t('calories')" :rules="rule.require" type="number" outlined autofocus />
                         </v-flex>
 
                         <v-flex xs12>

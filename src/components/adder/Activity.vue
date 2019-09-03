@@ -56,7 +56,7 @@
                         </v-flex>
 
                         <v-flex xs12>
-                            <v-text-field v-model="fd.calories" :label="$t('calories')" :rules="rule.require" type="number" outlined />
+                            <v-text-field v-model="fd.calories" :label="$t('calories')" :rules="rule.require" type="number" outlined autofocus />
                         </v-flex>
 
                         <v-flex xs12>
