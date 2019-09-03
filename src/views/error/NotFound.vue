@@ -1,12 +1,23 @@
 <template>
-    <v-flex xs12 sm10>
-        <h1 class="display-3">{{ $t('title1') }}</h1>
-        <div class="headline">{{ $t('title2') }}</div>
-        <div class="">{{ $t('text') }}</div>
-        <v-btn class="primary mt-3" large :to="{name: 'dashboard'}">
+    <v-col cols="auto" class="text-center">
+
+        <div class="display-3 pt-2 pb-2">
+            {{ $t('title1') }}
+        </div>
+
+        <div class="headline pt-2 pb-2">
+            {{ $t('title2') }}
+        </div>
+
+        <div class="pt-2 pb-2">
+            {{ $t('text') }}
+        </div>
+
+        <v-btn :to="{name: 'dashboard'}" class="primary pt-2 pb-2" large block depressed>
             {{ $t('back') }}
         </v-btn>
-    </v-flex>
+
+    </v-col>
 </template>
 
 <script>

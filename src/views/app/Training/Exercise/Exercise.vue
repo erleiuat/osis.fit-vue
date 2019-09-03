@@ -1,16 +1,14 @@
 <template>
-    <vcontainer>
-        <v-row align="center" v-if="item">
+    <vcontainer :align="item ? '' : 'space-evenly'">
 
+        <v-row align="center" v-if="item && loaded">
             <v-col cols="12" class="title">
                 {{ item.title }}
             </v-col>
-
             <v-col cols="12" class="body-2">
                 Beschreibung: <br />
                 {{ item.description }}
             </v-col>
-
             <v-col cols="12" md="3" class="body-2">
                 Öffentlich: <br />
                 {{ item.public }}
@@ -32,26 +30,36 @@
                 Beanspruchte Körperteile<br />
                 {{ item.bodyparts }}
             </v-col>
-
         </v-row>
-        <v-row align="center" v-else>
+
+        <v-row align="center" justify="center" v-else-if="!loaded">
             <v-progress-linear indeterminate />
         </v-row>
+
+        <v-row align="center" v-else>
+            <notFound />
+        </v-row>
+
     </vcontainer>
 </template>
 
 <script>
+const notFound = () => import('@/views/error/NotFound')
 import exercise from '@/store/modules/exercise'
 
 export default {
     name: 'Exercise',
+    components: {
+        notFound
+    },
     modules: {
         exercise
     },
 
     data () {
         return {
-            iData: false
+            iData: false,
+            loaded: false
         }
     },
 
@@ -66,8 +74,9 @@ export default {
 
     mounted () {
         this.$store.dispatch('exercise/get', this.$route.params.id).then(res => {
-            console.log(res.title)
             this.iData = res
+        }).finally(() => {
+            this.loaded = true
         })
     },
 

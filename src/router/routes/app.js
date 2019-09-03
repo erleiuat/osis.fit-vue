@@ -118,7 +118,6 @@ module.exports = [{
         },
         {
             path: 'exercise',
-            name: 'training.exercise.index',
             meta: { authRequired: true, premium: true },
             components: {
                 toolbar: () => import('@/components/nav/toolbar/'),
@@ -126,21 +125,27 @@ module.exports = [{
             },
             children: [
                 {
-                    path: 'e/:id',
+                    path: '',
+                    name: 'training.exercise.saved',
+                    meta: { authRequired: true, premium: true },
+                    components: {
+                        default: () => import('@/views/app/Training/Exercise/Saved')
+                    }
+                },
+                {
+                    path: ':id',
                     name: 'training.exercise',
                     meta: { authRequired: true, premium: true },
                     components: {
-                        toolbar: () => import('@/components/nav/toolbar/'),
                         default: () => import('@/views/app/Training/Exercise/Exercise')
                     }
                 },
                 {
-                    path: 'saved',
-                    name: 'training.exercise.saved',
+                    path: ':id/edit',
+                    name: 'training.exercise.edit',
                     meta: { authRequired: true, premium: true },
                     components: {
-                        toolbar: () => import('@/components/nav/toolbar/'),
-                        default: () => import('@/views/app/Training/Exercise/Saved')
+                        default: () => import('@/views/app/Training/Exercise/Edit')
                     }
                 }
             ]

@@ -96,6 +96,7 @@ module.exports = [{
 }, {
 
     path: '/error',
+    name: 'error',
     meta: { authRequired: false },
     components: {
         toolbar: () => import('@/components/nav/toolbar/'),
@@ -113,7 +114,6 @@ module.exports = [{
         },
         {
             path: '404',
-            name: 'error.found',
             meta: { authRequired: false },
             components: {
                 toolbar: () => import('@/components/nav/toolbar/'),
@@ -125,9 +125,10 @@ module.exports = [{
 }, {
 
     path: '*',
+    name: 'error.found',
     components: {
         toolbar: () => import('@/components/nav/toolbar/'),
-        default: () => import('@/views/error/NotFound')
+        default: () => import('@/views/error/')
     }
 
 }]
