@@ -8,7 +8,7 @@
 
         <v-row align="center" dense>
             <v-col cols="12" v-for="(item, key) in items" :key="key">
-                <v-card link outlined hover :to="{name: 'exercise', params: {type: 'own', id: item.id}}">
+                <v-card :to="{name: 'exercise', params: {type: 'own', id: item.id}}" link outlined hover>
                     <v-card-text class="pt-1 pb-1">
                         <div class="title">
                             {{ item.title }}

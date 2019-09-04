@@ -86,7 +86,17 @@ const actions = {
             bodyparts: []
         }
         Apios.post(con.state.url + 'search/', fd).then(res => {
-            if (res.status === 200) con.commit('set', res.data.items.own)
+            if (res.status === 200) con.commit('set', res.data.items)
+        })
+    },
+
+    search (con, form) {
+        return new Promise((resolve, reject) => {
+            Apios.post(con.state.url + 'search/', form).then(res => {
+                resolve(res.data.items)
+            }).catch(err => {
+                reject(err)
+            })
         })
     },
 

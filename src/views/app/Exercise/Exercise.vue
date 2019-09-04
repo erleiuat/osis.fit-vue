@@ -2,24 +2,24 @@
     <vcontainer align="space-evenly">
 
         <v-row v-if="item && loaded" align="center" justify="center" dense>
-            <v-col cols="12" class="title">
+            <v-col cols="12" md="10" class="title">
                 {{ item.title }}
             </v-col>
-            <v-col cols="12" class="body-2">
+            <v-col cols="12" md="10" class="body-2">
                 {{ item.description }}
             </v-col>
         </v-row>
 
         <v-row v-if="item && loaded" align="center" justify="center" class="text-sm-center" dense>
 
-            <v-col cols="6" md="3" class="body-2">
+            <v-col cols="6" md="2" class="body-2">
                 <v-sheet class="pa-2">
                     <div class="caption">{{ $t('type') }}</div>
                     {{ $t('pnt.types.'+item.type) }}
                 </v-sheet>
             </v-col>
 
-            <v-col cols="6" md="3" class="body-2">
+            <v-col cols="6" md="2" class="body-2">
                 <v-sheet class="pa-2">
                     <div class="caption">{{ $t('public') }}</div>
                     {{ item.public ? $t('pTrue'):$t('pFalse') }}
@@ -29,13 +29,13 @@
             <v-col cols="12" md="6">
                 <v-sheet class="pa-2 text-left">
                     <v-row no-gutters justify="space-between">
-                        <v-col cols="12" md="12" class="caption text-center text-md-left">
+                        <v-col cols="12" md="12" class="caption text-center">
                             <b>{{ $t('perDo') }}</b>
                         </v-col>
                         <v-col cols="6" md="auto" class="caption">
                             {{ $t('calsPerDo') }}
                         </v-col>
-                        <v-col cols="6" md="auto" class="body-2 text-right text-md-left">
+                        <v-col cols="6" md="3" class="body-2 text-right text-md-left">
                             {{ item.calories }}
                             <span class="font-italic font-weight-light">Kcal</span>
                         </v-col>
@@ -49,7 +49,7 @@
                 </v-sheet>
             </v-col>
 
-            <v-col cols="12" class="body-2" v-if="item.bodyparts.length">
+            <v-col cols="12" md="10" class="body-2" v-if="item.bodyparts.length">
                 <v-sheet class="pa-2">
                     <div class="caption">{{ $t('bodyparts') }}</div>
                     <v-chip v-for="(bp, key) in item.bodyparts" :key="key" class="ml-1 mr-1 mb-1">
@@ -129,8 +129,8 @@ export default {
                 repetsPerDo: 'Wiederholungen',
                 bodyparts: 'Betroffene Körperteile',
                 type: 'Typ',
-                pFalse: 'Ja',
-                pTrue: 'Nein'
+                pFalse: 'Nein',
+                pTrue: 'Ja'
             }
         }
     }

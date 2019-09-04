@@ -103,7 +103,7 @@ export default {
 
             this.sending = true
             this.$store.dispatch(action, this.fd).then(r => {
-                this.$router.push({ name: 'exercise', params: { type: 'own', id: r } })
+                this.$router.go(-1)
                 this.$notify({ type: 'success', title: this.$t('alert.success.save') })
             }).catch(r => {
                 this.$notify({ type: 'error', title: this.$t('alert.error.save'), text: r })

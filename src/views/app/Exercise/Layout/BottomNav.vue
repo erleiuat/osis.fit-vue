@@ -21,8 +21,7 @@
             </v-list>
         </v-menu>
 
-        <v-btn v-if="savePublic" @click="$router.push(savePublic.to)">
-            <span>{{ savePublic.text }}</span>
+        <v-btn v-if="savePublic" @click="$router.push(savePublic.to)" fab fixed bottom right color="primary">
             <v-icon>{{ savePublic.icon }}</v-icon>
         </v-btn>
 
@@ -68,7 +67,7 @@ export default {
             else if (this.$route.params.type !== 'public') return false
             else {
                 return {
-                    to: { name: 'training.exercise.save', params: { id: this.$route.params.id } },
+                    to: { name: 'exercise.save', params: { id: this.$route.params.id } },
                     text: this.$t('btn.save'),
                     icon: 'save'
                 }

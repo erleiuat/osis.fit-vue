@@ -21,6 +21,7 @@
         "stamina": "Stamina",
         "fitness": "Fitness",
         "flexibility": "Flexibility",
-        "coordination": "Coordination"
+        "coordination": "Coordination",
+        "other": "Others"
     }
 }
