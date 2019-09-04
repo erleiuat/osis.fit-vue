@@ -150,7 +150,7 @@ module.exports = [{
             path: 'copy/:id',
             name: 'exercise.copy',
             meta: { authRequired: true, premium: true },
-            component: () => import('@/views/app/Exercise/Edit/'),
+            component: () => import('@/views/app/Exercise/Edit/')
         },
         {
             path: 'edit/:id',

@@ -71,7 +71,7 @@ export default {
                 icon: 'fastfood',
                 items: {
                     own: { title: this.$t('templates'), to: 'food', icon: 'folder_open' },
-                    favorites: { title: this.$t('database'), to: 'food.favorites' , icon: 'layers' }
+                    favorites: { title: this.$t('database'), to: 'food.favorites', icon: 'layers' }
                 }
             }
 

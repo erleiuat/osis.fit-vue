@@ -13,7 +13,7 @@ export default {
     components: {
         ActivityTable
     },
-    
+
     data () {
         return {
             modal: false,

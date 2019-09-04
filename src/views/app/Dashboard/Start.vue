@@ -85,7 +85,6 @@ export default {
         },
 
         cals () {
-
             if (!this.user.ok || !this.aims.ok || !this.lastWeight.ok) return { show: false }
 
             var td = this.$store.getters['today'].date

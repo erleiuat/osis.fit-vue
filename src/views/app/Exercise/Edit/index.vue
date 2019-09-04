@@ -134,7 +134,6 @@ export default {
         }).finally(() => {
             this.loaded = true
         })
-
     },
 
     i18n: {
@@ -143,13 +142,13 @@ export default {
                 title: 'Exercise',
                 public: 'Public',
                 calsPerDo: 'Calories burned per execution',
-                repetsPerDo: 'Repetitions per execution',
+                repetsPerDo: 'Repetitions per execution'
             },
             de: {
                 title: 'Übung',
                 public: 'Öffentlich',
                 calsPerDo: 'Kalorienverbrauch pro Ausführung',
-                repetsPerDo: 'Wiederholungen pro Ausführung',
+                repetsPerDo: 'Wiederholungen pro Ausführung'
             }
         }
     }

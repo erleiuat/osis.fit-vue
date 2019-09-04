@@ -39,7 +39,7 @@
                         <v-col cols="6">
                             <v-text-field v-model="fd.time" :label="$t('ft.time')" :rules="rule.require" type="time" outlined append-icon="access_time" />
                         </v-col>
-                        
+
                         <v-col cols="12" sm="6">
                             <v-text-field v-model="caloriesPer100" :label="$t('caloriesPer100')" @input="calTotal()" outlined type="number" suffix="Kcal" />
                         </v-col>

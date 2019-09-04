@@ -18,7 +18,7 @@
                             </v-progress-linear>
                         </v-card-text>
                     </v-flex>
-                    
+
                 </v-layout>
 
                 <v-layout row wrap align-center v-if="value && !processing" :style="height?'height:'+height+'px':'min-height:200px'" key="2">

@@ -56,7 +56,6 @@ export default {
     },
 
     data () {
-        var data = this.$store.getters['user/user']
         return {
             sending: false,
             fd: {

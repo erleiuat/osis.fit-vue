@@ -22,7 +22,7 @@ export default {
     components: {
         WeightTable, WeightChart
     },
-    
+
     mounted () {
         this.$store.dispatch('weight/load')
     }

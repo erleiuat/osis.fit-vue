@@ -54,14 +54,13 @@ export default {
     computed: {
 
         items () {
+            var items = [...this.$store.getters['food/all']]
 
-            if (this.$store.getters['auth/premium']) var items = [
-                ...this.$store.getters['food/all'],
-                ...this.$store.getters['foodFavorite/all']
-            ]
-            else var items = [
-                ...this.$store.getters['food/all']
-            ]
+            if (this.$store.getters['auth/premium']) {
+                items = [
+                    ...items, ...this.$store.getters['foodFavorite/all']
+                ]
+            }
 
             var query = this.query || ''
             var filtered = items.filter(el =>
@@ -70,7 +69,6 @@ export default {
 
             if (filtered.length <= 0) return false
             else return filtered
-
         }
 
     },
