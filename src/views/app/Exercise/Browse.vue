@@ -30,6 +30,7 @@
                     </v-expansion-panel-header>
 
                     <v-expansion-panel-content class="pa-0" eager>
+                        <div class="caption text-right">{{ $t('byUser') }} {{ item.user }}</div>
                         <div class="">{{ $t('ft.description') }}</div>
                         <div class="caption"> {{ item.description }}</div><br />
                         <div class="">{{ $t('bodyparts') }}</div>
@@ -94,11 +95,13 @@ export default {
         messages: {
             en: {
                 title: 'Browse Templates',
-                bodyparts: 'Affected body parts'
+                bodyparts: 'Affected body parts',
+                byUser: 'Created by'
             },
             de: {
                 title: 'Vorlagen durchsuchen',
-                bodyparts: 'Betroffene Körperteile'
+                bodyparts: 'Betroffene Körperteile',
+                byUser: 'Erstellt von'
             }
         }
     }

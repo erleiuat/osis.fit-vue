@@ -33,6 +33,18 @@
         "saved": {
             "title": "Exercises",
             "description": ""
+        },
+        "edit": {
+            "title": "Edit Exercise",
+            "description": ""
+        },
+        "new": {
+            "title": "Create Exercise",
+            "description": ""
+        },
+        "copy": {
+            "title": "Copy Exercise",
+            "description": ""
         }
     },
     "dashboard": {

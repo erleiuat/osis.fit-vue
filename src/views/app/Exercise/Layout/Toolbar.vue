@@ -47,6 +47,11 @@
             </v-btn>
         </transition>
 
+        <v-spacer v-if="showTitle" />
+        <v-toolbar-title v-if="showTitle">
+            {{ showTitle }}
+        </v-toolbar-title>
+
     </Default>
 </template>
 
@@ -67,6 +72,19 @@ export default {
     },
 
     computed: {
+
+        showTitle () {
+            var doShow = false
+            if (this.$route.name === 'exercise.copy') doShow = true
+            else if (this.$route.name === 'exercise.new') doShow = true
+            else if (this.$route.name === 'exercise.edit') doShow = true
+            else if (this.$vuetify.breakpoint.smAndDown) {
+                if (this.$route.name === 'exercise') doShow = true
+                else if (this.$route.name === 'exercise.edit') doShow = true
+            }
+            if (doShow) return this.$t('view.' + this.$route.name + '.title')
+            else return false
+        },
 
         showBack () {
             if (!this.$vuetify.breakpoint.smAndDown) return false

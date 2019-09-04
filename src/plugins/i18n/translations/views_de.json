@@ -33,6 +33,18 @@
         "saved": {
             "title": "Übungen",
             "description": ""
+        },
+        "edit": {
+            "title": "Übung bearbeiten",
+            "description": ""
+        },
+        "new": {
+            "title": "Übung erstellen",
+            "description": ""
+        },
+        "copy": {
+            "title": "Übung kopieren",
+            "description": ""
         }
     },
     "dashboard": {
