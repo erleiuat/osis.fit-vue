@@ -1,5 +1,5 @@
 <template>
-    <v-card :color="state.color" :dark="state.dark">
+    <v-card :color="state.color" :dark="state.dark" :loading="loading">
         <v-card-title class="display-1">
             {{ $t('title') }}
         </v-card-title>
@@ -46,6 +46,12 @@ export default {
     },
 
     computed: {
+
+        loading () {
+            if (!this.$store.getters['loading']) return false
+            else if (this.state.dark) return 'white'
+            else return 'black'
+        },
 
         progress () {
             var val = this.remaining / (this.dailyTarget + this.dailyRequire)

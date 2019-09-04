@@ -1,5 +1,5 @@
 <template>
-    <v-card :color="state.color" :dark="state.dark">
+    <v-card :color="state.color" :dark="state.dark" :loading="loading">
 
         <v-card-title class="display-1">
             {{ $t('title') }}
@@ -49,6 +49,12 @@ export default {
             return 100 - val * 100
         },
         */
+
+        loading () {
+            if (!this.$store.getters['loading']) return false
+            else if (this.state.dark) return 'white'
+            else return 'black'
+        },
 
         state () {
             if (!this.cVals.weight || !this.cVals.aimWeight) return { dark: false, color: '' }

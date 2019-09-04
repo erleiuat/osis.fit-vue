@@ -1,5 +1,5 @@
 <template>
-    <v-card :color="state.color" :dark="state.dark">
+    <v-card :color="state.color" :dark="state.dark" :loading="loading">
         <v-card-title class="display-1">
             BMI
         </v-card-title>
@@ -28,6 +28,12 @@ export default {
     },
 
     computed: {
+
+        loading () {
+            if (!this.$store.getters['loading']) return false
+            else if (this.state.dark) return 'white'
+            else return 'black'
+        },
 
         state () {
             if (!this.bmi) return { color: '', dark: false, text: '' }

@@ -19,6 +19,7 @@ export default new Vuex.Store({
 
     state: {
         today: null,
+        loading: true,
         cookiesAccepted: VueCookies.get('cAccept') || false,
         app: {
             drawer: null,
@@ -30,6 +31,10 @@ export default new Vuex.Store({
     },
 
     getters: {
+
+        loading: state => {
+            return state.loading
+        },
 
         cookieNotice: state => {
             return !state.cookiesAccepted

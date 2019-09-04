@@ -1,8 +1,11 @@
 <template>
-    <v-row dense justify="center">
+    <v-row dense justify="center" align="center" style="min-height: 207px">
 
         <v-col cols="12" md="4" v-if="cals.show">
             <CaloricBalance :cVals="cals.cVals" />
+        </v-col>
+        <v-col cols="auto" v-else-if="$store.getters['loading']">
+            <v-progress-circular :size="70" :width="7" indeterminate />
         </v-col>
         <v-col cols="12" v-else>
             <Welcome />
@@ -82,6 +85,7 @@ export default {
         },
 
         cals () {
+
             if (!this.user.ok || !this.aims.ok || !this.lastWeight.ok) return { show: false }
 
             var td = this.$store.getters['today'].date

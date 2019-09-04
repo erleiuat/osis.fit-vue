@@ -67,7 +67,7 @@ const actions = {
 
     load (con) {
         Apios.post(con.state.url + 'read/', { from: '', to: '' }).then(res => {
-            if (res.status === 200) con.commit('set', res.data.items)
+            con.commit('set', res.data.items)
         })
     },
 
