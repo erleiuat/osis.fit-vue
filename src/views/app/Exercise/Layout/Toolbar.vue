@@ -18,9 +18,9 @@
         </v-btn>
 
         <v-spacer v-if="addNew" />
-        <v-menu>
+        <v-menu v-if="addNew">
             <template v-slot:activator="{ on }">
-                <v-btn v-if="addNew" v-on="on" outlined text>
+                <v-btn v-on="on" outlined text>
                     <v-icon left>{{ addNew.icon }}</v-icon> {{ addNew.text }}
                 </v-btn>
             </template>
