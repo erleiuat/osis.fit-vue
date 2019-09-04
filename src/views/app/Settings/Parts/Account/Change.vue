@@ -9,7 +9,7 @@
                     <v-text-field v-model="fd.new" :label="$t('new')" :rules="rule.password" :type="showPW ? 'text' : 'password'" :append-icon="showPW ? 'visibility' : 'visibility_off'" @click:append="showPW = !showPW" filled single-line />
                 </v-col>
                 <v-col cols="12" md="7">
-                    <v-btn @click="change()" :loading="sending" color="primary" depressed large block type="submit">
+                    <v-btn @click="change()" :loading="sending" :disabled="!rule.valid" type="submit" color="primary" block depressed>
                         {{ $t('change') }}
                     </v-btn>
                 </v-col>

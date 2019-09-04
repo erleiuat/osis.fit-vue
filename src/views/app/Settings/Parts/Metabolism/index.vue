@@ -2,7 +2,7 @@
     <vcontainer align="center">
         <v-form v-model="rule.valid" ref="form" v-on:submit.prevent>
 
-            <v-expansion-panels v-model="openPanel" accordion>
+            <v-expansion-panels v-model="openPanel" multiple>
 
                 <v-expansion-panel>
                     <v-expansion-panel-header class="caption">
@@ -26,7 +26,6 @@
                             <v-icon color="error">error_outline</v-icon>
                         </template>
                     </v-expansion-panel-header>
-                    <v-divider />
                     <v-expansion-panel-content eager>
                         <BMR v-model="cBMR" :fd="fd" :rule="rule" />
                     </v-expansion-panel-content>
@@ -45,7 +44,6 @@
                             <v-icon color="error">error_outline</v-icon>
                         </template>
                     </v-expansion-panel-header>
-                    <v-divider />
                     <v-expansion-panel-content eager>
                         <PAL v-model="fd.pal" />
                     </v-expansion-panel-content>
@@ -62,7 +60,7 @@
 
             <v-row justify="center">
                 <v-col cols="12" sm="4">
-                    <v-btn @click="save()" :loading="sending" color="primary" type="submit" block depressed>
+                    <v-btn @click="save()" :loading="sending" :disabled="!rule.valid" type="submit" color="primary" block depressed>
                         {{ $t('btn.save') }}
                     </v-btn>
                 </v-col>
@@ -85,7 +83,7 @@ export default {
 
     data () {
         return {
-            openPanel: null,
+            openPanel: [],
             cBMR: null,
             sending: false,
             fd: {
@@ -110,7 +108,7 @@ export default {
         this.fd.birthdate = data.birthdate
         this.fd.pal = data.pal
         if (!this.fd.height && !this.fd.pal) {
-            this.openPanel = 0
+            this.openPanel = [0, 1]
         }
     },
 
@@ -118,16 +116,20 @@ export default {
 
         save () {
             if (!this.$refs.form.validate()) {
-                if (!this.cBMR) this.openPanel = 1
-                else if (!this.fd.pal) this.openPanel = 2
-                else this.$t('alert.error.save')
-                return false
+                if (!this.cBMR || !this.fd.pal) {
+                    var panels = []
+                    if (!this.cBMR) panels.push(1)
+                    if (!this.fd.pal) panels.push(2)
+                    this.openPanel = panels
+                    return
+                } else this.$t('alert.error.save')
+                return
             }
 
             this.sending = true
             this.$store.dispatch('user/editMetabolism', this.fd).then(r => {
-                this.edit = false
                 this.$notify({ type: 'success', title: this.$t('alert.success.save') })
+                if (this.$vuetify.breakpoint.smAndDown) this.$router.push({ name: 'settings' })
             }).catch(r => {
                 this.$notify({ type: 'error', title: this.$t('alert.error.save'), text: r })
             }).finally(() => {

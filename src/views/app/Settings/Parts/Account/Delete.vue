@@ -12,7 +12,7 @@
                     <v-text-field v-model="fd.password" :label="$t('password')" :rules="rule.password" type="password" filled single-line />
                 </v-col>
                 <v-col cols="12" md="7">
-                    <v-btn @click="change()" :loading="sending" color="primary" depressed large block type="submit">
+                    <v-btn @click="delAcc()" :loading="sending" :disabled="!rule.valid" type="submit" color="primary" block depressed>
                         {{ $t('delete') }}
                     </v-btn>
                 </v-col>
@@ -53,7 +53,7 @@ export default {
     },
 
     methods: {
-        change () {
+        delAcc () {
             if (!this.$refs.form.validate()) return false
             this.sending = true
 

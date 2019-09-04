@@ -93,7 +93,7 @@ export default {
             this.sending = true
             this.$store.dispatch('user/editProfile', form).then(r => {
                 this.$notify({ type: 'success', title: this.$t('alert.success.save') })
-                if (this.$vuetify.breakpoint.smAndDown) this.$router.go(-1)
+                if (this.$vuetify.breakpoint.smAndDown) this.$router.push({name: 'settings'})
             }).catch(r => {
                 this.$notify({ type: 'error', title: this.$t('alert.error.save'), text: r })
             }).finally(() => {

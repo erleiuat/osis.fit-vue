@@ -16,49 +16,45 @@
                 </v-btn>
                 <v-toolbar-title>{{ $t('title') }}</v-toolbar-title>
                 <v-spacer></v-spacer>
-                <v-btn icon @click="add()" :loading="sending">
+                <v-btn icon @click="add()" :loading="sending" :disabled="!rule.valid">
                     <v-icon>save</v-icon>
                 </v-btn>
             </v-toolbar>
 
             <v-container grid-list-sm>
                 <v-form v-model="rule.valid" ref="form" v-on:submit.prevent>
-                    <v-layout wrap>
+                    <v-layout wrap align-baseline>
 
-                        <v-flex xs12>
-                            <v-text-field v-model="fd.title" :label="$t('ft.title')" @click:append="openSelect()" type="text" outlined append-icon="open_in_new" />
+                        <v-flex xs10>
+                            <v-text-field v-model="fd.title" :label="$t('ft.title')" type="text" outlined />
+                        </v-flex>
+
+                        <v-flex xs2 text-center>
+                            <v-btn fab depressed color="primary" @click="openSelect()">
+                                <v-icon>view_carousel</v-icon>
+                            </v-btn>
                         </v-flex>
 
                         <v-flex xs6>
-                            <v-menu ref="menu" v-model="dMenu" :close-on-content-click="false" :nudge-right="40" transition="scale-transition" offset-y full-width min-width="290px">
-                                <template v-slot:activator="{ on }">
-                                    <v-text-field v-model="fd.date" :label="$t('ft.date')" :rules="rule.require" type="date" outlined readonly v-on="on" @focus="dMenu = true" />
-                                </template>
-                                <v-date-picker v-model="fd.date" @input="dMenu = false" no-title />
-                            </v-menu>
+                            <v-text-field v-model="fd.date" :label="$t('ft.date')" :rules="rule.require" type="date" outlined append-icon="calendar_today"/>
                         </v-flex>
                         <v-flex xs6>
-                            <v-menu ref="menu" v-model="tMenu" :return-value.sync="fd.time" :close-on-content-click="false" :nudge-right="40" transition="scale-transition" offset-y full-width max-width="290px" min-width="290px">
-                                <template v-slot:activator="{ on }">
-                                    <v-text-field v-model="fd.time" :label="$t('ft.time')" :rules="rule.require" type="time" outlined readonly v-on="on" @focus="tMenu = true" />
-                                </template>
-                                <v-time-picker v-if="tMenu" v-model="fd.time" full-width @click:minute="$refs.menu.save(fd.time)" format="24hr" no-title />
-                            </v-menu>
+                            <v-text-field v-model="fd.time" :label="$t('ft.time')" :rules="rule.require" type="time" outlined append-icon="access_time"/>
                         </v-flex>
 
                         <v-flex xs12 sm6>
-                            <v-text-field v-model="caloriesPer100" :label="$t('caloriesPer100')" @input="calTotal()" outlined />
+                            <v-text-field v-model="caloriesPer100" :label="$t('caloriesPer100')" @input="calTotal()" outlined type="number" suffix="Kcal" />
                         </v-flex>
                         <v-flex xs12 sm6>
-                            <v-text-field v-model="amount" :label="$t('ft.amount')" @input="calTotal()" outlined />
+                            <v-text-field v-model="amount" :label="$t('ft.amount')" @input="calTotal()" outlined type="number" suffix="g / ml" />
                         </v-flex>
 
                         <v-flex xs12>
-                            <v-text-field v-model="fd.calories" :label="$t('calories')" :rules="rule.require" type="number" outlined autofocus />
+                            <v-text-field v-model="fd.calories" :label="$t('calories')" :rules="rule.require" type="number" suffix="Kcal" outlined autofocus />
                         </v-flex>
 
                         <v-flex xs12>
-                            <v-btn @click="add()" :loading="sending" type="submit" color="primary" block depressed>
+                            <v-btn @click="add()" :loading="sending" :disabled="!rule.valid" type="submit" color="primary" block depressed>
                                 {{ $t('btn.save') }}
                             </v-btn>
                         </v-flex>
@@ -85,8 +81,6 @@ export default {
         return {
             selector: false,
             show: false,
-            dMenu: false,
-            tMenu: false,
             sending: false,
             amount: '',
             caloriesPer100: '',
@@ -161,12 +155,12 @@ export default {
         messages: {
             en: {
                 title: 'Add Calories',
-                caloriesPer100: 'Calories per 100 (g/ml)',
+                caloriesPer100: 'Calories per 100g / 100ml',
                 calories: 'Calories Total'
             },
             de: {
                 title: 'Kalorien hinzufügen',
-                caloriesPer100: 'Kalorien pro 100 (g/ml)',
+                caloriesPer100: 'Kalorien pro 100g / 100ml',
                 calories: 'Kalorien Total'
             }
         }

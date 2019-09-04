@@ -15,7 +15,7 @@
                     <v-btn icon @click="sure = true" v-if="fd.id">
                         <v-icon>delete</v-icon>
                     </v-btn>
-                    <v-btn icon @click="save()" :loading="sending" v-else>
+                    <v-btn icon @click="save()" :loading="sending" :disabled="!rule.valid" v-else>
                         <v-icon>save</v-icon>
                     </v-btn>
                 </v-toolbar>
@@ -24,38 +24,45 @@
             <v-card-text class="pa-0">
                 <v-form v-model="rule.valid" ref="form" v-on:submit.prevent>
                     <vcontainer>
-                        <v-row dense>
 
+                        <v-row no-gutters>
                             <v-col cols="12">
                                 <v-text-field v-model="fd.title" :label="$t('ft.title')" :rules="rule.title" type="text" outlined />
                             </v-col>
                             <v-col cols="12" md="6">
-                                <v-text-field v-model="fd.caloriesPer100" :label="$t('caloriesPer100')" :rules="rule.require" type="number" outlined />
+                                <v-text-field v-model="fd.caloriesPer100" :label="$t('caloriesPer100')" :rules="rule.require" type="number" suffix="Kcal" outlined />
                             </v-col>
                             <v-col cols="12" md="6">
-                                <v-text-field v-model="fd.amount" :label="$t('ft.amount')" :rules="rule.require" type="number" outlined />
+                                <v-text-field v-model="fd.amount" :label="$t('defAmount')" :rules="rule.require" type="number" suffix="g / ml" outlined />
                             </v-col>
-
                             <v-col cols="12">
-                                {{ $t('calories') }}: {{ total }}
+                                <v-sheet class="pa-2">
+                                    {{ $t('calories') }}: {{ total }}
+                                </v-sheet>
                             </v-col>
+                        </v-row>
+
+                        <v-row dense>
+
 
                             <v-col cols="12" v-if="$store.getters['auth/premium']">
-                                <ImageInput v-model="fd.image" height="200" contain/>
+                                <ImageInput v-model="fd.image" height="200" contain />
                             </v-col>
                             <v-col cols="12" v-else>
-                                <v-btn block depressed large :to="{name: 'premium'}">
+                                <v-btn :to="{name: 'premium'}" color="amber" light block depressed large>
+                                    <v-icon left>start</v-icon>
                                     {{ $t('needsPremium') }}
                                 </v-btn>
                             </v-col>
 
                             <v-col cols="12">
-                                <v-btn @click="save()" :loading="sending" type="submit" color="primary" block depressed>
+                                <v-btn @click="save()" :loading="sending" :disabled="!rule.valid" type="submit" color="primary" block depressed>
                                     {{ $t('btn.save') }}
                                 </v-btn>
                             </v-col>
 
                         </v-row>
+
                     </vcontainer>
                 </v-form>
             </v-card-text>
@@ -187,7 +194,8 @@ export default {
                 delete: 'Delete',
                 titleAdd: 'Add Food',
                 titleEdit: 'Edit Food',
-                caloriesPer100: 'Calories per 100 (g/ml)',
+                defAmount: 'Default Amount',
+                caloriesPer100: 'Calories per 100g / 100ml',
                 calories: 'Calories Total'
             },
             de: {
@@ -195,7 +203,8 @@ export default {
                 delete: 'Löschen',
                 titleAdd: 'Essware hinzufügen',
                 titleEdit: 'Essware bearbeiten',
-                caloriesPer100: 'Kalorien pro 100 (g/ml)',
+                defAmount: 'Standartmenge',
+                caloriesPer100: 'Kalorien pro 100g / 100ml',
                 calories: 'Kalorien Total'
             }
         }

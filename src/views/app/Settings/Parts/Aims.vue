@@ -3,7 +3,7 @@
         <v-form v-model="rule.valid" ref="form" v-on:submit.prevent>
             <v-row justify="center" dense>
                 <v-col cols="12" sm="8" md="6">
-                    <v-text-field v-model="fd.weight" :label="$t('weight')" :rules="rule.require" type="number" filled />
+                    <v-text-field v-model="fd.weight" :label="$t('weight')" :rules="rule.require" type="number" suffix="Kg" filled />
                 </v-col>
             </v-row>
             <v-row justify="center" dense>
@@ -56,8 +56,8 @@ export default {
 
             this.sending = true
             this.$store.dispatch('user/editAims', this.fd).then(r => {
-                this.edit = false
                 this.$notify({ type: 'success', title: this.$t('alert.success.save') })
+                if (this.$vuetify.breakpoint.smAndDown) this.$router.push({ name: 'settings' })
             }).catch(r => {
                 this.$notify({ type: 'error', title: this.$t('alert.error.save'), text: r })
             }).finally(() => {

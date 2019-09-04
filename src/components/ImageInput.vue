@@ -6,8 +6,13 @@
                 <v-layout row wrap align-center v-if="!value" :style="height?'height:'+height+'px':'min-height:200px'" key="1">
 
                     <v-flex xs12 v-if="!value && !uploading">
-                        <v-card-text>
-                            <v-file-input v-model="file" :label="$t('select')" @change="upload()" :rules="rule" :disabled="uploading" prepend-icon="camera_alt" accept="image/jpg, image/png, image/jpeg" />
+                        <v-card-text class="text-center pb-0">
+                            <v-icon x-large>
+                                camera_alt
+                            </v-icon>
+                        </v-card-text>
+                        <v-card-text class="pt-0">
+                            <v-file-input v-model="file" :label="$t('select')" @change="upload()" :rules="rule" :disabled="uploading" accept="image/jpg, image/png, image/jpeg" prepend-icon="" />
                         </v-card-text>
                     </v-flex>
 

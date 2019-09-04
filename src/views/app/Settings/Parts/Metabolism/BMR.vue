@@ -16,7 +16,7 @@
         </v-col>
 
         <v-col cols="12" md="5">
-            <v-text-field :label="$t('height')" v-model="fd.height" :rules="rule.require" type="number" filled />
+            <v-text-field :label="$t('height')" v-model="fd.height" :rules="rule.require" type="number" suffix="cm" filled />
         </v-col>
         <v-col cols="12" md="5">
             <v-select :label="$t('gender')" v-model="fd.gender" :items="genders" :rules="rule.require" filled />
@@ -87,7 +87,7 @@ export default {
                 lastname: 'Lastname',
                 birthdate: 'Birthdate',
                 gender: 'Gender',
-                height: 'Height (cm)',
+                height: 'Height',
                 curWeight: 'Current weight',
                 bmr: 'Basal Metabolic Rate',
                 missing: 'Fill in all fields',
@@ -103,7 +103,7 @@ export default {
                 lastname: 'Nachname',
                 birthdate: 'Geburtsdatum',
                 gender: 'Geschlecht',
-                height: 'Grösse (cm)',
+                height: 'Grösse',
                 curWeight: 'Aktuelles Gewicht',
                 bmr: 'Grundumsatz',
                 missing: 'Fülle alle Felder aus',

@@ -1,31 +1,29 @@
 <template>
-    <v-expansion-panels v-model="openPanel" popout>
+    <v-expansion-panels v-model="openPanel" accordion="">
         <v-expansion-panel>
             <v-expansion-panel-header class="subheader">
                 {{ $t('change') }}
             </v-expansion-panel-header>
-            <v-divider />
             <v-expansion-panel-content eager>
+                <v-divider />
                 <Change />
             </v-expansion-panel-content>
-            <v-divider />
         </v-expansion-panel>
         <v-expansion-panel>
             <v-expansion-panel-header class="subheader">
                 {{ $t('download') }}
             </v-expansion-panel-header>
-            <v-divider />
             <v-expansion-panel-content eager>
+                <v-divider />
                 <Download />
             </v-expansion-panel-content>
-            <v-divider />
         </v-expansion-panel>
         <v-expansion-panel>
             <v-expansion-panel-header class="subheader">
                 {{ $t('delete') }}
             </v-expansion-panel-header>
-            <v-divider />
             <v-expansion-panel-content eager>
+                <v-divider />
                 <Delete />
             </v-expansion-panel-content>
         </v-expansion-panel>

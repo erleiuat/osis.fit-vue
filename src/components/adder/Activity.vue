@@ -16,7 +16,7 @@
                 </v-btn>
                 <v-toolbar-title>{{ $t('title') }}</v-toolbar-title>
                 <v-spacer></v-spacer>
-                <v-btn icon @click="add()" :loading="sending">
+                <v-btn icon @click="add()" :loading="sending" :disabled="!rule.valid">
                     <v-icon>save</v-icon>
                 </v-btn>
             </v-toolbar>
@@ -30,37 +30,22 @@
                         </v-flex>
 
                         <v-flex xs6>
-                            <v-menu ref="menu" v-model="dMenu" :close-on-content-click="false" :nudge-right="40" transition="scale-transition" offset-y full-width min-width="290px">
-                                <template v-slot:activator="{ on }">
-                                    <v-text-field v-model="fd.date" :label="$t('ft.date')" :rules="rule.require" type="date" outlined readonly v-on="on" @focus="dMenu = true" />
-                                </template>
-                                <v-date-picker v-model="fd.date" @input="dMenu = false" no-title />
-                            </v-menu>
+                            <v-text-field v-model="fd.date" :label="$t('ft.date')" :rules="rule.require" type="date" outlined append-icon="calendar_today" />
                         </v-flex>
                         <v-flex xs6>
-                            <v-menu ref="menu" v-model="tMenu" :return-value.sync="fd.time" :close-on-content-click="false" :nudge-right="40" transition="scale-transition" offset-y full-width max-width="290px" min-width="290px">
-                                <template v-slot:activator="{ on }">
-                                    <v-text-field v-model="fd.time" :label="$t('ft.time')" :rules="rule.require" type="time" outlined readonly v-on="on" @focus="tMenu = true" />
-                                </template>
-                                <v-time-picker v-if="tMenu" v-model="fd.time" full-width @click:minute="$refs.menu.save(fd.time)" format="24hr" no-title />
-                            </v-menu>
+                            <v-text-field v-model="fd.time" :label="$t('ft.time')" :rules="rule.require" type="time" outlined append-icon="access_time" />
                         </v-flex>
 
                         <v-flex xs12>
-                            <v-menu ref="menu" v-model="tMenu2" :return-value.sync="fd.duration" :close-on-content-click="false" :nudge-right="40" transition="scale-transition" offset-y full-width max-width="290px" min-width="290px">
-                                <template v-slot:activator="{ on }">
-                                    <v-text-field v-model="fd.duration" :label="$t('duration')" type="time" outlined readonly v-on="on" @focus="tMenu2 = true" />
-                                </template>
-                                <v-time-picker v-if="tMenu2" v-model="fd.duration" full-width @click:minute="$refs.menu.save(fd.duration)" format="24hr" no-title />
-                            </v-menu>
+                            <v-text-field v-model="fd.duration" :label="$t('duration')" type="time" outlined append-icon="timer" suffix="(hh:mm)" />
                         </v-flex>
 
                         <v-flex xs12>
-                            <v-text-field v-model="fd.calories" :label="$t('calories')" :rules="rule.require" type="number" outlined autofocus />
+                            <v-text-field v-model="fd.calories" :label="$t('calories')" :rules="rule.require" type="number" outlined autofocus suffix="Kcal" />
                         </v-flex>
 
                         <v-flex xs12>
-                            <v-btn @click="add()" :loading="sending" type="submit" color="primary" block depressed>
+                            <v-btn @click="add()" :loading="sending" :disabled="!rule.valid" type="submit" color="primary" block depressed>
                                 {{ $t('btn.save') }}
                             </v-btn>
                         </v-flex>
@@ -79,9 +64,6 @@ export default {
     data () {
         return {
             show: false,
-            dMenu: false,
-            tMenu: false,
-            tMenu2: false,
             sending: false,
             fd: {
                 title: '',
@@ -144,12 +126,12 @@ export default {
             en: {
                 title: 'Add Activity',
                 duration: 'Duration',
-                calories: 'Calories'
+                calories: 'Calories burned'
             },
             de: {
                 title: 'Aktivität hinzufügen',
                 duration: 'Dauer',
-                calories: 'Kalorien'
+                calories: 'Kalorien verbraucht'
             }
         }
     }
