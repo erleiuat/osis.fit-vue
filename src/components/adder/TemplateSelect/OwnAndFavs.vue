@@ -1,20 +1,20 @@
 <template>
-    <v-container>
+    <vcontainer class="pt-0">
 
-        <v-layout wrap align-center pb-2>
-            <v-toolbar dense fixed :tile="false">
-                <v-text-field v-model="query" hide-details prepend-icon="search" single-line clearable />
-            </v-toolbar>
-        </v-layout>
+        <v-row no-gutters>
+            <v-col cols="12">
+                <v-text-field v-if="search" v-model="query" ref="search" @blur="search = false" autofocus clearable hide-details single-line />
+                <v-btn v-else @click="search = true" text block>
+                    <strong>{{ query || $t('btn.search') }}</strong>
+                    <v-icon right>search</v-icon>
+                </v-btn>
+            </v-col>
+        </v-row>
 
-        <v-layout wrap justify-center align-start pl-0 pr-0>
-            <v-flex xs6 v-for="(arr, key) in items" :key="key">
-                <v-layout column fill-height>
-                    <v-flex xs12 v-for="(item, key) in arr" :key="key" class="pa-1">
-                        <FoodCard :item="item" @select="$emit('select', item)" nodetails :maxHeight="200" />
-                    </v-flex>
-                </v-layout>
-            </v-flex>
+        <v-row dense>
+            <v-col cols="6" v-for="(item, key) in items" :key="key">
+                <FoodCard :item="item" @select="$emit('select', item)" nodetails :maxHeight="200" />
+            </v-col>
 
             <v-flex xs12 v-if="!items && !query">
                 {{ $t('noneyet') }}
@@ -24,9 +24,9 @@
                 {{ $t('nonefound') }}
             </v-flex>
 
-        </v-layout>
+        </v-row>
 
-    </v-container>
+    </vcontainer>
 </template>
 
 <script>
@@ -49,6 +49,7 @@ export default {
 
     data () {
         return {
+            search: false,
             query: null
         }
     },
@@ -56,33 +57,23 @@ export default {
     computed: {
 
         items () {
-            var items = [
+
+            if (this.$store.getters['auth/premium']) var items = [
+                ...this.$store.getters['food/all'],
+                ...this.$store.getters['foodFavorite/all']
+            ]
+            else var items = [
                 ...this.$store.getters['food/all']
             ]
-            if (this.$store.getters['auth/premium']) {
-                items = [
-                    ...items,
-                    ...this.$store.getters['foodFavorite/all']
-                ]
-            }
-            var filtered = items.filter(el => el.title.includes(this.query || ''))
+
+            var query = this.query || ''
+            var filtered = items.filter(el =>
+                el.title.toUpperCase().includes(query.toUpperCase() || '')
+            )
+
             if (filtered.length <= 0) return false
+            else return filtered
 
-            var i = 1; var col1 = []; var col2 = []
-
-            filtered.forEach(item => {
-                if (i === 1) {
-                    col1.push(item)
-                    i++
-                } else if (i === 2) {
-                    col2.push(item)
-                    i = 1
-                }
-            })
-            return {
-                a: col1,
-                b: col2
-            }
         }
 
     },

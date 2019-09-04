@@ -25,7 +25,7 @@
                 <v-form v-model="rule.valid" ref="form" v-on:submit.prevent>
                     <vcontainer>
 
-                        <v-row no-gutters>
+                        <v-row dense>
                             <v-col cols="12">
                                 <v-text-field v-model="fd.title" :label="$t('ft.title')" :rules="rule.title" type="text" outlined />
                             </v-col>
@@ -35,16 +35,14 @@
                             <v-col cols="12" md="6">
                                 <v-text-field v-model="fd.amount" :label="$t('defAmount')" :rules="rule.require" type="number" suffix="g / ml" outlined />
                             </v-col>
-                            <v-col cols="12">
-                                <v-sheet class="pa-2">
-                                    {{ $t('calories') }}: {{ total }}
+                            <v-col cols="12" class="text-center">
+                                <v-sheet class="pa-2" :color="total?'accent':''">
+                                    {{ $t('calories') }}{{ total ? ': '+total+' Kcal' : ' ...' }}
                                 </v-sheet>
                             </v-col>
                         </v-row>
 
                         <v-row dense>
-
-
                             <v-col cols="12" v-if="$store.getters['auth/premium']">
                                 <ImageInput v-model="fd.image" height="200" contain />
                             </v-col>
@@ -54,13 +52,11 @@
                                     {{ $t('needsPremium') }}
                                 </v-btn>
                             </v-col>
-
                             <v-col cols="12">
                                 <v-btn @click="save()" :loading="sending" :disabled="!rule.valid" type="submit" color="primary" block depressed>
                                     {{ $t('btn.save') }}
                                 </v-btn>
                             </v-col>
-
                         </v-row>
 
                     </vcontainer>
@@ -196,7 +192,7 @@ export default {
                 titleEdit: 'Edit Food',
                 defAmount: 'Default Amount',
                 caloriesPer100: 'Calories per 100g / 100ml',
-                calories: 'Calories Total'
+                calories: 'Total Calories'
             },
             de: {
                 needsPremium: 'Füge Bilder mit Premium hinzu!',
@@ -205,7 +201,7 @@ export default {
                 titleEdit: 'Essware bearbeiten',
                 defAmount: 'Standartmenge',
                 caloriesPer100: 'Kalorien pro 100g / 100ml',
-                calories: 'Kalorien Total'
+                calories: 'Total Kalorien'
             }
         }
     }

@@ -5,7 +5,7 @@
 
         <v-row dense justify="center">
             <v-col cols="12" sm="6" md="4" v-for="(item, key) in items" :key="key">
-                <FoodCard :item="item" @select="$router.push({name: 'food.edit', params: {id: item.id}})" />
+                <FoodCard :item="item" @select="$router.push({name: 'food.edit', params: {id: item.id}})" nodetails />
             </v-col>
             <v-col cols="auto" v-if="!items && !this.$route.query.s">
                 {{ $t('noneyet') }}

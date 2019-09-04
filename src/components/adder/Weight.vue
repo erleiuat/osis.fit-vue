@@ -1,5 +1,5 @@
 <template>
-    <v-dialog v-model="show" :fullscreen="$vuetify.breakpoint.xs" width="600px" hide-overlay transition="dialog-bottom-transition">
+    <v-dialog v-model="show" :fullscreen="$vuetify.breakpoint.xs" width="600px" transition="dialog-bottom-transition">
 
         <template v-slot:activator="{ on }">
             <slot v-bind:on="on">

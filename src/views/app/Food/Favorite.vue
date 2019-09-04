@@ -1,31 +1,33 @@
 <template>
     <div>
 
-        <v-tabs v-model="tab" grow icons-and-text>
+        <v-tabs v-model="tab" grow fixed icons-and-text>
             <v-tab class="ml-0">
                 {{ $t('title') }}
-                <v-icon>folder_open</v-icon>
+                <v-icon>star</v-icon>
             </v-tab>
             <v-tab class="ml-0">
                 {{ $t('title2') }}
                 <v-icon>layers</v-icon>
             </v-tab>
         </v-tabs>
-        <v-tabs-items v-model="tab">
 
+        <v-tabs-items v-model="tab">
             <v-tab-item>
                 <vcontainer>
-                    <v-row>
-                        <v-col cols="12" v-for="item in items" :key="item.id">
-                            <v-card link ripple @click="toggleFav(item)">
+                    <v-row dense justify="center">
+                        <v-col cols="6" md="4" v-for="item in items" :key="item.id">
+                            <v-card outlined hover style="height: 100%" @click="toggleFav(item)">
                                 <v-img v-if="item.image" :src="item.image" :height="100" />
-                                <v-card-title class="title">
-                                    {{item.title}}
-                                </v-card-title>
-                                <v-card-text class="caption">
-                                    Standartmenge: {{ item.amount }}<br />
-                                    Kalorien / 100: {{ item.caloriesPer100 }}<br />
-                                    Total: {{ item.total }}
+                                <v-card-text>
+                                    <div class="body-2">
+                                        {{item.title}}
+                                    </div>
+                                    <div class="caption">
+                                        Standartmenge: {{ item.amount }}<br />
+                                        Kalorien / 100: {{ item.caloriesPer100 }}<br />
+                                        Total: {{ item.total }}
+                                    </div>
                                 </v-card-text>
                             </v-card>
                         </v-col>
@@ -44,17 +46,19 @@
 
             <v-tab-item>
                 <vcontainer>
-                    <v-row>
-                        <v-col cols="12" v-for="item in items2" :key="item.id">
-                            <v-card link ripple @click="toggleFav(item)" :color="isFav(item.id) ? 'yellow darken-2' : ''">
+                    <v-row dense>
+                        <v-col cols="6" md="4" v-for="item in items2" :key="item.id">
+                            <v-card @click="toggleFav(item)" :color="isFav(item.id) ? 'amber' : ''" link hover ripple outlined style="height: 100%">
                                 <v-img v-if="item.image" :src="item.image" :height="100" />
-                                <v-card-title class="title">
-                                    {{item.title}}
-                                </v-card-title>
-                                <v-card-text class="caption">
-                                    Standartmenge: {{ item.amount }}<br />
-                                    Kalorien / 100: {{ item.caloriesPer100 }}<br />
-                                    Total: {{ item.total }}
+                                <v-card-text :class="isFav(item.id) ? 'black--text' : ''">
+                                    <div class="body-2">
+                                        {{item.title}}
+                                    </div>
+                                    <div class="caption">
+                                        Standartmenge: {{ item.amount }}<br />
+                                        Kalorien / 100: {{ item.caloriesPer100 }}<br />
+                                        Total: {{ item.total }}
+                                    </div>
                                 </v-card-text>
                             </v-card>
                         </v-col>
@@ -65,9 +69,7 @@
                         <v-col cols="12" v-if="!items2 && this.$route.query.s">
                             {{ $t('nonefound') }}
                         </v-col>
-
                     </v-row>
-
                 </vcontainer>
             </v-tab-item>
 
@@ -156,17 +158,17 @@ export default {
     i18n: {
         messages: {
             en: {
-                title: 'Your Favorites',
+                title: 'Favorites',
                 title2: 'Database',
-                noneyet: 'You have not yet created your own templates',
+                noneyet: 'You have no favorites yet',
                 nonefound: 'No results',
                 noquery: 'Please enter a search query'
             },
             de: {
-                title: 'Deine Favoriten',
+                title: 'Favoriten',
                 title2: 'Datenbank',
                 notFound: 'Du hast noch keine Favoriten',
-                noneyet: 'Du hast noch keine eigenen Vorlagen erstellt',
+                noneyet: 'Du hast noch keine Favoriten',
                 nonefound: 'Keine Resultate',
                 noquery: 'Du musst noch einen Suchbegriff eingeben'
             }

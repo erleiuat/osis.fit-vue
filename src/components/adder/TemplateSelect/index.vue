@@ -1,5 +1,5 @@
 <template>
-    <v-dialog v-model="doShow" :fullscreen="$vuetify.breakpoint.xs" width="500" hide-overlay transition="dialog-bottom-transition" scrollable>
+    <v-dialog v-model="doShow" :fullscreen="$vuetify.breakpoint.xs" width="700" transition="dialog-bottom-transition" scrollable>
         <v-card>
 
             <v-card-title class="pl-0 pt-0 pr-0">
@@ -37,7 +37,7 @@
                     </v-flex>
                     <v-flex xs6 text-end>
                         <v-btn text disabled>
-                           Code Scannen
+                            Code Scannen
                         </v-btn>
                     </v-flex>
                 </v-layout>

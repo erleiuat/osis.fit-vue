@@ -15,7 +15,7 @@
                 <v-list-item-title>{{ $t('view.'+items.i2.to+'.title') }}</v-list-item-title>
             </template>
             <v-list-item v-for="(item,key) in items.i2.items" :to="{name: item.to}" :key="key" link>
-                <v-list-item-title>{{ $t('view.'+(item.title || item.to)+'.title') }}</v-list-item-title>
+                <v-list-item-title>{{ item.title }}</v-list-item-title>
                 <v-list-item-icon>
                     <v-icon>{{ item.icon }}</v-icon>
                 </v-list-item-icon>
@@ -70,8 +70,8 @@ export default {
                 to: 'food',
                 icon: 'fastfood',
                 items: {
-                    own: { title: 'food.own', to: 'food', icon: 'folder' },
-                    favorites: { to: 'food.favorites', icon: 'favorite' }
+                    own: { title: this.$t('templates'), to: 'food', icon: 'folder_open' },
+                    favorites: { title: this.$t('database'), to: 'food.favorites' , icon: 'layers' }
                 }
             }
 
@@ -100,6 +100,19 @@ export default {
             }
         }
 
+    },
+
+    i18n: {
+        messages: {
+            en: {
+                templates: 'Templates',
+                database: 'Database'
+            },
+            de: {
+                templates: 'Vorlagen',
+                database: 'Datenbank'
+            }
+        }
     }
 
 }
