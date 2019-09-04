@@ -82,6 +82,8 @@ const getters = {
 const mutations = {
 
     set: (state, data) => {
+        if(state.item) console.log(state.item)
+        console.log(data)
         state.item = data
         smartStore.set(state.lName, state.item)
     },

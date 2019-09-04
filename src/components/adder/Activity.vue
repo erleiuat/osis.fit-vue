@@ -131,7 +131,7 @@ export default {
                 this.fd.title = null // TODO: CREATE OWN FORM VALIDATION
                 this.fd.duration = null // TODO: CREATE OWN FORM VALIDATION
             }).catch(r => {
-                this.$notify({ type: 'error', title: this.$t('alert.error.save') })
+                this.$notify({ type: 'error', title: this.$t('alert.error.save'), text: r })
             }).finally(() => {
                 this.sending = false
             })

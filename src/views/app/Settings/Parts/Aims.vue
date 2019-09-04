@@ -9,19 +9,11 @@
             <v-row justify="center" dense>
                 <v-col cols="12" sm="8" md="6">
                     <v-text-field v-model="fd.date" :label="$t('ft.date')" :rules="rule.require" type="date" append-icon="event" filled />
-                    <!--
-                    <v-menu ref="menu" v-model="menu" :close-on-content-click="false" :nudge-right="40" transition="scale-transition" offset-y full-width min-width="290px">
-                        <template v-slot:activator="{ on }">
-                            <v-text-field v-model="fd.date" :label="$t('ft.date')" :rules="rule.require" type="date" v-on="on" @focus="menu = true" readonly append-icon="event" filled />
-                        </template>
-                        <v-date-picker v-model="fd.date" @input="menu = false" :locale="$store.getters['app'].locale" no-title />
-                    </v-menu>
-                    -->
                 </v-col>
             </v-row>
             <v-row justify="center" dense>
                 <v-col cols="12" sm="4">
-                    <v-btn @click="save()" :loading="sending" color="primary" type="submit" block depressed>
+                    <v-btn @click="save()" :loading="sending" :disabled="!rule.valid" type="submit" color="primary" block depressed>
                         {{ $t('btn.save') }}
                     </v-btn>
                 </v-col>

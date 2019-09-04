@@ -36,7 +36,7 @@
 
             <v-row justify="center" dense>
                 <v-col cols="12" sm="4">
-                    <v-btn @click="save()" :loading="sending" color="primary" type="submit" block depressed>
+                    <v-btn @click="save()" :loading="sending" :disabled="!rule.valid" type="submit" color="primary" block depressed>
                         {{ $t('btn.save') }}
                     </v-btn>
                 </v-col>
@@ -57,20 +57,24 @@ export default {
     },
 
     data () {
-        var data = this.$store.getters['user/user']
         return {
-            menu: false,
             sending: false,
-            fd: {
-                image: data.image,
-                firstname: data.firstname,
-                lastname: data.lastname
-            },
             rule: {
                 valid: false,
                 require: [
                     v => !!v || this.$t('alert.v.require')
                 ]
+            }
+        }
+    },
+
+    computed: {
+        fd () {
+            var data = this.$store.getters['user/user']
+            return {
+                image: data.image,
+                firstname: data.firstname,
+                lastname: data.lastname
             }
         }
     },
@@ -88,10 +92,10 @@ export default {
 
             this.sending = true
             this.$store.dispatch('user/editProfile', form).then(r => {
-                this.edit = false
                 this.$notify({ type: 'success', title: this.$t('alert.success.save') })
+                if (this.$vuetify.breakpoint.smAndDown) this.$router.go(-1)
             }).catch(r => {
-                this.$notify({ type: 'error', title: this.$t('alert.error.save') })
+                this.$notify({ type: 'error', title: this.$t('alert.error.save'), text: r })
             }).finally(() => {
                 this.sending = false
             })

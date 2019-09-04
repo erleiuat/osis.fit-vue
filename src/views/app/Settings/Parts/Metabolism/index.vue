@@ -129,7 +129,7 @@ export default {
                 this.edit = false
                 this.$notify({ type: 'success', title: this.$t('alert.success.save') })
             }).catch(r => {
-                this.$notify({ type: 'error', title: this.$t('alert.error.save') })
+                this.$notify({ type: 'error', title: this.$t('alert.error.save'), text: r })
             }).finally(() => {
                 this.sending = false
             })

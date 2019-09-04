@@ -96,7 +96,7 @@ export default {
 
     },
 
-    mounted () {
+    updated () {
         /* eslint-disable no-undef */
         var vm = this
         if (!document.getElementById('chargebee_js_script')) {

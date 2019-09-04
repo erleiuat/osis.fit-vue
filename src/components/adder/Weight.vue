@@ -114,7 +114,7 @@ export default {
                 this.show = false
                 this.$refs.form.reset()
             }).catch(r => {
-                this.$notify({ type: 'error', title: this.$t('alert.error.save') })
+                this.$notify({ type: 'error', title: this.$t('alert.error.save'), text: r })
             }).finally(() => {
                 this.sending = false
             })

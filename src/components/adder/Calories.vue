@@ -136,7 +136,7 @@ export default {
                 this.$refs.form.reset()
                 this.fd.title = null // TODO: CREATE OWN FORM VALIDATION
             }).catch(r => {
-                this.$notify({ type: 'error', title: this.$t('alert.error.save') })
+                this.$notify({ type: 'error', title: this.$t('alert.error.save'), text: r })
             }).finally(() => {
                 this.sending = false
             })

@@ -107,7 +107,7 @@ export default {
                 this.set = true
                 this.$emit('input', res)
             }).catch(r => {
-                this.$notify({ type: 'error', title: this.$t('alert.error.save') })
+                this.$notify({ type: 'error', title: this.$t('alert.error.save'), text: r })
             })
         },
 
