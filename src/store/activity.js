@@ -3,7 +3,6 @@ import Vue from 'vue'
 import Apios from '@/plugins/Apios'
 import smartStore from '@/plugins/smartStore'
 
-const name = 'activity'
 const namespaced = true
 
 const state = () => {
@@ -92,12 +91,9 @@ const actions = {
 }
 
 export default {
-    name: name,
-    module: {
-        namespaced: namespaced,
-        state,
-        getters,
-        mutations,
-        actions
-    }
+    namespaced: namespaced,
+    state,
+    getters,
+    mutations,
+    actions
 }

@@ -33,13 +33,6 @@ export default {
         Welcome
     },
 
-    mounted () {
-        var td = this.$store.getters['today'].date
-        this.$store.dispatch('calories/load', td)
-        this.$store.dispatch('weight/load')
-        this.$store.dispatch('activity/load', td)
-    },
-
     computed: {
 
         lastWeight () {

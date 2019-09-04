@@ -5,7 +5,6 @@
 </template>
 
 <script>
-import calories from '@/store/modules/calories'
 const CaloriesTable = () => import('@/views/app/Calories/Table')
 
 export default {
@@ -13,10 +12,6 @@ export default {
 
     components: {
         CaloriesTable
-    },
-
-    modules: {
-        calories
     }
 
 }

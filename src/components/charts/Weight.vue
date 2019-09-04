@@ -12,14 +12,8 @@
 </template>
 
 <script>
-import weight from '@/store/modules/weight'
-
 export default {
     name: 'WeightChart',
-
-    modules: {
-        weight
-    },
 
     computed: {
 

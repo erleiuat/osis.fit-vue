@@ -47,10 +47,6 @@
 </template>
 
 <script>
-import weight from '@/store/modules/weight'
-import calories from '@/store/modules/calories'
-import activity from '@/store/modules/activity'
-
 const Start = () => import('@/views/app/Dashboard/Start')
 
 const CalorieAdder = () => import('@/components/adder/Calories')
@@ -68,10 +64,6 @@ export default {
         ActivityAdder,
         WeightAdder,
         WeightChart
-    },
-
-    modules: {
-        weight, calories, activity
     },
 
     i18n: {

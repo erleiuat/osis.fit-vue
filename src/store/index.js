@@ -5,12 +5,16 @@ import VueCookies from 'vue-cookies'
 import user from '@/store/user'
 import auth from '@/store/auth'
 
+import calories from '@/store/calories'
+import activity from '@/store/activity'
+import weight from '@/store/weight'
+
 Vue.use(Vuex)
 
 export default new Vuex.Store({
 
     modules: {
-        user, auth
+        user, auth, calories, activity, weight
     },
 
     state: {

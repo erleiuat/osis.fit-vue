@@ -3,34 +3,40 @@ import Vue from 'vue'
 import Apios from '@/plugins/Apios'
 import smartStore from '@/plugins/smartStore'
 
-const name = 'calories'
 const namespaced = true
 
 const state = () => {
     return {
-        url: 'app/calories/',
-        lName: 'calories',
-        items: smartStore.get('calories')
+        url: 'app/weight/',
+        lName: 'weight',
+        items: smartStore.get('weight')
     }
 }
 
 const getters = {
 
-    byDate: (state) => (date) => {
+    all: (state) => {
         if (!state.items) return
-        if (!date || !(date in state.items)) return
-        return Object.values(state.items[date])
+        return Object.values(state.items)
     },
 
-    total: (state) => (date) => {
+    latest: (state) => {
         if (!state.items) return
-        if (date && (date in state.items)) {
-            var total = 0
-            Object.values(state.items[date]).forEach(function (element) {
-                total += element.calories
-            })
-            return total
-        }
+        var a = Object.values(state.items)
+
+        var mostRecentDate = new Date(Math.max.apply(null, a.map(e => {
+            return new Date(e.date + 'T' + e.time)
+        })))
+
+        var found = a.filter(e => {
+            var d = new Date(e.date + 'T' + e.time)
+            return d.getTime() === mostRecentDate.getTime()
+        })[0]
+
+        if (found) {
+            found.weight = Math.round(found.weight * 100) / 100
+            return found
+        } else return null
     }
 
 }
@@ -39,21 +45,19 @@ const mutations = {
 
     set: (state, vals) => {
         if (!Array.isArray(vals)) {
-            if (!(vals.date in state.items)) Vue.set(state.items, vals.date, {})
-            if (!(vals.id in state.items[vals.date])) Vue.set(state.items[vals.date], vals.id.toString(), vals)
-            else state.items[vals.date][vals.id] = vals
+            if (!(vals.id in state.items)) Vue.set(state.items, vals.id.toString(), vals)
+            else state.items[vals.id] = vals
         } else {
             vals.forEach(function (item) {
-                if (!(item.date in state.items)) Vue.set(state.items, item.date, {})
-                if (!(item.id in state.items[item.date])) Vue.set(state.items[item.date], item.id.toString(), item)
-                else state.items[item.date][item.id] = item
+                if (!(item.id in state.items)) Vue.set(state.items, item.id.toString(), item)
+                else state.items[item.id] = item
             })
         }
         smartStore.set(state.lName, state.items)
     },
 
     delete: (state, item) => {
-        Vue.delete(state.items[item.date], item.id.toString())
+        Vue.delete(state.items, item.id.toString())
         smartStore.set(state.lName, state.items)
     }
 
@@ -61,8 +65,8 @@ const mutations = {
 
 const actions = {
 
-    load (con, date) {
-        Apios.post(con.state.url + 'read/', { from: date, to: date }).then(res => {
+    load (con) {
+        Apios.post(con.state.url + 'read/', { from: '', to: '' }).then(res => {
             if (res.status === 200) con.commit('set', res.data.items)
         })
     },
@@ -92,12 +96,9 @@ const actions = {
 }
 
 export default {
-    name: name,
-    module: {
-        namespaced: namespaced,
-        state,
-        getters,
-        mutations,
-        actions
-    }
+    namespaced: namespaced,
+    state,
+    getters,
+    mutations,
+    actions
 }

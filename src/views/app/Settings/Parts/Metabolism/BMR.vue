@@ -33,7 +33,6 @@
 </template>
 
 <script>
-import weight from '@/store/modules/weight'
 import WeightAdder from '@/components/adder/Weight'
 
 export default {
@@ -41,10 +40,6 @@ export default {
 
     components: {
         WeightAdder
-    },
-
-    modules: {
-        weight
     },
 
     props: [

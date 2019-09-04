@@ -5,8 +5,6 @@
 </template>
 
 <script>
-import activity from '@/store/modules/activity'
-
 const ActivityTable = () => import('@/views/app/Activity/Table')
 
 export default {
@@ -15,11 +13,7 @@ export default {
     components: {
         ActivityTable
     },
-
-    modules: {
-        activity
-    },
-
+    
     data () {
         return {
             modal: false,

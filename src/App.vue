@@ -47,7 +47,10 @@ export default {
         this.$i18n.locale = appInfo.locale
         this.$vuetify.theme.dark = appInfo.dark
         this.setMetaTheme(appInfo.dark)
+    },
 
+    mounted () {
+        if (this.$store.getters['auth/authorized']) this.$store.dispatch('auth/loadInit')
         this.$store.subscribe((mutation, state) => {
             if (mutation.type === 'setLocale') this.$i18n.locale = mutation.payload
             else if (mutation.type === 'setDark') {
@@ -55,6 +58,7 @@ export default {
                 this.setMetaTheme(mutation.payload)
             }
         })
-    }
+    },
+
 }
 </script>

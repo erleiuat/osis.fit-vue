@@ -13,8 +13,6 @@
 </template>
 
 <script>
-import weight from '@/store/modules/weight'
-
 const WeightTable = () => import('@/views/app/Weight/Table')
 const WeightChart = () => import('@/components/charts/Weight')
 
@@ -24,11 +22,7 @@ export default {
     components: {
         WeightTable, WeightChart
     },
-
-    modules: {
-        weight
-    },
-
+    
     mounted () {
         this.$store.dispatch('weight/load')
     }

@@ -116,14 +116,26 @@ const mutations = {
 
 const actions = {
 
+    loadInit (con) {
+        Apios.get('app/').then(res => {
+            con.commit('user/set', res.data.user, { root: true })
+            con.commit('calories/set', res.data.calories, { root: true })
+            con.commit('weight/set', res.data.weight, { root: true })
+            con.commit('activity/set', res.data.activity, { root: true })
+        })
+    },
+
     refresh (con) {
         return new Promise((resolve, reject) => {
             var data = { token: con.state.token.refresh }
             Apios.post('auth/refresh/', data).then(res => {
                 con.state.token.access = res.data.tokens.access
                 con.state.token.refresh = res.data.tokens.refresh
-                con.commit('user/set', res.data.user, { root: true })
                 con.commit('place')
+                con.commit('user/set', res.data.user, { root: true })
+                con.commit('calories/set', res.data.calories, { root: true })
+                con.commit('weight/set', res.data.weight, { root: true })
+                con.commit('activity/set', res.data.activity, { root: true })
                 resolve()
             }).catch(err => {
                 con.commit('remove')
@@ -137,8 +149,11 @@ const actions = {
             Apios.post('auth/', form).then(res => {
                 con.state.token.access = res.data.tokens.access
                 con.state.token.refresh = res.data.tokens.refresh
-                con.commit('user/set', res.data.user, { root: true })
                 con.commit('place')
+                con.commit('user/set', res.data.user, { root: true })
+                con.commit('calories/set', res.data.calories, { root: true })
+                con.commit('weight/set', res.data.weight, { root: true })
+                con.commit('activity/set', res.data.activity, { root: true })
                 resolve()
             }).catch(err => {
                 reject(err)
