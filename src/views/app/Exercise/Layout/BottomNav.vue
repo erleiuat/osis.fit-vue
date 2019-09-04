@@ -67,7 +67,7 @@ export default {
             else if (this.$route.params.type !== 'public') return false
             else {
                 return {
-                    to: { name: 'exercise.save', params: { id: this.$route.params.id } },
+                    to: { name: 'exercise.copy', params: { id: this.$route.params.id } },
                     text: this.$t('btn.save'),
                     icon: 'save'
                 }

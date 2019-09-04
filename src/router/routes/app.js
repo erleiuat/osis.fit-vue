@@ -141,16 +141,16 @@ module.exports = [{
             component: () => import('@/views/app/Exercise/Exercise')
         },
         {
-            path: 'save/:id',
-            name: 'exercise.save',
-            meta: { authRequired: true, premium: true },
-            component: () => import('@/views/app/Exercise/Save')
-        },
-        {
             path: 'new',
             name: 'exercise.new',
             component: () => import('@/views/app/Exercise/Edit/'),
             meta: { authRequired: true, premium: true }
+        },
+        {
+            path: 'copy/:id',
+            name: 'exercise.copy',
+            meta: { authRequired: true, premium: true },
+            component: () => import('@/views/app/Exercise/Edit/'),
         },
         {
             path: 'edit/:id',

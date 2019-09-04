@@ -16,7 +16,7 @@
                 </v-col>
 
                 <v-col cols="12" md="6">
-                    <v-text-field :label="$t('calsPerDo')" v-model="fd.calories" type="number" filled suffix="Kcal"/>
+                    <v-text-field :label="$t('calsPerDo')" v-model="fd.calories" type="number" filled suffix="Kcal" />
                 </v-col>
                 <v-col cols="12" md="6">
                     <v-text-field :label="$t('repetsPerDo')" v-model="fd.repetitions" type="number" filled />
@@ -103,8 +103,9 @@ export default {
 
             this.sending = true
             this.$store.dispatch(action, this.fd).then(r => {
-                this.$router.go(-1)
                 this.$notify({ type: 'success', title: this.$t('alert.success.save') })
+                if (this.$route.name === 'exercise.copy') this.$router.replace({ name: 'exercise', params: { type: 'own', id: r } })
+                else this.$router.go(-1)
             }).catch(r => {
                 this.$notify({ type: 'error', title: this.$t('alert.error.save'), text: r })
             }).finally(() => {
@@ -115,16 +116,25 @@ export default {
     },
 
     mounted () {
-        if (this.$route.name === 'exercise.edit') {
-            this.loaded = false
-            this.$store.dispatch('exercise/get', this.$route.params.id).then(res => {
-                this.fd = res
-            }).catch(() => {
-                this.fd = null
-            }).finally(() => {
-                this.loaded = true
-            })
-        }
+        if (this.$route.name === 'exercise.new' || !this.$route.params.id) return
+
+        this.loaded = false
+        this.$store.dispatch('exercise/get', this.$route.params.id).then(res => {
+            if (this.$route.name === 'exercise.edit') this.fd = res
+            else if (this.$route.name === 'exercise.copy') {
+                this.fd.title = res.title
+                this.fd.description = res.description
+                this.fd.type = res.type
+                this.fd.calories = res.calories
+                this.fd.repetitions = res.repetitions
+                this.fd.bodyparts = res.bodyparts
+            }
+        }).catch(() => {
+            this.fd = null
+        }).finally(() => {
+            this.loaded = true
+        })
+
     },
 
     i18n: {
