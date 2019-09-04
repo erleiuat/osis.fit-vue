@@ -7,7 +7,7 @@
             <v-expansion-panel-content eager>
                 <v-row no-gutters justify="center">
                     <v-radio-group v-model="type" :mandatory="false" row :rules="rules">
-                        <v-col cols="12" sm="6" md="4" v-for="(i, key) in list" :key="key">
+                        <v-col cols="12" sm="6" md="3" v-for="(i, key) in list" :key="key" class="pa-0">
                             <v-radio :label="$t('pnt.types.'+i)" :value="i" />
                         </v-col>
                     </v-radio-group>

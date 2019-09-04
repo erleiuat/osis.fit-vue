@@ -1,50 +1,47 @@
 <template>
-    <v-container>
+    <vcontainer class="pt-0">
 
-        <form v-on:submit.prevent="doSearch()">
-            <v-layout wrap align-center pb-2>
-                <v-toolbar dense fixed :tile="false">
-                    <v-text-field v-model="searchQuery" hide-details prepend-icon="search" single-line clearable @input="changeIn()" />
-                    <v-flex xs12 v-show="false">
-                        <v-btn type="submit"></v-btn>
-                    </v-flex>
-                </v-toolbar>
-            </v-layout>
-        </form>
+        <v-row no-gutters>
+            <v-col cols="12" class="pb-2">
+                <v-text-field v-if="search" v-model="query" ref="search" @blur="search = false" @input="changeIn()" autofocus clearable class="pt-0" hide-details single-line />
+                <v-btn v-else @click="search = true" outlined block>
+                    <strong>{{ query || $t('btn.search') }}</strong>
+                    <v-icon right>search</v-icon>
+                </v-btn>
+            </v-col>
+        </v-row>
 
-        <v-layout row wrap v-if="loading">
-            <v-flex xs12 sm12>
-                <v-progress-linear indeterminate height="10" />
-            </v-flex>
-        </v-layout>
+        <v-row row wrap v-if="loading">
+            <v-col cols="12">
+                <v-progress-linear rounded indeterminate height="10" />
+            </v-col>
+        </v-row>
 
-        <v-layout wrap justify-center align-start pl-0 pr-0>
-            <v-flex xs6 v-for="(arr, key) in items" :key="key">
-                <v-layout column fill-height>
-                    <v-flex xs12 v-for="item in arr" :key="item.id" @click="$emit('select', item)" class="pa-1">
-                        <v-card :class="isFav(item.id) ? 'yellow' : ''" :light="isFav(item.id)" class="fill-height" link ripple>
-                            <v-img v-if="item.image" :src="item.image" :height="100" />
-                            <v-card-title class="title">
-                                {{item.title}}
-                            </v-card-title>
-                            <v-card-text class="caption">
-                                Standartmenge: {{ item.amount }}<br />
-                                Kalorien / 100: {{ item.caloriesPer100 }}<br />
-                                Total: {{ item.total }}
-                            </v-card-text>
-                        </v-card>
-                    </v-flex>
-                </v-layout>
-            </v-flex>
-        </v-layout>
+        <v-row dense>
+            <v-col cols="6" md="4" v-for="item in items" :key="item.id">
+                <v-card @click="$emit('select', item)" :color="isFav(item.id) ? 'amber' : ''" link hover ripple outlined style="height: 100%">
+                    <v-img v-if="item.image" :src="item.image" :height="100" />
+                    <v-card-text :class="isFav(item.id) ? 'black--text' : ''">
+                        <div class="body-2">
+                            {{item.title}}
+                        </div>
+                        <div class="caption">
+                            Standartmenge: {{ item.amount }}<br />
+                            Kalorien / 100: {{ item.caloriesPer100 }}<br />
+                            Total: {{ item.total }}
+                        </div>
+                    </v-card-text>
+                </v-card>
+            </v-col>
+        </v-row>
 
-        <v-layout row wrap pa-2 text-center v-if="results.length < 1 && searched">
+        <v-layout row wrap pa-2 text-center v-if="results.length < 1 && !loading">
             <v-flex xs12>
                 {{ $t('notFound') }}
             </v-flex>
         </v-layout>
 
-    </v-container>
+    </vcontainer>
 
 </template>
 
@@ -54,9 +51,9 @@ export default {
 
     data () {
         return {
+            query: '',
+            search: true,
             loading: false,
-            searchQuery: '',
-            searched: false,
             typerTimer: null,
             results: []
         }
@@ -67,22 +64,7 @@ export default {
         items () {
             var items = this.results
             if (items.length <= 0) return false
-
-            var i = 1; var col1 = []; var col2 = []
-
-            items.forEach(item => {
-                if (i === 1) {
-                    col1.push(item)
-                    i++
-                } else if (i === 2) {
-                    col2.push(item)
-                    i = 1
-                }
-            })
-            return {
-                a: col1,
-                b: col2
-            }
+            else return items
         }
 
     },
@@ -94,27 +76,22 @@ export default {
             else return false
         },
 
-        toggleFav (item) {
-            if (this.isFav(item.id)) this.$store.dispatch('foodFavorite/delete', item.id)
-            else this.$store.dispatch('foodFavorite/add', item)
-        },
-
         changeIn () {
-            this.searched = false
             clearTimeout(this.typerTimer)
             this.typerTimer = setTimeout(() => {
+                this.loading = true
                 this.doSearch()
             }, 800)
         },
 
         doSearch () {
-            if (this.searchQuery.length < 3) return
-            this.$store.dispatch('foodFavorite/search', this.searchQuery).then(res => {
+            if (this.query.length < 3) return
+            this.$store.dispatch('foodFavorite/search', this.query).then(res => {
                 this.results = res.items
             }).catch(err => {
                 this.$notify({ type: 'error', title: this.$t('alert.error.default'), text: err })
             }).finally(() => {
-                this.searched = true
+                this.loading = false
             })
         }
     },

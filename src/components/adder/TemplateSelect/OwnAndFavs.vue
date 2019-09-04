@@ -2,28 +2,25 @@
     <vcontainer class="pt-0">
 
         <v-row no-gutters>
-            <v-col cols="12">
-                <v-text-field v-if="search" v-model="query" ref="search" @blur="search = false" autofocus clearable hide-details single-line />
-                <v-btn v-else @click="search = true" text block>
+            <v-col cols="12" class="pb-2">
+                <v-text-field v-if="search" v-model="query" ref="search" @blur="search = false" autofocus clearable class="pt-0" hide-details single-line />
+                <v-btn v-else @click="search = true" outlined block>
                     <strong>{{ query || $t('btn.search') }}</strong>
                     <v-icon right>search</v-icon>
                 </v-btn>
             </v-col>
         </v-row>
 
-        <v-row dense>
-            <v-col cols="6" v-for="(item, key) in items" :key="key">
+        <v-row dense justify="center">
+            <v-col cols="6" md="4" v-for="(item, key) in items" :key="key">
                 <FoodCard :item="item" @select="$emit('select', item)" nodetails :maxHeight="200" />
             </v-col>
-
-            <v-flex xs12 v-if="!items && !query">
+            <v-col cols="auto" v-if="!items && !query">
                 {{ $t('noneyet') }}
-            </v-flex>
-
-            <v-flex xs12 v-if="!items && query">
+            </v-col>
+            <v-col cols="auto" v-if="!items && query">
                 {{ $t('nonefound') }}
-            </v-flex>
-
+            </v-col>
         </v-row>
 
     </vcontainer>

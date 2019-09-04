@@ -1,6 +1,6 @@
 <template>
     <v-dialog v-model="doShow" :fullscreen="$vuetify.breakpoint.xs" width="700" transition="dialog-bottom-transition" scrollable>
-        <v-card>
+        <v-card style="min-height: 500px">
 
             <v-card-title class="pl-0 pt-0 pr-0">
                 <v-toolbar color="primary" flat dark>
@@ -13,34 +13,37 @@
             </v-card-title>
 
             <v-card-text class="pa-0">
-
                 <OwnAndFavs v-if="!searchDB" @select="select" />
-
                 <Browse v-else-if="$store.getters['auth/premium']" @select="select" />
-
             </v-card-text>
 
             <v-divider />
 
             <v-card-actions>
-                <v-layout wrap>
-                    <v-flex xs6>
-                        <v-btn text @click="searchDB = true" v-if="$store.getters['auth/premium'] && !searchDB">
-                            Datenbank durchsuchen
-                        </v-btn>
-                        <v-btn text :to="{name: 'premium', query: {notify: true}}" v-else-if="!$store.getters['auth/premium']">
-                            Datenbank durchsuchen
-                        </v-btn>
-                        <v-btn text @click="searchDB = false" v-else>
-                            Gespeicherte durchsuchen
-                        </v-btn>
-                    </v-flex>
-                    <v-flex xs6 text-end>
-                        <v-btn text disabled>
-                            Code Scannen
-                        </v-btn>
-                    </v-flex>
-                </v-layout>
+                <vcontainer class="pa-0">
+                    <v-row no-gutters justify="space-between">
+                        <v-col cols="auto">
+                            <v-btn outlined @click="searchDB = true" v-if="$store.getters['auth/premium'] && !searchDB">
+                                {{ $t('database') }}
+                                <v-icon right>search</v-icon>
+                            </v-btn>
+                            <v-btn text :to="{name: 'premium', query: {notify: true}}" v-else-if="!$store.getters['auth/premium']">
+                                {{ $t('database') }}
+                                <v-icon right>search</v-icon>
+                            </v-btn>
+                            <v-btn text @click="searchDB = false" v-else>
+                                {{ $t('templates') }}
+                                <v-icon right>search</v-icon>
+                            </v-btn>
+                        </v-col>
+                        <v-col cols="auto">
+                            <v-btn outlined disabled>
+                                {{ $t('scan') }}
+                                <v-icon right>camera_alt</v-icon>
+                            </v-btn>
+                        </v-col>
+                    </v-row>
+                </vcontainer>
             </v-card-actions>
 
         </v-card>
@@ -89,10 +92,16 @@ export default {
     i18n: {
         messages: {
             en: {
-                title: 'Select Template'
+                title: 'Select Template',
+                database: 'Database',
+                templates: 'Templates',
+                scan: 'Scan code'
             },
             de: {
-                title: 'Vorlage auswählen'
+                title: 'Vorlage auswählen',
+                database: 'Datenbank',
+                templates: 'Vorlagen',
+                scan: 'Code scannen'
             }
         }
     }

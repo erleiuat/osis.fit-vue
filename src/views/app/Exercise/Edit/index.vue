@@ -16,7 +16,7 @@
                 </v-col>
 
                 <v-col cols="12" md="6">
-                    <v-text-field :label="$t('calsPerDo')" v-model="fd.calories" type="number" filled />
+                    <v-text-field :label="$t('calsPerDo')" v-model="fd.calories" type="number" filled suffix="Kcal"/>
                 </v-col>
                 <v-col cols="12" md="6">
                     <v-text-field :label="$t('repetsPerDo')" v-model="fd.repetitions" type="number" filled />

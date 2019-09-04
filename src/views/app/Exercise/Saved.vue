@@ -8,29 +8,24 @@
 
         <v-row align="center" dense>
             <v-col cols="12" v-for="(item, key) in items" :key="key">
-                <v-card link outlined>
+                <v-card link outlined hover :to="{name: 'exercise', params: {type: 'own', id: item.id}}">
                     <v-card-text class="pt-1 pb-1">
-                        <v-row align="center" no-gutters>
-                            <v-col cols="12" md="2" @click="$router.push({name: 'exercise', params: {type: 'own', id: item.id}})">
-                                <div class="title">
-                                    {{ item.title }}
-                                </div>
-                            </v-col>
-                            <v-col cols="12" md="9" @click="$router.push({name: 'exercise', params: {type: 'own', id: item.id}})">
-                                {{ item.description }}
-                            </v-col>
-                            <v-col cols="12" md="auto" class="text-right">
-                                <v-btn icon :to="{name: 'exercise.edit', params: {id: item.id}}">
-                                    <v-icon>edit</v-icon>
-                                </v-btn>
-                            </v-col>
-                            <v-col cols="12" md="auto" class="text-right">
-                                <v-btn icon disabled>
-                                    <v-icon>delete</v-icon>
-                                </v-btn>
-                            </v-col>
-                        </v-row>
+                        <div class="title">
+                            {{ item.title }}
+                        </div>
+                        {{ item.description }}
                     </v-card-text>
+                    <v-card-actions class="pt-0 pb-1">
+                        <v-btn icon :to="{name: 'exercise.edit', params: {id: item.id}}">
+                            <v-icon>edit</v-icon>
+                        </v-btn><v-spacer />
+                        <v-btn icon :to="{name: 'exercise', params: {type: 'own', id: item.id}}">
+                            <v-icon>remove_red_eye</v-icon>
+                        </v-btn><v-spacer />
+                        <v-btn icon disabled>
+                            <v-icon>delete</v-icon>
+                        </v-btn>
+                    </v-card-actions>
                 </v-card>
             </v-col>
         </v-row>

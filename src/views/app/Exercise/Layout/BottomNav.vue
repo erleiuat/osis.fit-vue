@@ -1,10 +1,9 @@
 <template>
-    <v-bottom-navigation app fixed grow v-if="addNew || savePublic || editOwn">
+    <v-fab-transition v-if="!$vuetify.breakpoint.mdAndUp">
 
-        <v-menu>
+        <v-menu v-if="addNew">
             <template v-slot:activator="{ on }">
-                <v-btn v-if="addNew" v-on="on" text>
-                    <span>{{ addNew.text }}</span>
+                <v-btn v-if="addNew" v-on="on" fab fixed bottom right color="primary">
                     <v-icon>{{ addNew.icon }}</v-icon>
                 </v-btn>
             </template>
@@ -22,17 +21,16 @@
             </v-list>
         </v-menu>
 
-        <v-btn v-if="savePublic" text @click="$router.push(savePublic.to)">
+        <v-btn v-if="savePublic" @click="$router.push(savePublic.to)">
             <span>{{ savePublic.text }}</span>
             <v-icon>{{ savePublic.icon }}</v-icon>
         </v-btn>
 
-        <v-btn v-if="editOwn" text @click="$router.push(editOwn.to)">
-            <span>{{ editOwn.text }}</span>
+        <v-btn v-if="editOwn" @click="$router.push(editOwn.to)" fab fixed bottom right color="primary">
             <v-icon>{{ editOwn.icon }}</v-icon>
         </v-btn>
 
-    </v-bottom-navigation>
+    </v-fab-transition>
 </template>
 
 <script>

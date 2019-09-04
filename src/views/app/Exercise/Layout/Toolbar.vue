@@ -3,9 +3,7 @@
 
         <template v-slot:toggler v-if="showBack">
             <v-btn icon @click="$router.go(-1)">
-                <v-icon>
-                    navigate_before
-                </v-icon>
+                <v-icon>arrow_back</v-icon>
             </v-btn>
         </template>
 

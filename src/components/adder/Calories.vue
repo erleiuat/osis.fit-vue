@@ -21,47 +21,45 @@
                 </v-btn>
             </v-toolbar>
 
-            <v-container grid-list-sm>
+            <vcontainer>
                 <v-form v-model="rule.valid" ref="form" v-on:submit.prevent>
-                    <v-layout wrap align-baseline>
 
-                        <v-flex xs10>
+                    <v-row dense align="baseline">
+                        <v-col cols="9">
                             <v-text-field v-model="fd.title" :label="$t('ft.title')" type="text" outlined />
-                        </v-flex>
-
-                        <v-flex xs2 text-center>
-                            <v-btn fab depressed color="primary" @click="openSelect()">
-                                <v-icon>view_carousel</v-icon>
+                        </v-col>
+                        <v-col cols="3">
+                            <v-btn @click="openSelect()" x-large outlined>
+                                <v-icon large>view_carousel</v-icon>
                             </v-btn>
-                        </v-flex>
-
-                        <v-flex xs6>
-                            <v-text-field v-model="fd.date" :label="$t('ft.date')" :rules="rule.require" type="date" outlined append-icon="calendar_today"/>
-                        </v-flex>
-                        <v-flex xs6>
-                            <v-text-field v-model="fd.time" :label="$t('ft.time')" :rules="rule.require" type="time" outlined append-icon="access_time"/>
-                        </v-flex>
-
-                        <v-flex xs12 sm6>
+                        </v-col>
+                        <v-col cols="6">
+                            <v-text-field v-model="fd.date" :label="$t('ft.date')" :rules="rule.require" type="date" outlined />
+                        </v-col>
+                        <v-col cols="6">
+                            <v-text-field v-model="fd.time" :label="$t('ft.time')" :rules="rule.require" type="time" outlined append-icon="access_time" />
+                        </v-col>
+                        
+                        <v-col cols="12" sm="6">
                             <v-text-field v-model="caloriesPer100" :label="$t('caloriesPer100')" @input="calTotal()" outlined type="number" suffix="Kcal" />
-                        </v-flex>
-                        <v-flex xs12 sm6>
+                        </v-col>
+                        <v-col cols="12" sm="6">
                             <v-text-field v-model="amount" :label="$t('ft.amount')" @input="calTotal()" outlined type="number" suffix="g / ml" />
-                        </v-flex>
+                        </v-col>
 
-                        <v-flex xs12>
+                        <v-col cols="12">
                             <v-text-field v-model="fd.calories" :label="$t('calories')" :rules="rule.require" type="number" suffix="Kcal" outlined autofocus />
-                        </v-flex>
-
-                        <v-flex xs12>
+                        </v-col>
+                        <v-col cols="12">
                             <v-btn @click="add()" :loading="sending" :disabled="!rule.valid" type="submit" color="primary" block depressed>
                                 {{ $t('btn.save') }}
                             </v-btn>
-                        </v-flex>
+                        </v-col>
+                    </v-row>
 
-                    </v-layout>
                 </v-form>
-            </v-container>
+            </vcontainer>
+
         </v-card>
         <TemplateSelect :show="selector" @select="use" />
     </v-dialog>

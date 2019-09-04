@@ -5,11 +5,8 @@
 
                 <v-layout row wrap v-if="!value" :style="height?'height:'+height+'px':'min-height:200px'" justify-center align-center key="1">
 
-                    <v-flex xs12 sm2 v-if="!value && !uploading" class="text-center pb-2">
+                    <v-flex xs12 v-if="!value && !uploading" class="text-center pl-2 pr-2">
                         <v-icon x-large>camera_alt</v-icon>
-                    </v-flex>
-
-                    <v-flex xs12 sm10 v-if="!value && !uploading" class="pt-5 pl-3 pr-3">
                         <v-file-input v-model="file" :label="$t('select')" @change="upload()" :rules="rule" :disabled="uploading" ref="imgUploadField" accept="image/jpg, image/png, image/jpeg" outlined prepend-icon="" />
                     </v-flex>
 
@@ -21,6 +18,7 @@
                             </v-progress-linear>
                         </v-card-text>
                     </v-flex>
+                    
                 </v-layout>
 
                 <v-layout row wrap align-center v-if="value && !processing" :style="height?'height:'+height+'px':'min-height:200px'" key="2">
