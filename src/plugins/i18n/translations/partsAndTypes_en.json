@@ -1,0 +1,26 @@
+{
+    "parts": {
+        "chest": "Chest muscles",
+        "bicep": "Biceps",
+        "tricep": "Triceps",
+        "fShoulder": "Front shoulder muscles",
+        "rShoulder": "Back shoulder musculature",
+        "mShoulder": "Medium shoulder musculature",
+        "latissimus": "Latissimus",
+        "trapezoid.": "Trapezius muscle",
+        "cLowerBack": "Cross/Lower Back Muscles",
+        "lStretcher": "Leg extension",
+        "lFlexor": "Leg curl",
+        "neck": "Neck musculature",
+        "laAbdomina": "Lateral abdominal muscles",
+        "loAbdomina": "Lower abdominal muscles",
+        "upAbdomina": "Upper abdominal muscles"
+    },
+    "types": {
+        "strength": "Strength",
+        "stamina": "Stamina",
+        "fitness": "Fitness",
+        "flexibility": "Flexibility",
+        "coordination": "Coordination"
+    }
+}

@@ -30,6 +30,12 @@ const state = () => {
 
 const getters = {
 
+    level: state => {
+        if (state.level === 'moderator') return 'moderator'
+        else if (state.level === 'admin') return 'admin'
+        else return 'user'
+    },
+
     account: state => {
         if (!state.account) {
             state.authorized = false
@@ -88,6 +94,7 @@ const mutations = {
 
         state.account = dAccess.data.account
         state.subscription = dAccess.data.subscription
+        state.level = dAccess.data.level
         state.authorized = true
     },
 
@@ -100,6 +107,7 @@ const mutations = {
         state.authorized = false
         state.subscription = null
         state.account = null
+        state.level = null
         smartStore.clearModules()
         smartStore.clearStorage()
     }

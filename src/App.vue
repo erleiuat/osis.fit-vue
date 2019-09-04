@@ -23,8 +23,8 @@
 
 <script>
 import Drawer from '@/components/nav/drawer/'
+import Alerts from '@/components/Alerts'
 
-const Alerts = () => import('@/components/Alerts')
 const CookieInfo = () => import('@/components/CookieInfo')
 
 export default {

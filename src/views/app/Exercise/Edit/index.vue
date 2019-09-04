@@ -4,10 +4,10 @@
 
             <v-row align="start" justify="center" v-if="loaded && fd" dense>
 
-                <v-col cols="12" md="10">
+                <v-col cols="12" :md="showPublicator ? '10':'12'">
                     <v-text-field :label="$t('ft.title')" v-model="fd.title" :rules="rule.require" type="text" filled />
                 </v-col>
-                <v-col cols="12" md="auto" class="ml-md-auto mr-md-auto">
+                <v-col cols="12" md="auto" class="ml-md-auto mr-md-auto" v-if="showPublicator">
                     <v-checkbox v-model="fd.public" :label="$t('public')" />
                 </v-col>
 
@@ -16,10 +16,10 @@
                 </v-col>
 
                 <v-col cols="12" md="6">
-                    <v-text-field :label="$t('calsPerDo')" v-model="fd.calories" :rules="rule.require" type="number" filled />
+                    <v-text-field :label="$t('calsPerDo')" v-model="fd.calories" type="number" filled />
                 </v-col>
                 <v-col cols="12" md="6">
-                    <v-text-field :label="$t('repetsPerDo')" v-model="fd.repetitions" :rules="rule.require" type="number" filled />
+                    <v-text-field :label="$t('repetsPerDo')" v-model="fd.repetitions" type="number" filled />
                 </v-col>
 
                 <v-col cols="12">
@@ -86,6 +86,14 @@ export default {
         }
     },
 
+    computed: {
+        showPublicator () {
+            if (this.$store.getters['auth/level'] === 'moderator') return true
+            else if (this.$store.getters['auth/level'] === 'admin') return true
+            else return false
+        }
+    },
+
     methods: {
 
         save () {
@@ -122,10 +130,16 @@ export default {
     i18n: {
         messages: {
             en: {
-                title: 'Exercise'
+                title: 'Exercise',
+                public: 'Public',
+                calsPerDo: 'Calories burned per execution',
+                repetsPerDo: 'Repetitions per execution',
             },
             de: {
-                title: 'Übung'
+                title: 'Übung',
+                public: 'Öffentlich',
+                calsPerDo: 'Kalorienverbrauch pro Ausführung',
+                repetsPerDo: 'Wiederholungen pro Ausführung',
             }
         }
     }

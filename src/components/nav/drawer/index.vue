@@ -3,7 +3,6 @@
 
         <template v-slot:prepend>
             <v-img :lazy-src="require('@/assets/img/drawer_bg_lazy.jpg')" :src="require('@/assets/img/drawer_bg.jpg')" max-height="144">
-
                 <v-row class="lightbox">
                     <v-col cols="12" class="pb-0">
                         <v-list dense dark>

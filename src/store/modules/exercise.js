@@ -11,11 +11,31 @@ const state = () => {
         url: 'app/exercise/',
         lName: 'exercise',
         items: smartStore.get('exercise'),
-        bodyparts: smartStore.get('exercise.bodyparts')
+        types: ['strength', 'stamina', 'fitness', 'flexibility', 'coordination'],
+        bodyparts: [
+            { type: 'muscle', id: 'chest' },
+            { type: 'muscle', id: 'bicep' },
+            { type: 'muscle', id: 'tricep' },
+            { type: 'muscle', id: 'fShoulder' },
+            { type: 'muscle', id: 'rShoulder' },
+            { type: 'muscle', id: 'mShoulder' },
+            { type: 'muscle', id: 'latissimus' },
+            { type: 'muscle', id: 'trapezoid' },
+            { type: 'muscle', id: 'cLowerBack' },
+            { type: 'muscle', id: 'lStretcher' },
+            { type: 'muscle', id: 'lFlexor' },
+            { type: 'muscle', id: 'neck' },
+            { type: 'muscle', id: 'laAbdomina' },
+            { type: 'muscle', id: 'loAbdomina' },
+            { type: 'muscle', id: 'upAbdomina' }
+        ]
     }
 }
 
 const getters = {
+    types: (state) => {
+        return state.types
+    },
     bodyparts: (state) => {
         return state.bodyparts
     },
@@ -26,11 +46,6 @@ const getters = {
 }
 
 const mutations = {
-
-    setBodyparts: (state, vals) => {
-        state.bodyparts = vals
-        smartStore.set('exercise.bodyparts', state.bodyparts)
-    },
 
     set: (state, vals) => {
         if (!Array.isArray(vals)) {
@@ -61,13 +76,6 @@ const actions = {
             }).catch(err => {
                 reject(err)
             })
-        })
-    },
-
-    loadBodyparts (con) {
-        if (con.state.bodyparts.length > 0) return null
-        Apios.get(con.state.url + 'bodyparts/').then(res => {
-            if (res.status === 200) con.commit('setBodyparts', res.data.items)
         })
     },
 

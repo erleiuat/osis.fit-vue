@@ -1,0 +1,26 @@
+{
+    "parts": {
+        "chest": "Brustmuskulatur",
+        "bicep": "Bizeps",
+        "tricep": "Trizeps",
+        "fShoulder": "Vordere Schultermuskulatur",
+        "rShoulder": "Hintere Schultermuskulatur",
+        "mShoulder": "Mittlere Schultermuskulatur",
+        "latissimus": "Latissimus",
+        "trapezoid": "Trapezmuskel",
+        "cLowerBack": "Kreuz/Untere Rückenmuskulatur",
+        "lStretcher": "Beinstrecker",
+        "lFlexor": "Beinbeuger",
+        "neck": "Nackenmuskulatur",
+        "laAbdomina": "Seitliche Bauchmuskulatur",
+        "loAbdomina": "Untere Bauchmuskulatur",
+        "upAbdomina": "Obere Bauchmuskulatur"
+    },
+    "types": {
+        "strength": "Kraft",
+        "stamina": "Ausdauer",
+        "fitness": "Fitness",
+        "flexibility": "Flexibilität",
+        "coordination": "Koordination"
+    }
+}

@@ -1,34 +1,36 @@
 <template>
     <vcontainer :align="item ? '' : 'space-evenly'">
 
-        <v-row align="center" v-if="item && loaded">
+        <v-row align="center" justify="center" v-if="item && loaded">
             <v-col cols="12" class="title">
                 {{ item.title }}
             </v-col>
-            <v-col cols="12" class="body-2">
-                Beschreibung: <br />
-                {{ item.description }}
+            <v-col cols="12">
+                <div class="caption">{{ $t('description') }}</div>
+                <div class="body-1">{{ item.description }}</div>
             </v-col>
             <v-col cols="12" md="3" class="body-2">
-                Öffentlich: <br />
-                {{ item.public }}
+                <div class="caption">{{ $t('public') }}</div>
+                {{ item.public ? $t('pTrue'):$t('pFalse') }}
             </v-col>
             <v-col cols="12" md="3" class="body-2">
-                Typ: <br />
-                {{ item.type }}
+                <div class="caption">{{ $t('type') }}</div>
+                {{ $t('pnt.types.'+item.type) }}
             </v-col>
             <v-col cols="12" md="3" class="body-2">
-                Kalorienverbrauch pro Durchführung<br />
+                <div class="caption">{{ $t('calsPerDo') }}</div>
                 {{ item.calories }}
             </v-col>
             <v-col cols="12" md="3" class="body-2">
-                Wiederholungen pro Durchführung<br />
+                <div class="caption">{{ $t('repetsPerDo') }}</div>
                 {{ item.repetitions }}
             </v-col>
 
             <v-col cols="12" class="body-2">
-                Beanspruchte Körperteile<br />
-                {{ item.bodyparts }}
+                <div class="caption">{{ $t('bodyparts') }}</div>
+                <v-chip v-for="(bp, key) in item.bodyparts" :key="key" class="ml-1 mr-1 mb-1">
+                    {{ $t('pnt.parts.'+bp) }}
+                </v-chip>
             </v-col>
         </v-row>
 
@@ -83,10 +85,20 @@ export default {
     i18n: {
         messages: {
             en: {
-                title: 'Exercise'
+                title: 'Exercise',
+                public: 'Public',
+                calsPerDo: 'Calories burned per execution',
+                repetsPerDo: 'Repetitions per execution',
+                bodyparts: 'Affected body parts',
+                type: 'Type'
             },
             de: {
-                title: 'Übung'
+                title: 'Übung',
+                public: 'Öffentlich',
+                calsPerDo: 'Kalorienverbrauch pro Ausführung',
+                repetsPerDo: 'Wiederholungen pro Ausführung',
+                bodyparts: 'Betroffene Körperteile',
+                type: 'Typ'
             }
         }
     }

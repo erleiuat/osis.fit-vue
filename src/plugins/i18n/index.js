@@ -11,6 +11,7 @@ export default new VueI18n({
     messages: {
         en: {
             view: require('@/plugins/i18n/translations/views_en.json'),
+            pnt: require('@/plugins/i18n/translations/partsAndTypes_en.json'),
             ft: require('@/plugins/i18n/translations/formTexts_en.json'),
             btn: require('@/plugins/i18n/translations/buttonTexts_en.json'),
             alert: require('@/plugins/i18n/translations/alerts_en.json'),
@@ -18,6 +19,7 @@ export default new VueI18n({
         },
         de: {
             view: require('@/plugins/i18n/translations/views_de.json'),
+            pnt: require('@/plugins/i18n/translations/partsAndTypes_de.json'),
             ft: require('@/plugins/i18n/translations/formTexts_de.json'),
             btn: require('@/plugins/i18n/translations/buttonTexts_de.json'),
             alert: require('@/plugins/i18n/translations/alerts_de.json'),
