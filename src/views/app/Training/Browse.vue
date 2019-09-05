@@ -1,11 +1,5 @@
 <template>
     <vcontainer>
-        <v-row align="center">
-            <v-col cols="12" class="title">
-                {{ $t('title') }}
-            </v-col>
-        </v-row>
-
         <v-row align="center" dense v-if="items.length">
             <v-expansion-panels>
                 <v-expansion-panel v-for="(item, key) in items" :key="key">
@@ -31,7 +25,6 @@
 
                     <v-expansion-panel-content class="pa-0" eager>
                         <div class="caption text-right">{{ $t('byUser') }} {{ item.user }}</div>
-                        <div class="">{{ $t('ft.description') }}</div>
                         <div class="caption"> {{ item.description }}</div><br />
                     </v-expansion-panel-content>
 

@@ -1,11 +1,5 @@
 <template>
     <vcontainer>
-        <v-row align="center">
-            <v-col cols="12" class="title">
-                {{ $t('title') }}
-            </v-col>
-        </v-row>
-
         <v-row align="center" dense v-if="items.length">
             <v-expansion-panels>
                 <v-expansion-panel v-for="(item, key) in items" :key="key">
