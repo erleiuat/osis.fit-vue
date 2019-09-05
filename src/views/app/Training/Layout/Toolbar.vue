@@ -7,36 +7,15 @@
             </v-btn>
         </template>
 
-        <v-spacer v-if="savePublic" />
-        <v-btn v-if="savePublic" @click="$router.push(savePublic.to)" outlined text>
-            <v-icon left>{{ savePublic.icon }}</v-icon> {{ savePublic.text }}
-        </v-btn>
-
         <v-spacer v-if="editOwn" />
         <v-btn v-if="editOwn" @click="$router.push(editOwn.to)" outlined text>
             <v-icon left>{{ editOwn.icon }}</v-icon> {{ editOwn.text }}
         </v-btn>
 
         <v-spacer v-if="addNew" />
-        <v-menu v-if="addNew">
-            <template v-slot:activator="{ on }">
-                <v-btn v-on="on" outlined text>
-                    <v-icon left>{{ addNew.icon }}</v-icon> {{ addNew.text }}
-                </v-btn>
-            </template>
-            <v-list>
-                <v-list-item @click="$router.push(addNew.to)">
-                    <v-list-item-title>
-                        Neue erstellen
-                    </v-list-item-title>
-                </v-list-item>
-                <v-list-item @click="$router.push(addNew.toBrowse)">
-                    <v-list-item-title>
-                        Vorlagen durchsuchen
-                    </v-list-item-title>
-                </v-list-item>
-            </v-list>
-        </v-menu>
+        <v-btn v-if="addNew" @click="$router.push(addNew.to)" outlined text>
+            <v-icon left>{{ addNew.icon }}</v-icon> {{ addNew.text }}
+        </v-btn>
 
         <v-spacer v-if="showSearch" />
         <transition v-if="showSearch" name="fade" mode="out-in">
@@ -75,8 +54,7 @@ export default {
 
         showTitle () {
             var doShow = false
-            if (this.$route.name === 'training.copy') doShow = true
-            else if (this.$route.name === 'training.new') doShow = true
+            if (this.$route.name === 'training.new') doShow = true
             else if (this.$route.name === 'training.edit') doShow = true
             else if (this.$vuetify.breakpoint.smAndDown) {
                 if (this.$route.name === 'training') doShow = true
@@ -96,19 +74,6 @@ export default {
             if (this.$route.name === 'training.saved') return true
             else if (this.$route.name === 'training.browse') return true
             else return false
-        },
-
-        savePublic () {
-            if (!this.$vuetify.breakpoint.mdAndUp) return false
-            else if (this.$route.name !== 'training') return false
-            else if (this.$route.params.type !== 'public') return false
-            else {
-                return {
-                    to: { name: 'training.copy' },
-                    text: this.$t('btn.save'),
-                    icon: 'save'
-                }
-            }
         },
 
         editOwn () {

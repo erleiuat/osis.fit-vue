@@ -106,15 +106,14 @@ export default {
 
         this.loaded = false
         this.$store.dispatch('training/get', this.$route.params.id).then(res => {
+
             if (this.$route.name === 'training.edit') this.fd = res
             else if (this.$route.name === 'training.copy') {
                 this.fd.title = res.title
                 this.fd.description = res.description
-                this.fd.type = res.type
-                this.fd.calories = res.calories
-                this.fd.repetitions = res.repetitions
-                this.fd.bodyparts = res.bodyparts
+                this.fd.exercises = res.exercises
             }
+            
         }).catch(() => {
             this.fd = null
         }).finally(() => {

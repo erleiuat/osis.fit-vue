@@ -99,7 +99,7 @@ module.exports = [{
     },
     children: [
         {
-            path: '',
+            path: 'saved',
             name: 'training.saved',
             meta: { authRequired: true, premium: true },
             component: () => import('@/views/app/Training/Saved')
@@ -123,12 +123,6 @@ module.exports = [{
             meta: { authRequired: true, premium: true }
         },
         {
-            path: 'copy/:id',
-            name: 'training.copy',
-            meta: { authRequired: true, premium: true },
-            component: () => import('@/views/app/Training/Edit/')
-        },
-        {
             path: 'edit/:id',
             name: 'training.edit',
             component: () => import('@/views/app/Training/Edit/'),
@@ -147,7 +141,7 @@ module.exports = [{
     },
     children: [
         {
-            path: '',
+            path: 'saved',
             name: 'exercise.saved',
             meta: { authRequired: true, premium: true },
             component: () => import('@/views/app/Exercise/Saved')

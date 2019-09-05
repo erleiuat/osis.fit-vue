@@ -45,7 +45,7 @@
                                     </v-btn>
                                 </v-col>
                                 <v-col cols="6">
-                                    <v-btn small block depressed :to="{name: 'training.copy', params: {id: item.id}}">
+                                    <v-btn small block depressed>
                                         {{ $t('btn.save') }}
                                         <v-icon right small>save</v-icon>
                                     </v-btn>
