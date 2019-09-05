@@ -3,9 +3,7 @@
 
         <template v-slot:toggler v-if="showBack">
             <v-btn icon @click="$router.go(-1)">
-                <v-icon>
-                    navigate_before
-                </v-icon>
+                <v-icon>arrow_back</v-icon>
             </v-btn>
         </template>
 
@@ -20,9 +18,9 @@
         </v-btn>
 
         <v-spacer v-if="addNew" />
-        <v-menu>
+        <v-menu v-if="addNew">
             <template v-slot:activator="{ on }">
-                <v-btn v-if="addNew" v-on="on" outlined text>
+                <v-btn v-on="on" outlined text>
                     <v-icon left>{{ addNew.icon }}</v-icon> {{ addNew.text }}
                 </v-btn>
             </template>
@@ -49,6 +47,11 @@
             </v-btn>
         </transition>
 
+        <v-spacer v-if="showTitle" />
+        <v-toolbar-title v-if="showTitle">
+            {{ showTitle }}
+        </v-toolbar-title>
+
     </Default>
 </template>
 
@@ -70,26 +73,38 @@ export default {
 
     computed: {
 
+        showTitle () {
+            var doShow = false
+            if (this.$route.name === 'training.copy') doShow = true
+            else if (this.$route.name === 'training.new') doShow = true
+            else if (this.$route.name === 'training.edit') doShow = true
+            else if (this.$vuetify.breakpoint.smAndDown) {
+                if (this.$route.name === 'training') doShow = true
+                else if (this.$route.name === 'training.edit') doShow = true
+            }
+            if (doShow) return this.$t('view.' + this.$route.name + '.title')
+            else return false
+        },
+
         showBack () {
             if (!this.$vuetify.breakpoint.smAndDown) return false
-            else if (this.$route.name === 'training.exercise.saved') return false
             else if (this.$route.name === 'training.saved') return false
             else return true
         },
 
         showSearch () {
-            if (this.$route.name === 'training.exercise.saved') return true
-            else if (this.$route.name === 'training.exercise.browse') return true
+            if (this.$route.name === 'training.saved') return true
+            else if (this.$route.name === 'training.browse') return true
             else return false
         },
 
         savePublic () {
             if (!this.$vuetify.breakpoint.mdAndUp) return false
-            else if (this.$route.name !== 'training.exercise') return false
+            else if (this.$route.name !== 'training') return false
             else if (this.$route.params.type !== 'public') return false
             else {
                 return {
-                    to: { name: 'training.exercise.save' },
+                    to: { name: 'training.copy' },
                     text: this.$t('btn.save'),
                     icon: 'save'
                 }
@@ -98,11 +113,11 @@ export default {
 
         editOwn () {
             if (!this.$vuetify.breakpoint.mdAndUp) return false
-            else if (this.$route.name !== 'training.exercise') return false
+            else if (this.$route.name !== 'training') return false
             else if (this.$route.params.type !== 'own') return false
             else {
                 return {
-                    to: { name: 'training.exercise.edit', params: { id: this.$route.params.id } },
+                    to: { name: 'training.edit', params: { id: this.$route.params.id } },
                     text: this.$t('btn.edit'),
                     icon: 'edit'
                 }
@@ -111,11 +126,11 @@ export default {
 
         addNew () {
             if (!this.$vuetify.breakpoint.mdAndUp) return false
-            else if (this.$route.name !== 'training.exercise.saved') return false
+            else if (this.$route.name !== 'training.saved') return false
             else {
                 return {
-                    to: { name: 'training.exercise.new' },
-                    toBrowse: { name: 'training.exercise.browse' },
+                    to: { name: 'training.new' },
+                    toBrowse: { name: 'training.browse' },
                     text: this.$t('btn.add'),
                     icon: 'add'
                 }

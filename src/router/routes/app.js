@@ -93,9 +93,9 @@ module.exports = [{
     path: '/training',
     meta: { authRequired: true, premium: true },
     components: {
-        toolbar: () => import('@/views/app/Training/Toolbar'),
-        default: () => import('@/views/app/Training/'), // TODO REDIRECT TO CHILD
-        bottom: () => import('@/views/app/Training/BottomNav')
+        toolbar: () => import('@/views/app/Training/Layout/Toolbar'),
+        default: () => import('@/views/app/Training/Layout/'), // TODO REDIRECT TO CHILD
+        bottom: () => import('@/views/app/Training/Layout/BottomNav')
     },
     children: [
         {
@@ -105,10 +105,34 @@ module.exports = [{
             component: () => import('@/views/app/Training/Saved')
         },
         {
+            path: 'browse',
+            name: 'training.browse',
+            meta: { authRequired: true, premium: true },
+            component: () => import('@/views/app/Training/Browse')
+        },
+        {
             path: 'r/:type/:id',
             name: 'training',
             meta: { authRequired: true, premium: true },
             component: () => import('@/views/app/Training/Training')
+        },
+        {
+            path: 'new',
+            name: 'training.new',
+            component: () => import('@/views/app/Training/Edit/'),
+            meta: { authRequired: true, premium: true }
+        },
+        {
+            path: 'copy/:id',
+            name: 'training.copy',
+            meta: { authRequired: true, premium: true },
+            component: () => import('@/views/app/Training/Edit/')
+        },
+        {
+            path: 'edit/:id',
+            name: 'training.edit',
+            component: () => import('@/views/app/Training/Edit/'),
+            meta: { authRequired: true, premium: true }
         }
     ]
 
