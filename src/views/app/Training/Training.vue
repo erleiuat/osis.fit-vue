@@ -26,11 +26,11 @@
                 </v-sheet>
             </v-col>
 
-            <v-col cols="12" class="body-2" v-if="item.exercises.length">
+            <v-col cols="12" class="body-2" v-if="item.exercises">
                 <v-sheet class="pa-2">
                     <div class="caption">{{ $t('exercises') }}</div>
                     <v-expansion-panels>
-                        <v-expansion-panel v-for="(exe, key) in exerciseItems" :key="key">
+                        <v-expansion-panel v-for="(exe, key) in item.exercises" :key="key">
                             <v-expansion-panel-header>
                                 {{ exe.repetitions }} x {{ exe.title }}
                             </v-expansion-panel-header>
@@ -76,9 +76,8 @@ export default {
 
     data () {
         return {
-            iData: false,
-            loaded: false,
-            loadedExercises: []
+            training: false,
+            loaded: false
         }
     },
 
@@ -86,55 +85,49 @@ export default {
 
         totalCals () {
             var sum = 0
-            this.exerciseItems.forEach(el => {
+            if (!this.item.exercises) return 0
+            this.item.exercises.forEach(el => {
                 if (el.calories) sum += (el.calories / el.repsOrg) * el.repetitions
             })
             return Math.round(sum)
         },
 
         item () {
-            if (this.iData) return this.iData
-            return false
-        },
-
-        exerciseItems () {
-            if (this.loadedExercises) return this.loadedExercises
-            else return []
+            if (this.training) return this.training
+            return []
         }
 
     },
 
     methods: {
 
-        privateExercises () {
-            var reps = {}
-            this.item.exercises.forEach(el => {
-                reps[el.id] = el.repetitions
-                this.loadedExercises.push(this.$store.getters['exercise/id'](el.id))
+        buildPrivate (item) {
+            item.exercises = item.exercises.map(el => {
+                var tmp = this.$store.getters['exercise/id'](el.id)
+                tmp.repsOrg = tmp.repetitions
+                tmp.repetitions = el.repetitions
+                return tmp
             })
-
-            this.loadedExercises.forEach(el => {
-                el.repsOrg = el.repetitions
-                el.repetitions = reps[el.id]
-            })
+            this.training = item
         },
 
-        publicExercises () {
+        buildPublic (item) {
             var ids = []
             var reps = {}
-            this.item.exercises.forEach(el => {
+            item.exercises.forEach(el => {
                 reps[el.id] = el.repetitions
                 ids.push(el.id)
             })
 
             this.$store.dispatch('exercise/get', ids).then(res => {
-                this.loadedExercises = res
-                this.loadedExercises.forEach(el => {
+                item.exercises = res.map(el => {
                     el.repsOrg = el.repetitions
                     el.repetitions = reps[el.id]
+                    return el
                 })
-            }).finally(() => {
-                if (!this.loadedExercises) this.loadedExercises = []
+                this.training = item
+            }).catch(r => {
+                this.$notify({ type: 'error', title: this.$t('alert.error.load'), text: r })
             })
         }
 
@@ -142,9 +135,10 @@ export default {
 
     mounted () {
         this.$store.dispatch('training/get', this.$route.params.id).then(res => {
-            this.iData = res
-            if (this.$route.params.type === 'own') this.privateExercises()
-            else this.publicExercises()
+            if (this.$route.params.type === 'own') this.buildPrivate(res)
+            else this.buildPublic(res)
+        }).catch(r => {
+            this.$notify({ type: 'error', title: this.$t('alert.error.load'), text: r })
         }).finally(() => {
             this.loaded = true
         })

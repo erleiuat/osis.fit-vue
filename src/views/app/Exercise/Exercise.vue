@@ -103,6 +103,8 @@ export default {
     mounted () {
         this.$store.dispatch('exercise/get', this.$route.params.id).then(res => {
             this.iData = res
+        }).catch(r => {
+            this.$notify({ type: 'error', title: this.$t('alert.error.load'), text: r })
         }).finally(() => {
             this.loaded = true
         })
