@@ -78,7 +78,7 @@ export default {
         return {
             iData: false,
             loaded: false,
-            loadedExercises: false
+            loadedExercises: []
         }
     },
 
@@ -86,15 +86,9 @@ export default {
 
         totalCals () {
             var sum = 0
-            if (!this.exerciseItems) return
-
             this.exerciseItems.forEach(el => {
-                if (el.calories) {
-                    var tmp = el.calories / el.repsOrg
-                    sum += tmp * el.repetitions
-                }
+                if (el.calories) sum += (el.calories / el.repsOrg) * el.repetitions
             })
-
             return Math.round(sum)
         },
 
@@ -104,11 +98,28 @@ export default {
         },
 
         exerciseItems () {
+            if (this.loadedExercises) return this.loadedExercises
+            else return []
+        }
 
-            if (this.loadedExercises) {
-                return this.loadedExercises
-            }
+    },
 
+    methods: {
+
+        privateExercises () {
+            var reps = {}
+            this.item.exercises.forEach(el => {
+                reps[el.id] = el.repetitions
+                this.loadedExercises.push(this.$store.getters['exercise/id'](el.id))
+            })
+
+            this.loadedExercises.forEach(el => {
+                el.repsOrg = el.repetitions
+                el.repetitions = reps[el.id]
+            })
+        },
+
+        publicExercises () {
             var ids = []
             var reps = {}
             this.item.exercises.forEach(el => {
@@ -129,12 +140,11 @@ export default {
 
     },
 
-    methods: {
-    },
-
     mounted () {
         this.$store.dispatch('training/get', this.$route.params.id).then(res => {
             this.iData = res
+            if (this.$route.params.type === 'own') this.privateExercises()
+            else this.publicExercises()
         }).finally(() => {
             this.loaded = true
         })
