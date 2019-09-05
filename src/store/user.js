@@ -22,17 +22,17 @@ const getters = {
 
         if (gender === 'female') {
             dayNeed = (
-                655.1 +
-            (9.6 * weight) +
-            (1.8 * height) +
-            (4.7 * age)
+                (2.4 * weight) +
+                (9.0 * height) -
+                (4.7 * age) -
+                65
             )
         } else {
             dayNeed = (
-                66.47 +
-            (13.7 * weight) +
-            (5.0 * height) +
-            (6.8 * age)
+                (3.4 * weight) +
+                (15.3 * height) -
+                (6.8 * age) -
+                961
             )
         }
 
