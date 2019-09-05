@@ -83,33 +83,50 @@ export default {
     },
 
     computed: {
+
         totalCals () {
             var sum = 0
-            console.log(this.loadedExercises)
-            if (!this.loadedExercises) return
-            this.loadedExercises.forEach(el => {
+            if (!this.exerciseItems) return
+
+            this.exerciseItems.forEach(el => {
                 if (el.calories) {
                     var tmp = el.calories / el.repsOrg
                     sum += tmp * el.repetitions
                 }
-            });
+            })
+
             return Math.round(sum)
         },
+
         item () {
             if (this.iData) return this.iData
             return false
         },
+
         exerciseItems () {
+
+            if (this.loadedExercises) {
+                return this.loadedExercises
+            }
+
             var ids = []
+            var reps = {}
             this.item.exercises.forEach(el => {
+                reps[el.id] = el.repetitions
                 ids.push(el.id)
-            });
+            })
 
             this.$store.dispatch('exercise/get', ids).then(res => {
                 this.loadedExercises = res
-            }).finally(() => { })
-
+                this.loadedExercises.forEach(el => {
+                    el.repsOrg = el.repetitions
+                    el.repetitions = reps[el.id]
+                })
+            }).finally(() => {
+                if (!this.loadedExercises) this.loadedExercises = []
+            })
         }
+
     },
 
     methods: {

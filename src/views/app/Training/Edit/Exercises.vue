@@ -65,18 +65,22 @@ export default {
     },
 
     computed: {
+
         totalCals () {
             var sum = 0
+
             this.exercises.forEach(el => {
-                if(!el.id) return
+                if (!el.id) return
                 var ent = this.$store.getters['exercise/id'](el.id)
                 if (ent.calories) {
                     var tmp = ent.calories / ent.repetitions
                     sum += tmp * el.repetitions
                 }
-            });
+            })
+
             return Math.round(sum)
         },
+
         exercises: {
             get () {
                 return this.value
@@ -85,9 +89,11 @@ export default {
                 this.$emit('input', val)
             }
         },
+
         list () {
             return this.$store.getters['exercise/all']
         }
+
     },
 
     methods: {
