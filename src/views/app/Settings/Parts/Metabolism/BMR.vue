@@ -21,9 +21,22 @@
         <v-col cols="12" md="5">
             <v-select :label="$t('gender')" v-model="fd.gender" :items="genders" :rules="rule.require" filled />
         </v-col>
+
         <v-col cols="12" md="5">
             <v-text-field v-model="fd.birthdate" :label="$t('birthdate')" type="date" append-icon="event" filled />
         </v-col>
+
+        <!-- TODO
+        <v-col cols="12" md="1">
+            <v-text-field :label="$t('day')" type="number" filled />
+        </v-col>
+        <v-col cols="12" md="1">
+            <v-text-field :label="$t('month')" type="number" filled />
+        </v-col>
+        <v-col cols="12" md="3">
+            <v-text-field :label="$t('year')" type="number" filled />
+        </v-col>
+        -->
 
         <v-col cols="12" class="text-center">
             {{ bmr }}

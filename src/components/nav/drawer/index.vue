@@ -6,7 +6,7 @@
                 <v-row class="lightbox">
                     <v-col cols="12" class="pb-0">
                         <v-list dense dark>
-                            <v-list-item link @click="$router.push({name: 'settings.profile'})">
+                            <v-list-item @click="$router.push({name: 'settings.profile'})">
                                 <v-list-item-avatar v-if="$store.getters['user/image']">
                                     <v-img :src="$store.getters['user/image'].path.small" />
                                 </v-list-item-avatar>
@@ -14,7 +14,7 @@
                                     <v-img :src="require('@/assets/img/user.png')" />
                                 </v-list-item-avatar>
                             </v-list-item>
-                            <v-list-item two-line link @click="$router.push({name: 'settings.profile'})">
+                            <v-list-item two-line @click="$router.push({name: 'settings.profile'})">
                                 <v-list-item-content>
                                     <v-list-item-title class="subheader">
                                         {{ $store.getters['user/fullName'] }}
