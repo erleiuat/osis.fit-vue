@@ -1,7 +1,8 @@
 
 import NProgress from 'nprogress'
-import(/* webpackPrefetch: true */ '@/assets/css/nprogress.css')
+import('@/assets/css/nprogress.css')
 
+/*
 NProgress.doStart = NProgress.start
 NProgress.doDone = NProgress.done
 
@@ -23,6 +24,7 @@ NProgress.done = function () {
     this.clearDelay()
     this.doDone()
 }
+*/
 
 NProgress.configure({
     trickleSpeed: 50,

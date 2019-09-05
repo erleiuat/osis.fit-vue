@@ -1,6 +1,5 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import NProgress from 'nprogress'
 import store from '@/store/'
 import i18n from '@/plugins/i18n/'
 
@@ -34,7 +33,7 @@ router.beforeEach((to, from, next) => {
         if (auth === 'expired') {
             store.dispatch('auth/refresh').then(() => {
                 if (!start) {
-                    NProgress.start()
+                    store.dispatch('loading', true)
                     next()
                 } else router.push({ name: 'dashboard' })
             }).catch(res => {
@@ -51,14 +50,14 @@ router.beforeEach((to, from, next) => {
 
             if (auth === 'authorized' && !start) {
                 if (!needPremium || store.getters['auth/premium']) {
-                    NProgress.start()
+                    store.dispatch('loading', true)
                     next()
                 } else router.push({ name: 'premium', query: { notify: true } })
             } else if (start) router.push({ name: 'dashboard' })
         }
     } else if (!needAuth) {
         if (!start) {
-            NProgress.start()
+            store.dispatch('loading', true)
             next()
         } else router.push({ name: 'welcome' })
     } else {
@@ -67,7 +66,7 @@ router.beforeEach((to, from, next) => {
 })
 
 router.afterEach((to, from) => {
-    NProgress.done()
+    store.dispatch('loading', false)
     if (to.name) document.title = i18n.t('view.' + to.name + '.title') + ' | ' + store.state.app.title
 })
 

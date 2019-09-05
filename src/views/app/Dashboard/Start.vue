@@ -4,7 +4,7 @@
         <v-col cols="12" md="4" v-if="cals.show">
             <CaloricBalance :cVals="cals.cVals" />
         </v-col>
-        <v-col cols="auto" v-else-if="$store.getters['loading']">
+        <v-col cols="12" md="4" v-else-if="$store.getters['loading']">
             <v-progress-circular :size="70" :width="7" indeterminate />
         </v-col>
         <v-col cols="12" v-else>

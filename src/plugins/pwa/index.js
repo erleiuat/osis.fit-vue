@@ -1,8 +1,6 @@
 /* eslint-disable no-console */
-
 import { register } from 'register-service-worker'
-
-import NProgress from '@/plugins/nprogress'
+import store from '@/store/'
 
 if (process.env.NODE_ENV === 'production') {
     register(`${process.env.BASE_URL}service-worker.js`, {
@@ -14,11 +12,10 @@ if (process.env.NODE_ENV === 'production') {
         },
         cached () {
             console.log('Content has been cached for offline use.')
-            NProgress.done()
         },
         updatefound () {
+            store.dispatch('updating', true)
             console.log('New content is downloading.')
-            NProgress.start()
         },
         updated () {
             console.log('New content is available; please refresh.')

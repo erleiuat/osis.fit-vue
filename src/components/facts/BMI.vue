@@ -1,5 +1,5 @@
 <template>
-    <v-card :color="state.color" :dark="state.dark" :loading="loading">
+    <v-card :color="state.color" :dark="state.dark" :loading="loading" flat>
         <v-card-title class="display-1">
             BMI
         </v-card-title>

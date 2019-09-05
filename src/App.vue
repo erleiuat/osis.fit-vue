@@ -4,7 +4,6 @@
         <Drawer v-if="$store.getters['auth/authorized']" />
 
         <router-view name="toolbar" />
-        <Alerts />
 
         <v-content>
             <transition appear name="fade" mode="out-in">
@@ -17,6 +16,8 @@
         </transition>
 
         <CookieInfo v-if="this.$store.getters['cookieNotice']" />
+        <Update v-if="this.$store.getters['updating']" />
+        <Alerts />
 
     </v-app>
 </template>
@@ -26,12 +27,13 @@ import Drawer from '@/components/nav/drawer/'
 import Alerts from '@/components/Alerts'
 
 const CookieInfo = () => import('@/components/CookieInfo')
+const Update = () => import('@/components/Update')
 
 export default {
     name: 'App',
 
     components: {
-        Drawer, Alerts, CookieInfo
+        Drawer, Alerts, CookieInfo, Update
     },
 
     methods: {

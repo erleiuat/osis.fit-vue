@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import VueCookies from 'vue-cookies'
+import NProgress from '@/plugins/nprogress'
 
 import user from '@/store/user'
 import auth from '@/store/auth'
@@ -19,7 +20,8 @@ export default new Vuex.Store({
 
     state: {
         today: null,
-        loading: true,
+        loading: 0,
+        updating: false,
         cookiesAccepted: VueCookies.get('cAccept') || false,
         app: {
             drawer: null,
@@ -32,8 +34,13 @@ export default new Vuex.Store({
 
     getters: {
 
+        updating: state => {
+            return state.updating
+        },
+
         loading: state => {
-            return state.loading
+            if (state.loading > 0) return true
+            else return false
         },
 
         cookieNotice: state => {
@@ -61,6 +68,18 @@ export default new Vuex.Store({
     },
 
     mutations: {
+
+        setUpdating: (state, val) => {
+            if (val === true) state.updating = true
+            else if (val === false) state.updating = false
+        },
+
+        setLoading: (state, val) => {
+            if (val === true) state.loading++
+            else if (val === false) state.loading--
+            if (state.loading === 1) NProgress.start()
+            else if (state.loading === 0) NProgress.done()
+        },
 
         setLocale: (state, info) => {
             state.app.language = info
@@ -91,6 +110,14 @@ export default new Vuex.Store({
     },
 
     actions: {
+
+        updating (con, val) {
+            con.commit('setUpdating', val)
+        },
+
+        loading (con, val) {
+            con.commit('setLoading', val)
+        },
 
         drawer (con) {
             con.commit('setDrawer', !con.state.app.drawer)

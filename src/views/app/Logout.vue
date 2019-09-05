@@ -54,7 +54,7 @@ export default {
                 }).finally(() => {
                     vm.$router.push({ name: 'auth' })
                 })
-            }, 1000)
+            }, 200)
         }
 
     },

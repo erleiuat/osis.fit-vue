@@ -1,5 +1,4 @@
 import Axios from 'axios'
-import NProgress from '@/plugins/nprogress'
 import store from '@/store/'
 
 const CancelToken = Axios.CancelToken
@@ -20,8 +19,8 @@ apios.interceptors.request.use(config => {
             ...config, cancelToken: new CancelToken((cancel) => cancel(config.url))
         }
     }
-    store.state.loading = true
-    NProgress.start()
+    store.dispatch('loading', true)
+    // NProgress.start()
     pendingCalls[config.baseURL + config.url] = true
     return config
 }, err => {
@@ -29,13 +28,13 @@ apios.interceptors.request.use(config => {
 })
 
 apios.interceptors.response.use(res => {
-    store.state.loading = false
-    NProgress.done()
+    store.dispatch('loading', false)
+    // NProgress.done()
     pendingCalls[res.config.url] = null
     return res.data
 }, err => {
-    store.state.loading = false
-    NProgress.done()
+    store.dispatch('loading', false)
+    // NProgress.done()
     if (err.constructor.name === 'Cancel') return Promise.reject(err)
     if (!err.response) return Promise.reject(err)
     pendingCalls[err.response.config.url] = null
