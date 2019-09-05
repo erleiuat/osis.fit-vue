@@ -47,13 +47,33 @@ const mutations = {
 
 const actions = {
 
+    get (con, id) {
+        return new Promise((resolve, reject) => {
+            Apios.post(con.state.url + 'read/', { id: id }).then(res => {
+                resolve(res.data.item)
+            }).catch(err => {
+                reject(err)
+            })
+        })
+    },
+
     load (con) {
         var fd = {
             public: false,
             query: null
         }
         Apios.post(con.state.url + 'search/', fd).then(res => {
-            if (res.status === 200) con.commit('set', res.data.items.own)
+            if (res.status === 200) con.commit('set', res.data.items)
+        })
+    },
+
+    search (con, form) {
+        return new Promise((resolve, reject) => {
+            Apios.post(con.state.url + 'search/', form).then(res => {
+                resolve(res.data.items)
+            }).catch(err => {
+                reject(err)
+            })
         })
     },
 

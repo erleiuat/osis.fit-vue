@@ -1,33 +1,26 @@
 <template>
-    <v-container grid-list-sm fill-height>
-
-        <v-layout wrap>
-
-            <v-flex xs12 class="subheading">
-                {{ $t('title') }}
-            </v-flex>
-
-            <v-flex xs12>
-                <v-layout row wrap v-if="items">
-                    <v-flex xs12 md6 v-for="item in items" :key="item.id">
-                        <v-hover v-slot:default="{ hover }">
-                            <v-card link flat :elevation="hover ? 12 : 2">
-
-                                <v-card-title>
-                                    {{ item.title }}
-                                </v-card-title>
-                                <v-card-text>
-                                    {{ item.description }}
-                                </v-card-text>
-
-                            </v-card>
-                        </v-hover>
-                    </v-flex>
-                </v-layout>
-            </v-flex>
-
-        </v-layout>
-    </v-container>
+    <vcontainer>
+        <v-row align="center" dense>
+            <v-col cols="12" v-for="(item, key) in items" :key="key">
+                <v-card :to="{name: 'training', params: {type: 'own', id: item.id}}" link outlined hover>
+                    <v-card-text class="pt-1 pb-1">
+                        <div class="title">
+                            {{ item.title }}
+                        </div>
+                        {{ item.description }}
+                    </v-card-text>
+                    <v-card-actions class="pt-0 pb-1">
+                        <v-btn icon :to="{name: 'training.edit', params: {id: item.id}}">
+                            <v-icon>edit</v-icon>
+                        </v-btn><v-spacer />
+                        <v-btn icon disabled>
+                            <v-icon>delete</v-icon>
+                        </v-btn>
+                    </v-card-actions>
+                </v-card>
+            </v-col>
+        </v-row>
+    </vcontainer>
 </template>
 
 <script>
@@ -40,15 +33,7 @@ export default {
         training
     },
 
-    data () {
-        return {
-            showEditor: false,
-            editObj: null
-        }
-    },
-
     computed: {
-
         items () {
             var items = this.$store.getters['training/all']
             var query = this.$route.query.s || ''
@@ -61,33 +46,22 @@ export default {
             if (filtered.length <= 0) return false
             else return filtered
         }
-
     },
 
     mounted () {
-        // this.$store.dispatch('training/load')
+        this.$store.dispatch('training/load')
     },
 
     i18n: {
         messages: {
             en: {
-                title: 'Saved training plans'
+                title: 'Saved Trainings'
             },
             de: {
-                title: 'Deine Trainingspläne'
+                title: 'Deine Pläne'
             }
         }
     }
 
 }
 </script>
-
-<style scoped>
-.sticky-bar {
-    width: 100%;
-}
-.sticky-bar > .v-toolbar {
-    position: fixed;
-    width: inherit;
-}
-</style>

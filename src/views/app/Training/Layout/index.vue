@@ -6,7 +6,17 @@
 </template>
 
 <script>
+import exercise from '@/store/modules/exercise'
+
 export default {
-    name: 'Training'
+    name: 'Training',
+
+    modules: {
+        exercise
+    },
+
+    mounted () {
+        this.$store.dispatch('exercise/load')
+    }
 }
 </script>

@@ -61,9 +61,7 @@ export default {
                 title: null,
                 description: null,
                 public: false,
-                exercises: [
-                    {id: 18, repetitions: 10}
-                ]
+                exercises: []
             },
             rule: {
                 valid: false,

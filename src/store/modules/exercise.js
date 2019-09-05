@@ -33,6 +33,9 @@ const state = () => {
 }
 
 const getters = {
+    id: (state) => (id) => {
+        if (state.items[id]) return state.items[id]
+    },
     types: (state) => {
         return state.types
     },
@@ -72,7 +75,8 @@ const actions = {
     get (con, id) {
         return new Promise((resolve, reject) => {
             Apios.post(con.state.url + 'read/', { id: id }).then(res => {
-                resolve(res.data.item)
+                if (res.data.item) resolve(res.data.item)
+                else if (res.data.items) resolve(res.data.items)
             }).catch(err => {
                 reject(err)
             })

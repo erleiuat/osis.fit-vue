@@ -12,14 +12,14 @@
 
         <v-row v-if="item && loaded" align="center" justify="center" class="text-sm-center" dense>
 
-            <v-col cols="6" md="2" class="body-2">
+            <v-col cols="6" md="2">
                 <v-sheet class="pa-2">
                     <div class="caption">{{ $t('type') }}</div>
                     {{ $t('pnt.types.'+item.type) }}
                 </v-sheet>
             </v-col>
 
-            <v-col cols="6" md="2" class="body-2">
+            <v-col cols="6" md="2">
                 <v-sheet class="pa-2">
                     <div class="caption">{{ $t('public') }}</div>
                     {{ item.public ? $t('pTrue'):$t('pFalse') }}

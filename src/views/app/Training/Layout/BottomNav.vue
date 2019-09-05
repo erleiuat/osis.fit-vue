@@ -1,10 +1,9 @@
 <template>
-    <v-bottom-navigation app fixed grow v-if="addNew || savePublic || editOwn">
+    <v-fab-transition v-if="!$vuetify.breakpoint.mdAndUp">
 
-        <v-menu>
+        <v-menu v-if="addNew">
             <template v-slot:activator="{ on }">
-                <v-btn v-if="addNew" v-on="on" text>
-                    <span>{{ addNew.text }}</span>
+                <v-btn v-if="addNew" v-on="on" fab fixed bottom right color="primary">
                     <v-icon>{{ addNew.icon }}</v-icon>
                 </v-btn>
             </template>
@@ -22,17 +21,15 @@
             </v-list>
         </v-menu>
 
-        <v-btn v-if="savePublic" text @click="$router.push(savePublic.to)">
-            <span>{{ savePublic.text }}</span>
+        <v-btn v-if="savePublic" @click="$router.push(savePublic.to)" fab fixed bottom right color="primary">
             <v-icon>{{ savePublic.icon }}</v-icon>
         </v-btn>
 
-        <v-btn v-if="editOwn" text @click="$router.push(editOwn.to)">
-            <span>{{ editOwn.text }}</span>
+        <v-btn v-if="editOwn" @click="$router.push(editOwn.to)" fab fixed bottom right color="primary">
             <v-icon>{{ editOwn.icon }}</v-icon>
         </v-btn>
 
-    </v-bottom-navigation>
+    </v-fab-transition>
 </template>
 
 <script>
@@ -42,11 +39,11 @@ export default {
     computed: {
         addNew () {
             if (this.$vuetify.breakpoint.mdAndUp) return false
-            else if (this.$route.name !== 'training.exercise.saved') return false
+            else if (this.$route.name !== 'training.saved') return false
             else {
                 return {
-                    to: { name: 'training.exercise.new' },
-                    toBrowse: { name: 'training.exercise.browse' },
+                    to: { name: 'training.new' },
+                    toBrowse: { name: 'training.browse' },
                     text: this.$t('btn.add'),
                     icon: 'add'
                 }
@@ -54,11 +51,11 @@ export default {
         },
         editOwn () {
             if (this.$vuetify.breakpoint.mdAndUp) return false
-            else if (this.$route.name !== 'training.exercise') return false
+            else if (this.$route.name !== 'training') return false
             else if (this.$route.params.type !== 'own') return false
             else {
                 return {
-                    to: { name: 'training.exercise.edit', params: { id: this.$route.params.id } },
+                    to: { name: 'training.edit', params: { id: this.$route.params.id } },
                     text: this.$t('btn.edit'),
                     icon: 'edit'
                 }
@@ -66,11 +63,11 @@ export default {
         },
         savePublic () {
             if (this.$vuetify.breakpoint.mdAndUp) return false
-            else if (this.$route.name !== 'training.exercise') return false
+            else if (this.$route.name !== 'training') return false
             else if (this.$route.params.type !== 'public') return false
             else {
                 return {
-                    to: { name: 'training.exercise.save', params: { id: this.$route.params.id } },
+                    to: { name: 'training.copy', params: { id: this.$route.params.id } },
                     text: this.$t('btn.save'),
                     icon: 'save'
                 }
