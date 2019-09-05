@@ -70,8 +70,8 @@ export default new Vuex.Store({
     mutations: {
 
         setUpdating: (state, val) => {
-            if (val === true) state.updating = true
-            else if (val === false) state.updating = false
+            if (val) state.updating = val
+            else state.updating = false
         },
 
         setLoading: (state, val) => {
