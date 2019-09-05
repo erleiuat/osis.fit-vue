@@ -1,6 +1,6 @@
 <template>
-    <v-overlay :value="$store.getters['updating']">
-        <v-sheet light min-width="300">
+    <v-overlay :value="$store.getters['updating']" opacity="0.9">
+        <v-sheet light min-width="300" class="ma-2">
             <vcontainer>
                 <v-row no-gutters>
                     <v-col cols="12">
@@ -8,7 +8,7 @@
                         <div class="caption"> {{ $t('text') }} </div>
                     </v-col>
                     <v-col cols="12" class="pt-2">
-                        <v-progress-linear indeterminate height="30" dark />
+                        <v-progress-linear indeterminate height="5" dark />
                     </v-col>
                 </v-row>
             </vcontainer>

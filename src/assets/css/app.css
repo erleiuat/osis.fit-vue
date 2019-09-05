@@ -1,15 +1,30 @@
 
-@import url('https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900');
 @import url('https://fonts.googleapis.com/css?family=Material+Icons');
+@import url('https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900');
+
+@font-face {
+    font-family: 'Roboto';
+    font-display: auto;
+}
+
+/* TODO
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:300,400,700');
+* {
+    font-family: 'Open Sans', sans-serif !important;
+}
+
+
+.v-application.display-4, .v-application .display-3, .v-application .display-2, .v-application .display-1 {
+    font-family: 'Open Sans', sans-serif !important;
+}
+*/
 
 .v-btn {
     text-transform: none !important;
 }
-
 .v-bottom-navigation--fixed {
     position: fixed !important;
 }
-
 .v-item-group.v-bottom-navigation .v-btn {
     height: inherit !important;
 }
