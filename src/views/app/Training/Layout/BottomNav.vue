@@ -20,11 +20,7 @@
                 </v-list-item>
             </v-list>
         </v-menu>
-
-        <v-btn v-if="savePublic" @click="$router.push(savePublic.to)" fab fixed bottom right color="primary">
-            <v-icon>{{ savePublic.icon }}</v-icon>
-        </v-btn>
-
+        
         <v-btn v-if="editOwn" @click="$router.push(editOwn.to)" fab fixed bottom right color="primary">
             <v-icon>{{ editOwn.icon }}</v-icon>
         </v-btn>
@@ -58,18 +54,6 @@ export default {
                     to: { name: 'training.edit', params: { id: this.$route.params.id } },
                     text: this.$t('btn.edit'),
                     icon: 'edit'
-                }
-            }
-        },
-        savePublic () {
-            if (this.$vuetify.breakpoint.mdAndUp) return false
-            else if (this.$route.name !== 'training') return false
-            else if (this.$route.params.type !== 'public') return false
-            else {
-                return {
-                    to: { name: 'training.copy', params: { id: this.$route.params.id } },
-                    text: this.$t('btn.save'),
-                    icon: 'save'
                 }
             }
         }

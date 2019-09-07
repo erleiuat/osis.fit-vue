@@ -29,13 +29,13 @@
                     <v-expansion-panel-content class="pa-0" eager>
                         <vcontainer class="pa-0">
                             <v-row dense>
-                                <v-col cols="6">
+                                <v-col cols="12" md="6">
                                     <v-btn small block depressed :to="{name: 'training', params: {type: 'public',id: item.id}}">
                                         {{ $t('btn.view') }}
                                         <v-icon right small>open_in_new</v-icon>
                                     </v-btn>
                                 </v-col>
-                                <v-col cols="6">
+                                <v-col cols="12" md="6">
                                     <v-btn v-if="isFav(item.id)" small block depressed @click="toggleFav(item)">
                                         {{ $t('removeFav') }}
                                         <v-icon right small>star_outline</v-icon>

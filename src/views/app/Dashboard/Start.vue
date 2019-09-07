@@ -4,7 +4,7 @@
         <v-col cols="12" md="4" v-if="cals.show">
             <CaloricBalance :cVals="cals.cVals" />
         </v-col>
-        <v-col cols="12" md="4" v-else-if="$store.getters['loading']">
+        <v-col cols="12" md="4" v-else-if="showLoader">
             <v-progress-circular :size="70" :width="7" indeterminate />
         </v-col>
         <v-col cols="12" v-else>
@@ -29,6 +29,12 @@ const WeightFacts = () => import('@/components/facts/Weight')
 export default {
     name: 'Start',
 
+    data () {
+        return {
+            loaded: false
+        }
+    },
+
     components: {
         CaloricBalance,
         BMIFacts,
@@ -37,6 +43,19 @@ export default {
     },
 
     computed: {
+
+        showLoader () {
+            if (this.loaded) {
+                return false
+            } else {
+                if (this.$store.getters['loading']) {
+                    return true
+                } else {
+                    this.loaded = true
+                    return false
+                }
+            }
+        },
 
         lastWeight () {
             var lWeight = this.$store.getters['weight/latest'] || { weight: 0 }

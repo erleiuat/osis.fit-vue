@@ -20,7 +20,6 @@ apios.interceptors.request.use(config => {
         }
     }
     store.dispatch('loading', true)
-    // NProgress.start()
     pendingCalls[config.baseURL + config.url] = true
     return config
 }, err => {
@@ -29,12 +28,10 @@ apios.interceptors.request.use(config => {
 
 apios.interceptors.response.use(res => {
     store.dispatch('loading', false)
-    // NProgress.done()
     pendingCalls[res.config.url] = null
     return res.data
 }, err => {
     store.dispatch('loading', false)
-    // NProgress.done()
     if (err.constructor.name === 'Cancel') return Promise.reject(err)
     if (!err.response) return Promise.reject(err)
     pendingCalls[err.response.config.url] = null

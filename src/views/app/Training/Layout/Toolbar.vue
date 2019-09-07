@@ -65,8 +65,9 @@ export default {
         },
 
         showBack () {
-            if (!this.$vuetify.breakpoint.smAndDown) return false
-            else if (this.$route.name === 'training.saved') return false
+            if (this.$route.name === 'training.saved') return false
+            else if (this.$route.name === 'training.favorites') return false
+            else if (this.$route.name === 'training.browse') return false
             else return true
         },
 

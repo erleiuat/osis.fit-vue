@@ -25,13 +25,14 @@
                 <v-form v-model="rule.valid" ref="form" v-on:submit.prevent>
 
                     <v-row dense align="baseline">
-                        <v-col cols="9">
-                            <v-text-field v-model="fd.title" :label="$t('ft.title')" type="text" outlined />
-                        </v-col>
-                        <v-col cols="3">
-                            <v-btn @click="openSelect()" x-large outlined>
-                                <v-icon large>view_carousel</v-icon>
+                        <v-col cols="12">
+                            <v-btn @click="openSelect()" block small outlined>
+                                {{ $t('selectTemplate') }}
+                                <v-icon right>view_carousel</v-icon>
                             </v-btn>
+                        </v-col>
+                        <v-col cols="12">
+                            <v-text-field v-model="fd.title" :label="$t('ft.title')" type="text" outlined />
                         </v-col>
                         <v-col cols="6">
                             <v-text-field v-model="fd.date" :label="$t('ft.date')" :rules="rule.require" type="date" outlined />
@@ -48,7 +49,7 @@
                         </v-col>
 
                         <v-col cols="12">
-                            <v-text-field v-model="fd.calories" :label="$t('calories')" :rules="rule.require" type="number" suffix="Kcal" outlined autofocus />
+                            <v-text-field v-model="fd.calories" :label="$t('calories')" :rules="rule.require" type="number" suffix="Kcal" outlined />
                         </v-col>
                         <v-col cols="12">
                             <v-btn @click="add()" :loading="sending" :disabled="!rule.valid" type="submit" color="primary" block depressed>
@@ -154,12 +155,14 @@ export default {
             en: {
                 title: 'Add Calories',
                 caloriesPer100: 'Calories per 100g / 100ml',
-                calories: 'Calories Total'
+                calories: 'Calories Total',
+                selectTemplate: 'Select Template'
             },
             de: {
                 title: 'Kalorien hinzufügen',
                 caloriesPer100: 'Kalorien pro 100g / 100ml',
-                calories: 'Kalorien Total'
+                calories: 'Kalorien Total',
+                selectTemplate: 'Vorlage auswählen'
             }
         }
     }
