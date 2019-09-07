@@ -42,6 +42,12 @@ export default {
         Welcome
     },
 
+    methods: {
+        setLoaded () {
+            this.loaded = true
+        }
+    },
+
     computed: {
 
         showLoader () {
@@ -51,7 +57,7 @@ export default {
                 if (this.$store.getters['loading']) {
                     return true
                 } else {
-                    this.loaded = true
+                    this.setLoaded()
                     return false
                 }
             }

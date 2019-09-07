@@ -168,7 +168,7 @@ export default {
                     Die Angabe zur körperlichen Aktivität (PAL) beschreibt wie aktiv man im Alltag ist, wobei zusätzliche Trainingseinheiten nicht
                     mitgerechnet werden. Diese kannst du stattdessen als "Aktivität" eintragen, um deine richtige Kalorienbilanz zu berechnen.
                     Wenn du beide der untenstehenden Angaben erledigt hast (und Ziele definiert), kannst du deine Kalorienbilanz auf dem Dashboard finden.
-                ` 
+                `
             }
         }
     }

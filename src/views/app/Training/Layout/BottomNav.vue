@@ -20,7 +20,7 @@
                 </v-list-item>
             </v-list>
         </v-menu>
-        
+
         <v-btn v-if="editOwn" @click="$router.push(editOwn.to)" fab fixed bottom right color="primary">
             <v-icon>{{ editOwn.icon }}</v-icon>
         </v-btn>
