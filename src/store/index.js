@@ -71,8 +71,10 @@ export default new Vuex.Store({
     mutations: {
 
         setUpdating: (state, val) => {
-            if (val) state.updating = val
-            else state.updating = false
+            if (val) {
+                if (!state.hasLoaded) VueCookies.set('hasLoaded', true, -1)
+                else state.updating = val
+            } else state.updating = false
         },
 
         setLoading: (state, val) => {
@@ -113,10 +115,7 @@ export default new Vuex.Store({
     actions: {
 
         updating (con, val) {
-            if (!hasLoaded) {
-                VueCookies.set('hasLoaded', true, -1)
-                con.commit('setUpdating', val)
-            }
+            con.commit('setUpdating', val)
         },
 
         loading (con, val) {
