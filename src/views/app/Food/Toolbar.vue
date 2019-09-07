@@ -1,8 +1,8 @@
 <template>
     <Default>
 
-        <v-spacer v-if="$vuetify.breakpoint.mdAndUp" />
-        <v-btn @click="$router.push({name: 'food.add'})" v-if="$vuetify.breakpoint.mdAndUp" outlined text>
+        <v-spacer v-if="showAdd" />
+        <v-btn @click="$router.push({name: 'food.add'})" v-if="showAdd" outlined text>
             <v-icon left>add</v-icon> {{ $t('btn.add') }}
         </v-btn>
 
@@ -35,6 +35,11 @@ export default {
     },
 
     computed: {
+        showAdd(){
+            if(this.$vuetify.breakpoint.mdAndUp){
+                if(this.$route.name !== 'food.favorites') return true
+            }
+        },
         query: {
             get () {
                 return this.$route.query.s

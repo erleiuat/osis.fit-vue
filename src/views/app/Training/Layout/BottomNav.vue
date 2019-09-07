@@ -1,25 +1,9 @@
 <template>
     <v-fab-transition v-if="!$vuetify.breakpoint.mdAndUp">
 
-        <v-menu v-if="addNew">
-            <template v-slot:activator="{ on }">
-                <v-btn v-if="addNew" v-on="on" fab fixed bottom right color="primary">
-                    <v-icon>{{ addNew.icon }}</v-icon>
-                </v-btn>
-            </template>
-            <v-list>
-                <v-list-item @click="$router.push(addNew.to)">
-                    <v-list-item-title>
-                        Neue erstellen
-                    </v-list-item-title>
-                </v-list-item>
-                <v-list-item @click="$router.push(addNew.toBrowse)">
-                    <v-list-item-title>
-                        Vorlagen durchsuchen
-                    </v-list-item-title>
-                </v-list-item>
-            </v-list>
-        </v-menu>
+        <v-btn v-if="addNew" @click="$router.push(addNew.to)" fab fixed bottom right color="primary">
+            <v-icon>{{ addNew.icon }}</v-icon>
+        </v-btn>
 
         <v-btn v-if="editOwn" @click="$router.push(editOwn.to)" fab fixed bottom right color="primary">
             <v-icon>{{ editOwn.icon }}</v-icon>
