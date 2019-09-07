@@ -17,13 +17,37 @@
         "browse": {
             "title": "Browse",
             "description": ""
+        },
+        "add": {
+            "title": "Create Edible",
+            "description": ""
+        },
+        "edit": {
+            "title": "Edit Edible",
+            "description": ""
         }
     },
     "training": {
         "title": "Training",
         "description": "",
         "saved": {
-            "title": "Plans",
+            "title": "Trainings",
+            "description": ""
+        },
+        "favorites": {
+            "title": "Favorite Trainings",
+            "description": ""
+        },
+        "browse": {
+            "title": "Browse Trainings",
+            "description": ""
+        },
+        "new": {
+            "title": "Create Training",
+            "description": ""
+        },
+        "edit": {
+            "title": "Edit Training",
             "description": ""
         }
     },
@@ -44,6 +68,10 @@
         },
         "copy": {
             "title": "Copy Exercise",
+            "description": ""
+        },
+        "browse": {
+            "title": "Browse Exercises",
             "description": ""
         }
     },

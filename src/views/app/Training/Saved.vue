@@ -1,6 +1,6 @@
 <template>
     <vcontainer>
-        <v-row align="center" dense>
+        <v-row align="center" dense v-if="items.length">
             <v-col cols="12" v-for="(item, key) in items" :key="key">
                 <v-card :to="{name: 'training', params: {type: 'own', id: item.id}}" link outlined hover>
                     <v-card-text class="pt-1 pb-1">
@@ -10,16 +10,30 @@
                         {{ item.description }}
                     </v-card-text>
                     <v-card-actions class="pt-0 pb-1">
+                        <v-spacer />
                         <v-btn icon :to="{name: 'training.edit', params: {id: item.id}}">
                             <v-icon>edit</v-icon>
-                        </v-btn><v-spacer />
-                        <v-btn icon disabled>
-                            <v-icon>delete</v-icon>
                         </v-btn>
                     </v-card-actions>
                 </v-card>
             </v-col>
         </v-row>
+
+        <v-row justify="center" dense v-else-if="!$store.getters['loading']">
+            <v-col cols="auto" v-if="$route.query.s">
+                {{ $t('noneFound') }}
+            </v-col>
+            <v-col cols="auto" v-else>
+                {{ $t('noneYet') }}
+            </v-col>
+        </v-row>
+
+        <v-row justify="center" dense v-else>
+            <v-col cols="auto">
+                <v-progress-circular indeterminate />
+            </v-col>
+        </v-row>
+
     </vcontainer>
 </template>
 
@@ -55,10 +69,14 @@ export default {
     i18n: {
         messages: {
             en: {
-                title: 'Saved Trainings'
+                title: 'Saved Trainings',
+                noneYet: "You have no trainings yet",
+                noneFound: 'No search results'
             },
             de: {
-                title: 'Deine Pläne'
+                title: 'Deine Pläne',
+                noneYet: 'Du hast noch keine eigenen Pläne',
+                noneFound: 'Keine Suchergebnisse'
             }
         }
     }

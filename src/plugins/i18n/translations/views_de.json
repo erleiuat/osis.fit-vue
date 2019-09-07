@@ -17,13 +17,37 @@
         "browse": {
             "title": "Suche",
             "description": ""
+        },
+        "add": {
+            "title": "Essware erstellen",
+            "description": ""
+        },
+        "edit": {
+            "title": "Essware bearbeiten",
+            "description": ""
         }
     },
     "training": {
         "title": "Training",
         "description": "",
         "saved": {
-            "title": "Pläne",
+            "title": "Trainings",
+            "description": ""
+        },
+        "favorites": {
+            "title": "Favoriten",
+            "description": ""
+        },
+        "browse": {
+            "title": "Trainings durchsuchen",
+            "description": ""
+        },
+        "new": {
+            "title": "Training erstellen",
+            "description": ""
+        },
+        "edit": {
+            "title": "Training bearbeiten",
             "description": ""
         }
     },
@@ -44,6 +68,10 @@
         },
         "copy": {
             "title": "Übung kopieren",
+            "description": ""
+        },
+        "browse": {
+            "title": "Vorlagen durchsuchen",
             "description": ""
         }
     },

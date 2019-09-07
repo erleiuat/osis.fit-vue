@@ -10,7 +10,8 @@ const state = () => {
     return {
         url: 'app/training/',
         lName: 'training',
-        items: smartStore.get('training')
+        items: smartStore.get('training'),
+        favItems: smartStore.get('training.favorites'),
     }
 }
 
@@ -19,6 +20,17 @@ const getters = {
     all: (state) => {
         if (!state.items) return
         return Object.values(state.items).reverse()
+    },
+
+    favorites: (state) => {
+        if (!state.favItems) return
+        return Object.values(state.favItems).reverse()
+    },
+
+    isFavorite: (state) => (itemID) => {
+        if (!state.favItems) return
+        if (!(itemID.toString() in state.favItems)) return false
+        else return state.favItems[itemID.toString()]
     }
 
 }
@@ -41,6 +53,24 @@ const mutations = {
     delete: (state, itemID) => {
         Vue.delete(state.items, itemID.toString())
         smartStore.set(state.lName, state.items)
+    },
+
+    setFav: (state, vals) => {
+        if (!Array.isArray(vals)) {
+            if (!(vals.id in state.favItems)) Vue.set(state.favItems, vals.id.toString(), vals)
+            else state.favItems[vals.id] = vals
+        } else {
+            vals.forEach(function (item) {
+                if (!(item.id in state.favItems)) Vue.set(state.favItems, item.id.toString(), item)
+                else state.favItems[item.id] = item
+            })
+        }
+        smartStore.set(state.lName + '.favorites', state.favItems)
+    },
+
+    deleteFav: (state, itemID) => {
+        Vue.delete(state.favItems, itemID.toString())
+        smartStore.set(state.lName + '.favorites', state.favItems)
     }
 
 }
@@ -67,9 +97,15 @@ const actions = {
         })
     },
 
-    search (con, form) {
+    loadFavorites (con) {
+        Apios.post(con.state.url + 'favorite/read/', {id: null}).then(res => {
+            if (res.status === 200) con.commit('setFav', res.data.items)
+        })
+    },
+
+    search (con, fd) {
         return new Promise((resolve, reject) => {
-            Apios.post(con.state.url + 'search/', form).then(res => {
+            Apios.post(con.state.url + 'search/', fd).then(res => {
                 resolve(res.data.items)
             }).catch(err => {
                 reject(err)
@@ -103,6 +139,28 @@ const actions = {
         return new Promise((resolve, reject) => {
             Apios.post(con.state.url + 'delete/', { id: itemID }).then(() => {
                 con.commit('delete', itemID)
+                resolve()
+            }).catch(err => {
+                reject(err)
+            })
+        })
+    },
+
+    addFavorite (con, itemID) {
+        return new Promise((resolve, reject) => {
+            Apios.post(con.state.url + 'favorite/add/', { id: itemID }).then(res => {
+                con.commit('setFav', res.data.item)
+                resolve()
+            }).catch(err => {
+                reject(err)
+            })
+        })
+    },
+
+    removeFavorite (con, itemID) {
+        return new Promise((resolve, reject) => {
+            Apios.post(con.state.url + 'favorite/remove/', { id: itemID }).then(() => {
+                con.commit('deleteFav', itemID)
                 resolve()
             }).catch(err => {
                 reject(err)

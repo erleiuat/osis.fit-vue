@@ -32,11 +32,13 @@
                             </v-card>
                         </v-col>
 
-                        <v-col xs12 v-if="!items && !this.$route.query.s">
+                        <v-col cols="auto" v-if="!items && $store.getters['loading']">
+                            <v-progress-circular indeterminate />
+                        </v-col>
+                        <v-col cols="12" v-else-if="!items && !this.$route.query.s">
                             {{ $t('noneyet') }}
                         </v-col>
-
-                        <v-col xs12 v-if="!items && this.$route.query.s">
+                        <v-col cols="12" v-else-if="!items">
                             {{ $t('nonefound') }}
                         </v-col>
 
@@ -63,12 +65,16 @@
                             </v-card>
                         </v-col>
 
-                        <v-col cols="12" v-if="!items2 && !this.$route.query.s">
+                        <v-col cols="auto" v-if="!items2 && $store.getters['loading']">
+                            <v-progress-circular indeterminate />
+                        </v-col>
+                        <v-col cols="12" v-else-if="!items2 && !this.$route.query.s">
                             {{ $t('noquery') }}
                         </v-col>
-                        <v-col cols="12" v-if="!items2 && this.$route.query.s">
+                        <v-col cols="12" v-else-if="!items2">
                             {{ $t('nonefound') }}
                         </v-col>
+
                     </v-row>
                 </vcontainer>
             </v-tab-item>

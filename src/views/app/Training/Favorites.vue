@@ -6,12 +6,6 @@
 
                     <v-expansion-panel-header class="pt-0 pb-0 pl-0">
                         <v-list-item>
-                            <v-list-item-avatar v-if="item.image">
-                                <v-img :src="item.image.path.small" />
-                            </v-list-item-avatar>
-                            <v-list-item-avatar v-else>
-                                <v-img :src="require('@/assets/img/user.png')" />
-                            </v-list-item-avatar>
                             <v-list-item-content style="width: 200px">
                                 <v-list-item-title>
                                     <v-list-item-title v-text="item.title"></v-list-item-title>
@@ -87,9 +81,18 @@ export default {
         training
     },
 
-    data () {
-        return {
-            items: []
+    computed: {
+        items () {
+            var items = this.$store.getters['training/favorites']
+            var query = this.$route.query.s || ''
+            if (!items) return false
+
+            var filtered = items.filter(el =>
+                el.title.toUpperCase().includes(query.toUpperCase())
+            )
+
+            if (filtered.length <= 0) return false
+            else return filtered
         }
     },
 
@@ -103,44 +106,12 @@ export default {
         isFav (itemID) {
             if (this.$store.getters['training/isFavorite'](itemID)) return true
             else return false
-        },
-
-        changeIn () {
-            clearTimeout(this.typerTimer)
-            this.typerTimer = setTimeout(() => {
-                this.doSearch()
-            }, 800)
-        },
-        doSearch () {
-            var fd = {
-                public: true,
-                query: null
-            }
-            if (this.$route.query.s && this.$route.query.s.length > 3) fd.query = this.$route.query.s
-            this.$store.dispatch('training/search', fd).then(res => {
-                this.items = res || []
-            }).catch(err => {
-                this.$notify({ type: 'error', title: this.$t('alert.error.default'), text: err })
-            })
         }
 
-    },
-
-    watch: {
-        '$route' (to, from) {
-            this.changeIn()
-        }
     },
 
     mounted () {
-        var fd = {
-            public: true,
-            query: null
-        }
-        if (this.$route.query.s) fd.query = this.$route.query.s
-        this.$store.dispatch('training/search', fd).then(res => {
-            this.items = res || []
-        })
+        this.$store.dispatch('training/loadFavorites')
     },
 
     i18n: {
@@ -150,14 +121,18 @@ export default {
                 bodyparts: 'Affected body parts',
                 byUser: 'Created by',
                 addFav: 'Add Favorite',
-                removeFav: 'Remove Favorite'
+                removeFav: 'Remove Favorite',
+                noneYet: "You have no Favorites yet",
+                noneFound: 'No search results'
             },
             de: {
                 title: 'Vorlagen durchsuchen',
                 bodyparts: 'Betroffene Körperteile',
                 byUser: 'Erstellt von',
                 addFav: 'Favorit hinzufügen',
-                removeFav: 'Favorit entfernen'
+                removeFav: 'Favorit entfernen',
+                noneYet: 'Du hast noch keine Favoriten',
+                noneFound: 'Keine Suchergebnisse'
             }
         }
     }

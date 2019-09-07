@@ -73,6 +73,7 @@ export default {
         showSearch () {
             if (this.$route.name === 'training.saved') return true
             else if (this.$route.name === 'training.browse') return true
+            else if (this.$route.name === 'training.favorites') return true
             else return false
         },
 

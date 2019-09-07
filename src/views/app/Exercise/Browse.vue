@@ -38,13 +38,13 @@
                             <v-row dense>
                                 <v-col cols="6">
                                     <v-btn small block depressed :to="{name: 'exercise', params: {type: 'public',id: item.id}}">
-                                        {{ $t('btn.open') }}
+                                        {{ $t('btn.view') }}
                                         <v-icon right small>open_in_new</v-icon>
                                     </v-btn>
                                 </v-col>
                                 <v-col cols="6">
                                     <v-btn small block depressed :to="{name: 'exercise.copy', params: {id: item.id}}">
-                                        {{ $t('btn.save') }}
+                                        {{ $t('btn.copy') }}
                                         <v-icon right small>save</v-icon>
                                     </v-btn>
                                 </v-col>

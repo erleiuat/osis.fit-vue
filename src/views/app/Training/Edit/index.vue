@@ -2,6 +2,8 @@
     <v-form v-model="rule.valid" ref="form" v-on:submit.prevent>
         <vcontainer>
 
+            <YouSure @accept="remove()" @decline="sure = false" :show="sure" />
+
             <v-row align="start" justify="center" v-if="loaded && fd" dense>
 
                 <v-col cols="12" :md="showPublicator ? '10':'12'">
@@ -19,9 +21,14 @@
                     <Exercises v-model="fd.exercises" />
                 </v-col>
 
-                <v-col cols="12">
+                <v-col cols="12" md="6">
                     <v-btn @click="save()" :loading="sending" color="primary" type="submit" block depressed>
                         {{ $t('btn.save') }}
+                    </v-btn>
+                </v-col>
+                <v-col cols="12" md="6" v-if="$route.name === 'training.edit'">
+                    <v-btn @click="sure = true" block depressed>
+                        {{ $t('btn.delete') }}
                     </v-btn>
                 </v-col>
 
@@ -43,11 +50,12 @@
 import Exercises from '@/views/app/Training/Edit/Exercises'
 import training from '@/store/modules/training'
 const notFound = () => import('@/views/error/NotFound')
+const YouSure = () => import('@/components/YouSure')
 
 export default {
     name: 'EditTraining',
     components: {
-        notFound, Exercises
+        notFound, Exercises, YouSure
     },
     modules: {
         training
@@ -55,6 +63,7 @@ export default {
 
     data () {
         return {
+            sure: false,
             loaded: true,
             sending: false,
             fd: {
@@ -81,6 +90,20 @@ export default {
     },
 
     methods: {
+
+        remove () {
+            this.sure = false
+            if (!this.fd.id) return
+
+            this.$store.dispatch('training/delete', this.fd.id).then(r => {
+                this.$router.push({ name: 'training.saved' })
+                this.$notify({ type: 'success', title: this.$t('alert.success.save') })
+            }).catch(r => {
+                this.$notify({ type: 'error', title: this.$t('alert.error.save'), text: r })
+            }).finally(() => {
+                this.deleting = false
+            })
+        },
 
         save () {
             if (!this.$refs.form.validate()) return
@@ -113,7 +136,7 @@ export default {
                 this.fd.description = res.description
                 this.fd.exercises = res.exercises
             }
-            
+
         }).catch(() => {
             this.fd = null
         }).finally(() => {

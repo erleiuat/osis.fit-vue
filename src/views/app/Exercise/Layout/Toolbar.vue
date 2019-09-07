@@ -105,7 +105,7 @@ export default {
             else {
                 return {
                     to: { name: 'exercise.copy' },
-                    text: this.$t('btn.save'),
+                    text: this.$t('btn.copy'),
                     icon: 'save'
                 }
             }

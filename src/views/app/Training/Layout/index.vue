@@ -5,6 +5,10 @@
                 {{ $t('title') }}
                 <v-icon>save</v-icon>
             </v-tab>
+            <v-tab class="ml-0" :to="{name: 'training.favorites'}">
+                {{ $t('title1') }}
+                <v-icon>star</v-icon>
+            </v-tab>
             <v-tab class="ml-0" :to="{name: 'training.browse'}">
                 {{ $t('title2') }}
                 <v-icon>explore</v-icon>
@@ -28,9 +32,10 @@ export default {
     },
 
     computed: {
-        showTabs(){
+        showTabs () {
             if (this.$route.name === 'training.saved') return true
             else if (this.$route.name === 'training.browse') return true
+            else if (this.$route.name === 'training.favorites') return true
             else return false
         }
     },
@@ -43,10 +48,12 @@ export default {
         messages: {
             en: {
                 title: 'Saved',
+                title1: 'Favorites',
                 title2: 'Browse'
             },
             en: {
                 title: 'Gespeichert',
+                title1: 'Favoriten',
                 title2: 'Entdecken'
             }
         }

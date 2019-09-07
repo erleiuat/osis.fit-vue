@@ -1,5 +1,8 @@
 <template>
     <v-form v-model="rule.valid" ref="form" v-on:submit.prevent>
+
+        <YouSure @accept="remove()" @decline="sure = false" :show="sure" />
+
         <vcontainer>
 
             <v-row align="start" justify="center" v-if="loaded && fd" dense>
@@ -29,9 +32,14 @@
                     <Bodyparts v-model="fd.bodyparts" />
                 </v-col>
 
-                <v-col cols="12">
+                <v-col cols="12" md="6">
                     <v-btn @click="save()" :loading="sending" color="primary" type="submit" block depressed>
                         {{ $t('btn.save') }}
+                    </v-btn>
+                </v-col>
+                <v-col cols="12" md="6" v-if="$route.name === 'exercise.edit'">
+                    <v-btn @click="sure = true" block depressed>
+                        {{ $t('btn.delete') }}
                     </v-btn>
                 </v-col>
 
@@ -54,11 +62,12 @@ import exercise from '@/store/modules/exercise'
 import Bodyparts from '@/views/app/Exercise/Edit/Bodyparts'
 import Types from '@/views/app/Exercise/Edit/Types'
 const notFound = () => import('@/views/error/NotFound')
+const YouSure = () => import('@/components/YouSure')
 
 export default {
     name: 'EditExercise',
     components: {
-        notFound, Bodyparts, Types
+        notFound, Bodyparts, Types, YouSure
     },
     modules: {
         exercise
@@ -66,6 +75,7 @@ export default {
 
     data () {
         return {
+            sure: false,
             loaded: true,
             sending: false,
             fd: {
@@ -95,6 +105,20 @@ export default {
     },
 
     methods: {
+
+        remove () {
+            this.sure = false
+            if (!this.fd.id) return
+
+            this.$store.dispatch('exercise/delete', this.fd.id).then(r => {
+                this.$router.push({ name: 'exercise.saved' })
+                this.$notify({ type: 'success', title: this.$t('alert.success.save') })
+            }).catch(r => {
+                this.$notify({ type: 'error', title: this.$t('alert.error.save'), text: r })
+            }).finally(() => {
+                this.deleting = false
+            })
+        },
 
         save () {
             if (!this.$refs.form.validate()) return

@@ -105,6 +105,12 @@ module.exports = [{
             component: () => import('@/views/app/Training/Saved')
         },
         {
+            path: 'favorites',
+            name: 'training.favorites',
+            meta: { authRequired: true, premium: true },
+            component: () => import('@/views/app/Training/Favorites')
+        },
+        {
             path: 'browse',
             name: 'training.browse',
             meta: { authRequired: true, premium: true },
