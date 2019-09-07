@@ -9,7 +9,7 @@
                         {{ $t('calculation') }}
                     </v-expansion-panel-header>
                     <v-expansion-panel-content>
-                        Lorem Déner
+                        {{ $t('calcInfo') }}
                     </v-expansion-panel-content>
                 </v-expansion-panel>
 
@@ -147,7 +147,14 @@ export default {
                 pal: 'Physical Activity Level (PAL)',
                 calNeed: 'Daily calorie requirement',
                 missing: 'Fill in all fields',
-                calday: 'Calories / Day'
+                calday: 'Calories / Day',
+                calcInfo: `
+                    The daily calorie requirement is made up of the basal metabolic rate and the performance metabolic rate 
+                    (physical activity). The specification for physical activity (PAL) describes how active you are in everyday 
+                    life, whereby additional training units are not included. Instead, you can enter these as "activity" to calculate 
+                    your correct calorie balance. Once you have completed both of the steps below (and set your aims), you can find your calorie balance 
+                    on the dashboard.
+                `
             },
             de: {
                 calculation: 'Infos zur Berechnung',
@@ -155,7 +162,13 @@ export default {
                 pal: 'Körperliche Aktivität (PAL)',
                 calNeed: 'Täglicher Kalorienbedarf',
                 missing: 'Fülle alle Felder aus',
-                calday: 'Kalorien / Tag'
+                calday: 'Kalorien / Tag',
+                calcInfo: `
+                    Der Tägliche Kalorienbedarf setzt sich aus dem Grundumsatz sowie dem Leistungsumsatz (körperliche Aktivität) zusammen.
+                    Die Angabe zur körperlichen Aktivität (PAL) beschreibt wie aktiv man im Alltag ist, wobei zusätzliche Trainingseinheiten nicht
+                    mitgerechnet werden. Diese kannst du stattdessen als "Aktivität" eintragen, um deine richtige Kalorienbilanz zu berechnen.
+                    Wenn du beide der untenstehenden Angaben erledigt hast (und Ziele definiert), kannst du deine Kalorienbilanz auf dem Dashboard finden.
+                ` 
             }
         }
     }

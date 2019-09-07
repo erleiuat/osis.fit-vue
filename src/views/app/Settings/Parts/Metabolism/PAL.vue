@@ -102,35 +102,36 @@ export default {
                 examples: 'Examples',
                 pals: {
                     a: {
-                        title: 'Null',
-                        text: '',
-                        examples: ''
+                        title: 'Zero',
+                        text: 'No or extremely little daily activity.',
+                        examples: 'Sleeping'
                     },
                     b: {
                         title: 'Low',
-                        text: '',
-                        examples: ''
+                        text: 'Sitting and lying activities only',
+                        examples: 'Frail people'
                     },
                     c: {
-                        title: 'Easy',
-                        text: '',
-                        examples: ''
+                        title: 'Simple',
+                        text: 'Mostly sitting, little physical activity.',
+                        examples: 'Office work at the desk'
                     },
                     d: {
-                        title: 'Middle',
-                        text: '',
-                        examples: ''
+                        title: 'Medium',
+                        text: 'Mainly sitting, partly walking and standing',
+                        examples: 'Students, pupils, taxi drivers'
                     },
                     e: {
-                        title: 'Hard',
-                        text: '',
-                        examples: ''
+                        title: 'Heavy',
+                        text: 'Mainly walking and standing.',
+                        examples: 'Seller, waiter'
                     },
                     f: {
                         title: 'Extreme',
-                        text: '',
-                        examples: ''
+                        text: 'Physically strenuous work.',
+                        examples: 'Farmers, construction workers'
                     }
+
                 }
             },
             de: {
@@ -139,33 +140,33 @@ export default {
                 pals: {
                     a: {
                         title: 'Null',
-                        text: '',
-                        examples: ''
+                        text: 'Keine oder nur extrem wenig tägliche Aktivität.',
+                        examples: 'Schlafen'
                     },
                     b: {
                         title: 'Niedrig',
-                        text: '',
-                        examples: ''
+                        text: 'Nur sitzende und liegende Aktivitäten.',
+                        examples: 'Gebrechliche Menschen'
                     },
                     c: {
                         title: 'Einfach',
-                        text: '',
-                        examples: ''
+                        text: 'Meist sitzend, wenig körperliche Aktivität.',
+                        examples: 'Büroarbeiten am Schreibtisch'
                     },
                     d: {
                         title: 'Mittel',
-                        text: '',
-                        examples: ''
+                        text: 'Überwiegend sitzend, teilweise gehend und stehend.',
+                        examples: 'Studenten, Schüler, Taxifahrer'
                     },
                     e: {
                         title: 'Schwer',
-                        text: '',
-                        examples: ''
+                        text: 'Hauptsächlich gehend und stehend.',
+                        examples: 'Verkäufer, Kellner'
                     },
                     f: {
                         title: 'Extrem',
-                        text: '',
-                        examples: ''
+                        text: 'Körperlich anstrengende Arbeiten.',
+                        examples: 'Landwirte, Bauarbeiter'
                     }
                 }
             }
