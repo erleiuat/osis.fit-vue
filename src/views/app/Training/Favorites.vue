@@ -122,7 +122,7 @@ export default {
                 byUser: 'Created by',
                 addFav: 'Add Favorite',
                 removeFav: 'Remove Favorite',
-                noneYet: "You have no Favorites yet",
+                noneYet: 'You have no Favorites yet',
                 noneFound: 'No search results'
             },
             de: {

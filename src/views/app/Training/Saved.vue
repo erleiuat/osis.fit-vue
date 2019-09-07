@@ -70,7 +70,7 @@ export default {
         messages: {
             en: {
                 title: 'Saved Trainings',
-                noneYet: "You have no trainings yet",
+                noneYet: 'You have no trainings yet',
                 noneFound: 'No search results'
             },
             de: {

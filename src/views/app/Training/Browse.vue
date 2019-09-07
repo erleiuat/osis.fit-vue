@@ -150,14 +150,16 @@ export default {
                 bodyparts: 'Affected body parts',
                 byUser: 'Created by',
                 addFav: 'Add Favorite',
-                removeFav: 'Remove Favorite'
+                removeFav: 'Remove Favorite',
+                noneYet: 'There are no trainings yet'
             },
             de: {
                 title: 'Vorlagen durchsuchen',
                 bodyparts: 'Betroffene Körperteile',
                 byUser: 'Erstellt von',
                 addFav: 'Favorit hinzufügen',
-                removeFav: 'Favorit entfernen'
+                removeFav: 'Favorit entfernen',
+                noneYet: 'Es gibt noch keine Trainings'
             }
         }
     }

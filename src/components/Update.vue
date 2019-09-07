@@ -21,13 +21,21 @@ export default {
     computed: {
         loader () {
             var state = this.$store.getters['updating']
-            if (state === 'loading') return {
-                color: 'primary',
-                inter: true
-            }
-            else if (state === 'loaded') return {
-                color: 'success',
-                inter: false
+            if (state === 'loading') {
+                return {
+                    color: 'primary',
+                    inter: true
+                }
+            } else if (state === 'loaded') {
+                return {
+                    color: 'success',
+                    inter: false
+                }
+            } else {
+                return {
+                    color: 'info',
+                    inter: false
+                }
             }
         }
     },

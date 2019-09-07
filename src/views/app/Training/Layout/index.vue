@@ -51,7 +51,7 @@ export default {
                 title1: 'Favorites',
                 title2: 'Browse'
             },
-            en: {
+            de: {
                 title: 'Gespeichert',
                 title1: 'Favoriten',
                 title2: 'Entdecken'

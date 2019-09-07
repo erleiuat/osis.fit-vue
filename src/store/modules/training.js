@@ -11,7 +11,7 @@ const state = () => {
         url: 'app/training/',
         lName: 'training',
         items: smartStore.get('training'),
-        favItems: smartStore.get('training.favorites'),
+        favItems: smartStore.get('training.favorites')
     }
 }
 
@@ -98,7 +98,7 @@ const actions = {
     },
 
     loadFavorites (con) {
-        Apios.post(con.state.url + 'favorite/read/', {id: null}).then(res => {
+        Apios.post(con.state.url + 'favorite/read/', { id: null }).then(res => {
             if (res.status === 200) con.commit('setFav', res.data.items)
         })
     },
