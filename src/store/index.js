@@ -22,6 +22,7 @@ export default new Vuex.Store({
         today: null,
         loading: 0,
         updating: false,
+        hasLoaded: VueCookies.get('hasLoaded') || false,
         cookiesAccepted: VueCookies.get('cAccept') || false,
         app: {
             drawer: null,
@@ -112,7 +113,10 @@ export default new Vuex.Store({
     actions: {
 
         updating (con, val) {
-            con.commit('setUpdating', val)
+            if (!hasLoaded) {
+                VueCookies.set('hasLoaded', true, -1)
+                con.commit('setUpdating', val)
+            }
         },
 
         loading (con, val) {

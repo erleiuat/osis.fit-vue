@@ -1,5 +1,5 @@
 <template>
-    <vcontainer align="center">
+    <vcontainer align="center" class="pb-0">
         <v-form v-model="rule.valid" ref="form" v-on:submit.prevent>
 
             <v-expansion-panels v-model="openPanel" multiple>
@@ -8,7 +8,7 @@
                     <v-expansion-panel-header class="caption">
                         {{ $t('calculation') }}
                     </v-expansion-panel-header>
-                    <v-expansion-panel-content>
+                    <v-expansion-panel-content class="pt-0 body-2">
                         {{ $t('calcInfo') }}
                     </v-expansion-panel-content>
                 </v-expansion-panel>
@@ -51,14 +51,14 @@
 
             </v-expansion-panels>
 
-            <v-row justify="center">
-                <v-col cols="12" class="pt-7 pb-5 text-center">
+            <v-row justify="center" dense>
+                <v-col cols="12" class="pt-3 pb-2 text-center">
                     <div class="caption">{{ $t('calNeed') }}</div>
                     <div class="title">{{ Math.round(cBMR * fd.pal) || $t('missing') }}</div>
                 </v-col>
             </v-row>
 
-            <v-row justify="center">
+            <v-row justify="center" dense>
                 <v-col cols="12" sm="4">
                     <v-btn @click="save()" :loading="sending" :disabled="!rule.valid" type="submit" color="primary" block depressed>
                         {{ $t('btn.save') }}

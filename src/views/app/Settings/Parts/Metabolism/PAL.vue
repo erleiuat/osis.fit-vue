@@ -1,5 +1,5 @@
 <template>
-    <vcontainer align="center">
+    <vcontainer align="center" class="pt-0">
 
         <v-row justify="center" align="center" dense>
             <v-col cols="12" md="9" class="text-center">
@@ -31,13 +31,13 @@
         <v-row justify="center" dense>
             <v-col cols="12" v-for="(el, key) in pals" :key="key" v-show="el.active">
                 <v-card outlined>
-                    <v-card-title class="caption">
+                    <v-card-title class="caption pb-0">
                         {{ $t('description') }}
                     </v-card-title>
-                    <v-card-text>
+                    <v-card-text class="pb-0">
                         {{ $t('pals.'+key+'.text') }}
                     </v-card-text>
-                    <v-card-title class="caption">
+                    <v-card-title class="caption pb-0">
                         {{ $t('examples') }}
                     </v-card-title>
                     <v-card-text>
