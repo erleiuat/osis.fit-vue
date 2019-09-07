@@ -9,9 +9,9 @@
             {{item.title}}
         </v-card-title>
         <v-card-text v-if="!nodetails || !path" class="caption text-center">
-            Standartmenge: {{ item.amount }}<br />
-            Kalorien / 100: {{ item.caloriesPer100 }}<br />
-            Total: {{ total }}
+            {{ $t('defAmount') }}: {{ item.amount }} g / ml<br />
+            {{ $t('calPer100') }}: {{ item.caloriesPer100 }} Kcal<br />
+            {{ $t('totalCal') }}: {{ total }} Kcal
         </v-card-text>
     </v-card>
 </template>
@@ -54,6 +54,21 @@ export default {
             return Math.round(((this.item.amount / 100) * this.item.caloriesPer100) * 100) / 100
         }
 
+    },
+
+    i18n: {
+        messages: {
+            en: {
+                defAmount: 'Default',
+                calPer100: 'Calories / 100',
+                totalCal: 'Total'
+            },
+            de: {
+                defAmount: 'Menge',
+                calPer100: 'Kalorien / 100',
+                totalCal: 'Total'
+            }
+        }
     }
 
 }
