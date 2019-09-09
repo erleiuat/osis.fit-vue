@@ -73,30 +73,30 @@ export default {
                     anwendbar ist – Personendaten gemäss folgenden Rechtsgrundlagen im Zusammenhang mit Art. 6 Abs. 1 DSGVO<!--DSGVO-->:
                 </p> 
                 <ul> 
-                    <li>
+                    <li class="caption">
                         lit. a) Bearbeitung von Personendaten mit Einwilligung der betroffenen Person.
                     </li> 
-                    <li>
+                    <li class="caption">
                         lit. b) Bearbeitung von Personendaten zur Erfüllung eines Vertrages mit der betroffenen Person sowie zur 
                         Durchführung entsprechender vorvertraglicher Massnahmen.
                     </li> 
-                    <li>
+                    <li class="caption">
                         lit. c) Bearbeitung von Personendaten zur Erfüllung einer rechtlichen Verpflichtung, der wir gemäss 
                         allenfalls anwendbarem Recht der EU oder gemäss allenfalls anwendbarem Recht eines Landes, in dem 
                         die DSGVO<!--DSGVO--> ganz oder teilweise anwendbar ist, unterliegen.
                     </li> 
-                    <li>
+                    <li class="caption">
                         lit. d) Bearbeitung von Personendaten um lebenswichtige Interessen der betroffenen Person oder einer 
                         anderen natürlichen Person zu schützen.
                     </li>
-                    <li>
+                    <li class="caption">
                         lit. f) Bearbeitung von Personendaten um die berechtigten Interessen von uns oder von Dritten zu wahren, 
                         sofern nicht die Grundfreiheiten und Grundrechte sowie Interessen der betroffenen Person überwiegen. 
                         Berechtigte Interessen sind insbesondere unser betriebswirtschaftliches Interesse, unsere Website 
                         bereitstellen zu können, die Informationssicherheit, die Durchsetzung von eigenen 
                         rechtlichen Ansprüchen und die Einhaltung von schweizerischem Recht.
                     </li> 
-                </ul> 
+                </ul> <br/> 
                 <p class="body-2">
                     Wir bearbeiten Personendaten für jene Dauer, die für den jeweiligen Zweck oder die jeweiligen 
                     Zwecke erforderlich ist. Bei länger dauernden Aufbewahrungspflichten aufgrund von gesetzlichen und 
@@ -134,12 +134,12 @@ export default {
                     automatisch an uns übermittelt. Dies sind:
                 </p> 
                 <ul> 
-                    <li>Browsertyp und Browserversion</li> 
-                    <li>verwendetes Betriebssystem</li> 
-                    <li>Referrer URL</li> 
-                    <li>Hostname des zugreifenden Rechners</li> 
-                    <li>Uhrzeit der Serveranfrage</li> 
-                </ul> 
+                    <li class="caption">Browsertyp und Browserversion</li> 
+                    <li class="caption">verwendetes Betriebssystem</li> 
+                    <li class="caption">Referrer URL</li> 
+                    <li class="caption">Hostname des zugreifenden Rechners</li> 
+                    <li class="caption">Uhrzeit der Serveranfrage</li> 
+                </ul> <br/> 
                 <p class="body-2">
                     Diese Daten sind nicht bestimmten Personen zuordenbar. Eine Zusammenführung dieser Daten mit anderen Datenquellen wird nicht vorgenommen. 
                     Wir behalten uns vor, diese Daten nachträglich zuprüfen, wenn uns konkrete Anhaltspunkte für eine rechtswidrige Nutzung bekannt werden.
@@ -324,19 +324,19 @@ export default {
                     Diese WebSite setzt externe Zahlungsdienstleister ein, über deren Plattformen die Nutzer und wir Zahlungstransaktionen vornehmen können. Zum Beispiel über
                 </p>
                 <ul>
-                    <li>PostFinance (https://www.postfinance.ch/de/detail/rechtliches-barrierefreiheit.html)</li>
-                    <li>Visa (https://www.visa.de/nutzungsbedingungen/visa-privacy-center.html)</li>
-                    <li>Mastercard (https://www.mastercard.ch/de-ch/datenschutz.html)</li>
-                    <li>American Express (https://www.americanexpress.com/de/content/privacy-policy-statement.html)</li>
-                    <li>Paypal (https://www.paypal.com/de/webapps/mpp/ua/privacy-full)</li>
-                    <li>Bexio AG (https://www.bexio.com/de-CH/datenschutz)</li>
-                    <li>Payrexx AG (https://www.payrexx.ch/site/assets/files/2592/datenschutzerklaerung.pdf)</li>
-                    <li>Apple Pay (https://support.apple.com/de-ch/ht203027)</li>
-                    <li>Stripe (https://stripe.com/ch/privacy)</li>
-                    <li>Klarna (https://www.klarna.com/de/datenschutz/)</li>
-                    <li>Skrill (https://www.skrill.com/de/fusszeile/datenschutzrichtlinie/)</li>
-                    <li>Giropay (https://www.giropay.de/rechtliches/datenschutz-agb/) etc.</li>
-                </ul> 
+                    <li class="caption"> PostFinance <a href="www.postfinance.ch/de/detail/rechtliches-barrierefreiheit.html" target="_blank"> Link </a> </li>
+                    <li class="caption"> Visa <a href="www.visa.de/nutzungsbedingungen/visa-privacy-center.html" target="_blank"> Link </a> </li>
+                    <li class="caption"> Mastercard <a href="www.mastercard.ch/de-ch/datenschutz.html" target="_blank"> Link </a> </li>
+                    <li class="caption"> American Express <a href="www.americanexpress.com/de/content/privacy-policy-statement.html" target="_blank"> Link </a> </li>
+                    <li class="caption"> Paypal <a href="www.paypal.com/de/webapps/mpp/ua/privacy-full" target="_blank"> Link </a> </li>
+                    <li class="caption"> Bexio AG <a href="www.bexio.com/de-CH/datenschutz" target="_blank"> Link </a> </li>
+                    <li class="caption"> Payrexx AG <a href="www.payrexx.ch/site/assets/files/2592/datenschutzerklaerung.pdf" target="_blank"> Link </a> </li>
+                    <li class="caption"> Apple Pay <a href="support.apple.com/de-ch/ht203027" target="_blank"> Link </a> </li>
+                    <li class="caption"> Stripe <a href="stripe.com/ch/privacy" target="_blank"> Link </a> </li>
+                    <li class="caption"> Klarna <a href="www.klarna.com/de/datenschutz/" target="_blank"> Link </a> </li>
+                    <li class="caption"> Skrill <a href="www.skrill.com/de/fusszeile/datenschutzrichtlinie/" target="_blank"> Link </a> </li>
+                    <li class="caption"> Giropay <a href="www.giropay.de/rechtliches/datenschutz-agb/" target="_blank"> Link </a> </li>
+                </ul> <br/> 
                 <p class="body-2">
                     Im Rahmen der Erfüllung von Verträgen setzen wir die Zahlungsdienstleister auf Grundlage der schweizerischen Datenschutzverordnung sowie und soweit nötig, 
                     des Art. 6 Abs. 1 lit. b. EU-DSGVO ein. Im übrigen setzen wir externe Zahlungsdienstleister auf Grundlage unserer berechtigten Interessen gem. schweizerischer 
