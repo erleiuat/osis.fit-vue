@@ -13,6 +13,9 @@
                 <div class="headline">
                     FAQ
                 </div>
+                <div class="caption">
+                    {{ $t('subText') }}
+                </div>
             </v-col>
             <v-col cols="12" md="10">
                 <v-expansion-panels v-model="openPanel">
@@ -46,12 +49,13 @@ export default {
 
     data () {
         return {
-            openPanel: 2,
+            openPanel: 4,
             faqItems: [
                 { title: this.$t('fqi.a.title'), text: this.$t('fqi.a.text') },
                 { title: this.$t('fqi.b.title'), text: this.$t('fqi.b.text') },
                 { title: this.$t('fqi.c.title'), text: this.$t('fqi.c.text') },
-                { title: this.$t('fqi.d.title'), text: this.$t('fqi.d.text') }
+                { title: this.$t('fqi.d.title'), text: this.$t('fqi.d.text') },
+                { title: this.$t('fqi.e.title'), text: this.$t('fqi.e.text') }
             ]
         }
     },
@@ -59,6 +63,7 @@ export default {
     i18n: {
         messages: {
             en: {
+                subText: 'Check the frequently asked questions before contacting us. They may be able to help you faster than our support team.',
                 stillQuesting: "Hasn't your request been resolved yet?",
                 supBtn: 'Contact Support',
                 fqi: {
@@ -111,14 +116,33 @@ export default {
                         `
                     },
                     d: {
-                        title: 'Die Resultate der Berechnungen scheinen mir nicht richtig. Woran liegt das?',
+                        title: "The results of the calculations don't seem right to me. What is the reason for this?",
                         text: `
-
+                        Some factors are decisive for the calculations. Therefore, check the following details in 
+                        your profile again for their correctness: <br/>
+                        <ul>
+                            <li>Make sure your current <b>weight</b> is correct.</li>
+                            <li>Check the information about your <b>metabolism</b> (height, gender, date of birth, PAL value) in the <b>settings.</b></li>
+                            <li>Set yourself <b>realistic targets</b> (target weight, date) in the settings.</li>
+                        </ul>
+                        If you think that your calculations are still not correct, you can also contact us.
+                        `
+                    },
+                    e: {
+                        title: 'My daily calorie requirement is extremely high/low. How can I change it?',
+                        text: `
+                        If all your information is correct and you still get an extremely high or low calorie requirement, 
+                        it's probably because of your goals. If you want to lose too much weight in too short a time, you 
+                        may end up with a much too low calorie requirement. Low calorie intake can have bad consequences 
+                        for your health, so you should set realistic goals. Try shifting your target date to a later date 
+                        or using a smaller target weight. When you have reached your goal, you can still set a new goal. 
+                        If you think that your calculations are still incorrect, you can also contact us.
                         `
                     }
                 }
             },
             de: {
+                subText: 'Durchsuche die häufig gestellten Fragen bevor du uns kontaktierst. Sie können dir vielleicht schneller helfen als unser Support-Team.',
                 stillQuesting: 'Konnte dein Anliegen noch nicht geklärt werden?',
                 supBtn: 'Support kontaktieren',
                 fqi: {
@@ -174,7 +198,25 @@ export default {
                     d: {
                         title: 'Die Resultate der Berechnungen scheinen mir nicht richtig. Woran liegt das?',
                         text: `
-                            
+                        Für die Berechnungen sind einige Faktoren ausschlaggebend. Überprüfe deshalb die folgenden 
+                        Angaben in deinem Profil nochmals auf ihre Richtigkeit: <br/>
+                        <ul>
+                            <li>Stelle sicher, dass dein aktuelles <b>Gewicht</b> richtig ist.</li>
+                            <li>Überprüfe die Angaben zu deinem <b>Stoffwechsel</b> (Körpergrösse, Geschlecht, Geburtsdatum, PAL-Wert) in den <b>Einstellungen.</b></li>
+                            <li>Stelle dir <b>realistische Ziele</b> (Ziel-Gewicht, Datum) in den Einstellungen.</li>
+                        </ul>
+                        Wenn du denkst, dass deine Berechnungen noch immer nicht stimmen, kannst du uns auch kontaktieren.
+                        `
+                    },
+                    e: {
+                        title: 'Mein täglicher Kalorienbedarf ist extrem hoch/niedrig. Wie kann ich ihn ändern?',
+                        text: `
+                        Wenn alle deine Angaben stimmen und du trotzdem einen extrem hohen oder niedrigen Kalorienbedarf erhälst,
+                        liegt das wahrscheinlich an deinen Zielen. Wenn du zu viel in zu kurzer Zeit abnehmen möchtest, kann das in einem
+                        viel zu niedrigen Kalorienbedarf enden. Eine zu geringe Kalorienaufnahme kann dabei schlechte Folgen für deine Gesundheit 
+                        haben, weshalb du dir realistische Ziele setzen solltest. Versuche dein Ziel-Datum auf einen späteren Zeitpunkt zu versetzen oder
+                        nutze ein kleineres Ziel-Gewicht. Wenn du dein Ziel erreicht hast kannst du dir immer noch ein neues Ziel setzen.
+                        Wenn du denkst, dass deine Berechnungen noch immer nicht stimmen, kannst du uns auch kontaktieren.
                         `
                     }
                 }

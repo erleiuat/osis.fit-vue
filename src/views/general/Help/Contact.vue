@@ -5,24 +5,22 @@
                 <div class="display-3">
                     {{ $t('contact') }}
                 </div>
-                <div class="mt-2 mb-4">
-                    Hast du Fragen oder ein Problem mit der App? <br />
-                    Oder hast du einen Verbesserungsvorschlag/Kritik für uns?
+                <div class="mt-2 mb-4" v-html="$t('subText')">
                 </div>
             </v-col>
         </v-row>
 
-        <v-form v-model="rule.valid" ref="form" v-on:submit.prevent v-if="!success">
-            <transition name="zoom">
-                <v-row v-if="success">
-                    <v-col cols="12" sm="10">
-                        <v-alert outline :value="true" type="success" v-if="success">
-                            <div class="title" v-html="$t('success.title')" />
-                            <div class="body-2" v-html="$t('success.text')" />
-                        </v-alert>
-                    </v-col>
-                </v-row>
-                <v-row dense v-else justify="center">
+        <transition name="zoom">
+            <v-row v-if="success">
+                <v-col cols="12" sm="10">
+                    <v-alert outline :value="true" type="success" v-if="success">
+                        <div class="title" v-html="$t('success.title')" />
+                        <div class="body-2" v-html="$t('success.text')" />
+                    </v-alert>
+                </v-col>
+            </v-row>
+            <v-form v-model="rule.valid" ref="form" v-on:submit.prevent v-else>
+                <v-row dense justify="center">
                     <v-col cols="12" sm="3">
                         <v-text-field :label="$t('ft.firstname')" v-model="fd.firstname" type="text" />
                     </v-col>
@@ -44,13 +42,15 @@
                         </v-btn>
                     </v-col>
                 </v-row>
-            </transition>
-        </v-form>
+            </v-form>
+        </transition>
 
     </vcontainer>
 </template>
 
 <script>
+import Apios from '@/plugins/Apios'
+
 export default {
     name: 'Contact',
 
@@ -80,27 +80,37 @@ export default {
         }
     },
 
+    mounted () {
+        if (this.$store.getters['auth/authorized']) {
+            var accInfo = this.$store.getters['auth/account']
+            var usrInfo = this.$store.getters['user/user']
+            this.fd.firstname = usrInfo.firstname
+            this.fd.lastname = usrInfo.lastname
+            this.fd.mail = accInfo.mail
+
+        }
+    },
+
     methods: {
         send () {
-            var vm = this
-            vm.$refs.form.validate()
-            if (!vm.rule.valid) return false
+            if (!this.$refs.form.validate()) return false
 
-            vm.sending = true
-            vm.$http.post('general/contact/', vm.fd).then(function (r) {
-                vm.success = true
-                vm.$refs.form.reset()
-            }).catch(function (e) {
-                vm.$notify({ type: 'error', title: vm.$t('alert.error.default') })
-            }).finally(function () {
-                vm.sending = false
+            this.sending = true
+            Apios.post('general/contact/', this.fd).then(res => {
+                this.success = true
+            }).catch(e => {
+                this.$notify({ type: 'error', title: this.$t('alert.error.default'), text: e })
+            }).finally(() => {
+                this.sending = false
             })
+
         }
     },
 
     i18n: {
         messages: {
             en: {
+                subText: 'Do you have questions or a problem with the app? <br /> Or do you have an improvement suggestion/criticism for us?',
                 contact: 'Contact',
                 subject: 'Subject',
                 message: 'Message',
@@ -110,6 +120,7 @@ export default {
                 }
             },
             de: {
+                subText: 'Hast du Fragen oder ein Problem mit der App? <br /> Oder hast du einen Verbesserungsvorschlag/Kritik für uns?',
                 contact: 'Kontakt',
                 subject: 'Betreff',
                 message: 'Nachricht',
