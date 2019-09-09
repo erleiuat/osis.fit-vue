@@ -78,7 +78,7 @@
                 </v-btn>
             </v-col>
             <v-col cols="12" md="4">
-                <v-btn outlined block href="mailto:mail@osis.io" target="_blank">
+                <v-btn outlined block href="mailto:contact@osis.io" target="_blank">
                     {{ $t('mailBtn') }}
                 </v-btn>
             </v-col>
