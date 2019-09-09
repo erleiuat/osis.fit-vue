@@ -71,7 +71,8 @@ export default {
                     f3: 'Barcode-Scanner',
                     f4: 'Aktivitäten aufzeichen',
                     f5: 'Übungen & Trainingspläne',
-                    f6: 'Profilbild einstellen'
+                    f6: 'Profilbild einstellen',
+                    f7: 'Priorisierter Support'
                 }
             },
             de: {
