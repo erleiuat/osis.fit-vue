@@ -33,13 +33,490 @@ export default {
                 langNotice: 'Translated by',
                 text: `
                 <p class="body-2">
+                    Responsible authority in the sense of the data protection laws, in particular the EU data protection basic regulation (DSGVO), is:
+                </p>
+                <p class="body-2">
+                    Osis.io<br/>
+                    4058 Basel (Switzerland CH)<br/>
+                    <a target="_blank" href="mailto:contact@osis.io">contact@osis.io</a><br/>
+                    <a target="_blank" href="mailto:contact@osis.io">https://osis.fit/</a>
+                </p>
+                <div class="headline font-weight-light">General Note</div> 
+                <p class="body-2">
+                    Supported by Article 13 of the Swiss Federal Constitution and the data protection provisions of the 
+                    Federal (Data Protection Act, DSG<!--DSG-->) every person is entitled to the protection of his or her privacy as well as to 
+                    Protection against misuse of your personal data. The operators of these pages take the protection of your personal data very seriously. 
+                    personal data very seriously. We will treat your personal data confidentially and accordingly. 
+                    the legal data protection regulations as well as this data protection declaration.
+                </p>
+                <p class="body-2">
+                    In collaboration with our hosting providers, we strive to protect the databases as best as possible from unauthorized access, 
+                    losses, abuse or counterfeiting.</p><p class="body-2">We would like to point out that the 
+                    data transmission on the Internet (e.g. when communicating by e-mail) may have security gaps. 
+                    A complete protection of the data against access by third parties is not possible.
+                </p>
+                <p class="body-2">
+                    By using this website, you consent to the collection, processing and use of data in accordance with the provisions of the 
+                    the following description. This website can be visited without registration. 
+                    Data such as the pages called up or the name of the file called up, date and time will be saved. 
+                    The data is stored on the server for statistical purposes without this data being directly related to your person. 
+                    Personal data, in particular name, address or e-mail address, are stored as far as possible on a voluntary basis. 
+                    Basis raised. The data will not be passed on to third parties without your consent.
+                </p>
+                <div class="headline font-weight-light">Processing personal data</div> 
+                <p class="body-2">
+                    Personal data is all information that refers to an identified or identifiable person. A data subject 
+                    is a person about whom personal data is processed. Processing includes any handling of personal data, 
+                    whatever the means and procedures used, in particular storage, disclosure and procurement, 
+                    Delete, save, modify, destroy and use personal data.</p> <p class="body-2">We edit personal data 
+                    in accordance with Swiss data protection law. In all other respects we process - insofar and insofar as the EU-DSGVO 
+                    is applicable - personal data according to the following legal bases in connection with Art. 6 para. 1 DSGVO<!--DSGVO-->:
+                </p> 
+                <ul> 
+                    <li class="caption">
+                        (a) processing of personal data with the consent of the data subject.
+                    </li> 
+                    <li class="caption">
+                        b) Processing of personal data for the fulfilment of a contract with the data subject as well as for the processing of personal data for the purpose of the 
+                        Implementation of appropriate pre-contractual measures.
+                    </li> 
+                    <li class="caption">
+                        c) Processing of personal data for the fulfilment of a legal obligation to which we are subject in accordance with the provisions of 
+                        applicable law of the EU or in accordance with applicable law of a country in which the 
+                        the DSGVO<!--DSGVO--> is applicable in whole or in part.
+                    </li> 
+                    <li class="caption">
+                        (d) processing of personal data for the vital interests of the data subject or of a third party 
+                        to protect another natural person.
+                    </li>
+                    <li class="caption">
+                        f) Processing of personal data in order to protect the legitimate interests of us or third parties, 
+                        unless the fundamental freedoms, rights and interests of the data subject prevail. 
+                        Legitimate interests are in particular our business interests, our website 
+                        information security, the enforcement of its own security policies, and the 
+                        legal claims and compliance with Swiss law.
+                    </li> 
+                </ul> <br/> 
+                <p class="body-2">
+                    We process personal data for the duration required for the respective purpose or the respective 
+                    purposes is necessary. In the case of longer-term storage obligations due to statutory and 
+                    other obligations to which we are subject, we shall restrict the processing accordingly.
+                </p>
+                <div class="headline font-weight-light">Privacy Statement for Cookies</div>
+                <p class="body-2">
+                    This website uses cookies. These are small text files, which make it possible to store the following data on the end device 
+                    the user to store specific, user-related information while using the website. 
+                    Cookies make it possible in particular to determine the frequency of use and number of users of the pages, 
+                    to analyze the behavior of site users, but also to make our services more customer-friendly. 
+                    <!--Allg.Cookies-->Cookies are stored at the end of a browser session and can be used by 
+                    can be called up again after a new page visit. If you do not wish this to happen, you should 
+                    Internet browser in such a way that it refuses the acceptance of Cookies.
+                </p> 
+                <p class="body-2">
+                    A general objection against the use of cookies used for online marketing purposes can be raised in the case of a 
+                    variety of services, especially in the case of tracking, via the US side 
+                    <a href="http://www.aboutads.info/choices/" target="_blank" rel="noopener">http://www.aboutads.info/choices/</a> 
+                    or the EU page <a href="http://www.youronlinechoices.com/" target="_blank" rel="noopener">http://www.youronlinechoices.com/</a> 
+                    be explained. Furthermore, the storage of cookies can be deactivated in the settings of the browser. 
+                    can be achieved. Please note that in this case not all functions of this online offer can be used.
+                </p>
+                <div class="headline font-weight-light">Privacy statement for SSL-/TLS encryption</div>
+                <p class="body-2">
+                    This website uses for security reasons and to protect the transmission of confidential content, such as the 
+                    Inquiries, which you send to us as side operator, an SSL/TLS coding. An encrypted connection 
+                    you can recognize this by the fact that the address line of the browser changes from "http://" to "https://" and is marked with the 
+                    Lock symbol in your browser line. If the SSL or TLS encryption is activated, the data, 
+                    which you transmit to us will not be read by third parties.
+                </p>
+                <div class="headline font-weight-light">Privacy policy for server log files</div>
+                <p class="body-2">
+                    The provider of this web site automatically collects and stores information in so-called server log files, which your browser can access and use. 
+                    automatically transmitted to us. These are:
+                </p> 
+                <ul> 
+                    <li class="caption">browser type and browser version</li> 
+                    <li class="caption">operating system used</li> 
+                    <li class="caption">Referrer URL</li> 
+                    <li class="caption">host name of the accessing computer</li> 
+                    <li class="caption">Time of the server request</li> 
+                </ul> <br/> 
+                <p class="body-2">
+                    These data cannot be assigned to specific persons. This data will not be merged with other data sources. 
+                    We reserve the right to subsequently check this data if we become aware of concrete indications of illegal use.
+                </p>
+                <div class="headline font-weight-light">Third party services</div> 
+                <p class="body-2">
+                    This website may use Google Maps to embed maps, Google Invisible reCAPTCHA to protect against bots and spam, and 
+                    YouTube for embedding videos. These services of the American Google LLC use, among other things, cookies and as a result data is transmitted to 
+                    Google in the USA, whereby we assume that no personal tracking takes place in this context solely through the use of our website.
+                </p>
+                <p class="body-2">
+                    Google is committed to ensuring adequate data protection in accordance with the American-European Privacy Shield and the American-Swiss Privacy Shield.
+                </p>
+                <p class="body-2">
+                    Further information can be found in the <a href='https://policies.google.com/privacy?hl=de' target="_blank" rel="noopener" style="color: inherit;">Google Privacy Policy</a>.</p>
+                <div class="headline font-weight-light">Privacy policy for contact form</div>
+                <p class="body-2">
+                    If you send us enquiries via the contact form, your details from the enquiry form, including the contact details you entered there, will be used for the following purposes 
+                    We will store your data for the purpose of processing your enquiry and in the event of follow-up questions. We do not pass on this data without your consent.
+                </p>
+                <div class="headline font-weight-light">Privacy policy for newsletter data</div>
+                <p class="body-2">
+                    If you would like to receive the newsletter offered on this website, we need an e-mail address from you as well as information which will allow us to check your e-mail address. 
+                    allow that you are the owner of the given e-mail address and agree to receive the newsletter. Further data will not be collected. We use this data 
+                    exclusively for the purpose of sending the requested information and will not pass it on to third parties.
+                </p> 
+                <p class="body-2">
+                    The given consent for the storage of the data, the 
+                    You can revoke your e-mail address and its use to send the newsletter at any time, for example via the "Unsubscribe" link in the newsletter.
+                </p>
+                <div class="headline font-weight-light">Privacy policy for comments on this website</div>
+                <p class="body-2">
+                    For the comment function on this WebSite, in addition to your comment, information about the time the comment was created, your e-mail address and, if you do not have an e-mail address, your e-mail address will also be used. 
+                    anonymously, the username you have chosen will be saved.
+                </p>
+                <p class="body-2">
+                    <i>Storing the IP address </i>
+                </p>
+                <p class="body-2">
+                    Our comment function stores the IP addresses of the users, 
+                    write the comments. Since we do not check comments on our site before activating them, we need this data in order to be able to process them in case of infringements such as 
+                    to insult or propagandise against the author.
+                </p>
+                <p class="body-2">
+                    <i>Subscribe to comments</i>
+                </p>
+                <p class="body-2">
+                    As a user of the site, you can subscribe to comments after registering. You will receive a confirmation email to check whether you are the owner of the specified 
+                    e-mail address. You can unsubscribe from this function at any time via a link in the Info-Mails.</p><div class="headline font-weight-light">Privacy Policy for 
+                    Right to information, deletion, blocking </div><p class="body-2">You have the right at any time to free information about your stored personal data, whose 
+                    origin and recipient and the purpose of the data processing as well as a right to correction, blocking or deletion of this data. For this as well as to further 
+                    If you have any questions on the subject of personal data, please contact us at any time at the address given in the imprint.
+                </p>
+                <div class="headline font-weight-light">Privacy statement for objection advertising mails</div>
+                <p class="body-2">
+                    The use of contact data published within the scope of the imprint obligation for the transmission of unsolicited advertising and promotional material is prohibited. 
+                    Information materials are hereby objected to. The operators of the pages expressly reserve the right to take legal action in the event of unsolicited mailing or e-mailing of spam. 
+                    sending of advertising information, such as spam e-mails.
+                </p>
+                <div class="headline font-weight-light">Services subject to a charge </div> 
+                <p class="body-2">
+                    In order to provide services subject to a charge, we will request additional data, such as payment details, in order to process your order or your order. 
+                    to be able to execute. We store this data in our systems until the statutory retention periods have expired.
+                </p>
+                <div class="headline font-weight-light">Google AdWords</div> 
+                <p class="body-2">
+                    This website uses Google Conversion Tracking. If you have reached our website via an ad placed by Google, Google Adwords will generate a 
+                    Cookie set on your computer. The conversion tracking cookie is set when a user clicks on an ad placed by Google. 
+                    These cookies lose their validity after 30 days and are not used for personal identification. If the user visits certain pages of our 
+                    website and the cookie has not yet expired, we and Google can recognize that the user clicked on the ad and go to this page 
+                    has been forwarded. Each Google AdWords customer receives a different cookie. Cookies cannot therefore be accessed via the websites of AdWords customers. 
+                    can be tracked. The information collected using the conversion cookie is used to generate conversion statistics for AdWords customers, 
+                    who have opted for conversion tracking. The customers learn the total number of users who clicked on their advertisement and went to an 
+                    were forwarded to a page tagged with a conversion tracking tag. However, you will not receive any personally identifiable information.
+                </p> 
+                <p class="body-2">
+                    If you do not wish to participate in tracking, you can refuse to set a cookie as required for this - for example by setting your browser, 
+                    which generally deactivates the automatic setting of cookies or sets your browser so that cookies from the domain "googleleadservices.com" are blocked.
+                </p> 
+                <p class="body-2">
+                    Please note that you may not delete the opt-out cookies as long as you do not wish to record measurement data. Do you have all your cookies? 
+                    in the browser, you must set the respective opt-out cookie again.
+                </p>
+                <div class="headline font-weight-light">Use of Google reCAPTCHA</div> 
+                <p class="body-2">
+                    This website uses the service reCAPTCHA of Google Inc. (1600 Amphitheatre Parkway, Mountain View, CA 94043, USA; "Google"). The query serves the purpose of differentiation, 
+                    whether the input is made by a human being or by automated, mechanical processing. The query closes the dispatch of the IP address and if necessary further of Google. 
+                    for the service reCAPTCHA required data to Google. For this purpose your input will be transmitted to Google and used there. Your IP address 
+                    Google shall, however, within member states of the European Union or in other signatory states to the Agreement on the European Economic Area 
+                    has been shortened before. Only in exceptional cases is the full IP address transmitted to a Google server in the USA and shortened there. On behalf of the operator 
+                    of this website, Google will use this information to evaluate your use of this service. The IP address transmitted by your browser as part of reCaptcha 
+                    will not be merged with any other data held by Google. Your data may also be transferred to the USA. For data transfers to the 
+                    USA, there is an adequacy decision of the European Commission, the "Privacy Shield". Google participates in the Privacy Shield and has submitted to the requirements. 
+                    By activating the query, you consent to the processing of your data. The processing takes place on the basis of Art. 6 (1) lit. a DSGVO with your consent. 
+                    You can revoke your consent at any time without affecting the lawfulness of the processing carried out on the basis of the consent up to the revocation.
+                </p> 
+                <p class="body-2">
+                    For more information about Google reCAPTCHA and the related privacy statement, please visit our privacy policy: 
+                    <a href="https://www.google.com/privacy/ads/" target="_blank" rel="noopener">https://www.google.com/privacy/ads/</a>
+                </p>
+                <div class="headline font-weight-light">Privacy Statement for Google Analytics</div>
+                <p class="body-2">
+                    This website uses Google Analytics, a web analytics service provided by Google Inc., 1600 Amphitheatre Parkway, Mountain View, CA 94043, USA. To disable Google Analytiscs, we provide 
+                    Google at <a href="https://tools.google.com/dlpage/gaoptout?hl=de" target="_blank" style="color: inherit;">https://tools.google.com/dlpage/gaoptout?hl=de</a> a browser plug-in for 
+                    order. Google Analytics uses cookies. These are small text files that make it possible to store specific, user-related information on the user's terminal device. 
+                    to store information. This allows an analysis of the use of our website by Google. The information collected by the cookie about the use of our website by Google 
+                    of our pages (including your IP address) are usually transmitted to a Google server in the USA and stored there. We would like to point out that on this server 
+                    Website Google Analytics was extended by the code "gat._anonymizeIp();" in order to guarantee an anonymised recording of IP addresses (so-called IP masking<!--SwissAnwalt-->). 
+                    If anonymization is active, Google shortens IP addresses within member states of the European Union or in other signatory states to the Agreement on privacy and data protection. 
+                    European Economic Area, which is why no conclusions can be drawn about your identity. Only in exceptional cases will the full IP address be transferred to a server. 
+                    from Google in the USA and shortened there. Google complies with the Privacy Shield provisions of the Privacy Shield Agreement and is not a party to the Privacy Shield program of the 
+                    The U.S. Department of Commerce registers and uses the information collected to evaluate the use of our Web sites, to prepare reports for us about our use of them, and to provide other services to you. 
+                    to provide services to us in this respect. You can find out more at 
+                    <a href="https://support.google.com/analytics/answer/6004245?hl=de" target="_blank" style="color: inherit;">https://support.google.com/analytics/answer/6004245?hl=de</a>.
+                </p>
+                <div class="headline font-weight-light">Privacy statement for Google AdSense</div>
+                <p class="body-2">
+                    This web site uses Google AdSense, an ad serving service provided by Google Inc., 1600 Amphitheatre Parkway, Mountain View, CA 94043, USA. GoogleAdSense uses 
+                    so-called "cookies", text files which are stored on your computer and which enable an analysis of the use of the website. Google AdSense also uses so-called Web 
+                    Beacons (invisible graphics). Through these web beacons, information such as visitor traffic on these pages can be evaluated. The cookies and web beacons generated by 
+                    Information about the use of this website (including your IP address) and the delivery of advertising formats is transmitted to a Google server in the USA. 
+                    and stored there. This information can be passed on by Google to Google's contractual partners. However, Google will not share your IP address with others of yours. 
+                    to merge the stored data. You may refuse the use of cookies by selecting the appropriate settings on your browser, however please note that if you do this you may not be able to use the full functionality of this website. 
+                    that in this case you may not be able to use all functions of this website to their full extent. Through the use of this website 
+                    you consent to the processing of data about you by Google in the manner and for the purposes set out above.
+                </p>
+                <div class="headline font-weight-light">Privacy policy for the use of Google Web Fonts</div>
+                <p class="body-2">
+                    This website uses so-called web fonts provided by Google for the uniform display of fonts. When you call up a page, your browser loads the 
+                    required web fonts in their browser cache to display text and fonts correctly. If your browser does not support web fonts, a standard font will be used by your computer.
+                </p>
+                <p class="body-2">
+                    More information about Google Web Fonts can be found at <a href="https://developers.google.com/fonts/faq" target="_blank" style="color: inherit;">https://developers.google.com/fonts/faq</a> 
+                    and in Google's privacy policy: <a href="https://www.google.com/policies/privacy/" target="_blank" style="color: inherit;">https://www.google.com/policies/privacy/</a>
+                </p>
+                <div class="headline font-weight-light">Google Tag Manager</div> 
+                <p class="body-2">
+                    Google Tag Manager is a solution with which we can manage so-called website tags via a single interface, e.g. Google Analytics and other Google marketing services. 
+                    to be able to integrate them into our online offer. The Tag Manager itself, which implements the tags, does not process any personal user data. With regard to the processing of the 
+                    personal data of the users is referred to the following information about the Google services. 
+                    Terms of use: <a href="https://www.google.com/intl/de/tagmanager/use-policy.html" target="_blank" rel="noopener">https://www.google.com/intl/de/tagmanager/use-policy.html</a>.
+                </p>
+                <div class="headline font-weight-light">Privacy policy for the use of Hotjar</div> 
+                <p class="body-2">
+                    This website uses Hotjar's services to improve its user-friendliness. Hotjar Ltd. is a European company based in Malta. 
+                    (Hotjar Ltd, Level 2, St Julians Business Centre, 3, Elia Zammit Street, St Julians STJ 1000, Malta, Europe). Mouse clicks and mouse and scroll movements can be recorded. 
+                    will be. Keystrokes made on this website can also be recorded. Personalized information is not recorded. 
+                    Hotjar uses a tracking code to collect and transfer your data. As soon as you visit our website, the Hotjar tracking code automatically collects the data stored on your computer. 
+                    activity based data and stores it on the Hotjar servers (located in Ireland). In addition, the data collected by the website on your computer or terminal device 
+                    cookies also contain data. For more information on how Hotjar works, please visit this page. 
+                    <a href="https://www.hotjar.com/privacy" target="_blank" rel="noopener">https://www.hotjar.com/privacy</a>.
+                </p> 
+                <p class="body-2">
+                    If you would like to object to the collection of data by Hotjar (opt-out), please click here: <a href="https://www.hotjar.com/opt-out" target="_blank" rel="noopener">https://www.hotjar.com/opt-out</a>.
+                </p>
+                <div class="headline font-weight-light">Privacy Statement for Facebook</div>
+                <p class="body-2">
+                    This WebSite uses features of Facebook Inc., 1601 S. California Ave, Palo Alto, CA 94304, USA . When you access our pages using Facebook plug-ins, a connection is established between your 
+                    browser and the Facebook servers. Data is already transferred to Facebook. If you have a Facebook account, this data can be linked to it. 
+                    If you do not want this data to be associated with your Facebook account, please log out of Facebook before visiting our page. Interactions, in particular the use of a 
+                    Comments or clicking a "Like" or "Share" button will also be forwarded to Facebook. Learn more at 
+                    <a href="https://de-de.facebook.com/about/privacy" target="_blank" style="color: inherit;">https://de-de.facebook.com/about/privacy</a>.
+                </p>
+                <div class="headline font-weight-light">Privacy statement for Twitter</div>
+                <p class="body-2">
+                    This WebSite uses features from Twitter, Inc., 1355 Market St, Suite 900, San Francisco, CA 94103, USA. When you access our pages with Twitter plug-ins, a connection is established between 
+                    your browser and the Twitter servers. Data is already transferred to Twitter. If you have a Twitter account, these data can be linked to it. 
+                    will be. If you do not want this data to be associated with your Twitter account, please log out of Twitter before visiting our site. Interactions, in particular clicking on them 
+                    of a "Re-Tweet" button are also forwarded to Twitter. You can learn more at <a href="https://twitter.com/privacy" target="_blank" style="color: inherit;">https://twitter.com/privacy</a>.
+                </p>
+                <div class="headline font-weight-light">Privacy Statement for Instagram</div>
+                <p class="body-2">
+                    On our pages functions of the service Instagram are integrated. These functions are offered by Instagram Inc., 1601 Willow Road, Menlo Park, CA, 94025, USA. 
+                    If you are logged into your Instagram account, you can link the contents of our pages to your Instagram profile by clicking the Instagram button. This allows Instagram 
+                    assign the visit of our pages to your user account. We would like to point out that, as the provider of these pages, we do not have any knowledge of the content of the transmitted data or its use by Instagram.
+                </p>
+                <p class="body-2">
+                    For more information, see Instagram's privacy statement: <a href="https://instagram.com/about/legal/privacy/" target="_blank" style="color: inherit;">http://instagram.com/about/legal/privacy/</a>
+                </p>
+                <div class="headline font-weight-light">External payment service provider</div> 
+                <p class="body-2">
+                    This WebSite uses external payment service providers whose platforms enable users and us to make payment transactions. For example
+                </p>
+                <ul>
+                    <li class="caption"> PostFinance <a href="https://www.postfinance.ch/de/detail/rechtliches-barrierefreiheit.html" target="_blank"> Link </a> </li>
+                    <li class="caption"> Visa <a href="https://www.visa.de/nutzungsbedingungen/visa-privacy-center.html" target="_blank"> Link </a> </li>
+                    <li class="caption"> Mastercard <a href="https://www.mastercard.ch/de-ch/datenschutz.html" target="_blank"> Link </a> </li>
+                    <li class="caption"> American Express <a href="https://www.americanexpress.com/de/content/privacy-policy-statement.html" target="_blank"> Link </a> </li>
+                    <li class="caption"> Paypal <a href="https://www.paypal.com/de/webapps/mpp/ua/privacy-full" target="_blank"> Link </a> </li>
+                    <li class="caption"> Bexio AG <a href="https://www.bexio.com/de-CH/datenschutz" target="_blank"> Link </a> </li>
+                    <li class="caption"> Payrexx AG <a href="https://www.payrexx.ch/site/assets/files/2592/datenschutzerklaerung.pdf" target="_blank"> Link </a> </li>
+                    <li class="caption"> Apple Pay <a href="support.apple.com/de-ch/ht203027" target="_blank"> Link </a> </li>
+                    <li class="caption"> Stripe <a href="stripe.com/ch/privacy" target="_blank"> Link </a> </li>
+                    <li class="caption"> Klarna <a href="https://www.klarna.com/de/datenschutz/" target="_blank"> Link </a> </li>
+                    <li class="caption"> Skrill <a href="https://www.skrill.com/de/fusszeile/datenschutzrichtlinie/" target="_blank"> Link </a> </li>
+                    <li class="caption"> Giropay <a href="https://www.giropay.de/rechtliches/datenschutz-agb/" target="_blank"> Link </a> </li>
+                </ul> <br/> 
+                <p class="body-2">
+                    Within the scope of fulfilling contracts, we use payment service providers on the basis of the Swiss Data Protection Ordinance as well as and to the extent necessary, 
+                    of Art. 6 para. 1 lit. b. EU-DSGVO. Otherwise, we use external payment service providers on the basis of our legitimate interests pursuant to Swiss law. 
+                    Data Protection Ordinance and, if necessary, pursuant to Art. 6 para. 1 lit. f. EU-DSGVO in order to offer our users effective and secure payment options.
+                </p> 
+                <p class="body-2">
+                    The data processed by the payment service providers includes inventory data, such as name and address, bank data, such as account numbers or credit card numbers, 
+                    Passwords, TANs and checksums, as well as contract, total and recipient details. The information is required to complete the transactions. 
+                    However, the data entered will only be processed and stored by the payment service providers. We as the operator do not receive any information about (bank) 
+                    Account or credit card, but only information confirming (accepting) or refusing payment. Under certain circumstances, the data may be used by the payment service providers to 
+                    to credit agencies. The purpose of this transmission is to check identity and creditworthiness. Please refer to the general terms and conditions and data protection information of the payment service providers.
+                </p> 
+                <p class="body-2">
+                    Payment transactions are subject to the terms and conditions and data protection notices of the respective payment service providers, which are published within the respective website or transaction applications. 
+                    are available. We also refer to these for further information and assertion of revocation, information and other rights affected.
+                </p>
+                <div class="headline font-weight-light">Privacy Statement for YouTube</div>
+                <p class="body-2">
+                    This website uses plugins from the YouTube site operated by Google. The site is operated by YouTube, LLC, 901 Cherry Ave, San Bruno, CA 94066, USA. If you are using one of our YouTube plugin-equipped 
+                    pages, a connection will be established to the servers of YouTube. The Youtube server will be informed which of our pages you have visited.
+                </p> 
+                <p class="body-2">
+                    When you are logged into your YouTube account 
+                    are you enable YouTube to assign your surfing behavior directly to your personal profile. You can prevent this by logging out of your YouTube account.
+                </p>
+                <p class="body-2">
+                    You can find more information about the handling of user data in YouTube's Privacy Policy: 
+                    <a href="https://www.google.de/intl/de/policies/privacy" target="_blank" style="color: inherit;">https://www.google.de/intl/de/policies/privacy</a>
+                </p>
+                <div class="headline font-weight-light">Order processing in the online shop with customer account </div> 
+                <p class="body-2">
+                    We process the data of our customers in accordance with the data protection regulations of the Federal Government (Data Protection Act, DSG) and the EU DSGVO, in the context of the ordering processes in our online shop, 
+                    to enable them to select and order the selected products and services, as well as to pay for and deliver them, or to execute them.
+                </p> 
+                <p class="body-2">
+                    The processed data includes master data (inventory data), communication data, contract data, payment data and the persons affected by the processing include our customers, prospective customers and other interested parties. 
+                    Business partner. Processing is carried out for the purpose of providing contractual services within the framework of operating an online shop, billing, delivery and customer services. Here 
+                    we use session cookies, e.g. to store the contents of the shopping cart, and permanent cookies, e.g. to store the login status.
+                </p> 
+                <p class="body-2">
+                    Processing takes place on the basis of Art. 6 para. 1 lit. b (execution of order processes) and c (legally required archiving) DSGVO. The data marked as required for the 
+                    Justification and fulfilment of the contract required. We only disclose the data to third parties within the scope of delivery, payment or within the scope of the legal permissions. 
+                    and duties. The data will only be processed in third countries if this is necessary for the fulfilment of the contract (e.g. at the customer's request for delivery or payment).
+                </p> 
+                <p class="body-2">
+                    Users can optionally create a user account by viewing their orders in particular. During the registration process, the necessary mandatory information will be provided to the users. 
+                    The user accounts are not public and cannot be indexed by search engines such as Google. If users have terminated their user account, their data will be deleted with regard to the 
+                    User account deleted, subject to their retention is necessary for commercial or tax reasons pursuant to Art. 6 para. 1 lit. c DSGVO. Data in the customer account shall remain valid until their 
+                    Deletion with subsequent archiving in the event of a legal obligation. It is the responsibility of the users to secure their data before the end of the contract in the event of termination.
+                </p> 
+                <p class="body-2">
+                    Within the scope of registration and renewed registrations as well as use of our online services, we store the IP address and the time of the respective user action. The storage takes place on 
+                    Basis of our legitimate interests, as well as the user's protection from misuse and other unauthorized use. A passing on of these data to third parties does not take place in principle, except 
+                    it is necessary to pursue our claims or there is a legal obligation to do so pursuant to Art. 6 para. 1 lit. c DSGVO.
+                </p> 
+                <p class="body-2">
+                    The deletion takes place after expiration of legal warranty and comparable obligations, the necessity of the storage of the data in irregular 
+                    I checked the intervals. In the case of legal archiving obligations, deletion takes place after their expiration.
+                </p>
+                <div class="headline font-weight-light">Agency services</div> 
+                <p class="body-2">
+                    We process the data of our customers in accordance with the data protection regulations of the Federal Government (Data Protection Act, DSG) and the EU-DSGVO within the scope of our contractual services.
+                </p> 
+                <p class="body-2">
+                    We process inventory data (e.g. customer master data, such as names or addresses), contact data (e.g. e-mail, telephone numbers), content data (e.g. text input, etc.), contract data (e.g. subject of contract, term), 
+                    Payment data (e.g. bank details, payment history), usage and metadata (e.g. in the context of evaluating and measuring the success of marketing measures). Among those affected are our customers, interested parties 
+                    as well as their customers, users, website visitors or employees and third parties. The purpose of the processing consists in the provision of contractual services, billing and our customer service. The legal basis of the 
+                    Processing results from Art. 6 para. 1 lit. b DSGVO (contractual services), Art. 6 para. 1 lit. f DSGVO (analysis, statistics, optimisation, security measures). We process data that is used to substantiate 
+                    and performance of the contractual services and point to the necessity of their disclosure. Disclosure to external parties is only made if it is required within the framework of a contract. 
+                    When processing the data provided to us within the framework of an order, we shall act in accordance with the instructions of the customer and the legal requirements for order processing pursuant to Art. 28 DSGVO. 
+                    and process the data for no purposes other than those specified in the order.
+                </p>
+                <p class="body-2">
+                    We delete the data after the expiry of statutory warranty and comparable obligations. The necessity 
+                    the storage of the data is checked at irregular intervals. In the case of legal archiving obligations, deletion takes place after their expiration. In the case of data which has been 
+                    have been disclosed to us by the client within the framework of an order, we delete the data in accordance with the specifications of the order, in principle after the end of the order.
+                <div class="headline font-weight-light">Broker services</div> 
+                <p class="body-2">
+                    We process the data of our customers, clients and interested parties (uniformly referred to as "customers") in accordance with the data protection provisions of the Federal Government (Data Protection Act, DSG) and the EU-DSGVO 
+                    in accordance with Art. 6 para. 1 lit. b. DSGVO in order to provide them with our contractual or pre-contractual services. The data processed, the type, scope and purpose of the data processed, and the 
+                    The necessity of their processing is determined by the underlying order. This basically includes the inventory and master data of the customers (name, address, etc.), as well as the contact data. 
+                    (e-mail address, telephone, etc.), the contract data (content of the order, fees, terms, details of the brokered company/insurer/services) and payment data (commissions, payment history, etc.). 
+                    We can also process information on the characteristics and circumstances of persons or items belonging to them if this is part of our order. This may include, but is not limited to 
+                    personal circumstances, mobile or immobile material goods.
+                </p> 
+                <p class="body-2">
+                    Within the scope of our assignment it may also be necessary for us to collect special categories of data according to Art. 9 Para. 1 
+                    DSGVO, here in particular information on the health of a person process. In accordance with Art. 6 Para. 1 lit. a., Art. 7, Art. 9 Para. 2 lit. a DSGVO, we obtain the express consent of the customer, if necessary.
+                </p> 
+                <p class="body-2">
+                    Insofar as necessary for the fulfilment of the contract or required by law, we disclose or transmit the customer's data within the scope of cover requests, conclusion and execution of contracts, data to 
+                    Providers of brokered services/properties, insurers, reinsurers, broker pools, technical service providers, other service providers, such as cooperating associations, as well as financial service providers, credit institutions, etc. 
+                    and investment companies as well as social insurance institutions, tax authorities, tax advisors, legal advisors, auditors, insurance ombudsmen and the Swiss Financial Market Supervisory Authority (FINMA) 
+                    or Federal Financial Supervisory Authority (BaFin). We can also commission sub-contractors, such as sub-brokers. We obtain the consent of the customer, provided that this consent is used for disclosure purposes. 
+                    transmission (which may be the case, for example, in the case of special categories of data pursuant to Art. 9 DSGVO).
+                </p> 
+                <p class="body-2">
+                    The deletion of the data takes place after the expiry of statutory warranty and comparable obligations, whereby the necessity of storing the data is checked at irregular intervals. 
+                    In all other respects, the statutory storage obligations shall apply. In the case of statutory archiving obligations, deletion shall take place after their expiration.
+                </p> 
+                <div class="headline font-weight-light">Contractual benefits</div> 
+                <p class="body-2">
+                    We process the data of our contractual partners and interested parties as well as other clients, customers, clients, clients or contractual partners (uniformly referred to as "contractual partners") in accordance with the data protection law. 
+                    Provisions of the Federal Government (Data Protection Act, DSG) and the EU DSGVO pursuant to Art. 6 para. 1 lit. b. DSGVO in order to provide them with our contractual or pre-contractual services. The data processed here, 
+                    the nature, scope and purpose and necessity of their processing shall be determined by the underlying contractual relationship.
+                </p> 
+                <p class="body-2">
+                    The processed data includes the master data of our contractual partners (e.g. names and addresses), contact data (e.g. e-mail addresses and telephone numbers) and contract data (e.g. services used, contract contents), 
+                    contractual communication, names of contact persons) and payment data (e.g. bank details, payment history).
+                </p> 
+                <p class="body-2">
+                    We do not process any special categories of personal data, unless they are part of a commissioned or contractual processing.
+                </p> 
+                <p class="body-2">
+                    We process data which are necessary for the justification and fulfilment of the contractual services and point out the necessity of their indication, if this is not evident for the contracting parties. 
+                    Disclosure to external persons or companies will only take place if it is necessary within the framework of a contract. When processing the data provided to us within the framework of an order, we act in accordance with the following 
+                    instructions of the client as well as the legal requirements.
+                </p> 
+                <p class="body-2">
+                    Within the scope of using our online services, we can store the IP address and the time of the respective user action. The storage takes place 
+                    on the basis of our legitimate interests, as well as the interests of users in protection against misuse and other unauthorized use. A passing on of these data to third parties does not take place in principle, except it 
+                    is required to pursue our claims pursuant to Art. 6 para. 1 lit. f. DSGVO is necessary or there is a legal obligation to do so pursuant to Art. 6 para. 1 lit. c. DSGVO.
+                </p> 
+                <p class="body-2">
+                    The data will be deleted if 
+                    the data is no longer required for the fulfilment of contractual or statutory duties of care and for the handling of any warranty and comparable obligations, whereby the necessity of the data is no longer limited to the following 
+                    the storage of the data is checked at irregular intervals. In all other respects, the statutory storage obligations apply.
+                </p>
+                <div class="headline font-weight-light">copyright</div> 
+                <p class="body-2">
+                    The copyright and all other rights to contents, pictures, photos or other files on the website belong exclusively to the operator of this website or the specially named copyright holders. For the reproduction of 
+                    all files, the written consent of the copyright holder is to be obtained in advance.</p><p class="body-2">Whoever commits a copyright infringement without the consent of the respective copyright holder may be liable to prosecution and, if necessary, be liable to prosecution. 
+                    and make you liable for damages.
+                </p>
+                <div class="headline font-weight-light">General disclaimer</div> 
+                <p class="body-2">
+                    All information on our website has been carefully checked. We make every effort to ensure that the material contained in its web site is current, complete and correct. Nevertheless, the occurrence of errors cannot be ruled out. 
+                    We therefore cannot guarantee the completeness, correctness and up-to-dateness of information of a journalistic or editorial nature. Liability claims 
+                    The author reserves the right not to be responsible for the topicality, correctness, completeness or quality of the information provided.
+                </p>
+                <p class="body-2">
+                    The publisher may change or delete texts at his own discretion and without prior notice and is not obliged to update the contents of this website. The use of or access to this website is 
+                    at the visitor's own risk. The publisher, his clients or partners are not responsible for damages, such as direct, indirect, accidental, in advance to be determined or consequential damages, which are allegedly 
+                    and therefore do not assume any liability for them.
+                </p>
+                <p class="body-2">
+                    The publisher also assumes no responsibility and liability for the content and availability of 
+                    Websites of third parties that can be reached via external links on this website. The operators of the linked sites are solely responsible for their content. The publisher expressly dissociates himself from the contents of all linked websites. 
+                    any third party content that may be relevant to criminal or liability law or that is immoral.
+                </p>
+                <div class="headline font-weight-light">changes</div>
+                <p class="body-2">
+                    We can delete this privacy statement at any time without notice. 
+                    Customize Advance Notice. The current version published on our website applies. As far as the data protection declaration is part of an agreement with you, we will inform you in case of an update via 
+                    notify the change by e-mail or other appropriate means.
+                </p>
+                <div class="headline font-weight-light">Questions to the Data Protection Officer</div> 
+                <p class="body-2">
+                    If you have any questions regarding data protection, please send us an e-mail or contact the data protection officer listed at the beginning of this privacy statement, 
+                    responsible person in our organization.
+                </p>
+                <p class="caption">
+                    Basel, 09.09.2019<br/>
+                    Source: <a href="https://www.swissanwalt.ch" target="_blank" rel="noopener">SwissAnwalt</a>
+                </p>
+                `
+            },
+            de: {
+                title: 'Datenschutzerklärung',
+                contact: 'Kontakt',
+                langNotice: 'Übersetz mit',
+                text: `
+                <p class="body-2">
                     Verantwortliche Stelle im Sinne der Datenschutzgesetze, insbesondere der EU-Datenschutzgrundverordnung (DSGVO), ist:
                 </p>
                 <p class="body-2">
                     Osis.io<br/>
                     4058 Basel (Schweiz CH)<br/>
-                    E-Mail: <a target="_blank" href="mailto:mail@osis.io">mail@osis.io</a><br/>
-                    WebSite: https://osis.fit/ 
+                    <a target="_blank" href="mailto:contact@osis.io">contact@osis.io</a><br/>
+                    <a target="_blank" href="mailto:contact@osis.io">https://osis.fit/</a>
                 </p>
                 <div class="headline font-weight-light">Allgemeiner Hinweis</div> 
                 <p class="body-2">
@@ -324,18 +801,18 @@ export default {
                     Diese WebSite setzt externe Zahlungsdienstleister ein, über deren Plattformen die Nutzer und wir Zahlungstransaktionen vornehmen können. Zum Beispiel über
                 </p>
                 <ul>
-                    <li class="caption"> PostFinance <a href="www.postfinance.ch/de/detail/rechtliches-barrierefreiheit.html" target="_blank"> Link </a> </li>
-                    <li class="caption"> Visa <a href="www.visa.de/nutzungsbedingungen/visa-privacy-center.html" target="_blank"> Link </a> </li>
-                    <li class="caption"> Mastercard <a href="www.mastercard.ch/de-ch/datenschutz.html" target="_blank"> Link </a> </li>
-                    <li class="caption"> American Express <a href="www.americanexpress.com/de/content/privacy-policy-statement.html" target="_blank"> Link </a> </li>
-                    <li class="caption"> Paypal <a href="www.paypal.com/de/webapps/mpp/ua/privacy-full" target="_blank"> Link </a> </li>
-                    <li class="caption"> Bexio AG <a href="www.bexio.com/de-CH/datenschutz" target="_blank"> Link </a> </li>
-                    <li class="caption"> Payrexx AG <a href="www.payrexx.ch/site/assets/files/2592/datenschutzerklaerung.pdf" target="_blank"> Link </a> </li>
+                    <li class="caption"> PostFinance <a href="https://www.postfinance.ch/de/detail/rechtliches-barrierefreiheit.html" target="_blank"> Link </a> </li>
+                    <li class="caption"> Visa <a href="https://www.visa.de/nutzungsbedingungen/visa-privacy-center.html" target="_blank"> Link </a> </li>
+                    <li class="caption"> Mastercard <a href="https://www.mastercard.ch/de-ch/datenschutz.html" target="_blank"> Link </a> </li>
+                    <li class="caption"> American Express <a href="https://www.americanexpress.com/de/content/privacy-policy-statement.html" target="_blank"> Link </a> </li>
+                    <li class="caption"> Paypal <a href="https://www.paypal.com/de/webapps/mpp/ua/privacy-full" target="_blank"> Link </a> </li>
+                    <li class="caption"> Bexio AG <a href="https://www.bexio.com/de-CH/datenschutz" target="_blank"> Link </a> </li>
+                    <li class="caption"> Payrexx AG <a href="https://www.payrexx.ch/site/assets/files/2592/datenschutzerklaerung.pdf" target="_blank"> Link </a> </li>
                     <li class="caption"> Apple Pay <a href="support.apple.com/de-ch/ht203027" target="_blank"> Link </a> </li>
                     <li class="caption"> Stripe <a href="stripe.com/ch/privacy" target="_blank"> Link </a> </li>
-                    <li class="caption"> Klarna <a href="www.klarna.com/de/datenschutz/" target="_blank"> Link </a> </li>
-                    <li class="caption"> Skrill <a href="www.skrill.com/de/fusszeile/datenschutzrichtlinie/" target="_blank"> Link </a> </li>
-                    <li class="caption"> Giropay <a href="www.giropay.de/rechtliches/datenschutz-agb/" target="_blank"> Link </a> </li>
+                    <li class="caption"> Klarna <a href="https://www.klarna.com/de/datenschutz/" target="_blank"> Link </a> </li>
+                    <li class="caption"> Skrill <a href="https://www.skrill.com/de/fusszeile/datenschutzrichtlinie/" target="_blank"> Link </a> </li>
+                    <li class="caption"> Giropay <a href="https://www.giropay.de/rechtliches/datenschutz-agb/" target="_blank"> Link </a> </li>
                 </ul> <br/> 
                 <p class="body-2">
                     Im Rahmen der Erfüllung von Verträgen setzen wir die Zahlungsdienstleister auf Grundlage der schweizerischen Datenschutzverordnung sowie und soweit nötig, 
@@ -503,11 +980,6 @@ export default {
                     Quelle: <a href="https://www.swissanwalt.ch" target="_blank" rel="noopener">SwissAnwalt</a>
                 </p>
                 `
-            },
-            de: {
-                title: 'Datenschutzerklärung',
-                contact: 'Kontakt',
-                langNotice: 'Übersetz mit'
             }
         }
     }
