@@ -23,14 +23,15 @@ export default {
     props: {
         cVals: {
             weight: Number,
-            height: Number
+            height: Number,
+            showLoad: Boolean
         }
     },
 
     computed: {
 
         loading () {
-            if (!this.$store.getters['loading']) return false
+            if (!this.showLoad) return false
             else if (this.state.dark) return 'white'
             else return 'black'
         },

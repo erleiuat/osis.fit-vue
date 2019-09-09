@@ -13,7 +13,6 @@
                 </v-col>
 
                 <v-col cols="auto" class="caption text-right">
-                    {{ cVals.pal }} PAL<br />
                     {{ cVals.lost }} {{ $t('burned') }}<br />
                     {{ cVals.consumed }} {{ $t('consumed') }}
                 </v-col>
@@ -41,14 +40,15 @@ export default {
             pal: Number,
             height: Number,
             consumed: Number,
-            lost: Number
+            lost: Number,
+            showLoad: Boolean
         }
     },
 
     computed: {
 
         loading () {
-            if (!this.$store.getters['loading']) return false
+            if (!this.showLoad) return false
             else if (this.state.dark) return 'white'
             else return 'black'
         },

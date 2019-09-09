@@ -25,20 +25,18 @@ export default {
                 settings: 'Open Settings',
                 title: 'Welcome!',
                 text: `
-                    You almost made it:
-                    To calculate your caloric balance and other interesting facts you need to 
-                    determine more info about you in the <b>Settings</b>. This includes your <b>height</b>, 
-                    your <b>aims</b>, your <b>gender</b> and your current <b>weight</b>.
+                    You've almost made it: For your calorie balance and other calculations we need more information
+                    about your, which you can tell us in the <b>Settings</b>. The required information includes your 
+                    <b>metabolism</b>, your <b>aims</b> and your current <b>weight</b>.
                 `
             },
             de: {
                 settings: 'Einstellungen öffnen',
                 title: 'Willkommen!',
                 text: `
-                    Du hast es schon fast geschafft: 
-                    Für deine Kalorienbilanz und weitere Berechnungen werden
+                    Du hast es schon fast geschafft: Für deine Kalorienbilanz und weitere Berechnungen werden
                     noch weitere Infos von dir benötigt, welche du in den <b>Einstellungen</b> bestimmen kannst.
-                    Dazu gehört deine <b>Körpergrösse</b>, deine <b>Ziele</b>, dein <b>Geschlecht</b> und dein aktuelles <b>Gewicht</b>.
+                    Dazu gehört dein <b>Stoffwechsel</b>, deine <b>Ziele</b> und dein aktuelles <b>Gewicht</b>.
                 `
             }
         }

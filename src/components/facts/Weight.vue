@@ -36,7 +36,8 @@ export default {
     props: {
         cVals: {
             weight: Number,
-            aimWeight: Number
+            aimWeight: Number,
+            showLoad: Boolean
         }
     },
 
@@ -51,7 +52,7 @@ export default {
         */
 
         loading () {
-            if (!this.$store.getters['loading']) return false
+            if (!this.showLoad) return false
             else if (this.state.dark) return 'white'
             else return 'black'
         },

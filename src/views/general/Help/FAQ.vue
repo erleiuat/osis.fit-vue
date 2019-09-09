@@ -2,14 +2,6 @@
     <vcontainer align="space-evenly">
         <v-row justify="center">
             <v-col cols="12" md="10">
-                <div class="display-1">
-                    Support
-                </div>
-            </v-col>
-        </v-row>
-
-        <v-row justify="center">
-            <v-col cols="12" md="10">
                 <div class="headline">
                     FAQ
                 </div>
@@ -49,7 +41,7 @@ export default {
 
     data () {
         return {
-            openPanel: 4,
+            openPanel: null,
             faqItems: [
                 { title: this.$t('fqi.a.title'), text: this.$t('fqi.a.text') },
                 { title: this.$t('fqi.b.title'), text: this.$t('fqi.b.text') },
