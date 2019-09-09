@@ -11,10 +11,11 @@ export default {
     name: 'BottomNav',
 
     computed: {
-        showAdd(){
-            if(!this.$vuetify.breakpoint.mdAndUp){
-                if(this.$route.name !== 'food.favorites') return true
+        showAdd () {
+            if (!this.$vuetify.breakpoint.mdAndUp) {
+                if (this.$route.name !== 'food.favorites') return true
             }
+            return false
         }
     }
 

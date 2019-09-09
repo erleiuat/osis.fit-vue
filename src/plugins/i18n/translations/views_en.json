@@ -165,7 +165,23 @@
     },
     "about": {
         "title": "About",
-        "description": ""
+        "description": "",
+        "imprint": {
+            "title": "Imprint",
+            "description": ""
+        },
+        "terms": {
+            "title": "Terms and Legal Notice",
+            "description": ""
+        },
+        "cookie": {
+            "title": "Cookie-Policy",
+            "description": ""
+        },
+        "data": {
+            "title": "Privacy-Policy",
+            "description": ""
+        }
     },
     "error": {
         "permission": {

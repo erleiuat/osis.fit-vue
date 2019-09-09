@@ -7,35 +7,6 @@ module.exports = [{
 
 }, {
 
-    path: '/terms',
-    meta: { authRequired: false },
-    components: {
-        toolbar: () => import('@/components/nav/toolbar/'),
-        default: () => import('@/views/general/Terms/')
-    },
-    children: [
-        {
-            path: '',
-            name: 'terms',
-            meta: { authRequired: false },
-            components: {
-                toolbar: () => import('@/components/nav/toolbar/'),
-                default: () => import('@/views/general/Terms/List')
-            }
-        },
-        {
-            path: 'cookies',
-            name: 'terms.cookie',
-            meta: { authRequired: false },
-            components: {
-                toolbar: () => import('@/components/nav/toolbar/'),
-                default: () => import('@/views/general/Terms/Cookie')
-            }
-        }
-    ]
-
-}, {
-
     path: '/help',
     meta: { authRequired: false },
     components: {
@@ -65,13 +36,59 @@ module.exports = [{
 
 }, {
 
-    name: 'about',
     path: '/about',
     meta: { authRequired: false },
     components: {
         toolbar: () => import('@/components/nav/toolbar/'),
-        default: () => import('@/views/general/About')
-    }
+        default: () => import('@/views/general/About/')
+    },
+    children: [
+        {
+            path: '',
+            name: 'about',
+            meta: { authRequired: false },
+            components: {
+                toolbar: () => import('@/components/nav/toolbar/'),
+                default: () => import('@/views/general/About/Info.vue')
+            }
+        },
+        {
+            path: 'imprint',
+            name: 'about.imprint',
+            meta: { authRequired: false },
+            components: {
+                toolbar: () => import('@/components/nav/toolbar/'),
+                default: () => import('@/views/general/About/docs/Imprint')
+            }
+        },
+        {
+            path: 'terms',
+            name: 'about.terms',
+            meta: { authRequired: false },
+            components: {
+                toolbar: () => import('@/components/nav/toolbar/'),
+                default: () => import('@/views/general/About/docs/Terms')
+            }
+        },
+        {
+            path: 'cookies',
+            name: 'about.cookie',
+            meta: { authRequired: false },
+            components: {
+                toolbar: () => import('@/components/nav/toolbar/'),
+                default: () => import('@/views/general/About/docs/Cookie')
+            }
+        },
+        {
+            path: 'data',
+            name: 'about.data',
+            meta: { authRequired: false },
+            components: {
+                toolbar: () => import('@/components/nav/toolbar/'),
+                default: () => import('@/views/general/About/docs/Data')
+            }
+        }
+    ]
 
 }, {
 

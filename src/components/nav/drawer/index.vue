@@ -65,14 +65,6 @@
                                         <v-list-item-title>{{ $t('view.logout.title') }}</v-list-item-title>
                                     </v-list-item-content>
                                 </v-list-item>
-                                <v-list-item :to="{ name: 'terms' }" link>
-                                    <v-list-item-icon>
-                                        <v-icon>notes</v-icon>
-                                    </v-list-item-icon>
-                                    <v-list-item-content>
-                                        <v-list-item-title>{{ $t('view.terms.title') }}</v-list-item-title>
-                                    </v-list-item-content>
-                                </v-list-item>
                                 <v-list-item :to="{ name: 'about' }" link>
                                     <v-list-item-icon>
                                         <v-icon>info</v-icon>

@@ -147,14 +147,6 @@
         "title": "Premium erhalten",
         "description": ""
     },
-    "terms": {
-        "title": "Nutzungsbedingungen",
-        "description": "",
-        "cookie": {
-            "title": "Cookie-Richtlinie",
-            "description": ""
-        }
-    },
     "help": {
         "title": "Support",
         "description": "",
@@ -165,7 +157,23 @@
     },
     "about": {
         "title": "Über",
-        "description": ""
+        "description": "",
+        "imprint": {
+            "title": "Impressum",
+            "description": ""
+        },
+        "terms": {
+            "title": "Bedingungen und rechtliche Hinweise",
+            "description": ""
+        },
+        "cookie": {
+            "title": "Cookie-Richtlinie",
+            "description": ""
+        },
+        "data": {
+            "title": "Datenschutz",
+            "description": ""
+        }
     },
     "error": {
         "permission": {
