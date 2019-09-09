@@ -498,7 +498,7 @@ export default {
                     Wenn Sie Fragen zum Datenschutz haben, schreiben Sie uns bitte eine E-Mail oder wenden Sie sich direkt an die für den Datenschutz zu Beginn der Datenschutzerklärung aufgeführten, 
                     verantwortlichen Person in unserer Organisation.
                 </p>
-                <p class="body-2">
+                <p class="caption">
                     Basel, 09.09.2019<br/>
                     Quelle: <a href="https://www.swissanwalt.ch" target="_blank" rel="noopener">SwissAnwalt</a>
                 </p>

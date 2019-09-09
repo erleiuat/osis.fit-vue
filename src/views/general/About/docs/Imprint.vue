@@ -117,6 +117,10 @@ export default {
                     Für die Reproduktion jeglicher Elemente ist die schriftliche Zustimmung 
                     des Urheberrechtsträgers im Voraus einzuholen.
                 </p>
+                <p class="caption">
+                    Basel, 09.09.2019<br/>
+                    Quelle: <a href="https://www.swissanwalt.ch" target="_blank" rel="noopener">SwissAnwalt</a>
+                </p>
                 `
             }
         }
