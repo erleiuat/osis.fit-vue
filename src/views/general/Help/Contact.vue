@@ -87,7 +87,6 @@ export default {
             this.fd.firstname = usrInfo.firstname
             this.fd.lastname = usrInfo.lastname
             this.fd.mail = accInfo.mail
-
         }
     },
 
@@ -103,7 +102,6 @@ export default {
             }).finally(() => {
                 this.sending = false
             })
-
         }
     },
 
