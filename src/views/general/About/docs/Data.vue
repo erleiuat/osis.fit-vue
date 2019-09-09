@@ -1,11 +1,6 @@
 <template>
     <vcontainer>
         <v-row justify="center">
-
-            <v-col cols="12" md="11" class="display-1">
-                {{ $t('title') }}
-            </v-col>
-
             <v-col cols="12" md="11" v-html="$t('text')" />
 
             <v-col cols="12" md="5">
@@ -14,7 +9,7 @@
                 </v-btn>
             </v-col>
             <v-col cols="12" md="5" class="text-sm-right">
-                <p class="caption">{{ $t('langNotice') }} <a href="https://www.deepl.com/">Deepl.com</a></p>
+                <p class="caption">{{ $t('langNotice') }} <a class="caption" href="https://www.deepl.com/">Deepl.com</a></p>
             </v-col>
 
         </v-row>
@@ -238,12 +233,12 @@ export default {
                 </p> 
                 <p class="body-2">
                     For more information about Google reCAPTCHA and the related privacy statement, please visit our privacy policy: 
-                    <a href="https://www.google.com/privacy/ads/" target="_blank" rel="noopener">https://www.google.com/privacy/ads/</a>
+                    <a class="caption" href="https://www.google.com/privacy/ads/" target="_blank" rel="noopener">https://www.google.com/privacy/ads/</a>
                 </p>
                 <div class="headline font-weight-light">Privacy Statement for Google Analytics</div>
                 <p class="body-2">
                     This website uses Google Analytics, a web analytics service provided by Google Inc., 1600 Amphitheatre Parkway, Mountain View, CA 94043, USA. To disable Google Analytiscs, we provide 
-                    Google at <a href="https://tools.google.com/dlpage/gaoptout?hl=de" target="_blank" style="color: inherit;">https://tools.google.com/dlpage/gaoptout?hl=de</a> a browser plug-in for 
+                    Google at <a class="caption" href="https://tools.google.com/dlpage/gaoptout?hl=de" target="_blank" style="color: inherit;">https://tools.google.com/dlpage/gaoptout?hl=de</a> a browser plug-in for 
                     order. Google Analytics uses cookies. These are small text files that make it possible to store specific, user-related information on the user's terminal device. 
                     to store information. This allows an analysis of the use of our website by Google. The information collected by the cookie about the use of our website by Google 
                     of our pages (including your IP address) are usually transmitted to a Google server in the USA and stored there. We would like to point out that on this server 
@@ -253,7 +248,7 @@ export default {
                     from Google in the USA and shortened there. Google complies with the Privacy Shield provisions of the Privacy Shield Agreement and is not a party to the Privacy Shield program of the 
                     The U.S. Department of Commerce registers and uses the information collected to evaluate the use of our Web sites, to prepare reports for us about our use of them, and to provide other services to you. 
                     to provide services to us in this respect. You can find out more at 
-                    <a href="https://support.google.com/analytics/answer/6004245?hl=de" target="_blank" style="color: inherit;">https://support.google.com/analytics/answer/6004245?hl=de</a>.
+                    <a class="caption" href="https://support.google.com/analytics/answer/6004245" target="_blank" style="color: inherit;">support.google.com/analytics/answer/6004245</a>.
                 </p>
                 <div class="headline font-weight-light">Privacy statement for Google AdSense</div>
                 <p class="body-2">
@@ -272,15 +267,15 @@ export default {
                     required web fonts in their browser cache to display text and fonts correctly. If your browser does not support web fonts, a standard font will be used by your computer.
                 </p>
                 <p class="body-2">
-                    More information about Google Web Fonts can be found at <a href="https://developers.google.com/fonts/faq" target="_blank" style="color: inherit;">https://developers.google.com/fonts/faq</a> 
-                    and in Google's privacy policy: <a href="https://www.google.com/policies/privacy/" target="_blank" style="color: inherit;">https://www.google.com/policies/privacy/</a>
+                    More information about Google Web Fonts can be found at <a class="caption" href="https://developers.google.com/fonts/faq" target="_blank" style="color: inherit;">https://developers.google.com/fonts/faq</a> 
+                    and in Google's privacy policy: <a class="caption" href="https://www.google.com/policies/privacy/" target="_blank" style="color: inherit;">https://www.google.com/policies/privacy/</a>
                 </p>
                 <div class="headline font-weight-light">Google Tag Manager</div> 
                 <p class="body-2">
                     Google Tag Manager is a solution with which we can manage so-called website tags via a single interface, e.g. Google Analytics and other Google marketing services. 
                     to be able to integrate them into our online offer. The Tag Manager itself, which implements the tags, does not process any personal user data. With regard to the processing of the 
                     personal data of the users is referred to the following information about the Google services. 
-                    Terms of use: <a href="https://www.google.com/intl/de/tagmanager/use-policy.html" target="_blank" rel="noopener">https://www.google.com/intl/de/tagmanager/use-policy.html</a>.
+                    Terms of use: <a class="caption" href="https://www.google.com/intl/de/tagmanager/use-policy.html" target="_blank" rel="noopener">google.com/intl/de/tagmanager/use-policy</a>.
                 </p>
                 <div class="headline font-weight-light">Privacy policy for the use of Hotjar</div> 
                 <p class="body-2">
@@ -290,10 +285,10 @@ export default {
                     Hotjar uses a tracking code to collect and transfer your data. As soon as you visit our website, the Hotjar tracking code automatically collects the data stored on your computer. 
                     activity based data and stores it on the Hotjar servers (located in Ireland). In addition, the data collected by the website on your computer or terminal device 
                     cookies also contain data. For more information on how Hotjar works, please visit this page. 
-                    <a href="https://www.hotjar.com/privacy" target="_blank" rel="noopener">https://www.hotjar.com/privacy</a>.
+                    <a class="caption" href="https://www.hotjar.com/privacy" target="_blank" rel="noopener">https://www.hotjar.com/privacy</a>.
                 </p> 
                 <p class="body-2">
-                    If you would like to object to the collection of data by Hotjar (opt-out), please click here: <a href="https://www.hotjar.com/opt-out" target="_blank" rel="noopener">https://www.hotjar.com/opt-out</a>.
+                    If you would like to object to the collection of data by Hotjar (opt-out), please click here: <a class="caption" href="https://www.hotjar.com/opt-out" target="_blank" rel="noopener">https://www.hotjar.com/opt-out</a>.
                 </p>
                 <div class="headline font-weight-light">Privacy Statement for Facebook</div>
                 <p class="body-2">
@@ -301,14 +296,14 @@ export default {
                     browser and the Facebook servers. Data is already transferred to Facebook. If you have a Facebook account, this data can be linked to it. 
                     If you do not want this data to be associated with your Facebook account, please log out of Facebook before visiting our page. Interactions, in particular the use of a 
                     Comments or clicking a "Like" or "Share" button will also be forwarded to Facebook. Learn more at 
-                    <a href="https://de-de.facebook.com/about/privacy" target="_blank" style="color: inherit;">https://de-de.facebook.com/about/privacy</a>.
+                    <a class="caption" href="https://de-de.facebook.com/about/privacy" target="_blank" style="color: inherit;">https://de-de.facebook.com/about/privacy</a>.
                 </p>
                 <div class="headline font-weight-light">Privacy statement for Twitter</div>
                 <p class="body-2">
                     This WebSite uses features from Twitter, Inc., 1355 Market St, Suite 900, San Francisco, CA 94103, USA. When you access our pages with Twitter plug-ins, a connection is established between 
                     your browser and the Twitter servers. Data is already transferred to Twitter. If you have a Twitter account, these data can be linked to it. 
                     will be. If you do not want this data to be associated with your Twitter account, please log out of Twitter before visiting our site. Interactions, in particular clicking on them 
-                    of a "Re-Tweet" button are also forwarded to Twitter. You can learn more at <a href="https://twitter.com/privacy" target="_blank" style="color: inherit;">https://twitter.com/privacy</a>.
+                    of a "Re-Tweet" button are also forwarded to Twitter. You can learn more at <a class="caption" href="https://twitter.com/privacy" target="_blank" style="color: inherit;">https://twitter.com/privacy</a>.
                 </p>
                 <div class="headline font-weight-light">Privacy Statement for Instagram</div>
                 <p class="body-2">
@@ -317,25 +312,25 @@ export default {
                     assign the visit of our pages to your user account. We would like to point out that, as the provider of these pages, we do not have any knowledge of the content of the transmitted data or its use by Instagram.
                 </p>
                 <p class="body-2">
-                    For more information, see Instagram's privacy statement: <a href="https://instagram.com/about/legal/privacy/" target="_blank" style="color: inherit;">http://instagram.com/about/legal/privacy/</a>
+                    For more information, see Instagram's privacy statement: <a class="caption" href="https://instagram.com/about/legal/privacy/" target="_blank" style="color: inherit;">http://instagram.com/about/legal/privacy/</a>
                 </p>
                 <div class="headline font-weight-light">External payment service provider</div> 
                 <p class="body-2">
                     This WebSite uses external payment service providers whose platforms enable users and us to make payment transactions. For example
                 </p>
                 <ul>
-                    <li class="caption"> PostFinance <a href="https://www.postfinance.ch/de/detail/rechtliches-barrierefreiheit.html" target="_blank"> Link </a> </li>
-                    <li class="caption"> Visa <a href="https://www.visa.de/nutzungsbedingungen/visa-privacy-center.html" target="_blank"> Link </a> </li>
-                    <li class="caption"> Mastercard <a href="https://www.mastercard.ch/de-ch/datenschutz.html" target="_blank"> Link </a> </li>
-                    <li class="caption"> American Express <a href="https://www.americanexpress.com/de/content/privacy-policy-statement.html" target="_blank"> Link </a> </li>
-                    <li class="caption"> Paypal <a href="https://www.paypal.com/de/webapps/mpp/ua/privacy-full" target="_blank"> Link </a> </li>
-                    <li class="caption"> Bexio AG <a href="https://www.bexio.com/de-CH/datenschutz" target="_blank"> Link </a> </li>
-                    <li class="caption"> Payrexx AG <a href="https://www.payrexx.ch/site/assets/files/2592/datenschutzerklaerung.pdf" target="_blank"> Link </a> </li>
+                    <li class="caption"> PostFinance <a class="caption" href="https://www.postfinance.ch/de/detail/rechtliches-barrierefreiheit.html" target="_blank"> Link </a> </li>
+                    <li class="caption"> Visa <a class="caption" href="https://www.visa.de/nutzungsbedingungen/visa-privacy-center.html" target="_blank"> Link </a> </li>
+                    <li class="caption"> Mastercard <a class="caption" href="https://www.mastercard.ch/de-ch/datenschutz.html" target="_blank"> Link </a> </li>
+                    <li class="caption"> American Express <a class="caption" href="https://www.americanexpress.com/de/content/privacy-policy-statement.html" target="_blank"> Link </a> </li>
+                    <li class="caption"> Paypal <a class="caption" href="https://www.paypal.com/de/webapps/mpp/ua/privacy-full" target="_blank"> Link </a> </li>
+                    <li class="caption"> Bexio AG <a class="caption" href="https://www.bexio.com/de-CH/datenschutz" target="_blank"> Link </a> </li>
+                    <li class="caption"> Payrexx AG <a class="caption" href="https://www.payrexx.ch/site/assets/files/2592/datenschutzerklaerung.pdf" target="_blank"> Link </a> </li>
                     <li class="caption"> Apple Pay <a href="support.apple.com/de-ch/ht203027" target="_blank"> Link </a> </li>
                     <li class="caption"> Stripe <a href="stripe.com/ch/privacy" target="_blank"> Link </a> </li>
-                    <li class="caption"> Klarna <a href="https://www.klarna.com/de/datenschutz/" target="_blank"> Link </a> </li>
-                    <li class="caption"> Skrill <a href="https://www.skrill.com/de/fusszeile/datenschutzrichtlinie/" target="_blank"> Link </a> </li>
-                    <li class="caption"> Giropay <a href="https://www.giropay.de/rechtliches/datenschutz-agb/" target="_blank"> Link </a> </li>
+                    <li class="caption"> Klarna <a class="caption" href="https://www.klarna.com/de/datenschutz/" target="_blank"> Link </a> </li>
+                    <li class="caption"> Skrill <a class="caption" href="https://www.skrill.com/de/fusszeile/datenschutzrichtlinie/" target="_blank"> Link </a> </li>
+                    <li class="caption"> Giropay <a class="caption" href="https://www.giropay.de/rechtliches/datenschutz-agb/" target="_blank"> Link </a> </li>
                 </ul> <br/> 
                 <p class="body-2">
                     Within the scope of fulfilling contracts, we use payment service providers on the basis of the Swiss Data Protection Ordinance as well as and to the extent necessary, 
@@ -364,7 +359,7 @@ export default {
                 </p>
                 <p class="body-2">
                     You can find more information about the handling of user data in YouTube's Privacy Policy: 
-                    <a href="https://www.google.de/intl/de/policies/privacy" target="_blank" style="color: inherit;">https://www.google.de/intl/de/policies/privacy</a>
+                    <a class="caption" href="https://www.google.de/intl/de/policies/privacy" target="_blank" style="color: inherit;">https://www.google.de/intl/de/policies/privacy</a>
                 </p>
                 <div class="headline font-weight-light">Order processing in the online shop with customer account </div> 
                 <p class="body-2">
@@ -500,7 +495,7 @@ export default {
                 </p>
                 <p class="caption">
                     Basel, 09.09.2019<br/>
-                    Source: <a href="https://www.swissanwalt.ch" target="_blank" rel="noopener">SwissAnwalt</a>
+                    Source: <a class="caption" href="https://www.swissanwalt.ch" target="_blank" rel="noopener">SwissAnwalt</a>
                 </p>
                 `
             },
@@ -715,12 +710,12 @@ export default {
                 </p> 
                 <p class="body-2">
                     Nähere Informationen zu Google reCAPTCHA sowie die dazugehörige Datenschutzerklärung finden Sie unter: 
-                    <a href="https://www.google.com/privacy/ads/" target="_blank" rel="noopener">https://www.google.com/privacy/ads/</a>
+                    <a class="caption" href="https://www.google.com/privacy/ads/" target="_blank" rel="noopener">https://www.google.com/privacy/ads/</a>
                 </p>
                 <div class="headline font-weight-light">Datenschutzerklärung für Google Analytics</div>
                 <p class="body-2">
                     Diese WebSite verwendet Google Analytics, einen Webanalysedienst von Google Inc., 1600 Amphitheatre Parkway, Mountain View, CA 94043, USA. Zur Deaktivierung von Google Analytiscs stellt 
-                    Google unter <a href="https://tools.google.com/dlpage/gaoptout?hl=de" target="_blank" style="color: inherit;">https://tools.google.com/dlpage/gaoptout?hl=de</a> ein Browser-Plug-In zur 
+                    Google unter <a class="caption" href="https://tools.google.com/dlpage/gaoptout?hl=de" target="_blank" style="color: inherit;">https://tools.google.com/dlpage/gaoptout?hl=de</a> ein Browser-Plug-In zur 
                     Verfügung. Google Analytics verwendet Cookies. Das sind kleine Textdateien, die es möglich machen, auf dem Endgerät des Nutzers spezifische, auf den Nutzer bezogene 
                     Informationen zu speichern. Diese ermöglichen eine Analyse der Nutzung unseres Websiteangebotes durch Google. Die durch den Cookie erfassten Informationen über die Nutzung 
                     unserer Seiten (einschliesslich Ihrer IP-Adresse) werden in der Regel an einen Server von Google in den USA übertragen und dort gespeichert. Wir weisen darauf hin, dass auf dieser 
@@ -730,7 +725,7 @@ export default {
                     von Google in den USA übertragen und dort gekürzt. Google beachtet die Datenschutzbestimmungen des „Privacy Shield“-Abkommens und ist beim „Privacy Shield“-Programm des 
                     US-Handelsministeriums registriert und nutzt die gesammelten Informationen, um die Nutzung unserer Websites auszuwerten, Berichte für uns diesbezüglich zu verfassen und andere 
                     diesbezügliche Dienstleistungen an uns zu erbringen. Mehr erfahren Sie unter 
-                    <a href="https://support.google.com/analytics/answer/6004245?hl=de" target="_blank" style="color: inherit;">https://support.google.com/analytics/answer/6004245?hl=de</a>.
+                    <a class="caption" href="https://support.google.com/analytics/answer/6004245" target="_blank" style="color: inherit;">support.google.com/analytics/answer/6004245</a>.
                 </p>
                 <div class="headline font-weight-light">Datenschutzerklärung für Google AdSense</div>
                 <p class="body-2">
@@ -749,15 +744,15 @@ export default {
                     benötigten Web Fonts in ihren Browsercache, um Texte und Schriftarten korrekt anzuzeigen. Wenn Ihr Browser Web Fonts nicht unterstützt, wird eine Standardschrift von Ihrem Computer genutzt.
                 </p>
                 <p class="body-2">
-                    Weitere Informationen zu Google Web Fonts finden Sie unter <a href="https://developers.google.com/fonts/faq" target="_blank" style="color: inherit;">https://developers.google.com/fonts/faq</a> 
-                    und in der Datenschutzerklärung von Google: <a href="https://www.google.com/policies/privacy/" target="_blank" style="color: inherit;">https://www.google.com/policies/privacy/</a>
+                    Weitere Informationen zu Google Web Fonts finden Sie unter <a class="caption" href="https://developers.google.com/fonts/faq" target="_blank" style="color: inherit;">https://developers.google.com/fonts/faq</a> 
+                    und in der Datenschutzerklärung von Google: <a class="caption" href="https://www.google.com/policies/privacy/" target="_blank" style="color: inherit;">https://www.google.com/policies/privacy/</a>
                 </p>
                 <div class="headline font-weight-light">Google Tag Manager</div> 
                 <p class="body-2">
                     Google Tag Manager ist eine Lösung, mit der wir sog. Website-Tags über eine Oberfläche verwalten können und so z.B. Google Analytics sowie andere Google-Marketing-Dienste 
                     in unser Onlineangebot einbinden können. Der Tag Manager selbst, welcher die Tags implementiert, verarbeitet keine personenbezogenen Daten der Nutzer. Im Hinblick auf die Verarbeitung der 
                     personenbezogenen Daten der Nutzer wird auf die folgenden Angaben zu den Google-Diensten verwiesen. 
-                    Nutzungsrichtlinien: <a href="https://www.google.com/intl/de/tagmanager/use-policy.html" target="_blank" rel="noopener">https://www.google.com/intl/de/tagmanager/use-policy.html</a>.
+                    Nutzungsrichtlinien: <a class="caption" href="https://www.google.com/intl/de/tagmanager/use-policy.html" target="_blank" rel="noopener">google.com/intl/de/tagmanager/use-policy</a>.
                 </p>
                 <div class="headline font-weight-light">Datenschutzerklärung für die Nutzung von Hotjar</div> 
                 <p class="body-2">
@@ -767,10 +762,10 @@ export default {
                     Hotjar verwendet zur Erhebung und übertragung Ihrer Daten einen Tracking-Code. Sobald Sie unsere Website besuchen, erhebt der Hotjar Tracking-Code automatisch die auf Ihrer 
                     Aktivität beruhenden Daten und speichert Sie auf den Hotjar Servern (Standort Irland) ab. Zudem erheben die durch die Website auf Ihrem Computer oder Ihrem Endendgerät 
                     platzierten Cookies ebenfalls Daten. Für weitere Informationen, wie Hotjar arbeitet, besuchen Sie diese Seite 
-                    <a href="https://www.hotjar.com/privacy" target="_blank" rel="noopener">https://www.hotjar.com/privacy</a>.
+                    <a class="caption" href="https://www.hotjar.com/privacy" target="_blank" rel="noopener">https://www.hotjar.com/privacy</a>.
                 </p> 
                 <p class="body-2">
-                    Möchten Sie der Erhebung der Daten durch Hotjar widersprechen (Opt-Out), klicken Sie bitte hier: <a href="https://www.hotjar.com/opt-out" target="_blank" rel="noopener">https://www.hotjar.com/opt-out</a>.
+                    Möchten Sie der Erhebung der Daten durch Hotjar widersprechen (Opt-Out), klicken Sie bitte hier: <a class="caption" href="https://www.hotjar.com/opt-out" target="_blank" rel="noopener">https://www.hotjar.com/opt-out</a>.
                 </p>
                 <div class="headline font-weight-light">Datenschutzerklärung für Facebook</div>
                 <p class="body-2">
@@ -778,14 +773,14 @@ export default {
                     Browser und den Servern von Facebook aufgebaut. Dabei werden bereits Daten an Facebook übertragen. Besitzen Sie einen Facebook-Account, können diese Daten damit verknüpft werden. 
                     Wenn Sie keine Zuordnung dieser Daten zu Ihrem Facebook-Account wünschen, loggen Sie sich bitte vor dem Besuch unserer Seite bei Facebook aus. Interaktionen, insbesondere das Nutzen einer 
                     Kommentarfunktion oder das Anklicken eines „Like“- oder „Teilen“-Buttons werden ebenfalls an Facebook weitergegeben. Mehr erfahren Sie unter 
-                    <a href="https://de-de.facebook.com/about/privacy" target="_blank" style="color: inherit;">https://de-de.facebook.com/about/privacy</a>.
+                    <a class="caption" href="https://de-de.facebook.com/about/privacy" target="_blank" style="color: inherit;">https://de-de.facebook.com/about/privacy</a>.
                 </p>
                 <div class="headline font-weight-light">Datenschutzerklärung für Twitter</div>
                 <p class="body-2">
                     Diese WebSite verwendet Funktionen von Twitter, Inc., 1355 Market St, Suite 900, San Francisco, CA 94103, USA. Bei Aufruf unserer Seiten mit Twitter-Plug-Ins wird eine Verbindung zwischen 
                     Ihrem Browser und den Servern von Twitter aufgebaut. Dabei werden bereits Daten an Twitter übertragen. Besitzen Sie einen Twitter-Account, können diese Daten damit verknüpft 
                     werden. Wenn Sie keine Zuordnung dieser Daten zu Ihrem Twitter-Account wünschen, loggen Sie sich bitte vor dem Besuch unserer Seite bei Twitter aus. Interaktionen, insbesondere das Anklicken 
-                    eines „Re-Tweet“-Buttons werden ebenfalls an Twitter weitergegeben. Mehr erfahren Sie unter <a href="https://twitter.com/privacy" target="_blank" style="color: inherit;">https://twitter.com/privacy</a>.
+                    eines „Re-Tweet“-Buttons werden ebenfalls an Twitter weitergegeben. Mehr erfahren Sie unter <a class="caption" href="https://twitter.com/privacy" target="_blank" style="color: inherit;">https://twitter.com/privacy</a>.
                 </p>
                 <div class="headline font-weight-light">Datenschutzerklärung für Instagram</div>
                 <p class="body-2">
@@ -794,25 +789,25 @@ export default {
                     den Besuch unserer Seiten Ihrem Benutzerkonto zuordnen. Wir weisen darauf hin, dass wir als Anbieter der Seiten keine Kenntnis vom Inhalt der übermittelten Daten sowie deren Nutzung durch Instagram erhalten.
                 </p>
                 <p class="body-2">
-                    Weitere Informationen hierzu finden Sie in der Datenschutzerklärung von Instagram: <a href="https://instagram.com/about/legal/privacy/" target="_blank" style="color: inherit;">http://instagram.com/about/legal/privacy/</a>
+                    Weitere Informationen hierzu finden Sie in der Datenschutzerklärung von Instagram: <a class="caption" href="https://instagram.com/about/legal/privacy/" target="_blank" style="color: inherit;">http://instagram.com/about/legal/privacy/</a>
                 </p>
                 <div class="headline font-weight-light">Externe Zahlungsdienstleister</div> 
                 <p class="body-2">
                     Diese WebSite setzt externe Zahlungsdienstleister ein, über deren Plattformen die Nutzer und wir Zahlungstransaktionen vornehmen können. Zum Beispiel über
                 </p>
                 <ul>
-                    <li class="caption"> PostFinance <a href="https://www.postfinance.ch/de/detail/rechtliches-barrierefreiheit.html" target="_blank"> Link </a> </li>
-                    <li class="caption"> Visa <a href="https://www.visa.de/nutzungsbedingungen/visa-privacy-center.html" target="_blank"> Link </a> </li>
-                    <li class="caption"> Mastercard <a href="https://www.mastercard.ch/de-ch/datenschutz.html" target="_blank"> Link </a> </li>
-                    <li class="caption"> American Express <a href="https://www.americanexpress.com/de/content/privacy-policy-statement.html" target="_blank"> Link </a> </li>
-                    <li class="caption"> Paypal <a href="https://www.paypal.com/de/webapps/mpp/ua/privacy-full" target="_blank"> Link </a> </li>
-                    <li class="caption"> Bexio AG <a href="https://www.bexio.com/de-CH/datenschutz" target="_blank"> Link </a> </li>
-                    <li class="caption"> Payrexx AG <a href="https://www.payrexx.ch/site/assets/files/2592/datenschutzerklaerung.pdf" target="_blank"> Link </a> </li>
+                    <li class="caption"> PostFinance <a class="caption" href="https://www.postfinance.ch/de/detail/rechtliches-barrierefreiheit.html" target="_blank"> Link </a> </li>
+                    <li class="caption"> Visa <a class="caption" href="https://www.visa.de/nutzungsbedingungen/visa-privacy-center.html" target="_blank"> Link </a> </li>
+                    <li class="caption"> Mastercard <a class="caption" href="https://www.mastercard.ch/de-ch/datenschutz.html" target="_blank"> Link </a> </li>
+                    <li class="caption"> American Express <a class="caption" href="https://www.americanexpress.com/de/content/privacy-policy-statement.html" target="_blank"> Link </a> </li>
+                    <li class="caption"> Paypal <a class="caption" href="https://www.paypal.com/de/webapps/mpp/ua/privacy-full" target="_blank"> Link </a> </li>
+                    <li class="caption"> Bexio AG <a class="caption" href="https://www.bexio.com/de-CH/datenschutz" target="_blank"> Link </a> </li>
+                    <li class="caption"> Payrexx AG <a class="caption" href="https://www.payrexx.ch/site/assets/files/2592/datenschutzerklaerung.pdf" target="_blank"> Link </a> </li>
                     <li class="caption"> Apple Pay <a href="support.apple.com/de-ch/ht203027" target="_blank"> Link </a> </li>
                     <li class="caption"> Stripe <a href="stripe.com/ch/privacy" target="_blank"> Link </a> </li>
-                    <li class="caption"> Klarna <a href="https://www.klarna.com/de/datenschutz/" target="_blank"> Link </a> </li>
-                    <li class="caption"> Skrill <a href="https://www.skrill.com/de/fusszeile/datenschutzrichtlinie/" target="_blank"> Link </a> </li>
-                    <li class="caption"> Giropay <a href="https://www.giropay.de/rechtliches/datenschutz-agb/" target="_blank"> Link </a> </li>
+                    <li class="caption"> Klarna <a class="caption" href="https://www.klarna.com/de/datenschutz/" target="_blank"> Link </a> </li>
+                    <li class="caption"> Skrill <a class="caption" href="https://www.skrill.com/de/fusszeile/datenschutzrichtlinie/" target="_blank"> Link </a> </li>
+                    <li class="caption"> Giropay <a class="caption" href="https://www.giropay.de/rechtliches/datenschutz-agb/" target="_blank"> Link </a> </li>
                 </ul> <br/> 
                 <p class="body-2">
                     Im Rahmen der Erfüllung von Verträgen setzen wir die Zahlungsdienstleister auf Grundlage der schweizerischen Datenschutzverordnung sowie und soweit nötig, 
@@ -841,7 +836,7 @@ export default {
                 </p>
                 <p class="body-2">
                     Weitere Informationen zum Umgang von Nutzerdaten finden Sie in der Datenschutzerklärung von YouTube unter: 
-                    <a href="https://www.google.de/intl/de/policies/privacy" target="_blank" style="color: inherit;">https://www.google.de/intl/de/policies/privacy</a>
+                    <a class="caption" href="https://www.google.de/intl/de/policies/privacy" target="_blank" style="color: inherit;">https://www.google.de/intl/de/policies/privacy</a>
                 </p>
                 <div class="headline font-weight-light">Bestellabwicklung im Online-Shop mit Kundenkonto</div> 
                 <p class="body-2">
@@ -977,7 +972,7 @@ export default {
                 </p>
                 <p class="caption">
                     Basel, 09.09.2019<br/>
-                    Quelle: <a href="https://www.swissanwalt.ch" target="_blank" rel="noopener">SwissAnwalt</a>
+                    Quelle: <a class="caption" href="https://www.swissanwalt.ch" target="_blank" rel="noopener">SwissAnwalt</a>
                 </p>
                 `
             }

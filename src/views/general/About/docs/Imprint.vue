@@ -1,11 +1,6 @@
 <template>
     <vcontainer>
         <v-row justify="center">
-
-            <v-col cols="12" md="11" class="display-1">
-                {{ $t('title') }}
-            </v-col>
-
             <v-col cols="12" md="11" v-html="$t('text')" />
 
             <v-col cols="12" md="5">
