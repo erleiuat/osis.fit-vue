@@ -89,15 +89,37 @@ export default {
             fd: {
                 height: null,
                 gender: null,
-                birthdate: null,
+                birthdate: '0000-00-00',
                 pal: null
             },
             rule: {
                 valid: false,
                 require: [
                     v => !!v || this.$t('alert.v.require')
+                ],
+                dDay: [
+                    v => !!v || this.$t('alert.v.require'),
+                    v => v >= 1 || this.$t('alert.v.invalid'),
+                    v => v <= 31 || this.$t('alert.v.invalid')
+                ],
+                dMonth: [
+                    v => !!v || this.$t('alert.v.require'),
+                    v => v >= 1 || this.$t('alert.v.invalid'),
+                    v => v <= 12 || this.$t('alert.v.invalid')
+                ],
+                dYear: [
+                    v => !!v || this.$t('alert.v.require'),
+                    v => v >= 1990 || this.$t('alert.v.invalid'),
+                    v => v <= this.curYear || this.$t('alert.v.invalid')
                 ]
             }
+        }
+    },
+
+    computed: {
+        curYear () {
+            var nDate = this.$store.getters['today'].date.split('-')
+            return nDate[0]
         }
     },
 
@@ -105,7 +127,7 @@ export default {
         var data = this.$store.getters['user/metabolism']
         this.fd.height = data.height
         this.fd.gender = data.gender
-        this.fd.birthdate = data.birthdate
+        this.fd.birthdate = data.birthdate || '0000-00-00'
         this.fd.pal = data.pal
         if (!this.fd.height && !this.fd.pal) {
             this.openPanel = [0, 1]

@@ -18,24 +18,23 @@
         <v-col cols="12" md="5">
             <v-text-field :label="$t('height')" v-model="fd.height" :rules="rule.require" type="number" suffix="cm" filled />
         </v-col>
-        <v-col cols="12" md="5">
+        <v-col cols="12" md="5" class="pt-md-3">
             <v-select :label="$t('gender')" v-model="fd.gender" :items="genders" :rules="rule.require" filled />
         </v-col>
 
-        <!-- TODO
         <v-col cols="12" md="5">
-            <v-text-field v-model="formBirthdate" :label="$t('birthdate')" type="text" append-icon="event" filled />
-        </v-col>
-        -->
-
-        <v-col cols="12" md="1">
-            <v-text-field v-model="fbdDay" :rules="rule.require" placeholder="DD" type="number" minlength="2" maxlength="2" min="1" max="31" filled />
-        </v-col>
-        <v-col cols="12" md="1">
-            <v-text-field v-model="fbdMonth" :rules="rule.require" placeholder="MM" type="number" minlength="2" maxlength="2" min="1" max="12" filled />
-        </v-col>
-        <v-col cols="12" md="3">
-            <v-text-field v-model="fbdYear" :rules="rule.require" placeholder="YYYY" type="number" minlength="4" maxlength="4" min="1990" :max="curYear" filled />
+            <p class="caption mb-0">{{ $t('birthdate') }}</p>
+            <v-row>
+                <v-col cols="3" class="pt-0 pr-0">
+                    <v-text-field v-model="fbdDay" :rules="rule.dDay" placeholder="DD" type="number" minlength="2" maxlength="2" min="1" max="31" filled single-line />
+                </v-col>
+                <v-col cols="3" class="pt-0 pr-0">
+                    <v-text-field v-model="fbdMonth" :rules="rule.dMonth" placeholder="MM" type="number" minlength="2" maxlength="2" min="1" max="12" filled single-line />
+                </v-col>
+                <v-col cols="6" class="pt-0">
+                    <v-text-field v-model="fbdYear" :rules="rule.dYear" placeholder="YYYY" type="number" minlength="4" maxlength="4" min="1990" :max="curYear" filled single-line />
+                </v-col>
+            </v-row>
         </v-col>
 
         <v-col cols="12" class="text-center">
@@ -61,7 +60,7 @@ export default {
 
     computed: {
 
-        curYear(){
+        curYear () {
             var nDate = this.$store.getters['today'].date.split('-')
             return nDate[0]
         },
@@ -70,13 +69,13 @@ export default {
             get () {
                 if (this.fd.birthdate) {
                     var nDate = this.fd.birthdate.split('-')
-                    return nDate[2]
+                    if (parseInt(nDate[2]) > 0) return nDate[2]
                 }
-                return 0
+                return null
             },
             set (val) {
-                val = parseInt(val)
-                if (val <= 0) val = '00'
+                val = parseInt(val) || 0
+                if (val <= 0) val = null
                 else if (val <= 9) val = '0' + val
                 else if (val > 31) val = 31
                 var nDate = this.fd.birthdate.split('-')
@@ -88,14 +87,13 @@ export default {
             get () {
                 if (this.fd.birthdate) {
                     var nDate = this.fd.birthdate.split('-')
-                    return nDate[1]
+                    if (parseInt(nDate[1]) > 0) return nDate[1]
                 }
-                return 0
+                return null
             },
             set (val) {
-                val = parseInt(val)
-                if (val <= 0) val = '00'
-                else if (val <= 9) val = '0' + val
+                val = parseInt(val) || 0
+                if (val <= 9) val = '0' + val
                 else if (val > 12) val = 12
                 var nDate = this.fd.birthdate.split('-')
                 this.fd.birthdate = nDate[0] + '-' + val + '-' + nDate[2]
@@ -106,12 +104,12 @@ export default {
             get () {
                 if (this.fd.birthdate) {
                     var nDate = this.fd.birthdate.split('-')
-                    return nDate[0]
+                    if (parseInt(nDate[0]) > 0) return nDate[0]
                 }
-                return 0
+                return null
             },
             set (val) {
-                val = parseInt(val)
+                val = parseInt(val) || 0
                 if (val <= 0) val = '0000'
                 else if (val <= 9) val = '000' + val
                 else if (val <= 99) val = '00' + val

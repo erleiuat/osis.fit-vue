@@ -8,8 +8,8 @@
 
         <v-row justify="space-between">
             <v-col cols="auto">
-                <v-btn text :to="{ name: 'terms' }">
-                    {{ $t('view.terms.title') }}
+                <v-btn text :to="{ name: 'about' }">
+                    {{ $t('view.about.title') }}
                 </v-btn>
             </v-col>
             <v-col cols="auto">
