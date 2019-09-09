@@ -2,18 +2,18 @@
     <vcontainer>
         <v-row justify="center">
 
-            <v-col cols="12" sm="10" class="display-1">
+            <v-col cols="12" md="11" class="display-1">
                 {{ $t('title') }}
             </v-col>
 
-            <v-col cols="12" sm="10" v-html="$t('text')" />
+            <v-col cols="12" md="11" v-html="$t('text')" />
 
-            <v-col cols="12" sm="5">
+            <v-col cols="12" md="5">
                 <v-btn outlined block :to="{name:'help.contact'}">
                     {{ $t('contact') }}
                 </v-btn>
             </v-col>
-            <v-col cols="12" sm="5" class="text-sm-right">
+            <v-col cols="12" md="5" class="text-sm-right">
                 <p class="caption">{{ $t('langNotice') }} <a href="https://www.deepl.com/">Deepl.com</a></p>
             </v-col>
 
