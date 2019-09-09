@@ -12,8 +12,8 @@
 
         <transition name="zoom">
             <v-row v-if="success">
-                <v-col cols="12" sm="10">
-                    <v-alert outline :value="true" type="success" v-if="success">
+                <v-col cols="12">
+                    <v-alert outlined :value="true" type="success" v-if="success">
                         <div class="title" v-html="$t('success.title')" />
                         <div class="body-2" v-html="$t('success.text')" />
                     </v-alert>
@@ -64,7 +64,7 @@ export default {
                 mail: '',
                 subject: '',
                 message: '',
-                language: this.$store.state.app.lang
+                language: this.$store.getters['app'].locale
             },
             rule: {
                 valid: false,
