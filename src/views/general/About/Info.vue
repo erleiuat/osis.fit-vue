@@ -67,12 +67,17 @@
                 </div>
             </v-col>
 
-            <v-col cols="12" md="6">
+            <v-col cols="12" md="4">
+                <v-btn outlined block :to="{name: 'help'}">
+                    {{ $t('faqBtn') }}
+                </v-btn>
+            </v-col>
+            <v-col cols="12" md="4">
                 <v-btn outlined block :to="{name: 'help.contact'}">
                     {{ $t('contactBtn') }}
                 </v-btn>
             </v-col>
-            <v-col cols="12" md="6">
+            <v-col cols="12" md="4">
                 <v-btn outlined block href="mailto:mail@osis.io" target="_blank">
                     {{ $t('mailBtn') }}
                 </v-btn>
@@ -89,6 +94,7 @@ export default {
     i18n: {
         messages: {
             en: {
+                faqBtn: 'Frequently asked questions',
                 contactBtn: 'Contact-Form',
                 mailBtn: 'E-Mail',
                 title: 'Imprint and Legal Notice',
@@ -106,6 +112,7 @@ export default {
                 data: 'Privacy-Policy'
             },
             de: {
+                faqBtn: 'Oft gestellte Fragen',
                 contactBtn: 'Kontaktformular',
                 mailBtn: 'E-Mail',
                 title: 'Impressum und rechtliche Hinweise',

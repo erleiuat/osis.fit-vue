@@ -1,7 +1,7 @@
 <template>
     <vcontainer align="space-evenly">
         <v-row justify="center">
-            <v-col cols="12" sm="10">
+            <v-col cols="12" md="10">
                 <div class="display-1">
                     Support
                 </div>
@@ -9,13 +9,13 @@
         </v-row>
 
         <v-row justify="center">
-            <v-col cols="12" sm="10">
+            <v-col cols="12" md="10">
                 <div class="headline">
                     FAQ
                 </div>
             </v-col>
-            <v-col cols="12" sm="10">
-                <v-expansion-panels>
+            <v-col cols="12" md="10">
+                <v-expansion-panels v-model="openPanel">
                     <v-expansion-panel v-for="(item, i) in faqItems" :key="i">
                         <v-expansion-panel-header class="body-1 text-center">
                             {{ item.title }}
@@ -28,8 +28,8 @@
             </v-col>
         </v-row>
 
-        <v-row dense justify="end">
-            <v-col cols="auto" class="text-right">
+        <v-row dense>
+            <v-col cols="12" md="10" class="text-right">
                 {{ $t('stillQuesting') }}<br />
                 <v-btn outlined :to="{name: 'help.contact'}">
                     {{ $t('supBtn') }}
@@ -46,9 +46,12 @@ export default {
 
     data () {
         return {
+            openPanel: 2,
             faqItems: [
                 { title: this.$t('fqi.a.title'), text: this.$t('fqi.a.text') },
-                { title: this.$t('fqi.b.title'), text: this.$t('fqi.b.text') }
+                { title: this.$t('fqi.b.title'), text: this.$t('fqi.b.text') },
+                { title: this.$t('fqi.c.title'), text: this.$t('fqi.c.text') },
+                { title: this.$t('fqi.d.title'), text: this.$t('fqi.d.text') }
             ]
         }
     },
@@ -93,6 +96,25 @@ export default {
                         Further information on the PAL value can be found at 
                         <a href="https://de.wikipedia.org/wiki/Physical_activity_level" target="_blank">Wikipedia</a>.
                         `
+                    },
+                    c: {
+                        title: 'How accurate are the calculations? Where do they come from?',
+                        text: `
+                        When developing and checking our formulas, we are very precise and also work with
+                        <b> Swiss recognized doctors</b>. <br/><br/>
+                        The methods are basically the same as those used for many other fitness and 
+                        Weight loss applications (WeightWatchers, BodyChange etc.) and have often proven 
+                        their effectiveness in the past. <br/><br/>
+                        After all, <b>the most important factor</b> for the accuracy of the calculations and therefore your
+                        Success <b> is always you </b> - that's why it is important that you keep your information 
+                        (weight, calories consumed and additional activities) constantly up to date.
+                        `
+                    },
+                    d: {
+                        title: 'Die Resultate der Berechnungen scheinen mir nicht richtig. Woran liegt das?',
+                        text: `
+
+                        `
                     }
                 }
             },
@@ -133,6 +155,26 @@ export default {
                         du deshalb als "Aktivität" in der App eintragen.<br/><br/>
                         Weitere Infomationen zum PAL-Wert/Leistungsumsatz findest du auf 
                         <a href="https://de.wikipedia.org/wiki/Leistungsumsatz" target="_blank">Wikipedia</a>.
+                        `
+                    },
+                    c: {
+                        title: 'Wie genau sind die Berechnungen? Woher stammen sie?',
+                        text: `
+                        Bei der Erarbeitung und Überprüfung unserer Formeln sind wir sehr genau und arbeiten
+                        auch mit <b>schweizerisch anerkannten Ärzten</b> zusammen. <br/><br/>
+                        Die Methoden sind grundsätzlich die Selben wie bei zahlreichen anderen Fitness- und 
+                        Gewichtsverlust-Anwendungen (WeightWatchers, BodyChange etc.) und haben ihre Wirksamkeit 
+                        in der Vergangenheit schon oft belegt. <br/><br/>
+                        <b>Der wichtigste Faktor</b> für die Richtigkeit der Berechnungen und somit deinen
+                        Erfolg <b>bist jedoch immer du</b> - deshalb ist es wichtig, dass du deine Angaben 
+                        (Gewicht, konsumierte Kalorien und zusätzliche Aktivitäten) stetig auf dem 
+                        aktuellsten Stand hälst.
+                        `
+                    },
+                    d: {
+                        title: 'Die Resultate der Berechnungen scheinen mir nicht richtig. Woran liegt das?',
+                        text: `
+                            
                         `
                     }
                 }
