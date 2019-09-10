@@ -2,12 +2,15 @@
     <vcontainer align="space-evenly">
 
         <v-row v-if="item && loaded" align="center" justify="center" dense>
-            <v-col cols="12" md="10" class="title">
-                {{ item.title }}
-            </v-col>
             <v-col cols="12" md="10">
-                {{ item.description }}
+                <v-sheet class="pa-2 text-left">
+                    <div class="title">{{ item.title }}</div>
+                    <div class="caption">{{ item.description }}</div>
+                </v-sheet>
             </v-col>
+        </v-row>
+
+        <v-row v-if="item && loaded" justify="center" dense>
             <v-col cols="12" md="10">
                 <div v-html="item.content" />
             </v-col>

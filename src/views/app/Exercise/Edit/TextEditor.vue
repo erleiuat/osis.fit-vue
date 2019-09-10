@@ -1,11 +1,16 @@
 <template>
     <div>
-        <vue-editor v-model="contents" />
+        <vue-editor v-model="contents" :editorOptions="editorSettings" />
     </div>
 </template>
 
 <script>
-import { VueEditor } from "vue2-editor";
+import { VueEditor, Quill } from 'vue2-editor'
+import { ImageDrop } from 'quill-image-drop-module'
+import ImageResize from 'quill-image-resize-module'
+
+Quill.register('modules/imageDrop', ImageDrop)
+Quill.register('modules/imageResize', ImageResize)
 
 export default {
     name: 'TextEditor',
@@ -15,6 +20,17 @@ export default {
     },
 
     props: ['value'],
+
+    data () {
+        return {
+            editorSettings: {
+                modules: {
+                    imageDrop: true,
+                    imageResize: {}
+                }
+            }
+        }
+    },
 
     computed: {
 
