@@ -23,7 +23,7 @@ export default new Vuex.Store({
         loading: 0,
         updating: false,
         authRefresh: false,
-        hasLoaded: (VueCookies.get('hasLoaded') ? true : false),
+        hasLoaded: (!!VueCookies.get('hasLoaded')),
         cookiesAccepted: VueCookies.get('cAccept') || false,
         app: {
             drawer: null,
