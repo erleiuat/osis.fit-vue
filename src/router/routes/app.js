@@ -2,7 +2,7 @@ module.exports = [{
 
     name: 'dashboard',
     path: '/dashboard',
-    meta: { authRequired: true },
+    meta: { authRequired: false }, // TODO: Change back to true
     components: {
         toolbar: () => import('@/components/nav/toolbar/'),
         default: () => import('@/views/app/Dashboard/'),

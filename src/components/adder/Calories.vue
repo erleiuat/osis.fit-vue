@@ -25,10 +25,16 @@
                 <v-form v-model="rule.valid" ref="form" v-on:submit.prevent>
 
                     <v-row dense align="baseline">
-                        <v-col cols="12">
+                        <v-col cols="12" md="6">
                             <v-btn @click="openSelect()" block small outlined>
                                 {{ $t('selectTemplate') }}
                                 <v-icon right>view_carousel</v-icon>
+                            </v-btn>
+                        </v-col>
+                        <v-col cols="12" md="6">
+                            <v-btn @click="scanCode()" block small outlined>
+                                {{ $t('scanCode') }}
+                                <v-icon right>photo_camera</v-icon>
                             </v-btn>
                         </v-col>
                         <v-col cols="12">
@@ -113,6 +119,11 @@ export default {
 
     methods: {
 
+        scanCode(){
+            console.log('TODO: Open Barcode scanner')
+            // TODO: Open Barcode scanner
+        },
+
         calTotal () {
             if (this.amount > 0 && this.caloriesPer100 > 0) {
                 this.fd.calories = Math.round(((this.amount / 100) * this.caloriesPer100) * 100) / 100
@@ -156,13 +167,15 @@ export default {
                 title: 'Add Calories',
                 caloriesPer100: 'Calories per 100 g/ml',
                 calories: 'Calories Total',
-                selectTemplate: 'Select Template'
+                selectTemplate: 'Select Template',
+                scanCode: 'Scan Barcode'
             },
             de: {
                 title: 'Kalorien hinzufügen',
                 caloriesPer100: 'Kalorien pro 100 g/ml',
                 calories: 'Kalorien Total',
-                selectTemplate: 'Vorlage auswählen'
+                selectTemplate: 'Vorlage auswählen',
+                scanCode: 'Barcode scannen'
             }
         }
     }
