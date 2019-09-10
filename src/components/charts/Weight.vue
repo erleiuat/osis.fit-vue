@@ -1,9 +1,9 @@
 <template>
-    <v-card v-if="values" outlined>
+    <v-card v-if="values" flat>
         <v-card-text class="title pb-0 pt-2">
             {{ $t('title') }}
         </v-card-text>
-        <canvas id="wChart" />
+        <canvas id="wChart" height="150px" />
     </v-card>
 </template>
 
@@ -43,7 +43,6 @@ export default {
         chaDa () {
             var tmp = this.values
             var color = '#' + this.$vuetify.theme.currentTheme.primary
-            var color2 = '#' + this.$vuetify.theme.currentTheme.secondary
 
             return {
                 type: 'line',
@@ -52,13 +51,16 @@ export default {
                     datasets: [
                         {
                             data: tmp.data,
-                            backgroundColor: color2,
+                            backgroundColor: 'rgba(255, 255, 255, 0.2)',
                             borderColor: color,
                             borderWidth: 3
                         }
                     ]
                 },
                 options: {
+                    legend: {
+                        display: false
+                    },
                     responsive: true,
                     lineTension: 2,
                     scales: {
@@ -96,6 +98,7 @@ export default {
     },
 
     mounted () {
+        if (!this.values) return
         this.createChart('wChart', this.chaDa)
         // this.convertCanvasToImage('wChart'); TODO
     },

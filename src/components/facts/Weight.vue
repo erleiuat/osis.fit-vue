@@ -9,7 +9,7 @@
             <v-row no-gutters align="end" justify="space-between" style="height: 95px">
 
                 <v-col cols="auto">
-                    <div class="display-2">{{ cVals.weight }}</div>
+                    <div class="display-2">{{ cVals.weight }} Kg</div>
                     <div class="caption" v-if="cVals.aimWeight">{{ $t('target') }}: {{ cVals.aimWeight }}</div>
                 </v-col>
 
