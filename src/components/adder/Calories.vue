@@ -1,263 +1,205 @@
 <template>
-  <v-dialog
-    v-model="show"
-    :fullscreen="$vuetify.breakpoint.xs"
-    width="600px"
-    transition="dialog-bottom-transition"
-  >
-    <template v-slot:activator="{ on }">
-      <slot v-bind:on="on">
-        <v-btn fab depressed large v-on="on" color="primary">
-          <v-icon>add</v-icon>
-        </v-btn>
-      </slot>
-    </template>
+    <v-dialog v-model="show" :fullscreen="$vuetify.breakpoint.xs" width="600px" transition="dialog-bottom-transition">
+        <template v-slot:activator="{ on }">
+            <slot v-bind:on="on">
+                <v-btn fab depressed large v-on="on" color="primary">
+                    <v-icon>add</v-icon>
+                </v-btn>
+            </slot>
+        </template>
 
-    <v-card>
-      <v-toolbar color="primary" flat dark>
-        <v-btn icon @click="show = false">
-          <v-icon>close</v-icon>
-        </v-btn>
-        <v-toolbar-title>{{ $t('title') }}</v-toolbar-title>
-        <v-spacer></v-spacer>
-        <v-btn icon @click="add()" :loading="sending" :disabled="!rule.valid">
-          <v-icon>save</v-icon>
-        </v-btn>
-      </v-toolbar>
+        <v-card>
+            <v-toolbar color="primary" flat dark>
+                <v-btn icon @click="show = false">
+                    <v-icon>close</v-icon>
+                </v-btn>
+                <v-toolbar-title>{{ $t('title') }}</v-toolbar-title>
+                <v-spacer></v-spacer>
+                <v-btn icon @click="add()" :loading="sending" :disabled="!rule.valid">
+                    <v-icon>save</v-icon>
+                </v-btn>
+            </v-toolbar>
 
-      <vcontainer>
-        <v-form
-          v-model="rule.valid"
-          ref="form"
-          v-on:submit.prevent
-          :class="{hiddenoverflow : scanning}"
-        >
-          <v-row dense align="baseline">
-            <v-col cols="12" md="6">
-              <v-btn @click="openSelect()" block small outlined>
-                {{ $t('selectTemplate') }}
-                <v-icon right>view_carousel</v-icon>
-              </v-btn>
-            </v-col>
-            <v-col cols="12" md="6">
-              <v-btn @click="scanCode()" block small outlined>
-                {{ $t('scanCode') }}
-                <v-icon right>photo_camera</v-icon>
-              </v-btn>
-            </v-col>
-            <v-col cols="12">
-              <v-quagga
-                :onDetected="logIt"
-                :readerSize="readerSize"
-                :readerTypes="['ean_reader']"
-                v-if="scanning"
-              ></v-quagga>
-            </v-col>
+            <vcontainer>
+                <v-form v-model="rule.valid" ref="form" v-on:submit.prevent v-show="{hiddenoverflow : scanning}">
 
-            <v-col cols="12" :class="{hidden : scanning}">
-              <v-text-field v-model="fd.title" :label="$t('ft.title')" type="text" outlined />
-            </v-col>
-            <v-col cols="6" :class="{hidden : scanning}">
-              <v-text-field
-                v-model="fd.date"
-                :label="$t('ft.date')"
-                :rules="rule.require"
-                type="date"
-                outlined
-              />
-            </v-col>
-            <v-col cols="6" :class="{hidden : scanning}">
-              <v-text-field
-                v-model="fd.time"
-                :label="$t('ft.time')"
-                :rules="rule.require"
-                type="time"
-                outlined
-                append-icon="access_time"
-              />
-            </v-col>
+                    <v-row dense align="baseline">
+                        <v-col cols="12" md="6">
+                            <v-btn @click="openSelect()" block small outlined>
+                                {{ $t('selectTemplate') }}
+                                <v-icon right>view_carousel</v-icon>
+                            </v-btn>
+                        </v-col>
+                        <v-col cols="12" md="6">
+                            <v-btn @click="scanCode()" block small outlined>
+                                {{ $t('scanCode') }}
+                                <v-icon right>photo_camera</v-icon>
+                            </v-btn>
+                        </v-col>
+                        <v-col cols="12">
+                            <v-quagga :onDetected="logIt" :readerSize="readerSize" :readerTypes="['ean_reader']" v-if="scanning"></v-quagga>
+                        </v-col>
 
-            <v-col cols="12" sm="6" :class="{hidden : scanning}">
-              <v-text-field
-                v-model="caloriesPer100"
-                :label="$t('caloriesPer100')"
-                @input="calTotal()"
-                outlined
-                type="number"
-                suffix="Kcal"
-              />
-            </v-col>
-            <v-col cols="12" sm="6" :class="{hidden : scanning}">
-              <v-text-field
-                v-model="amount"
-                :label="$t('ft.amount')"
-                @input="calTotal()"
-                outlined
-                type="number"
-                suffix="g / ml"
-              />
-            </v-col>
+                        <v-col cols="12" :class="{hidden : scanning}">
+                            <v-text-field v-model="fd.title" :label="$t('ft.title')" type="text" outlined />
+                        </v-col>
+                        <v-col cols="6" :class="{hidden : scanning}">
+                            <v-text-field v-model="fd.date" :label="$t('ft.date')" :rules="rule.require" type="date" outlined />
+                        </v-col>
+                        <v-col cols="6" :class="{hidden : scanning}">
+                            <v-text-field v-model="fd.time" :label="$t('ft.time')" :rules="rule.require" type="time" outlined append-icon="access_time" />
+                        </v-col>
 
-            <v-col cols="12" :class="{hidden : scanning}">
-              <v-text-field
-                v-model="fd.calories"
-                :label="$t('calories')"
-                :rules="rule.require"
-                type="number"
-                suffix="Kcal"
-                outlined
-              />
-            </v-col>
-            <v-col cols="12" :class="{hidden : scanning}">
-              <v-btn
-                @click="add()"
-                :loading="sending"
-                :disabled="!rule.valid"
-                type="submit"
-                color="primary"
-                block
-                depressed
-              >{{ $t('btn.save') }}</v-btn>
-            </v-col>
-          </v-row>
-        </v-form>
-      </vcontainer>
-    </v-card>
-    <TemplateSelect :show="selector" @select="use" />
-  </v-dialog>
+                        <v-col cols="12" sm="6" :class="{hidden : scanning}">
+                            <v-text-field v-model="caloriesPer100" :label="$t('caloriesPer100')" @input="calTotal()" outlined type="number" suffix="Kcal" />
+                        </v-col>
+                        <v-col cols="12" sm="6" :class="{hidden : scanning}">
+                            <v-text-field v-model="amount" :label="$t('ft.amount')" @input="calTotal()" outlined type="number" suffix="g / ml" />
+                        </v-col>
+
+                        <v-col cols="12" :class="{hidden : scanning}">
+                            <v-text-field v-model="fd.calories" :label="$t('calories')" :rules="rule.require" type="number" suffix="Kcal" outlined />
+                        </v-col>
+                        <v-col cols="12" :class="{hidden : scanning}">
+                            <v-btn @click="add()" :loading="sending" :disabled="!rule.valid" type="submit" color="primary" block depressed>{{ $t('btn.save') }}</v-btn>
+                        </v-col>
+                    </v-row>
+                </v-form>
+            </vcontainer>
+        </v-card>
+        <TemplateSelect :show="selector" @select="use" />
+    </v-dialog>
 </template>
 
 <script>
-import VueQuagga from "vue-quaggajs";
-
-const TemplateSelect = () => import("@/components/adder/TemplateSelect/");
+const TemplateSelect = () => import('@/components/adder/TemplateSelect/')
 
 export default {
-  name: "CalorieAdder",
+    name: 'CalorieAdder',
 
-  components: {
-    TemplateSelect
-  },
+    components: {
+        TemplateSelect
+    },
 
-  data() {
-    return {
-      readerSize: {
-        width: 10,
-        height: 10
-      },
-      detecteds: [],
-      scanning: false,
-      selector: false,
-      show: false,
-      sending: false,
-      amount: "",
-      caloriesPer100: "",
-      fd: {
-        title: "",
-        date: "",
-        time: "",
-        calories: ""
-      },
-      rule: {
-        valid: false,
-        title: [
-          v =>
-            (v && v.length < 150) || this.$t("alert.v.tooLong", { amount: 150 })
-        ],
-        require: [v => !!v || this.$t("alert.v.require")]
-      }
-    };
-  },
+    data () {
+        return {
+            readerSize: {
+                width: 10,
+                height: 10
+            },
+            detecteds: [],
+            scanning: false,
+            selector: false,
+            show: false,
+            sending: false,
+            amount: '',
+            caloriesPer100: '',
+            fd: {
+                title: '',
+                date: '',
+                time: '',
+                calories: ''
+            },
+            rule: {
+                valid: false,
+                title: [
+                    v =>
+                        (v && v.length < 150) || this.$t('alert.v.tooLong', { amount: 150 })
+                ],
+                require: [v => !!v || this.$t('alert.v.require')]
+            }
+        }
+    },
 
-  watch: {
-    show: function() {
-      if (!this.show) return;
-      var now = new Date();
-      var str = new Date(
-        now.getTime() - now.getTimezoneOffset() * 60000
-      ).toISOString();
-      this.fd.date = str.substr(0, 10);
-      this.fd.time = str.substr(11, 5);
+    watch: {
+        show: function () {
+            if (!this.show) return
+            var now = new Date()
+            var str = new Date(
+                now.getTime() - now.getTimezoneOffset() * 60000
+            ).toISOString()
+            this.fd.date = str.substr(0, 10)
+            this.fd.time = str.substr(11, 5)
+        }
+    },
+
+    methods: {
+        scanCode () {
+            this.scanning = !this.scanning
+        },
+        logIt (data) {
+            this.datas = data
+            this.scanning = !this.scanning
+            console.log(data.codeResult.code)
+        },
+
+        calTotal () {
+            if (this.amount > 0 && this.caloriesPer100 > 0) {
+                this.fd.calories =
+                    Math.round((this.amount / 100) * this.caloriesPer100 * 100) / 100
+            } else this.fd.calories = 0
+        },
+
+        add () {
+            if (!this.$refs.form.validate()) return
+
+            this.sending = true
+            this.$store
+                .dispatch('calories/add', this.fd)
+                .then(r => {
+                    this.$notify({
+                        type: 'success',
+                        title: this.$t('alert.success.save')
+                    })
+                    this.show = false
+                    this.$refs.form.reset()
+                    this.fd.title = null // TODO: CREATE OWN FORM VALIDATION
+                })
+                .catch(r => {
+                    this.$notify({
+                        type: 'error',
+                        title: this.$t('alert.error.save'),
+                        text: r
+                    })
+                })
+                .finally(() => {
+                    this.sending = false
+                })
+        },
+
+        openSelect () {
+            this.selector = true
+        },
+
+        use (item) {
+            this.selector = false
+            if (!item) return
+            this.fd.title = item.title
+            this.amount = item.amount
+            this.caloriesPer100 = item.caloriesPer100
+            this.calTotal()
+        }
+    },
+
+    i18n: {
+        messages: {
+            en: {
+                title: 'Add Calories',
+                caloriesPer100: 'Calories per 100 g/ml',
+                calories: 'Calories Total',
+                selectTemplate: 'Select Template',
+                scanCode: 'Scan Barcode'
+            },
+            de: {
+                title: 'Kalorien hinzufügen',
+                caloriesPer100: 'Kalorien pro 100 g/ml',
+                calories: 'Kalorien Total',
+                selectTemplate: 'Vorlage auswählen',
+                scanCode: 'Barcode scannen'
+            }
+        }
     }
-  },
-
-  methods: {
-    scanCode() {
-      this.scanning = !this.scanning;
-    },
-    logIt(data) {
-      this.datas = data;
-      this.scanning = !this.scanning;
-      console.log(data.codeResult.code);
-    },
-
-    calTotal() {
-      if (this.amount > 0 && this.caloriesPer100 > 0) {
-        this.fd.calories =
-          Math.round((this.amount / 100) * this.caloriesPer100 * 100) / 100;
-      } else this.fd.calories = 0;
-    },
-
-    add() {
-      if (!this.$refs.form.validate()) return;
-
-      this.sending = true;
-      this.$store
-        .dispatch("calories/add", this.fd)
-        .then(r => {
-          this.$notify({
-            type: "success",
-            title: this.$t("alert.success.save")
-          });
-          this.show = false;
-          this.$refs.form.reset();
-          this.fd.title = null; // TODO: CREATE OWN FORM VALIDATION
-        })
-        .catch(r => {
-          this.$notify({
-            type: "error",
-            title: this.$t("alert.error.save"),
-            text: r
-          });
-        })
-        .finally(() => {
-          this.sending = false;
-        });
-    },
-
-    openSelect() {
-      this.selector = true;
-    },
-
-    use(item) {
-      this.selector = false;
-      if (!item) return;
-      this.fd.title = item.title;
-      this.amount = item.amount;
-      this.caloriesPer100 = item.caloriesPer100;
-      this.calTotal();
-    }
-  },
-
-  i18n: {
-    messages: {
-      en: {
-        title: "Add Calories",
-        caloriesPer100: "Calories per 100 g/ml",
-        calories: "Calories Total",
-        selectTemplate: "Select Template",
-        scanCode: "Scan Barcode"
-      },
-      de: {
-        title: "Kalorien hinzufügen",
-        caloriesPer100: "Kalorien pro 100 g/ml",
-        calories: "Kalorien Total",
-        selectTemplate: "Vorlage auswählen",
-        scanCode: "Barcode scannen"
-      }
-    }
-  }
-};
+}
 </script>
 <style scoped>
 .camera {
@@ -270,5 +212,4 @@ export default {
 .hiddenoverflow {
   overflow: hidden !important;
 }
-</style>>
 </style>
