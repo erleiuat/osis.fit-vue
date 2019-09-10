@@ -16,7 +16,12 @@
         </transition>
 
         <CookieInfo v-if="this.$store.getters['cookieNotice']" />
-        <Update v-if="this.$store.getters['updating']" />
+
+        <transition-group appear name="fade" mode="out-in">
+            <Update v-if="this.$store.getters['updating']" key="updater" />
+            <AuthRefresh v-if="this.$store.getters['refreshing']" key="refresher" />
+        </transition-group>
+
         <Alerts />
 
     </v-app>
@@ -28,12 +33,13 @@ import Alerts from '@/components/Alerts'
 
 const CookieInfo = () => import('@/components/CookieInfo')
 const Update = () => import('@/components/Update')
+const AuthRefresh = () => import('@/components/AuthRefresh')
 
 export default {
     name: 'App',
 
     components: {
-        Drawer, Alerts, CookieInfo, Update
+        Drawer, Alerts, CookieInfo, Update, AuthRefresh
     },
 
     methods: {

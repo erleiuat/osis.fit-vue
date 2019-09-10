@@ -8,6 +8,12 @@
     animation: zoomOut 0.7s;
 }
 
+.fadeBig-enter-active {
+    animation: fadeInDownBig 0.7s;
+}
+.fadeBig-leave-active {
+    animation: fadeOutUpBig 0.7s;
+}
 
 .fade-enter-active {
     animation: fadeIn 0.1s;

@@ -22,7 +22,8 @@ export default new Vuex.Store({
         today: null,
         loading: 0,
         updating: false,
-        hasLoaded: VueCookies.get('hasLoaded') || false,
+        authRefresh: false,
+        hasLoaded: (VueCookies.get('hasLoaded') ? true : false),
         cookiesAccepted: VueCookies.get('cAccept') || false,
         app: {
             drawer: null,
@@ -37,6 +38,10 @@ export default new Vuex.Store({
 
         updating: state => {
             return state.updating
+        },
+
+        refreshing: state => {
+            return state.authRefresh
         },
 
         loading: state => {
@@ -75,6 +80,11 @@ export default new Vuex.Store({
                 if (!state.hasLoaded) VueCookies.set('hasLoaded', true, -1)
                 else state.updating = val
             } else state.updating = false
+        },
+
+        setRefreshing: (state, val) => {
+            if (val) state.authRefresh = true
+            else state.authRefresh = false
         },
 
         setLoading: (state, val) => {
@@ -116,6 +126,10 @@ export default new Vuex.Store({
 
         updating (con, val) {
             con.commit('setUpdating', val)
+        },
+
+        refreshing (con, val) {
+            con.commit('setRefreshing', val)
         },
 
         loading (con, val) {

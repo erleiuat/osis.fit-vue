@@ -31,6 +31,7 @@ router.beforeEach((to, from, next) => {
 
     if (auth !== 'unauthorized') {
         if (auth === 'expired') {
+            store.dispatch('refreshing', true)
             store.dispatch('auth/refresh').then(() => {
                 if (!start) {
                     store.dispatch('loading', true)
@@ -38,6 +39,8 @@ router.beforeEach((to, from, next) => {
                 } else router.push({ name: 'dashboard' })
             }).catch(res => {
                 router.push({ name: 'start' })
+            }).finally(() => {
+                store.dispatch('refreshing', false)
             })
         } else if (auth === 'unhooked') {
             store.commit('auth/remove')

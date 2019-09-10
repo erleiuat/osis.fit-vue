@@ -1,6 +1,13 @@
 <template>
     <v-container grid-list-xl>
 
+        <v-row>
+            <v-col cols="12">
+                <v-switch v-model="authRefresh" label="Switch Auth Refresh" />
+                <v-switch v-model="doUpdating" label="Switch Updating" />
+            </v-col>
+        </v-row>
+
         <v-layout wrap justify-center align-center>
             <v-flex xs3>
                 <v-switch v-model="mode" label="Switch Mode"></v-switch>
@@ -100,6 +107,24 @@ export default {
     },
 
     computed: {
+
+        authRefresh: {
+            get () {
+                return this.$store.getters['refreshing']
+            },
+            set (val) {
+                this.$store.dispatch('refreshing', val)
+            }
+        },
+
+        doUpdating: {
+            get () {
+                return this.$store.getters['updating']
+            },
+            set (val) {
+                this.$store.dispatch('updating', val)
+            }
+        },
 
         mode: {
             get () {

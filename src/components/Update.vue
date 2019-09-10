@@ -1,16 +1,18 @@
 <template>
-    <v-overlay :value="$store.getters['updating']" opacity="0.98">
-        <vcontainer>
-            <v-row no-gutters>
-                <v-col cols="12">
-                    <div class="title"> {{ $t('title') }} </div>
-                    <div class="caption"> {{ $t('text') }} </div>
-                </v-col>
-                <v-col cols="12" class="pt-2">
-                    <v-progress-linear :indeterminate="loader.inter" :color="loader.color" value="100" height="10" dark />
-                </v-col>
-            </v-row>
-        </vcontainer>
+    <v-overlay :value="$store.getters['updating']" opacity="0.9" style="z-index: 10">
+        <transition appear name="zoom" mode="out-in">
+            <vcontainer class="pa-2">
+                <v-row no-gutters>
+                    <v-col cols="12">
+                        <div class="title"> {{ $t('title') }} </div>
+                        <div class="caption"> {{ $t('text') }} </div>
+                    </v-col>
+                    <v-col cols="12" class="pt-2">
+                        <v-progress-linear :indeterminate="loader.inter" :color="loader.color" value="100" height="10" dark />
+                    </v-col>
+                </v-row>
+            </vcontainer>
+        </transition>
     </v-overlay>
 </template>
 
