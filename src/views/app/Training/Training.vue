@@ -36,10 +36,13 @@
                             </v-expansion-panel-header>
                             <v-expansion-panel-content>
                                 {{ exe.description }}
-                                <div class="caption">{{ $t('bodyparts') }}</div>
+                                <div class="caption" v-if="exe.bodyparts">{{ $t('bodyparts') }}</div>
                                 <v-chip v-for="(bp, key) in exe.bodyparts" :key="key" class="ml-1 mr-1 mb-1">
                                     {{ $t('pnt.parts.'+bp) }}
                                 </v-chip>
+                                <v-btn icon :to="{name: 'exercise', params: {type: 'public', id: exe.id}}">
+                                    <v-icon>open_in_new</v-icon>
+                                </v-btn>
                             </v-expansion-panel-content>
                         </v-expansion-panel>
                     </v-expansion-panels>

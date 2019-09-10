@@ -154,6 +154,7 @@ export default {
             else if (this.$route.name === 'exercise.copy') {
                 this.fd.title = res.title
                 this.fd.description = res.description
+                this.fd.content = res.content
                 this.fd.type = res.type
                 this.fd.calories = res.calories || null
                 this.fd.repetitions = res.repetitions || null
