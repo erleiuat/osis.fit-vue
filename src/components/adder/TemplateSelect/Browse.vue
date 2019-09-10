@@ -26,9 +26,9 @@
                             {{item.title}}
                         </div>
                         <div class="caption">
-                            Standartmenge: {{ item.amount }}<br />
-                            Kalorien / 100: {{ item.caloriesPer100 }}<br />
-                            Total: {{ item.total }}
+                            {{ $t('amount') }}: {{ item.amount }} g/ml<br />
+                            {{ $t('calories') }}: {{ item.caloriesPer100 }} Kcal<br />
+                            {{ $t('total') }}: {{ item.total }} Kcal
                         </div>
                     </v-card-text>
                 </v-card>
@@ -100,11 +100,17 @@ export default {
         messages: {
             en: {
                 browse: 'Search Items',
-                notFound: 'No results'
+                notFound: 'No results',
+                amount: 'Amount',
+                calories: 'Calories/100',
+                total: 'Total'
             },
             de: {
                 browse: 'Lebensmittel suchen',
-                notFound: 'Keine Suchergebnisse'
+                notFound: 'Keine Suchergebnisse',
+                amount: 'Menge',
+                calories: 'Kalorien/100',
+                total: 'Total'
             }
         }
     }

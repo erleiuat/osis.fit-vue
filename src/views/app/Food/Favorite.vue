@@ -12,7 +12,7 @@
             </v-tab>
         </v-tabs>
 
-        <v-tabs-items v-model="tab">
+        <v-tabs-items v-model="tab" style="background-color: inherit">
             <v-tab-item>
                 <vcontainer>
                     <v-row dense justify="center">
@@ -24,9 +24,9 @@
                                         {{item.title}}
                                     </div>
                                     <div class="caption">
-                                        Standartmenge: {{ item.amount }}<br />
-                                        Kalorien / 100: {{ item.caloriesPer100 }}<br />
-                                        Total: {{ item.total }}
+                                        {{ $t('amount') }}: {{ item.amount }} g/ml<br />
+                                        {{ $t('calories') }}: {{ item.caloriesPer100 }} Kcal<br />
+                                        {{ $t('total') }}: {{ item.total }} Kcal
                                     </div>
                                 </v-card-text>
                             </v-card>
@@ -57,9 +57,9 @@
                                         {{item.title}}
                                     </div>
                                     <div class="caption">
-                                        Standartmenge: {{ item.amount }}<br />
-                                        Kalorien / 100: {{ item.caloriesPer100 }}<br />
-                                        Total: {{ item.total }}
+                                        {{ $t('amount') }}: {{ item.amount }} g/ml<br />
+                                        {{ $t('calories') }}: {{ item.caloriesPer100 }} Kcal<br />
+                                        {{ $t('total') }}: {{ item.total }} Kcal
                                     </div>
                                 </v-card-text>
                             </v-card>
@@ -168,7 +168,10 @@ export default {
                 title2: 'Database',
                 noneyet: 'You have no favorites yet',
                 nonefound: 'No results',
-                noquery: 'Please enter a search query'
+                noquery: 'Please enter a search query',
+                amount: 'Amount',
+                calories: 'Calories/100',
+                total: 'Total'
             },
             de: {
                 title: 'Favoriten',
@@ -176,7 +179,10 @@ export default {
                 notFound: 'Du hast noch keine Favoriten',
                 noneyet: 'Du hast noch keine Favoriten',
                 nonefound: 'Keine Resultate',
-                noquery: 'Du musst noch einen Suchbegriff eingeben'
+                noquery: 'Du musst noch einen Suchbegriff eingeben',
+                amount: 'Menge',
+                calories: 'Kalorien/100',
+                total: 'Total'
             }
         }
     }

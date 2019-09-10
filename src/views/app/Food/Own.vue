@@ -3,7 +3,7 @@
 
         <router-view name="editor" />
 
-        <v-row dense justify="center">
+        <v-row dense justify="center" align="center">
             <v-col cols="12" sm="6" md="4" v-for="(item, key) in items" :key="key">
                 <FoodCard :item="item" @select="$router.push({name: 'food.edit', params: {id: item.id}})" nodetails />
             </v-col>

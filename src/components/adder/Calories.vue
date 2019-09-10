@@ -154,13 +154,13 @@ export default {
         messages: {
             en: {
                 title: 'Add Calories',
-                caloriesPer100: 'Calories per 100g / 100ml',
+                caloriesPer100: 'Calories per 100 g/ml',
                 calories: 'Calories Total',
                 selectTemplate: 'Select Template'
             },
             de: {
                 title: 'Kalorien hinzufügen',
-                caloriesPer100: 'Kalorien pro 100g / 100ml',
+                caloriesPer100: 'Kalorien pro 100 g/ml',
                 calories: 'Kalorien Total',
                 selectTemplate: 'Vorlage auswählen'
             }

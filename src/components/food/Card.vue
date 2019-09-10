@@ -1,5 +1,5 @@
 <template>
-    <v-card hover link @click="$emit('select')" style="height: 100%" outlined>
+    <v-card hover link @click="$emit('select')" outlined>
         <v-img v-if="path" class="white--text" :lazy-src="path.lazy" :src="path.image" :max-height="maxHeight || 300">
             <v-card-title class="lightbox align-end fill-height">
                 {{item.title}}

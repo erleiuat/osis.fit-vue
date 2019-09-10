@@ -11,7 +11,7 @@
             </v-col>
         </v-row>
 
-        <v-row dense justify="center">
+        <v-row dense justify="center" align="center">
             <v-col cols="6" md="4" v-for="(item, key) in items" :key="key">
                 <FoodCard :item="item" @select="$emit('select', item)" nodetails :maxHeight="200" />
             </v-col>
@@ -82,17 +82,11 @@ export default {
         messages: {
             en: {
                 noneyet: 'You have not yet created your own templates',
-                nonefound: 'No results',
-                amount: 'Amount',
-                calories: 'Calories/100',
-                total: 'Total'
+                nonefound: 'No results'
             },
             de: {
                 noneyet: 'Du hast noch keine eigenen Vorlagen erstellt',
-                nonefound: 'Keine Resultate',
-                amount: 'Menge',
-                calories: 'Kalorien/100',
-                total: 'Total'
+                nonefound: 'Keine Resultate'
             }
         }
     }
