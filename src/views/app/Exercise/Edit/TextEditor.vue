@@ -1,7 +1,7 @@
 <template>
-    <div>
+    <v-sheet color="white">
         <vue-editor v-model="contents" :editorOptions="editorSettings" />
-    </div>
+    </v-sheet>
 </template>
 
 <script>

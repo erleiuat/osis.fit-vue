@@ -12,7 +12,13 @@
 
         <v-row v-if="item && loaded" justify="center" dense>
             <v-col cols="12" md="10">
-                <div v-html="item.content" />
+                <div class="ql-editor quillEditorContent">
+                    <div v-html="item.content">
+                    </div>
+                </div>
+                <!--
+                <div class="quillEditorContent" v-html="item.content" />
+                -->
             </v-col>
         </v-row>
 
@@ -145,3 +151,14 @@ export default {
 
 }
 </script>
+
+<style>
+.quillEditorContent img {
+    max-width: 100%;
+    padding-top: 0px;
+    padding-right: 0px;
+    padding-bottom: 0px;
+    padding-left: 0px;
+}
+@import '~quill/dist/quill.core.css';
+</style>
