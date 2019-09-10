@@ -15,7 +15,11 @@
                 </v-col>
 
                 <v-col cols="12">
-                    <v-textarea :label="$t('ft.description')" v-model="fd.description" outlined />
+                    <v-textarea :label="$t('ft.description')" v-model="fd.description" counter="255" outlined />
+                </v-col>
+
+                <v-col cols="12">
+                    <TextEditor v-model="fd.content" />
                 </v-col>
 
                 <v-col cols="12" md="6">
@@ -60,6 +64,7 @@
 <script>
 import exercise from '@/store/modules/exercise'
 import Bodyparts from '@/views/app/Exercise/Edit/Bodyparts'
+import TextEditor from '@/views/app/Exercise/Edit/TextEditor'
 import Types from '@/views/app/Exercise/Edit/Types'
 const notFound = () => import('@/views/error/NotFound')
 const YouSure = () => import('@/components/YouSure')
@@ -67,7 +72,7 @@ const YouSure = () => import('@/components/YouSure')
 export default {
     name: 'EditExercise',
     components: {
-        notFound, Bodyparts, Types, YouSure
+        notFound, Bodyparts, Types, YouSure, TextEditor
     },
     modules: {
         exercise
@@ -81,6 +86,7 @@ export default {
             fd: {
                 title: null,
                 description: null,
+                content: null,
                 public: false,
                 type: null,
                 calories: null,
@@ -149,8 +155,8 @@ export default {
                 this.fd.title = res.title
                 this.fd.description = res.description
                 this.fd.type = res.type
-                this.fd.calories = res.calories
-                this.fd.repetitions = res.repetitions
+                this.fd.calories = res.calories || null
+                this.fd.repetitions = res.repetitions || null
                 this.fd.bodyparts = res.bodyparts
             }
         }).catch(() => {

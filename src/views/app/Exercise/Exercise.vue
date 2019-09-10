@@ -5,8 +5,11 @@
             <v-col cols="12" md="10" class="title">
                 {{ item.title }}
             </v-col>
-            <v-col cols="12" md="10" class="body-2">
+            <v-col cols="12" md="10">
                 {{ item.description }}
+            </v-col>
+            <v-col cols="12" md="10">
+                <div v-html="item.content" />
             </v-col>
         </v-row>
 
