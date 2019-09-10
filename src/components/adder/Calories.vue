@@ -1,6 +1,5 @@
 <template>
     <v-dialog v-model="show" :fullscreen="$vuetify.breakpoint.xs" width="600px" transition="dialog-bottom-transition">
-
         <template v-slot:activator="{ on }">
             <slot v-bind:on="on">
                 <v-btn fab depressed large v-on="on" color="primary">
@@ -22,7 +21,7 @@
             </v-toolbar>
 
             <vcontainer>
-                <v-form v-model="rule.valid" ref="form" v-on:submit.prevent>
+                <v-form v-model="rule.valid" ref="form" v-on:submit.prevent v-show="{hiddenoverflow : scanning}">
 
                     <v-row dense align="baseline">
                         <v-col cols="12" md="6">
@@ -38,35 +37,35 @@
                             </v-btn>
                         </v-col>
                         <v-col cols="12">
+                            <v-quagga :onDetected="logIt" :readerSize="readerSize" :readerTypes="['ean_reader']" v-if="scanning"></v-quagga>
+                        </v-col>
+
+                        <v-col cols="12" :class="{hidden : scanning}">
                             <v-text-field v-model="fd.title" :label="$t('ft.title')" type="text" outlined />
                         </v-col>
-                        <v-col cols="6">
+                        <v-col cols="6" :class="{hidden : scanning}">
                             <v-text-field v-model="fd.date" :label="$t('ft.date')" :rules="rule.require" type="date" outlined />
                         </v-col>
-                        <v-col cols="6">
+                        <v-col cols="6" :class="{hidden : scanning}">
                             <v-text-field v-model="fd.time" :label="$t('ft.time')" :rules="rule.require" type="time" outlined append-icon="access_time" />
                         </v-col>
 
-                        <v-col cols="12" sm="6">
+                        <v-col cols="12" sm="6" :class="{hidden : scanning}">
                             <v-text-field v-model="caloriesPer100" :label="$t('caloriesPer100')" @input="calTotal()" outlined type="number" suffix="Kcal" />
                         </v-col>
-                        <v-col cols="12" sm="6">
+                        <v-col cols="12" sm="6" :class="{hidden : scanning}">
                             <v-text-field v-model="amount" :label="$t('ft.amount')" @input="calTotal()" outlined type="number" suffix="g / ml" />
                         </v-col>
 
-                        <v-col cols="12">
+                        <v-col cols="12" :class="{hidden : scanning}">
                             <v-text-field v-model="fd.calories" :label="$t('calories')" :rules="rule.require" type="number" suffix="Kcal" outlined />
                         </v-col>
-                        <v-col cols="12">
-                            <v-btn @click="add()" :loading="sending" :disabled="!rule.valid" type="submit" color="primary" block depressed>
-                                {{ $t('btn.save') }}
-                            </v-btn>
+                        <v-col cols="12" :class="{hidden : scanning}">
+                            <v-btn @click="add()" :loading="sending" :disabled="!rule.valid" type="submit" color="primary" block depressed>{{ $t('btn.save') }}</v-btn>
                         </v-col>
                     </v-row>
-
                 </v-form>
             </vcontainer>
-
         </v-card>
         <TemplateSelect :show="selector" @select="use" />
     </v-dialog>
@@ -84,6 +83,12 @@ export default {
 
     data () {
         return {
+            readerSize: {
+                width: 10,
+                height: 10
+            },
+            detecteds: [],
+            scanning: false,
             selector: false,
             show: false,
             sending: false,
@@ -98,11 +103,10 @@ export default {
             rule: {
                 valid: false,
                 title: [
-                    v => (v && v.length < 150) || this.$t('alert.v.tooLong', { amount: 150 })
+                    v =>
+                        (v && v.length < 150) || this.$t('alert.v.tooLong', { amount: 150 })
                 ],
-                require: [
-                    v => !!v || this.$t('alert.v.require')
-                ]
+                require: [v => !!v || this.$t('alert.v.require')]
             }
         }
     },
@@ -111,22 +115,28 @@ export default {
         show: function () {
             if (!this.show) return
             var now = new Date()
-            var str = new Date(now.getTime() - (now.getTimezoneOffset() * 60000)).toISOString()
+            var str = new Date(
+                now.getTime() - now.getTimezoneOffset() * 60000
+            ).toISOString()
             this.fd.date = str.substr(0, 10)
             this.fd.time = str.substr(11, 5)
         }
     },
 
     methods: {
-
-        scanCode(){
-            console.log('TODO: Open Barcode scanner')
-            // TODO: Open Barcode scanner
+        scanCode () {
+            this.scanning = !this.scanning
+        },
+        logIt (data) {
+            this.datas = data
+            this.scanning = !this.scanning
+            console.log(data.codeResult.code)
         },
 
         calTotal () {
             if (this.amount > 0 && this.caloriesPer100 > 0) {
-                this.fd.calories = Math.round(((this.amount / 100) * this.caloriesPer100) * 100) / 100
+                this.fd.calories =
+                    Math.round((this.amount / 100) * this.caloriesPer100 * 100) / 100
             } else this.fd.calories = 0
         },
 
@@ -134,16 +144,27 @@ export default {
             if (!this.$refs.form.validate()) return
 
             this.sending = true
-            this.$store.dispatch('calories/add', this.fd).then(r => {
-                this.$notify({ type: 'success', title: this.$t('alert.success.save') })
-                this.show = false
-                this.$refs.form.reset()
-                this.fd.title = null // TODO: CREATE OWN FORM VALIDATION
-            }).catch(r => {
-                this.$notify({ type: 'error', title: this.$t('alert.error.save'), text: r })
-            }).finally(() => {
-                this.sending = false
-            })
+            this.$store
+                .dispatch('calories/add', this.fd)
+                .then(r => {
+                    this.$notify({
+                        type: 'success',
+                        title: this.$t('alert.success.save')
+                    })
+                    this.show = false
+                    this.$refs.form.reset()
+                    this.fd.title = null // TODO: CREATE OWN FORM VALIDATION
+                })
+                .catch(r => {
+                    this.$notify({
+                        type: 'error',
+                        title: this.$t('alert.error.save'),
+                        text: r
+                    })
+                })
+                .finally(() => {
+                    this.sending = false
+                })
         },
 
         openSelect () {
@@ -158,7 +179,6 @@ export default {
             this.caloriesPer100 = item.caloriesPer100
             this.calTotal()
         }
-
     },
 
     i18n: {
@@ -179,6 +199,17 @@ export default {
             }
         }
     }
-
 }
 </script>
+<style scoped>
+.camera {
+  height: 10%;
+  width: 10%;
+}
+.hidden {
+  visibility: hidden;
+}
+.hiddenoverflow {
+  overflow: hidden !important;
+}
+</style>
