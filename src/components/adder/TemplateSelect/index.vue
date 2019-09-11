@@ -1,9 +1,9 @@
 <template>
     <v-dialog v-model="doShow" :fullscreen="$vuetify.breakpoint.xs" width="700" transition="dialog-bottom-transition" scrollable>
-        <v-card style="min-height: 500px">
+        <v-card>
 
-            <v-card-title class="pl-0 pt-0 pr-0">
-                <v-toolbar color="primary" flat dark>
+            <v-card-title class="pa-0">
+                <v-toolbar color="primary" flat dark dense>
                     <v-toolbar-title>{{ $t('title') }}</v-toolbar-title>
                     <v-spacer></v-spacer>
                     <v-btn icon @click="$emit('select', false)">
@@ -12,7 +12,7 @@
                 </v-toolbar>
             </v-card-title>
 
-            <v-card-text class="pa-0">
+            <v-card-text class="pa-0" style="min-height: 200px">
                 <OwnAndFavs v-if="!searchDB" @select="select" />
                 <Browse v-else-if="$store.getters['auth/premium']" @select="select" />
             </v-card-text>
@@ -21,25 +21,19 @@
 
             <v-card-actions>
                 <vcontainer class="pa-0">
-                    <v-row no-gutters justify="space-between">
-                        <v-col cols="auto">
-                            <v-btn outlined @click="searchDB = true" v-if="$store.getters['auth/premium'] && !searchDB">
+                    <v-row no-gutters>
+                        <v-col cols="12">
+                            <v-btn @click="searchDB = true" v-if="$store.getters['auth/premium'] && !searchDB" text block>
                                 {{ $t('database') }}
                                 <v-icon right>search</v-icon>
                             </v-btn>
-                            <v-btn text :to="{name: 'premium', query: {notify: true}}" v-else-if="!$store.getters['auth/premium']">
+                            <v-btn :to="{name: 'premium', query: {notify: true}}" v-else-if="!$store.getters['auth/premium']" text block>
                                 {{ $t('database') }}
                                 <v-icon right>search</v-icon>
                             </v-btn>
-                            <v-btn text @click="searchDB = false" v-else>
+                            <v-btn @click="searchDB = false" v-else text block>
                                 {{ $t('templates') }}
                                 <v-icon right>search</v-icon>
-                            </v-btn>
-                        </v-col>
-                        <v-col cols="auto">
-                            <v-btn outlined disabled>
-                                {{ $t('scan') }}
-                                <v-icon right>camera_alt</v-icon>
                             </v-btn>
                         </v-col>
                     </v-row>

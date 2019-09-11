@@ -1,5 +1,5 @@
 <template>
-    <vcontainer class="pt-0">
+    <vcontainer class="pa-2">
 
         <v-row no-gutters>
             <v-col cols="12" class="pb-2">
@@ -35,11 +35,13 @@
             </v-col>
         </v-row>
 
-        <v-layout row wrap pa-2 text-center v-if="results.length < 1 && !loading">
-            <v-flex xs12>
-                {{ $t('notFound') }}
-            </v-flex>
-        </v-layout>
+        <v-row dense v-if="results.length < 1 && !loading">
+            <v-col cols="auto">
+                <div class="caption">
+                    {{ $t('notFound') }}
+                </div>
+            </v-col>
+        </v-row>
 
     </vcontainer>
 

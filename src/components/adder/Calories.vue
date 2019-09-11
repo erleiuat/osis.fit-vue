@@ -10,9 +10,8 @@
 
         <v-card>
 
-            <v-card-title class="pl-0 pt-0 pr-0">
-
-                <v-toolbar color="primary" flat dark>
+            <v-card-title class="pa-0">
+                <v-toolbar color="primary" flat dark dense>
                     <v-btn icon @click="show = false">
                         <v-icon>close</v-icon>
                     </v-btn>
@@ -41,7 +40,7 @@
                     </v-row>
                 </vcontainer>
 
-                <vcontainer v-show="!scan.scanning">
+                <vcontainer v-show="!scan.scanning" class="pa-2">
                     <v-form v-model="rule.valid" ref="form" v-on:submit.prevent>
                         <v-row dense align="baseline" v-if="!scan.scanning">
                             <v-col cols="12" md="6">
@@ -51,7 +50,7 @@
                                 </v-btn>
                             </v-col>
                             <v-col cols="12" md="6">
-                                <v-btn @click="scan.scanning = !scan.scanning" block small outlined>
+                                <v-btn @click="scan.scanning = !scan.scanning" :loading="scan.loading" block small outlined>
                                     {{ $t('scanCode') }}
                                     <v-icon right>photo_camera</v-icon>
                                 </v-btn>
@@ -131,6 +130,7 @@ export default {
             },
             scan: {
                 code: null,
+                loading: false,
                 size: {
                     width: 500,
                     height: 500
@@ -161,21 +161,23 @@ export default {
         }
     },
 
-    beforeDestroy () {
-        this.scan.scanning = false
-    },
-
     methods: {
 
         scanned (data) {
-            this.scan.scanning = false
             this.scan.code = data.codeResult.code
-            console.log('going')
-            this.$store.dispatch('foodFavorite/scan', this.scan.code).then(res => {
-                alert(res.content)
-            }).catch(err => {
-                this.$notify({ type: 'error', title: this.$t('alert.error.default'), text: err })
-            })
+            if (this.scan.scanning) {
+                this.scan.scanning = false
+                this.scan.loading = true
+                setTimeout(() => {
+                    this.$store.dispatch('foodFavorite/scan', this.scan.code).then(res => {
+                        this.use(res)
+                    }).catch(err => {
+                        this.$notify({ type: 'error', title: this.$t('alert.error.default'), text: err })
+                    }).finally(() => {
+                        this.scan.loading = false
+                    })
+                }, 1000);
+            }
         },
 
         calTotal () {
@@ -214,6 +216,10 @@ export default {
             this.calTotal()
         }
 
+    },
+
+    beforeDestroy () {
+        this.scan.scanning = false
     },
 
     i18n: {

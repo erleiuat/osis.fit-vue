@@ -56,7 +56,7 @@ const actions = {
     scan (con, ean) {
         return new Promise((resolve, reject) => {
             Apios.post(con.state.url + 'scan/', { code: ean }).then(res => {
-                resolve(res.data)
+                resolve(res.data.item)
             }).catch(err => {
                 reject(err)
             })
