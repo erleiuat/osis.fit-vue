@@ -54,7 +54,7 @@ const mutations = {
             if (!syncKeys.includes(elKey)) {
                 Vue.delete(state.items, elKey)
             }
-        });
+        })
         smartStore.set(state.lName, state.items)
     },
 
