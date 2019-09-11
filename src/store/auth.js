@@ -120,7 +120,7 @@ const actions = {
         Apios.get('app/').then(res => {
             con.commit('user/set', res.data.user, { root: true })
             con.commit('calories/set', res.data.calories, { root: true })
-            con.commit('weight/set', res.data.weight, { root: true })
+            con.commit('weight/syncSet', res.data.weight, { root: true })
             con.commit('activity/set', res.data.activity, { root: true })
         })
     },
@@ -134,7 +134,7 @@ const actions = {
                 con.commit('place')
                 con.commit('user/set', res.data.user, { root: true })
                 con.commit('calories/set', res.data.calories, { root: true })
-                con.commit('weight/set', res.data.weight, { root: true })
+                con.commit('weight/syncSet', res.data.weight, { root: true })
                 con.commit('activity/set', res.data.activity, { root: true })
                 resolve()
             }).catch(err => {
@@ -152,7 +152,7 @@ const actions = {
                 con.commit('place')
                 con.commit('user/set', res.data.user, { root: true })
                 con.commit('calories/set', res.data.calories, { root: true })
-                con.commit('weight/set', res.data.weight, { root: true })
+                con.commit('weight/syncSet', res.data.weight, { root: true })
                 con.commit('activity/set', res.data.activity, { root: true })
                 resolve()
             }).catch(err => {

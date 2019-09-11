@@ -103,6 +103,12 @@ export default {
         // this.convertCanvasToImage('wChart'); TODO
     },
 
+    watch: {
+        values () {
+            this.createChart('wChart', this.chaDa)
+        }
+    },
+
     i18n: {
         messages: {
             en: {

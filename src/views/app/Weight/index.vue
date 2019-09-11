@@ -24,7 +24,7 @@ export default {
     },
 
     mounted () {
-        this.$store.dispatch('weight/load')
+        this.$store.dispatch('weight/sync')
     }
 
 }

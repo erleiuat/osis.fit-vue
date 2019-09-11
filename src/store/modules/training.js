@@ -37,6 +37,21 @@ const getters = {
 
 const mutations = {
 
+    syncSet: (state, vals) => {
+        var syncKeys = []
+        vals.forEach((item) => {
+            syncKeys.push(item.id.toString())
+            if (!(item.id in state.items)) Vue.set(state.items, item.id.toString(), item)
+            else state.items[item.id] = item
+        })
+        Object.keys(state.items).forEach(elKey => {
+            if (!syncKeys.includes(elKey)) {
+                Vue.delete(state.items, elKey)
+            }
+        });
+        smartStore.set(state.lName, state.items)
+    },
+
     set: (state, vals) => {
         if (!Array.isArray(vals)) {
             if (!(vals.id in state.items)) Vue.set(state.items, vals.id.toString(), vals)
@@ -53,6 +68,21 @@ const mutations = {
     delete: (state, itemID) => {
         Vue.delete(state.items, itemID.toString())
         smartStore.set(state.lName, state.items)
+    },
+
+    syncSetFav: (state, vals) => {
+        var syncKeys = []
+        vals.forEach((item) => {
+            syncKeys.push(item.id.toString())
+            if (!(item.id in state.favItems)) Vue.set(state.favItems, item.id.toString(), item)
+            else state.favItems[item.id] = item
+        })
+        Object.keys(state.favItems).forEach(elKey => {
+            if (!syncKeys.includes(elKey)) {
+                Vue.delete(state.favItems, elKey)
+            }
+        });
+        smartStore.set(state.lName + '.favorites', state.favItems)
     },
 
     setFav: (state, vals) => {
@@ -93,13 +123,15 @@ const actions = {
             query: null
         }
         Apios.post(con.state.url + 'search/', fd).then(res => {
-            if (res.status === 200) con.commit('set', res.data.items)
+            if (res.status === 200) con.commit('syncSet', res.data.items)
+            else con.commit('syncSet', [])
         })
     },
 
     loadFavorites (con) {
         Apios.post(con.state.url + 'favorite/read/', { id: null }).then(res => {
-            if (res.status === 200) con.commit('setFav', res.data.items)
+            if (res.status === 200) con.commit('syncSetFav', res.data.items)
+            else con.commit('syncSetFav', [])
         })
     },
 

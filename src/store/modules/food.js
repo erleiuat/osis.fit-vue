@@ -29,6 +29,21 @@ const getters = {
 
 const mutations = {
 
+    syncSet: (state, vals) => {
+        var syncKeys = []
+        vals.forEach((item) => {
+            syncKeys.push(item.id.toString())
+            if (!(item.id in state.items)) Vue.set(state.items, item.id.toString(), item)
+            else state.items[item.id] = item
+        })
+        Object.keys(state.items).forEach(elKey => {
+            if (!syncKeys.includes(elKey)) {
+                Vue.delete(state.items, elKey)
+            }
+        });
+        smartStore.set(state.lName, state.items)
+    },
+
     set: (state, vals) => {
         if (!Array.isArray(vals)) {
             if (!(vals.id in state.items)) Vue.set(state.items, vals.id.toString(), vals)
@@ -53,7 +68,8 @@ const actions = {
 
     load (con) {
         Apios.post(con.state.url + 'read/', { id: null }).then(res => {
-            if (res.status === 200) con.commit('set', res.data.items)
+            if (res.status === 200) con.commit('syncSet', res.data.items)
+            else con.commit('syncSet', [])
         })
     },
 
