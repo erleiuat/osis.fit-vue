@@ -9,7 +9,8 @@
         </template>
 
         <v-card>
-            <v-toolbar color="primary" flat dark>
+
+            <v-toolbar color="primary" flat dark v-if="!scan.scanning">
                 <v-btn icon @click="show = false">
                     <v-icon>close</v-icon>
                 </v-btn>
@@ -20,10 +21,16 @@
                 </v-btn>
             </v-toolbar>
 
-            <vcontainer>
-                <v-form v-model="rule.valid" ref="form" v-on:submit.prevent v-show="{hiddenoverflow : scanning}">
+            <div class="quagga-scanner-container" v-if="scan.scanning">
+                <v-btn @click="scan.scanning = !scan.scanning" block depressed>
+                    Close
+                </v-btn>
+                <v-quagga :onDetected="scanned" :aspectRatio="scan.aspect" :readerSize="scan.size" :readerTypes="scan.types" />
+            </div>
 
-                    <v-row dense align="baseline">
+            <vcontainer v-show="!scan.scanning">
+                <v-form v-model="rule.valid" ref="form" v-on:submit.prevent>
+                    <v-row dense align="baseline" v-if="!scan.scanning">
                         <v-col cols="12" md="6">
                             <v-btn @click="openSelect()" block small outlined>
                                 {{ $t('selectTemplate') }}
@@ -31,41 +38,39 @@
                             </v-btn>
                         </v-col>
                         <v-col cols="12" md="6">
-                            <v-btn @click="scanCode()" block small outlined>
+                            <v-btn @click="scan.scanning = !scan.scanning" block small outlined>
                                 {{ $t('scanCode') }}
                                 <v-icon right>photo_camera</v-icon>
                             </v-btn>
                         </v-col>
-                        <v-col cols="12">
-                            <v-quagga :onDetected="logIt" :readerSize="readerSize" :readerTypes="['ean_reader']" v-if="scanning"></v-quagga>
-                        </v-col>
 
-                        <v-col cols="12" :class="{hidden : scanning}">
+                        <v-col cols="12">
                             <v-text-field v-model="fd.title" :label="$t('ft.title')" type="text" outlined />
                         </v-col>
-                        <v-col cols="6" :class="{hidden : scanning}">
+                        <v-col cols="6">
                             <v-text-field v-model="fd.date" :label="$t('ft.date')" :rules="rule.require" type="date" outlined />
                         </v-col>
-                        <v-col cols="6" :class="{hidden : scanning}">
+                        <v-col cols="6">
                             <v-text-field v-model="fd.time" :label="$t('ft.time')" :rules="rule.require" type="time" outlined append-icon="access_time" />
                         </v-col>
 
-                        <v-col cols="12" sm="6" :class="{hidden : scanning}">
+                        <v-col cols="12" sm="6">
                             <v-text-field v-model="caloriesPer100" :label="$t('caloriesPer100')" @input="calTotal()" outlined type="number" suffix="Kcal" />
                         </v-col>
-                        <v-col cols="12" sm="6" :class="{hidden : scanning}">
+                        <v-col cols="12" sm="6">
                             <v-text-field v-model="amount" :label="$t('ft.amount')" @input="calTotal()" outlined type="number" suffix="g / ml" />
                         </v-col>
 
-                        <v-col cols="12" :class="{hidden : scanning}">
+                        <v-col cols="12">
                             <v-text-field v-model="fd.calories" :label="$t('calories')" :rules="rule.require" type="number" suffix="Kcal" outlined />
                         </v-col>
-                        <v-col cols="12" :class="{hidden : scanning}">
+                        <v-col cols="12">
                             <v-btn @click="add()" :loading="sending" :disabled="!rule.valid" type="submit" color="primary" block depressed>{{ $t('btn.save') }}</v-btn>
                         </v-col>
                     </v-row>
                 </v-form>
             </vcontainer>
+
         </v-card>
         <TemplateSelect :show="selector" @select="use" />
     </v-dialog>
@@ -83,12 +88,6 @@ export default {
 
     data () {
         return {
-            readerSize: {
-                width: 10,
-                height: 10
-            },
-            detecteds: [],
-            scanning: false,
             selector: false,
             show: false,
             sending: false,
@@ -107,7 +106,21 @@ export default {
                         (v && v.length < 150) || this.$t('alert.v.tooLong', { amount: 150 })
                 ],
                 require: [v => !!v || this.$t('alert.v.require')]
-            }
+            },
+            scan: {
+                code: null,
+                size: {
+                    width: 500,
+                    height: 500
+                },
+                aspect: {
+                    min: 1,
+                    max: 1
+                },
+                detecteds: [],
+                types: ['ean_reader'],
+                scanning: false
+            },
         }
     },
 
@@ -124,13 +137,11 @@ export default {
     },
 
     methods: {
-        scanCode () {
-            this.scanning = !this.scanning
-        },
-        logIt (data) {
-            this.datas = data
-            this.scanning = !this.scanning
-            console.log(data.codeResult.code)
+
+        scanned (data) {
+            this.scan.scanning = !this.scan.scanning
+            this.scan.code = data.codeResult.code
+            alert(data.codeResult.code)
         },
 
         calTotal () {
@@ -201,15 +212,16 @@ export default {
     }
 }
 </script>
-<style scoped>
-.camera {
-  height: 10%;
-  width: 10%;
+
+<style>
+.quagga-scanner-container {
+    max-height: 500px;
+    width: 100%;
+    overflow: hidden;
+    border: solid 1px gray;
 }
-.hidden {
-  visibility: hidden;
-}
-.hiddenoverflow {
-  overflow: hidden !important;
+.quagga-scanner-container video {
+    max-height: 500px !important;
+    width: 100% !important;
 }
 </style>

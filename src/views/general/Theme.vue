@@ -2,6 +2,19 @@
     <v-container grid-list-xl>
 
         <v-row>
+            <v-col cols="12" v-if="scan.scanning">
+                <div class="quagga-scanner-container">
+                    <v-quagga :onDetected="scanned" :aspectRatio="scan.aspect" :readerSize="scan.size" :readerTypes="scan.types" />
+                </div>
+            </v-col>
+            <v-col cols="12" v-else>
+                <v-btn @click="scan.scanning = !scan.scanning" outlined>
+                    {{ scan.code || 'Scan' }}
+                </v-btn>
+            </v-col>
+        </v-row>
+
+        <v-row>
             <v-col cols="12">
                 <v-switch v-model="authRefresh" label="Switch Auth Refresh" />
                 <v-switch v-model="doUpdating" label="Switch Updating" />
@@ -74,6 +87,20 @@ export default {
 
     data () {
         return {
+            scan: {
+                code: null,
+                size: {
+                    width: 100,
+                    height: 100
+                },
+                aspect: {
+                    min: 1,
+                    max: 1
+                },
+                detecteds: [],
+                types: ['ean_reader'],
+                scanning: true
+            },
             text: 'Osis.fit',
             alerts: [
                 'success',
@@ -103,6 +130,13 @@ export default {
                 'warning',
                 'info'
             ]
+        }
+    },
+
+    methods: {
+        scanned (data) {
+            this.scan.scanning = !this.scan.scanning
+            this.scan.code = data.codeResult.code
         }
     },
 
@@ -141,3 +175,16 @@ export default {
 
 }
 </script>
+
+<style>
+.quagga-scanner-container {
+    height: 400px;
+    width: 100%;
+    overflow: hidden;
+    border: solid 1px gray;
+}
+.quagga-scanner-container video {
+    height: 400px !important;
+    width: 100% !important;
+}
+</style>
