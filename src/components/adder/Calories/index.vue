@@ -25,24 +25,11 @@
 
             <v-card-text class="pa-0">
 
-                <vcontainer v-if="scan.scanning">
-                    <v-row>
-                        <v-col cols="12">
-                            <v-btn @click="scan.scanning = !scan.scanning" block depressed>
-                                {{ $t('btn.close') }}
-                            </v-btn>
-                        </v-col>
-                        <v-col cols="12">
-                            <div class="quagga-scanner-container">
-                                <v-quagga :onDetected="scanned" :aspectRatio="scan.aspect" :readerSize="scan.size" :readerTypes="scan.types" />
-                            </div>
-                        </v-col>
-                    </v-row>
-                </vcontainer>
+                <Scanner :show="scanner" @select="use" />
 
-                <vcontainer v-show="!scan.scanning" class="pa-2">
+                <vcontainer v-show="!scanner" class="pa-2">
                     <v-form v-model="rule.valid" ref="form" v-on:submit.prevent>
-                        <v-row dense align="baseline" v-if="!scan.scanning">
+                        <v-row dense align="baseline">
                             <v-col cols="12" md="6">
                                 <v-btn @click="openSelect()" block small outlined>
                                     {{ $t('selectTemplate') }}
@@ -50,7 +37,7 @@
                                 </v-btn>
                             </v-col>
                             <v-col cols="12" md="6">
-                                <v-btn @click="scan.scanning = !scan.scanning" :loading="scan.loading" block small outlined>
+                                <v-btn @click="scanner = !scanner" block small outlined>
                                     {{ $t('scanCode') }}
                                     <v-icon right>photo_camera</v-icon>
                                 </v-btn>
@@ -93,23 +80,20 @@
 </template>
 
 <script>
-import foodFavs from '@/store/modules/foodFavorite'
 const TemplateSelect = () => import('@/components/adder/TemplateSelect/')
+const Scanner = () => import('@/components/adder/Calories/Scanner')
 
 export default {
     name: 'CalorieAdder',
 
     components: {
-        TemplateSelect
-    },
-
-    modules: {
-        foodFavs
+        TemplateSelect, Scanner
     },
 
     data () {
         return {
             selector: false,
+            scanner: false,
             show: false,
             sending: false,
             amount: '',
@@ -127,21 +111,6 @@ export default {
                         (v && v.length < 150) || this.$t('alert.v.tooLong', { amount: 150 })
                 ],
                 require: [v => !!v || this.$t('alert.v.require')]
-            },
-            scan: {
-                code: null,
-                loading: false,
-                size: {
-                    width: 500,
-                    height: 500
-                },
-                aspect: {
-                    min: 1,
-                    max: 1
-                },
-                detecteds: [],
-                types: ['ean_reader'],
-                scanning: false
             }
         }
     },
@@ -149,7 +118,7 @@ export default {
     watch: {
         show: function () {
             if (!this.show) {
-                this.scan.scanning = false
+                this.scanner = false
                 return
             }
             var now = new Date()
@@ -162,23 +131,6 @@ export default {
     },
 
     methods: {
-
-        scanned (data) {
-            this.scan.code = data.codeResult.code
-            if (this.scan.scanning) {
-                this.scan.scanning = false
-                this.scan.loading = true
-                setTimeout(() => {
-                    this.$store.dispatch('foodFavorite/scan', this.scan.code).then(res => {
-                        this.use(res)
-                    }).catch(err => {
-                        this.$notify({ type: 'error', title: this.$t('alert.error.default'), text: err })
-                    }).finally(() => {
-                        this.scan.loading = false
-                    })
-                }, 1000);
-            }
-        },
 
         calTotal () {
             if (this.amount > 0 && this.caloriesPer100 > 0) {
@@ -209,6 +161,7 @@ export default {
 
         use (item) {
             this.selector = false
+            this.scanner = false
             if (!item) return
             this.fd.title = item.title
             this.amount = item.amount
@@ -219,7 +172,7 @@ export default {
     },
 
     beforeDestroy () {
-        this.scan.scanning = false
+        this.scanner = false
     },
 
     i18n: {

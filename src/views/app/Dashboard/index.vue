@@ -49,7 +49,7 @@
 <script>
 const Start = () => import('@/views/app/Dashboard/Start')
 
-const CalorieAdder = () => import('@/components/adder/Calories')
+const CalorieAdder = () => import('@/components/adder/Calories/')
 const ActivityAdder = () => import('@/components/adder/Activity')
 const WeightAdder = () => import('@/components/adder/Weight')
 

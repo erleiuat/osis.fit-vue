@@ -29,7 +29,7 @@
 </template>
 
 <script>
-import CalorieAdder from '@/components/adder/Calories'
+import CalorieAdder from '@/components/adder/Calories/'
 import Default from '@/components/nav/toolbar/Default'
 
 export default {

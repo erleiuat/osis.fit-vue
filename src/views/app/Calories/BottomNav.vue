@@ -22,7 +22,7 @@
 </template>
 
 <script>
-import CalorieAdder from '@/components/adder/Calories'
+import CalorieAdder from '@/components/adder/Calories/'
 
 export default {
     name: 'BottomNav',
