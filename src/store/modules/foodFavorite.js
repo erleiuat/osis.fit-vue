@@ -53,6 +53,16 @@ const mutations = {
 
 const actions = {
 
+    scan (con, ean) {
+        return new Promise((resolve, reject) => {
+            Apios.post(con.state.url + 'scan/', { code: ean }).then(res => {
+                resolve(res.data)
+            }).catch(err => {
+                reject(err)
+            })
+        })
+    },
+
     load (con) {
         Apios.post(con.state.url + 'read/', { id: null }).then(res => {
             if (res.status === 200) con.commit('set', res.data.items)

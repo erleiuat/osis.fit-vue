@@ -1,5 +1,5 @@
 <template>
-    <v-dialog v-model="show" :fullscreen="$vuetify.breakpoint.xs" width="600px" transition="dialog-bottom-transition">
+    <v-dialog v-model="show" :fullscreen="$vuetify.breakpoint.xs" width="600px" scrollable transition="dialog-bottom-transition">
         <template v-slot:activator="{ on }">
             <slot v-bind:on="on">
                 <v-btn fab depressed large v-on="on" color="primary">
@@ -10,73 +10,91 @@
 
         <v-card>
 
-            <v-toolbar color="primary" flat dark v-if="!scan.scanning">
-                <v-btn icon @click="show = false">
-                    <v-icon>close</v-icon>
-                </v-btn>
-                <v-toolbar-title>{{ $t('title') }}</v-toolbar-title>
-                <v-spacer></v-spacer>
-                <v-btn icon @click="add()" :loading="sending" :disabled="!rule.valid">
-                    <v-icon>save</v-icon>
-                </v-btn>
-            </v-toolbar>
+            <v-card-title class="pl-0 pt-0 pr-0">
 
-            <div class="quagga-scanner-container" v-if="scan.scanning">
-                <v-btn @click="scan.scanning = !scan.scanning" block depressed>
-                    Close
-                </v-btn>
-                <v-quagga :onDetected="scanned" :aspectRatio="scan.aspect" :readerSize="scan.size" :readerTypes="scan.types" />
-            </div>
+                <v-toolbar color="primary" flat dark>
+                    <v-btn icon @click="show = false">
+                        <v-icon>close</v-icon>
+                    </v-btn>
+                    <v-toolbar-title>{{ $t('title') }}</v-toolbar-title>
+                    <v-spacer></v-spacer>
+                    <v-btn icon @click="add()" :loading="sending" :disabled="!rule.valid">
+                        <v-icon>save</v-icon>
+                    </v-btn>
+                </v-toolbar>
+            </v-card-title>
 
-            <vcontainer v-show="!scan.scanning">
-                <v-form v-model="rule.valid" ref="form" v-on:submit.prevent>
-                    <v-row dense align="baseline" v-if="!scan.scanning">
-                        <v-col cols="12" md="6">
-                            <v-btn @click="openSelect()" block small outlined>
-                                {{ $t('selectTemplate') }}
-                                <v-icon right>view_carousel</v-icon>
+            <v-card-text class="pa-0">
+
+                <vcontainer v-if="scan.scanning">
+                    <v-row>
+                        <v-col cols="12">
+                            <v-btn @click="scan.scanning = !scan.scanning" block depressed>
+                                {{ $t('btn.close') }}
                             </v-btn>
                         </v-col>
-                        <v-col cols="12" md="6">
-                            <v-btn @click="scan.scanning = !scan.scanning" block small outlined>
-                                {{ $t('scanCode') }}
-                                <v-icon right>photo_camera</v-icon>
-                            </v-btn>
-                        </v-col>
-
                         <v-col cols="12">
-                            <v-text-field v-model="fd.title" :label="$t('ft.title')" type="text" outlined />
-                        </v-col>
-                        <v-col cols="6">
-                            <v-text-field v-model="fd.date" :label="$t('ft.date')" :rules="rule.require" type="date" outlined />
-                        </v-col>
-                        <v-col cols="6">
-                            <v-text-field v-model="fd.time" :label="$t('ft.time')" :rules="rule.require" type="time" outlined append-icon="access_time" />
-                        </v-col>
-
-                        <v-col cols="12" sm="6">
-                            <v-text-field v-model="caloriesPer100" :label="$t('caloriesPer100')" @input="calTotal()" outlined type="number" suffix="Kcal" />
-                        </v-col>
-                        <v-col cols="12" sm="6">
-                            <v-text-field v-model="amount" :label="$t('ft.amount')" @input="calTotal()" outlined type="number" suffix="g / ml" />
-                        </v-col>
-
-                        <v-col cols="12">
-                            <v-text-field v-model="fd.calories" :label="$t('calories')" :rules="rule.require" type="number" suffix="Kcal" outlined />
-                        </v-col>
-                        <v-col cols="12">
-                            <v-btn @click="add()" :loading="sending" :disabled="!rule.valid" type="submit" color="primary" block depressed>{{ $t('btn.save') }}</v-btn>
+                            <div class="quagga-scanner-container">
+                                <v-quagga :onDetected="scanned" :aspectRatio="scan.aspect" :readerSize="scan.size" :readerTypes="scan.types" />
+                            </div>
                         </v-col>
                     </v-row>
-                </v-form>
-            </vcontainer>
+                </vcontainer>
+
+                <vcontainer v-show="!scan.scanning">
+                    <v-form v-model="rule.valid" ref="form" v-on:submit.prevent>
+                        <v-row dense align="baseline" v-if="!scan.scanning">
+                            <v-col cols="12" md="6">
+                                <v-btn @click="openSelect()" block small outlined>
+                                    {{ $t('selectTemplate') }}
+                                    <v-icon right>view_carousel</v-icon>
+                                </v-btn>
+                            </v-col>
+                            <v-col cols="12" md="6">
+                                <v-btn @click="scan.scanning = !scan.scanning" block small outlined>
+                                    {{ $t('scanCode') }}
+                                    <v-icon right>photo_camera</v-icon>
+                                </v-btn>
+                            </v-col>
+
+                            <v-col cols="12">
+                                <v-text-field v-model="fd.title" :label="$t('ft.title')" type="text" outlined />
+                            </v-col>
+                            <v-col cols="6">
+                                <v-text-field v-model="fd.date" :label="$t('ft.date')" :rules="rule.require" type="date" outlined />
+                            </v-col>
+                            <v-col cols="6">
+                                <v-text-field v-model="fd.time" :label="$t('ft.time')" :rules="rule.require" type="time" outlined append-icon="access_time" />
+                            </v-col>
+
+                            <v-col cols="12" sm="6">
+                                <v-text-field v-model="caloriesPer100" :label="$t('caloriesPer100')" @input="calTotal()" outlined type="number" suffix="Kcal" />
+                            </v-col>
+                            <v-col cols="12" sm="6">
+                                <v-text-field v-model="amount" :label="$t('ft.amount')" @input="calTotal()" outlined type="number" suffix="g / ml" />
+                            </v-col>
+
+                            <v-col cols="12">
+                                <v-text-field v-model="fd.calories" :label="$t('calories')" :rules="rule.require" type="number" suffix="Kcal" outlined />
+                            </v-col>
+                            <v-col cols="12">
+                                <v-btn @click="add()" :loading="sending" :disabled="!rule.valid" type="submit" color="primary" block depressed>{{ $t('btn.save') }}</v-btn>
+                            </v-col>
+                        </v-row>
+                    </v-form>
+                </vcontainer>
+
+                <TemplateSelect :show="selector" @select="use" />
+
+            </v-card-text>
 
         </v-card>
-        <TemplateSelect :show="selector" @select="use" />
+
     </v-dialog>
 </template>
 
 <script>
+import foodFavs from '@/store/modules/foodFavorite'
 const TemplateSelect = () => import('@/components/adder/TemplateSelect/')
 
 export default {
@@ -84,6 +102,10 @@ export default {
 
     components: {
         TemplateSelect
+    },
+
+    modules: {
+        foodFavs
     },
 
     data () {
@@ -120,13 +142,16 @@ export default {
                 detecteds: [],
                 types: ['ean_reader'],
                 scanning: false
-            },
+            }
         }
     },
 
     watch: {
         show: function () {
-            if (!this.show) return
+            if (!this.show) {
+                this.scan.scanning = false
+                return
+            }
             var now = new Date()
             var str = new Date(
                 now.getTime() - now.getTimezoneOffset() * 60000
@@ -136,12 +161,21 @@ export default {
         }
     },
 
+    beforeDestroy () {
+        this.scan.scanning = false
+    },
+
     methods: {
 
         scanned (data) {
-            this.scan.scanning = !this.scan.scanning
+            this.scan.scanning = false
             this.scan.code = data.codeResult.code
-            alert(data.codeResult.code)
+            console.log('going')
+            this.$store.dispatch('foodFavorite/scan', this.scan.code).then(res => {
+                alert(res.content)
+            }).catch(err => {
+                this.$notify({ type: 'error', title: this.$t('alert.error.default'), text: err })
+            })
         },
 
         calTotal () {
@@ -155,27 +189,16 @@ export default {
             if (!this.$refs.form.validate()) return
 
             this.sending = true
-            this.$store
-                .dispatch('calories/add', this.fd)
-                .then(r => {
-                    this.$notify({
-                        type: 'success',
-                        title: this.$t('alert.success.save')
-                    })
-                    this.show = false
-                    this.$refs.form.reset()
-                    this.fd.title = null // TODO: CREATE OWN FORM VALIDATION
-                })
-                .catch(r => {
-                    this.$notify({
-                        type: 'error',
-                        title: this.$t('alert.error.save'),
-                        text: r
-                    })
-                })
-                .finally(() => {
-                    this.sending = false
-                })
+            this.$store.dispatch('calories/add', this.fd).then(r => {
+                this.$notify({ type: 'success', title: this.$t('alert.success.save') })
+                this.show = false
+                this.$refs.form.reset()
+                this.fd.title = null // TODO: CREATE OWN FORM VALIDATION
+            }).catch(r => {
+                this.$notify({ type: 'error', title: this.$t('alert.error.save'), text: r })
+            }).finally(() => {
+                this.sending = false
+            })
         },
 
         openSelect () {
@@ -190,6 +213,7 @@ export default {
             this.caloriesPer100 = item.caloriesPer100
             this.calTotal()
         }
+
     },
 
     i18n: {
@@ -210,18 +234,19 @@ export default {
             }
         }
     }
+
 }
 </script>
 
 <style>
 .quagga-scanner-container {
-    max-height: 500px;
+    height: 400px;
     width: 100%;
     overflow: hidden;
     border: solid 1px gray;
 }
-.quagga-scanner-container video {
-    max-height: 500px !important;
+.quagga-scanner-container video, .quagga-scanner-container canvas {
+    height: 400px !important;
     width: 100% !important;
 }
 </style>
