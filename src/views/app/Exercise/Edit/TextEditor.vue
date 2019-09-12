@@ -1,5 +1,5 @@
 <template>
-    <v-sheet color="white">
+    <v-sheet light>
         <vue-editor v-model="contents" :editorOptions="editorSettings" />
     </v-sheet>
 </template>

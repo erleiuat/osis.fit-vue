@@ -153,6 +153,12 @@ export default {
 </script>
 
 <style>
+.quillEditorContent {
+    padding-top: 0px;
+    padding-right: 0px;
+    padding-bottom: 0px;
+    padding-left: 0px;
+}
 .quillEditorContent img {
     max-width: 100%;
     padding-top: 0px;
