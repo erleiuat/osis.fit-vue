@@ -40,7 +40,7 @@
 
         <v-row justify="center">
             <v-col cols="12" sm="8">
-                <v-btn color="amber" dark depressed block :to="{name: 'settings.premium'}">
+                <v-btn color="amber" light large block :to="{name: 'settings.premium'}">
                     <strong>{{ $t('getPremium') }}</strong>
                 </v-btn>
             </v-col>
@@ -68,7 +68,10 @@ export default {
     },
 
     mounted () {
-        if (this.$route.query.notify) this.$notify({ type: 'info', title: this.$t('alert.premiumOnly') })
+        if (this.$route.query.notify) {
+            this.$notify({ type: 'info', title: this.$t('alert.premiumOnly') })
+            this.$router.replace({ query: null })
+        }
     },
 
     i18n: {

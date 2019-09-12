@@ -37,15 +37,17 @@
                         </v-flex>
 
                         <v-flex xs12>
-                            <v-text-field v-model="fd.duration" :label="$t('duration')" type="time" outlined append-icon="timer" suffix="(hh:mm)" />
-                        </v-flex>
-
-                        <v-flex xs12>
                             <v-text-field v-model="fd.calories" :label="$t('calories')" :rules="rule.require" type="number" outlined autofocus suffix="Kcal" />
                         </v-flex>
 
-                        <v-flex xs12>
+                        <v-flex xs12 v-if="$store.getters['auth/premium']">
                             <v-btn @click="add()" :loading="sending" :disabled="!rule.valid" type="submit" color="primary" block depressed>
+                                {{ $t('btn.save') }}
+                            </v-btn>
+                        </v-flex>
+
+                        <v-flex xs12 v-else>
+                            <v-btn :to="{name: 'premium', query: { notify: true }}" :disabled="!rule.valid" type="submit" color="primary" block depressed>
                                 {{ $t('btn.save') }}
                             </v-btn>
                         </v-flex>

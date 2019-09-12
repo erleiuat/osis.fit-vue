@@ -3,7 +3,9 @@
 
         <v-list-item v-for="(item,key) in items.i1" :to="item.to" :key="key" link>
             <v-list-item-icon>
-                <v-icon>{{ item.icon }}</v-icon>
+                <v-icon :color="item.color ? item.color : null">
+                    {{ item.icon }}
+                </v-icon>
             </v-list-item-icon>
             <v-list-item-content>
                 <v-list-item-title>{{ $t('view.'+item.title+'.title') }}</v-list-item-title>
@@ -17,7 +19,9 @@
             <v-list-item v-for="(item,key) in items.i2.items" :to="{name: item.to}" :key="key" link>
                 <v-list-item-title>{{ item.title }}</v-list-item-title>
                 <v-list-item-icon>
-                    <v-icon>{{ item.icon }}</v-icon>
+                    <v-icon :color="item.color ? item.color : null">
+                        {{ item.icon }}
+                    </v-icon>
                 </v-list-item-icon>
             </v-list-item>
         </v-list-group>
@@ -29,7 +33,9 @@
             <v-list-item v-for="(item,key) in items.i3.items" :to="{name: item.to}" :key="key" link>
                 <v-list-item-title>{{ $t('view.'+(item.title || item.to)+'.title') }}</v-list-item-title>
                 <v-list-item-icon>
-                    <v-icon>{{ item.icon }}</v-icon>
+                    <v-icon :color="item.color ? item.color : null">
+                        {{ item.icon }}
+                    </v-icon>
                 </v-list-item-icon>
             </v-list-item>
         </v-list-group>
@@ -59,11 +65,20 @@ export default {
         items () {
             var date = this.$store.getters['today'].date
 
+            var items4 = {}
+            var premiumIco = null
+            if (!this.$store.getters['auth/premium']) {
+                premiumIco = 'yellow'
+                items4['premium'] = {
+                    to: 'premium', icon: 'star', color: 'yellow'
+                }
+            }
+
             var items1 = {
                 dashboard: { title: 'dashboard', to: { name: 'dashboard' }, icon: 'dashboard' },
                 calories: { title: 'calories', to: { name: 'calories', params: { date: date } }, icon: 'restaurant' },
                 weight: { title: 'weight', to: { name: 'weight' }, icon: 'linear_scale' },
-                activity: { title: 'activity', to: { name: 'activity', params: { date: date } }, icon: 'accessibility_new' }
+                activity: { title: 'activity', to: { name: 'activity', params: { date: date } }, icon: 'accessibility_new', color: premiumIco }
             }
 
             var item2 = {
@@ -71,7 +86,7 @@ export default {
                 icon: 'fastfood',
                 items: {
                     own: { title: this.$t('templates'), to: 'food', icon: 'folder_open' },
-                    favorites: { title: this.$t('database'), to: 'food.favorites', icon: 'layers' }
+                    favorites: { title: this.$t('database'), to: 'food.favorites', icon: 'layers', color: premiumIco }
                 }
             }
 
@@ -79,16 +94,8 @@ export default {
                 to: 'training',
                 icon: 'fitness_center',
                 items: {
-                    saved: { title: 'training.saved', to: 'training.saved', icon: 'list_alt' },
-                    exercise: { to: 'exercise.saved', icon: 'calendar_view_day' }
-                }
-            }
-
-            var items4 = {}
-
-            if (!this.$store.getters['auth/premium']) {
-                items4['premium'] = {
-                    to: 'premium', icon: 'star', color: 'yellow'
+                    saved: { title: 'training.saved', to: 'training.saved', icon: 'list_alt', color: premiumIco },
+                    exercise: { to: 'exercise.saved', icon: 'calendar_view_day', color: premiumIco }
                 }
             }
 

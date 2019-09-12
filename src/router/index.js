@@ -55,7 +55,7 @@ router.beforeEach((to, from, next) => {
                 if (!needPremium || store.getters['auth/premium']) {
                     store.dispatch('loading', true)
                     next()
-                } else router.push({ name: 'premium', query: { notify: true } })
+                } else if (from.name !== 'premium') router.push({ name: 'premium', query: { notify: true } })
             } else if (start) router.push({ name: 'dashboard' })
         }
     } else if (!needAuth) {

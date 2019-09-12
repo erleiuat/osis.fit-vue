@@ -36,12 +36,20 @@
                                     <v-icon right>view_carousel</v-icon>
                                 </v-btn>
                             </v-col>
-                            <v-col cols="12" md="6">
+
+                            <v-col cols="12" md="6" v-if="$store.getters['auth/premium']">
                                 <v-btn @click="scanner = !scanner" block small outlined>
                                     {{ $t('scanCode') }}
                                     <v-icon right>photo_camera</v-icon>
                                 </v-btn>
                             </v-col>
+                            <v-col cols="12" md="6" v-else>
+                                <v-btn :to="{name: 'premium', query: { notify: true }}" block small outlined color="amber">
+                                    {{ $t('scanCode') }}
+                                    <v-icon right>photo_camera</v-icon>
+                                </v-btn>
+                            </v-col>
+
 
                             <v-col cols="12">
                                 <v-text-field v-model="fd.title" :label="$t('ft.title')" type="text" outlined />

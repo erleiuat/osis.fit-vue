@@ -27,7 +27,7 @@
                                 {{ $t('database') }}
                                 <v-icon right>search</v-icon>
                             </v-btn>
-                            <v-btn :to="{name: 'premium', query: {notify: true}}" v-else-if="!$store.getters['auth/premium']" text block>
+                            <v-btn :to="{name: 'premium', query: {notify: true}}" v-else-if="!$store.getters['auth/premium']" color="amber" text block>
                                 {{ $t('database') }}
                                 <v-icon right>search</v-icon>
                             </v-btn>

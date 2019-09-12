@@ -35,7 +35,7 @@ module.exports = [{
 
     name: 'activity',
     path: '/activity/:date',
-    meta: { authRequired: true },
+    meta: { authRequired: true, premium: true },
     components: {
         toolbar: () => import('@/views/app/Activity/Toolbar'),
         default: () => import('@/views/app/Activity/'),
