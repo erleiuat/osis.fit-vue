@@ -3,7 +3,7 @@
         <transition appear name="zoom" mode="out-in">
             <vcontainer class="pa-2">
                 <v-row no-gutters>
-                    <v-col cols="12">
+                    <v-col cols="12" class="text-center">
                         <div class="title"> {{ $t('title') }} </div>
                         <div class="caption"> {{ $t('text') }} </div>
                     </v-col>
@@ -28,11 +28,11 @@ export default {
         messages: {
             en: {
                 title: 'Authentication',
-                text: 'Your session has expired and is being refreshed'
+                text: 'Your session is being refreshed'
             },
             de: {
                 title: 'Authentifizierung',
-                text: 'Deine Sitzung ist abgelaufen und wird gerade aktualisiert'
+                text: 'Deine Sitzung wird aktualisiert'
             }
         }
     }

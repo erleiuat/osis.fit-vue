@@ -3,7 +3,7 @@
         <transition appear name="zoom" mode="out-in">
             <vcontainer class="pa-2">
                 <v-row no-gutters>
-                    <v-col cols="12">
+                    <v-col cols="12" class="text-center">
                         <div class="title"> {{ $t('title') }} </div>
                         <div class="caption"> {{ $t('text') }} </div>
                     </v-col>
@@ -50,7 +50,7 @@ export default {
             },
             de: {
                 title: 'Update gefunden',
-                text: 'Die App wird gerade aktualisiert. Du wirst anschliessend gleich zur neuen Version weitergeleitet.'
+                text: 'Die App wird gerade aktualisiert. Du wirst anschliessend direkt zur neuen Version weitergeleitet.'
             }
         }
     }

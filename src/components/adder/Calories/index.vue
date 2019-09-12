@@ -50,7 +50,6 @@
                                 </v-btn>
                             </v-col>
 
-
                             <v-col cols="12">
                                 <v-text-field v-model="fd.title" :label="$t('ft.title')" type="text" outlined />
                             </v-col>
