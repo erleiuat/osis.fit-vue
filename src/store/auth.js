@@ -161,6 +161,18 @@ const actions = {
         })
     },
 
+    verifyLogin (con) {
+        return new Promise((resolve, reject) => {
+            Apios.post('auth/check/').then(res => {
+                resolve()
+            }).catch(err => {
+                con.commit('user/remove', null, { root: true })
+                con.commit('remove')
+                reject(err)
+            })
+        })
+    },
+
     logout (con) {
         return new Promise((resolve, reject) => {
             Apios.post('auth/logout/', { token: con.state.token.refresh }).then(() => {

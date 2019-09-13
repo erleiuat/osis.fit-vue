@@ -65,13 +65,23 @@ export default {
 
     methods: {
 
+        checkLogin(){
+            this.$store.dispatch('auth/verifyLogin', this.fd).then(r => {
+                if (this.$route.query.target) this.$router.push({ name: this.$route.query.target })
+                else this.$router.push({ name: 'dashboard' })
+            }).catch(r => {
+                this.$notify({ type: 'error', title: this.$t('alert.error.default'), text: r })
+            }).finally(() => {
+                this.sending = false
+            })
+        },
+
         login () {
             if (!this.$refs.form.validate()) return false
             this.sending = true
 
             this.$store.dispatch('auth/login', this.fd).then(r => {
-                if (this.$route.query.target) this.$router.push({ name: this.$route.query.target })
-                else this.$router.push({ name: 'dashboard' })
+                this.checkLogin()
             }).catch(r => {
                 switch (r) {
                 case 'password_wrong':
@@ -88,8 +98,6 @@ export default {
                     this.$notify({ type: 'error', title: this.$t('alert.error.default'), text: r })
                     break
                 }
-            }).finally(() => {
-                this.sending = false
             })
         }
 
