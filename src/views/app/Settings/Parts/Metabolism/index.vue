@@ -109,7 +109,7 @@ export default {
                 ],
                 dYear: [
                     v => !!v || this.$t('alert.v.require'),
-                    v => v >= 1990 || this.$t('alert.v.invalid'),
+                    v => v >= 1900 || this.$t('alert.v.invalid'),
                     v => v <= this.curYear || this.$t('alert.v.invalid')
                 ]
             }

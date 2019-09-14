@@ -32,7 +32,7 @@
                     <v-text-field v-model="fbdMonth" :rules="rule.dMonth" placeholder="MM" type="number" minlength="2" maxlength="2" min="1" max="12" filled single-line />
                 </v-col>
                 <v-col cols="6" class="pt-0">
-                    <v-text-field v-model="fbdYear" :rules="rule.dYear" placeholder="YYYY" type="number" minlength="4" maxlength="4" min="1990" :max="curYear" filled single-line />
+                    <v-text-field v-model="fbdYear" :rules="rule.dYear" placeholder="YYYY" type="number" minlength="4" maxlength="4" min="1900" :max="curYear" filled single-line />
                 </v-col>
             </v-row>
         </v-col>
