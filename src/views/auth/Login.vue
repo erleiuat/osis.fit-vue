@@ -65,7 +65,7 @@ export default {
 
     methods: {
 
-        checkLogin(){
+        checkLogin () {
             this.$store.dispatch('auth/verifyLogin', this.fd).then(r => {
                 if (this.$route.query.target) this.$router.push({ name: this.$route.query.target })
                 else this.$router.push({ name: 'dashboard' })
@@ -81,7 +81,9 @@ export default {
             this.sending = true
 
             this.$store.dispatch('auth/login', this.fd).then(r => {
-                this.checkLogin()
+                // this.checkLogin()
+                if (this.$route.query.target) this.$router.push({ name: this.$route.query.target })
+                else this.$router.push({ name: 'dashboard' })
             }).catch(r => {
                 switch (r) {
                 case 'password_wrong':

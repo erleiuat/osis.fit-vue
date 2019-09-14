@@ -125,18 +125,44 @@ const actions = {
         })
     },
 
-    refresh (con) {
+    login (con, form) {
         return new Promise((resolve, reject) => {
-            var data = { token: con.state.token.refresh }
-            Apios.post('auth/refresh/', data).then(res => {
+            Apios.post('auth/', form).then(res => {
                 con.state.token.access = res.data.tokens.access
                 con.state.token.refresh = res.data.tokens.refresh
                 con.commit('place')
-                con.commit('user/set', res.data.user, { root: true })
-                con.commit('calories/set', res.data.calories, { root: true })
-                con.commit('weight/syncSet', res.data.weight, { root: true })
-                con.commit('activity/set', res.data.activity, { root: true })
-                resolve()
+
+                con.dispatch('checkLogin').then(() => {
+                    con.commit('user/set', res.data.user, { root: true })
+                    con.commit('calories/set', res.data.calories, { root: true })
+                    con.commit('weight/syncSet', res.data.weight, { root: true })
+                    con.commit('activity/set', res.data.activity, { root: true })
+                    resolve()
+                }).catch(err => {
+                    reject(err)
+                })
+            }).catch(err => {
+                reject(err)
+            })
+        })
+    },
+
+    refresh (con) {
+        return new Promise((resolve, reject) => {
+            Apios.post('auth/refresh/', { token: con.state.token.refresh }).then(res => {
+                con.state.token.access = res.data.tokens.access
+                con.state.token.refresh = res.data.tokens.refresh
+                con.commit('place')
+
+                con.dispatch('checkLogin').then(() => {
+                    con.commit('user/set', res.data.user, { root: true })
+                    con.commit('calories/set', res.data.calories, { root: true })
+                    con.commit('weight/syncSet', res.data.weight, { root: true })
+                    con.commit('activity/set', res.data.activity, { root: true })
+                    resolve()
+                }).catch(err => {
+                    reject(err)
+                })
             }).catch(err => {
                 con.commit('remove')
                 reject(err)
@@ -144,24 +170,7 @@ const actions = {
         })
     },
 
-    login (con, form) {
-        return new Promise((resolve, reject) => {
-            Apios.post('auth/', form).then(res => {
-                con.state.token.access = res.data.tokens.access
-                con.state.token.refresh = res.data.tokens.refresh
-                con.commit('place')
-                con.commit('user/set', res.data.user, { root: true })
-                con.commit('calories/set', res.data.calories, { root: true })
-                con.commit('weight/syncSet', res.data.weight, { root: true })
-                con.commit('activity/set', res.data.activity, { root: true })
-                resolve()
-            }).catch(err => {
-                reject(err)
-            })
-        })
-    },
-
-    verifyLogin (con) {
+    checkLogin (con) {
         return new Promise((resolve, reject) => {
             Apios.post('auth/check/').then(res => {
                 resolve()
