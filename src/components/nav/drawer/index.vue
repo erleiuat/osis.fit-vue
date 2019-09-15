@@ -1,5 +1,5 @@
 <template>
-    <v-navigation-drawer v-model="drawer" app floating>
+    <v-navigation-drawer v-model="drawer" app floating style="height: 100%;">
 
         <template v-slot:prepend>
             <v-img :lazy-src="require('@/assets/img/drawer_bg_lazy.jpg')" :src="require('@/assets/img/drawer_bg.jpg')" max-height="144">
