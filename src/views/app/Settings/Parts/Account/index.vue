@@ -24,7 +24,16 @@
             </v-expansion-panel-header>
             <v-expansion-panel-content eager>
                 <v-divider />
-                <Delete />
+                <Delete v-if="!$store.getters['auth/premium']" />
+                <vcontainer v-else>
+                    <v-row dense justify="center">
+                        <v-col cols="12" md="7">
+                            <v-alert type="warning" outlined>
+                                {{ $t('hasPremium') }}
+                            </v-alert>
+                        </v-col>
+                    </v-row>
+                </vcontainer>
             </v-expansion-panel-content>
         </v-expansion-panel>
     </v-expansion-panels>
@@ -62,12 +71,14 @@ export default {
             en: {
                 change: 'Change Password',
                 download: 'Download Data',
-                delete: 'Delete Account'
+                delete: 'Delete Account',
+                hasPremium: 'You still have an active premium subscription! End this first and return as soon as it expires.'
             },
             de: {
                 change: 'Passwört ändern',
                 download: 'Daten herunterladen',
-                delete: 'Konto löschen'
+                delete: 'Konto löschen',
+                hasPremium: 'Du hast noch ein aktives Premium-Abonnement! Beende dieses zuerst und kehre zurück sobald es abgelaufen ist.'
             }
         }
     }
