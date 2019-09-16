@@ -13,6 +13,11 @@
                 </v-btn>
             </v-toolbar-items>
         </template>
+        <template v-slot:toggler v-else-if="showBack">
+            <v-btn icon @click="$router.go(-1)">
+                <v-icon>arrow_back</v-icon>
+            </v-btn>
+        </template>
 
     </Default>
 </template>
@@ -30,6 +35,10 @@ export default {
     computed: {
         title () {
             return this.$t('view.' + this.$route.name + '.title')
+        },
+        showBack () {
+            if (this.$route.name !== 'about') return true
+            else return false
         }
     }
 

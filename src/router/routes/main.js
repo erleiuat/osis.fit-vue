@@ -39,7 +39,7 @@ module.exports = [{
     path: '/about',
     meta: { authRequired: false },
     components: {
-        toolbar: () => import('@/components/nav/toolbar/'),
+        toolbar: () => import('@/views/general/About/Toolbar'),
         default: () => import('@/views/general/About/')
     },
     children: [

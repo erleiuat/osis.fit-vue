@@ -55,7 +55,7 @@ export default new Vuex.Store({
 
         app: state => {
             return {
-                locale: state.app.language,
+                locale: state.app.language.substring(0, 2),
                 dark: state.app.dark
             }
         },

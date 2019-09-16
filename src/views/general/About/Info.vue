@@ -69,17 +69,17 @@
 
             <v-col cols="12" md="4">
                 <v-btn outlined block :to="{name: 'help'}">
-                    {{ $t('faqBtn') }}
+                    {{ $t('faqBtn') }} <v-icon right>open_in_new</v-icon>
                 </v-btn>
             </v-col>
             <v-col cols="12" md="4">
                 <v-btn outlined block :to="{name: 'help.contact'}">
-                    {{ $t('contactBtn') }}
+                    {{ $t('contactBtn') }} <v-icon right>open_in_new</v-icon>
                 </v-btn>
             </v-col>
             <v-col cols="12" md="4">
                 <v-btn outlined block href="mailto:contact@osis.io" target="_blank">
-                    {{ $t('mailBtn') }}
+                    {{ $t('mailBtn') }} <v-icon right>open_in_new</v-icon>
                 </v-btn>
             </v-col>
 
@@ -120,7 +120,7 @@ export default {
                 subText: `
                 Wir bieten unseren Nutzern Unterstützung bei der Bedienung der Anwendung und 
                 sind abhängig von konstruktiver Kritik, um unser Angebot stetig zu verbessern.
-                Auch ist unsere App nicht zu 100% Fehlerfrei, weshalb wir immer dankbar sind, wenn
+                Auch ist unsere App nicht zu 100% fehlerfrei, weshalb wir immer dankbar sind, wenn
                 Nutzer uns auf Fehler aufmerksam machen. Für diese Anliegen und alle anderen kann man
                 uns über das Kontaktformular oder per Mail erreichen.
                 `,
