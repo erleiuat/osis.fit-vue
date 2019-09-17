@@ -88,7 +88,7 @@ export default {
                     active: sl >= 180 && sl <= 199
                 },
                 f: {
-                    active: sl >= 200 && sl <= 249
+                    active: sl >= 200 && sl <= 250
                 }
             }
         }

@@ -39,15 +39,6 @@ const getters = {
         return Math.round(dayNeed)
     },
 
-    user: state => {
-        if (!state.item) return null
-        return {
-            firstname: state.item.firstname,
-            lastname: state.item.lastname,
-            image: state.item.image
-        }
-    },
-
     metabolism: state => {
         if (!state.item) return null
         return {
@@ -55,6 +46,29 @@ const getters = {
             height: state.item.height,
             gender: state.item.gender,
             pal: state.item.pal
+        }
+    },
+
+    dailyCalorie: state => (pal = false, bmr = false) => {
+
+        if (!bmr) return false
+        if (!pal) var cPal = 1
+        else var cPal = pal
+
+        var defDay = 15.8
+        var actDay = cPal * 8
+        var totDay = (defDay + actDay) / 24
+
+        return Math.round(bmr * totDay)
+
+    },
+
+    user: state => {
+        if (!state.item) return null
+        return {
+            firstname: state.item.firstname,
+            lastname: state.item.lastname,
+            image: state.item.image
         }
     },
 

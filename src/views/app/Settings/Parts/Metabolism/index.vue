@@ -54,7 +54,7 @@
             <v-row justify="center" dense>
                 <v-col cols="12" class="pt-3 pb-2 text-center">
                     <div class="caption">{{ $t('calNeed') }}</div>
-                    <div class="title">{{ Math.round(cBMR * fd.pal) || $t('missing') }}</div>
+                    <div class="title">{{ totalNeed || $t('missing') }}</div>
                 </v-col>
             </v-row>
 
@@ -120,6 +120,9 @@ export default {
         curYear () {
             var nDate = this.$store.getters['today'].date.split('-')
             return nDate[0]
+        },
+        totalNeed () {
+            return this.$store.getters['user/dailyCalorie'](this.fd.pal, this.cBMR)
         }
     },
 

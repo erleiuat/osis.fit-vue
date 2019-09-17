@@ -80,7 +80,7 @@ export default {
         },
 
         dailyRequire () {
-            return Math.round(this.bmr * this.cVals.pal)
+            return this.$store.getters['user/dailyCalorie'](this.cVals.pal, this.bmr)
         },
 
         bmr () {
