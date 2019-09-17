@@ -1,13 +1,18 @@
 <template>
-    <vcontainer align="space-evenly">
+    <vcontainer align="space-evenly" :class="$vuetify.breakpoint.xsOnly ? 'pa-2': ''">
 
         <v-row v-if="item && loaded" align="center" justify="center" dense>
-            <v-col cols="12" md="10">
+            <v-col cols="12" md="10" class="title">
+                {{ item.title }}
+            </v-col>
+            <v-col cols="12" md="10" class="body-2">
                 <v-sheet class="pa-2 text-left">
-                    <div class="title">{{ item.title }}</div>
-                    <div class="caption">{{ item.description }}</div>
+                    {{ item.description }}
                 </v-sheet>
             </v-col>
+        </v-row>
+
+        <v-row v-if="item && loaded" align="center" justify="center" dense>
             <v-col cols="12" v-if="path">
                 <v-img :lazy-src="path.lazy" :src="path.image" :max-height="300" contain />
             </v-col>
@@ -16,12 +21,8 @@
         <v-row v-if="item && loaded" justify="center" dense>
             <v-col cols="12" md="10">
                 <div class="ql-editor quillEditorContent">
-                    <div v-html="item.content">
-                    </div>
+                    <div v-html="item.content" />
                 </div>
-                <!--
-                <div class="quillEditorContent" v-html="item.content" />
-                -->
             </v-col>
         </v-row>
 

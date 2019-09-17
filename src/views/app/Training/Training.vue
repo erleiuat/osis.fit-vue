@@ -1,30 +1,18 @@
 <template>
-    <vcontainer align="space-evenly">
+    <vcontainer align="space-evenly" :class="$vuetify.breakpoint.xsOnly ? 'pa-2': ''">
 
         <v-row v-if="item && loaded" align="center" justify="center" dense>
             <v-col cols="12" md="10" class="title">
                 {{ item.title }}
             </v-col>
             <v-col cols="12" md="10" class="body-2">
-                {{ item.description }}
+                <v-sheet class="pa-2 text-left">
+                    {{ item.description }}
+                </v-sheet>
             </v-col>
         </v-row>
 
         <v-row v-if="item && loaded" align="center" dense>
-
-            <v-col cols="6">
-                <v-sheet class="pa-2">
-                    <div class="caption">{{ $t('totalCals') }}</div>
-                    {{ total.calories || 0 }} <span class="font-italic font-weight-light">Kcal</span>
-                </v-sheet>
-            </v-col>
-            <v-col cols="6">
-                <v-sheet class="pa-2">
-                    <div class="caption">{{ $t('totalduration') }}</div>
-                    {{ total.duration || 0 }} <span class="font-italic font-weight-light">hh:mm</span>
-                </v-sheet>
-            </v-col>
-
             <v-col cols="12" class="body-2" v-if="item.exercises">
                 <v-sheet class="pa-2">
                     <div class="caption">{{ $t('exercises') }}</div>
@@ -70,6 +58,22 @@
                             </v-expansion-panel-content>
                         </v-expansion-panel>
                     </v-expansion-panels>
+                </v-sheet>
+            </v-col>
+        </v-row>
+
+        <v-row v-if="item && loaded" align="center" dense>
+
+            <v-col cols="6">
+                <v-sheet class="pa-2">
+                    <div class="caption">{{ $t('totalCals') }}</div>
+                    {{ total.calories || 0 }} <span class="font-italic font-weight-light">Kcal</span>
+                </v-sheet>
+            </v-col>
+            <v-col cols="6">
+                <v-sheet class="pa-2">
+                    <div class="caption">{{ $t('totalduration') }}</div>
+                    {{ total.duration || 0 }} <span class="font-italic font-weight-light">hh:mm</span>
                 </v-sheet>
             </v-col>
 
