@@ -5,13 +5,13 @@
 
         <vcontainer>
 
-            <v-row align="start" justify="center" v-if="loaded && fd" dense>
+            <v-row align="center" justify="center" v-if="loaded && fd" dense>
 
                 <v-col cols="12" :md="showPublicator ? '10':'12'">
                     <v-text-field :label="$t('ft.title')" v-model="fd.title" :rules="rule.require" type="text" filled />
                 </v-col>
-                <v-col cols="auto" md="auto" v-if="showPublicator">
-                    <v-checkbox v-model="fd.public" :label="$t('public')" class="mt-0" />
+                <v-col cols="auto" md="auto" class="ml-md-auto mr-md-auto" v-if="showPublicator">
+                    <v-checkbox v-model="fd.public" :label="fd.public? $t('public')+'!':$t('public')+'?'" class="mt-0" />
                 </v-col>
 
                 <v-col cols="12">
