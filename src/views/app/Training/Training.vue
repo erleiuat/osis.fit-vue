@@ -140,6 +140,11 @@ export default {
             var hours = Math.round(time / 60)
             var minutes = Math.round(((time / 60) - hours) * 60)
 
+            if (minutes < 0) {
+                hours += -1
+                minutes = (60+minutes)
+            }
+
             return {
                 calories: Math.round(cals),
                 duration: hours + ':' + minutes
