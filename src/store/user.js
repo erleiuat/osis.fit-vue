@@ -50,17 +50,16 @@ const getters = {
     },
 
     dailyCalorie: state => (pal = false, bmr = false) => {
-
         if (!bmr) return false
-        if (!pal) var cPal = 1
-        else var cPal = pal
+
+        var cPal = 1
+        if (pal) cPal = pal
 
         var defDay = 15.8
         var actDay = cPal * 8
         var totDay = (defDay + actDay) / 24
 
         return Math.round(bmr * totDay)
-
     },
 
     user: state => {

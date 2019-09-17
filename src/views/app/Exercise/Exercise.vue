@@ -8,6 +8,9 @@
                     <div class="caption">{{ item.description }}</div>
                 </v-sheet>
             </v-col>
+            <v-col cols="12" v-if="path">
+                <v-img :lazy-src="path.lazy" :src="path.image" :max-height="300" contain />
+            </v-col>
         </v-row>
 
         <v-row v-if="item && loaded" justify="center" dense>
@@ -41,21 +44,9 @@
             <v-col cols="12" md="6">
                 <v-sheet class="pa-2 text-left">
                     <v-row no-gutters justify="space-between">
-                        <v-col cols="12" md="12" class="caption text-center">
-                            <b>{{ $t('perDo') }}</b>
-                        </v-col>
-                        <v-col cols="6" md="auto" class="caption">
-                            {{ $t('calsPerDo') }}
-                        </v-col>
-                        <v-col cols="6" md="3" class="body-2 text-right text-md-left">
-                            {{ item.calories }}
-                            <span class="font-italic font-weight-light">Kcal</span>
-                        </v-col>
-                        <v-col cols="6" md="auto" class="caption">
-                            {{ $t('repetsPerDo') }}
-                        </v-col>
-                        <v-col cols="6" md="auto" class="body-2 text-right text-md-left">
-                            {{ item.repetitions }}
+                        <v-col cols="12" class="text-center">
+                            <div class="caption">{{ $t('caloriesCalc') }} (<i>{{ $t('withYour') }}</i>)</div>
+                            {{ exampleCals ? exampleCals : '...' }} <i> {{ $t('perHour') }}</i>
                         </v-col>
                     </v-row>
                 </v-sheet>
@@ -109,6 +100,30 @@ export default {
                 return this.iData
             }
             return false
+        },
+        path () {
+            if (!this.item.image) return false
+            else if (!this.item.image.path) {
+                return {
+                    image: this.item.image,
+                    lazy: this.item.image
+                }
+            }
+
+            var img = this.item.image.path.small
+            var lazy = this.item.image.path.lazy
+
+            return {
+                image: img,
+                lazy: lazy
+            }
+        },
+        exampleCals () {
+            if (!this.item.calories) return false
+            if (!this.$store.getters['weight/latest']) return false
+            var weight = this.$store.getters['weight/latest'].weight
+            var result = this.item.calories * 1 * weight
+            return result
         }
     },
 
@@ -127,9 +142,9 @@ export default {
             en: {
                 title: 'Exercise',
                 public: 'Public',
-                perDo: 'Per Execution',
-                calsPerDo: 'Calories burned',
-                repetsPerDo: 'Repetitions',
+                caloriesCalc: 'Calories burned',
+                withYour: 'with your weight',
+                perHour: 'Kcal per Hour',
                 bodyparts: 'Affected body parts',
                 type: 'Type',
                 pFalse: 'No',
@@ -138,9 +153,9 @@ export default {
             de: {
                 title: 'Übung',
                 public: 'Öffentlich',
-                perDo: 'Pro Ausführung',
-                calsPerDo: 'Kalorienverbrauch',
-                repetsPerDo: 'Wiederholungen',
+                caloriesCalc: 'Kalorienverbrauch',
+                withYour: 'mit deinem Gewicht',
+                perHour: 'Kcal pro Stunde',
                 bodyparts: 'Betroffene Körperteile',
                 type: 'Typ',
                 pFalse: 'Nein',

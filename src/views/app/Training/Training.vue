@@ -14,38 +14,69 @@
 
             <v-col cols="6">
                 <v-sheet class="pa-2">
-                    <div class="caption">{{ $t('public') }}</div>
-                    {{ item.public ? $t('pTrue'):$t('pFalse') }}
+                    <div class="caption">{{ $t('totalCals') }}</div>
+                    {{ total.calories || 0 }} <span class="font-italic font-weight-light">Kcal</span>
                 </v-sheet>
             </v-col>
-
             <v-col cols="6">
                 <v-sheet class="pa-2">
-                    <div class="caption">{{ $t('totalCals') }}</div>
-                    {{ totalCals || 0 }} <span class="font-italic font-weight-light">Kcal</span>
+                    <div class="caption">{{ $t('totalduration') }}</div>
+                    {{ total.duration || 0 }} <span class="font-italic font-weight-light">hh:mm</span>
                 </v-sheet>
             </v-col>
 
             <v-col cols="12" class="body-2" v-if="item.exercises">
                 <v-sheet class="pa-2">
                     <div class="caption">{{ $t('exercises') }}</div>
-                    <v-expansion-panels>
+                    <v-expansion-panels accordion>
                         <v-expansion-panel v-for="(exe, key) in item.exercises" :key="key">
                             <v-expansion-panel-header>
-                                {{ exe.repetitions }} x {{ exe.title }}
+
+                                <v-row no-gutters align="center">
+                                    <v-col cols="1" md="1">
+                                        {{ key+1 }}.
+                                    </v-col>
+                                    <v-col cols="6" md="6" class="title">
+                                        {{ exe.title }}
+                                    </v-col>
+                                    <v-col cols="5" md="5" class="text-right">
+                                        ( <i>{{ exe.duration }}</i> )
+                                    </v-col>
+                                </v-row>
+
                             </v-expansion-panel-header>
                             <v-expansion-panel-content>
-                                {{ exe.description }}
-                                <div class="caption" v-if="exe.bodyparts">{{ $t('bodyparts') }}</div>
-                                <v-chip v-for="(bp, key) in exe.bodyparts" :key="key" class="ml-1 mr-1 mb-1">
-                                    {{ $t('pnt.parts.'+bp) }}
-                                </v-chip>
-                                <v-btn icon :to="{name: 'exercise', params: {type: 'public', id: exe.id}}">
-                                    <v-icon>open_in_new</v-icon>
-                                </v-btn>
+
+                                <v-row no-gutters align="center">
+                                    <v-col cols="12" class="caption">
+                                        {{ exe.description }}
+                                    </v-col>
+                                    <v-col cols="11">
+                                        <div class="caption" v-if="exe.bodyparts">{{ $t('bodyparts') }}</div>
+                                        <v-chip v-for="(bp, key) in exe.bodyparts" :key="key" class="ml-1 mr-1 mb-1">
+                                            {{ $t('pnt.parts.'+bp) }}
+                                        </v-chip>
+                                    </v-col>
+                                    <v-col cols="1" class="text-right">
+                                        <v-btn v-if="$route.params.type === 'own'" :to="{name: 'exercise', params: {type: 'own', id: exe.id}}" icon>
+                                            <v-icon>open_in_new</v-icon>
+                                        </v-btn>
+                                        <v-btn v-else :to="{name: 'exercise', params: {type: 'public', id: exe.id}}" icon>
+                                            <v-icon>open_in_new</v-icon>
+                                        </v-btn>
+                                    </v-col>
+                                </v-row>
+
                             </v-expansion-panel-content>
                         </v-expansion-panel>
                     </v-expansion-panels>
+                </v-sheet>
+            </v-col>
+
+            <v-col cols="12">
+                <v-sheet class="pa-2">
+                    <div class="caption">{{ $t('public') }}</div>
+                    {{ item.public ? $t('pTrue'):$t('pFalse') }}
                 </v-sheet>
             </v-col>
 
@@ -63,6 +94,7 @@
 </template>
 
 <script>
+import clonedeep from 'lodash.clonedeep'
 import exercise from '@/store/modules/exercise'
 import training from '@/store/modules/training'
 
@@ -86,13 +118,32 @@ export default {
 
     computed: {
 
-        totalCals () {
-            var sum = 0
+        userWeight () {
+            if (!this.$store.getters['weight/latest']) return false
+            else return this.$store.getters['weight/latest'].weight
+        },
+
+        total () {
+            var cals = 0
+            var time = 0
             if (!this.item.exercises) return 0
+            if (!this.userWeight) return 0
             this.item.exercises.forEach(el => {
-                if (el.calories) sum += (el.calories / el.repsOrg) * el.repetitions
+                if (el.calories && el.duration) {
+                    var hAm = el.duration.split(':')
+                    var tMins = parseFloat(hAm[0]) * 60 + parseFloat(hAm[1])
+                    cals += el.calories * (tMins / 60) * this.userWeight
+                    time += tMins
+                }
             })
-            return Math.round(sum)
+
+            var hours = Math.round(time / 60)
+            var minutes = Math.round(((time / 60) - hours) * 60)
+
+            return {
+                calories: Math.round(cals),
+                duration: hours + ':' + minutes
+            }
         },
 
         item () {
@@ -106,9 +157,8 @@ export default {
 
         buildPrivate (item) {
             item.exercises = item.exercises.map(el => {
-                var tmp = this.$store.getters['exercise/id'](el.id)
-                tmp.repsOrg = tmp.repetitions
-                tmp.repetitions = el.repetitions
+                var tmp = clonedeep(this.$store.getters['exercise/id'](el.id))
+                tmp.duration = el.duration
                 return tmp
             })
             this.training = item
@@ -116,16 +166,16 @@ export default {
 
         buildPublic (item) {
             var ids = []
-            var reps = {}
+            var durations = {}
+
             item.exercises.forEach(el => {
-                reps[el.id] = el.repetitions
+                durations[el.id] = el.duration
                 ids.push(el.id)
             })
 
             this.$store.dispatch('exercise/get', ids).then(res => {
                 item.exercises = res.map(el => {
-                    el.repsOrg = el.repetitions
-                    el.repetitions = reps[el.id]
+                    el.duration = durations[el.id]
                     return el
                 })
                 this.training = item
@@ -152,7 +202,8 @@ export default {
             en: {
                 title: 'Training',
                 public: 'Public',
-                totalCals: 'Total calories burned',
+                totalCals: 'Calories burned',
+                totalduration: 'Duration',
                 exercises: 'Exercises',
                 bodyparts: 'Affected body parts',
                 repetsPerDo: 'Repetitions',
@@ -162,7 +213,8 @@ export default {
             de: {
                 title: 'Plan',
                 public: 'Öffentlich',
-                totalCals: 'Total Kalorienverbrauch',
+                totalCals: 'Kalorienverbrauch',
+                totalduration: 'Dauer',
                 exercises: 'Übungen',
                 bodyparts: 'Betroffene Körperteile',
                 repetsPerDo: 'Wiederholungen',

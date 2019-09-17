@@ -11,7 +11,7 @@ const state = () => {
         url: 'app/exercise/',
         lName: 'exercise',
         items: smartStore.get('exercise'),
-        types: ['strength', 'stamina', 'fitness', 'flexibility', 'coordination'],
+        types: ['strength', 'stamina', 'fitness', 'flexibility', 'coordination', 'other'],
         bodyparts: [
             { type: 'muscle', id: 'chest' },
             { type: 'muscle', id: 'bicep' },

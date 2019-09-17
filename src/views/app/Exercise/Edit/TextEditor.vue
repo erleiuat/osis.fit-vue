@@ -1,16 +1,11 @@
 <template>
     <v-sheet light>
-        <vue-editor v-model="contents" :editorOptions="editorSettings" />
+        <vue-editor v-model="contents" :editor-toolbar="customToolbar" />
     </v-sheet>
 </template>
 
 <script>
-import { VueEditor, Quill } from 'vue2-editor'
-import { ImageDrop } from 'quill-image-drop-module'
-import ImageResize from 'quill-image-resize-module'
-
-Quill.register('modules/imageDrop', ImageDrop)
-Quill.register('modules/imageResize', ImageResize)
+import { VueEditor } from 'vue2-editor'
 
 export default {
     name: 'TextEditor',
@@ -23,12 +18,12 @@ export default {
 
     data () {
         return {
-            editorSettings: {
-                modules: {
-                    imageDrop: true,
-                    imageResize: {}
-                }
-            }
+            customToolbar: [
+                ['bold', 'italic', 'underline'],
+                [{ align: '' }, { align: 'center' }, { align: 'right' }],
+                [{ list: 'ordered' }, { list: 'bullet' }],
+                ['code-block', 'link', 'video']
+            ]
         }
     },
 

@@ -1,5 +1,5 @@
 <template>
-    <div style="height: 100%">
+    <div style="height: 100%;"> <!-- TODO: BG Color at overflowing bottom -->
         <v-tabs grow icons-and-text v-if="showTabs">
             <v-tab class="ml-0" :to="{name: 'training.saved'}">
                 {{ $t('title') }}
