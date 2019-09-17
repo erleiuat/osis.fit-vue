@@ -165,6 +165,7 @@ export default {
             if (this.$route.name === 'exercise.edit') this.fd = res
             else if (this.$route.name === 'exercise.copy') {
                 this.fd.title = res.title
+                this.fd.image = res.image
                 this.fd.description = res.description
                 this.fd.content = res.content
                 this.fd.type = res.type
