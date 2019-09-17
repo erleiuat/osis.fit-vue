@@ -142,7 +142,7 @@ export default {
 
             if (minutes < 0) {
                 hours += -1
-                minutes = (60+minutes)
+                minutes = (60 + minutes)
             }
 
             return {
