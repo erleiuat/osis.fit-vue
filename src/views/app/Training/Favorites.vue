@@ -11,7 +11,7 @@
                                     <v-list-item-title v-text="item.title"></v-list-item-title>
                                 </v-list-item-title>
                                 <v-list-item-subtitle>
-                                    {{ item.description }}
+                                    {{ getByLang($store.getters['app'].locale, item.description) }}
                                 </v-list-item-subtitle>
                             </v-list-item-content>
                             <v-list-item-icon>
@@ -23,7 +23,7 @@
 
                     <v-expansion-panel-content class="pa-0" eager>
                         <div class="caption text-right">{{ $t('byUser') }} {{ item.user }}</div>
-                        <div class="caption"> {{ item.description }}</div><br />
+                        <div class="caption"> {{ getByLang($store.getters['app'].locale, item.description) }}</div><br />
                     </v-expansion-panel-content>
 
                     <v-expansion-panel-content class="pa-0" eager>
@@ -106,6 +106,23 @@ export default {
         isFav (itemID) {
             if (this.$store.getters['training/isFavorite'](itemID)) return true
             else return false
+        },
+
+        getByLang (lang, string) {
+            lang = lang.toUpperCase()
+            if (string.includes("[" + lang + "]")) {
+                return string.substring(
+                    string.lastIndexOf("[" + lang + "]") + 4,
+                    string.lastIndexOf("[/" + lang + "]")
+                )
+            } else if (string.includes("[EN]")) {
+                return string.substring(
+                    string.lastIndexOf("[EN]") + 4,
+                    string.lastIndexOf("[/EN]")
+                )
+            } else {
+                return string
+            }
         }
 
     },
