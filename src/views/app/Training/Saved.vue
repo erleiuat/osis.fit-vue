@@ -7,7 +7,7 @@
                         <div class="title">
                             {{ item.title }}
                         </div>
-                        {{ item.description }}
+                        {{ getByLang($store.getters['app'].locale, item.description) }}
                     </v-card-text>
                     <v-card-actions class="pt-0 pb-1">
                         <v-spacer />
@@ -59,6 +59,25 @@ export default {
 
             if (filtered.length <= 0) return false
             else return filtered
+        }
+    },
+
+    methods: {
+        getByLang (lang, string) {
+            lang = lang.toUpperCase()
+            if (string.includes("[" + lang + "]")) {
+                return string.substring(
+                    string.lastIndexOf("[" + lang + "]") + 4,
+                    string.lastIndexOf("[/" + lang + "]")
+                )
+            } else if (string.includes("[EN]")) {
+                return string.substring(
+                    string.lastIndexOf("[EN]") + 4,
+                    string.lastIndexOf("[/EN]")
+                )
+            } else {
+                return string
+            }
         }
     },
 
