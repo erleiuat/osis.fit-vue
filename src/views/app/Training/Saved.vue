@@ -65,15 +65,15 @@ export default {
     methods: {
         getByLang (lang, string) {
             lang = lang.toUpperCase()
-            if (string.includes('[' + lang + ']')) {
+            if (string.includes("[" + lang + "]")) {
                 return string.substring(
-                    string.lastIndexOf('[' + lang + ']') + 4,
-                    string.lastIndexOf('[/' + lang + ']')
+                    string.lastIndexOf("[" + lang + "]") + 4,
+                    string.lastIndexOf("[/" + lang + "]")
                 )
-            } else if (string.includes('[EN]')) {
+            } else if (string.includes("[EN]")) {
                 return string.substring(
-                    string.lastIndexOf('[EN]') + 4,
-                    string.lastIndexOf('[/EN]')
+                    string.lastIndexOf("[EN]") + 4,
+                    string.lastIndexOf("[/EN]")
                 )
             } else {
                 return string
