@@ -87,19 +87,19 @@ export default {
             }).catch(r => {
                 this.sending = false
                 switch (r) {
-                    case 'password_wrong':
-                        this.$notify({ type: 'error', title: this.$t('fail.pass'), text: r })
-                        break
-                    case 'account_not_found':
-                        this.$notify({ type: 'error', title: this.$t('fail.unknown'), text: r })
-                        break
-                    case 'account_not_verified':
-                        this.$router.push({ name: 'auth.verify', query: { v: true } })
-                        this.$notify({ type: 'error', title: this.$t('fail.verify'), text: r })
-                        break
-                    default:
-                        this.$notify({ type: 'error', title: this.$t('alert.error.default'), text: r })
-                        break
+                case 'password_wrong':
+                    this.$notify({ type: 'error', title: this.$t('fail.pass'), text: r })
+                    break
+                case 'account_not_found':
+                    this.$notify({ type: 'error', title: this.$t('fail.unknown'), text: r })
+                    break
+                case 'account_not_verified':
+                    this.$router.push({ name: 'auth.verify', query: { v: true } })
+                    this.$notify({ type: 'error', title: this.$t('fail.verify'), text: r })
+                    break
+                default:
+                    this.$notify({ type: 'error', title: this.$t('alert.error.default'), text: r })
+                    break
                 }
             })
         }
