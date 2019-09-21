@@ -1,5 +1,5 @@
 <template>
-    <v-overlay :value="$store.getters['refreshing']" opacity="0.9" style="z-index: 10">
+    <v-overlay :value="$store.getters['refreshing']" opacity="0.3" style="z-index: 10">
         <transition appear name="zoom" mode="out-in">
             <vcontainer class="pa-2">
                 <v-row no-gutters>
