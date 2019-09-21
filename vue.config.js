@@ -5,6 +5,7 @@ const WebpackAssetsManifest = require('webpack-assets-manifest')
 const webpack = require('webpack')
 
 module.exports = {
+    transpileDependencies: ['vuetify'],
     baseUrl: process.env.BASE_URL,
 
     pwa: {
