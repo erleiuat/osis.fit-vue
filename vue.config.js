@@ -1,7 +1,7 @@
 /* eslint-disable no-console */
 
 // const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
-const WebpackAssetsManifest = require('webpack-assets-manifest')
+// const WebpackAssetsManifest = require('webpack-assets-manifest')
 const webpack = require('webpack')
 
 module.exports = {
@@ -21,34 +21,7 @@ module.exports = {
         return {
             plugins: [
                 // new BundleAnalyzerPlugin(),
-                new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
-                new WebpackAssetsManifest({
-                    output: 'manifest.json',
-                    transform (assets) {
-                        assets.name = process.env.VUE_APP_NAME
-                        assets.short_name = process.env.VUE_APP_NAME_SHORT
-                        assets.background_color = process.env.VUE_APP_THEME_BACKGROUND
-                        assets.theme_color = process.env.VUE_APP_THEME_COLOR
-                        assets.start_url = './'
-                        assets.display = 'standalone'
-                        assets.icons = [
-                            {
-                                src: './img/icons/android-chrome-192x192.png',
-                                sizes: '192x192',
-                                type: 'image/png'
-                            },
-                            {
-                                src: './img/icons/android-chrome-512x512.png',
-                                sizes: '512x512',
-                                type: 'image/png'
-                            }
-                        ]
-                    }
-                }),
-                new webpack.ProvidePlugin({
-                    'window.Quill': 'quill/dist/quill.js',
-                    Quill: 'quill/dist/quill.js'
-                })
+                new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/)
             ]
         }
     },

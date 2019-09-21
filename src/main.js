@@ -9,7 +9,7 @@ import vuetify from '@/plugins/vuetify/'
 import smartStore from '@/plugins/smartStore'
 import vcontainer from '@/plugins/vuetify/vcontainer'
 import Notifications from 'vue-notification'
-import VueQuagga from 'vue-quaggajs'
+// import VueQuagga from 'vue-quaggajs'
 
 import(/* webpackPrefetch: true */ '@/assets/css/app.css')
 import(/* webpackPrefetch: true */ '@/assets/css/transitions.css')
@@ -17,7 +17,7 @@ import(/* webpackPrefetch: true */ '@/assets/css/transitions.css')
 Vue.component('vcontainer', vcontainer)
 Vue.use(Notifications)
 Vue.use(smartStore, { store: store })
-Vue.use(VueQuagga)
+// Vue.use(VueQuagga)
 
 Vue.config.productionTip = false
 Vue.prototype.$dateFormat = (date) => {
