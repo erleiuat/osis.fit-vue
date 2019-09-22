@@ -25,11 +25,10 @@
 
             <v-card-text class="pa-0">
 
-                <Scanner :show="scanner" @select="use" />
-
-                <vcontainer v-show="!scanner" class="pa-2">
+                <vcontainer class="pa-2">
                     <v-form v-model="rule.valid" ref="form" v-on:submit.prevent>
                         <v-row dense align="baseline">
+                            
                             <v-col cols="12" md="6">
                                 <v-btn @click="openSelect()" block small outlined>
                                     {{ $t('selectTemplate') }}
@@ -37,13 +36,10 @@
                                 </v-btn>
                             </v-col>
 
-                            <v-col cols="12" md="6" v-if="$store.getters['auth/premium']">
-                                <v-btn @click="scanner = !scanner" block small outlined>
-                                    {{ $t('scanCode') }}
-                                    <v-icon right>photo_camera</v-icon>
-                                </v-btn>
+                            <v-col cols="12" md="6" v-if="showScanner">
+                                <Scanner @select="use" />
                             </v-col>
-                            <v-col cols="12" md="6" v-else>
+                            <v-col cols="12" md="6" v-else-if="!$store.getters['auth/premium']">
                                 <v-btn :to="{name: 'premium', query: { notify: true }}" block small outlined color="amber">
                                     {{ $t('scanCode') }}
                                     <v-icon right>photo_camera</v-icon>
@@ -100,7 +96,6 @@ export default {
     data () {
         return {
             selector: false,
-            scanner: false,
             show: false,
             sending: false,
             amount: '',
@@ -119,6 +114,17 @@ export default {
                 ],
                 require: [v => !!v || this.$t('alert.v.require')]
             }
+        }
+    },
+
+    computed: {
+        showScanner(){
+            if(this.$store.getters['auth/premium']) {
+                if(process.env.CORDOVA_PLATFORM){
+                    return true
+                }
+            }
+            return false
         }
     },
 

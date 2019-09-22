@@ -1,19 +1,8 @@
 <template>
-    <vcontainer v-if="show">
-        <v-row>
-            <v-col cols="12">
-                <v-btn @click="show = !show" block depressed>
-                    {{ $t('btn.close') }}
-                </v-btn>
-            </v-col>
-            <v-col cols="12">
-                <div class="quagga-scanner-container">
-                    <v-quagga v-if="!loading" :onDetected="scanned" :aspectRatio="aspect" :readerSize="size" :readerTypes="types" />
-                    <v-progress-linear v-else height="400" indeterminate />
-                </div>
-            </v-col>
-        </v-row>
-    </vcontainer>
+    <v-btn @click="scan" block small outlined>
+        {{ $t('scanCode') }}
+        <v-icon right>photo_camera</v-icon>
+    </v-btn>
 </template>
 
 <script>
@@ -46,6 +35,33 @@ export default {
     },
 
     methods: {
+
+        scan () {
+            cordova.plugins.barcodeScanner.scan(
+                function (result) {
+                    alert("We got a barcode\n" +
+                        "Result: " + result.text + "\n" +
+                        "Format: " + result.format + "\n" +
+                        "Cancelled: " + result.cancelled);
+                },
+                function (error) {
+                    alert("Scanning failed: " + error);
+                },
+                {
+                    preferFrontCamera: true, // iOS and Android
+                    showFlipCameraButton: true, // iOS and Android
+                    showTorchButton: true, // iOS and Android
+                    torchOn: false, // Android, launch with the torch switched on (if available)
+                    saveHistory: true, // Android, save scan history (default false)
+                    prompt: "Place a barcode inside the scan area", // Android
+                    resultDisplayDuration: 500, // Android, display scanned text for X ms. 0 suppresses it entirely, default 1500
+                    //formats: "QR_CODE,PDF_417", // default: all but PDF_417 and RSS_EXPANDED
+                    orientation: "portrait", // Android only (portrait|landscape), default unset so it rotates with the device
+                    disableAnimations: true, // iOS
+                    disableSuccessBeep: false // iOS and Android
+                }
+            );
+        },
 
         scanned (data) {
             this.code = data.codeResult.code
