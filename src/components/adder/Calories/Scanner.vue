@@ -19,11 +19,6 @@
 <script>
 import foodFavs from '@/store/modules/foodFavorite'
 
-const constraints = window.constraints = {
-    audio: false,
-    video: true
-};
-
 export default {
     name: 'Scanner',
 
@@ -47,15 +42,6 @@ export default {
             },
             detecteds: [],
             types: ['ean_reader']
-        }
-    },
-
-    mounted () {
-        try {
-            const stream = navigator.mediaDevices.getUserMedia(constraints);
-            console.log(stream);
-        } catch (e) {
-            console.log(e);
         }
     },
 
