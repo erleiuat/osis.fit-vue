@@ -33,8 +33,7 @@ module.exports = {
     publicPath: '',
 
     pluginOptions: {
-      cordovaPath: 'src-cordova'
+        cordovaPath: 'src-cordova'
     }
 }
-
 /* eslint-enable no-console */

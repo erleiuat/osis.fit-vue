@@ -11,7 +11,7 @@ const app = require('@/router/routes/app')
 const premium = require('@/router/routes/premium')
 
 const router = new Router({
-    mode: 'history',
+    mode: process.env.CORDOVA_PLATFORM ? 'hash' : 'history',
     base: process.env.BASE_URL,
     scrollBehavior (to, from, savedPosition) {
         return { x: 0, y: 0 }
