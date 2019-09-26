@@ -38,8 +38,8 @@ export default {
 
         scan () {
             /* eslint-disable no-undef */
-            console.log(JSON.stringify(cordova.plugin))
-            cordova.plugin.barcodeScanner.scan(
+            console.log(JSON.stringify(cordova.plugins))
+            cordova.plugins.barcodeScanner.scan(
                 function (result) {
                     alert('We got a barcode\n' +
                         'Result: ' + result.text + '\n' +
