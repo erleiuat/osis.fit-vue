@@ -1,5 +1,5 @@
 <template>
-    <v-btn @click="scan" block small outlined>
+    <v-btn @click="scan" color="info" depressed block small :loading="loading">
         {{ $t('scanCode') }}
         <v-icon right>photo_camera</v-icon>
     </v-btn>
@@ -38,36 +38,30 @@ export default {
 
         scan () {
             /* eslint-disable no-undef */
-            console.log(JSON.stringify(cordova.plugins))
-            cordova.plugins.barcodeScanner.scan(
-                function (result) {
-                    alert('We got a barcode\n' +
-                        'Result: ' + result.text + '\n' +
-                        'Format: ' + result.format + '\n' +
-                        'Cancelled: ' + result.cancelled)
-                },
-                function (error) {
-                    alert('Scanning failed: ' + error)
-                },
-                {
-                    preferFrontCamera: true, // iOS and Android
-                    showFlipCameraButton: true, // iOS and Android
-                    showTorchButton: true, // iOS and Android
-                    torchOn: false, // Android, launch with the torch switched on (if available)
-                    saveHistory: true, // Android, save scan history (default false)
-                    prompt: 'Place a barcode inside the scan area', // Android
-                    resultDisplayDuration: 500, // Android, display scanned text for X ms. 0 suppresses it entirely, default 1500
-                    // formats: "QR_CODE,PDF_417", // default: all but PDF_417 and RSS_EXPANDED
-                    orientation: 'portrait', // Android only (portrait|landscape), default unset so it rotates with the device
-                    disableAnimations: true, // iOS
-                    disableSuccessBeep: false // iOS and Android
-                }
-            )
+            var vm = this
+
+            cordova.plugins.barcodeScanner.scan(result => {
+                if (result.cancelled) return
+                vm.scanned(result.text)
+            }, error => {
+                alert('Failed: ' + error)
+            }, {
+                preferFrontCamera: true,
+                showFlipCameraButton: true,
+                showTorchButton: true,
+                torchOn: false,
+                saveHistory: true,
+                prompt: 'Place a barcode inside the scan area',
+                resultDisplayDuration: 500,
+                orientation: 'portrait',
+                disableAnimations: true,
+                disableSuccessBeep: false
+            })
             /* eslint-enable no-undef */
         },
 
         scanned (data) {
-            this.code = data.codeResult.code
+            this.code = data
 
             if (!this.loading) {
                 this.loading = true
