@@ -22,6 +22,11 @@
     <allow-intent href="geo:*" />
     <platform name="android">
         <allow-intent href="market:*" />
+        <preference name="BackgroundColor" value="#FAFAFA"/>
+        <preference name="StatusBarOverlaysWebView" value="false" />
+        <preference name="StatusBarBackgroundColor" value="#FAFAFA" />
+        <preference name="StatusBarStyle" value="default" />
+        <preference name="SplashScreenBackgroundColor" value="#FAFAFA"/>
         <splash density="land-hdpi" src="res/screen/android/land-hdpi.png" />
         <splash density="land-xhdpi" src="res/screen/android/land-xhdpi.png" />
         <splash density="land-xxhdpi" src="res/screen/android/land-xxhdpi.png" />
