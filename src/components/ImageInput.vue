@@ -5,9 +5,23 @@
 
                 <v-layout row wrap v-if="!value" :style="height?'height:'+height+'px':'min-height:200px'" justify-center align-center key="1">
 
-                    <v-flex xs12 v-if="!value && !uploading" class="text-center pl-2 pr-2">
+                    <v-flex xs12 v-if="doUse.desktop" class="text-center pl-2 pr-2">
                         <v-icon x-large>camera_alt</v-icon>
                         <v-file-input v-model="file" :label="$t('select')" @change="upload()" :rules="rule" :disabled="uploading" ref="imgUploadField" accept="image/jpg, image/png, image/jpeg" outlined prepend-icon="" />
+                    </v-flex>
+
+                    <v-flex xs11 v-if="doUse.mobile" class="text-center">
+                        <v-btn @click="mobileSelect()" block depressed color="info">
+                            {{ $t('takeCam') }}
+                            <v-icon right>camera_alt</v-icon>
+                        </v-btn>
+                    </v-flex>
+
+                    <v-flex xs11 v-if="doUse.mobile" class="text-center">
+                        <v-btn @click="mobileSelect(true)" block depressed color="info">
+                            {{ $t('select') }}
+                            <v-icon right>photo_library</v-icon>
+                        </v-btn>
                     </v-flex>
 
                     <v-flex xs12 v-if="uploading">
@@ -49,12 +63,17 @@
 
 <script>
 import image from '@/store/modules/image'
+
 export default {
+
     name: 'ImageInput',
+
     modules: {
         image
     },
+
     props: ['value', 'ratio', 'height', 'contain'],
+
     data () {
         return {
             file: null,
@@ -63,7 +82,23 @@ export default {
             ]
         }
     },
+
     computed: {
+
+        doUse () {
+            var tmp = {
+                mobile: false,
+                desktop: false
+            }
+
+            if (!this.value && !this.uploading) {
+                if (process.env.CORDOVA_PLATFORM) tmp.mobile = true
+                else tmp.desktop = true
+            }
+
+            return tmp
+        },
+
         choosen () {
             if (this.file && this.file.size >= (15 * 1000000)) return false
             return (!!this.file)
@@ -79,12 +114,50 @@ export default {
             if (this.progress && this.progress === 100) return true
             return false
         }
+
     },
+
     methods: {
+
+        mobileSelect (fromlib = false) {
+            /* eslint-disable no-undef */
+            var vm = this
+
+            navigator.camera.getPicture(imageUri => {
+                window.resolveLocalFileSystemURL(imageUri, fileEntry => {
+                    fileEntry.file(file => {
+                        var reader = new FileReader()
+                        reader.onloadend = function (e) {
+                            var imgBlob = new Blob([this.result], { type: 'image/jpeg' })
+                            vm.file = imgBlob
+                            vm.upload()
+                        }
+                        reader.readAsArrayBuffer(file)
+                    }, error => {
+                        alert('fileEntry ERROR: ' + error)
+                    })
+                }, error => {
+                    alert('resolveLocalFile ERROR: ' + error)
+                })
+            }, error => {
+                alert('getPicture ERROR: ' + error)
+            }, {
+                quality: 80,
+                destinationType: Camera.DestinationType.FILE_URI,
+                sourceType: fromlib ? Camera.PictureSourceType.PHOTOLIBRARY : Camera.PictureSourceType.CAMERA,
+                encodingType: Camera.EncodingType.JPEG,
+                mediaType: Camera.MediaType.PICTURE,
+                allowEdit: true,
+                correctOrientation: true
+            })
+            /* eslint-enable no-undef */
+        },
+
         upload () {
             if (!this.choosen) return
+
             var fData = new FormData()
-            fData.append('image', this.file, this.file.name)
+            fData.append('image', this.file, 'tmpImage.jpg')
             this.$store.dispatch('image/add', fData).then(res => {
                 this.file = null
                 this.set = true
@@ -93,6 +166,7 @@ export default {
                 this.$notify({ type: 'error', title: this.$t('alert.error.save'), text: r })
             })
         },
+
         download () {
             var element = document.createElement('a')
             element.setAttribute('href', this.value.path.original)
@@ -103,28 +177,34 @@ export default {
             element.click()
             document.body.removeChild(element)
         },
+
         remove () {
             this.$emit('input', false)
         }
+
     },
+
     i18n: {
         messages: {
             en: {
                 maxSize: 'Size must be below 15 MB',
                 processing: 'Processing image',
-                select: 'Select File',
+                select: 'Select from Library',
                 upload: 'Upload',
-                remove: 'Remove Image'
+                remove: 'Remove Image',
+                takeCam: 'Take Picture'
             },
             de: {
                 maxSize: 'Die Datei muss kleiner als 15MB sein',
                 processing: 'Bild wird verarbeitet',
                 select: 'Datei auswählen',
                 upload: 'Hochladen',
-                remove: 'Bild entfernen'
+                remove: 'Bild entfernen',
+                takeCam: 'Bild aufnehmen'
             }
         }
     }
+
 }
 </script>
 

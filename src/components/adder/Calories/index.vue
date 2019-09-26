@@ -139,10 +139,6 @@ export default {
 
     watch: {
         show: function () {
-            if (!this.show) {
-                this.scanner = false
-                return
-            }
             var now = new Date()
             var str = new Date(
                 now.getTime() - now.getTimezoneOffset() * 60000
