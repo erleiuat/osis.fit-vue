@@ -19,7 +19,8 @@
     "cordova-osx": "^5.0.0",
     "cordova-plugin-camera": "^4.1.0",
     "cordova-plugin-file": "^6.0.2",
-    "cordova-plugin-qr-barcode-scanner": "^8.0.3"
+    "cordova-plugin-qr-barcode-scanner": "^8.0.3",
+    "cordova-plugin-splashscreen": "^5.0.3"
   },
   "devDependencies": {
     "cordova-plugin-whitelist": "^1.3.4"
@@ -33,7 +34,8 @@
       "cordova-plugin-camera": {
         "ANDROID_SUPPORT_V4_VERSION": "27.+"
       },
-      "cordova-plugin-file": {}
+      "cordova-plugin-file": {},
+      "cordova-plugin-splashscreen": {}
     },
     "platforms": [
       "android",
