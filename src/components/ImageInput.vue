@@ -5,16 +5,7 @@
 
                 <v-layout row wrap v-if="!value" :style="height?'height:'+height+'px':'min-height:200px'" justify-center align-center key="1">
 
-                    <v-flex xs12 v-if="showMobile && !value && !uploading" class="text-center pl-2 pr-2">
-                        <v-btn @click="selectMobile('data')">
-                            SELECT
-                        </v-btn>
-                        <v-btn @click="selectMobile('cam')">
-                            TAKE PIC
-                        </v-btn>
-                    </v-flex>
-
-                    <v-flex xs12 v-if="!showMobile && !value && !uploading" class="text-center pl-2 pr-2">
+                    <v-flex xs12 v-if="!value && !uploading" class="text-center pl-2 pr-2">
                         <v-icon x-large>camera_alt</v-icon>
                         <v-file-input v-model="file" :label="$t('select')" @change="upload()" :rules="rule" :disabled="uploading" ref="imgUploadField" accept="image/jpg, image/png, image/jpeg" outlined prepend-icon="" />
                     </v-flex>
@@ -58,16 +49,12 @@
 
 <script>
 import image from '@/store/modules/image'
-
 export default {
     name: 'ImageInput',
-
     modules: {
         image
     },
-
     props: ['value', 'ratio', 'height', 'contain'],
-
     data () {
         return {
             file: null,
@@ -76,11 +63,7 @@ export default {
             ]
         }
     },
-
     computed: {
-        showMobile () {
-            if (process.env.CORDOVA_PLATFORM) return true
-        },
         choosen () {
             if (this.file && this.file.size >= (15 * 1000000)) return false
             return (!!this.file)
@@ -97,61 +80,11 @@ export default {
             return false
         }
     },
-
     methods: {
-
-        selectMobile (type = 'cam') {
-
-            var vm = this
-            var stu = (type === 'cam' ? true : false)
-
-            navigator.camera.getPicture(function cameraSuccess (imageUri) {
-
-                var byteString;
-                if (imageUri.split(',')[0].indexOf('base64') >= 0)
-                    byteString = atob(imageUri.split(',')[1]);
-                else
-                    byteString = unescape(imageUri.split(',')[1]);
-
-                // separate out the mime component
-                var mimeString = imageUri.split(',')[0].split(':')[1].split(';')[0];
-
-                // write the bytes of the string to a typed array
-                var ia = new Uint8Array(byteString.length);
-                for (var i = 0; i < byteString.length; i++) {
-                    ia[i] = byteString.charCodeAt(i);
-                }
-
-                vm.file = new Blob([ia], { type: mimeString });
-                vm.upload();
-
-                //displayImage(imageUri);
-                // You may choose to copy the picture, save it somewhere, or upload.
-                //func(imageUri);
-
-            }, function cameraError (error) {
-
-                console.debug("Unable to obtain picture: " + error, "app");
-
-            }, {
-                // Some common settings are 20, 50, and 100
-                quality: 50,
-                destinationType: Camera.DestinationType.FILE_URI,
-                // In this app, dynamically set the picture source, Camera or photo gallery
-                sourceType: stu ? Camera.PictureSourceType.CAMERA : Camera.PictureSourceType.PHOTOLIBRARY,
-                encodingType: Camera.EncodingType.PNG,
-                mediaType: Camera.MediaType.PICTURE,
-                allowEdit: true,
-                correctOrientation: true  //Corrects Android orientation quirks
-            });
-        },
-
         upload () {
             if (!this.choosen) return
-
             var fData = new FormData()
             fData.append('image', this.file, this.file.name)
-
             this.$store.dispatch('image/add', fData).then(res => {
                 this.file = null
                 this.set = true
@@ -160,25 +93,20 @@ export default {
                 this.$notify({ type: 'error', title: this.$t('alert.error.save'), text: r })
             })
         },
-
         download () {
             var element = document.createElement('a')
             element.setAttribute('href', this.value.path.original)
             element.setAttribute('target', '_blank')
             element.setAttribute('download', this.value.name + '.' + this.value.mime)
             element.style.display = 'none'
-
             document.body.appendChild(element)
             element.click()
             document.body.removeChild(element)
         },
-
         remove () {
             this.$emit('input', false)
         }
-
     },
-
     i18n: {
         messages: {
             en: {
@@ -197,7 +125,6 @@ export default {
             }
         }
     }
-
 }
 </script>
 

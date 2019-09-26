@@ -1,6 +1,7 @@
 <template>
     <v-container grid-list-xl>
 
+        <!--
         <v-row>
             <v-col cols="12" v-if="scan.scanning">
                 <div class="quagga-scanner-container">
@@ -13,6 +14,7 @@
                 </v-btn>
             </v-col>
         </v-row>
+        -->
 
         <v-row>
             <v-col cols="12">

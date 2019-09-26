@@ -57,8 +57,7 @@ module.exports = [{
             name: 'food',
             meta: { authRequired: true },
             components: {
-                default: () => import('@/views/app/Food/Own'),
-                toolbar: () => import('@/components/nav/toolbar/')
+                default: () => import('@/views/app/Food/Own')
             },
             children: [
                 {

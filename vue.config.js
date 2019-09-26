@@ -1,7 +1,6 @@
 /* eslint-disable no-console */
 
 // const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
-// const WebpackAssetsManifest = require('webpack-assets-manifest')
 const webpack = require('webpack')
 
 module.exports = {
@@ -30,10 +29,11 @@ module.exports = {
         config.plugins.delete('prefetch')
     },
 
-    publicPath: '',
+    publicPath: process.env.CORDOVA_PLATFORM ? '' : process.env.VUE_APP_PUBLICPATH,
 
     pluginOptions: {
         cordovaPath: 'src-cordova'
     }
 }
+
 /* eslint-enable no-console */

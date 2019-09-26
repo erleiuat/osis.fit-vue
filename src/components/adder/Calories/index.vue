@@ -28,18 +28,21 @@
                 <vcontainer class="pa-2">
                     <v-form v-model="rule.valid" ref="form" v-on:submit.prevent>
                         <v-row dense align="baseline">
-                            
+
                             <v-col cols="12" md="6">
-                                <v-btn @click="openSelect()" block small outlined>
+                                <v-btn @click="selector = true" color="info" depressed block small>
                                     {{ $t('selectTemplate') }}
                                     <v-icon right>view_carousel</v-icon>
                                 </v-btn>
                             </v-col>
 
-                            <v-col cols="12" md="6" v-if="showScanner">
-                                <Scanner @select="use" />
+                            <v-col cols="12" md="6" v-if="scanner.phone">
+                                <PhoneScanner @select="use" />
                             </v-col>
-                            <v-col cols="12" md="6" v-else-if="!$store.getters['auth/premium']">
+                            <v-col cols="12" md="6" v-else-if="scanner.quagga">
+                                <QuaggaScanner @select="use" />
+                            </v-col>
+                            <v-col cols="12" md="6" v-else>
                                 <v-btn :to="{name: 'premium', query: { notify: true }}" block small outlined color="amber">
                                     {{ $t('scanCode') }}
                                     <v-icon right>photo_camera</v-icon>
@@ -84,13 +87,14 @@
 
 <script>
 const TemplateSelect = () => import('@/components/adder/TemplateSelect/')
-const Scanner = () => import('@/components/adder/Calories/Scanner')
+const PhoneScanner = () => import('@/components/adder/Calories/PhoneScanner')
+const QuaggaScanner = () => import('@/components/adder/Calories/QuaggaScanner')
 
 export default {
     name: 'CalorieAdder',
 
     components: {
-        TemplateSelect, Scanner
+        TemplateSelect, PhoneScanner, QuaggaScanner
     },
 
     data () {
@@ -118,14 +122,19 @@ export default {
     },
 
     computed: {
-        showScanner(){
-            if(this.$store.getters['auth/premium']) {
-                if(process.env.CORDOVA_PLATFORM){
-                    return true
-                }
+
+        scanner () {
+            var toShow = {
+                phone: false,
+                quagga: false
             }
-            return false
+            if (this.$store.getters['auth/premium']) {
+                if (process.env.CORDOVA_PLATFORM) toShow.phone = true
+                else toShow.quagga = true
+            }
+            return toShow
         }
+
     },
 
     watch: {
@@ -147,8 +156,7 @@ export default {
 
         calTotal () {
             if (this.amount > 0 && this.caloriesPer100 > 0) {
-                this.fd.calories =
-                    Math.round((this.amount / 100) * this.caloriesPer100 * 100) / 100
+                this.fd.calories = Math.round((this.amount / 100) * this.caloriesPer100 * 100) / 100
             } else this.fd.calories = 0
         },
 
@@ -168,13 +176,8 @@ export default {
             })
         },
 
-        openSelect () {
-            this.selector = true
-        },
-
         use (item) {
             this.selector = false
-            this.scanner = false
             if (!item) return
             this.fd.title = item.title
             this.amount = item.amount
@@ -184,41 +187,22 @@ export default {
 
     },
 
-    beforeDestroy () {
-        this.scanner = false
-    },
-
     i18n: {
         messages: {
             en: {
                 title: 'Add Calories',
                 caloriesPer100: 'Calories per 100 g/ml',
                 calories: 'Calories Total',
-                selectTemplate: 'Select Template',
-                scanCode: 'Scan Barcode'
+                selectTemplate: 'Select Template'
             },
             de: {
                 title: 'Kalorien hinzufügen',
                 caloriesPer100: 'Kalorien pro 100 g/ml',
                 calories: 'Kalorien Total',
-                selectTemplate: 'Vorlage auswählen',
-                scanCode: 'Barcode scannen'
+                selectTemplate: 'Vorlage auswählen'
             }
         }
     }
 
 }
 </script>
-
-<style>
-.quagga-scanner-container {
-    height: 400px;
-    width: 100%;
-    overflow: hidden;
-    border: solid 1px gray;
-}
-.quagga-scanner-container video, .quagga-scanner-container canvas {
-    height: 400px !important;
-    width: 100% !important;
-}
-</style>

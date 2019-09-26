@@ -37,15 +37,17 @@ export default {
     methods: {
 
         scan () {
+            /* eslint-disable no-undef */
+            console.log(cordova)
             cordova.plugins.barcodeScanner.scan(
                 function (result) {
-                    alert("We got a barcode\n" +
-                        "Result: " + result.text + "\n" +
-                        "Format: " + result.format + "\n" +
-                        "Cancelled: " + result.cancelled);
+                    alert('We got a barcode\n' +
+                        'Result: ' + result.text + '\n' +
+                        'Format: ' + result.format + '\n' +
+                        'Cancelled: ' + result.cancelled)
                 },
                 function (error) {
-                    alert("Scanning failed: " + error);
+                    alert('Scanning failed: ' + error)
                 },
                 {
                     preferFrontCamera: true, // iOS and Android
@@ -53,14 +55,15 @@ export default {
                     showTorchButton: true, // iOS and Android
                     torchOn: false, // Android, launch with the torch switched on (if available)
                     saveHistory: true, // Android, save scan history (default false)
-                    prompt: "Place a barcode inside the scan area", // Android
+                    prompt: 'Place a barcode inside the scan area', // Android
                     resultDisplayDuration: 500, // Android, display scanned text for X ms. 0 suppresses it entirely, default 1500
-                    //formats: "QR_CODE,PDF_417", // default: all but PDF_417 and RSS_EXPANDED
-                    orientation: "portrait", // Android only (portrait|landscape), default unset so it rotates with the device
+                    // formats: "QR_CODE,PDF_417", // default: all but PDF_417 and RSS_EXPANDED
+                    orientation: 'portrait', // Android only (portrait|landscape), default unset so it rotates with the device
                     disableAnimations: true, // iOS
                     disableSuccessBeep: false // iOS and Android
                 }
-            );
+            )
+            /* eslint-enable no-undef */
         },
 
         scanned (data) {
@@ -87,26 +90,15 @@ export default {
     i18n: {
         messages: {
             en: {
-                codeNotFound: 'Code unknown'
+                codeNotFound: 'Code unknown',
+                scanCode: 'Scan Barcode'
             },
             de: {
-                codeNotFound: 'Code unbekannt'
+                codeNotFound: 'Code unbekannt',
+                scanCode: 'Barcode scannen'
             }
         }
     }
 
 }
 </script>
-
-<style>
-.quagga-scanner-container {
-    height: 400px;
-    width: 100%;
-    overflow: hidden;
-    border: solid 1px gray;
-}
-.quagga-scanner-container video, .quagga-scanner-container canvas {
-    height: 400px !important;
-    width: 100% !important;
-}
-</style>
