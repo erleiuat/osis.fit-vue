@@ -28,7 +28,7 @@ module.exports = {
         config.plugins.delete('prefetch')
     },
 
-    publicPath: '',
+    publicPath: process.env.VUE_APP_PUBLICPATH,
 
     pluginOptions: {
         cordovaPath: 'src-cordova'
