@@ -2,7 +2,7 @@
 import { register } from 'register-service-worker'
 import store from '@/store/'
 
-if (!process.env.CORDOVA_PLATFORM && (process.env.NODE_ENV === 'test' || process.env.NODE_ENV === 'production')) {
+if (process.env.NODE_ENV === 'test' || process.env.NODE_ENV === 'production') {
     register(`${process.env.VUE_APP_PUBLICPATH}service-worker.js`, {
         ready () {
             console.log('App is being served from cache by a service worker.')
