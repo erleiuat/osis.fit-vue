@@ -72,7 +72,6 @@ export default {
         this.$i18n.locale = appInfo.locale
         this.$vuetify.theme.dark = appInfo.dark
         this.setTheme(appInfo.dark)
-
     },
 
     mounted () {
