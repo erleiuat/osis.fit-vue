@@ -84,7 +84,10 @@ export default {
                 lastname: this.fd.lastname
             }).then(r => {
                 this.$notify({ type: 'success', title: this.$t('alert.success.save') })
-                if (this.$vuetify.breakpoint.smAndDown) this.$router.push({ name: 'settings' })
+                if (this.$vuetify.breakpoint.smAndDown) {
+                    this.$router.push({ name: 'settings' })
+                    // this.$router.back()
+                }
             }).catch(r => {
                 this.$notify({ type: 'error', title: this.$t('alert.error.save'), text: r })
             }).finally(() => {
