@@ -5,7 +5,6 @@ const webpack = require('webpack')
 
 module.exports = {
     transpileDependencies: ['vuetify'],
-    baseUrl: process.env.BASE_URL,
 
     pwa: {
         name: process.env.VUE_APP_NAME,
@@ -29,7 +28,7 @@ module.exports = {
         config.plugins.delete('prefetch')
     },
 
-    publicPath: process.env.CORDOVA_PLATFORM ? '' : process.env.VUE_APP_PUBLICPATH,
+    publicPath: '',
 
     pluginOptions: {
         cordovaPath: 'src-cordova'

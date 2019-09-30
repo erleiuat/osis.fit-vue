@@ -60,13 +60,14 @@ export default {
     },
 
     created () {
+        if (window.MobileAccessibility) window.MobileAccessibility.usePreferredTextZoom(false)
 
         if (process.env.CORDOVA_PLATFORM) {
-            if (window.MobileAccessibility) window.MobileAccessibility.usePreferredTextZoom(false)
             document.addEventListener('backbutton', () => {
                 this.$router.go(-1)
             }, false)
         }
+
         var appInfo = this.$store.getters['app']
         this.$i18n.locale = appInfo.locale
         this.$vuetify.theme.dark = appInfo.dark
