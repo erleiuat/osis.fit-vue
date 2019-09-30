@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import App from '@/App.vue'
 import store from '@/store/'
-import router from '@/router/'
+import router from '@/router.js'
 
 import '@/plugins/pwa/'
 import i18n from '@/plugins/i18n/'

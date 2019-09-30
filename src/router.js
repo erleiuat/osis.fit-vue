@@ -11,8 +11,8 @@ const app = require('@/router/routes/app')
 const premium = require('@/router/routes/premium')
 
 const router = new Router({
-    //mode: process.env.CORDOVA_PLATFORM ? 'hash' : 'history',
-    base: process.env.BASE_URL,
+    mode: process.env.CORDOVA_PLATFORM ? "hash" : "history",
+    //base: process.env.CORDOVA_PLATFORM ? './' : process.env.BASE_URL,
     scrollBehavior (to, from, savedPosition) {
         return { x: 0, y: 0 }
     },
@@ -25,7 +25,6 @@ const router = new Router({
 })
 
 router.beforeEach((to, from, next) => {
-    console.log(to.path)
     store.commit('auth/check')
 
     var auth = store.getters['auth/details']
