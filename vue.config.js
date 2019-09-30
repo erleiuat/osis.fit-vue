@@ -5,7 +5,7 @@ const webpack = require('webpack')
 
 module.exports = {
     transpileDependencies: ['vuetify'],
-    // baseUrl: process.env.CORDOVA_PLATFORM ? '' : process.env.BASE_URL,
+    baseUrl: process.env.BASE_URL,
 
     pwa: {
         name: process.env.VUE_APP_NAME,

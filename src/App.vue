@@ -60,6 +60,7 @@ export default {
     },
 
     created () {
+
         if (process.env.CORDOVA_PLATFORM) {
             if (window.MobileAccessibility) window.MobileAccessibility.usePreferredTextZoom(false)
             document.addEventListener('backbutton', () => {
@@ -70,6 +71,7 @@ export default {
         this.$i18n.locale = appInfo.locale
         this.$vuetify.theme.dark = appInfo.dark
         this.setTheme(appInfo.dark)
+
     },
 
     mounted () {
