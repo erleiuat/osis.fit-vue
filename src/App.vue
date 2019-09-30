@@ -70,10 +70,11 @@ export default {
     },
 
     created () {
-
-        if (process.env.CORDOVA_PLATFORM) document.addEventListener('deviceready', () => {
-            this.setCordova()
-        }, false)
+        if (process.env.CORDOVA_PLATFORM) {
+            document.addEventListener('deviceready', () => {
+                this.setCordova()
+            }, false)
+        }
 
         var appInfo = this.$store.getters['app']
         this.$i18n.locale = appInfo.locale
