@@ -101,14 +101,8 @@ export default new Vuex.Store({
 
         setDark: (state, info) => {
             state.app.dark = info
-            var metaThemeColor = document.querySelector('meta[name=theme-color]')
-            if (info) {
-                VueCookies.set('appDark', 1, -1)
-                metaThemeColor.setAttribute('content', '#303030')
-            } else {
-                VueCookies.remove('appDark')
-                metaThemeColor.setAttribute('content', '#FAFAFA')
-            }
+            if (info) VueCookies.set('appDark', 1, -1)
+            else VueCookies.remove('appDark')
         },
 
         setDrawer: (state, condition) => {

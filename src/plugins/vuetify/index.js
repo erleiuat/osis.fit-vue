@@ -11,22 +11,13 @@ export default new Vuetify({
     theme: {
         themes: {
             light: {
-                primary: '3D85C6',
-                secondary: '23355E',
-                accent: '87ABDA',
-                error: 'f44336',
-                success: '48b082',
-                warning: 'c5a04a',
-                info: '23355e'
-            },
-            dark: {
-                primary: '3D85C6',
-                secondary: '23355E',
-                accent: '87ABDA',
-                error: 'f44336',
-                success: '48b082',
-                warning: 'c5a04a',
-                info: '375293'
+                primary: process.env.VUE_APP_THEME_COLOR_PRIMARY,
+                secondary: process.env.VUE_APP_THEME_COLOR_SECONDARY,
+                accent: process.env.VUE_APP_THEME_COLOR_ACCENT,
+                error: process.env.VUE_APP_THEME_COLOR_ERROR,
+                success: process.env.VUE_APP_THEME_COLOR_SUCCESS,
+                warning: process.env.VUE_APP_THEME_COLOR_WARNING,
+                info: process.env.VUE_APP_THEME_COLOR_INFO
             }
         },
         options: {

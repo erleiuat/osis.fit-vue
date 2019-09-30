@@ -1,6 +1,5 @@
 <template>
     <vcontainer>
-
         <v-row>
 
             <v-col cols="6">
@@ -64,7 +63,6 @@
 
         </v-row>
     </vcontainer>
-
 </template>
 
 <script>

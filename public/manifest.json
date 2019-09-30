@@ -3,8 +3,8 @@
     "short_name": "Fit",
     "start_url": "./",
     "display": "standalone",
-    "background_color": "#FAFAFA",
-    "theme_color": "#FAFAFA",
+    "background_color": "#FFFFFF",
+    "theme_color": "#FFFFFF",
     "icons": [
         {
             "src": "./img/icons/android-chrome-36x36.png",

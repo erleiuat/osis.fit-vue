@@ -13,7 +13,8 @@
             </slot>
             <slot name="icon">
                 <v-spacer />
-                <Icon />
+                <v-img :src="require('@/assets/img/svg/logo_outline_white.svg')" v-if="$store.getters['app'].dark" :max-height="imgSize" :max-width="imgSize" contain />
+                <v-img :src="require('@/assets/img/svg/logo.svg')" v-else :max-height="imgSize" :max-width="imgSize" contain />
             </slot>
         </v-app-bar>
 

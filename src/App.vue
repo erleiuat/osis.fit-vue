@@ -43,27 +43,45 @@ export default {
     },
 
     methods: {
-        setMetaTheme (dark) {
-            var metaThemeColor = document.querySelector('meta[name=theme-color]')
-            if (dark) metaThemeColor.setAttribute('content', '#303030')
-            else metaThemeColor.setAttribute('content', '#FAFAFA')
+
+        setTheme (dark) {
+            var color = (dark ? process.env.VUE_APP_THEME_BACKGROUND_DARK : process.env.VUE_APP_THEME_BACKGROUND)
+            document.querySelector('meta[name=theme-color]').setAttribute('content', color)
+            if (process.env.CORDOVA_PLATFORM) {
+                document.addEventListener('deviceready', () => {
+                    /* eslint-disable no-undef */
+                    window.plugins.headerColor.tint(color)
+                    StatusBar.backgroundColorByHexString(color)
+                    /* eslint-enable no-undef */
+                }, false)
+            }
         }
+
     },
 
     created () {
+
+        if (process.env.CORDOVA_PLATFORM) {
+            if (window.MobileAccessibility) window.MobileAccessibility.usePreferredTextZoom(false)
+            document.addEventListener('backbutton', () => {
+                this.$router.go(-1)
+            }, false)
+        }
         var appInfo = this.$store.getters['app']
         this.$i18n.locale = appInfo.locale
         this.$vuetify.theme.dark = appInfo.dark
-        this.setMetaTheme(appInfo.dark)
+        this.setTheme(appInfo.dark)
+
     },
 
     mounted () {
         if (this.$store.getters['auth/authorized']) this.$store.dispatch('auth/loadInit')
+
         this.$store.subscribe((mutation, state) => {
             if (mutation.type === 'setLocale') this.$i18n.locale = mutation.payload
             else if (mutation.type === 'setDark') {
                 this.$vuetify.theme.dark = mutation.payload
-                this.setMetaTheme(mutation.payload)
+                this.setTheme(mutation.payload)
             }
         })
     }
