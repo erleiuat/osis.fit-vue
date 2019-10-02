@@ -2,68 +2,65 @@
 <html lang="en">
 
 <head>
-  <style>
-    #loading-wrapper {
-      position: fixed;
-      width: 100%;
-      height: 100%;
-      left: 0;
-      top: 0;
-    }
-
-    #loading-content {
-      display: block;
-      position: relative;
-      top: 30%;
-      width: 150px;
-      height: 150px;
-      margin-left: auto;
-      margin-right: auto;
-    }
-
-    #loading-content {
-      border: 3px solid transparent;
-      border-top-color: #3D85C6;
-      border-bottom-color: #3D85C6;
-      border-radius: 50%;
-      -webkit-animation: loader 2s linear infinite;
-      -moz-animation: loader 2s linear infinite;
-      -o-animation: loader 2s linear infinite;
-      animation: loader 2s linear infinite;
-    }
-
-    @keyframes loader {
-      0% {
-        -webkit-transform: rotate(0deg);
-        -ms-transform: rotate(0deg);
-        transform: rotate(0deg);
-      }
-
-      100% {
-        -webkit-transform: rotate(360deg);
-        -ms-transform: rotate(360 deg);
-        transform: rotate(360deg);
-      }
-    }
-  </style>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="google-site-verification" content="OPjRI-UAMhefkjp4Rw-0TPky56xbcZumyveUJbnZWuc" />
-  <meta name="viewport" content="width=device-width,initial-scale=1.0">
-  <link rel="icon" href="<%= BASE_URL %>favicon.ico">
-  <title>Osis.fit</title>
+    <style>
+        #loading-wrapper {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            left: 0;
+            top: 0;
+        }
+        #loading-content {
+            display: block;
+            position: relative;
+            top: 30%;
+            width: 150px;
+            height: 150px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        #loading-content {
+            border: 3px solid transparent;
+            border-top-color: #3D85C6;
+            border-bottom-color: #3D85C6;
+            border-radius: 50%;
+            -webkit-animation: loader 2s linear infinite;
+            -moz-animation: loader 2s linear infinite;
+            -o-animation: loader 2s linear infinite;
+            animation: loader 2s linear infinite;
+        }
+        @keyframes loader {
+            0% {
+                -webkit-transform: rotate(0deg);
+                -ms-transform: rotate(0deg);
+                transform: rotate(0deg);
+            }
+            100% {
+                -webkit-transform: rotate(360deg);
+                -ms-transform: rotate(360 deg);
+                transform: rotate(360deg);
+            }
+        }
+    </style>
+    <base href="/" />
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="OPjRI-UAMhefkjp4Rw-0TPky56xbcZumyveUJbnZWuc" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <link rel="icon" href="<%= BASE_URL %>favicon.ico">
+    <title>Osis.fit</title>
 </head>
 
 <body>
-  <noscript>
-    <strong>We're sorry but Osis.fit doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
-  </noscript>
-  <div id="app">
-    <div id="loading-wrapper">
-      <div id="loading-content"></div>
+    <noscript>
+        <strong>We're sorry but Osis.fit doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
+    </noscript>
+    <div id="app">
+        <div id="loading-wrapper">
+            <div id="loading-content"></div>
+        </div>
     </div>
-  </div>
-  <!-- built files will be auto injected -->
+    <!-- built files will be auto injected -->
 </body>
 
 </html>

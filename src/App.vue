@@ -55,27 +55,11 @@ export default {
                     /* eslint-enable no-undef */
                 }, false)
             }
-        },
-
-        setCordova () {
-            if (window.MobileAccessibility) window.MobileAccessibility.usePreferredTextZoom(false)
-            document.addEventListener('backbutton', () => {
-                this.$router.back()
-                console.log('back CALLED')
-                console.log(window.history.length)
-            }, false)
-            console.log('cHasSET')
         }
 
     },
 
     created () {
-        if (process.env.CORDOVA_PLATFORM) {
-            document.addEventListener('deviceready', () => {
-                this.setCordova()
-            }, false)
-        }
-
         var appInfo = this.$store.getters['app']
         this.$i18n.locale = appInfo.locale
         this.$vuetify.theme.dark = appInfo.dark

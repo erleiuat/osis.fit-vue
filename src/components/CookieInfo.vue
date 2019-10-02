@@ -13,7 +13,7 @@
                         </v-btn>
                     </v-flex>
                     <v-flex xs12 sm6>
-                        <v-btn depressed block :to="{ name: 'terms', params: {url: 'cookies'} }" @click="show = false">
+                        <v-btn depressed block :to="{ name: 'about.cookie' }" @click="show = false">
                             {{ $t('info') }}
                         </v-btn>
                     </v-flex>
