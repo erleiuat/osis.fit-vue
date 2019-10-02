@@ -50,6 +50,7 @@ export default {
             if (process.env.CORDOVA_PLATFORM) {
                 document.addEventListener('deviceready', () => {
                     /* eslint-disable no-undef */
+                    if (window.MobileAccessibility) window.MobileAccessibility.usePreferredTextZoom(false)
                     window.plugins.headerColor.tint(color)
                     StatusBar.backgroundColorByHexString(color)
                     /* eslint-enable no-undef */

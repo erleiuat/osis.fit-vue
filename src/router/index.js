@@ -3,12 +3,12 @@ import Router from 'vue-router'
 import store from '@/store/'
 import i18n from '@/plugins/i18n/'
 
-Vue.use(Router)
+import main from '@/router/routes/main'
+import auth from '@/router/routes/auth'
+import app from '@/router/routes/app'
+import premium from '@/router/routes/premium'
 
-const main = require('@/router/routes/main')
-const auth = require('@/router/routes/auth')
-const app = require('@/router/routes/app')
-const premium = require('@/router/routes/premium')
+Vue.use(Router)
 
 const router = new Router({
     mode: process.env.CORDOVA_PLATFORM ? 'hash' : 'history',
@@ -39,15 +39,15 @@ router.beforeEach((to, from, next) => {
                 if (!start) {
                     store.dispatch('loading', true)
                     next()
-                } else router.push({ name: 'dashboard' })
+                } else next({ name: 'dashboard' })
             }).catch(res => {
-                router.push({ name: 'start' })
+                next({ name: 'start' })
             }).finally(() => {
                 store.dispatch('refreshing', false)
             })
         } else if (auth === 'unhooked') {
             store.commit('auth/remove')
-            router.push({ name: 'auth.login', query: { target: to.name } })
+            next({ name: 'auth.login', query: { target: to.name } })
         } else {
             if (auth === 'available') {
                 store.commit('auth/place')
@@ -58,16 +58,16 @@ router.beforeEach((to, from, next) => {
                 if (!needPremium || store.getters['auth/premium']) {
                     store.dispatch('loading', true)
                     next()
-                } else if (from.name !== 'premium') router.push({ name: 'premium', query: { notify: true } })
-            } else if (start) router.push({ name: 'dashboard' })
+                } else if (from.name !== 'premium') next({ name: 'premium', query: { notify: true } })
+            } else if (start) next({ name: 'dashboard' })
         }
     } else if (!needAuth) {
         if (!start) {
             store.dispatch('loading', true)
             next()
-        } else router.push({ name: 'welcome' })
+        } else next({ name: 'welcome' })
     } else {
-        router.push({ name: 'auth.login', query: { target: to.name } })
+        next({ name: 'auth.login', query: { target: to.name } })
     }
 })
 

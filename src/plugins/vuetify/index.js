@@ -18,6 +18,15 @@ export default new Vuetify({
                 success: process.env.VUE_APP_THEME_COLOR_SUCCESS,
                 warning: process.env.VUE_APP_THEME_COLOR_WARNING,
                 info: process.env.VUE_APP_THEME_COLOR_INFO
+            },
+            dark: {
+                primary: process.env.VUE_APP_THEME_COLOR_PRIMARY,
+                secondary: process.env.VUE_APP_THEME_COLOR_SECONDARY,
+                accent: process.env.VUE_APP_THEME_COLOR_ACCENT,
+                error: process.env.VUE_APP_THEME_COLOR_ERROR,
+                success: process.env.VUE_APP_THEME_COLOR_SUCCESS,
+                warning: process.env.VUE_APP_THEME_COLOR_WARNING,
+                info: process.env.VUE_APP_THEME_COLOR_INFO
             }
         },
         options: {

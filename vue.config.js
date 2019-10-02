@@ -5,7 +5,7 @@ const webpack = require('webpack')
 
 module.exports = {
 
-    publicPath: '',
+    publicPath: process.env.CORDOVA_PLATFORM ? '' : '/',
 
     pluginOptions: {
         cordovaPath: 'src-cordova'
