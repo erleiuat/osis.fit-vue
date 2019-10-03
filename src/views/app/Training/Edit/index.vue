@@ -146,14 +146,12 @@ export default {
     },
 
     beforeRouteLeave (to, from, next) {
-
         if (this.saved) next()
         else {
             var r = confirm(this.$t('notSaved'))
             if (r === true) next()
             else next(false)
         }
-        
     },
 
     i18n: {

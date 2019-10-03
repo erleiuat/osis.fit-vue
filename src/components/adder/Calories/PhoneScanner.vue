@@ -1,7 +1,7 @@
 <template>
-    <v-btn @click="scan" color="info" depressed block small :loading="loading">
+    <v-btn @click="scan" color="primary" block small :loading="loading">
         {{ $t('scanCode') }}
-        <v-icon right>photo_camera</v-icon>
+        <v-icon right small>photo_camera</v-icon>
     </v-btn>
 </template>
 
@@ -46,7 +46,7 @@ export default {
             }, error => {
                 alert('Failed: ' + error)
             }, {
-                preferFrontCamera: true,
+                preferFrontCamera: false,
                 showFlipCameraButton: true,
                 showTorchButton: true,
                 torchOn: false,
@@ -85,11 +85,13 @@ export default {
         messages: {
             en: {
                 codeNotFound: 'Code unknown',
-                scanCode: 'Scan Barcode'
+                scanCode: 'Scan Barcode',
+                placeText: 'Place a barcode inside the scan area'
             },
             de: {
                 codeNotFound: 'Code unbekannt',
-                scanCode: 'Barcode scannen'
+                scanCode: 'Barcode scannen',
+                placeText: 'Platzieren Sie einen Barcode innerhalb des Scanbereichs'
             }
         }
     }

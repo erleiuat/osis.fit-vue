@@ -121,13 +121,13 @@ export default {
         },
 
         removeOne (key) {
-            this.exercises.splice(key, 1);
+            this.exercises.splice(key, 1)
         },
 
         anotherOne () {
             this.exercises.push({ id: null, duration: '00:00' })
         }
-        
+
     },
 
     i18n: {

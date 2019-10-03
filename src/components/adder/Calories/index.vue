@@ -11,7 +11,7 @@
         <v-card>
 
             <v-card-title class="pa-0">
-                <v-toolbar color="primary" flat dark dense>
+                <v-toolbar color="primary" flat dark>
                     <v-btn icon @click="show = false">
                         <v-icon>close</v-icon>
                     </v-btn>
@@ -29,17 +29,17 @@
                     <v-form v-model="rule.valid" ref="form" v-on:submit.prevent>
                         <v-row dense align="baseline">
 
-                            <v-col cols="12" md="6">
-                                <v-btn @click="selector = true" color="info" depressed block small>
+                            <v-col cols="6" md="6">
+                                <v-btn @click="selector = true" color="primary" block small>
                                     {{ $t('selectTemplate') }}
-                                    <v-icon right>view_carousel</v-icon>
+                                    <v-icon right small>open_in_new</v-icon>
                                 </v-btn>
                             </v-col>
 
                             <v-col cols="12" md="6" v-if="scanner.phone">
                                 <PhoneScanner @select="use" />
                             </v-col>
-                            <v-col cols="12" md="6" v-else-if="scanner.quagga">
+                            <v-col cols="6" md="6" v-else-if="scanner.quagga">
                                 <QuaggaScanner @select="use" />
                             </v-col>
                             <v-col cols="12" md="6" v-else>
@@ -50,20 +50,20 @@
                             </v-col>
 
                             <v-col cols="12">
-                                <v-text-field v-model="fd.title" :label="$t('ft.title')" type="text" outlined />
+                                <v-text-field v-model="fd.title" :label="$t('ft.title')" type="text" outlined hide-details />
                             </v-col>
                             <v-col cols="6">
-                                <v-text-field v-model="fd.date" :label="$t('ft.date')" :rules="rule.require" type="date" outlined />
+                                <v-text-field v-model="fd.date" :label="$t('ft.date')" :rules="rule.require" type="date" outlined hide-details />
                             </v-col>
                             <v-col cols="6">
-                                <v-text-field v-model="fd.time" :label="$t('ft.time')" :rules="rule.require" type="time" outlined append-icon="access_time" />
+                                <v-text-field v-model="fd.time" :label="$t('ft.time')" :rules="rule.require" type="time" outlined append-icon="access_time" hide-details />
                             </v-col>
 
                             <v-col cols="12" sm="6">
-                                <v-text-field v-model="caloriesPer100" :label="$t('caloriesPer100')" @input="calTotal()" outlined type="number" suffix="Kcal" />
+                                <v-text-field v-model="caloriesPer100" :label="$t('caloriesPer100')" @input="calTotal()" outlined type="number" suffix="Kcal" hide-details />
                             </v-col>
                             <v-col cols="12" sm="6">
-                                <v-text-field v-model="amount" :label="$t('ft.amount')" @input="calTotal()" outlined type="number" suffix="g / ml" />
+                                <v-text-field v-model="amount" :label="$t('ft.amount')" @input="calTotal()" outlined type="number" suffix="g / ml" hide-details />
                             </v-col>
 
                             <v-col cols="12">
@@ -189,13 +189,13 @@ export default {
                 title: 'Add Calories',
                 caloriesPer100: 'Calories per 100 g/ml',
                 calories: 'Calories Total',
-                selectTemplate: 'Select Template'
+                selectTemplate: 'Templates'
             },
             de: {
                 title: 'Kalorien hinzufügen',
                 caloriesPer100: 'Kalorien pro 100 g/ml',
                 calories: 'Kalorien Total',
-                selectTemplate: 'Vorlage auswählen'
+                selectTemplate: 'Vorlagen'
             }
         }
     }

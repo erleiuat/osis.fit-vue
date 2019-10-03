@@ -5,20 +5,23 @@
 
                 <v-layout row wrap v-if="!value" :style="height?'height:'+height+'px':'min-height:200px'" justify-center align-center key="1">
 
-                    <v-flex xs12 v-if="doUse.desktop" class="text-center pl-2 pr-2">
-                        <v-icon x-large>camera_alt</v-icon>
-                        <v-file-input v-model="file" :label="$t('select')" @change="upload()" :rules="rule" :disabled="uploading" ref="imgUploadField" accept="image/jpg, image/png, image/jpeg" outlined prepend-icon="" />
+                    <v-flex xs11 v-if="doUse.mobile || doUse.desktop" class="text-center">
+                        {{ $t('addPic') }}
                     </v-flex>
 
-                    <v-flex xs11 v-if="doUse.mobile" class="text-center">
-                        <v-btn @click="mobileSelect()" block depressed color="info">
+                    <v-flex xs11 v-if="doUse.desktop" class="text-center">
+                        <v-file-input v-model="file" :label="$t('selectFile')" @change="upload()" :rules="rule" :disabled="uploading" ref="imgUploadField" accept="image/jpg, image/png, image/jpeg" outlined prepend-icon="" append-icon="camera_alt" />
+                    </v-flex>
+
+                    <v-flex xs5 v-if="doUse.mobile" class="text-center">
+                        <v-btn @click="mobileSelect()" block depressed color="primary" outlined="">
                             {{ $t('takeCam') }}
                             <v-icon right>camera_alt</v-icon>
                         </v-btn>
                     </v-flex>
 
-                    <v-flex xs11 v-if="doUse.mobile" class="text-center">
-                        <v-btn @click="mobileSelect(true)" block depressed color="info">
+                    <v-flex xs5 v-if="doUse.mobile" class="text-center">
+                        <v-btn @click="mobileSelect(true)" block depressed color="primary" outlined="">
                             {{ $t('select') }}
                             <v-icon right>photo_library</v-icon>
                         </v-btn>
@@ -44,12 +47,14 @@
                                 </v-layout>
                             </template>
                             <v-card-title class="lightbox align-start fill-height pa-2">
-                                <v-btn icon small @click="remove()" color="white">
-                                    <v-icon>delete</v-icon>
-                                </v-btn>
-                                <v-spacer />
+                                <!--
                                 <v-btn icon small @click="download()" color="white">
                                     <v-icon>cloud_download</v-icon>
+                                </v-btn>
+                                -->
+                                <v-spacer />
+                                <v-btn icon small @click="remove()" color="white">
+                                    <v-icon>delete</v-icon>
                                 </v-btn>
                             </v-card-title>
                         </v-img>
@@ -189,18 +194,22 @@ export default {
             en: {
                 maxSize: 'Size must be below 15 MB',
                 processing: 'Processing image',
-                select: 'Select from Library',
                 upload: 'Upload',
                 remove: 'Remove Image',
-                takeCam: 'Take Picture'
+                takeCam: 'Camera',
+                select: 'Gallery',
+                addPic: 'Add Image:',
+                selectFile: 'Select File...'
             },
             de: {
                 maxSize: 'Die Datei muss kleiner als 15MB sein',
                 processing: 'Bild wird verarbeitet',
-                select: 'Datei auswählen',
                 upload: 'Hochladen',
                 remove: 'Bild entfernen',
-                takeCam: 'Bild aufnehmen'
+                takeCam: 'Kamera',
+                select: 'Galerie',
+                addPic: 'Bild hinzufügen:',
+                selectFile: 'Datei auswählen...'
             }
         }
     }

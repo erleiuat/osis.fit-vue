@@ -1,24 +1,24 @@
 <template>
     <v-dialog v-model="dialog" fullscreen hide-overlay transition="dialog-bottom-transition">
         <template v-slot:activator="{ on }">
-            <v-btn v-on="on" color="info" depressed block small>
+            <v-btn v-on="on" color="primary" block small>
                 {{ $t('scanCode') }}
-                <v-icon right>photo_camera</v-icon>
+                <v-icon right small>photo_camera</v-icon>
             </v-btn>
         </template>
         <v-card>
             <vcontainer>
                 <v-row>
                     <v-col cols="12">
-                        <v-btn @click="dialog = false" block depressed color="primary">
-                            {{ $t('btn.cancel') }}
-                        </v-btn>
-                    </v-col>
-                    <v-col cols="12">
                         <div class="quagga-scanner-container">
                             <v-quagga v-if="!loading && dialog" :onDetected="scanned" :aspectRatio="aspect" :readerSize="size" :readerTypes="types" />
                             <v-progress-linear v-else height="400" indeterminate />
                         </div>
+                    </v-col>
+                    <v-col cols="12">
+                        <v-btn @click="dialog = false" block depressed color="primary">
+                            {{ $t('btn.cancel') }}
+                        </v-btn>
                     </v-col>
                 </v-row>
             </vcontainer>

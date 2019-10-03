@@ -12,7 +12,7 @@
 
         <v-spacer v-if="$vuetify.breakpoint.mdAndUp" />
 
-        <v-dialog ref="dialog" v-model="dialog" full-width width="290px">
+        <v-dialog ref="dialog" v-model="dialog" width="290px">
             <template v-slot:activator="{ on }">
                 <v-btn v-on="on" text>
                     {{ $dateFormat(date) }} <v-icon right>event</v-icon>

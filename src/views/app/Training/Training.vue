@@ -14,8 +14,8 @@
 
         <v-row v-if="item && loaded" align="center" dense>
             <v-col cols="12" class="body-2" v-if="item.exercises">
-                <v-sheet class="pa-2">
-                    <div class="caption">{{ $t('exercises') }}</div>
+                <v-sheet>
+                    <div class="caption pa-2">{{ $t('exercises') }}</div>
                     <v-expansion-panels accordion>
                         <v-expansion-panel v-for="(exe, key) in item.exercises" :key="key">
                             <v-expansion-panel-header>
@@ -24,7 +24,7 @@
                                     <v-col cols="1" md="1">
                                         {{ key+1 }}.
                                     </v-col>
-                                    <v-col cols="6" md="6" class="title">
+                                    <v-col cols="6" md="6">
                                         {{ exe.title }}
                                     </v-col>
                                     <v-col cols="5" md="5" class="text-right">

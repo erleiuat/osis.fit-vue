@@ -21,19 +21,19 @@
                 </v-btn>
             </v-toolbar>
 
-            <v-container grid-list-sm>
+            <v-container grid-list-md>
                 <v-form v-model="rule.valid" ref="form" v-on:submit.prevent>
                     <v-layout wrap>
 
                         <v-flex xs12>
-                            <v-text-field v-model="fd.title" :label="$t('ft.title')" type="text" outlined />
+                            <v-text-field v-model="fd.title" :label="$t('ft.title')" type="text" outlined hide-details />
                         </v-flex>
 
                         <v-flex xs6>
-                            <v-text-field v-model="fd.date" :label="$t('ft.date')" :rules="rule.require" type="date" outlined append-icon="calendar_today" />
+                            <v-text-field v-model="fd.date" :label="$t('ft.date')" :rules="rule.require" type="date" outlined hide-details />
                         </v-flex>
                         <v-flex xs6>
-                            <v-text-field v-model="fd.time" :label="$t('ft.time')" :rules="rule.require" type="time" outlined append-icon="access_time" />
+                            <v-text-field v-model="fd.time" :label="$t('ft.time')" :rules="rule.require" type="time" outlined append-icon="access_time" hide-details />
                         </v-flex>
 
                         <v-flex xs12>

@@ -3,7 +3,7 @@
         <v-card>
 
             <v-card-title class="pa-0">
-                <v-toolbar color="primary" flat dark dense>
+                <v-toolbar color="primary" flat dark>
                     <v-toolbar-title>{{ $t('title') }}</v-toolbar-title>
                     <v-spacer></v-spacer>
                     <v-btn icon @click="$emit('select', false)">
