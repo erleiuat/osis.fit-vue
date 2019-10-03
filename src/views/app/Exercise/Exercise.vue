@@ -7,7 +7,7 @@
             </v-col>
             <v-col cols="12" md="10" class="body-2">
                 <v-sheet class="pa-2 text-left">
-                    {{ getByLang($store.getters['app'].locale, item.description) }}
+                    {{ $getByLang($store.getters['app'].locale, item.description) }}
                 </v-sheet>
             </v-col>
         </v-row>
@@ -21,7 +21,7 @@
         <v-row v-if="item && loaded" justify="center" dense>
             <v-col cols="12" md="10">
                 <div class="ql-editor quillEditorContent">
-                    <div v-html="getByLang($store.getters['app'].locale, item.content)" />
+                    <div v-html="$getByLang($store.getters['app'].locale, item.content)" />
                 </div>
             </v-col>
         </v-row>
@@ -92,25 +92,6 @@ export default {
         return {
             iData: false,
             loaded: false
-        }
-    },
-
-    methods: {
-        getByLang (lang, string) {
-            lang = lang.toUpperCase()
-            if (string.includes('[' + lang + ']')) {
-                return string.substring(
-                    string.lastIndexOf('[' + lang + ']') + 4,
-                    string.lastIndexOf('[/' + lang + ']')
-                )
-            } else if (string.includes('[EN]')) {
-                return string.substring(
-                    string.lastIndexOf('[EN]') + 4,
-                    string.lastIndexOf('[/EN]')
-                )
-            } else {
-                return string
-            }
         }
     },
 

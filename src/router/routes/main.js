@@ -92,6 +92,16 @@ module.exports = [{
 
 }, {
 
+    name: 'premium',
+    path: '/premium',
+    meta: { authRequired: false },
+    components: {
+        toolbar: () => import('@/components/nav/toolbar/'),
+        default: () => import('@/views/premium/')
+    }
+
+}, {
+
     name: 'theme',
     path: '/theme',
     meta: { authRequired: false },

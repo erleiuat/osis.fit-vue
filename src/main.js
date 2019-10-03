@@ -24,6 +24,24 @@ Vue.prototype.$dateFormat = (date) => {
     return `${day}.${month}.${year}`
 }
 
+Vue.prototype.$getByLang = (lang, string) => {
+    if (!string) return
+    lang = lang.toUpperCase()
+    if (string.includes('[' + lang + ']')) {
+        return string.substring(
+            string.lastIndexOf('[' + lang + ']') + 4,
+            string.lastIndexOf('[/' + lang + ']')
+        )
+    } else if (string.includes('[EN]')) {
+        return string.substring(
+            string.lastIndexOf('[EN]') + 4,
+            string.lastIndexOf('[/EN]')
+        )
+    } else {
+        return string
+    }
+}
+
 new Vue({
     router,
     store,

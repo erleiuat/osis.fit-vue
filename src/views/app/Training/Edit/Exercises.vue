@@ -1,5 +1,5 @@
 <template>
-    <v-expansion-panels>
+    <v-expansion-panels :value="0">
         <v-expansion-panel>
             <v-expansion-panel-header class="body-1">
                 {{ $t('exercises') }}{{ exercises.length ? ': '+exercises.length:'' }}
@@ -20,13 +20,13 @@
                                 {{ key+1 }}
                             </v-col>
                             <v-col cols="11" md="5">
-                                <v-select :items="list" :label="$t('exercise')" v-model="i.id" @change="doEmit()" item-value="id" item-text="title" hide-details />
+                                <v-select :items="list" :label="$t('exerciseSelect')" v-model="i.id" @change="doEmit()" :rules="rules.require" item-value="id" item-text="title" hide-details />
                             </v-col>
                             <v-col cols="10" md="5">
-                                <v-text-field :label="$t('duration')" v-model="i.duration" @change="doEmit()" type="time" hide-details />
+                                <v-text-field :label="$t('duration')" v-model="i.duration" @change="doEmit()" :rules="rules.require" type="time" hide-details />
                             </v-col>
                             <v-col cols="1" md="1">
-                                <v-btn @click="removeOne(i.id)" icon>
+                                <v-btn @click="removeOne(key)" icon>
                                     <v-icon>delete</v-icon>
                                 </v-btn>
                             </v-col>
@@ -36,11 +36,19 @@
 
                 </v-card>
 
-                <v-row dense>
-                    <v-col cols="12">
-                        <v-btn @click="anotherOne()" depressed>
+                <v-row :dense="list ? true : false">
+                    <v-col cols="12" v-if="list" class="text-center">
+                        <v-btn @click="anotherOne()" depressed block>
                             <v-icon left>add</v-icon>
-                            {{ $t('btn.add') }}
+                            {{ $t('btnAddOne') }}
+                        </v-btn>
+                    </v-col>
+                    <v-col cols="12" v-else class="text-center">
+                        <span v-html="$t('textNoExercises')" />
+                        <br /><br />
+                        <v-btn @click="$router.push({name: 'exercise.saved'})" depressed>
+                            {{ $t('btnNoExercises') }}
+                            <v-icon small right>open_in_new</v-icon>
                         </v-btn>
                     </v-col>
                 </v-row>
@@ -57,7 +65,7 @@ export default {
     name: 'Exercises',
 
     props: [
-        'value'
+        'value', 'rules'
     ],
 
     modules: {
@@ -99,21 +107,27 @@ export default {
         },
 
         list () {
-            return this.$store.getters['exercise/all']
+            var tmp = this.$store.getters['exercise/all']
+            if (tmp && tmp.length > 0) return this.$store.getters['exercise/all']
+            else return false
         }
 
     },
 
     methods: {
+
         doEmit () {
             this.$emit('input', this.exercises)
         },
-        removeOne (id) {
-            this.exercises = this.exercises.filter(function (el) { return el.id !== id })
+
+        removeOne (key) {
+            this.exercises.splice(key, 1);
         },
+
         anotherOne () {
-            this.exercises.push({ id: null, duration: null })
+            this.exercises.push({ id: null, duration: '00:00' })
         }
+        
     },
 
     i18n: {
@@ -121,14 +135,21 @@ export default {
             en: {
                 exercises: 'Exercises',
                 exercise: 'Exercise',
+                exerciseSelect: 'Choose Exercise',
+                btnAddOne: 'Add exercise',
                 duration: 'Duration (hh:mm)',
-                totalCals: 'Total calories burned'
+                totalCals: 'Total calories burned',
+                btnNoExercises: ''
             },
             de: {
                 exercises: 'Übungen',
                 exercise: 'Übung',
+                exerciseSelect: 'Übung wählen',
+                btnAddOne: 'Übung hinzufügen',
                 duration: 'Dauer (hh:mm)',
-                totalCals: 'Total Kalorienverbrauch'
+                totalCals: 'Total Kalorienverbrauch',
+                textNoExercises: 'Du hast noch keine eigenen Übungen. <br/> Möchtest du jetzt eine erstellen?',
+                btnNoExercises: 'Übungen öffnen'
             }
         }
     }

@@ -18,7 +18,7 @@
                 </v-col>
 
                 <v-col cols="12" class="pb-5">
-                    <Exercises v-model="fd.exercises" />
+                    <Exercises v-model="fd.exercises" :rules="rule" />
                 </v-col>
 
                 <v-col cols="12" md="6">
@@ -146,12 +146,14 @@ export default {
     },
 
     beforeRouteLeave (to, from, next) {
+
         if (this.saved) next()
         else {
             var r = confirm(this.$t('notSaved'))
             if (r === true) next()
             else next(false)
         }
+        
     },
 
     i18n: {

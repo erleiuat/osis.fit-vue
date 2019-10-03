@@ -17,7 +17,7 @@
                                     <v-list-item-title v-text="item.title"></v-list-item-title>
                                 </v-list-item-title>
                                 <v-list-item-subtitle>
-                                    {{ getByLang($store.getters['app'].locale, item.description) }}
+                                    {{ $getByLang($store.getters['app'].locale, item.description) }}
                                 </v-list-item-subtitle>
                             </v-list-item-content>
                         </v-list-item>
@@ -26,7 +26,7 @@
                     <v-expansion-panel-content class="pa-0" eager>
                         <div class="caption text-right">{{ $t('byUser') }} {{ item.user }}</div>
                         <div class="">{{ $t('ft.description') }}</div>
-                        <div class="caption"> {{ getByLang($store.getters['app'].locale, item.description) }}</div><br />
+                        <div class="caption"> {{ $getByLang($store.getters['app'].locale, item.description) }}</div><br />
                         <div class="">{{ $t('bodyparts') }}</div>
                         <v-chip v-for="(bp, key) in item.bodyparts" :key="key" class="caption ml-1 mr-1 mb-1">
                             {{ $t('pnt.parts.'+bp) }}
@@ -75,25 +75,6 @@ export default {
                 public: true,
                 query: null,
                 bodyparts: []
-            }
-        }
-    },
-
-    methods: {
-        getByLang (lang, string) {
-            lang = lang.toUpperCase()
-            if (string.includes('[' + lang + ']')) {
-                return string.substring(
-                    string.lastIndexOf('[' + lang + ']') + 4,
-                    string.lastIndexOf('[/' + lang + ']')
-                )
-            } else if (string.includes('[EN]')) {
-                return string.substring(
-                    string.lastIndexOf('[EN]') + 4,
-                    string.lastIndexOf('[/EN]')
-                )
-            } else {
-                return string
             }
         }
     },
