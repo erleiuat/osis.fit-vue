@@ -51,7 +51,7 @@ export default {
                 showTorchButton: true,
                 torchOn: false,
                 saveHistory: true,
-                prompt: 'Place a barcode inside the scan area',
+                prompt: this.$t('placeText'),
                 resultDisplayDuration: 500,
                 orientation: 'portrait',
                 disableAnimations: true,
