@@ -29,27 +29,27 @@
                     <v-form v-model="rule.valid" ref="form" v-on:submit.prevent>
                         <v-row dense align="baseline">
 
-                            <v-col cols="6" md="6">
+                            <v-col cols="6">
                                 <v-btn @click="selector = true" color="primary" block small>
                                     {{ $t('selectTemplate') }}
                                     <v-icon right small>open_in_new</v-icon>
                                 </v-btn>
                             </v-col>
 
-                            <v-col cols="12" md="6" v-if="scanner.phone">
+                            <v-col cols="6" v-if="scanner.phone">
                                 <PhoneScanner @select="use" />
                             </v-col>
-                            <v-col cols="6" md="6" v-else-if="scanner.quagga">
+                            <v-col cols="6" v-else-if="scanner.quagga">
                                 <QuaggaScanner @select="use" />
                             </v-col>
-                            <v-col cols="12" md="6" v-else>
+                            <v-col cols="6" v-else>
                                 <v-btn :to="{name: 'premium', query: { notify: true }}" block small outlined color="amber">
                                     {{ $t('scanCode') }}
                                     <v-icon right>photo_camera</v-icon>
                                 </v-btn>
                             </v-col>
 
-                            <v-col cols="12">
+                            <v-col cols="12" class="mt-1">
                                 <v-text-field v-model="fd.title" :label="$t('ft.title')" type="text" outlined hide-details />
                             </v-col>
                             <v-col cols="6">

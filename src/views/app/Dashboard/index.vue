@@ -1,7 +1,16 @@
 <template>
     <vcontainer>
 
-        <v-row>
+        <v-row dense justify="center" v-if="$vuetify.breakpoint.xs">
+            <v-col md="6" align="center">
+                <v-btn :to="{name: 'training.saved'}" color="primary" block large outlined>
+                    {{ $t('trainings') }}
+                    <v-icon right small>open_in_new</v-icon>
+                </v-btn>
+            </v-col>
+        </v-row>
+
+        <v-row dense>
             <v-col cols="12">
                 <Start />
             </v-col>
@@ -11,35 +20,32 @@
             <v-col cols="12">
                 <v-divider />
             </v-col>
-            <v-col cols="4" align="center">
+            <v-col cols="3" align="center">
                 <div class="headline pb-3">{{ $t('calories') }}</div>
                 <CalorieAdder />
             </v-col>
-            <v-col cols="4" align="center">
+            <v-col cols="3" align="center">
                 <div class="headline pb-3">{{ $t('activity') }}</div>
                 <ActivityAdder />
             </v-col>
-            <v-col cols="4" align="center">
+            <v-col cols="3" align="center">
                 <div class="headline pb-3">{{ $t('weight') }}</div>
                 <WeightAdder />
+            </v-col>
+            <v-col cols="3" align="center">
+                <div class="headline pb-3">{{ $t('trainings') }}</div>
+                <v-btn fab depressed large color="primary" :to="{name: 'training.saved'}">
+                    <v-icon>open_in_new</v-icon>
+                </v-btn>
             </v-col>
             <v-col cols="12">
                 <v-divider />
             </v-col>
         </v-row>
 
-        <v-row>
+        <v-row dense>
             <v-col cols="12">
                 <WeightChart />
-            </v-col>
-        </v-row>
-
-        <v-row justify="center">
-            <v-col md="6" align="center">
-                <v-btn :to="{name: 'training.saved'}" color="primary" block large depressed>
-                    {{ $t('trainings') }}
-                    <v-icon right>open_in_new</v-icon>
-                </v-btn>
             </v-col>
         </v-row>
 
@@ -72,7 +78,7 @@ export default {
                 calories: 'Calories',
                 activity: 'Activity',
                 weight: 'Weight',
-                trainings: 'Training',
+                trainings: 'Trainings',
                 m: {
                     title: 'Welcome to Osis.fit!',
                     text: `
@@ -86,7 +92,7 @@ export default {
                 calories: 'Kalorien',
                 activity: 'Aktivität',
                 weight: 'Gewicht',
-                trainings: 'Training',
+                trainings: 'Trainings',
                 m: {
                     title: 'Willkommen bei Osis.fit!',
                     text: `

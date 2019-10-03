@@ -98,7 +98,7 @@ export default {
 
 <style>
 .quagga-scanner-container {
-    height: 80vh;
+    height: 70vh;
     width: 100%;
     overflow: hidden;
     /*border: solid 1px gray;*/
