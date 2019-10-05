@@ -23,7 +23,7 @@
                     <v-text-field v-model="fd.weight" :label="$t('weight')" :rules="rule.require" type="number" suffix="Kg" :disabled="!canDo" filled />
                 </v-col>
                 <v-col cols="12" sm="5">
-                    <v-text-field v-model="fd.date" :label="$t('ft.date')" :rules="rule.require" type="date" append-icon="event" :disabled="!canDo" filled />
+                    <v-text-field v-model="fd.date" :label="$t('date')" :rules="rule.require" type="date" append-icon="event" :disabled="!canDo" filled />
                 </v-col>
 
             </v-row>
@@ -65,24 +65,30 @@ export default {
 
         alertInfo () {
             var value = this.dailyRequire + this.dailyTarget
-            var type = 'success'
-            var text = 'info.good'
-
             if (!this.dailyTarget) {
-                value = '...'
-                type = 'info'
-                text = 'info.doit'
-            } else if (value < 300) {
-                type = 'error'
-                text = 'info.danger'
-            } else if (value < 900) {
-                type = 'warning'
-                text = 'info.warn'
+                return {
+                    type: 'info',
+                    text: 'info.doit',
+                    val: '...'
+                }
             }
-
+            if (value < 300) {
+                return {
+                    type: 'error',
+                    text: 'info.danger',
+                    val: value
+                }
+            }
+            if (value < 900) {
+                return {
+                    type: 'warning',
+                    text: 'info.warn',
+                    val: value
+                }
+            }
             return {
-                type: type,
-                text: text,
+                type: 'success',
+                text: 'info.good',
                 val: value
             }
         },
@@ -100,7 +106,7 @@ export default {
 
         user () {
             var data = this.$store.getters['user/metabolism']
-            if (!data) return false
+            if (!data.gender || !data.height || !data.birthdate) return false
             return {
                 gender: data.gender,
                 height: data.height,
@@ -111,10 +117,8 @@ export default {
 
         dailyTarget () {
             if (!this.fd.date || !this.fd.weight) return false
-
             var diff = new Date(this.fd.date).getTime() - new Date().getTime()
             var days = Math.round(diff / (1000 * 60 * 60 * 24))
-
             return Math.round(
                 (this.fd.weight - this.lastWeight) /
                 days * 7000
@@ -163,8 +167,8 @@ export default {
         messages: {
             en: {
                 title: 'Aims',
-                weight: 'Weight',
-                date: 'Date',
+                weight: 'How much do you want to weigh?',
+                date: 'By when do you want to reach the goal?',
                 calday: 'Calories / Day',
                 info: {
                     doit: 'Enter your goals and try to generate a good result',
@@ -175,8 +179,8 @@ export default {
             },
             de: {
                 title: 'Ziele',
-                weight: 'Gewicht',
-                date: 'Datum',
+                weight: 'Wie viel möchtest du wiegen?',
+                date: 'Bis wann möchtest du das Ziel erreichen?',
                 calday: 'Kalorien / Tag',
                 info: {
                     doit: 'Trage deine Ziele ein und versuche ein gutes Resultat zu generieren',

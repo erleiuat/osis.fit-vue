@@ -73,7 +73,7 @@ export default {
 
         user () {
             var data = this.$store.getters['user/metabolism']
-            if (!data) return { ok: false }
+            if (!data.gender || !data.height || !data.birthdate) return { ok: false }
             var gend = data.gender
             var heig = data.height
             var birthdate = data.birthdate
