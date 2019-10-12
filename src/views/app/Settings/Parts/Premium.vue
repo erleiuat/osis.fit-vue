@@ -29,12 +29,17 @@
         </v-row>
 
         <v-row justify="center">
-            <v-col cols="12" sm="6">
+            <v-col cols="12" sm="4">
                 <v-btn @click="openPortal()" v-if="sub.id" :loading="loadingScript" color="primary" block depressed>
                     {{ $t('btnEdit') }}
                 </v-btn>
                 <v-btn @click="openCheckout()" v-else :loading="loadingScript" color="primary" block depressed>
                     <strong>{{ $t('btnGet') }}</strong>
+                </v-btn>
+            </v-col>
+            <v-col cols="12" sm="4">
+                <v-btn @click="refresh()" block depressed :loading="loadingScript">
+                    <strong>{{ $t('btnRefresh') }}</strong>
                 </v-btn>
             </v-col>
         </v-row>
@@ -124,6 +129,13 @@ export default {
 
     methods: {
 
+        refresh () {
+            this.loadingScript = true
+            this.$store.dispatch('auth/refresh').finally(() => {
+                this.loadingScript = false
+            })
+        },
+
         setSession () {
             this.cbi.setPortalSession(function () {
                 return Apios.get('subscription/portal/').then((res) => res.data.items)
@@ -175,6 +187,7 @@ export default {
                 youDontHave: "You don't have a subscription yet",
                 btnEdit: 'Manage Subscription',
                 btnGet: 'Get Premium',
+                btnRefresh: 'Reload Premium-State',
                 title: 'Premium',
                 subsNr: 'Subscription ID',
                 plan: 'Plan ID',
@@ -195,6 +208,7 @@ export default {
                 youDontHave: 'Du hast noch kein Abonnement',
                 btnEdit: 'Abonnement verwalten',
                 btnGet: 'Premium abbonieren',
+                btnRefresh: 'Premium-Status prüfen',
                 title: 'Premium',
                 subsNr: 'Abonnement ID',
                 plan: 'Plan ID',
