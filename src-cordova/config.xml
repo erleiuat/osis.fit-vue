@@ -1,13 +1,12 @@
 <?xml version='1.0' encoding='utf-8'?>
 <widget id="io.osis.fit.app" version="1.0.0" 
     xmlns="http://www.w3.org/ns/widgets" 
-    xmlns:cdv="http://cordova.apache.org/ns/1.0"
-    android-versionCode="20191005">
+    xmlns:cdv="http://cordova.apache.org/ns/1.0" android-versionCode="20191005">
     <name>Osis.Fit</name>
     <description>
         Mobile-App for Osis.Fit
     </description>
-    <author email="mail@osis.fit" href="https://osis.fit">
+    <author email="mail@osis.fit" href="https://app.osis.fit">
         Osis.Fit Dev-Team
     </author>
     <!-- this hook will point your config.xml to the DevServer on Serve -->

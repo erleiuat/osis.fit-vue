@@ -99,6 +99,7 @@ export default {
     mounted () {
         /* eslint-disable no-undef */
         var vm = this
+        vm.$store.dispatch('auth/refresh')
         if (!document.getElementById('chargebee_js_script')) {
             var script = document.createElement('script')
             script.id = 'chargebee_js_script'
@@ -132,6 +133,7 @@ export default {
 
         openPortal () {
             var vm = this
+            vm.$store.dispatch('auth/refresh')
             vm.portal.open({
                 close () {
                     vm.$store.dispatch('auth/refresh')
@@ -144,9 +146,13 @@ export default {
 
         openCheckout () {
             var vm = this
+            vm.$store.dispatch('auth/refresh')
             vm.cbi.openCheckout({
                 hostedPage: () => {
                     return Apios.get('subscription/checkout/').then((res) => res.data.items)
+                },
+                loaded: function () {
+                    alert('alles klar')
                 },
                 success: function (hostedPageId) {
                     Apios.post('subscription/apply/', {
