@@ -3,7 +3,7 @@
 
         <v-row dense v-if="infoState">
             <v-col cols="12" class="pt-0">
-                <v-btn @click="showInfo" depressed class="warning pt-0" block small>
+                <v-btn @click="infoState = false" depressed class="warning pt-0" block small>
                     {{ $t('newComingBtn') }}
                     <v-icon right>announcement</v-icon>
                 </v-btn>
@@ -92,13 +92,6 @@ export default {
     data () {
         return {
             infoState: true
-        }
-    },
-
-    methods: {
-        showInfo () {
-            window.scrollTo(0, document.body.scrollHeight)
-            this.infoState = false
         }
     },
 
