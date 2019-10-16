@@ -1,6 +1,23 @@
 <template>
     <vcontainer>
 
+        <v-row dense v-if="infoState">
+            <v-col cols="12" class="pt-0">
+                <v-btn @click="showInfo" depressed class="warning pt-0" block small>
+                    {{ $t('newComingBtn') }}
+                    <v-icon right>announcement</v-icon>
+                </v-btn>
+            </v-col>
+        </v-row>
+
+        <v-row dense v-else>
+            <v-col cols="12">
+                <v-alert color="accent" elevation="0" class="mb-2" dismissible>
+                    <div v-html="$t('newComing')" />
+                </v-alert>
+            </v-col>
+        </v-row>
+
         <v-row dense justify="center" v-if="$vuetify.breakpoint.xs">
             <v-col md="6" align="center">
                 <v-btn :to="{name: 'training.saved'}" color="primary" block large outlined>
@@ -72,9 +89,29 @@ export default {
         WeightChart
     },
 
+    data () {
+        return {
+            infoState: true
+        }
+    },
+
+    methods: {
+        showInfo () {
+            window.scrollTo(0, document.body.scrollHeight)
+            this.infoState = false
+        }
+    },
+
     i18n: {
         messages: {
             en: {
+                newComing: `
+                    <b>We are working on a completely new version of Osis.Fit!</b><br/><br/>
+                    You can still use this version, but we will move it to another address after the introduction of 
+                    the new version. Your data will remain in the old version, but not in the new one. <br/><br/>
+                    Premium subscriptions in the old version will also be deactivated. If you have a premium 
+                    subscription with a voucher, we will send you a voucher for the new version per mail.
+                `,
                 calories: 'Calories',
                 activity: 'Activity',
                 weight: 'Weight',
@@ -89,6 +126,15 @@ export default {
                 }
             },
             de: {
+                newComing: `
+                    <b>Wir arbeiten an einer komplett neuen Version von Osis.Fit!</b><br/><br/>
+                    Du kannst weiterhin diese Version nutzen, jedoch werden wir sie nach Einführung der neuen Version 
+                    an eine andere Adresse verschieben. Deine Daten bleiben in der alten Version enthalten, jedoch 
+                    nicht in die neue übernommen. <br/><br/>
+                    Premium-Abonnements in der alten Version werden ebenfalls deaktiviert. Falls du ein Premium-Abonnement mit
+                    einem Gutschein hast, werden wir dir einen entsprechenden Gutschein für die neue Version per Mail zustellen.
+                `,
+                newComingBtn: 'NEUE VERSION IN ARBEIT',
                 calories: 'Kalorien',
                 activity: 'Aktivität',
                 weight: 'Gewicht',
