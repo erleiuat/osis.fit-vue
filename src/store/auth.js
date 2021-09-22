@@ -175,9 +175,9 @@ const actions = {
             Apios.post('auth/check/').then(res => {
                 resolve()
             }).catch(err => {
-                con.commit('user/remove', null, { root: true })
-                con.commit('remove')
                 resolve()
+                //con.commit('user/remove', null, { root: true })
+                //con.commit('remove')
             })
         })
     },
