@@ -177,7 +177,7 @@ const actions = {
             }).catch(err => {
                 con.commit('user/remove', null, { root: true })
                 con.commit('remove')
-                reject(err)
+                resolve()
             })
         })
     },
